@@ -3,12 +3,9 @@ module.exports = function (grunt) {
 module.exports = function (grunt) {
     grunt.initConfig({
         concat: {
-            options: {
-                separator: ';'
-            },
             dist: {
-                src: ['pre_compile_templates/*.tpl.js'],
-                dest: 'all_templates.js'
+                src: ['*.tpl.js'],
+                dest: '../all_templates.js'
             }
         }
     });
