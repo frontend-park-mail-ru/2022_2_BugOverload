@@ -1,13 +1,36 @@
-.navbar{
+.header {
     display: flex;
 }
 
-.header__inner {
+.navbar {
     display: inline-flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
-    margin: 0 17%;
     white-space: nowrap;
-  }
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.header__login {
+    display: inline-block;
+    white-space: nowrap; 
+}
+
+.header__form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 5%; 
+}
+
+.header__navlink {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 5%;    
+}
+
+@media screen and (max-width: 740px){
+    .header__form{display:none}
+};
+
