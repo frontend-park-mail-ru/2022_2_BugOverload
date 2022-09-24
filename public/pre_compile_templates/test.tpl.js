@@ -1,1 +1,0 @@
-!function(){var e=Handlebars.template;(Handlebars.templates=Handlebars.templates||{}).test=e({compiler:[8,">= 4.3.0"],main:function(e,t,a,n,s){return"<h1>test</h1>"},useData:!0})}();
