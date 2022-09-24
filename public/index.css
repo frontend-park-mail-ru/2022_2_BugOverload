@@ -15,7 +15,8 @@
 
 .header__login {
     display: inline-block;
-    white-space: nowrap; 
+    white-space: nowrap;
+    margin-right: 15%; 
 }
 
 .header__form {
@@ -27,7 +28,12 @@
 .header__navlink {
     display: inline-block;
     white-space: nowrap;
-    margin-right: 5%;    
+    margin-right: 5%;  
+    font-size: 18px;  
+}
+
+.active {
+	font-weight: bold;
 }
 
 @media screen and (max-width: 740px){
