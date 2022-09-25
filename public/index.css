@@ -30,6 +30,8 @@
     margin-right: 5%;
 }
 
+
+
 BODY {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #121212;
@@ -67,8 +69,6 @@ BODY {
     left: 0px;
 
     z-index: -2;
-    /* width: 1920px; */
-    /* top: -1110px; */
 }
 .content-big__container {
     height: 1080px;
@@ -78,18 +78,10 @@ BODY {
 }
 
 .content-big__film-data {
-    /* position: relative; */
-    /* z-index: 0; */
-    /* top: 0px;
-    left: 0px; */
-    /* flex-basis: 700px;    */
-
     display: flex;
 
     flex-direction: column;
     align-self: flex-end;
-
-
 
     margin: 52px 0px 30px 52px;
 }
@@ -99,7 +91,6 @@ BODY {
     font-weight:bold;
     font-size: 48px;
     width: 500px;
-    /* margin: 0px 0px 0px 0px; */
 }
 
 .content-big__film-decore-line {
@@ -146,8 +137,6 @@ BODY {
     background-color: #A07925;
 }
 
-
-
 .collection {
     margin: 0px 0px 0px 52px;
 }
@@ -163,11 +152,6 @@ BODY {
     text-decoration: none;
 }
 
-/* .film__rating:hover {
-    color: #12B77C;
-} */
-
-
 .collection__tittle {
     font-size: 28px;
     color:#fff;
@@ -179,12 +163,9 @@ BODY {
     height: 353px;
     padding: 0px 10px 53px 10px;
     margin: 30px 30px 0px 0px;
-    /* position: relative; */
-
 }
 
 .film:hover {
-    /* height: 353px; */
     padding: 0px 10px 53px 10px;
     margin: 15px 15px 15px -15px;
 }
@@ -209,22 +190,6 @@ BODY {
     left: -10px;
 }
 
-/* .film:hover .film__info-container {
-    margin: 0px 0px 0px 15px;
-} */
-/* .film__poster:hover {
-    width: 240px;
-    height: 320px;
-    border-radius: 5px;
-    background-color: #000;
-
-}
-
-.film__poster:hover film {
-    padding: 0px 10px 53px 10px;
-    margin: 15px 15px 15px -15px;
-} */
-
 .film__rating {
     font-size: 15px;
     color: #fff;
@@ -242,26 +207,10 @@ BODY {
 
 }
 
-/* .film__blackout {
-    p
-} */
-
 .film__poster {
     width: 210px;
     height: 300px;
     border-radius: 5px;
-    /* position: absolute;
-    top: 0px;
-    left: 10px; */
-}
-
-.film__poster:hover {
-    /* width: 224px;
-    height: 320px;
-    padding: 2em;
-    margin: -2em; */
-
-    /* background-color: rgba(18, 18, 18, 0.3); */
 }
 
 .film__tittle {
@@ -274,7 +223,6 @@ BODY {
 
 .film__info-container {
     display: flex;
-    /* justify-content:space-between */
 }
 
 .film__decore-circle {
@@ -288,8 +236,6 @@ BODY {
 .film__genry {
     font-size: 12px;
     color: #9C9C9C;
-    /* width: 127px;
-    height: 22px; */
     margin: 10px 0px 0px 0px;
 }
 
