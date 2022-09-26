@@ -195,10 +195,10 @@ function renderLogin() {
 }
 
 function checkInput(input, type = 'text'){
-    if (type == email && (!input || !input.match(/@/))) {
+    if (type == 'email' && (!input || !input.match(/@/))) {
           return false;
     }
-    if (type == password && (!input || !input.match(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g))) {
+    if (type == 'password' && (!input || !input.match(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g))) {
         return false;
     }
     /*if (!input || !input.match(/^[\p{L}\p{M}][\p{L}\p{M}\'\-]{0,48}[\p{L}\p{M}]$/u)) {
@@ -252,24 +252,32 @@ function renderSignup() {
         user.email = emailInput.value.trim();
         user.password = passwordInput.value; 
 
-        for (key in user) {
-            if (key === email || key === email) {
+
+
+        for (let key in user) {
+            
+
+            if (key === 'email' || key === 'password') {
                 if (!checkInput(user[key],key)) {
+                    console.log(key)
                     return;
                 }
             } else {
                 if (!checkInput(user[key])) {
+                    console.log(key)
                     return;
                 }
             }
         } 
 
+        console.log(user.nickname)
+
         ajax(
             'POST',
             '/signup',
-            {nickname, email, password },
+            user,
             (response, result) => {
-                if (response.status === 200) {
+                if (response.status === 201) {
                     
                     document.body
                         .querySelector('.modal__background')
