@@ -43,6 +43,28 @@ app.post('/login',  (req, res) => {
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
+app.post('/signup', (req, res) => {
+	const password = req.body.password;
+	const email = req.body.email;
+	const nickname = req.body.nickname;
+	if (
+		!password || !email || !nickname
+	) {
+		return res.status(400).json({error: 'Не валидные данные пользователя'});
+	}
+	if (users[email]) {
+		return res.status(200).json({error: 'Пользователь уже существует'});
+	}
+
+	const id = uuid();
+	const user = {nickname,email,password};
+	ids[id] = email;
+	users[email] = user;
+
+	res.cookie('red', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+	res.status(201).json(users[email]);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, function () {

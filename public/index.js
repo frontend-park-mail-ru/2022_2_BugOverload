@@ -27,11 +27,19 @@ const config = {
     }
 }
 
-function renderTemplate(templateName,callback) {
+function renderTemplate(templateName, callback, parametrs = {}) {
     const template = Handlebars.templates[templateName];
-    const templateHtml = template({});
+    const templateHtml = template(parametrs);
     const safeheaderHtml = DOMPurify.sanitize(templateHtml);
     callback(safeheaderHtml);
+}
+
+function renderUserbar(user) {
+    const userbar = document.body.querySelector('.header__userbar');
+
+    renderTemplate('userbar', (safeHtml) => {
+        userbar.insertAdjacentHTML('beforeend', safeHtml);
+    }, user);
 }
 
 function renderHeader(user = null) {
@@ -40,15 +48,26 @@ function renderHeader(user = null) {
             .querySelector('.header')
             .remove();
     }
-    if(user) {
-        console.log(user)
-    }
 
     renderTemplate('header', (safeHtml) => {
         root.insertAdjacentHTML('beforebegin', safeHtml);
-    });
+    },
+    (user) ? user: {});
 
     const header = document.querySelector('.header');
+
+    if(user) {
+        const ava = header.querySelector('.header__avatar');
+
+        function openUserbar(e) {
+            const { target } = e;
+
+            renderUserbar(user);
+        }
+
+        ava.addEventListener('click', openUserbar)
+    }
+
     header.addEventListener('click', (e) => {
         const { target } = e;
     
@@ -68,12 +87,12 @@ const renderFunc = (menuElement) => {
     menuElement.render();
 };
 
-function goToPage(menuElement,callback = renderFunc) {
-    let activeLink = document.body.querySelector('.active')
+function goToPage(menuElement,callback = renderFunc,current = document.body) {
+    let activeLink = current.querySelector('.active')
     if (activeLink) {
         activeLink.classList.remove('active');
     }
-    document.body.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
+    current.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
     (callback != renderFunc) ? callback() : renderFunc(menuElement);
 }
 
@@ -116,18 +135,20 @@ function renderLogin() {
 
     const modalWindow = root.querySelector('.modal__window__flex');
 
+
     renderTemplate('login', (safeHtml) => {
         modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
     });
 
-    function deleteLogin(e) {
+    const loginImg = root.querySelector('.modal__login__img');
+
+    loginImg.addEventListener('click', (e) => {
         const { target } = e;
     
         if (target instanceof HTMLAnchorElement) {
             e.preventDefault();
 
             goToPage(config.login[target.dataset.section], () => {
-                modalWindow.removeEventListener('click', deleteLogin); 
                 modalWindow              
                     .querySelector('.modal__login')
                     .remove();
@@ -135,13 +156,14 @@ function renderLogin() {
                     .querySelector('.modal__login__img')
                     .remove();
                 config.login[target.dataset.section].render();
-            });
+            }, 
+            modalWindow);
         }
-    }
+    });
 
-    modalWindow.addEventListener('click', deleteLogin); 
+    const form = modalWindow.querySelector('.modal__form');
 
-    modalWindow.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const emailInput = modalWindow.querySelector('input[type=email]');
@@ -172,6 +194,19 @@ function renderLogin() {
     });
 }
 
+function checkInput(input, type = 'text'){
+    if (type == email && (!input || !input.match(/@/))) {
+          return false;
+    }
+    if (type == password && (!input || !input.match(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g))) {
+        return false;
+    }
+    /*if (!input || !input.match(/^[\p{L}\p{M}][\p{L}\p{M}\'\-]{0,48}[\p{L}\p{M}]$/u)) {
+        return false;
+    }*/
+    return true;
+}
+
 function renderSignup() {
     if (root.querySelector('.modal__window') === null) {
         renderModal();
@@ -181,15 +216,16 @@ function renderSignup() {
     renderTemplate('signup', (safeHtml) => {
         modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
     });
+    
+    const loginImg = root.querySelector('.modal__signup__img');
 
-    function deleteSignup(e) {
+    loginImg.addEventListener('click', (e) => {
         const { target } = e;
     
         if (target instanceof HTMLAnchorElement) {
             e.preventDefault();
 
             goToPage(config.login[target.dataset.section], () => {
-                modalWindow.removeEventListener('click', deleteSignup); 
                 modalWindow              
                     .querySelector('.modal__signup')
                     .remove();
@@ -197,12 +233,58 @@ function renderSignup() {
                     .querySelector('.modal__signup__img')
                     .remove();
                 config.login[target.dataset.section].render();
-            });
+            },
+            modalWindow);
         }
-    }
+    });
 
-    modalWindow.addEventListener('click', deleteSignup); 
+    const form = modalWindow.querySelector('.modal__form');
 
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nickInput = modalWindow.querySelector('input[type=text]');
+        const emailInput = modalWindow.querySelector('input[type=email]');
+        const passwordInput = modalWindow.querySelector('input[type=password]');
+
+        const user = {};
+        user.nickname = nickInput.value;
+        user.email = emailInput.value.trim();
+        user.password = passwordInput.value; 
+
+        for (key in user) {
+            if (key === email || key === email) {
+                if (!checkInput(user[key],key)) {
+                    return;
+                }
+            } else {
+                if (!checkInput(user[key])) {
+                    return;
+                }
+            }
+        } 
+
+        ajax(
+            'POST',
+            '/signup',
+            {nickname, email, password },
+            (response, result) => {
+                if (response.status === 200) {
+                    
+                    document.body
+                        .querySelector('.modal__background')
+                        .remove();
+                    
+                    renderHeader(result);
+
+                    return;
+                }
+
+                console.log(response.status);
+
+                alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
+            })
+    });
 }
 
 renderHeader();

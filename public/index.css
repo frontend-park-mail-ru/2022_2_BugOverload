@@ -5,7 +5,12 @@ body {
 .header {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+
+    height: 95px;
 }
 
 .header__logo {
@@ -15,7 +20,7 @@ body {
 
     white-space: nowrap;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 18px;
     margin-left: 100px;
     color: #fff;
     text-decoration: none;
@@ -28,7 +33,7 @@ body {
 
     white-space: nowrap;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 18px;
     color: #fff;
     text-decoration: none;
 }
@@ -39,9 +44,23 @@ body {
     align-self: auto;
 
     margin-left: auto;
-    margin-right: 10px;
-    font-size: 14px;
+    margin-right: 46px;
+
+    font-size: 18px;
     text-decoration: none;
+}
+
+.header__form__input {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
+    height: 35px;
+    width: 470px;
+    border-radius: 18px;
+    border: 0px;
+    background: #333333;
+    opacity: .8;
 }
 
 .header__login {
@@ -49,13 +68,64 @@ body {
     flex: 0 1 auto;
     align-self: auto;
 
-    margin-right: 100px;
-    color: #fff;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    font-size: 20px;
     text-decoration: none;
-    padding: 5px 10px;
-    background-color: #414b52;
-    border-radius: 15px;
+    background-color: #FEBA2B;
+
+    margin-right: 100px;
+    height: 46px;
+    width: 180px;
+    border-radius: 40px;
+}
+
+.header__userbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    width: 220px;
+}
+
+.userbar__nick__email {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 12px;
+}
+
+.header__nickname {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.header__email {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.header__avatar {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: baseline;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    object-fit: cover;
 }
 
 .modal__background {
@@ -100,8 +170,8 @@ body {
     width: 15px;
     height: 15px;
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 45px;
+    right: 87px;
     fill: #444;
     cursor: pointer;
 }
@@ -176,6 +246,7 @@ body {
     background-size: 400px;
     background-image: url(temp_src/login.png);
     background-repeat: no-repeat;
+    border-radius: 0px 30px 30px 0px;
 
     width: 50%;
     height: 100%;
@@ -223,6 +294,7 @@ body {
     background-size: 400px;
     background-image: url(temp_src/signup.png);
     background-repeat: no-repeat;
+    border-radius: 30px 0px 0px 30px;
 
     width: 50%;
     height: 100%;
