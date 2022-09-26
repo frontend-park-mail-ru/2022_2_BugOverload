@@ -1,33 +1,128 @@
 .header {
     display: flex;
-}
-
-.navbar {
-    display: inline-flex;
     flex-direction: row;
-    justify-content: flex-start;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
     align-items: center;
-    width: 100%;
-    white-space: nowrap;
-    padding-left: 15%;
-    padding-right: 15%;
+
+    height: 95px;
+    z-index: 2;
 }
 
-.header__login {
-    display: inline-block;
-    white-space: nowrap;
-}
+.header__logo {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
 
-.header__form {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: 5%;
+    white-space: nowrap;
+    margin-right: 10px;
+    font-size: 18px;
+    margin-left: 100px;
+    color: #fff;
+    text-decoration: none;
 }
 
 .header__navlink {
-    display: inline-block;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
     white-space: nowrap;
-    margin-right: 5%;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header__form {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
+    margin-left: auto;
+    margin-right: 46px;
+
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.header__form__input {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
+    height: 35px;
+    width: 470px;
+    border-radius: 18px;
+    border: 0px;
+    background: #333333;
+    opacity: .8;
+}
+
+.header__login {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    font-size: 20px;
+    text-decoration: none;
+    background-color: #FEBA2B;
+
+    margin-right: 100px;
+    height: 46px;
+    width: 180px;
+    border-radius: 40px;
+}
+
+.header__userbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    width: 220px;
+}
+
+.userbar__nick__email {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 12px;
+}
+
+.header__nickname {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.header__email {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.header__avatar {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: baseline;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    object-fit: cover;
 }
 
 

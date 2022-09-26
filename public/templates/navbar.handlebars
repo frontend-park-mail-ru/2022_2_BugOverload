@@ -1,14 +1,22 @@
-<header class="header" id="header">
-  <nav class="navbar">
-    <a class="header__navlink" href="">Logo</a>
-    <a class="header__navlink" href="">Главная {{value}}</a>
-    <a class="header__navlink" href="">Главная {{value}}</a>
-    <a class="header__navlink" href="">Главная</a>
+<header class="header">
 
-    <form class="header__form">
-      <input class="" maxlength="200" type="search" placeholder="Search" aria-label="Search">
-    </form>
+  <a href="/navlink" class="header__logo" data-section="navlink">Logo</a>
+  <a href="/navlinke" class="header__navlink" data-section="navlink">Главная</a>
+  <a href="/navlink" class="header__navlink" data-section="navlink">Главная</a>
+  <a href="/navlink" class="header__navlink" data-section="navlink">Главная</a>
 
-    <a class="header__login" href=""><button>login</button></a>
-  </nav>
+
+  <form class="header__form">
+    <input class="header__form__input" maxlength="200" type="search" placeholder="" aria-label="Search">
+
+  </form>
+
+  {{#if email}}
+    <div class="header__userbar">
+      <img class="header__avatar" src="{{avatar}}" alt="">
+    </div>
+  {{else}}
+    <a href="/login" class="header__login" data-section="login">Вход</button>
+  {{/if}}
+
 </header>
