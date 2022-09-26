@@ -151,8 +151,9 @@ body {
     align-content: stretch;
     align-items: flex-start;
 
-    background-size: 100%;
+    background-size: 400px;
     background-image: url(temp_src/login.png);
+    background-repeat: no-repeat;
 
     width: 50%;
     height: 100%;
@@ -197,8 +198,9 @@ body {
     align-content: stretch;
     align-items: flex-start;
 
-    background-size: 100%;
+    background-size: 400px;
     background-image: url(temp_src/signup.png);
+    background-repeat: no-repeat;
 
     width: 50%;
     height: 100%;

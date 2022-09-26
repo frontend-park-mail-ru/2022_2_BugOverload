@@ -27,8 +27,6 @@ const config = {
     }
 }
 
-const voidFunc = () => {}
-
 function renderTemplate(templateName,callback) {
     const template = Handlebars.templates[templateName];
     const templateHtml = template({});
@@ -52,6 +50,8 @@ function renderHeader() {
     });
 }
 
+const voidFunc = () => {};
+
 function goToPage(menuElement,callback = voidFunc) {
     let activeLink = document.body.querySelector('.active')
     if (activeLink) {
@@ -74,15 +74,6 @@ async function ajax(method, url, body = null, callback) {
     callback(response);
 }
 
-function createInput(type, text, name) {
-	const input = document.createElement('input');
-	input.type = type;
-	input.name = name;
-	input.placeholder = text;
-
-	return input;
-}
-
 function renderModal() {
     renderTemplate('modal', (safeHtml) => {
         root.insertAdjacentHTML('afterbegin', safeHtml);
@@ -102,33 +93,34 @@ function renderLogin() {
     if (!root.querySelector('.modal__window')) {
         renderModal();
     }
+
     const modalWindow = root.querySelector('.modal__window__flex');
+
     renderTemplate('login', (safeHtml) => {
         modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
     });
 
-    function cklickRegister(e) {
+    function deleteLogin(e) {
         const { target } = e;
     
-        if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
+        if (target instanceof HTMLAnchorElement) {
             e.preventDefault();
 
             goToPage(config.login[target.dataset.section], () => {
+                modalWindow.removeEventListener('click', deleteLogin); 
                 modalWindow              
                     .querySelector('.modal__login')
                     .remove();
                 modalWindow              
                     .querySelector('.modal__login__img')
                     .remove();
-                modalWindow.removeEventListener('click', cklickRegister); 
             });
         }
-    };
+    }
 
-    modalWindow.addEventListener('click', cklickRegister); 
+    modalWindow.addEventListener('click', deleteLogin); 
 
-/*
-    form.addEventListener('submit', (e) => {
+    modalWindow.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const email = emailInput.value.trim();
@@ -148,8 +140,6 @@ function renderLogin() {
             })
         )
     });
-
-    return form;*/
 }
 
 function renderSignup() {
@@ -162,25 +152,25 @@ function renderSignup() {
         modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
     });
 
-    function cklickSignup(e) {
+    function deleteSignup(e) {
         const { target } = e;
     
-        if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
+        if (target instanceof HTMLAnchorElement) {
             e.preventDefault();
 
             goToPage(config.login[target.dataset.section], () => {
-                modalWindow              
-                    .querySelector('.modal__signup__img')
-                    .remove();
+                modalWindow.removeEventListener('click', deleteSignup); 
                 modalWindow              
                     .querySelector('.modal__signup')
                     .remove();
-                modalWindow.removeEventListener('click', cklickSignup); 
+                modalWindow              
+                    .querySelector('.modal__signup__img')
+                    .remove();
             });
         }
-    };
+    }
 
-    modalWindow.addEventListener('click', cklickSignup); 
+    modalWindow.addEventListener('click', deleteSignup); 
 
 }
 
