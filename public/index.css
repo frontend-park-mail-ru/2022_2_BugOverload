@@ -111,7 +111,7 @@ body {
     flex: 0 1 auto;
     align-self: auto;
 
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -130,13 +130,35 @@ body {
     margin-bottom: 50px;
 }
 
+.modal__form {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+}
+
 .modal__input {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+
     width: 270px;
     height: 28px;
     border: 2px solid #333333;
     border-radius: 21px;
     margin-bottom: 50px;
     font-size: 10px;
+}
+
+.modal__button {
+    display: block;
 }
 
 .modal__login__img {
@@ -211,7 +233,7 @@ body {
     flex: 0 1 auto;
     align-self: auto;
 
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;

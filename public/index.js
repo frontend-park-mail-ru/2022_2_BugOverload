@@ -34,7 +34,16 @@ function renderTemplate(templateName,callback) {
     callback(safeheaderHtml);
 }
 
-function renderHeader() {
+function renderHeader(user = null) {
+    if(document.querySelector('.header')) {
+        document
+            .querySelector('.header')
+            .remove();
+    }
+    if(user) {
+        console.log(user)
+    }
+
     renderTemplate('header', (safeHtml) => {
         root.insertAdjacentHTML('beforebegin', safeHtml);
     });
@@ -45,33 +54,44 @@ function renderHeader() {
     
         if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
             e.preventDefault();
-            goToPage(config.header[target.dataset.section]);
+            goToPage(config.header[target.dataset.section], () => {
+                document.body
+                    .querySelector('.active')
+                    .classList.remove('active');
+                    config.header[target.dataset.section].render();
+            });
         }
     });
 }
 
-const voidFunc = () => {};
+const renderFunc = (menuElement) => {
+    menuElement.render();
+};
 
-function goToPage(menuElement,callback = voidFunc) {
+function goToPage(menuElement,callback = renderFunc) {
     let activeLink = document.body.querySelector('.active')
     if (activeLink) {
         activeLink.classList.remove('active');
     }
     document.body.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
-    if (callback != voidFunc) {
-        callback();
-    }
-    menuElement.render();
+    (callback != renderFunc) ? callback() : renderFunc(menuElement);
 }
 
-async function ajax(method, url, body = null, callback) {
+async function ajax(method, url, data = null, callback) {
+    console.log(data)
+    console.log(JSON.stringify(data))
     let response = await fetch(
         url, {
             method: method,
-            body: body
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+            body: JSON.stringify(data),
     });
 
-    callback(response);
+    const result = await response.json();
+
+    callback(response, result);
 }
 
 function renderModal() {
@@ -114,6 +134,7 @@ function renderLogin() {
                 modalWindow              
                     .querySelector('.modal__login__img')
                     .remove();
+                config.login[target.dataset.section].render();
             });
         }
     }
@@ -123,6 +144,8 @@ function renderLogin() {
     modalWindow.addEventListener('submit', (e) => {
         e.preventDefault();
 
+        const emailInput = modalWindow.querySelector('input[type=email]');
+        const passwordInput = modalWindow.querySelector('input[type=password]');
         const email = emailInput.value.trim();
         const password = passwordInput.value;
 
@@ -130,15 +153,22 @@ function renderLogin() {
             'POST',
             '/login',
             { email, password },
-            (response => {
+            (response, result) => {
                 if (response.status === 200) {
-                    goToPage(config.menu.profile);
+                    
+                    document.body
+                        .querySelector('.modal__background')
+                        .remove();
+                    
+                    renderHeader(result);
+
                     return;
                 }
 
+                console.log(response.status);
+
                 alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
             })
-        )
     });
 }
 
@@ -166,6 +196,7 @@ function renderSignup() {
                 modalWindow              
                     .querySelector('.modal__signup__img')
                     .remove();
+                config.login[target.dataset.section].render();
             });
         }
     }
