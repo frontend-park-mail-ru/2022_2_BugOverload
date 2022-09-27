@@ -58,7 +58,9 @@ const collectionCinemaTodayData = {
 ]}
 
 
-const collectionPopularData = {films:[
+const collectionPopularData = {
+    tittle: "Популярное",
+    films:[
     {
         tittle: "Дюна",
         poster: "dune_poster.jpg",
@@ -108,19 +110,19 @@ let root = document.getElementById('root')
 let navbar = Handlebars.templates['navbar']({})
 let div = document.createElement('div')
 div.innerHTML = navbar
-
 root.append(div)
 
-let previewFilm = Handlebars.templates['previewFilm']({})
+let previewFilm = Handlebars.templates['previewFilm']({
+    previewTittle: "Американская история X",
+    previewDescription: "Ну типо по пустыням ходят, а ещё черви там всякие делают уууу",
+    previewImg: "img/dune.jpg"})
 div = document.createElement('div')
 div.innerHTML = previewFilm
-
 root.append(div)
 
 let collectionCinemaToday = Handlebars.templates['collection'](collectionCinemaTodayData)
 div = document.createElement('div')
 div.innerHTML = collectionCinemaToday
-
 root.append(div)
 
 // let collectionPopular = Handlebars.templates['collection']({})
