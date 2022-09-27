@@ -4,15 +4,13 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const uuid = require('uuid').v4;
-const cookie = require('cookie-parser');
 const body = require('body-parser');
 const morgan = require('morgan');
 
 app.use(morgan('dev'));
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
+app.use(express.static(path.resolve(__dirname, '../')));
 app.use(express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
-app.use(cookie());
 
 const users = {
 	'dop123@mail.ru': {
@@ -41,6 +39,11 @@ app.post('/login',  (req, res) => {
 
 	res.cookie('red', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
+});
+
+app.get('/auth',  (req, res) => {
+	const email = 'dop123@mail.ru'
+	res.status(404).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
 app.post('/signup', (req, res) => {

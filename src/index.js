@@ -1,5 +1,5 @@
 const root = document.getElementById('root');
-
+//import {config} from './__mocks__/config.js';
 const config = {
     header: {
         navlink: {
@@ -27,6 +27,30 @@ const config = {
     }
 }
 
+async function ajax(method, url, data, callback) {
+    console.log(data)
+    console.log(JSON.stringify(data))
+    if (method === 'POST') {
+        let response = await fetch(
+            url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                  },
+                body: JSON.stringify(data),
+        });
+    
+        const result = await response.json();
+    
+        callback(response, result);
+    } else {
+        let response = await fetch(url);
+        let result = await response.json();
+        console.log(result);
+        callback(response, result);
+    }
+}
+
 function renderTemplate(templateName, callback, parametrs = {}) {
     const template = Handlebars.templates[templateName];
     const templateHtml = template(parametrs);
@@ -42,20 +66,14 @@ function renderUserbar(user) {
     }, user);
 }
 
-function renderHeader(user = null) {
-    if(document.querySelector('.header')) {
-        document
-            .querySelector('.header')
-            .remove();
-    }
-
+const renderHeaderUser = (user = null) => {
     renderTemplate('header', (safeHtml) => {
         root.insertAdjacentHTML('beforebegin', safeHtml);
     },
-    (user) ? user: {});
+    user);
 
     const header = document.querySelector('.header');
-
+    
     if(user) {
         const ava = header.querySelector('.header__avatar');
 
@@ -83,6 +101,31 @@ function renderHeader(user = null) {
     });
 }
 
+function renderHeader(user = null) {
+    if(document.querySelector('.header')) {
+        document
+            .querySelector('.header')
+            .remove();
+    }
+
+    if(!user) {
+        ajax(
+            'GET',
+            'auth',
+            {},
+            (response, result) => {
+                if (response.status === 200) {
+                    user = result;
+                    renderHeaderUser(user);
+                    return;
+                }
+                renderHeaderUser(user);
+            })
+    } else {
+        renderHeaderUser(user);
+    }
+}
+
 const renderFunc = (menuElement) => {
     menuElement.render();
 };
@@ -94,23 +137,6 @@ function goToPage(menuElement,callback = renderFunc,current = document.body) {
     }
     current.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
     (callback != renderFunc) ? callback() : renderFunc(menuElement);
-}
-
-async function ajax(method, url, data = null, callback) {
-    console.log(data)
-    console.log(JSON.stringify(data))
-    let response = await fetch(
-        url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              },
-            body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-
-    callback(response, result);
 }
 
 function renderModal() {

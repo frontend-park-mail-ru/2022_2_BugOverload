@@ -1,3 +1,60 @@
+@font-face {
+    font-family: 'Mail Sans Roman Med';
+    src: url('fonts/MailSansRoman-Medium.eot');
+    src: local('Mail Sans Roman Medium'), local('MailSansRoman-Medium'),
+        url('fonts/MailSansRoman-Medium.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman DemBd';
+    src: url('fonts/MailSansRoman-DemiBold.eot');
+    src: local('Mail Sans Roman DemiBold'), local('MailSansRoman-DemiBold'),
+        url('fonts/MailSansRoman-DemiBold.woff2') format('woff2'),
+        url('fonts/MailSansRoman-DemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Bold.eot');
+    src: local('Mail Sans Roman Bold'), local('MailSansRoman-Bold'),
+        url('fonts/MailSansRoman-Bold.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Light.eot');
+    src: local('Mail Sans Roman Light'), local('MailSansRoman-Light'),
+        url('fonts/MailSansRoman-Light.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Regular.eot');
+    src: local('Mail Sans Roman Regular'), local('MailSansRoman-Regular'),
+        url('fonts/MailSansRoman-Regular.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
 body {
     background: #121212;
 }
@@ -10,6 +67,9 @@ body {
     align-content: flex-start;
     align-items: center;
 
+    font-family: 'Mail Sans Roman';
+    font-weight: normal;
+
     height: 95px;
 }
 
@@ -19,9 +79,9 @@ body {
     align-self: auto;
 
     white-space: nowrap;
-    margin-right: 10px;
-    font-size: 18px;
-    margin-left: 100px;
+    margin-right: 55px;
+    font-size: 30px;
+    margin-left: 55px;
     color: #fff;
     text-decoration: none;
 }
@@ -32,7 +92,7 @@ body {
     align-self: auto;
 
     white-space: nowrap;
-    margin-right: 10px;
+    margin-right: 55px;
     font-size: 18px;
     color: #fff;
     text-decoration: none;
@@ -44,7 +104,7 @@ body {
     align-self: auto;
 
     margin-left: auto;
-    margin-right: 46px;
+    margin-right: 55px;
 
     font-size: 18px;
     text-decoration: none;
@@ -63,24 +123,25 @@ body {
     opacity: .8;
 }
 
-.header__login {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-
+.button__yellow {
     display: flex;
     align-items: center;
     justify-content: center;
 
     color: #000;
-    font-size: 20px;
-    text-decoration: none;
     background-color: #FEBA2B;
+}
+
+.header__login {
+    font-size: 18px;
+    text-decoration: none;
 
     margin-right: 100px;
-    height: 46px;
+    height: 35px;
     width: 180px;
     border-radius: 40px;
+
+    font-weight: bold;
 }
 
 .header__userbar {
@@ -164,6 +225,9 @@ body {
     align-items: center;
 
     height: 100%;
+
+    font-family: 'Mail Sans Roman';
+    font-weight: normal;
 }
 
 .modal__cross {
@@ -196,8 +260,11 @@ body {
     height: 100%;
 }
 
-.modal__login__header {
-    margin-bottom: 50px;
+.modal__header {
+    margin-bottom: 40px;
+    color: #fff;
+
+    font-size: 26px;
 }
 
 .modal__form {
@@ -221,14 +288,25 @@ body {
 
     width: 270px;
     height: 28px;
-    border: 2px solid #333333;
     border-radius: 21px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    border: 0px;
+    background: #333333;
+    opacity: .8;
+
     font-size: 10px;
 }
 
-.modal__button {
-    display: block;
+.modal__input__button {
+    font-size: 13px;
+    text-decoration: none;
+
+    width: 270px;
+    height: 30px;
+    border-radius: 21px;
+    margin-bottom: 40px;
+
+    font-weight: bold;
 }
 
 .modal__login__img {
@@ -243,8 +321,9 @@ body {
     align-content: stretch;
     align-items: flex-start;
 
+
     background-size: 400px;
-    background-image: url(temp_src/login.png);
+    background-image: url(asserts/login.png);
     background-repeat: no-repeat;
     border-radius: 0px 30px 30px 0px;
 
@@ -252,30 +331,33 @@ body {
     height: 100%;
 }
 
-.modal__login__forgot__password{
+.modal__text__alternative__page{
     order: 0;
     flex: 0 1 auto;
     align-self: auto;
 
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 25px;
-    font-size: 10px;
+    margin-right: 15px;
+    font-size: 11px;
     color: #fff;
     text-decoration: none;
 }
 
-.header__login__signup {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-
+.modal__login__signup {
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 50px;
-    font-size: 10px;
+    margin-right: 36px;
     color: #000;
     text-decoration: none;
+
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+
+    height: 23px;
+    width: 120px;
+    border-radius: 26px;
 }
 
 
@@ -292,12 +374,21 @@ body {
     align-items: flex-start;
 
     background-size: 400px;
-    background-image: url(temp_src/signup.png);
+    background-image: url(asserts/signup.png);
     background-repeat: no-repeat;
     border-radius: 30px 0px 0px 30px;
 
     width: 50%;
     height: 100%;
+}
+
+.modal__flex__center__div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
 }
 
 .modal__signup {
