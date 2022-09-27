@@ -1,1 +1,0 @@
-!function(){var n=Handlebars.template;(Handlebars.templates=Handlebars.templates||{}).bigContent=n({compiler:[8,">= 4.3.0"],main:function(n,a,e,t,i){return'\n<div class="content-big">\n  <div class="content-big__image">\n\n  </div>\n</div>'},useData:!0})}();
