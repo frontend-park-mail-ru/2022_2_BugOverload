@@ -4,47 +4,22 @@
 
         {{#each films}}
         <div class="film">
-            <a href={{href}}>
-                <img class="film__poster" src={{poster}}>
-            </a>
+            <a href={{href}} class="film__poster" style="background-image: url('{{poster}}');"></a>
+            <div class="film__blackout"></div>
 
             <div class="film__rating">{{rating}}</div>
             <div class="film__tittle">{{tittle}}</div>
             <div class="film__info-container">
-                <div class="film__genry">{{genrys}}</div>
+                <div class="film__genrys">
+                    {{#each genrys}}
+                    <div class="film__genry">{{this}}&nbsp</div>
+                    {{/each}}
+                </div>
                 <div class="film__decore-circle"></div>
                 <div class="film__year">{{year}}</div>
             </div>
         </div>
         {{/each}}
-
-        {{!-- <div class="film">
-            <a href={{href}}>
-                <img class="film__poster" src={{poster}}>
-            </a>
-
-            <div class="film__rating">{{rating}}</div>
-            <div class="film__tittle">{{tittle}}</div>
-            <div class="film__info-container">
-                <div class="film__genry">{{genrys}}</div>
-                <div class="film__decore-circle"></div>
-                <div class="film__year">{{year}}</div>
-            </div>
-        </div>
-
-        <div class="film">
-            <a href={{href}}>
-                <img class="film__poster" src={{poster}}>
-            </a>
-
-            <div class="film__rating">{{rating}}</div>
-            <div class="film__tittle">{{tittle}}</div>
-            <div class="film__info-container">
-                <div class="film__genry">{{genrys}}</div>
-                <div class="film__decore-circle"></div>
-                <div class="film__year">{{year}}</div>
-            </div>
-        </div> --}}
 
     </div>
 </div>

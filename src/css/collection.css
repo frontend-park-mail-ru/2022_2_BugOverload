@@ -1,0 +1,19 @@
+.collection {
+    margin: 0px 0px 0px 52px;
+}
+
+.collection__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 38px;
+}
+
+.collection__container a {
+    text-decoration: none;
+}
+
+.collection__tittle {
+    font-size: 28px;
+    color:#fff;
+}

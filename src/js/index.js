@@ -3,6 +3,15 @@
 // addElementFromTemplate(header, 'bigContent', {})
 
 // let main = document.createElement('')
+const previewDune = {
+    previewTittle: "Американская история X",
+    previewDescription: "Ну типо по пустыням ходят, а ещё черви там всякие делают уууу",
+    previewImg: "img/dune.jpg"}
+
+const previewStarWars = {
+    previewTittle: "Звёздные войны. Эпизод IV: Новая надежда",
+    previewDescription: "Ну типо космическая войнушка, световой меч делает вжух-вжух",
+    previewImg: "img/StarWars.jpeg"}
 
 const collectionCinemaTodayData = {
     tittle: "Сейчас в кино",
@@ -11,142 +20,127 @@ const collectionCinemaTodayData = {
         tittle: "Дюна",
         poster: "img/posters/dune_poster.jpg",
         rating: 7.1,
-        genrys: "Фентези, Приключения",
-        year: 2015,
+        genrys: ["Фентези,", "Приключения"],
+        year: 2021,
         href: "index.html",
     },
     {
-        tittle: "Дюна",
+        tittle: "Человек",
         poster: "img/posters/1.png",
-        rating: 7.3,
-        genrys: "Фентези, Приключения",
+        rating: 8.7,
+        genrys: ["Документальный,", "Смотрю и плачу"],
         year: 2015,
         href: "index.html",
     },
     {
-        tittle: "Дюна",
+        tittle: "Люси",
         poster: "img/posters/2.png",
         rating: 7.4,
-        genrys: "Фентези, Приключения",
-        year: 2015,
+        genrys: ["Фантастика, Боевик"],
+        year: 2014,
         href: "index.html",
     },
     {
-        tittle: "Дюна",
+        tittle: "Властелин колец. Братство кольца",
         poster: "img/posters/3.png",
         rating: 7.5,
-        genrys: "Фентези, Приключения",
-        year: 2015,
+        genrys: ["Фентези,", "Прилючения"],
+        year: 2001,
         href: "index.html",
     },
     {
-        tittle: "Дюна",
+        tittle: "Дом, который построил Джек",
         poster: "img/posters/4.png",
         rating: 7.9,
-        genrys: "Фентези, Приключения",
-        year: 2015,
+        genrys: ["Триллер", "Криминал"],
+        year: 2018,
         href: "index.html",
     },
     {
-        tittle: "Дюна",
+        tittle: "Доказательство смерти",
         poster: "img/posters/5.png",
         rating: 7.2,
-        genrys: "Фентези, Приключения",
-        year: 2015,
+        genrys: ["Триллер", "Боевик"],
+        year: 2007,
         href: "index.html",
     },
-]}
+]};
 
 
 const collectionPopularData = {
     tittle: "Популярное",
     films:[
-    {
-        tittle: "Дюна",
-        poster: "dune_poster.jpg",
-        rating: 7.1,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-    {
-        tittle: "Дюна",
-        poster: "1.png",
-        rating: 7.2,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-    {
-        tittle: "Дюна",
-        poster: "2.png",
-        rating: 7.2,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-    {
-        tittle: "Дюна",
-        poster: "3.png",
-        rating: 7.2,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-    {
-        tittle: "Дюна",
-        poster: "4.png",
-        rating: 7.2,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-    {
-        tittle: "Дюна",
-        poster: "5.png",
-        rating: 7.2,
-        genrys: ["Фентези", "Приключения"],
-        year: 2015
-    },
-]}
+        {
+            tittle: "Дюна",
+            poster: "img/posters/dune_poster.jpg",
+            rating: 7.1,
+            genrys: ["Триллер", "Криминал"],
+            year: 2021,
+            href: "index.html",
+        },
+        {
+            tittle: "Убить Билла",
+            poster: "img/posters/8.png",
+            rating: 8.7,
+            genrys: ["Триллер", "Криминал"],
+            year: 2015,
+            href: "index.html",
+        },
+        {
+            tittle: "Головокружение",
+            poster: "img/posters/9.png",
+            rating: 7.4,
+            genrys: ["Триллер", "Криминал"],
+            year: 2014,
+            href: "index.html",
+        },
+        {
+            tittle: "Доказательство смерти",
+            poster: "img/posters/5.png",
+            rating: 7.5,
+            genrys: ["Триллер", "Криминал"],
+            year: 2001,
+            href: "index.html",
+        },
+        {
+            tittle: "Чунгингский экспресс",
+            poster: "img/posters/7.png",
+            rating: 7.9,
+            genrys: ["Триллер", "Криминал"],
+            year: 2018,
+            href: "index.html",
+        },
+        {
+            tittle: "Девушка с татуировой дракона",
+            poster: "img/posters/6.png",
+            rating: 7.2,
+            genrys: ["Триллер", "Криминал"],
+            year: 2007,
+            href: "index.html",
+        },
+]};
 
-let root = document.getElementById('root')
+let root = document.getElementById('root');
 
-let navbar = Handlebars.templates['navbar']({})
-let div = document.createElement('div')
-div.innerHTML = navbar
+let navbar = Handlebars.templates['navbar']({});
+let div = document.createElement('div');
+div.innerHTML = navbar;
+root.append(div);
+
+let previewFilm = Handlebars.templates['previewFilm'](previewStarWars);
+div = document.createElement('div');
+div.innerHTML = previewFilm;
+div.style.backgroundImage = `url('${previewStarWars.previewImg}')`;
+root.append(div);
+
+let collectionCinemaToday = Handlebars.templates['collection'](collectionCinemaTodayData);
+div = document.createElement('div');
+div.innerHTML = collectionCinemaToday;
+// let a = div.querySelectorAll('a')
+// a.style.backgroundImage = `url('${previewStarWars.previewImg}')`;
 root.append(div)
 
-let previewFilm = Handlebars.templates['previewFilm']({
-    previewTittle: "Американская история X",
-    previewDescription: "Ну типо по пустыням ходят, а ещё черви там всякие делают уууу",
-    previewImg: "img/dune.jpg"})
-div = document.createElement('div')
-div.innerHTML = previewFilm
+let collectionPopular = Handlebars.templates['collection'](collectionPopularData);
+div = document.createElement('div');
+div.innerHTML = collectionPopular;
 root.append(div)
-
-let collectionCinemaToday = Handlebars.templates['collection'](collectionCinemaTodayData)
-div = document.createElement('div')
-div.innerHTML = collectionCinemaToday
-root.append(div)
-
-// let collectionPopular = Handlebars.templates['collection']({})
-// div = document.createElement('div')
-// div.innerHTML = collectionPopular
-
-// root.append(div)
-
-// function renderTemplate(templateName, callback, parametrs = {}) {
-//     const template = Handlebars.templates[templateName];
-//     const templateHtml = template(parametrs);
-//     const safeheaderHtml = DOMPurify.sanitize(templateHtml);
-//     callback(safeheaderHtml);
-// }
-
-// function addElementFromTemplate(elementDOM, templateName, context) {
-//     // let renderTemplate = Handlebars.templates[templateName]
-//     // let html = renderTemplate(context)
-//     let html = Handlebars.templates[templateName](context)
-//     let div = document.createElement('div')
-//     // const sanitizer = new Sanitizer();
-//     // div.setHTML(html, {sanitizer})
-//     div.innerHTML = html
-
-//     // const elem = document.getElementById(element);
-//     elementDOM.append(div);
-// }
