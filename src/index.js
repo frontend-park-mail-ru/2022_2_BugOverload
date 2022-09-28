@@ -1,5 +1,6 @@
 const root = document.getElementById('root');
 //import {config} from './__mocks__/config.js';
+import {Ajax} from './utils/ajax.js';
 const config = {
     header: {
         navlink: {
@@ -109,7 +110,21 @@ function renderHeader(user = null) {
     }
 
     if(!user) {
-        ajax(
+        const aj = new Ajax();
+
+        aj.get({
+            url: '/auth',
+            callback: (response, result) => {
+                if (response.status === 200) {
+                    user = result;
+                    renderHeaderUser(user);
+                    return;
+                }
+                renderHeaderUser(user);
+            }
+        });
+
+        /*ajax(
             'GET',
             'auth',
             {},
@@ -120,7 +135,7 @@ function renderHeader(user = null) {
                     return;
                 }
                 renderHeaderUser(user);
-            })
+            })*/
     } else {
         renderHeaderUser(user);
     }
