@@ -1,32 +1,10 @@
 const root = document.getElementById('root');
 //import {config} from './__mocks__/config.js';
 import {Ajax} from './utils/ajax.js';
-const config = {
-    header: {
-        navlink: {
-            href: '/navlink',
-            name: 'Главная',
-            //render: renderMain,
-        },
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: renderLogin,
-        },
-    },
-    login: {
-        signup: {
-            href: '/signup',
-            name: 'Регистрация',
-            render: renderSignup,
-        },
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: renderLogin,
-        },
-    }
-}
+import {renderTemplate} from './utils/render_template.js';
+import {Header} from './components/Header/header.js';
+import {Modal} from './components/Modal/modal.js';
+import {Login} from './components/Login/login.js';
 
 async function ajax(method, url, data, callback) {
     console.log(data)
@@ -52,95 +30,6 @@ async function ajax(method, url, data, callback) {
     }
 }
 
-function renderTemplate(templateName, callback, parametrs = {}) {
-    const template = Handlebars.templates[templateName];
-    const templateHtml = template(parametrs);
-    const safeheaderHtml = DOMPurify.sanitize(templateHtml);
-    callback(safeheaderHtml);
-}
-
-function renderUserbar(user) {
-    const userbar = document.body.querySelector('.header__userbar');
-
-    renderTemplate('userbar', (safeHtml) => {
-        userbar.insertAdjacentHTML('beforeend', safeHtml);
-    }, user);
-}
-
-const renderHeaderUser = (user = null) => {
-    renderTemplate('header', (safeHtml) => {
-        root.insertAdjacentHTML('beforebegin', safeHtml);
-    },
-    user);
-
-    const header = document.querySelector('.header');
-    
-    if(user) {
-        const ava = header.querySelector('.header__avatar');
-
-        function openUserbar(e) {
-            const { target } = e;
-
-            renderUserbar(user);
-        }
-
-        ava.addEventListener('click', openUserbar)
-    }
-
-    header.addEventListener('click', (e) => {
-        const { target } = e;
-    
-        if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
-            e.preventDefault();
-            goToPage(config.header[target.dataset.section], () => {
-                document.body
-                    .querySelector('.active')
-                    .classList.remove('active');
-                    config.header[target.dataset.section].render();
-            });
-        }
-    });
-}
-
-function renderHeader(user = null) {
-    if(document.querySelector('.header')) {
-        document
-            .querySelector('.header')
-            .remove();
-    }
-
-    if(!user) {
-        const aj = new Ajax();
-
-        aj.get({
-            url: '/auth',
-            callback: (response, result) => {
-                if (response.status === 200) {
-                    user = result;
-                    renderHeaderUser(user);
-                    return;
-                }
-                renderHeaderUser(user);
-            }
-        });
-
-        /*ajax(
-            'GET',
-            'auth',
-            {},
-            (response, result) => {
-                if (response.status === 200) {
-                    user = result;
-                    renderHeaderUser(user);
-                    return;
-                }
-                renderHeaderUser(user);
-            })*/
-    } else {
-        renderHeaderUser(user);
-    }
-}
-
 const renderFunc = (menuElement) => {
     menuElement.render();
 };
@@ -154,24 +43,10 @@ function goToPage(menuElement,callback = renderFunc,current = document.body) {
     (callback != renderFunc) ? callback() : renderFunc(menuElement);
 }
 
-function renderModal() {
-    renderTemplate('modal', (safeHtml) => {
-        root.insertAdjacentHTML('afterbegin', safeHtml);
-    });
-    
-    document.body
-        .querySelector('.modal__cross')
-        .addEventListener('click', (e) => {
-            e.preventDefault();
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-        }); 
-}
-
 function renderLogin() {
     if (!root.querySelector('.modal__window')) {
-        renderModal();
+        const modal = new Modal();
+        modal.render();
     }
 
     const modalWindow = root.querySelector('.modal__window__flex');
@@ -223,7 +98,8 @@ function renderLogin() {
                         .querySelector('.modal__background')
                         .remove();
                     
-                    renderHeader(result);
+                    const header = new Header();
+                    header.render(result);
 
                     return;
                 }
@@ -250,7 +126,8 @@ function checkInput(input, type = 'text'){
 
 function renderSignup() {
     if (root.querySelector('.modal__window') === null) {
-        renderModal();
+        const modal = new Modal();
+        modal.render();
     }
 
     const modalWindow = root.querySelector('.modal__window__flex');
@@ -324,7 +201,8 @@ function renderSignup() {
                         .querySelector('.modal__background')
                         .remove();
                     
-                    renderHeader(result);
+                    const header = new Header();
+                    header.render(result);
 
                     return;
                 }
@@ -336,4 +214,7 @@ function renderSignup() {
     });
 }
 
-renderHeader();
+export {renderLogin,renderSignup};
+
+const header = new Header();
+header.render();

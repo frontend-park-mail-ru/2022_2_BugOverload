@@ -1,3 +1,5 @@
+import {Login} from '../components/Login/login.js'
+
 export const config = {
     header: {
         navlink: {
@@ -8,19 +10,21 @@ export const config = {
         login: {
             href: '/login',
             name: 'Авторизация',
-            render: renderLogin,
+            render: Login,
         },
     },
     login: {
         signup: {
             href: '/signup',
             name: 'Регистрация',
-            render: renderSignup,
+            //render: renderSignup,
         },
         login: {
             href: '/login',
             name: 'Авторизация',
-            render: renderLogin,
+            render: Login,
         },
     }
 }
+
+export const root = document.getElementById('root');

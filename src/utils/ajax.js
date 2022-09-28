@@ -8,7 +8,7 @@ export class Ajax {
     post = async ({url, body, callback}) => {
         let response = await fetch(
             url, {
-                method: method,
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                   },
