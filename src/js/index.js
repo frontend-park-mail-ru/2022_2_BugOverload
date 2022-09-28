@@ -1,8 +1,3 @@
-
-// addElementFromTemplate(root, 'navbar', {})
-// addElementFromTemplate(header, 'bigContent', {})
-
-// let main = document.createElement('')
 const previewDune = {
     previewTittle: "Американская история X",
     previewDescription: "Ну типо по пустыням ходят, а ещё черви там всякие делают уууу",
@@ -136,8 +131,6 @@ root.append(div);
 let collectionCinemaToday = Handlebars.templates['collection'](collectionCinemaTodayData);
 div = document.createElement('div');
 div.innerHTML = collectionCinemaToday;
-// let a = div.querySelectorAll('a')
-// a.style.backgroundImage = `url('${previewStarWars.previewImg}')`;
 root.append(div)
 
 let collectionPopular = Handlebars.templates['collection'](collectionPopularData);
