@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "eslint": "^8.24.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4"
+  },
+  "scripts": {
+    "lint": "eslint --cache --ext .js server src --fix"
+  }
+}
