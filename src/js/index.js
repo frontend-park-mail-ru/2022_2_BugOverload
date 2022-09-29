@@ -129,10 +129,10 @@ root.append(div);
 let response = await fetch('http://localhost:3001/v1/preview_film', {credentials: 'include'});
 let previewDune = await response.json();
 
-let previewFilm = Handlebars.templates['previewFilm'](previewDune);
+let previewFilm = Handlebars.templates['previewFilm'](previewStarWars);
 div = document.createElement('div');
 div.innerHTML = previewFilm;
-div.style.backgroundImage = `url('${previewDune.previewImg}')`;
+div.style.backgroundImage = `url('${previewStarWars.previewImg}')`;
 root.append(div);
 
 response = await fetch('http://localhost:3001/v1/popular_films', {credentials: 'include'});
