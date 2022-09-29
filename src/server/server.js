@@ -50,6 +50,7 @@ app.post('/signup', (req, res) => {
 	const password = req.body.password;
 	const email = req.body.email;
 	const nickname = req.body.nickname;
+	console.log(nickname)
 	if (
 		!password || !email || !nickname
 	) {

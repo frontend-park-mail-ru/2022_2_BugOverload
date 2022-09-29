@@ -1,4 +1,5 @@
 import {Login} from '../components/Login/login.js'
+import {Signup} from '../components/Signup/signup.js'
 
 export const config = {
     header: {
@@ -17,7 +18,7 @@ export const config = {
         signup: {
             href: '/signup',
             name: 'Регистрация',
-            //render: renderSignup,
+            render: Signup,
         },
         login: {
             href: '/login',

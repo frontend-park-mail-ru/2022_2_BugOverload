@@ -1,6 +1,7 @@
 import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
+import {checkInput} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
 import {config, root} from '../../__mocks__/config.js';
@@ -14,41 +15,22 @@ export class Login {
     
         const modalWindow = root.querySelector('.modal__window__flex');
     
-    
         renderTemplate('login', (safeHtml) => {
             modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
         });
     
-        const loginImg = root.querySelector('.modal__login__img');
-    
-        loginImg.addEventListener('click', (e) => {
-            const { target } = e;
-        
-            if (target instanceof HTMLAnchorElement) {
-                e.preventDefault();
-    
-                goToPage(config.login[target.dataset.section], () => {
-                    modalWindow              
-                        .querySelector('.modal__login')
-                        .remove();
-                    modalWindow              
-                        .querySelector('.modal__login__img')
-                        .remove();
-                    config.login[target.dataset.section].render();
-                }, 
-                modalWindow);
-            }
-        });
-    
-        this.handler(modalWindow.querySelector('.modal__form'));
+        this.handler(modalWindow);
     }
 
-    handler(target) {
-        target.addEventListener('submit', (e) => {
+    handler(modalWindow) {
+        const form = modalWindow.querySelector('.modal__form');
+        const loginImg = modalWindow.querySelector('.modal__login__img');
+
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
     
-            const emailInput = target.querySelector('input[type=email]');
-            const passwordInput = target.querySelector('input[type=password]');
+            const emailInput = form.querySelector('input[type=email]');
+            const passwordInput = form.querySelector('input[type=password]');
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
@@ -74,6 +56,26 @@ export class Login {
                     alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
                 },
             });         
+        });
+
+        loginImg.addEventListener('click', (e) => {
+            const { target } = e;
+        
+            if (target instanceof HTMLAnchorElement) {
+                e.preventDefault();
+    
+                goToPage(config.login[target.dataset.section], () => {
+                    modalWindow              
+                        .querySelector('.modal__login')
+                        .remove();
+                    modalWindow              
+                        .querySelector('.modal__login__img')
+                        .remove();
+                    const signup = new config.login[target.dataset.section].render();
+                    signup.render();
+                }, 
+                modalWindow);
+            }
         });
     }
 }
