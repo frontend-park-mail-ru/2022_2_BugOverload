@@ -3,9 +3,11 @@
     <div class="collection__container">
 
         {{#each films}}
+        {{!-- <a href={{href}} class="film__poster" style="background-image: url('{{poster}}');"> --}}
         <div class="film">
-            <a href={{href}} class="film__poster" style="background-image: url('{{poster}}');"></a>
+            <a href={{href}} class="film__poster" style="background-image: url('{{poster}}');">
             <div class="film__blackout"></div>
+            </a>
 
             <div class="film__rating">{{rating}}</div>
             <div class="film__tittle">{{tittle}}</div>
@@ -18,7 +20,9 @@
                 <div class="film__decore-circle"></div>
                 <div class="film__year">{{year}}</div>
             </div>
+            {{!-- </a> --}}
         </div>
+        {{!-- </a> --}}
         {{/each}}
 
     </div>

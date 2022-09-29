@@ -71,9 +71,6 @@
 }
 
 .preview-film__button:hover {
-    background-color: #E4AA2F;
-}
-
-.preview-film__button:active {
-    background-color: #A07925;
+    background-color: #CD9826;
+    transition: 0.1s linear;
 }

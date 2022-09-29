@@ -9,7 +9,7 @@
     height: 95px;
     z-index: 2;
 
-    position: fixed;
+    position: absolute;
     width: 100%;
 }
 

@@ -5,12 +5,29 @@
     margin-bottom: 75px;
     position: relative;
 }
+.film a {
+    transition: 0.12s linear;
+}
+
+.film:hover a {
+    background-size: 224px auto;
+    background-position: -7px -10px;
+    transition: 0.12s linear;
+}
+
+.film:hover .film__blackout {
+    width: 210px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0px;
+}
 
 .film__rating {
     font-size: 15px;
     color: #fff;
 
-    background-color: #12B77C;
+    /* background-color: #12B77C; */
     padding: 1px 6px 0px 6px;
     width: 32px;
     height: 20px;
@@ -20,6 +37,18 @@
     top: 9px;
     left: 0px;
     border-radius: 4px;
+}
+
+[data-value-rating="positive"] {
+    background-color: #12B77C;
+}
+
+[data-value-rating="neutral"] {
+    background-color: #858585;
+}
+
+[data-value-rating="negotive"] {
+    background-color: #FF4350;
 }
 
 .film__poster {
@@ -36,6 +65,7 @@
     background-color: rgba(0, 0, 0, 0.0);
     position: absolute;
     top: 0px;
+    transition: 0.12s linear;
 }
 
 
