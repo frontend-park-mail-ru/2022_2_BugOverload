@@ -50,11 +50,14 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
 }
 
 const renderError = (form, type, text) => {
+    console.log(type)
     const target = form.querySelector(`input[type=${type}]`);
-    /*if(target.parentElement.querySelector('.modal__input__error')) {
-        return;
-    }*/
-    //d checkInput вытащить текст ошибки, проверить совпадает или нет 
+    if(target.parentElement.querySelector('.modal__input__error')) {
+        const erorElement = target.parentElement.querySelector('.modal__input__error');
+        if(text === erorElement.textContent) {
+            return;
+        }
+    }
     const insertHtml = `<div class="modal__input__error">${text}</div>`
     target.insertAdjacentHTML('afterend', insertHtml);
 }

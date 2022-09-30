@@ -38,16 +38,23 @@ export class Signup {
             user.email = emailInput.value.trim();
             user.password = passwordInput.value; 
 
+            let flag = false;
+
             for (let key in user) {
                 if (key === 'email' || key === 'password') {
                     if (!checkInput(form, 'signup', user[key], key)) {
-                        return;
+                        console.log(key)
+                        flag = true;
                     }
                 } else {
                     if (!checkInput(form, 'signup', user[key])) {
-                        return;
+                        flag = true;
                     }
                 }
+            }
+
+            if(flag) {
+                return;
             }
             
             const ajax = new Ajax();
