@@ -53,7 +53,7 @@ export class Signup {
             const ajax = new Ajax();
 
             ajax.post({
-                url: '/signup',
+                url: '/v1/auth/signup',
                 body: user,
                 callback: (response, result) => {
                     if (response.status === 201) {

@@ -16,7 +16,7 @@ export class Header {
             const ajax = new Ajax();
     
             user = ajax.get({
-                url: '/auth',
+                url: '/v1/auth',
                 callback: (response) => {
                     if (response.status === 200) {
                         return true;

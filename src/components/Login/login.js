@@ -36,7 +36,7 @@ export class Login {
 
             const ajax = new Ajax();
             ajax.post({
-                url: '/login',
+                url: '/v1/auth/login',
                 body: {email, password},
                 callback: (response, result) => {
                     if (response.status === 200) {
