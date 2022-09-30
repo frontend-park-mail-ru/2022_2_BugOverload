@@ -13,6 +13,7 @@ export class Ajax {
     }
 
     post = async ({url, body, callback}) => {
+        console.log(body)
         let response = await fetch(
             url, {
                 method: 'POST',

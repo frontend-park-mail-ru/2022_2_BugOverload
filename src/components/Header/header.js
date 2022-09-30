@@ -49,7 +49,7 @@ export class Header {
             function openUserbar(e) {
                 const { target } = e;
     
-                userbar = new Userbar();
+                const userbar = new Userbar();
                 userbar.render(user);
             }
     
