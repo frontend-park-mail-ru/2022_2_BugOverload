@@ -1,7 +1,12 @@
+// import {Header} from './components/Header/header.js';
+
+// const header = new Header();
+// header.render();
+
 // const previewDune = {
 //     previewTittle: "Американская история X",
 //     previewDescription: "Ну типо по пустыням ходят, а ещё черви там всякие делают уууу",
-//     previewImg: "img/dune.jpg"}
+//     previewImg: "asserts/img/dune.jpg"}
 
 const previewStarWars = {
     previewTittle: "Звёздные войны. Эпизод IV: Новая надежда",
@@ -10,14 +15,14 @@ const previewStarWars = {
     А теперь самое главное!
     От нас требуется сидеть тихо. После того, как все сделают, все будет у нас хорошо. Всем устроят довольствие, как Саудовским гражданам - каждый будет кататься в масле. Главное сейчас сидеть тихо и не суетиться. Никаких митингов, никаких навальных. Просто переждать и всё будет хорошо, там все схвачено....
     Световой меч делает вжух-вжух`,
-    previewImg: "img/StarWars.jpeg"}
+    previewImg: "asserts/img/StarWars.jpeg"}
 
 // const collectionCinemaTodayData = {
 //     tittle: "Сейчас в кино",
 //     films:[
 //     {
 //         tittle: "Дюна",
-//         poster: "img/posters/dune_poster.jpg",
+//         poster: "asserts/img/posters/dune_poster.jpg",
 //         rating: 7.1,
 //         genrys: ["Фентези,", "Приключения"],
 //         year: 2021,
@@ -25,7 +30,7 @@ const previewStarWars = {
 //     },
 //     {
 //         tittle: "Человек",
-//         poster: "img/posters/1.png",
+//         poster: "asserts/img/posters/1.png",
 //         rating: 8.7,
 //         genrys: ["Документальный,", "Смотрю и плачу"],
 //         year: 2015,
@@ -33,7 +38,7 @@ const previewStarWars = {
 //     },
 //     {
 //         tittle: "Люси",
-//         poster: "img/posters/2.png",
+//         poster: "asserts/img/posters/2.png",
 //         rating: 6.2,
 //         genrys: ["Фантастика, Боевик"],
 //         year: 2014,
@@ -41,7 +46,7 @@ const previewStarWars = {
 //     },
 //     {
 //         tittle: "Властелин колец. Братство кольца",
-//         poster: "img/posters/3.png",
+//         poster: "asserts/img/posters/3.png",
 //         rating: 7.5,
 //         genrys: ["Фентези,", "Прилючения"],
 //         year: 2001,
@@ -49,7 +54,7 @@ const previewStarWars = {
 //     },
 //     {
 //         tittle: "Дом, который построил Джек",
-//         poster: "img/posters/4.png",
+//         poster: "asserts/img/posters/4.png",
 //         rating: 4.9,
 //         genrys: ["Триллер", "Криминал"],
 //         year: 2018,
@@ -57,7 +62,7 @@ const previewStarWars = {
 //     },
 //     {
 //         tittle: "Доказательство смерти",
-//         poster: "img/posters/5.png",
+//         poster: "asserts/img/posters/5.png",
 //         rating: 7.2,
 //         genrys: ["Триллер", "Боевик"],
 //         year: 2007,
@@ -70,7 +75,7 @@ const collectionPopularData = {
     films:[
         {
             tittle: "Дюна",
-            poster: "img/posters/dune_poster.jpg",
+            poster: "asserts/img/posters/dune_poster.jpg",
             rating: 6.8,
             genrys: ["Триллер", "Криминал"],
             year: 2021,
@@ -78,7 +83,7 @@ const collectionPopularData = {
         },
         {
             tittle: "Убить Билла",
-            poster: "img/posters/8.png",
+            poster: "asserts/img/posters/8.png",
             rating: 8.7,
             genrys: ["Триллер", "Криминал"],
             year: 2015,
@@ -86,7 +91,7 @@ const collectionPopularData = {
         },
         {
             tittle: "Головокружение",
-            poster: "img/posters/9.png",
+            poster: "asserts/img/posters/9.png",
             rating: 7.4,
             genrys: ["Триллер", "Криминал"],
             year: 2014,
@@ -94,7 +99,7 @@ const collectionPopularData = {
         },
         {
             tittle: "Доказательство смерти",
-            poster: "img/posters/5.png",
+            poster: "asserts/img/posters/5.png",
             rating: 7.5,
             genrys: ["Триллер", "Криминал"],
             year: 2001,
@@ -102,7 +107,7 @@ const collectionPopularData = {
         },
         {
             tittle: "Чунгингский экспресс",
-            poster: "img/posters/7.png",
+            poster: "asserts/img/posters/7.png",
             rating: 6.9,
             genrys: ["Триллер", "Криминал"],
             year: 2018,
@@ -110,13 +115,14 @@ const collectionPopularData = {
         },
         {
             tittle: "Девушка с татуировой дракона",
-            poster: "img/posters/6.png",
+            poster: "asserts/img/posters/6.png",
             rating: 5.1 ,
             genrys: ["Триллер", "Криминал"],
             year: 2007,
             href: "index.html",
         },
 ]};
+
 
 let root = document.getElementById('root');
 
@@ -125,22 +131,28 @@ let div = document.createElement('div');
 div.innerHTML = navbar;
 root.append(div);
 
-// Отчислят?
-let response = await fetch('http://localhost:3001/v1/preview_film', {credentials: 'include'});
-let previewDune = await response.json();
+renderPreviewFilm()
+renderCollectionsOnMainPage()
 
-let previewFilm = Handlebars.templates['previewFilm'](previewStarWars);
-div = document.createElement('div');
-div.innerHTML = previewFilm;
-div.style.backgroundImage = `url('${previewStarWars.previewImg}')`;
-root.append(div);
 
-response = await fetch('http://localhost:3001/v1/popular_films', {credentials: 'include'});
-let collectionCinemaTodayData = await response.json();
-root.append(renderCollection(collectionCinemaTodayData));
+async function renderPreviewFilm() {
+    let response = await fetch('http://localhost:3001/v1/preview_film', {credentials: 'include'});
+    let previewDune = await response.json();
 
-root.append(renderCollection(collectionPopularData));
+    let previewFilm = Handlebars.templates['preview_film'](previewDune);
+    let div = document.createElement('div');
+    div.innerHTML = previewFilm;
+    div.style.backgroundImage = `url('${previewDune.previewImg}')`;
+    root.append(div);
+}
 
+async function renderCollectionsOnMainPage() {
+    let response = await fetch('http://localhost:3001/v1/popular_films', {credentials: 'include'});
+    let collectionCinemaTodayData = await response.json();
+    root.append(renderCollection(collectionCinemaTodayData));
+
+    root.append(renderCollection(collectionPopularData));
+}
 
 function renderCollection(filmsData) {
     let collection = Handlebars.templates['collection'](filmsData);

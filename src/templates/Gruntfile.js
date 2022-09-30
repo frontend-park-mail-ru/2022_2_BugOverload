@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: ['../../public/pre_compile_templates/*.tpl.js'],
-                dest: '../js/all_templates.js'
+                dest: 'all_templates.js'
             }
         },
         watch: {
