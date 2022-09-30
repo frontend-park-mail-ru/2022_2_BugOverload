@@ -13,23 +13,26 @@ export class Header {
         }
     
         if(!user) {
-            const aj = new Ajax();
+            const ajax = new Ajax();
     
-            aj.get({
+            user = ajax.get({
                 url: '/auth',
-                callback: (response, result) => {
+                callback: (response) => {
                     if (response.status === 200) {
-                        user = result;
-                        this.renderUser(user);
-                        return;
+                        return true;
                     }
-                    this.renderUser(user);
+                    return false;
                 }
             });
-    
-        } else {
-            this.renderUser(user);
+
+            user.then((result) => {
+                this.renderUser(result);
+            })
+            return;
         }
+        console.log(user);
+    
+        this.renderUser(user);
     }
 
     renderUser(user = null) {

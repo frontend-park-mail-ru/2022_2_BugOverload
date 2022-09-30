@@ -4,8 +4,12 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
         });
-        let result = await response.json();
-        callback(response, result);
+        if (callback(response)) {
+            let result = await response.json();
+            return result;
+        }
+
+        return null;
     }
 
     post = async ({url, body, callback}) => {
