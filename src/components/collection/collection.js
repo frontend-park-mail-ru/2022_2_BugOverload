@@ -19,14 +19,12 @@ export class Collection {
     render() {
         getDataToCollection(this.#type).then(data => {
             this.collectionData = data;
-            debugger;
             renderCollection(this.collectionData);
         });
     }
 }
 
 async function getDataToCollection(type) {
-    debugger;
     switch (type) {
         case COLLECTION_TYPE.popular: {
             let response = await fetch(COLLECTION_API.popular, {
@@ -56,32 +54,46 @@ async function getDataToCollection(type) {
 }
 
 function renderCollection(filmsData) {
-    debugger;
     if (!filmsData) {
         return;
     }
+
+    decorateGenresFilm(filmsData);
 
     let collection = Handlebars.templates['collection'](filmsData);
     let div = document.createElement('div');
     div.innerHTML = collection;
 
+    addColorRatingFilm(div, filmsData);
+
+
+    root.append(div);
+}
+
+function decorateGenresFilm(filmsData) {
+    filmsData.films.forEach((film) => {
+        for (let i = 0; i < film.genres.length - 1; ++i) {
+            film.genres[i] += ',';
+        }
+    })
+}
+
+function addColorRatingFilm(div, filmsData) {
     let ratingElem = div.querySelectorAll('.film__rating');
 
-    ratingElem.forEach((elem, index) => {
+    ratingElem.forEach((film, index) => {
         let ratingValue = filmsData.films[index].rating;
 
         if (ratingValue > 7.49) {
-            elem.dataset.valueRating = 'positive';
+            film.dataset.valueRating = 'positive';
             return;
         }
 
         if (ratingValue > 5.19) {
-            elem.dataset.valueRating = 'neutral';
+            film.dataset.valueRating = 'neutral';
             return;
         }
 
-        elem.dataset.valueRating = 'negotive';
+        film.dataset.valueRating = 'negotive';
     })
-
-    root.append(div);
 }

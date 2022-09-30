@@ -81,7 +81,7 @@
     margin-top: 7px;
 }
 
-.film__genrys {
+.film__genres {
     display: flex;
     flex-wrap: wrap;
     width: 158px;
@@ -96,7 +96,7 @@
 
 }
 
-.film__genry {
+.film__genre {
     font-size: 12px;
     color: #9C9C9C;
 }
