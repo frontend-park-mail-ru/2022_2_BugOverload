@@ -1,7 +1,6 @@
 const renderFunc = (menuElement) => {
     const target = new (menuElement.render)();
     target.render();
-    
 };
 
 export const goToPage = (menuElement,callback = renderFunc,current = document.body) => {

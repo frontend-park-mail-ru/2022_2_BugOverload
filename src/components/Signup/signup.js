@@ -34,7 +34,7 @@ export class Signup {
 
     
             const user = {};
-            user.nickname = nickInput.value;
+            user.nickname = nickInput.value.trim();
             user.email = emailInput.value.trim();
             user.password = passwordInput.value; 
 
@@ -76,8 +76,6 @@ export class Signup {
                     }
     
                     console.log(response.status);
-    
-                    alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
                 }})
         });
 

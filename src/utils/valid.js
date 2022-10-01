@@ -24,7 +24,7 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
         if(!input.match(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/g)) {
             if (action === 'signup') {
                 (input.length > 5) ?
-                    renderError(form, type, 'В пароле должна быть хотя бы одна цифра,маленькая и большая буква')
+                    renderError(form, type, 'В пароле должна быть хотя бы одна цифра, маленькая и большая буква')
                     :renderError(form, type, 'В пароле должно быть не меньше 6 символов');
             } 
             if (action === 'login') {
@@ -49,7 +49,7 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
     return true;
 }
 
-const renderError = (form, type, text) => {
+export const renderError = (form, type, text) => {
     console.log(type)
     const target = form.querySelector(`input[type=${type}]`);
     if(target.parentElement.querySelector('.modal__input__error')) {

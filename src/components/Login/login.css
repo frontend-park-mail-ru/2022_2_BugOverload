@@ -1,0 +1,33 @@
+.modal__login {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+    border-radius: 30px 0px 0px 30px;
+
+    background: #191A1D;
+    
+    width: 50%;
+    height: 100%;
+}
+
+.modal__login__img {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-content: stretch;
+    align-items: flex-start;
+
+
+    background-size: 400px;
+    background-image: url(../../asserts/login.png);
+    background-repeat: no-repeat;
+    border-radius: 0px 30px 30px 0px;
+
+    width: 50%;
+    height: 100%;
+}

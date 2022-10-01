@@ -30,7 +30,6 @@ export class Header {
             })
             return;
         }
-        console.log(user);
     
         this.renderUser(user);
     }

@@ -1,0 +1,40 @@
+.header__userbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    width: 220px;
+}
+
+.userbar__nick__email {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 12px;
+}
+
+.header__nickname {
+
+}
+
+.header__email {
+
+}
+
+.header__avatar {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: baseline;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    object-fit: cover;
+}

@@ -1,0 +1,67 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+
+    font-family: 'Mail Sans Roman';
+    font-weight: normal;
+
+    height: 95px;
+}
+
+.header__logo {
+
+
+    white-space: nowrap;
+    margin-right: 55px;
+    font-size: 30px;
+    margin-left: 55px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header__navlink {
+
+
+    white-space: nowrap;
+    margin-right: 55px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header__form {
+
+
+    margin-left: auto;
+    margin-right: 55px;
+
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.header__form__input {
+
+
+    height: 35px;
+    width: 470px;
+    border-radius: 18px;
+    border: 0px;
+    background: #333333;
+    opacity: .8;
+}
+
+.header__login__btn {
+    font-size: 18px;
+    text-decoration: none;
+
+    margin-right: 100px;
+    height: 35px;
+    width: 180px;
+    border-radius: 40px;
+
+    font-weight: bold;
+}

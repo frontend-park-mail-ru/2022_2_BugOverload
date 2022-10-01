@@ -1,7 +1,7 @@
 import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
-import {checkInput} from '../../utils/valid.js';
+import {renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
 import {config, root} from '../../__mocks__/config.js';
@@ -52,8 +52,6 @@ export class Login {
                     }
     
                     console.log(response.status);
-    
-                    alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
                 },
             });         
         });
