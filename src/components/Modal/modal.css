@@ -73,9 +73,9 @@
     align-items: flex-start;
 
     width: 270px;
-    height: 48px;
+    height: 55px;
 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .modal__input {
@@ -84,10 +84,10 @@
     border-radius: 21px;
 
     color: #fff;
-    background: #333333;
+    background: #27292E;
     opacity: .8;
-    border: 0px;
-
+    border: 2px solid #333333;
+    
     font-size: 12px;
 }
 
@@ -98,6 +98,8 @@
 .modal__input__error {
     width: 270px;
     height: 18px;
+
+    margin-top: 5px;
 
     color: #E72D2D;
     font-size: 12px;
@@ -110,6 +112,8 @@
     width: 270px;
     height: 30px;
     border-radius: 21px;
+
+    margin-top: 10px;
 
     font-weight: bold;
 }
