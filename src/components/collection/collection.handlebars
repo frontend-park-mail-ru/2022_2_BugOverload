@@ -1,26 +1,12 @@
 <div class="collection">
-    <div class="collection__tittle">{{tittle}}</div>
+    <div class="collection__title">{{title}}</div>
     <div class="collection__container">
+        <div class="collection__slider">
 
-        {{#each films}}
-        <div class="film">
-            <a href={{href}} class="film__poster" style="background-image: url('{{poster}}');">
-            <div class="film__blackout"></div>
-            </a>
+            {{{films}}}
 
-            <div class="film__rating">{{rating}}</div>
-            <div class="film__tittle">{{tittle}}</div>
-            <div class="film__info-container">
-                <div class="film__genres">
-                    {{#each genres}}
-                    <div class="film__genre">{{this}}&nbsp</div>
-                    {{/each}}
-                </div>
-                <div class="film__decore-circle"></div>
-                <div class="film__year">{{year}}</div>
-            </div>
         </div>
-        {{/each}}
-
+        <a href="" class="collection__slider-button_right"><img src="asserts/img/elements/btn-slider-right.png"></a>
+        <a href="" class="collection__slider-button_left"><img src="asserts/img/elements/btn-slider-left.png"></a>
     </div>
 </div>

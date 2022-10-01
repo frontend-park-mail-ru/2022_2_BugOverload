@@ -11,12 +11,20 @@
 
   </form>
 
-  {{#if email}}
+  {{!-- {{#if email}}
     <div class="header__userbar">
       <img class="header__avatar" src="{{avatar}}" alt="">
     </div>
   {{else}}
-    <a href="/login" class="header__login" data-section="login">Вход</button>
+    <a href="/login" class="button__yellow header__login" data-section="login">Войти</button>
+  {{/if}} --}}
+
+  {{#if email}}
+    <a href="/login" class="button__yellow header__login" data-section="login">Войти</button>
+  {{else}}
+    <div class="header__userbar">
+      <img class="header__avatar" src="asserts/img/invisibleMan.jpeg{{avatar}}" alt="">
+    </div>
   {{/if}}
 
 </header>

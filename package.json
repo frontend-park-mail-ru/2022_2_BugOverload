@@ -4,8 +4,10 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "node server/server.js",
-        "back": "node server/backend.js"
+        "start": "npm run clean && npm run build && npm run back",
+        "back": "node __mocks__/backend.js",
+        "clean": "rm -rf dist && mkdir dist",
+        "build": "handlebars -m src/ -f dist/templates.js"
     },
     "author": "",
     "license": "ISC",
@@ -14,15 +16,8 @@
         "cors": "^2.8.5",
         "debug": "^4.3.4",
         "express": "^4.18.1",
-        "grunt": "^1.5.3",
-        "grunt-contrib-concat": "^2.1.0",
-        "grunt-contrib-handlebars": "^3.0.0",
-        "grunt-newer": "^1.3.0",
         "handlebars": "^4.7.7",
         "morgan": "^1.10.0",
         "uuid": "^9.0.0"
-    },
-    "devDependencies": {
-        "grunt-contrib-watch": "^1.1.0"
     }
 }

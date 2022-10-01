@@ -1,3 +1,5 @@
+export const PREVIEW_API = 'http://localhost:8081/v1/recommendation_film';
+
 export class PreviewFilm {
     render() {
         getDataToPreviewFilm().then(data => {
@@ -8,7 +10,8 @@ export class PreviewFilm {
 }
 
 async function getDataToPreviewFilm() {
-    let response = await fetch('http://localhost:3001/v1/recommendation_film', {
+    let response = await fetch(PREVIEW_API, {
+        mode: 'cors',
         credentials: 'include'
     });
 
@@ -18,7 +21,7 @@ async function getDataToPreviewFilm() {
 }
 
 function renderPreviewFilm(previewData) {
-    let previewFilm = Handlebars.templates['preview_film'](previewData);
+    let previewFilm = Handlebars.templates['components/previewFilm/previewFilm'](previewData);
     let div = document.createElement('div');
 
     div.innerHTML = previewFilm;

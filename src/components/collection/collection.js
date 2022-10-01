@@ -4,8 +4,8 @@ export const COLLECTION_TYPE = {
 }
 
 export const COLLECTION_API = {
-    popular: 'http://localhost:3001/v1/popular_films',
-    todayInCinema: 'http://localhost:3001/v1/in_cinema',
+    popular: 'http://localhost:8081/v1/popular_films',
+    todayInCinema: 'http://localhost:8081/v1/in_cinema',
 }
 
 
@@ -17,18 +17,18 @@ export class Collection {
     }
 
     render() {
-        getDataToCollection(this.#type).then(data => {
+        getDataForCollection(this.#type).then(data => {
             this.collectionData = data;
             renderCollection(this.collectionData);
         });
     }
 }
 
-async function getDataToCollection(type) {
+async function getDataForCollection(type) {
     switch (type) {
         case COLLECTION_TYPE.popular: {
             let response = await fetch(COLLECTION_API.popular, {
-                cors: true,
+                mode: 'cors',
                 credentials: 'include'
             });
             let collectionCinemaTodayData = await response.json();
@@ -38,7 +38,7 @@ async function getDataToCollection(type) {
 
         case COLLECTION_TYPE.todayInCinema: {
             let response = await fetch(COLLECTION_API.todayInCinema, {
-                cors: true,
+                mode: 'cors',
                 credentials: 'include'
             });
             let collectionCinemaTodayData = await response.json();
@@ -60,7 +60,10 @@ function renderCollection(filmsData) {
 
     decorateGenresFilm(filmsData);
 
-    let collection = Handlebars.templates['collection'](filmsData);
+    let films = "";
+    filmsData.films.forEach(filmData => films += Handlebars.templates['components/film/film'](filmData) )
+
+    let collection = Handlebars.templates['components/collection/collection']({title: filmsData.title, films: films});
     let div = document.createElement('div');
     div.innerHTML = collection;
 
