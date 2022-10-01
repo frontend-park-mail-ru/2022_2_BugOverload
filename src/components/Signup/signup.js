@@ -1,7 +1,7 @@
 import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
-import {checkInput} from '../../utils/valid.js';
+import {checkInput, renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
 import {config, root} from '../../__mocks__/config.js';
@@ -75,6 +75,7 @@ export class Signup {
                     }
 
                     if (response.status === 200) {    
+                        renderError(form,'email','Пользователь с таким email уже зарегистрирован')
                         return;
                     }
     

@@ -36,7 +36,7 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
         return true;
     }
     if(!input) {
-        renderError(form, type, 'Вы кое-что забыли! Скажите, как вас зовут.'); 
+        renderError(form, type, 'Вы кое-что забыли! Скажите, как вас зовут'); 
         return false;
     }
     if (!input.match(/^[a-zA-Za-яёА-ЯЁ0-9!"№;%:?*@#$%^&]{4,}$/)) {
