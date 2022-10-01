@@ -82,12 +82,17 @@
     width: 270px;
     height: 28px;
     border-radius: 21px;
-    border: 0px;
+
     color: #fff;
     background: #333333;
     opacity: .8;
+    border: 0px;
 
     font-size: 12px;
+}
+
+.modal__input_red_border{
+    border: 2px solid #E72D2D;
 }
 
 .modal__input__error {

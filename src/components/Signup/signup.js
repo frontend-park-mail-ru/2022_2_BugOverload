@@ -73,6 +73,10 @@ export class Signup {
     
                         return;
                     }
+
+                    if (response.status === 200) {    
+                        return;
+                    }
     
                     console.log(response.status);
                 }})

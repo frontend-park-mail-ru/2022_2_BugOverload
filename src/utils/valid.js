@@ -13,6 +13,7 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
             }
             return false;
         }
+        removeError(form,type);
         return true;
     }
     if (type == 'password') {
@@ -31,6 +32,7 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
             }
             return false;
         }
+        removeError(form,type);
         return true;
     }
     if(!input) {
@@ -44,16 +46,34 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
             
         return false;
     }
+    removeError(form,type);
     return true;
+}
+
+const removeError = (form,type) => {
+    const errorElement = form
+        .querySelector(`input[type=${type}]`)
+        .parentElement
+        .querySelector('.modal__input__error')
+
+    if (errorElement) {
+        errorElement.remove();
+    }
+
+    form
+        .querySelector(`input[type=${type}]`)
+        .classList.remove('modal__input_red_border');
 }
 
 export const renderError = (form, type, text) => {
     const target = form.querySelector(`input[type=${type}]`);
+    target.classList.add('modal__input_red_border');
     if(target.parentElement.querySelector('.modal__input__error')) {
         const erorElement = target.parentElement.querySelector('.modal__input__error');
         if(text === erorElement.textContent) {
             return;
         }
+        erorElement.remove();
     }
     const insertHtml = `<div class="modal__input__error">${text}</div>`
     target.insertAdjacentHTML('afterend', insertHtml);
