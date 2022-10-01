@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server/server.js"
+    "start": "npm run build && node src/server/server.js",
+    "build": "handlebars -m src/components/ -f src/dist/templates.js"
   },
   "repository": {
     "type": "git",

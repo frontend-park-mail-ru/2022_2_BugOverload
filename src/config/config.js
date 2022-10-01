@@ -27,5 +27,3 @@ export const config = {
         },
     }
 }
-
-export const root = document.getElementById('root');

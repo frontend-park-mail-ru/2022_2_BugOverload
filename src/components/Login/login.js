@@ -4,20 +4,24 @@ import {goToPage} from '../../utils/go_to_page.js';
 import {renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
-import {config, root} from '../../__mocks__/config.js';
+import {config} from '../../config/config.js';
 
 export class Login {
+    #root
+
+    constructor(root) {
+        this.root = root;
+    }
+    
     render() {
         if (!root.querySelector('.modal__window')) {
-            const modal = new Modal();
+            const modal = new Modal(root);
             modal.render();
         }
     
         const modalWindow = root.querySelector('.modal__window__flex');
     
-        renderTemplate('login', (safeHtml) => {
-            modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
-        });
+        renderTemplate('Login/login', modalWindow, 'afterbegin');
     
         this.handler(modalWindow);
     }
@@ -34,26 +38,30 @@ export class Login {
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
-            const ajax = new Ajax();
-            ajax.post({
+            const responsePromise = Ajax.post({
                 url: '/v1/auth/login',
-                body: {email, password},
-                callback: (response, result) => {
-                    if (response.status === 200) {
-                        
-                        document.body
-                            .querySelector('.modal__background')
-                            .remove();
-                        
-                        const header = new Header();
-                        header.render(result);
-    
-                        return;
-                    }
-    
-                    console.log(response.status);
-                },
-            });         
+                body: {email, password}
+            });
+
+            console.log(responsePromise)
+
+            responsePromise.then((response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    console.log(response.body);
+                    
+                    document.body
+                        .querySelector('.modal__background')
+                        .remove();
+                    
+                    const header = new Header(root);
+                    header.renderUserAvatar(response.body);
+
+                    return;
+                }
+
+                console.log(response.status);
+            });
         });
 
         loginImg.addEventListener('click', (e) => {
@@ -69,7 +77,7 @@ export class Login {
                     modalWindow              
                         .querySelector('.modal__login__img')
                         .remove();
-                    const signup = new config.login[target.dataset.section].render();
+                    const signup = new config.login[target.dataset.section].render(root);
                     signup.render();
                 }, 
                 modalWindow);
@@ -77,4 +85,3 @@ export class Login {
         });
     }
 }
-

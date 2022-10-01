@@ -4,19 +4,23 @@ import {goToPage} from '../../utils/go_to_page.js';
 import {checkInput, renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
-import {config, root} from '../../__mocks__/config.js';
+import {config} from '../../config/config.js';
 
 export class Signup {
+    #root
+
+    constructor(root) {
+        this.root = root;
+    }
+    
     render() {
         if (root.querySelector('.modal__window') === null) {
-            const modal = new Modal();
+            const modal = new Modal(root);
             modal.render();
         }
     
         const modalWindow = root.querySelector('.modal__window__flex');
-        renderTemplate('signup', (safeHtml) => {
-            modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
-        });
+        renderTemplate('Signup/signup', modalWindow, 'afterbegin');
 
         this.handler(modalWindow);
     }
@@ -55,32 +59,35 @@ export class Signup {
             if(flag) {
                 return;
             }
-            
-            const ajax = new Ajax();
 
-            ajax.post({
+            const responsePromise = Ajax.post({
                 url: '/v1/auth/signup',
                 body: user,
-                callback: (response, result) => {
-                    if (response.status === 201) {
-                        
-                        document.body
-                            .querySelector('.modal__background')
-                            .remove();
-                        
-                        const header = new Header();
-                        header.render(result);
-    
-                        return;
-                    }
+            });
 
-                    if (response.status === 200) {    
-                        renderError(form,'email','Пользователь с таким email уже зарегистрирован')
-                        return;
-                    }
-    
-                    console.log(response.status);
-                }})
+            console.log(responsePromise)
+
+            responsePromise.then((response) => {
+                console.log(response)
+                if (response.status === 201) {
+                        
+                    document.body
+                        .querySelector('.modal__background')
+                        .remove();
+                    
+                    const header = new Header();
+                    header.renderUserAvatar(response.body);
+
+                    return;
+                }
+
+                if (response.status === 200) {    
+                    renderError(form,'email','Пользователь с таким email уже зарегистрирован')
+                    return;
+                }
+
+                console.log(response.status);
+            });
         });
 
         loginImg.addEventListener('click', (e) => {
@@ -96,7 +103,7 @@ export class Signup {
                     modalWindow              
                         .querySelector('.modal__signup__img')
                         .remove();
-                    const login = new config.login[target.dataset.section].render();
+                    const login = new config.login[target.dataset.section].render(root);
                     login.render();
                 },
                 modalWindow);
@@ -104,94 +111,3 @@ export class Signup {
         });
     }
 }
-
-/*
-function renderSignup() {
-    if (root.querySelector('.modal__window') === null) {
-        const modal = new Modal();
-        modal.render();
-    }
-
-    const modalWindow = root.querySelector('.modal__window__flex');
-    renderTemplate('signup', (safeHtml) => {
-        modalWindow.insertAdjacentHTML('afterbegin', safeHtml);
-    });
-    
-    const loginImg = root.querySelector('.modal__signup__img');
-
-    loginImg.addEventListener('click', (e) => {
-        const { target } = e;
-    
-        if (target instanceof HTMLAnchorElement) {
-            e.preventDefault();
-
-            goToPage(config.login[target.dataset.section], () => {
-                modalWindow              
-                    .querySelector('.modal__signup')
-                    .remove();
-                modalWindow              
-                    .querySelector('.modal__signup__img')
-                    .remove();
-                config.login[target.dataset.section].render();
-            },
-            modalWindow);
-        }
-    });
-
-    const form = modalWindow.querySelector('.modal__form');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const nickInput = modalWindow.querySelector('input[type=text]');
-        const emailInput = modalWindow.querySelector('input[type=email]');
-        const passwordInput = modalWindow.querySelector('input[type=password]');
-
-        const user = {};
-        user.nickname = nickInput.value;
-        user.email = emailInput.value.trim();
-        user.password = passwordInput.value; 
-
-
-
-        for (let key in user) {
-            
-
-            if (key === 'email' || key === 'password') {
-                if (!checkInput(user[key],key)) {
-                    console.log(key)
-                    return;
-                }
-            } else {
-                if (!checkInput(user[key])) {
-                    console.log(key)
-                    return;
-                }
-            }
-        } 
-
-        console.log(user.nickname)
-
-        ajax(
-            'POST',
-            '/signup',
-            user,
-            (response, result) => {
-                if (response.status === 201) {
-                    
-                    document.body
-                        .querySelector('.modal__background')
-                        .remove();
-                    
-                    const header = new Header();
-                    header.render(result);
-
-                    return;
-                }
-
-                console.log(response.status);
-
-                alert('АХТУНГ! НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
-            })
-    });
-}*/

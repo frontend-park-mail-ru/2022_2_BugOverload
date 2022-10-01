@@ -1,18 +1,17 @@
 export class Ajax {
-    get = async ({url,callback}) => {
+    static get = async (url) => {
+        console.log('get')
         let response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
         });
-        if (callback(response)) {
-            let result = await response.json();
-            return result;
-        }
 
-        return null;
+        const result = await response.json();
+        return {status: response.status, body: result};
     }
 
-    post = async ({url, body, callback}) => {
+    static post = async ({url, body}) => {
+        console.log('post')
         let response = await fetch(
             url, {
                 method: 'POST',
@@ -23,9 +22,8 @@ export class Ajax {
                   },
                 body: JSON.stringify(body),
         });
-    
+
         const result = await response.json();
-    
-        callback(response, result);
+        return {status: response.status, body: result};
     }
 }

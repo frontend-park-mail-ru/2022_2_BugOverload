@@ -1,6 +1,5 @@
-export const renderTemplate = (templateName, callback, parametrs = {}) => {
+export const renderTemplate = (templateName, target, place, props = {}) => {
     const template = Handlebars.templates[templateName];
-    const templateHtml = template(parametrs);
-    const safeheaderHtml = DOMPurify.sanitize(templateHtml);
-    callback(safeheaderHtml);
+    const templateHtml = template(props);
+    target.insertAdjacentHTML(place, templateHtml);
 }

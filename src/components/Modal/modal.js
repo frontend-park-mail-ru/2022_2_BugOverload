@@ -1,10 +1,14 @@
 import {renderTemplate} from '../../utils/render_template.js';
 
 export class Modal {
+    #root
+
+    constructor(root) {
+        this.root = root;
+    }
+    
     render() {
-        renderTemplate('modal', (safeHtml) => {
-            root.insertAdjacentHTML('afterbegin', safeHtml);
-        });
+        renderTemplate('Modal/modal', root, 'afterbegin');
 
         this.handler();
     }

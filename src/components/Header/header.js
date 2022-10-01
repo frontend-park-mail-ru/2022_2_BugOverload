@@ -2,58 +2,59 @@ import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
 import {Userbar} from '../Userbar/userbar.js';
-import {config, root} from '../../__mocks__/config.js';
+import {config} from '../../config/config.js';
 
 export class Header {
-    render(user) {
-        if(document.querySelector('.header')) {
-            document
-                .querySelector('.header')
-                .remove();
+    #root
+
+    constructor(root) {
+        this.root = root;
+    }
+
+    renderUserAvatar(user) {
+        document.body.querySelector('.header__login__btn').remove();
+
+        const userHtml = 
+        `<div class="header__userbar">
+            <img class="header__avatar" src="${user.avatar}" alt="">
+        </div>`;
+
+        document.body.querySelector('.header__form').insertAdjacentHTML('afterend', userHtml);
+
+        const ava = document.body.querySelector('.header__avatar');
+    
+        function openUserbar(e) {
+            const { target } = e;
+    
+            const userbar = new Userbar(root);
+            userbar.render(user);
         }
     
+        ava.addEventListener('click', openUserbar);
+    }
+
+    render(user) {
         if(!user) {
-            const ajax = new Ajax();
-    
-            user = ajax.get({
-                url: '/v1/auth',
-                callback: (response) => {
-                    if (response.status === 200) {
-                        return true;
-                    }
-                    return false;
+            const responsePromise = Ajax.get('/v1/auth');
+            console.log(responsePromise)
+            responsePromise.then((response) => {
+                console.log(response)
+                if(response.status == 200) {
+                    user = response.body;
+                    console.log(user)
+                    this.renderUserAvatar(user);
                 }
             });
 
-            user.then((result) => {
-                this.renderUser(result);
-            })
-            return;
         }
-    
-        this.renderUser(user);
+
+        renderTemplate('Header/header', root, 'beforebegin', user);
+        console.log(user)
+        this.handlerHeader(user);
     }
 
-    renderUser(user = null) {
-        renderTemplate('header', (safeHtml) => {
-            root.insertAdjacentHTML('beforebegin', safeHtml);
-        },
-        user);
-    
+    handlerHeader() {    
         const header = document.querySelector('.header');
-        
-        if(user) {
-            const ava = header.querySelector('.header__avatar');
-    
-            function openUserbar(e) {
-                const { target } = e;
-    
-                const userbar = new Userbar();
-                userbar.render(user);
-            }
-    
-            ava.addEventListener('click', openUserbar)
-        }
     
         header.addEventListener('click', (e) => {
             const { target } = e;
@@ -65,7 +66,7 @@ export class Header {
                         .querySelector('.active')
                         .classList.remove('active');
 
-                        const head = new (config.header[target.dataset.section].render)();
+                        const head = new (config.header[target.dataset.section].render)(root);
                         head.render();
                 });
             }

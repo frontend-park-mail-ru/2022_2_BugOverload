@@ -1,4 +1,6 @@
 import {Header} from './components/Header/header.js';
 
-const header = new Header();
+const root = document.getElementById('root');
+
+const header = new Header(root);
 header.render();
