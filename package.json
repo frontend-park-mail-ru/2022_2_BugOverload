@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run clean && npm run build && npm run back",
-    "back": "node __mocks__/backend.js",
+    "back": "node __mocks__/server.js",
     "clean": "rm -rf dist && mkdir dist",
-    "build": "handlebars -m src/ -f dist/templates.js"
+    "build": "handlebars -m src/ -f src/dist/templates.js"
     },
   "repository": {
     "type": "git",

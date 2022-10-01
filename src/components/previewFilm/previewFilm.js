@@ -1,4 +1,4 @@
-export const PREVIEW_API = 'http://localhost:8081/v1/recommendation_film';
+export const PREVIEW_API = 'http://127.0.1:3000/v1/recommendation_film';
 
 export class PreviewFilm {
     render() {
@@ -11,7 +11,7 @@ export class PreviewFilm {
 
 async function getDataToPreviewFilm() {
     let response = await fetch(PREVIEW_API, {
-        mode: 'cors',
+        mode: 'no-cors',
         credentials: 'include'
     });
 

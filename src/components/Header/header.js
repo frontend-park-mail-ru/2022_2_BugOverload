@@ -14,23 +14,26 @@ export class Header {
     renderUserAvatar(user) {
         document.body.querySelector('.header__login__btn').remove();
 
-        const userHtml = 
-        `<div class="header__userbar">
+        const userHtml =
+        `<div class="header__userbar-substrate">
             <img class="header__avatar" src="${user.avatar}" alt="">
         </div>`;
 
         document.body.querySelector('.header__form').insertAdjacentHTML('afterend', userHtml);
 
-        const ava = document.body.querySelector('.header__avatar');
-    
+        const ava = document.body.querySelector('.header__userbar-substrate');
+
         function openUserbar(e) {
             const { target } = e;
-    
+            // debugger;
+
             const userbar = new Userbar(root);
             userbar.render(user);
+            // const userbar = document.querySelector('.header__userbar-substrate');
+            // renderTemplate('components/navbarMish/usermenu', userbar, 'beforeend', user);
         }
-    
-        ava.addEventListener('click', openUserbar);
+
+        ava.addEventListener('mouseenter', openUserbar);
     }
 
     render(user) {
@@ -45,20 +48,19 @@ export class Header {
                     this.renderUserAvatar(user);
                 }
             });
-
         }
 
-        renderTemplate('Header/header', root, 'beforebegin', user);
+        renderTemplate('components/Header/header', root, 'beforebegin', user);
         console.log(user)
         this.handlerHeader(user);
     }
 
-    handlerHeader() {    
+    handlerHeader() {
         const header = document.querySelector('.header');
-    
+
         header.addEventListener('click', (e) => {
             const { target } = e;
-        
+
             if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
                 e.preventDefault();
                 goToPage(config.header[target.dataset.section], () => {

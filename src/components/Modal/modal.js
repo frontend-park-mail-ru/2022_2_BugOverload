@@ -6,9 +6,9 @@ export class Modal {
     constructor(root) {
         this.root = root;
     }
-    
+
     render() {
-        renderTemplate('Modal/modal', root, 'afterbegin');
+        renderTemplate('components/Modal/modal', root, 'afterbegin');
 
         this.handler();
     }
@@ -21,6 +21,6 @@ export class Modal {
             document.body
                 .querySelector('.modal__background')
                 .remove();
-        }); 
+        });
     }
 }

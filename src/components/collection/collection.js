@@ -4,8 +4,8 @@ export const COLLECTION_TYPE = {
 }
 
 export const COLLECTION_API = {
-    popular: 'http://localhost:8081/v1/popular_films',
-    todayInCinema: 'http://localhost:8081/v1/in_cinema',
+    popular: 'http://127.0.0.1:3000/v1/popular_films',
+    todayInCinema: 'http://127.0.0.1:3000/v1/in_cinema',
 }
 
 
@@ -28,8 +28,8 @@ async function getDataForCollection(type) {
     switch (type) {
         case COLLECTION_TYPE.popular: {
             let response = await fetch(COLLECTION_API.popular, {
-                mode: 'cors',
-                credentials: 'include'
+                mode: 'no-cors',
+                // credentials: 'include'
             });
             let collectionCinemaTodayData = await response.json();
 
@@ -38,8 +38,8 @@ async function getDataForCollection(type) {
 
         case COLLECTION_TYPE.todayInCinema: {
             let response = await fetch(COLLECTION_API.todayInCinema, {
-                mode: 'cors',
-                credentials: 'include'
+                mode: 'no-cors',
+                // credentials: 'include'
             });
             let collectionCinemaTodayData = await response.json();
 

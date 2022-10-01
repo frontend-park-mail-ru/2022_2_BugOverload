@@ -12,15 +12,15 @@ export class Signup {
     constructor(root) {
         this.root = root;
     }
-    
+
     render() {
         if (root.querySelector('.modal__window') === null) {
             const modal = new Modal(root);
             modal.render();
         }
-    
+
         const modalWindow = root.querySelector('.modal__window__flex');
-        renderTemplate('Signup/signup', modalWindow, 'afterbegin');
+        renderTemplate('components/Signup/signup', modalWindow, 'afterbegin');
 
         this.handler(modalWindow);
     }
@@ -31,16 +31,16 @@ export class Signup {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-    
+
             const nickInput = form.querySelector('input[type=text]');
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelector('input[type=password]');
 
-    
+
             const user = {};
             user.nickname = nickInput.value.trim();
             user.email = emailInput.value.trim();
-            user.password = passwordInput.value; 
+            user.password = passwordInput.value;
 
             let flag = false;
 
@@ -70,18 +70,18 @@ export class Signup {
             responsePromise.then((response) => {
                 console.log(response)
                 if (response.status === 201) {
-                        
+
                     document.body
                         .querySelector('.modal__background')
                         .remove();
-                    
+
                     const header = new Header();
                     header.renderUserAvatar(response.body);
 
                     return;
                 }
 
-                if (response.status === 200) {    
+                if (response.status === 200) {
                     renderError(form,'email','Пользователь с таким email уже зарегистрирован')
                     return;
                 }
@@ -92,15 +92,15 @@ export class Signup {
 
         loginImg.addEventListener('click', (e) => {
             const { target } = e;
-        
+
             if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
-    
+
                 goToPage(config.login[target.dataset.section], () => {
-                    modalWindow              
+                    modalWindow
                         .querySelector('.modal__signup')
                         .remove();
-                    modalWindow              
+                    modalWindow
                         .querySelector('.modal__signup__img')
                         .remove();
                     const login = new config.login[target.dataset.section].render(root);
