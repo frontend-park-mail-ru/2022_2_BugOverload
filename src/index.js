@@ -5,10 +5,10 @@ import { COLLECTION_TYPE } from './components/collection/collection.js';
 renderMainPage();
 
 
-let avatar = document.querySelector('.header__userbar');
+let avatar = document.querySelector('.header__userbar-substrate');
 avatar.addEventListener('mouseenter', (event) => {
     let menu = Handlebars.templates['components/navbarMish/usermenu']();
-    avatar.innerHTML = menu;
+    avatar.innerHTML = menu; //ajasentHTTP
     avatar.style.backgroundColor = "rgba(15, 15, 15, 0.8)";
 });
 
@@ -66,3 +66,11 @@ sliders.forEach(slider => {
         return;
     });
 })
+
+
+import {Header} from './components/Header/header.js';
+
+const root = document.getElementById('root');
+
+const header = new Header(root);
+header.render();

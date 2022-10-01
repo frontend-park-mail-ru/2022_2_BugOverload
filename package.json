@@ -1,23 +1,31 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-        "start": "npm run clean && npm run build && npm run back",
-        "back": "node __mocks__/backend.js",
-        "clean": "rm -rf dist && mkdir dist",
-        "build": "handlebars -m src/ -f dist/templates.js"
+  "name": "2022_2_bugoverload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run clean && npm run build && npm run back",
+    "back": "node __mocks__/backend.js",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "handlebars -m src/ -f dist/templates.js"
     },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.20.0",
-        "cors": "^2.8.5",
-        "debug": "^4.3.4",
-        "express": "^4.18.1",
-        "handlebars": "^4.7.7",
-        "morgan": "^1.10.0",
-        "uuid": "^9.0.0"
-    }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2022_2_BugOverload.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2022_2_BugOverload/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2022_2_BugOverload#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "express": "^4.18.1",
+    "handlebars": "^4.7.7",
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.0"
+  }
 }

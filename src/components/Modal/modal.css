@@ -1,0 +1,153 @@
+.modal__background {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+}
+
+.modal__window {
+
+
+    width: 800px;
+    height: 480px;
+    min-height: 250px;
+}
+
+.modal__window__flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+    height: 100%;
+
+    font-family: 'Mail Sans Roman';
+    font-weight: normal;
+}
+
+.modal__cross {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 45px;
+    right: 87px;
+    fill: #444;
+    cursor: pointer;
+}
+
+.modal__header {
+    margin-bottom: 33px;
+    color: #fff;
+
+    font-size: 26px;
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+}
+
+.modal__wrapper__input{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    width: 270px;
+    height: 55px;
+
+    margin-bottom: 10px;
+}
+
+.modal__input {
+    width: 270px;
+    height: 28px;
+    border-radius: 21px;
+
+    color: #fff;
+    background: #27292E;
+    opacity: .8;
+    border: 2px solid #333333;
+    
+    font-size: 12px;
+}
+
+.modal__input_red_border{
+    border: 2px solid #E72D2D;
+}
+
+.modal__input__error {
+    width: 300px;
+    height: 18px;
+
+    margin-top: 5px;
+
+    color: #E72D2D;
+    font-size: 12px;
+}
+
+.modal__input__button {
+    font-size: 13px;
+    text-decoration: none;
+
+    width: 270px;
+    height: 30px;
+    border-radius: 21px;
+
+    margin-top: 10px;
+
+    font-weight: bold;
+}
+
+.modal__text__alternative__page{
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 15px;
+    font-size: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.modal__login__signup__btn {
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 36px;
+    color: #000;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+
+    height: 23px;
+    width: 120px;
+    border-radius: 26px;
+}
+
+.modal__flex__center__div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+}
