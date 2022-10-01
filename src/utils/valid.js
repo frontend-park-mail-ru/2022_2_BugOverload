@@ -11,7 +11,6 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
             if (action === 'login') {
                 renderError(form, type, 'Неправильный адрес');
             }
-            console.log('invalid_email')
             return false;
         }
         return true;
@@ -30,7 +29,6 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
             if (action === 'login') {
                 renderError(form, type, 'Неправильный пароль');
             }
-            console.log('invalid_password')
             return false;
         }
         return true;
@@ -50,7 +48,6 @@ export const checkInput = (form ,action ,input ,type = 'text') => {
 }
 
 export const renderError = (form, type, text) => {
-    console.log(type)
     const target = form.querySelector(`input[type=${type}]`);
     if(target.parentElement.querySelector('.modal__input__error')) {
         const erorElement = target.parentElement.querySelector('.modal__input__error');

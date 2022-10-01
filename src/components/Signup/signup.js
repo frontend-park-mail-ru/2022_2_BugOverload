@@ -43,7 +43,6 @@ export class Signup {
             for (let key in user) {
                 if (key === 'email' || key === 'password') {
                     if (!checkInput(form, 'signup', user[key], key)) {
-                        console.log(key)
                         flag = true;
                     }
                 } else {
