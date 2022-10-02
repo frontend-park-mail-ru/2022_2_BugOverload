@@ -1,31 +1,28 @@
-export const PREVIEW_API = 'http://127.0.1:3000/v1/recommendation_film';
+import { Ajax } from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/render_template.js';
+import { ROOT } from '../../utils/root.js';
+
+export const PREVIEW_API = '/v1/recommendation_film';
 
 export class PreviewFilm {
     render() {
-        getDataToPreviewFilm().then(data => {
-            this.filmData = data;
-            renderPreviewFilm(this.filmData);
+        let promiseCollection = Ajax.get(PREVIEW_API);
+        promiseCollection.then( (response) => {
+            if (response.status === 200) {
+                renderPreviewFilm(response.body);
+                return;
+            }
+
+            if (response.status > 500) {
+                //TODO
+                throw 500;
+            }
+
+            throw 'PreviewFilm: Unexpected status'
         });
     }
 }
 
-async function getDataToPreviewFilm() {
-    let response = await fetch(PREVIEW_API, {
-        mode: 'no-cors',
-        credentials: 'include'
-    });
-
-    let previewData = await response.json();
-
-    return previewData;
-}
-
 function renderPreviewFilm(previewData) {
-    let previewFilm = Handlebars.templates['components/previewFilm/previewFilm'](previewData);
-    let div = document.createElement('div');
-
-    div.innerHTML = previewFilm;
-    div.style.backgroundImage = `url('${previewData.previewImg}')`;
-
-    root.append(div);
+    renderTemplate('components/previewFilm/previewFilm', ROOT, 'beforeend', previewData);
 }

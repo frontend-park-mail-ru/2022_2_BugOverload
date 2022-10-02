@@ -1,5 +1,5 @@
-import {renderTemplate} from '../../utils/render_template.js';
 import {Ajax} from '../../utils/ajax.js';
+import { ROOT } from '../../utils/root.js';
 
 export const COLLECTION_TYPE = {
     popular: "popular",
@@ -7,96 +7,132 @@ export const COLLECTION_TYPE = {
 }
 
 export const COLLECTION_API = {
-    popular: 'http://127.0.0.1:3000/v1/popular_films',
-    todayInCinema: 'http://127.0.0.1:3000/v1/in_cinema',
+    popular: '/v1/popular_films',
+    todayInCinema: '/v1/in_cinema',
 }
 
 
 export class Collection {
-    #type;
-    #filmsData;
+    #type
+    #count
 
     constructor(type) {
         this.#type = type;
     }
 
     render() {
-        getDataForCollection(this.#type).then(data => {
-            this.collectionData = data;
-            renderCollection(this.collectionData);
-        });
-        // let promiseCollection = Ajax.get(COLLECTION_API[this.#type]);
-        // promiseCollection.then( (response) => {
-        //     if (response.status === 200) {
-        //         renderCollection();
-        //         return;
-        //     }
-
-        //     if (response.status === 404) {
-        //         // renderCollection();
-        //         throw 404
-        //         return;
-        //     }
-
-        //     if (response.status > 500) {
-        //         renderCollection();
-        //         return;
-        //     }
-
-        //     throw "not found preview";
-        //     return
-        // });
-    }
-}
-
-async function getDataForCollection(type) {
-    switch (type) {
-        case COLLECTION_TYPE.popular: {
-            let response = await fetch(COLLECTION_API.popular, {
-                mode: 'no-cors',
-                // credentials: 'include'
-            });
-            let collectionCinemaTodayData = await response.json();
-
-            return collectionCinemaTodayData;
-        }
-
-        case COLLECTION_TYPE.todayInCinema: {
-            let response = await fetch(COLLECTION_API.todayInCinema, {
-                mode: 'no-cors',
-                // credentials: 'include'
-            });
-            let collectionCinemaTodayData = await response.json();
-
-            return collectionCinemaTodayData;
-        }
-
-        default:
-            if (+type) {
-                alert(`ID COLLECTION ${+type}`);
+        let promiseCollection = Ajax.get(COLLECTION_API[this.#type]);
+        promiseCollection.then( (response) => {
+            if (response.status === 200) {
+                this.#count = response.body.films.length;
+                this.renderCollection(response.body);
+                this.addListeners;
+                return;
             }
+
+            if (response.status === 404) {
+                //TODO
+                throw 404;
+            }
+
+            if (response.status > 500) {
+                //TODO
+                throw 500;
+            }
+
+            //TODO
+            throw "Error collection";
+        });
+    }
+
+    renderCollection(filmsData) {
+        if (!filmsData) {
+            return;
+        }
+
+        decorateGenresFilm(filmsData);
+
+        let films = "";
+        filmsData.films.forEach(filmData => films += Handlebars.templates['components/film/film'](filmData) )
+
+        let collection = Handlebars.templates['components/collection/collection']({title: filmsData.title, films: films});
+        let div = document.createElement('div');
+        div.insertAdjacentHTML('beforeend', collection);
+
+        if (document.documentElement.clientWidth - 2*52 > this.#count*260 - 30) {
+            div.querySelector('.collection__slider-button_right').style.display = 'none';
+        }
+        div.querySelector('.collection__slider-button_left').style.display = 'none';
+
+        addColorRatingFilm(div, filmsData);
+
+        ROOT.append(div);
+        this.addListeners(div);
+    }
+
+    addListeners(slider) {
+        let btnRight = slider.querySelector('.collection__slider-button_right');
+        let btnLeft = slider.querySelector('.collection__slider-button_left');
+        // debugger;
+
+        let offset = 0;
+        const widthFilm = 260;
+        let maxLength = widthFilm * this.#count;
+        let windowLen = document.documentElement.clientWidth;
+        let maxOffset = maxLength - windowLen + 52 + 12;
+        let countOnPage = Math.trunc(windowLen / widthFilm);
+        let pageOffset = countOnPage * widthFilm;
+
+        let isHiddenRight = false;
+        let isHiddenLeft = true;
+
+        slider.addEventListener('click', (event) => {
+            if (event.target === btnRight.querySelector('img')) {
+                event.preventDefault();
+                if (isHiddenLeft) {
+                    slider.querySelector('.collection__slider-button_left').style.display = '';
+                    isHiddenLeft = false;
+                }
+
+                offset += pageOffset;
+                if (offset > maxOffset) {
+                    offset = maxOffset;
+                };
+
+                slider.querySelector('.collection__slider').style.left = -offset + 'px';
+                if (offset >= maxOffset) {
+                    slider.querySelector('.collection__slider-button_right').style.display = 'none';
+                    isHiddenRight = true;
+                }
+
+                return;
+            }
+
+            if (event.target === btnLeft.querySelector('img')) {
+                event.preventDefault();
+                if (isHiddenRight) {
+                    slider.querySelector('.collection__slider-button_right').style.display = '';
+                    isHiddenRight = false;
+                }
+                offset -= pageOffset;
+                if (offset <= 0) {
+                    offset = 0;
+                }
+
+                slider.querySelector('.collection__slider').style.left = -offset + 'px';
+                if (offset <= 0) {
+                    slider.querySelector('.collection__slider-button_left').style.display = 'none';
+                    isHiddenLeft = true;
+                }
+
+                return;
+            }
+
+            return;
+        });
     }
 }
 
-function renderCollection(filmsData) {
-    if (!filmsData) {
-        return;
-    }
-
-    decorateGenresFilm(filmsData);
-
-    let films = "";
-    filmsData.films.forEach(filmData => films += Handlebars.templates['components/film/film'](filmData) )
-
-    let collection = Handlebars.templates['components/collection/collection']({title: filmsData.title, films: films});
-    let div = document.createElement('div');
-    div.innerHTML = collection;
-
-    addColorRatingFilm(div, filmsData);
-
-
-    root.append(div);
-}
 
 function decorateGenresFilm(filmsData) {
     filmsData.films.forEach((film) => {

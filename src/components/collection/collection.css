@@ -22,14 +22,16 @@
 }
 
 .collection__slider {
-    position: relative;
-    left: 30px;
     display: flex;
+    position: relative;
+
+    left: 0;
+    transition: all ease 0.5s;
 }
 
 .collection__slider-button_right {
     position: absolute;
-    left: 1750px;
+    left: 1758px;
     top: 128px;
     width: 43px;
     height: 43px;

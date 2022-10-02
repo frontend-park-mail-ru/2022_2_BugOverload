@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-	origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:5500'],
+	origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:5500'],
 	credentials: true,
 }));
 
@@ -17,7 +17,107 @@ app.use(express.static(path.resolve(__dirname, 'src/assert/img')));
 app.get('/v1/in_cinema', (req, res) => {
 	console.log('GET: popular_films CinemaTodayData')
 	const collectionCinemaTodayData = {
-		title: "Сейчас в кино",
+		title: "Cейчас в кино",
+		films:[
+			{
+				id: 0,
+				title: "Дюна",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/dune_poster.jpg",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				id: 8,
+				title: "Убить Билла",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/8.png",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				id: 9,
+				title: "Головокружение",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/9.png",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				id: 5,
+				title: "Доказательство смерти",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/5.png",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				id: 7,
+				title: "Чунгингский экспресс",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/7.png",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				id: 6,
+				title: "Девушка с татуировой дракона",
+				description: "",
+				type: "",
+				year: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster: "asserts/img/posters/6.png",
+				rating: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+	]};
+
+	res.status(200).json(collectionCinemaTodayData);
+});
+
+app.get('/v1/popular_films', (req, res) => {
+	console.log('GET: popular_films PopularData')
+	const collectionPopularData = {
+		title: "Популярное",
 		films:[
 		{
 			id: 0,
@@ -183,107 +283,8 @@ app.get('/v1/in_cinema', (req, res) => {
 			poster: "asserts/img/posters/6.png",
 			rating: 7.1,
 			genres: ["Фентези", "Приключения"],
-		}
-	]};
+		},
 
-	res.status(200).json(collectionCinemaTodayData);
-});
-
-app.get('/v1/popular_films', (req, res) => {
-	console.log('GET: popular_films PopularData')
-	const collectionPopularData = {
-		title: "Популярное",
-		films:[
-			{
-				id: 0,
-				title: "Дюна",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/dune_poster.jpg",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
-			{
-				id: 8,
-				title: "Убить Билла",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/8.png",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
-			{
-				id: 9,
-				title: "Головокружение",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/9.png",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
-			{
-				id: 5,
-				title: "Доказательство смерти",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/5.png",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
-			{
-				id: 7,
-				title: "Чунгингский экспресс",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/7.png",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
-			{
-				id: 6,
-				title: "Девушка с татуировой дракона",
-				description: "",
-				type: "",
-				year: 2021,
-				prodCompany: "",
-				prodCountry: "",
-				ageLimit: "",
-				duration: "",
-				posterHuge: "",
-				poster: "asserts/img/posters/6.png",
-				rating: 7.1,
-				genres: ["Фентези", "Приключения"],
-			},
 	]};
 
 	res.status(200).json(collectionPopularData);

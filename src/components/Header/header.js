@@ -45,7 +45,8 @@ export class Header {
             }
 
             userbar.style.backgroundColor = "rgba(15, 15, 15, 0.0)";
-            userbar.innerHTML = '<img class="header__avatar" src="asserts/img/invisibleMan.jpeg" alt="">';
+            userbar.innerHTML = '';
+            userbar.insertAdjacentHTML('beforeend','<img class="header__avatar" src="asserts/img/invisibleMan.jpeg" alt="">');
 
             isOpened = false;
         }

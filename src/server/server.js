@@ -71,7 +71,7 @@ app.post('/v1/auth/signup', (req, res) => {
 	res.status(201).json(users[email]);
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
