@@ -7,8 +7,7 @@ export class Ajax {
         });
 
         const result = await response.json();
-        // return {status: response.status, body: result}; // это лишнее
-        return result;
+        return {status: response.status, body: result}; 
     }
 
     static post = async ({url, body}) => {
