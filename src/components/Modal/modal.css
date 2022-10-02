@@ -16,8 +16,6 @@
 }
 
 .modal__window {
-
-
     width: 800px;
     height: 480px;
     min-height: 250px;
@@ -32,8 +30,6 @@
     align-items: center;
 
     height: 100%;
-
-    /* font-family: 'Mail Sans Roman'; */
     font-weight: normal;
 }
 
@@ -79,7 +75,7 @@
 }
 
 .modal__input {
-    width: 270px;
+    width: 249px;
     height: 28px;
     border-radius: 21px;
 
@@ -89,6 +85,8 @@
     border: 2px solid #333333;
 
     font-size: 12px;
+
+    padding-left: 15px;
 }
 
 .modal__input_red_border{

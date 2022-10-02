@@ -12,7 +12,6 @@ export class UserAvatar {
     render(user) {
         document.body.querySelector('.header__login__btn').remove();
 
-        debugger;
         const userHtml =
         `<div class="header__userbar-substrate">
             <div class="header__userbar-user-info-container">
