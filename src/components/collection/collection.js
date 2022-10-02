@@ -1,3 +1,6 @@
+import {renderTemplate} from '../../utils/render_template.js';
+import {Ajax} from '../../utils/ajax.js';
+
 export const COLLECTION_TYPE = {
     popular: "popular",
     todayInCinema: "todayInCinema",
@@ -11,6 +14,7 @@ export const COLLECTION_API = {
 
 export class Collection {
     #type;
+    #filmsData;
 
     constructor(type) {
         this.#type = type;
@@ -21,6 +25,27 @@ export class Collection {
             this.collectionData = data;
             renderCollection(this.collectionData);
         });
+        // let promiseCollection = Ajax.get(COLLECTION_API[this.#type]);
+        // promiseCollection.then( (response) => {
+        //     if (response.status === 200) {
+        //         renderCollection();
+        //         return;
+        //     }
+
+        //     if (response.status === 404) {
+        //         // renderCollection();
+        //         throw 404
+        //         return;
+        //     }
+
+        //     if (response.status > 500) {
+        //         renderCollection();
+        //         return;
+        //     }
+
+        //     throw "not found preview";
+        //     return
+        // });
     }
 }
 

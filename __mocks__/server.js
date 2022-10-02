@@ -354,6 +354,22 @@ app.get('/v1/popular_films', (req, res) => {
 
 app.get('/v1/recommendation_film', (req, res) => {
 	console.log('GET: recommendation_film')
+	const previewSpace = {
+		id: 0,
+		previewtitle: "2001 год: Космическая одиссея",
+		previewDescription: "Экипаж космического корабля «Дискавери» — капитаны Дэйв Боумэн, Фрэнк Пул и их бортовой компьютер HAL 9000 — должны исследовать район галактики и понять, почему инопланетяне следят за Землей. На этом пути их ждет множество неожиданных открытий.",
+		type: "",
+		year: 1968,
+		prodCompany: "",
+		prodCountry: "",
+		ageLimit: "",
+		duration: "",
+		previewImg: "asserts/img/space_odyssey_hor.jpg",
+		poster: "",
+		rating: 7.1,
+		genres: ["Фентези", "Приключения"]
+	}
+
 	const previewDune = {
 		id: 0,
 		previewtitle: "Американская история X",
@@ -366,6 +382,19 @@ app.get('/v1/recommendation_film', (req, res) => {
 		duration: "",
 		previewImg: "asserts/img/dune.jpg",
 		poster: "",
+		rating: 7.1,
+		genres: ["Фентези", "Приключения"]
+	}
+
+	const previewJoker = {
+		id: 0,
+		previewtitle: "Джокер ",
+		previewDescription: "Распад личности под воздействием социума.",
+		type: "film",
+		year: 2019,
+		ageLimit: "18+",
+		duration: "2:10",
+		previewImg: "asserts/img/joker_hor.jpg",
 		rating: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -390,13 +419,19 @@ app.get('/v1/recommendation_film', (req, res) => {
 		genres: ["Фентези", "Приключения"]
 	}
 
+	if (Math.random() > 0.75) {
+		res.status(200).json(previewSpace);
+		return;
+	}
 	if (Math.random() > 0.5) {
-		console.log("previewStarWars")
 		res.status(200).json(previewStarWars);
 		return;
 	}
+	if (Math.random() > 0.25) {
+		res.status(200).json(previewJoker);
+		return;
+	}
 
-	console.log("previewDune")
 	res.status(200).json(previewDune)
 });
 
