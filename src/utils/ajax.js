@@ -21,7 +21,12 @@ export class Ajax {
                 body: JSON.stringify(body),
         });
 
-        const result = await response.json();
+        // const result = await response.json();
+        // try {
+            promiseJson = response.json();
+            promiseJson.then( (body)  => result = body).catch(() => result = '{}');
+        // }
+
         return {status: response.status, body: result};
     }
 }
