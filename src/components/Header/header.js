@@ -14,7 +14,7 @@ export class Header {
 
     render(user) {
         if(!user) {
-            const responsePromise = Ajax.get('/v1/auth');
+            const responsePromise = Ajax.get('http://localhost:8088/v1/auth');
             console.log(responsePromise)
             responsePromise.then((response) => {
                 console.log(response)

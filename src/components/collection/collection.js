@@ -7,8 +7,8 @@ export const COLLECTION_TYPE = {
 }
 
 export const COLLECTION_API = {
-    popular: '/v1/popular_films',
-    todayInCinema: '/v1/in_cinema',
+    popular: 'http://localhost:8088/v1/popular_films',
+    todayInCinema: 'http://localhost:8088/v1/in_cinema',
 }
 
 
