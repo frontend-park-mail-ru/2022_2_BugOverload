@@ -20,16 +20,8 @@
     margin-left: 12px;
 }
 
-.header__nickname {
-
-}
-
-.header__email {
-
-}
-
 .header__avatar {
-    order: 0;
+    /* order: 0; */
     flex: 0 1 auto;
     align-self: baseline;
 
@@ -37,4 +29,121 @@
     height: 42px;
     border-radius: 21px;
     object-fit: cover;
+}
+
+
+.button__yellow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    background-color: #FEBA2B;
+    border: 0px;
+}
+
+.header__login {
+    font-size: 18px;
+    text-decoration: none;
+
+    margin-right: 100px;
+    height: 35px;
+    width: 180px;
+    border-radius: 40px;
+
+    font-weight: bold;
+}
+
+.header__userbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+
+    width: 220px;
+    height: 213px;
+
+    margin-top: 222px;
+    margin-right: 52px;
+    padding: 16px 11px 16px 11px;
+
+    align-self: flex-start;
+    margin-top: 14px;
+}
+
+.header__userbar-substrate {
+    z-index: 5;
+    color: #000;
+    width: 220px;
+    height: 228px;
+    margin-right: 52px;
+    padding: 16px 11px 16px 11px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    flex-wrap: nowrap;
+    align-self: flex-start;
+    margin-top: 14px;
+    border-radius: 15px;
+}
+
+.header__userbar-user-info-container {
+    display: flex;
+}
+
+.header__userbar-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 12px;
+}
+
+.header__userbar-name {
+    font-size: 15px;
+    color: #fff;
+}
+
+.header__userbar-email {
+    font-size: 12px;
+    color: #AFAFAF;
+}
+
+.header__userbar-items-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    flex-direction: column;
+    /* margin-top: -15px; */
+}
+
+.header__userbar-item {
+    margin-top: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.header__userbar-item:hover {
+    color:#FEBA2B;
+    transition: 0.08s linear;
+}
+
+.header__userbar-item-out {
+    color: #AFAFAF;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.userbar__nick__email {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 12px;
 }

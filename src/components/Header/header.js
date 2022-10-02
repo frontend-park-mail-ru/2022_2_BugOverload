@@ -18,22 +18,40 @@ export class Header {
         `<div class="header__userbar-substrate">
             <img class="header__avatar" src="${user.avatar}" alt="">
         </div>`;
+        // <img class="header__avatar" src="${user.avatar}" alt="">
 
-        document.body.querySelector('.header__form').insertAdjacentHTML('afterend', userHtml);
+        let headerForm = document.body.querySelector('.header__form');
+        headerForm.insertAdjacentHTML('afterend', userHtml);
 
-        const ava = document.body.querySelector('.header__userbar-substrate');
+        const userbar = document.body.querySelector('.header__userbar-substrate');
+        let isOpened = false;
+
+
 
         function openUserbar(e) {
-            const { target } = e;
-            // debugger;
+            if (isOpened) {
+                return;
+            }
 
-            const userbar = new Userbar(root);
-            userbar.render(user);
-            // const userbar = document.querySelector('.header__userbar-substrate');
-            // renderTemplate('components/navbarMish/usermenu', userbar, 'beforeend', user);
+            const userbarElement = new Userbar(root);
+            userbarElement.render(user);
+
+            isOpened = true;
         }
 
-        ava.addEventListener('mouseenter', openUserbar);
+        function closeUserbar(event) {
+            if ( !isOpened ) {
+                return;
+            }
+
+            userbar.style.backgroundColor = "rgba(15, 15, 15, 0.0)";
+            userbar.innerHTML = '<img class="header__avatar" src="asserts/img/invisibleMan.jpeg" alt="">';
+
+            isOpened = false;
+        }
+
+        userbar.addEventListener('mouseenter', openUserbar);
+        userbar.addEventListener('mouseleave', closeUserbar);
     }
 
     render(user) {

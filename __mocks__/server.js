@@ -14,7 +14,7 @@ app.use(express.static(path.resolve(__dirname, '../src')));
 app.use(express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
-	origin: ['http://127.0.0.1:3000', 'http://localhost:8080', 'http://127.0.0.1:5500'],
+	origin: ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://localhost:8080', 'http://127.0.0.1:5500'],
 	credentials: true,
 }));
 
@@ -23,8 +23,8 @@ const users = {
 		'nickname': 'StepByyyy',
 		'email': 'dop123@mail.ru',
 		'password': 'dop123@mail.ru',
-		'avatar': 'https://static.1tv.ru/uploads/photo/image/2/huge/4062_huge_876c41f50e.jpg'
-		//asserts/img/invisibleMan.jpeg
+		// 'avatar': 'https://static.1tv.ru/uploads/photo/image/2/huge/4062_huge_876c41f50e.jpg'
+		'avatar': 'asserts/img/invisibleMan.jpeg'
 	},
 };
 const ids = {};
