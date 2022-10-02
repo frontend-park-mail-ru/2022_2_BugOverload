@@ -18,7 +18,7 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const response = Ajax.get('/v1/auth/logout');
+            const response = Ajax.get('http://localhost:8088/v1/auth/logout');
             response.then((response) => {
                 if(target.dataset.section == 'logout') {
                     if (response.status == 200) {

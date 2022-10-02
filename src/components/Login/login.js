@@ -40,7 +40,7 @@ export class Login {
             const password = passwordInput.value;
 
             const responsePromise = Ajax.post({
-                url: '/v1/auth/login',
+                url: 'http://localhost:8088/v1/auth/login',
                 body: {email, password}
             });
 

@@ -61,7 +61,7 @@ export class Signup {
             }
 
             const responsePromise = Ajax.post({
-                url: '/v1/auth/signup',
+                url: 'http://localhost:8088/v1/auth/signup',
                 body: user,
             });
 

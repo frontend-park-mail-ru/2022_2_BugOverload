@@ -2,7 +2,7 @@ import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/render_template.js';
 import { ROOT } from '../../utils/root.js';
 
-export const PREVIEW_API = '/v1/recommendation_film';
+export const PREVIEW_API = 'http://localhost:8088/v1/recommendation_film';
 
 export class PreviewFilm {
     render() {
