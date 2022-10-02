@@ -2,3 +2,5 @@
 node_modules
 .eslintcache
 pre_compile_templates
+public
+dest
