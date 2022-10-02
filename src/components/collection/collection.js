@@ -146,7 +146,7 @@ function addColorRatingFilm(div, filmsData) {
     let ratingElem = div.querySelectorAll('.film__rating');
 
     ratingElem.forEach((film, index) => {
-        let ratingValue = filmsData.films[index].rating;
+        let ratingValue = filmsData.films[index].ratio;
 
         if (ratingValue > 7.49) {
             film.dataset.valueRating = 'positive';
