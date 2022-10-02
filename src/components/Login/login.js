@@ -5,6 +5,7 @@ import {renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
 import {config} from '../../config/config.js';
+import {UserAvatar} from '../UserAvatar/userAvatar.js';
 
 export class Login {
     #root
@@ -54,8 +55,8 @@ export class Login {
                         .querySelector('.modal__background')
                         .remove();
 
-                    const header = new Header(root);
-                    header.renderUserAvatar(response.body);
+                    const userAvatar = new UserAvatar(root);
+                    userAvatar.render(response.body);
 
                     return;
                 }

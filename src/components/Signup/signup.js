@@ -3,7 +3,7 @@ import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
 import {checkInput, renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
-import {Header} from '../Header/header.js';
+import {UserAvatar} from '../UserAvatar/userAvatar.js';
 import {config} from '../../config/config.js';
 
 export class Signup {
@@ -75,8 +75,8 @@ export class Signup {
                         .querySelector('.modal__background')
                         .remove();
 
-                    const header = new Header();
-                    header.renderUserAvatar(response.body);
+                    const userAvatar = new UserAvatar(root);
+                    userAvatar.render(response.body);
 
                     return;
                 }

@@ -2,6 +2,7 @@ import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
 import {goToPage} from '../../utils/go_to_page.js';
 import {Userbar} from '../Userbar/userbar.js';
+import {UserAvatar} from '../UserAvatar/userAvatar.js';
 import {config} from '../../config/config.js';
 
 export class Header {
@@ -11,6 +12,7 @@ export class Header {
         this.root = root;
     }
 
+<<<<<<< HEAD
     renderUserAvatar(user) {
         document.body.querySelector('.header__login__btn').remove();
 
@@ -55,6 +57,8 @@ export class Header {
         userbar.addEventListener('mouseleave', closeUserbar);
     }
 
+=======
+>>>>>>> origin/merge_header
     render(user) {
         if(!user) {
             const responsePromise = Ajax.get('/v1/auth');
@@ -64,7 +68,8 @@ export class Header {
                 if(response.status == 200) {
                     user = response.body;
                     console.log(user)
-                    this.renderUserAvatar(user);
+                    const userAvatar = new UserAvatar(root);
+                    userAvatar.render(user);
                 }
             });
         }
@@ -80,6 +85,10 @@ export class Header {
         header.addEventListener('click', (e) => {
             const { target } = e;
 
+            if (target.dataset.section == 'logout') {
+                return;
+            }
+
             if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
                 e.preventDefault();
                 goToPage(config.header[target.dataset.section], () => {
@@ -87,8 +96,8 @@ export class Header {
                         .querySelector('.active')
                         .classList.remove('active');
 
-                        const head = new (config.header[target.dataset.section].render)(root);
-                        head.render();
+                    const head = new (config.header[target.dataset.section].render)(root);
+                    head.render();
                 });
             }
         });

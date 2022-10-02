@@ -20,40 +20,6 @@
     margin-left: 12px;
 }
 
-.header__avatar {
-    /* order: 0; */
-    flex: 0 1 auto;
-    align-self: baseline;
-
-    width: 42px;
-    height: 42px;
-    border-radius: 21px;
-    object-fit: cover;
-}
-
-
-.button__yellow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #000;
-    background-color: #FEBA2B;
-    border: 0px;
-}
-
-.header__login {
-    font-size: 18px;
-    text-decoration: none;
-
-    margin-right: 100px;
-    height: 35px;
-    width: 180px;
-    border-radius: 40px;
-
-    font-weight: bold;
-}
-
 .header__userbar {
     display: flex;
     flex-direction: column;
@@ -74,11 +40,10 @@
 .header__userbar-substrate {
     z-index: 5;
     color: #000;
-    width: 220px;
-    height: 228px;
+    width: 209px;
+    height: 219px;
     margin-right: 52px;
-    padding: 16px 11px 16px 11px;
-    box-sizing: border-box;
+    padding: 16px 0px 0px 16px;
     display: flex;
     flex-direction: column;
     color: #fff;
@@ -133,7 +98,7 @@
 
 .header__userbar-item-out {
     color: #AFAFAF;
-    margin-top: 20px;
+    margin-top: 12px;
     text-decoration: none;
 }
 
@@ -146,4 +111,12 @@
     align-items: flex-start;
 
     margin-left: 12px;
+}
+
+.userbar-on {
+    background-color: RGBA(15, 15, 15, 0.8);
+}
+
+.userbar-off {
+    background-color: RGBA(15, 15, 15, 0);
 }
