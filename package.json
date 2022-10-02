@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && npm run back",
     "back": "node __mocks__/server.js",
-    "clean": "rm -rf dist && mkdir dist",
+    "clean": "rm -rf dist src/dist && mkdir dist src/dist",
     "build": "handlebars -m src/ -f src/dist/templates.js"
     },
   "repository": {

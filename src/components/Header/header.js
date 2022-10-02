@@ -12,53 +12,6 @@ export class Header {
         this.root = root;
     }
 
-<<<<<<< HEAD
-    renderUserAvatar(user) {
-        document.body.querySelector('.header__login__btn').remove();
-
-        const userHtml =
-        `<div class="header__userbar-substrate">
-            <img class="header__avatar" src="${user.avatar}" alt="">
-        </div>`;
-        // <img class="header__avatar" src="${user.avatar}" alt="">
-
-        let headerForm = document.body.querySelector('.header__form');
-        headerForm.insertAdjacentHTML('afterend', userHtml);
-
-        const userbar = document.body.querySelector('.header__userbar-substrate');
-        let isOpened = false;
-
-
-
-        function openUserbar(e) {
-            if (isOpened) {
-                return;
-            }
-
-            const userbarElement = new Userbar(root);
-            userbarElement.render(user);
-
-            isOpened = true;
-        }
-
-        function closeUserbar(event) {
-            if ( !isOpened ) {
-                return;
-            }
-
-            userbar.style.backgroundColor = "rgba(15, 15, 15, 0.0)";
-            userbar.innerHTML = '';
-            userbar.insertAdjacentHTML('beforeend','<img class="header__avatar" src="asserts/img/invisibleMan.jpeg" alt="">');
-
-            isOpened = false;
-        }
-
-        userbar.addEventListener('mouseenter', openUserbar);
-        userbar.addEventListener('mouseleave', closeUserbar);
-    }
-
-=======
->>>>>>> origin/merge_header
     render(user) {
         if(!user) {
             const responsePromise = Ajax.get('/v1/auth');

@@ -27,6 +27,7 @@ const users = {
 		'avatar': 'asserts/img/invisibleMan.jpeg'
 	},
 };
+const DEFAULT_AVATAR = 'asserts/img/invisibleMan.jpeg'
 const ids = {};
 
 app.post('/v1/auth/login',  (req, res) => {
@@ -80,6 +81,7 @@ app.post('/v1/auth/signup', (req, res) => {
 	users[email] = user;
 
 	res.cookie('red', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+	users[email].avatar = DEFAULT_AVATAR;
 	res.status(201).json(users[email]);
 });
 

@@ -74,8 +74,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 
 body, html {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff;
+    font-family: 'Mail Sans Roman';
+    background-color: #121212;
     margin: 0;
     padding: 0;
 }
@@ -88,6 +88,15 @@ body, html {
     color: #000;
     background-color: #FEBA2B;
     border: 0px;
+}
+
+.button__yellow:hover {
+    background-color: #CD9826;
+    transition: 0.1s linear;
+}
+.header__navlink:hover {
+    color:#FEBA2B;
+    transition: 0.08s linear;
 }
 
 

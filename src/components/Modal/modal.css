@@ -33,7 +33,7 @@
 
     height: 100%;
 
-    font-family: 'Mail Sans Roman';
+    /* font-family: 'Mail Sans Roman'; */
     font-weight: normal;
 }
 
@@ -87,7 +87,7 @@
     background: #27292E;
     opacity: .8;
     border: 2px solid #333333;
-    
+
     font-size: 12px;
 }
 

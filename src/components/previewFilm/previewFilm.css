@@ -26,6 +26,7 @@
     flex-direction: column;
     margin: 52px 0px -116px 52px;
     z-index: 1;
+    width: 550px;
 }
 
 .preview-film__film-title {
