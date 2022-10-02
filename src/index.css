@@ -6,6 +6,10 @@
 @import "./components/Signup/signup.css";
 @import "./components/UserAvatar/userAvatar.css";
 @import "./components/Userbar/userbar.css";
+@import "./components/collection/collection.css";
+@import "./components/film/film.css";
+@import "./components/previewFilm/previewFilm.css";
+
 
 @font-face {
     font-family: 'Mail Sans Roman Med';
@@ -64,7 +68,6 @@
 
 input:focus, textarea:focus, select:focus {
     outline: none;
-    /* border: 2px solid #000; */
 }
 
 input[type="search"]::-webkit-search-decoration,

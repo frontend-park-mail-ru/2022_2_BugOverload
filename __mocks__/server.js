@@ -580,6 +580,21 @@ app.get('/v1/popular_films', (req, res) => {
 				ratio: 7.1,
 				genres: ["Фентези", "Приключения"],
 			},
+			{
+				film_id: 1,
+				film_name: "Человек",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_v: "asserts/img/posters/1.png",
+				ratio: 7.1,
+				genres: ["Документальный", "Смотрю и плачу"],
+			}
 	]};
 
 	res.status(200).json(collectionPopularData);
