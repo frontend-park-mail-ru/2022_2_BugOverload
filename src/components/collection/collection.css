@@ -8,7 +8,7 @@
     flex-wrap: nowrap;
     margin-top: 38px;
     position: relative;
-    /* overflow: hidden; */
+    overflow-x:hidden;
 }
 
 .collection__container a {
