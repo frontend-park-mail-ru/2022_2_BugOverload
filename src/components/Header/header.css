@@ -9,6 +9,8 @@
     font-family: 'Mail Sans Roman';
     font-weight: normal;
 
+    background-color: RGBA(18, 18, 18, 0.4);
+
     position: absolute;
     height: 95px;
     width: 100%;
@@ -41,7 +43,7 @@
 
 .header__form__input {
     height: 35px;
-    width: 470px;
+    width: 25vw;
     border-radius: 18px;
     border: 0px;
     background: #333333;
@@ -56,7 +58,7 @@
 
     margin-right: 100px;
     height: 35px;
-    width: 180px;
+    width: 178px;
     border-radius: 40px;
 
     font-weight: bold;

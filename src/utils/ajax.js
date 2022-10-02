@@ -1,6 +1,5 @@
 export class Ajax {
     static get = async (url) => {
-        console.log('get')
         let response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
@@ -11,7 +10,6 @@ export class Ajax {
     }
 
     static post = async ({url, body}) => {
-        console.log('post')
         let response = await fetch(
             url, {
                 method: 'POST',
