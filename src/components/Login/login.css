@@ -22,8 +22,7 @@
     align-content: stretch;
     align-items: flex-start;
 
-
-    background-size: 400px;
+    background-size: 460px;
     background-image: url(../../asserts/login.png);
     background-repeat: no-repeat;
     border-radius: 0px 30px 30px 0px;

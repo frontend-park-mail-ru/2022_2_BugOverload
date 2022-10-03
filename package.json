@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node src/server/server.js",
-    "build": "handlebars -m src/components/ -f src/dist/templates.js"
+    "start": "npm run build && npm run back",
+    "back": "node __mocks__/server.js",
+    "clean": "rm -rf dist src/dist && mkdir dist src/dist",
+    "build": "handlebars -m src/ -f src/dist/templates.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +21,11 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2022_2_BugOverload#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "debug": "^4.3.4",
+    "eslint-config-airbnb": "^19.0.4",
     "express": "^4.18.1",
+    "handlebars": "^4.7.7",
     "morgan": "^1.10.0",
     "uuid": "^9.0.0"
   }

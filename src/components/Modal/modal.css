@@ -16,10 +16,8 @@
 }
 
 .modal__window {
-
-
-    width: 800px;
-    height: 480px;
+    width: 920px;
+    height: 550px;
     min-height: 250px;
 }
 
@@ -32,8 +30,6 @@
     align-items: center;
 
     height: 100%;
-
-    font-family: 'Mail Sans Roman';
     font-weight: normal;
 }
 
@@ -61,7 +57,6 @@
     justify-content: center;
     align-content: stretch;
     align-items: center;
-
 }
 
 .modal__wrapper__input{
@@ -70,16 +65,16 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
 
     width: 270px;
     height: 55px;
 
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
 .modal__input {
-    width: 270px;
+    width: 290px;
     height: 28px;
     border-radius: 21px;
 
@@ -87,8 +82,10 @@
     background: #27292E;
     opacity: .8;
     border: 2px solid #333333;
-    
+
     font-size: 12px;
+
+    padding-left: 15px;
 }
 
 .modal__input_red_border{
@@ -109,11 +106,11 @@
     font-size: 13px;
     text-decoration: none;
 
-    width: 270px;
+    width: 310px;
     height: 30px;
     border-radius: 21px;
 
-    margin-top: 10px;
+    margin-top: 4px;
 
     font-weight: bold;
 }
@@ -121,7 +118,7 @@
 .modal__text__alternative__page{
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 15px;
+    margin-right: 20px;
     font-size: 11px;
     color: #fff;
     text-decoration: none;
@@ -130,7 +127,7 @@
 .modal__login__signup__btn {
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 36px;
+    margin-right: 45px;
     color: #000;
     text-decoration: none;
 

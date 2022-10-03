@@ -1,8 +1,15 @@
+
+
 @import "./components/Header/header.css";
 @import "./components/Login/login.css";
 @import "./components/Modal/modal.css";
 @import "./components/Signup/signup.css";
+@import "./components/UserAvatar/userAvatar.css";
 @import "./components/Userbar/userbar.css";
+@import "./components/collection/collection.css";
+@import "./components/film/film.css";
+@import "./components/previewFilm/previewFilm.css";
+
 
 @font-face {
     font-family: 'Mail Sans Roman Med';
@@ -59,8 +66,21 @@
     font-display: swap;
 }
 
-body {
-    background: #121212;
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+body, html {
+    font-family: 'Mail Sans Roman';
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
 }
 
 .button__yellow {
@@ -70,15 +90,22 @@ body {
 
     color: #000;
     background-color: #FEBA2B;
+    border: 0px;
 }
 
+.button__yellow:hover {
+    background-color: #CD9826;
+    transition: 0.1s linear;
+}
+.header__navlink:hover {
+    color:#FEBA2B;
+    transition: 0.08s linear;
+}
+
+
+@media screen and (max-width: 740px){
+    .header__form{display:none}
+};
 .active {
     font-weight: bold;
-}
-
-
-@media screen and (max-width: 740px) {
-    .header__form {
-        display: none
-    }
 }

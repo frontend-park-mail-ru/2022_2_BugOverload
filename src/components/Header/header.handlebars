@@ -1,9 +1,9 @@
 <header class="header">
 
-  <a href="/navlink" class="header__logo" data-section="navlink">Logo</a>
-  <a href="/navlinke" class="header__navlink" data-section="navlink">Главная</a>
-  <a href="/navlink" class="header__navlink" data-section="navlink">Главная</a>
-  <a href="/navlink" class="header__navlink" data-section="navlink">Главная</a>
+  <div class="header__logo"><a href="/navlink" class="header__logo" data-section="navlink">Logo</a></div>
+  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Мои фильмы</div></a>
+  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Коллекции</div></a>
+  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Топ-250</div></a>
 
 
   <form class="header__form">
@@ -12,7 +12,7 @@
   </form>
 
   {{#if email}}
-    <div class="header__userbar">
+    <div class="header__userbar-substrate">
       <img class="header__avatar" src="{{avatar}}" alt="">
     </div>
   {{else}}

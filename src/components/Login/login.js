@@ -5,6 +5,7 @@ import {renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
 import {config} from '../../config/config.js';
+import {UserAvatar} from '../UserAvatar/userAvatar.js';
 
 export class Login {
     #root
@@ -12,17 +13,17 @@ export class Login {
     constructor(root) {
         this.root = root;
     }
-    
+
     render() {
         if (!root.querySelector('.modal__window')) {
             const modal = new Modal(root);
             modal.render();
         }
-    
+
         const modalWindow = root.querySelector('.modal__window__flex');
-    
-        renderTemplate('Login/login', modalWindow, 'afterbegin');
-    
+
+        renderTemplate('components/Login/login', modalWindow, 'afterbegin');
+
         this.handler(modalWindow);
     }
 
@@ -32,14 +33,14 @@ export class Login {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-    
+
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelector('input[type=password]');
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
             const responsePromise = Ajax.post({
-                url: '/v1/auth/login',
+                url: 'http://localhost:8088/v1/auth/login',
                 body: {email, password}
             });
 
@@ -49,13 +50,13 @@ export class Login {
                 console.log(response)
                 if (response.status === 200) {
                     console.log(response.body);
-                    
+
                     document.body
                         .querySelector('.modal__background')
                         .remove();
-                    
-                    const header = new Header(root);
-                    header.renderUserAvatar(response.body);
+
+                    const userAvatar = new UserAvatar(root);
+                    userAvatar.render(response.body);
 
                     return;
                 }
@@ -66,20 +67,20 @@ export class Login {
 
         loginImg.addEventListener('click', (e) => {
             const { target } = e;
-        
+
             if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
-    
+
                 goToPage(config.login[target.dataset.section], () => {
-                    modalWindow              
+                    modalWindow
                         .querySelector('.modal__login')
                         .remove();
-                    modalWindow              
+                    modalWindow
                         .querySelector('.modal__login__img')
                         .remove();
                     const signup = new config.login[target.dataset.section].render(root);
                     signup.render();
-                }, 
+                },
                 modalWindow);
             }
         });

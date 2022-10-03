@@ -6,21 +6,25 @@ export class Modal {
     constructor(root) {
         this.root = root;
     }
-    
+
     render() {
-        renderTemplate('Modal/modal', root, 'afterbegin');
+        renderTemplate('components/Modal/modal', root, 'afterbegin');
 
         this.handler();
     }
 
     handler() {
         document.body
-        .querySelector('.modal__cross')
+        .querySelector('.modal__background')
         .addEventListener('click', (e) => {
-            e.preventDefault();
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-        }); 
+            const {target} = e;
+            console.log()
+            if (target.classList.contains('modal__background')) {
+                document.body
+                    .querySelector('.modal__background')
+                    .remove();
+            }
+            return;
+        });
     }
 }

@@ -1,4 +1,4 @@
-import {Header} from './components/Header/header.js';
+import { Header } from './components/Header/header.js';
 
 const root = document.getElementById('root');
 
