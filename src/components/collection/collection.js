@@ -1,42 +1,37 @@
 import { Ajax } from '../../utils/ajax.js';
-import { BACKEND_API, ROOT } from '../../config/config.js'
+import { BACKEND_API, ROOT } from '../../config/config.js';
 
 export const COLLECTION_TYPE = {
-    popular: "popular",
-    todayInCinema: "todayInCinema",
-}
-
+    popular: 'popular',
+    todayInCinema: 'todayInCinema',
+};
 
 export class Collection {
-    #type
-    #count
-
     constructor(type) {
-        this.#type = type;
+        this._type = type;
     }
 
     render() {
-        let promiseCollection = Ajax.get(BACKEND_API[this.#type]);
-        promiseCollection.then( (response) => {
+        const promiseCollection = Ajax.get(BACKEND_API[this._type]);
+        promiseCollection.then((response) => {
             if (response.status === 200) {
-                this.#count = response.body.films.length;
+                this._count = response.body.films.length;
                 this.renderCollection(response.body);
-                this.addListeners;
                 return;
             }
 
             if (response.status === 404) {
-                //TODO
+                // TODO
                 throw 404;
             }
 
             if (response.status > 500) {
-                //TODO
+                // TODO
                 throw 500;
             }
 
-            //TODO
-            throw "Error collection";
+            // TODO
+            throw 'Error collection';
         });
     }
 
@@ -47,37 +42,35 @@ export class Collection {
 
         decorateGenresFilm(filmsData);
 
-        let films = "";
-        filmsData.films.forEach(filmData => films += Handlebars.templates['components/film/film'](filmData) )
+        let films = '';
+        filmsData.films.forEach((filmData) => films += Handlebars.templates['components/film/film'](filmData));
 
-        let collection = Handlebars.templates['components/collection/collection']({title: filmsData.title, films: films});
-        let div = document.createElement('div');
+        const collection = Handlebars.templates['components/collection/collection']({ title: filmsData.title, films });
+        const div = document.createElement('div');
         div.insertAdjacentHTML('beforeend', collection);
 
-        if (document.documentElement.clientWidth - 2*52 > this.#count*260 - 30) {
+        if (document.documentElement.clientWidth - 2 * 52 > this._count * 260 - 30) {
             div.querySelector('.collection__slider-button_right').style.display = 'none';
         }
         div.querySelector('.collection__slider-button_left').style.display = 'none';
 
         addColorRatingFilm(div, filmsData);
 
-        // let root = document.getElementById('root');
         ROOT.append(div);
         this.addListeners(div);
     }
 
     addListeners(slider) {
-        let btnRight = slider.querySelector('.collection__slider-button_right');
-        let btnLeft = slider.querySelector('.collection__slider-button_left');
-        // debugger;
+        const btnRight = slider.querySelector('.collection__slider-button_right');
+        const btnLeft = slider.querySelector('.collection__slider-button_left');
 
         let offset = 0;
         const widthFilm = 260;
-        let maxLength = widthFilm * this.#count;
-        let windowLen = document.documentElement.clientWidth;
-        let maxOffset = maxLength - windowLen + 52 + 12;
-        let countOnPage = Math.trunc(windowLen / widthFilm);
-        let pageOffset = countOnPage * widthFilm;
+        const maxLength = widthFilm * this._count;
+        const windowLen = document.documentElement.clientWidth;
+        const maxOffset = maxLength - windowLen + 52 + 12;
+        const countOnPage = Math.trunc(windowLen / widthFilm);
+        const pageOffset = countOnPage * widthFilm;
 
         let isHiddenRight = false;
         let isHiddenLeft = true;
@@ -93,9 +86,9 @@ export class Collection {
                 offset += pageOffset;
                 if (offset > maxOffset) {
                     offset = maxOffset;
-                };
+                }
 
-                slider.querySelector('.collection__slider').style.left = -offset + 'px';
+                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
                 if (offset >= maxOffset) {
                     slider.querySelector('.collection__slider-button_right').style.display = 'none';
                     isHiddenRight = true;
@@ -115,34 +108,29 @@ export class Collection {
                     offset = 0;
                 }
 
-                slider.querySelector('.collection__slider').style.left = -offset + 'px';
+                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
                 if (offset <= 0) {
                     slider.querySelector('.collection__slider-button_left').style.display = 'none';
                     isHiddenLeft = true;
                 }
-
-                return;
             }
-
-            return;
         });
     }
 }
-
 
 function decorateGenresFilm(filmsData) {
     filmsData.films.forEach((film) => {
         for (let i = 0; i < film.genres.length - 1; ++i) {
             film.genres[i] += ',';
         }
-    })
+    });
 }
 
 function addColorRatingFilm(div, filmsData) {
-    let ratingElem = div.querySelectorAll('.film__rating');
+    const ratingElem = div.querySelectorAll('.film__rating');
 
     ratingElem.forEach((film, index) => {
-        let ratingValue = filmsData.films[index].ratio;
+        const ratingValue = filmsData.films[index].ratio;
 
         if (ratingValue > 7.49) {
             film.dataset.valueRating = 'positive';
@@ -155,5 +143,5 @@ function addColorRatingFilm(div, filmsData) {
         }
 
         film.dataset.valueRating = 'negotive';
-    })
+    });
 }
