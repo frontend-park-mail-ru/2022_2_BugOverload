@@ -1,12 +1,10 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/render_template.js';
-import { ROOT } from '../../utils/root.js';
-
-export const PREVIEW_API = 'http://localhost:8088/v1/recommendation_film';
+import { BACKEND_API, config, ROOT } from '../../config/config.js';
 
 export class PreviewFilm {
     render() {
-        let promiseCollection = Ajax.get(PREVIEW_API);
+        let promiseCollection = Ajax.get(BACKEND_API.previewFilm);
         promiseCollection.then( (response) => {
             if (response.status === 200) {
                 renderPreviewFilm(response.body);

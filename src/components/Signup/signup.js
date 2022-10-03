@@ -1,10 +1,10 @@
-import {Ajax} from '../../utils/ajax.js';
-import {renderTemplate} from '../../utils/render_template.js';
-import {goToPage} from '../../utils/go_to_page.js';
-import {checkInput, renderError} from '../../utils/valid.js';
-import {Modal} from '../Modal/modal.js';
-import {UserAvatar} from '../UserAvatar/userAvatar.js';
-import {config} from '../../config/config.js';
+import { Ajax } from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/render_template.js';
+import { goToPage } from '../../utils/goToPage.js';
+import { checkInput, renderError } from '../../utils/valid.js';
+import { Modal } from '../Modal/modal.js';
+import { UserAvatar } from '../UserAvatar/userAvatar.js';
+import { BACKEND_API, config } from '../../config/config.js';
 
 export class Signup {
     #root
@@ -61,7 +61,7 @@ export class Signup {
             }
 
             const responsePromise = Ajax.post({
-                url: 'http://localhost:8088/v1/auth/signup',
+                url: BACKEND_API.signup,
                 body: user,
             });
 

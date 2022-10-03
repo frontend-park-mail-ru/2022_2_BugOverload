@@ -1,9 +1,9 @@
 import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
-import {goToPage} from '../../utils/go_to_page.js';
+import {goToPage} from '../../utils/goToPage.js';
 import {Userbar} from '../Userbar/userbar.js';
 import {UserAvatar} from '../UserAvatar/userAvatar.js';
-import {config} from '../../config/config.js';
+import {BACKEND_API, config} from '../../config/config.js';
 
 export class Header {
     #root
@@ -14,7 +14,7 @@ export class Header {
 
     render(user) {
         if(!user) {
-            const responsePromise = Ajax.get('http://localhost:8088/v1/auth');
+            const responsePromise = Ajax.get(BACKEND_API.auth);
             console.log(responsePromise)
             responsePromise.then((response) => {
                 console.log(response)

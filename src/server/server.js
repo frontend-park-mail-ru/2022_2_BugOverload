@@ -7,6 +7,8 @@ const uuid = require('uuid').v4;
 const body = require('body-parser');
 const morgan = require('morgan');
 
+import { BACKEND_API } from '../config/config.js'
+
 app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, '../')));
 app.use(express.static(path.resolve(__dirname, 'images')));
@@ -22,7 +24,7 @@ const users = {
 };
 const ids = {};
 
-app.post('http://localhost:8088/v1/auth/login',  (req, res) => {
+app.post(BACKEND_API.login,  (req, res) => {
 	console.log(req);
 	console.log(req.body);
 
@@ -42,13 +44,13 @@ app.post('http://localhost:8088/v1/auth/login',  (req, res) => {
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
-app.get('http://localhost:8088/v1/auth',  (req, res) => {
+app.get(BACKEND_API.auth,  (req, res) => {
 	const email = 'dop123@mail.ru'
 	console.log(email)
 	res.status(404).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
-app.post('http://localhost:8088/v1/auth/signup', (req, res) => {
+app.post(BACKEND_API.signup, (req, res) => {
 	const password = req.body.password;
 	const email = req.body.email;
 	const nickname = req.body.nickname;

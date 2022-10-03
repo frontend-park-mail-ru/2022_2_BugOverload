@@ -2,17 +2,15 @@ import { PreviewFilm } from './components/previewFilm/previewFilm.js';
 import { Collection } from './components/collection/collection.js';
 import { COLLECTION_TYPE } from './components/collection/collection.js';
 import { Header } from './components/Header/header.js';
-import { ROOT } from '../utils/root.js';
-
+import { ROOT } from './config/config.js'
 
 renderMainPage();
 
 
 function renderMainPage() {
 
-    let root = document.getElementById('root');
+    const header = new Header(ROOT);
 
-    const header = new Header(root);
     header.render();
 
     const previewFilm = new PreviewFilm;

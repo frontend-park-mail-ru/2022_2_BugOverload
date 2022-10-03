@@ -1,14 +1,9 @@
-import {Ajax} from '../../utils/ajax.js';
-import { ROOT } from '../../utils/root.js';
+import { Ajax } from '../../utils/ajax.js';
+import { BACKEND_API, ROOT } from '../../config/config.js'
 
 export const COLLECTION_TYPE = {
     popular: "popular",
     todayInCinema: "todayInCinema",
-}
-
-export const COLLECTION_API = {
-    popular: 'http://localhost:8088/v1/popular_films',
-    todayInCinema: 'http://localhost:8088/v1/in_cinema',
 }
 
 
@@ -21,7 +16,7 @@ export class Collection {
     }
 
     render() {
-        let promiseCollection = Ajax.get(COLLECTION_API[this.#type]);
+        let promiseCollection = Ajax.get(BACKEND_API[this.#type]);
         promiseCollection.then( (response) => {
             if (response.status === 200) {
                 this.#count = response.body.films.length;
@@ -66,6 +61,7 @@ export class Collection {
 
         addColorRatingFilm(div, filmsData);
 
+        // let root = document.getElementById('root');
         ROOT.append(div);
         this.addListeners(div);
     }

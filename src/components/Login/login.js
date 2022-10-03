@@ -1,10 +1,10 @@
 import {Ajax} from '../../utils/ajax.js';
 import {renderTemplate} from '../../utils/render_template.js';
-import {goToPage} from '../../utils/go_to_page.js';
+import {goToPage} from '../../utils/goToPage.js';
 import {renderError} from '../../utils/valid.js';
 import {Modal} from '../Modal/modal.js';
 import {Header} from '../Header/header.js';
-import {config} from '../../config/config.js';
+import {BACKEND_API, config} from '../../config/config.js';
 import {UserAvatar} from '../UserAvatar/userAvatar.js';
 
 export class Login {
@@ -40,7 +40,7 @@ export class Login {
             const password = passwordInput.value;
 
             const responsePromise = Ajax.post({
-                url: 'http://localhost:8088/v1/auth/login',
+                url: BACKEND_API.login,
                 body: {email, password}
             });
 

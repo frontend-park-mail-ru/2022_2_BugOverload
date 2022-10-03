@@ -1,5 +1,6 @@
-import {renderTemplate} from '../../utils/render_template.js';
-import {Ajax} from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/render_template.js';
+import { Ajax } from '../../utils/ajax.js';
+import { BACKEND_API } from '../../config/config.js';
 
 export class Userbar {
     #root
@@ -18,15 +19,15 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const response = Ajax.get('http://localhost:8088/v1/auth/logout');
+            const response = Ajax.get(BACKEND_API.logout);
             response.then((response) => {
                 if(target.dataset.section == 'logout') {
                     if (response.status == 200) {
                         document.body.querySelector('.header__userbar-substrate').remove();
-        
+
                         const userHtml =
                         '<a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>';
-        
+
                         const headerForm = document.body.querySelector('.header__form');
                         headerForm.insertAdjacentHTML('afterend', userHtml);
                     }
@@ -34,12 +35,12 @@ export class Userbar {
             });
         });
     }
-    
+
     handler(user) {
         const userbar = document.body.querySelector('.header__userbar-substrate');
         console.log(userbar);
         let isOpened = false;
-    
+
         function handlerOpenUserbar() {
             if (isOpened) {
                 return;
@@ -48,16 +49,16 @@ export class Userbar {
             const userbar = document.body.querySelector('.header__userbar-substrate');
             userbar.classList.remove('userbar-off');
             userbar.classList.add('userbar-on');
-    
-            const target = userbar.querySelector('.header__userbar-user-info-container');           
+
+            const target = userbar.querySelector('.header__userbar-user-info-container');
             renderTemplate('components/UserAvatar/userAvatar', target, 'beforeend', user);
-    
+
             const userbarElement = new Userbar(root);
             userbarElement.render(user);
-    
+
             isOpened = true;
         }
-    
+
         function handlerCloseUserbar() {
             if ( !isOpened ) {
                 return;
@@ -66,13 +67,13 @@ export class Userbar {
             const userbar = document.body.querySelector('.header__userbar-substrate');
             userbar.classList.remove('userbar-on');
             userbar.classList.add('userbar-off');
-            
+
             document.body.querySelector('.header__userbar-items-container').remove();
             document.body.querySelector('.header__userbar-name-container').remove();
-    
+
             isOpened = false;
         }
-    
+
         userbar.addEventListener('mouseenter', handlerOpenUserbar);
         userbar.addEventListener('mouseleave', handlerCloseUserbar);
     }
