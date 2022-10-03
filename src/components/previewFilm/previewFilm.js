@@ -13,10 +13,10 @@ export class PreviewFilm {
 
             if (response.status > 500) {
                 // TODO
-                throw 500;
+                throw new Error(500);
             }
 
-            throw 'PreviewFilm: Unexpected status';
+            throw new Error('PreviewFilm: Unexpected status');
         });
     }
 }

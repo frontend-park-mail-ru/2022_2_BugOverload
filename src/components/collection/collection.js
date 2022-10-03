@@ -22,16 +22,16 @@ export class Collection {
 
             if (response.status === 404) {
                 // TODO
-                throw 404;
+                throw new Error(404);
             }
 
             if (response.status > 500) {
                 // TODO
-                throw 500;
+                throw new Error(500);
             }
 
             // TODO
-            throw 'Error collection';
+            throw new Error('Error collection');
         });
     }
 
@@ -42,8 +42,7 @@ export class Collection {
 
         decorateGenresFilm(filmsData);
 
-        let films = '';
-        filmsData.films.forEach((filmData) => films += Handlebars.templates['components/film/film'](filmData));
+        const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/film/film'](filmData), '');
 
         const collection = Handlebars.templates['components/collection/collection']({ title: filmsData.title, films });
         const div = document.createElement('div');
