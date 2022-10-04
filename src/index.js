@@ -6,14 +6,15 @@ import { ROOT } from './config/config.js';
 renderMainPage();
 
 function renderMainPage() {
-    const header = new Header(ROOT);
+    const linearLoad = Promise.resolve();
 
-    header.render();
-
-    const previewFilm = new PreviewFilm();
-    previewFilm.render();
-
-    showCollectionsOnMainPage();
+    linearLoad.then(() => {
+        const header = new Header(ROOT);
+        header.render();
+    }).then(() => {
+        const previewFilm = new PreviewFilm();
+        previewFilm.render();
+    }).then(() => showCollectionsOnMainPage());
 
     function showCollectionsOnMainPage() {
         const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
