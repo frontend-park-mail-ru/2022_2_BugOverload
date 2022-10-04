@@ -9,8 +9,10 @@ export class PreviewFilm {
 
     render(response) {
         if (response.status === 200) {
-            renderPreviewFilm(response.body);
-            return;
+            // renderPreviewFilm(response.body);
+            debugger;
+            return Handlebars.templates['components/PreviewFilm/previewFilm'](response.body);
+            // return;
         }
 
         if (response.status > 500) {
@@ -23,5 +25,9 @@ export class PreviewFilm {
 }
 
 function renderPreviewFilm(previewData) {
-    renderTemplate('components/PreviewFilm/previewFilm', ROOT, 'beforeend', previewData);
+    return previewData;
+    // renderTemplate('components/PreviewFilm/previewFilm', ROOT, 'beforeend', previewData);
+    // const template = Handlebars.templates[templateName];
+    // const templateHtml = template(props);
+    // target.insertAdjacentHTML(place, templateHtml)
 }

@@ -1,3 +1,7 @@
+:root {
+    --rating-color: #858585;
+}
+
 .film {
     height: 353px;
     padding: 0px 10px 0px 10px;
@@ -38,6 +42,8 @@
     top: 9px;
     left: 0px;
     border-radius: 4px;
+
+    background-color: var(--rating-color, #12B77C);
 }
 
 [data-value-rating="positive"] {

@@ -1,5 +1,6 @@
 import { Ajax } from '../../utils/ajax.js';
-import { BACKEND_API, ROOT } from '../../config/config.js';
+import { BACKEND_API } from '../../config/config.js';
+import { Film } from '../Film/film.js';
 
 export const COLLECTION_TYPE = {
     popular: 'popular',
@@ -16,12 +17,12 @@ export class Collection {
     }
 
     render(response) {
-        // const promiseCollection = Ajax.get(BACKEND_API[this._type]);
-        // promiseCollection.then((response) => {
         if (response.status === 200) {
             this._count = response.body.films.length;
             this.renderCollection(response.body);
-            return;
+            debugger;
+            return Handlebars.templates['components/Collection/collection'](response.body);
+            // return;
         }
 
         if (response.status === 404) {
@@ -36,36 +37,46 @@ export class Collection {
 
         // TODO
         throw new Error('Error collection');
-        // });
+    }
+
+    static addHandlers() {
+        document.querySelectorAll('.collection__slider')
+            .forEach((slider) => Collection.addHandlerSlider(slider));
     }
 
     renderCollection(filmsData) {
-        if (!filmsData) {
-            return;
-        }
+        // if (!filmsData) {
+        //     return;
+        // }
 
-        decorateGenresFilm(filmsData);
 
-        const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/Film/film'](filmData), '');
 
-        const collection = Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
-        const div = document.createElement('div');
-        div.insertAdjacentHTML('beforeend', collection);
+        // decorateGenresFilm(filmsData);
 
-        if (document.documentElement.clientWidth - 2 * 52 > this._count * 260 - 30) {
-            div.querySelector('.collection__slider-button_right').style.display = 'none';
-        }
-        div.querySelector('.collection__slider-button_left').style.display = 'none';
+        // const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/Film/film'](filmData), '');
+        const films = filmsData.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        addColorRatingFilm(div, filmsData);
 
-        ROOT.append(div);
-        this.addListeners(div);
+        return Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
+        // const div = document.createElement('div');
+        // div.insertAdjacentHTML('beforeend', collection);
+
+
+
+        // addColorRatingFilm(div, filmsData);
+
+        // ROOT.append(div);
+        // this.addListeners(div);
     }
 
-    addListeners(slider) {
+    static addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
+
+        if (document.documentElement.clientWidth - 2 * 52 > this._count * 260 - 30) {
+            btnRight.style.display = 'none';
+        }
+        btnLeft.style.display = 'none';
 
         let offset = 0;
         const widthFilm = 260;
@@ -119,32 +130,52 @@ export class Collection {
             }
         });
     }
+
+    // static addColorRatingFilm(div, filmsData) {
+    //     const ratingElem = div.querySelectorAll('.film__rating');
+
+    //     ratingElem.forEach((film, index) => {
+    //         const ratingValue = filmsData.films[index].ratio;
+
+    //         if (ratingValue > 7.49) {
+    //             film.dataset.valueRating = 'positive';
+    //             return;
+    //         }
+
+    //         if (ratingValue > 5.19) {
+    //             film.dataset.valueRating = 'neutral';
+    //             return;
+    //         }
+
+    //         film.dataset.valueRating = 'negotive';
+    //     });
+    // }
 }
 
-function decorateGenresFilm(filmsData) {
-    filmsData.films.forEach((film) => {
-        for (let i = 0; i < film.genres.length - 1; ++i) {
-            film.genres[i] += ',';
-        }
-    });
-}
+// function decorateGenresFilm(filmsData) {
+//     filmsData.films.forEach((film) => {
+//         for (let i = 0; i < film.genres.length - 1; ++i) {
+//             film.genres[i] += ',';
+//         }
+//     });
+// }
 
-function addColorRatingFilm(div, filmsData) {
-    const ratingElem = div.querySelectorAll('.film__rating');
+// function addColorRatingFilm(div, filmsData) {
+//     const ratingElem = div.querySelectorAll('.film__rating');
 
-    ratingElem.forEach((film, index) => {
-        const ratingValue = filmsData.films[index].ratio;
+//     ratingElem.forEach((film, index) => {
+//         const ratingValue = filmsData.films[index].ratio;
 
-        if (ratingValue > 7.49) {
-            film.dataset.valueRating = 'positive';
-            return;
-        }
+//         if (ratingValue > 7.49) {
+//             film.dataset.valueRating = 'positive';
+//             return;
+//         }
 
-        if (ratingValue > 5.19) {
-            film.dataset.valueRating = 'neutral';
-            return;
-        }
+//         if (ratingValue > 5.19) {
+//             film.dataset.valueRating = 'neutral';
+//             return;
+//         }
 
-        film.dataset.valueRating = 'negotive';
-    });
-}
+//         film.dataset.valueRating = 'negotive';
+//     });
+// }
