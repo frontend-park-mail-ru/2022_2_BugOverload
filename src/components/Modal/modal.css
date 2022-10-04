@@ -16,8 +16,8 @@
 }
 
 .modal__window {
-    width: 800px;
-    height: 480px;
+    width: 920px;
+    height: 550px;
     min-height: 250px;
 }
 
@@ -57,7 +57,6 @@
     justify-content: center;
     align-content: stretch;
     align-items: center;
-
 }
 
 .modal__wrapper__input{
@@ -66,16 +65,16 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
 
     width: 270px;
     height: 55px;
 
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
 .modal__input {
-    width: 249px;
+    width: 290px;
     height: 28px;
     border-radius: 21px;
 
@@ -108,17 +107,19 @@
     font-family: 'Mail Sans Roman Med';
     text-decoration: none;
 
-    width: 270px;
+    width: 310px;
     height: 30px;
     border-radius: 21px;
 
-    margin-top: 10px;
+    margin-top: 4px;
+
+    font-weight: bold;
 }
 
 .modal__text__alternative__page{
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 15px;
+    margin-right: 20px;
     font-size: 11px;
     color: #fff;
     text-decoration: none;
@@ -127,7 +128,7 @@
 .modal__login__signup__btn {
     white-space: nowrap;
     margin-top: 25px;
-    margin-right: 36px;
+    margin-right: 45px;
     color: #000;
 
     font-size: 12px;

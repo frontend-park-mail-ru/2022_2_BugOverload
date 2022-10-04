@@ -17,7 +17,6 @@ export class Header {
             const responsePromise = Ajax.get(BACKEND_API.auth);
             console.log(responsePromise)
             responsePromise.then((response) => {
-                console.log(response)
                 if(response.status == 200) {
                     user = response.body;
                     console.log(user)
@@ -28,7 +27,6 @@ export class Header {
         }
 
         renderTemplate('components/Header/header', root, 'beforebegin', user);
-        console.log(user)
         this.handlerHeader(user);
     }
 

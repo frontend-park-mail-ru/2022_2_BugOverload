@@ -36,10 +36,12 @@ export class Userbar {
         });
     }
 
+
     handler(user) {
         const userbar = document.body.querySelector('.header__userbar-substrate');
         console.log(userbar);
         let isOpened = false;
+
 
         function handlerOpenUserbar() {
             if (isOpened) {
@@ -74,7 +76,9 @@ export class Userbar {
             isOpened = false;
         }
 
-        userbar.addEventListener('mouseenter', handlerOpenUserbar);
+        const inputUserbar = document.body.querySelector('.header__userbar-user-info-container');
+
+        inputUserbar.addEventListener('mouseenter', handlerOpenUserbar);
         userbar.addEventListener('mouseleave', handlerCloseUserbar);
     }
 

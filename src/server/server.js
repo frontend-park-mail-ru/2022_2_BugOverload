@@ -23,9 +23,9 @@ const users = {
 };
 const ids = {};
 
-app.post(BACKEND_API.login, (req, res) => {
-    console.log(req);
-    console.log(req.body);
+app.post('http://localhost:8088/v1/auth/login',  (req, res) => {
+	console.log(req);
+	console.log(req.body);
 
     const { password } = req.body;
     const { email } = req.body;
@@ -43,6 +43,7 @@ app.post(BACKEND_API.login, (req, res) => {
     res.status(200).json({ nickname: users[email].nickname, email: users[email].email, avatar: users[email].avatar });
 });
 
+<<<<<<< HEAD
 app.get(BACKEND_API.auth, (req, res) => {
     const email = 'dop123@mail.ru';
     console.log(email);
@@ -62,6 +63,27 @@ app.post(BACKEND_API.signup, (req, res) => {
     if (users[email]) {
         return res.status(200).json({ error: 'Пользователь уже существует' });
     }
+=======
+app.get('http://localhost:8088/v1/auth',  (req, res) => {
+	const email = 'dop123@mail.ru'
+	console.log(email)
+	res.status(404).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
+});
+
+app.post('http://localhost:8088/v1/auth/signup', (req, res) => {
+	const password = req.body.password;
+	const email = req.body.email;
+	const nickname = req.body.nickname;
+	console.log(nickname)
+	if (
+		!password || !email || !nickname
+	) {
+		return res.status(400).json({error: 'Не валидные данные пользователя'});
+	}
+	if (users[email]) {
+		return res.status(200).json({error: 'Пользователь уже существует'});
+	}
+>>>>>>> origin/TP-96b_auth_login_page
 
     const id = uuid();
     const user = { nickname, email, password };

@@ -1,7 +1,7 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/render_template.js';
 import { goToPage } from '../../utils/goToPage.js';
-import { checkInput, renderError } from '../../utils/valid.js';
+import {checkEmail, checkPassword, checkNick, renderError} from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { UserAvatar } from '../UserAvatar/userAvatar.js';
 import { BACKEND_API, config } from '../../config/config.js';
@@ -34,23 +34,29 @@ export class Signup {
 
             const nickInput = form.querySelector('input[type=text]');
             const emailInput = form.querySelector('input[type=email]');
-            const passwordInput = form.querySelector('input[type=password]');
-
+            const passwordInput = form.querySelectorAll('input[type=password]');
 
             const user = {};
             user.nickname = nickInput.value.trim();
             user.email = emailInput.value.trim();
-            user.password = passwordInput.value;
+            user.password = passwordInput[0].value;
+            const confirmPassword = passwordInput[1].value;
 
             let flag = false;
 
             for (let key in user) {
-                if (key === 'email' || key === 'password') {
-                    if (!checkInput(form, 'signup', user[key], key)) {
+                if (key === 'email') {
+                    if (!checkEmail(form, user[key])) {
                         flag = true;
                     }
-                } else {
-                    if (!checkInput(form, 'signup', user[key])) {
+                }
+                if (key === 'password') {
+                    if (!checkPassword(form, user[key], confirmPassword)) {
+                        flag = true;
+                    }
+                }
+                if (key === 'nickname') {
+                    if (!checkNick(form, user[key])) {
                         flag = true;
                     }
                 }
