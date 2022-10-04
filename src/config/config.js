@@ -1,12 +1,12 @@
-import {Login} from '../components/Login/login.js'
-import {Signup} from '../components/Signup/signup.js'
+import { Login } from '../components/Login/login.js';
+import { Signup } from '../components/Signup/signup.js';
 
 export const config = {
     header: {
         navlink: {
             href: '/navlink',
             name: 'Главная',
-            //render: renderMain,
+            // render: renderMain,
         },
         login: {
             href: '/login',
@@ -25,5 +25,5 @@ export const config = {
             name: 'Авторизация',
             render: Login,
         },
-    }
-}
+    },
+};

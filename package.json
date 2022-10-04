@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && npm run back",
+    "start": "npm run lint && npm run build && npm run back",
     "back": "node __mocks__/server.js",
     "clean": "rm -rf dist src/dist && mkdir dist src/dist",
-    "build": "handlebars -m src/ -f src/dist/templates.js"
+    "build": "handlebars -m src/ -f src/dist/templates.js",
+    "lint": "eslint --cache --ext .js src --fix"
   },
   "repository": {
     "type": "git",
@@ -20,13 +21,19 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2022_2_BugOverload#readme",
   "dependencies": {
+    "@babel/parser": "^7.19.3",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
+    "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
     "express": "^4.18.1",
     "handlebars": "^4.7.7",
     "morgan": "^1.10.0",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4"
   }
 }

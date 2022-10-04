@@ -1,3 +1,9 @@
+.idea
 node_modules
+<<<<<<< HEAD
+dist
+.eslintcache
+=======
 public
 dist
+>>>>>>> origin/TP-96b_auth_login_page
