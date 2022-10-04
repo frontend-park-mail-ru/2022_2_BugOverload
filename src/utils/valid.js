@@ -1,5 +1,5 @@
 export const checkInput = (form, action, input, type = 'text') => {
-    if (type == 'email') {
+    if (type === 'email') {
         if (!input) {
             renderError(form, type, 'Введите email');
             return false;
@@ -16,7 +16,7 @@ export const checkInput = (form, action, input, type = 'text') => {
         removeError(form, type);
         return true;
     }
-    if (type == 'password') {
+    if (type === 'password') {
         if (!input) {
             renderError(form, type, 'Введите пароль');
             return false;

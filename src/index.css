@@ -97,6 +97,7 @@ body, html {
     background-color: #CD9826;
     transition: 0.1s linear;
 }
+
 .header__navlink:hover {
     color:#FEBA2B;
     transition: 0.08s linear;

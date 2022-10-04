@@ -178,7 +178,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/5.png",
 			ratio: 7.1,
-			genres: ["Фентези", "Приключения"],
+			genres: ["Фентези ", "Приключения"],
 		},
 		{
 			film_id: 8,
