@@ -1,5 +1,5 @@
-import { PreviewFilm } from './components/previewFilm/previewFilm.js';
-import { Collection, COLLECTION_TYPE } from './components/collection/collection.js';
+import { PreviewFilm } from './components/PreviewFilm/previewFilm.js';
+import { Collection, COLLECTION_TYPE } from './components/Collection/collection.js';
 import { Header } from './components/Header/header.js';
 import { ROOT } from './config/config.js';
 

@@ -23,5 +23,5 @@ export class PreviewFilm {
 }
 
 function renderPreviewFilm(previewData) {
-    renderTemplate('components/previewFilm/previewFilm', ROOT, 'beforeend', previewData);
+    renderTemplate('components/PreviewFilm/previewFilm', ROOT, 'beforeend', previewData);
 }

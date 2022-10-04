@@ -30,15 +30,17 @@ export const config = {
 
 export const ROOT = document.getElementById('root');
 
+const PATH = 'http://localhost:8088';
+
 export const BACKEND_API = {
-    path: 'http://localhost:8088',
+    path: PATH,
     port: '8088',
 
-    popular: 'http://localhost:8088/v1/popular_films',
-    todayInCinema: 'http://localhost:8088/v1/in_cinema',
-    auth: 'http://localhost:8088/v1/auth',
-    login: 'http://localhost:8088/v1/auth/login',
-    signup: 'http://localhost:8088/v1/auth/signup',
-    logout: 'http://localhost:8088/v1/auth/logout',
-    previewFilm: 'http://localhost:8088/v1/recommendation_film',
+    popular: `${PATH}/v1/popular_films`,
+    todayInCinema: `${PATH}/v1/in_cinema`,
+    auth: `${PATH}/v1/auth`,
+    login: `${PATH}/v1/auth/login`,
+    signup: `${PATH}/v1/auth/signup`,
+    logout: `${PATH}/v1/auth/logout`,
+    previewFilm: `${PATH}/v1/recommendation_film`,
 };

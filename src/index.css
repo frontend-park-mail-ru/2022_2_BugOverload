@@ -6,9 +6,9 @@
 @import "./components/Signup/signup.css";
 @import "./components/UserAvatar/userAvatar.css";
 @import "./components/Userbar/userbar.css";
-@import "./components/collection/collection.css";
-@import "./components/film/film.css";
-@import "./components/previewFilm/previewFilm.css";
+@import "./components/Collection/collection.css";
+@import "./components/Film/film.css";
+@import "./components/PreviewFilm/previewFilm.css";
 
 
 @font-face {

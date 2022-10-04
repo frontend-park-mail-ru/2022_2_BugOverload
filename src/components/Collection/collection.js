@@ -46,9 +46,9 @@ export class Collection {
 
         decorateGenresFilm(filmsData);
 
-        const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/film/film'](filmData), '');
+        const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/Film/film'](filmData), '');
 
-        const collection = Handlebars.templates['components/collection/collection']({ title: filmsData.title, films });
+        const collection = Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
         const div = document.createElement('div');
         div.insertAdjacentHTML('beforeend', collection);
 

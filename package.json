@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run lint && npm run build && npm run back",
+    "start": "npm run stylelint && npm run lint && npm run clean && npm run build && npm run back",
     "back": "node __mocks__/server.js",
-    "clean": "rm -rf dist src/dist && mkdir dist src/dist",
+    "clean": "rm -rf dist src/dist && mkdir dist src/dist && touch src/dist/templates.js",
     "build": "handlebars -m src/ -f src/dist/templates.js",
     "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}'",
