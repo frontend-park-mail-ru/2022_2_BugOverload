@@ -6,21 +6,34 @@ import { ROOT } from './config/config.js';
 renderMainPage();
 
 function renderMainPage() {
-    const linearLoad = Promise.resolve();
+    const header = new Header(ROOT);
+    header.render();
 
-    linearLoad.then(() => {
-        const header = new Header(ROOT);
-        header.render();
-    }).then(() => {
-        const previewFilm = new PreviewFilm();
-        previewFilm.render();
-    }).then(() => showCollectionsOnMainPage());
+    const previewFilm = new PreviewFilm();
+    const promisePreviewFilm = previewFilm.init();
 
-    function showCollectionsOnMainPage() {
-        const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-        collectionPopular.render();
+    const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
+    const promiseCollectionPopular = collectionPopular.init();
 
-        const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-        collectionCinemaToday.render();
-    }
+    const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
+    const promiseCollectionCinemaToday = collectionCinemaToday.init();
+
+    promisePreviewFilm
+        .then((response) => {
+            previewFilm.render(response);
+            return promiseCollectionPopular;
+        })
+        .then((response) => {
+            collectionPopular.render(response);
+            return promiseCollectionCinemaToday;
+        })
+        .then((response) => collectionCinemaToday.render(response));
+
+    // function showCollectionsOnMainPage() {
+    //     const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
+    //     collectionPopular.render();
+
+    //     const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
+    //     collectionCinemaToday.render();
+    // }
 }

@@ -11,28 +11,32 @@ export class Collection {
         this._type = type;
     }
 
-    render() {
-        const promiseCollection = Ajax.get(BACKEND_API[this._type]);
-        promiseCollection.then((response) => {
-            if (response.status === 200) {
-                this._count = response.body.films.length;
-                this.renderCollection(response.body);
-                return;
-            }
+    init() {
+        return Ajax.get(BACKEND_API[this._type]);
+    }
 
-            if (response.status === 404) {
-                // TODO
-                throw new Error(404);
-            }
+    render(response) {
+        // const promiseCollection = Ajax.get(BACKEND_API[this._type]);
+        // promiseCollection.then((response) => {
+        if (response.status === 200) {
+            this._count = response.body.films.length;
+            this.renderCollection(response.body);
+            return;
+        }
 
-            if (response.status > 500) {
-                // TODO
-                throw new Error(500);
-            }
-
+        if (response.status === 404) {
             // TODO
-            throw new Error('Error collection');
-        });
+            throw new Error(404);
+        }
+
+        if (response.status > 500) {
+            // TODO
+            throw new Error(500);
+        }
+
+        // TODO
+        throw new Error('Error collection');
+        // });
     }
 
     renderCollection(filmsData) {

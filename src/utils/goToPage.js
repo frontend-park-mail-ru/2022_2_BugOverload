@@ -10,4 +10,4 @@ export const goToPage = (menuElement, callback = renderFunc, current = document.
     }
     current.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
     (callback != renderFunc) ? callback() : renderFunc(menuElement);
-}
+};

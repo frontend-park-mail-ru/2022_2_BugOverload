@@ -12,6 +12,10 @@ export class Header {
         this.root = root;
     }
 
+    init() {
+        return Ajax.get(BACKEND_API.auth);
+    }
+
     render(user) {
         if(!user) {
             const responsePromise = Ajax.get(BACKEND_API.auth);

@@ -3,21 +3,22 @@ import { renderTemplate } from '../../utils/render_template.js';
 import { BACKEND_API, ROOT } from '../../config/config.js';
 
 export class PreviewFilm {
-    render() {
-        const promiseCollection = Ajax.get(BACKEND_API.previewFilm);
-        promiseCollection.then((response) => {
-            if (response.status === 200) {
-                renderPreviewFilm(response.body);
-                return;
-            }
+    init() {
+        return Ajax.get(BACKEND_API.previewFilm);
+    }
 
-            if (response.status > 500) {
-                // TODO
-                throw new Error(500);
-            }
+    render(response) {
+        if (response.status === 200) {
+            renderPreviewFilm(response.body);
+            return;
+        }
 
-            throw new Error('PreviewFilm: Unexpected status');
-        });
+        if (response.status > 500) {
+            // TODO
+            throw new Error(500);
+        }
+
+        throw new Error('PreviewFilm: Unexpected status');
     }
 }
 

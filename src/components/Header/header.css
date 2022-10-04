@@ -7,7 +7,6 @@
     align-items: center;
     background-color: rgba(18, 18, 18, 0.4);
 
-    /* font-family: 'Mail Sans Roman'; */
     font-weight: normal;
 
     background-color: RGBA(18, 18, 18, 0.4);
@@ -21,7 +20,7 @@
     white-space: nowrap;
     margin-right: 45px;
     font-size: 30px;
-    margin-left: 55px;
+    margin-left: 52px;
     color: #fff;
     text-decoration: none;
 }
@@ -63,14 +62,12 @@
 
 .header__login__btn {
     font-size: 15px;
-    /* font-weight: bolder; */
     font-family: 'Mail Sans Roman Med';
     text-decoration: none;
 
-    margin-right: 100px;
+    margin-right: 52px;
     height: 35px;
     width: 178px;
+    min-width: 100px;
     border-radius: 40px;
-
-
 }
