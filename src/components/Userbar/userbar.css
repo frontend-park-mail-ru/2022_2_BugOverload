@@ -17,18 +17,6 @@
     margin-left: 12px;
 }
 
-/* .header__userbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 15px;
-    width: 220px;
-    height: 213px;
-    margin-right: 52px;
-    padding: 16px 11px;
-    align-self: flex-start;
-    margin-top: 14px;
-} */
 
 .header__userbar-substrate {
     z-index: 5;
@@ -42,7 +30,6 @@
     align-self: flex-start;
     margin-top: 14px;
     border-radius: 15px;
-    background-color: rgb(15 15 15 / 80%);
 }
 
 .header__userbar-user-info-container {
@@ -91,12 +78,10 @@
     text-decoration: none;
 }
 
-/*
-.userbar__nick__email {
-    display: inline-flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-left: 12px;
-} */
+.userbar-on{
+    background-color: rgb(15 15 15 / 80%);
+}
+
+.userbar-off{
+    background-color: rgb(15 15 15 / 0%);
+}

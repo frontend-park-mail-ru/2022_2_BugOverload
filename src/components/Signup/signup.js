@@ -12,6 +12,32 @@ export class Signup {
         this.root = root;
     }
 
+    postRequestData(user) {
+        const responsePromise = Ajax.post({
+            url: 'http://localhost:8088/v1/auth/signup',
+            body: user,
+        });
+
+        responsePromise.then((response) => {
+            if (response.status === 201) {
+                document.body
+                    .querySelector('.modal__background')
+                    .remove();
+
+                document.body.querySelector('.header').remove();
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                const userbar = new Userbar(this.root);
+                userbar.addHandlers(response.body);
+
+                return;
+            }
+
+            if (response.status === 200) {
+                renderError(form, 'email', 'Пользователь с таким email уже зарегистрирован');
+            }
+        });
+    }
+
     render() {
         if (this.root.querySelector('.modal__window') === null) {
             const modal = new Modal(this.root);
@@ -64,29 +90,7 @@ export class Signup {
                 return;
             }
 
-            const responsePromise = Ajax.post({
-                url: BACKEND_API.signup,
-                body: user,
-            });
-
-            responsePromise.then((response) => {
-                if (response.status === 201) {
-                    document.body
-                        .querySelector('.modal__background')
-                        .remove();
-
-                    document.body.querySelector('.header').remove();
-                    renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
-                    const userbar = new Userbar(this.root);
-                    userbar.addHandlers(response.body);
-
-                    return;
-                }
-
-                if (response.status === 200) {
-                    renderError(form, 'email', 'Пользователь с таким email уже зарегистрирован');
-                }
-            });
+            this.postRequestData(user);
         });
     }
 }

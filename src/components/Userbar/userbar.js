@@ -7,6 +7,10 @@ export class Userbar {
         this.root = root;
     }
 
+    getRequestData() {
+        
+    }
+
     addHandlers(user) {
         let isOpened = false;
         const { root } = this;
@@ -30,6 +34,8 @@ export class Userbar {
                 'afterbegin',
                 props,
             );
+
+            root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
             isOpened = true;
 
@@ -55,6 +61,9 @@ export class Userbar {
 
                 renderTemplate('components/Header/header', root, 'afterbegin', user);
 
+                const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
+                newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
+
                 isOpened = false;
             }
 
@@ -62,6 +71,7 @@ export class Userbar {
             userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
 
-        this.root.addEventListener('mouseenter', handlerOpenUserbar);
+        const target = document.body.querySelector('.header__userbar-user-info-container');
+        target.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }
