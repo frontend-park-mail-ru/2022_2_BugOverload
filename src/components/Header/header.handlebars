@@ -1,9 +1,15 @@
 <header class="header">
 
   <div class="header__logo"><a href="/navlink" class="header__logo" data-section="navlink">Logo</a></div>
-  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Мои фильмы</div></a>
-  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Коллекции</div></a>
-  <a href="/navlink" class="header__navlink" data-section="navlink"> <div class="header__navlink-area">Топ-250</div></a>
+  <a href="/navlink" class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Мои фильмы</div>
+  </a>
+  <a href="/navlink" class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Коллекции</div>
+  </a>
+  <a href="/navlink" class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Топ-250</div>
+  </a>
 
 
   <form class="header__form">
@@ -11,12 +17,20 @@
 
   </form>
 
-  {{#if email}}
-    <div class="header__userbar-substrate">
+  {{#if avatar}}
+  <div class="header__userbar-substrate">
+    <div class="header__userbar-user-info-container">
       <img class="header__avatar" src="{{avatar}}" alt="">
+      {{#if userinfo}}
+        {{{userinfo}}}
+      {{/if}}
     </div>
+    {{#if userbar}}
+      {{{userbar}}}
+    {{/if}}
+  </div>
   {{else}}
-    <a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>
-  {{/if}}
+  <a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>
+    {{/if}}
 
 </header>

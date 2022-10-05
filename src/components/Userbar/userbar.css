@@ -112,10 +112,10 @@
     margin-left: 12px;
 }
 
-.userbar-on {
+.userbar-on{
     background-color: RGBA(15, 15, 15, 0.8);
 }
 
-.userbar-off {
+.userbar-off{
     background-color: RGBA(15, 15, 15, 0);
 }

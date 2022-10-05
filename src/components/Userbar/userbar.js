@@ -1,82 +1,76 @@
-import {renderTemplate} from '../../utils/render_template.js';
-import {Ajax} from '../../utils/ajax.js';
+import { Ajax } from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
 
 export class Userbar {
-    #root
-
     constructor(root) {
         this.root = root;
     }
 
-    render(user) {
-        const userbar = document.querySelector('.header__userbar-user-info-container');
-        renderTemplate('components/Userbar/userbar', userbar, 'afterend', user);
-
-        const targetHadler =  document.querySelector('.header__userbar-items-container');
-
-        targetHadler.addEventListener('click', (e) => {
-            e.preventDefault();
-            const { target } = e;
-
-            const response = Ajax.get('http://localhost:8088/v1/auth/logout');
-            response.then((response) => {
-                if(target.dataset.section == 'logout') {
-                    if (response.status == 200) {
-                        document.body.querySelector('.header__userbar-substrate').remove();
+    getRequestData() {
         
-                        const userHtml =
-                        '<a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>';
-        
-                        const headerForm = document.body.querySelector('.header__form');
-                        headerForm.insertAdjacentHTML('afterend', userHtml);
-                    }
-                }
-            });
-        });
     }
-    
-    handler(user) {
-        const userbar = document.body.querySelector('.header__userbar-substrate');
-        console.log(userbar);
+
+    addHandlers(user) {
         let isOpened = false;
-    
+        const { root } = this;
+
         function handlerOpenUserbar() {
             if (isOpened) {
                 return;
             }
 
-            const userbar = document.body.querySelector('.header__userbar-substrate');
-            userbar.classList.remove('userbar-off');
-            userbar.classList.add('userbar-on');
-    
-            const target = userbar.querySelector('.header__userbar-user-info-container');           
-            renderTemplate('components/UserAvatar/userAvatar', target, 'beforeend', user);
-    
-            const userbarElement = new Userbar(root);
-            userbarElement.render(user);
-    
+            document.body.querySelector('.header').remove();
+
+            const props = {
+                userinfo: Handlebars.templates['components/UserInfo/userInfo'](),
+                userbar: Handlebars.templates['components/Userbar/userbar'](),
+                ...user,
+            };
+
+            renderTemplate(
+                'components/Header/header',
+                root,
+                'afterbegin',
+                props,
+            );
+
+            root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
+
             isOpened = true;
-        }
-    
-        function handlerCloseUserbar() {
-            if ( !isOpened ) {
-                return;
+
+            const targetHadler = document.querySelector('.header__userbar-items-container');
+
+            targetHadler.addEventListener('click', (e) => {
+                e.preventDefault();
+                const { target } = e;
+
+                const resGet = Ajax.get('http://localhost:8088/v1/auth/logout');
+                resGet.then((response) => {
+                    if (target.dataset.section === 'logout') {
+                        if (response.status === 200) {
+                            document.body.querySelector('.header').remove();
+                            renderTemplate('components/Header/header', root, 'afterbegin');
+                        }
+                    }
+                });
+            });
+
+            function handlerCloseUserbar() {
+                document.body.querySelector('.header').remove();
+
+                renderTemplate('components/Header/header', root, 'afterbegin', user);
+
+                const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
+                newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
+
+                isOpened = false;
             }
 
             const userbar = document.body.querySelector('.header__userbar-substrate');
-            userbar.classList.remove('userbar-on');
-            userbar.classList.add('userbar-off');
-            
-            document.body.querySelector('.header__userbar-items-container').remove();
-            document.body.querySelector('.header__userbar-name-container').remove();
-    
-            isOpened = false;
+            userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
 
-        const inputUserbar = document.body.querySelector('.header__userbar-user-info-container');
-    
-        inputUserbar.addEventListener('mouseenter', handlerOpenUserbar);
-        userbar.addEventListener('mouseleave', handlerCloseUserbar);
+        const target = document.body.querySelector('.header__userbar-user-info-container');
+        target.addEventListener('mouseenter', handlerOpenUserbar);
     }
-
 }
