@@ -26,13 +26,13 @@
     position: relative;
 
     left: 0;
-    transition: all ease 0.5s;
+    transition: all cubic-bezier(0.62, 0, 0.35, 1.0) 0.5s;
 }
 
 .collection__slider-button_right {
     position: absolute;
-    top: calc(50% - 80px);
     right: 52px;
+    top: calc(50% - 80px);
     width: 43px;
     height: 43px;
 }

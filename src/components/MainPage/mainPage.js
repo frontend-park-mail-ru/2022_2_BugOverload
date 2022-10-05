@@ -11,14 +11,17 @@ export function renderMainPage() {
     const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
     const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
 
-    Promise.all([previewFilm.init(), collectionPopular.init(), collectionCinemaToday.init()])
-        .then((responses) => {
-            ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['components/MainPage/mainPage']({
-                previewFilm: previewFilm.render(responses[0]),
-                collectionPopular: collectionPopular.render(responses[1]),
-                collectionTodayInCinema: collectionCinemaToday.render(responses[2]),
-            }));
+    Promise.all([
+        previewFilm.getRequestData(), // ходит в сеть и обрабатывает статусы
+        collectionPopular.getRequestData(),
+        collectionCinemaToday.getRequestData(),
+    ]).then((responses) => {
+        ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['components/MainPage/mainPage']({
+            previewFilm: previewFilm.renderTemplate(responses[0]), // возвращает HTML
+            collectionPopular: collectionPopular.renderTemplate(responses[1]),
+            collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
+        }));
 
-            Collection.addHandlers();
-        });
+        Collection.addHandlers();
+    });
 }

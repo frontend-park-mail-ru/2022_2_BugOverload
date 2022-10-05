@@ -3,24 +3,36 @@ import { renderTemplate } from '../../utils/render_template.js';
 import { BACKEND_API, ROOT } from '../../config/config.js';
 
 export class PreviewFilm {
-    init() {
-        return Ajax.get(BACKEND_API.previewFilm);
+    async getRequestData() {
+        const response = await Ajax.get(BACKEND_API.previewFilm);
+        // .then((response) => {
+            if (response.status === 200) {
+                return response.body;
+            }
+
+            if (response.status > 500) {
+                // TODO
+                throw new Error(500);
+            }
+
+            throw new Error('PreviewFilm: Unexpected status');
+        // });
     }
 
-    render(response) {
-        if (response.status === 200) {
+    renderTemplate(data) {
+        // if (response.status === 200) {
             // renderPreviewFilm(response.body);
             // debugger;
-            return Handlebars.templates['components/PreviewFilm/previewFilm'](response.body);
+            return Handlebars.templates['components/PreviewFilm/previewFilm'](data);
             // return;
-        }
+        // }
 
-        if (response.status > 500) {
-            // TODO
-            throw new Error(500);
-        }
+        // if (response.status > 500) {
+        //     // TODO
+        //     throw new Error(500);
+        // }
 
-        throw new Error('PreviewFilm: Unexpected status');
+        // throw new Error('PreviewFilm: Unexpected status');
     }
 }
 

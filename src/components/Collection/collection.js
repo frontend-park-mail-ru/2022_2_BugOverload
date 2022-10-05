@@ -12,17 +12,11 @@ export class Collection {
         this._type = type;
     }
 
-    init() {
-        return Ajax.get(BACKEND_API[this._type]);
-    }
+    async getRequestData() {
+        const response = await Ajax.get(BACKEND_API[this._type]);
 
-    render(response) {
         if (response.status === 200) {
-            // this._count = response.body.films.length;
-            return this.renderCollection(response.body);
-            // debugger;
-            // return Handlebars.templates['components/Collection/collection'](response.body);
-            // return;
+            return response.body;
         }
 
         if (response.status === 404) {
@@ -32,12 +26,34 @@ export class Collection {
         }
 
         if (response.status > 500) {
-            // TODO
             throw new Error(500);
         }
 
-        // TODO
         throw new Error('Error collection');
+    }
+
+    renderTemplate(data) {
+        // if (response.status === 200) {
+            // this._count = response.body.films.length;
+        return this.createCollection(data);
+            // debugger;
+            // return Handlebars.templates['components/Collection/collection'](response.body);
+            // return;
+        // }
+
+        // if (response.status === 404) {
+        //     // TODO
+        //     // ShowErrorMessage()
+        //     throw new Error(404);
+        // }
+
+        // if (response.status > 500) {
+        //     // TODO
+        //     throw new Error(500);
+        // }
+
+        // // TODO
+        // throw new Error('Error collection');
     }
 
     static addHandlers() {
@@ -45,9 +61,8 @@ export class Collection {
         sliders.forEach((slider) => Collection.addHandlerSlider(slider));
     }
 
-    renderCollection(filmsData) {
+    createCollection(filmsData) {
         const films = filmsData.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
-
 
         return Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
     }
