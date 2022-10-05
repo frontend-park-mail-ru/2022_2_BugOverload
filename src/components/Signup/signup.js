@@ -26,7 +26,7 @@ export class Signup {
 
                 const user = response.body;
                 if(!user.hasOwnProperty('avatar')) {
-                    user.avatar = 'asserts/img/elements/invisibleMan.jpeg';
+                    user.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
