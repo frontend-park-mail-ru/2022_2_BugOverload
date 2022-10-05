@@ -3,7 +3,6 @@ const renderFunc = ({ Render }) => {
     Target.render();
 };
 
-
 export const goToPage = (menuElement, callback = renderFunc, current = document.body) => {
     const activeLink = current.querySelector('.active');
     if (activeLink) {

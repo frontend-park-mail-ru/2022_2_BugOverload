@@ -5,7 +5,6 @@ import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
 import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 
-
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.

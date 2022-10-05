@@ -1,7 +1,7 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import {
-    checkEmail, checkPassword,renderError,
+    checkEmail, checkPassword, renderError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
@@ -64,7 +64,7 @@ export class Login {
 
             const responsePromise = Ajax.post({
                 url: BACKEND_API.login,
-                body: {email, password}
+                body: { email, password },
             });
 
             responsePromise.then((response) => {

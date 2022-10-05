@@ -2,7 +2,6 @@ import { Ajax } from '../../utils/ajax.js';
 import { BACKEND_API } from '../../config/config.js';
 import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 
-
 /**
 * Ходит за данными на бэкенд.
 * Рендерит HTML-шаблон превью фильма на главной
