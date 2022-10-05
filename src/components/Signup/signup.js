@@ -63,12 +63,13 @@ export class Signup {
             const nickInput = form.querySelector('input[type=text]');
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelectorAll('input[type=password]');
+            const confirmInput = document.getElementById('confirm');
 
             const user = {};
             user.nickname = nickInput.value.trim();
             user.email = emailInput.value.trim();
             user.password = passwordInput[0].value;
-            const confirmPassword = passwordInput[1].value;
+            const confirmPassword = confirmInput.querySelector('.modal__input').value;
 
             let flag = false;
 
