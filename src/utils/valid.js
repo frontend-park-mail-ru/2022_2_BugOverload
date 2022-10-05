@@ -42,7 +42,7 @@ const checkConfirmPassword = (confirm, confirmPassword, password, textErrorPassw
         return false;
     }
 
-    if (confirmPassword === password) {
+    if ((confirmPassword === password) && textErrorPassword) {
         if (textErrorPassword) {
             renderError(confirm, 'password', textErrorPassword);
             return false;
@@ -88,7 +88,7 @@ export const checkPassword = (form, input,type = null, confirmPassword = null) =
         }
     }
     if (type) {
-        if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
+        if (!checkConfirmPassword(confirm, confirmPassword, input)) {
             return false;
         }
         removeError(confirm, 'password');
