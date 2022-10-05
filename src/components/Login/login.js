@@ -7,6 +7,12 @@ import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
 import { BACKEND_API } from '../../config/config.js';
 
+/**
+* Отрисовывает хедер.
+* Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
+* Добавляет обработчики событий.
+*
+*/
 export class Login {
     constructor(root) {
         this.root = root;
