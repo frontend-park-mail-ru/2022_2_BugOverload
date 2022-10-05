@@ -35,12 +35,12 @@ export class Login {
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
-            form = this.root.querySelector('.modal__wrapper__input');
+            const form = this.root.querySelector('.modal__wrapper__input');
             if (response.status === 400) {
                 renderError(form, 'email', 'Такой пользователь не зарегистирован');
             }
             const wrapper = document.getElementById('login_password');
-            console.log(wrapper);
+
             if (response.status === 403) {
                 renderError(wrapper, 'password', 'Неверный пароль');
             }
