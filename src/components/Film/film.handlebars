@@ -1,0 +1,17 @@
+<div class="film">
+    <a href="/film/id/{{film_id}}" class="film__poster" style="background-image: url('{{poster_ver}}');">
+    <div class="film__blackout"></div>
+    </a>
+
+    <div class="film__rating">{{ratio}}</div>
+    <div class="film__title">{{film_name}}</div>
+    <div class="film__info-container">
+        <div class="film__genres">
+            {{#each genres}}
+            <div class="film__genre">{{this}}&nbsp</div>
+            {{/each}}
+        </div>
+        <div class="film__decore-circle"></div>
+        <div class="film__year">{{year_prod}}</div>
+    </div>
+</div>

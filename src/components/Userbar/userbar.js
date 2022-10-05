@@ -22,7 +22,7 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userinfo: Handlebars.templates['components/UserInfo/userInfo'](),
+                userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                 userbar: Handlebars.templates['components/Userbar/userbar'](),
                 ...user,
             };
@@ -38,13 +38,13 @@ export class Userbar {
 
             isOpened = true;
 
-            const targetHadler = document.querySelector('.header__userbar-items-container');
+            const targetHadler = document.querySelector('.header__userbar-item-out');
 
             targetHadler.addEventListener('click', (e) => {
                 e.preventDefault();
                 const { target } = e;
 
-                const resGet = Ajax.get('http://localhost:8088/v1/auth/logout');
+                const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
                 resGet.then((response) => {
                     if (target.dataset.section === 'logout') {
                         if (response.status === 200) {

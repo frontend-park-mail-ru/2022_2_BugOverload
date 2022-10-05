@@ -6,6 +6,12 @@ import {
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
 
+/**
+* Отрисовывает хедер.
+* Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
+* Добавляет обработчики событий.
+*
+*/
 export class Login {
     constructor(root) {
         this.root = root;
@@ -13,7 +19,7 @@ export class Login {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://localhost:8088/v1/auth/login',
+            url: 'http://movie-gate.online:8088/v1/auth/login',
             body: user,
         });
 
@@ -32,9 +38,10 @@ export class Login {
             if (response.status === 400) {
                 renderError(form, 'email', 'Такой пользователь не зарегистирован');
             }
-            const password = document.getElementById('password');
+            const wrapper = document.getElementById('login_password');
+
             if (response.status === 403) {
-                renderError(password, 'password', 'Неверный пароль');
+                renderError(wrapper, 'password', 'Неверный пароль');
             }
         });
     }

@@ -11,10 +11,10 @@ export class Signup {
         this.root = root;
     }
 
-    postRequestData(user) {
+    postRequestData(inputData) {
         const responsePromise = Ajax.post({
-            url: 'http://localhost:8088/v1/auth/signup',
-            body: user,
+            url: 'http://movie-gate.online:8088/v1/auth/signup',
+            body: inputData,
         });
 
         responsePromise.then((response) => {
@@ -23,6 +23,10 @@ export class Signup {
                     .querySelector('.modal__background')
                     .remove();
 
+                const user = response.body;
+                if (!Object.prototype.hasOwnProperty.call(user, 'avatar')) {
+                    user.avatar = 'asserts/img/invisibleMan.jpeg';
+                }
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
@@ -31,9 +35,9 @@ export class Signup {
                 return;
             }
 
-            const form = document.getElementById('email');
-            if (response.status === 200) {
-                renderError(form, 'email', 'Пользователь с таким email уже зарегистрирован');
+            if (response.status === 400) {
+                const wrapper = document.getElementById('signup_email');
+                renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
             }
         });
     }
@@ -59,12 +63,13 @@ export class Signup {
             const nickInput = form.querySelector('input[type=text]');
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelectorAll('input[type=password]');
+            const confirmInput = document.getElementById('confirm');
 
             const user = {};
             user.nickname = nickInput.value.trim();
             user.email = emailInput.value.trim();
             user.password = passwordInput[0].value;
-            const confirmPassword = passwordInput[1].value;
+            const confirmPassword = confirmInput.querySelector('.modal__input').value;
 
             let flag = false;
 
@@ -75,7 +80,7 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
-                    if (!checkPassword(form, user[key], confirmPassword)) {
+                    if (!checkPassword(form, user[key], 'signup', confirmPassword)) {
                         flag = true;
                     }
                 }

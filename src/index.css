@@ -1,14 +1,13 @@
-
-
 @import "./components/Header/header.css";
 @import "./components/Login/login.css";
 @import "./components/Modal/modal.css";
 @import "./components/Signup/signup.css";
 @import "./components/UserInfo/userInfo.css";
 @import "./components/Userbar/userbar.css";
-@import "./components/collection/collection.css";
-@import "./components/film/film.css";
-@import "./components/previewFilm/previewFilm.css";
+@import "./components/Collection/collection.css";
+@import "./components/Film/film.css";
+@import "./components/PreviewFilm/previewFilm.css";
+@import "./components/ErrorMessage/errorMessage.css";
 
 
 @font-face {
@@ -87,16 +86,16 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: #000;
     background-color: #FEBA2B;
-    border: 0px;
+    border: 0;
 }
 
 .button__yellow:hover {
     background-color: #CD9826;
     transition: 0.1s linear;
 }
+
 .header__navlink:hover {
     color:#FEBA2B;
     transition: 0.08s linear;
@@ -106,6 +105,7 @@ body, html {
 @media screen and (max-width: 740px){
     .header__form{display:none}
 };
+
 .active {
     font-weight: bold;
 }

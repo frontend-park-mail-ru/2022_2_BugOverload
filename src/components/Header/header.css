@@ -1,13 +1,10 @@
 .header {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     justify-content: center;
     align-content: flex-start;
     align-items: center;
-
     font-weight: normal;
-
     position: absolute;
     height: 95px;
     width: 100%;
@@ -17,7 +14,7 @@
     white-space: nowrap;
     margin-right: 45px;
     font-size: 30px;
-    margin-left: 55px;
+    margin-left: 52px;
     color: #fff;
     text-decoration: none;
 }
@@ -28,6 +25,7 @@
     font-size: 18px;
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .header__navlink-area {
@@ -41,30 +39,38 @@
 .header__form {
     margin-left: auto;
     margin-right: 55px;
-
     font-size: 18px;
     text-decoration: none;
 }
+
+.header__form__icon-search {
+    position: absolute;
+    top: 40px;
+    width: 16px;
+    height: auto;
+    z-index: 2;
+    padding-left: 10px;
+}
+
 
 .header__form__input {
     height: 35px;
     width: 25vw;
     border-radius: 18px;
-    border: 0px;
-    background: #333333;
+    border: 0;
+    background: #333;
     color: #fff;
     opacity: .8;
     padding-left: 37px;
 }
 
 .header__login__btn {
-    font-size: 18px;
+    font-size: 15px;
+    font-family: 'Mail Sans Roman Med';
     text-decoration: none;
-
-    margin-right: 100px;
+    margin-right: 52px;
     height: 35px;
     width: 178px;
+    min-width: 100px;
     border-radius: 40px;
-
-    font-weight: bold;
 }

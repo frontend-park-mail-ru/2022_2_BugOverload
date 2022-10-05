@@ -14,7 +14,7 @@ app.use(express.static(path.resolve(__dirname, '../src')));
 app.use(express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
-	origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:8080', 'http://127.0.0.1:5500'],
+	origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
 	credentials: true,
 }));
 
@@ -23,7 +23,6 @@ const users = {
 		'nickname': 'StepByyyy',
 		'email': 'dop123@mail.ru',
 		'password': 'dop123@mail.ru',
-		// 'avatar': 'https://static.1tv.ru/uploads/photo/image/2/huge/4062_huge_876c41f50e.jpg'
 		'avatar': 'asserts/img/invisibleMan.jpeg'
 	},
 };
@@ -52,7 +51,7 @@ app.post('/v1/auth/login',  (req, res) => {
 
 app.get('/v1/auth',  (req, res) => {
 	const email = 'dop123@mail.ru'
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
@@ -178,7 +177,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/5.png",
 			ratio: 7.1,
-			genres: ["Фентези", "Приключения"],
+			genres: ["Фентези ", "Приключения"],
 		},
 		{
 			film_id: 8,
@@ -479,7 +478,22 @@ app.get('/v1/in_cinema', (req, res) => {
 			poster_ver: "asserts/img/posters/3.png",
 			ratio: 7.1,
 			genres: ["Фентези", "Приключения"],
-		}
+		},
+		{
+			film_id: 3,
+			film_name: "Властелин колец. Братство кольца",
+			description: "",
+			type: "",
+			year_prod: 2021,
+			prodCompany: "",
+			prodCountry: "",
+			ageLimit: "",
+			duration: "",
+			posterHuge: "",
+			poster_ver: "asserts/img/posters/3.png",
+			ratio: 7.1,
+			genres: ["Фентези", "Приключения"],
+		},
 	]};
 
 	res.status(200).json(collectionCinemaTodayData);
@@ -594,7 +608,52 @@ app.get('/v1/popular_films', (req, res) => {
 				poster_ver: "asserts/img/posters/1.png",
 				ratio: 7.1,
 				genres: ["Документальный", "Смотрю и плачу"],
-			}
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "asserts/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "asserts/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "asserts/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
 	]};
 
 	res.status(200).json(collectionPopularData);

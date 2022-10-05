@@ -1,6 +1,3 @@
-import { Header } from './components/Header/header.js';
+import { renderMainPage } from './components/MainPage/mainPage.js';
 
-const root = document.getElementById('root');
-
-const header = new Header(root);
-header.render();
+renderMainPage();
