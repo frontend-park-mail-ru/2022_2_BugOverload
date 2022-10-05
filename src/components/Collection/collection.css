@@ -31,8 +31,8 @@
 
 .collection__slider-button_right {
     position: absolute;
-    left: 1758px;
-    top: 128px;
+    top: calc(50% - 80px);
+    right: 52px;
     width: 43px;
     height: 43px;
 }

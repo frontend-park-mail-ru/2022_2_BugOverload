@@ -10,7 +10,7 @@ export class PreviewFilm {
     render(response) {
         if (response.status === 200) {
             // renderPreviewFilm(response.body);
-            debugger;
+            // debugger;
             return Handlebars.templates['components/PreviewFilm/previewFilm'](response.body);
             // return;
         }

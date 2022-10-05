@@ -18,15 +18,16 @@ export class Collection {
 
     render(response) {
         if (response.status === 200) {
-            this._count = response.body.films.length;
-            this.renderCollection(response.body);
-            debugger;
-            return Handlebars.templates['components/Collection/collection'](response.body);
+            // this._count = response.body.films.length;
+            return this.renderCollection(response.body);
+            // debugger;
+            // return Handlebars.templates['components/Collection/collection'](response.body);
             // return;
         }
 
         if (response.status === 404) {
             // TODO
+            // ShowErrorMessage()
             throw new Error(404);
         }
 
@@ -40,47 +41,31 @@ export class Collection {
     }
 
     static addHandlers() {
-        document.querySelectorAll('.collection__slider')
-            .forEach((slider) => Collection.addHandlerSlider(slider));
+        const sliders = document.querySelectorAll('.collection__container');
+        sliders.forEach((slider) => Collection.addHandlerSlider(slider));
     }
 
     renderCollection(filmsData) {
-        // if (!filmsData) {
-        //     return;
-        // }
-
-
-
-        // decorateGenresFilm(filmsData);
-
-        // const films = filmsData.films.reduce((res, filmData) => res + Handlebars.templates['components/Film/film'](filmData), '');
         const films = filmsData.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
 
         return Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
-        // const div = document.createElement('div');
-        // div.insertAdjacentHTML('beforeend', collection);
-
-
-
-        // addColorRatingFilm(div, filmsData);
-
-        // ROOT.append(div);
-        // this.addListeners(div);
     }
 
     static addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
 
-        if (document.documentElement.clientWidth - 2 * 52 > this._count * 260 - 30) {
+        const count = slider.querySelectorAll('.film').length;
+
+        if (document.documentElement.clientWidth - 2 * 52 > count * 260 - 30) {
             btnRight.style.display = 'none';
         }
         btnLeft.style.display = 'none';
 
         let offset = 0;
         const widthFilm = 260;
-        const maxLength = widthFilm * this._count;
+        const maxLength = widthFilm * count;
         const windowLen = document.documentElement.clientWidth;
         const maxOffset = maxLength - windowLen + 52 + 12;
         const countOnPage = Math.trunc(windowLen / widthFilm);

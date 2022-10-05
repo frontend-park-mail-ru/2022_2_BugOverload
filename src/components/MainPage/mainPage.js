@@ -8,63 +8,17 @@ export function renderMainPage() {
     header.render();
 
     const previewFilm = new PreviewFilm();
-    const promisePreviewFilm = previewFilm.init();
-
     const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-    const promiseCollectionPopular = collectionPopular.init();
-
     const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-    const promiseCollectionCinemaToday = collectionCinemaToday.init();
 
-    // promisePreviewFilm
-    //     .then((response) => {
-    //         previewFilm.render(response);
-    //         return promiseCollectionPopular;
-    //     })
-    //     .then((response) => {
-    //         collectionPopular.render(response);
-    //         return promiseCollectionCinemaToday;
-    //     })
-        // .then((response) => collectionCinemaToday.render(response));
+    Promise.all([previewFilm.init(), collectionPopular.init(), collectionCinemaToday.init()])
+        .then((responses) => {
+            ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['components/MainPage/mainPage']({
+                previewFilm: previewFilm.render(responses[0]),
+                collectionPopular: collectionPopular.render(responses[1]),
+                collectionTodayInCinema: collectionCinemaToday.render(responses[2]),
+            }));
 
-        // debugger;
-        const tpm = Handlebars.templates['components/MainPage/mainPage'];
-        let tmp1 = promisePreviewFilm.then((response) => previewFilm.render(response));
-        let tmp2 = promiseCollectionPopular.then((response) => collectionPopular.render(response));
-        let tm3 = promiseCollectionCinemaToday.then((response) => collectionCinemaToday.render(response));
-        // const mainPage = tpm({
-        //     previewFilm: tmp1,
-        //     collectionPopular: tmp2,
-        //     collectionTodayInCinema: "wglwrge",
-        // });
-
-        // let main = document.querySelector('main-page');
-    let templates = [1,2,3];
-        // Promise.all([
-            promisePreviewFilm.then((response) => templates[0] = previewFilm.render(response));
-            promiseCollectionPopular.then((response) => templates[1] = collectionPopular.render(response));
-            promiseCollectionCinemaToday.then((response) => {
-                templates[2] = collectionCinemaToday.render(response);
-                ROOT.insertAdjacentHTML('beforeend', tpm({
-                    previewFilm: templates[0],
-                    collectionPopular: templates[1],
-                    collectionTodayInCinema: templates[2],
-                }));
-            });
-        // ]
-        // .then((templates) => {
-        //     debugger;
-
-        //     );
-        //     Collection.addHandlers();
-        // }));
-
-
-    // function showCollectionsOnMainPage() {
-    //     const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-    //     collectionPopular.render();
-
-    //     const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-    //     collectionCinemaToday.render();
-    // }
+            Collection.addHandlers();
+        });
 }
