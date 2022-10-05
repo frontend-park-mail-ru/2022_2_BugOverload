@@ -40,6 +40,7 @@ export class Login {
                 renderError(form, 'email', 'Такой пользователь не зарегистирован');
             }
             const wrapper = document.getElementById('login_password');
+            console.log(wrapper);
             if (response.status === 403) {
                 renderError(wrapper, 'password', 'Неверный пароль');
             }
