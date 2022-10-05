@@ -28,7 +28,10 @@ export class Signup {
                     user.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin', { 
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user), 
+                    ...response.body
+                });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
 

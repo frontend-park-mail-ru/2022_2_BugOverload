@@ -1,6 +1,8 @@
 <header class="header">
 
-  <div class="header__logo"><a class="header__navlink" data-section="navlink">Logo</a></div>
+  <a class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Logo</div>
+  </a>
   <a class="header__navlink" data-section="navlink">
     <div class="header__navlink-area">Мои фильмы</div>
   </a>
@@ -14,7 +16,7 @@
 
   <form class="header__form">
     <img class="header__form__icon-search" src="../../asserts/img/elements/icon-search.png">
-    <input class="header__form__input" maxlength="200" type="search" placeholder="" aria-label="Search">
+    <input class="header__form__input" maxlength="100" type="search" placeholder="фильмы, передачи, персоны.." aria-label="Search">
 
   </form>
 
@@ -23,11 +25,11 @@
     <div class="header__userbar-user-info-container">
       <img class="header__avatar" src="{{avatar}}" alt="">
       {{#if userinfo}}
-        {{{userinfo}}}
+      {{{userinfo}}}
       {{/if}}
     </div>
     {{#if userbar}}
-      {{{userbar}}}
+    {{{userbar}}}
     {{/if}}
   </div>
   {{else}}
