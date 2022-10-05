@@ -1,3 +1,4 @@
+import { BACKEND_API } from '../../config/config.js';
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import {
@@ -19,7 +20,7 @@ export class Login {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://localhost:8088/v1/auth/login',
+            url: BACKEND_API.login,
             body: user,
         });
 

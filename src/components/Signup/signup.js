@@ -14,7 +14,7 @@ export class Signup {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://localhost:8088/v1/auth/signup',
+            url: BACKEND_API.signup,
             body: user,
         });
 
