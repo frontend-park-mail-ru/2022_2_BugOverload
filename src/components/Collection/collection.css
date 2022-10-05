@@ -58,7 +58,7 @@
 .collection__slider-button_right img:hover {
     width: 43px;
     height: 43px;
-    opacity: "80%";
+    opacity: 0.8;
 }
 
 .collection__slider-button_left img:hover {

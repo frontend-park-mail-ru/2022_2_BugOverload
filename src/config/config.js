@@ -30,7 +30,7 @@ export const config = {
 
 export const ROOT = document.getElementById('root');
 
-const PATH = 'http://localhost:8088';
+const PATH = 'http://localhost:3000';
 
 export const BACKEND_API = {
     path: PATH,

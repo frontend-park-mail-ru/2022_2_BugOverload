@@ -5,7 +5,7 @@ import {
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
-import { BACKEND_API } from '../../config/config.js';
+// import { BACKEND_API } from '../../config/config.js';
 
 /**
 * Отрисовывает хедер.

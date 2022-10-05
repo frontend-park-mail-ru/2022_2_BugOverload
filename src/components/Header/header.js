@@ -2,8 +2,7 @@ import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import { goToPage } from '../../utils/goToPage.js';
 import { Userbar } from '../Userbar/userbar.js';
-import { config } from '../../config/config.js';
-import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
+import { BACKEND_API, config } from '../../config/config.js';
 
 /**
 * Отрисовывает хедер.
@@ -17,7 +16,7 @@ export class Header {
     }
 
     render() {
-        const responsePromise = Ajax.get('http://localhost:8088/v1/auth');
+        const responsePromise = Ajax.get(BACKEND_API.auth);
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
