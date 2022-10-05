@@ -25,17 +25,42 @@ export class Header {
     }
 
     handlerHeader() {
-        const header = document.querySelector('.header');
-
-        header.addEventListener('click', (e) => {
+        this.root.addEventListener('click', (e) => {
             const { target } = e;
 
             if (target.dataset.section === 'logout') {
                 return;
             }
 
-            if (target instanceof HTMLAnchorElement || target instanceof HTMLButtonElement) {
+            if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
+                const modalWindow = this.root.querySelector('.modal__window');
+                if (this.root.querySelector('.modal__background') && (target.dataset.section === 'login' || target.dataset.section === 'signup')) {
+                    goToPage(
+                        config.auth[target.dataset.section],
+                        () => {
+                            let removeElement;
+                            if (target.dataset.section === 'login') {
+                                removeElement = 'signup';
+                            }
+                            if (target.dataset.section === 'signup') {
+                                removeElement = 'login';
+                            }
+
+                            modalWindow
+                                .querySelector(`.modal__${removeElement}`)
+                                .remove();
+                            modalWindow
+                                .querySelector(`.modal__${removeElement}__img`)
+                                .remove();
+                            const Render = config.auth[target.dataset.section].render;
+                            const element = new Render(this.root);
+                            element.render();
+                        },
+                        modalWindow,
+                    );
+                    return;
+                }
                 goToPage(config.header[target.dataset.section], () => {
                     document.body
                         .querySelector('.active')
@@ -44,45 +69,7 @@ export class Header {
                     const Render = config.header[target.dataset.section].render;
                     const element = new Render(this.root);
                     element.render();
-                    if (target.dataset.section === 'login') {
-                        this.addRedirect();
-                    }
                 });
-            }
-        });
-    }
-
-    addRedirect() {
-        const modalWindow = this.root.querySelector('.modal__window');
-        modalWindow.addEventListener('click', (e) => {
-            const { target } = e;
-
-            if (target instanceof HTMLAnchorElement) {
-                e.preventDefault();
-
-                goToPage(
-                    config.auth[target.dataset.section],
-                    () => {
-                        let removeElement;
-                        if (target.dataset.section === 'login') {
-                            removeElement = 'signup';
-                        }
-                        if (target.dataset.section === 'signup') {
-                            removeElement = 'login';
-                        }
-
-                        modalWindow
-                            .querySelector(`.modal__${removeElement}`)
-                            .remove();
-                        modalWindow
-                            .querySelector(`.modal__${removeElement}__img`)
-                            .remove();
-                        const Render = config.auth[target.dataset.section].render;
-                        const login = new Render(this.root);
-                        login.render();
-                    },
-                    modalWindow,
-                );
             }
         });
     }

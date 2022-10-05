@@ -1,6 +1,8 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
-// import { renderError } from '../../utils/valid.js';
+import {
+    checkEmail, checkPassword,renderError,
+} from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
 
@@ -28,10 +30,30 @@ export class Login {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const user = {};
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelector('input[type=password]');
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
+            user.email = emailInput.value.trim();
+            user.password = passwordInput.value;
+
+            let flag = false;
+
+            Object.keys(user).forEach((key) => {
+                if (key === 'email') {
+                    if (!checkEmail(form, user[key])) {
+                        flag = true;
+                    }
+                }
+                if (key === 'password') {
+                    if (!checkPassword(form, user[key])) {
+                        flag = true;
+                    }
+                }
+            });
+
+            if (flag) {
+                return;
+            }
 
             const responsePromise = Ajax.post({
                 url: 'http://localhost:8088/v1/auth/login',
@@ -48,6 +70,12 @@ export class Login {
                     renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                     const userbar = new Userbar(this.root);
                     userbar.addHandlers(response.body);
+                }
+                if (response.status === 400) {
+                    renderError(form, 'email', 'Такой пользователь не зарегистирован');
+                }
+                if (response.status === 403) {
+                    renderError(form, 'password', 'Неверный пароль');
                 }
             });
         });

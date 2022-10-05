@@ -17,17 +17,17 @@ export class Userbar {
 
             document.body.querySelector('.header').remove();
 
+            const props = {
+                userinfo: Handlebars.templates['components/UserInfo/userInfo'](),
+                userbar: Handlebars.templates['components/Userbar/userbar'](),
+                ...user,
+            };
+
             renderTemplate(
                 'components/Header/header',
                 root,
                 'afterbegin',
-                Object.assign(
-                    user,
-                    {
-                        userinfo: Handlebars.templates['components/UserInfo/userInfo'](),
-                        userbar: Handlebars.templates['components/Userbar/userbar'](),
-                    },
-                ),
+                props,
             );
 
             isOpened = true;
@@ -42,17 +42,18 @@ export class Userbar {
                 resGet.then((response) => {
                     if (target.dataset.section === 'logout') {
                         if (response.status === 200) {
+                            document.body.querySelector('.header').remove();
                             renderTemplate('components/Header/header', root, 'afterbegin');
                         }
                     }
                 });
             });
 
-            function handlerCloseUserbar() {  
+            function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
-    
-                renderTemplate('components/Header/header', root, 'afterbegin',user);
-    
+
+                renderTemplate('components/Header/header', root, 'afterbegin', user);
+
                 isOpened = false;
             }
 
@@ -60,8 +61,6 @@ export class Userbar {
             userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
 
-        const inputUserbar = document.body.querySelector('.header__userbar-user-info-container');
-
-        inputUserbar.addEventListener('mouseenter', handlerOpenUserbar);
+        this.root.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }
