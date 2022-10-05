@@ -25,6 +25,7 @@
     font-size: 18px;
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .header__navlink-area {

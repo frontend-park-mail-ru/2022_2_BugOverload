@@ -66,8 +66,9 @@ export class Header {
 
                 const header = this.root.querySelector('.header');
 
-                if (header.compareDocumentPosition(target) === 16
-                        || header.compareDocumentPosition(target) === 20) {
+                if ((header.compareDocumentPosition(target) === 16
+                        || header.compareDocumentPosition(target) === 20)
+                        && target.dataset.section === 'login' ) {
                     const Render = config.header[target.dataset.section].render;
                     const element = new Render(this.root);
                     element.render();

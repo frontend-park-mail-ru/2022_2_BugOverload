@@ -51,7 +51,7 @@ export class Userbar {
                             document.body.querySelector('.header').remove();
                             renderTemplate('components/Header/header', root, 'afterbegin');
                         }
-                    }
+                    } else return;
                 });
             });
 
