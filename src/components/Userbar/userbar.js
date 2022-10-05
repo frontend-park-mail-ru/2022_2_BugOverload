@@ -38,7 +38,7 @@ export class Userbar {
 
             isOpened = true;
 
-            const targetHadler = document.querySelector('.header__userbar-items-container');
+            const targetHadler = document.querySelector('.header__userbar-item-out');
 
             targetHadler.addEventListener('click', (e) => {
                 e.preventDefault();
