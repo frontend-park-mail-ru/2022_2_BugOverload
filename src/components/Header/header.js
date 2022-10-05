@@ -19,7 +19,7 @@ export class Header {
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin');
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
