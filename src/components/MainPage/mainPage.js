@@ -2,6 +2,7 @@ import { PreviewFilm } from '../PreviewFilm/previewFilm.js';
 import { Collection, COLLECTION_TYPE } from '../Collection/collection.js';
 import { Header } from '../Header/header.js';
 import { ROOT } from '../../config/config.js';
+import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -27,5 +28,21 @@ export function renderMainPage() {
         }));
 
         Collection.addHandlers();
+        addHandlersToDevelopmentLinks();
+    });
+}
+
+export function addHandlersToDevelopmentLinks() {
+    let elems = document.querySelectorAll('.header__navlink');
+    elems.forEach((elem) => errLink(elem));
+
+    elems = document.querySelectorAll('.film__poster');
+    elems.forEach((elem) => errLink(elem));
+}
+
+function errLink(elem) {
+    elem.addEventListener('click', (e) => {
+        e.preventDefault();
+        ShowErrorMessage('Данная страница на стадии разработки');
     });
 }
