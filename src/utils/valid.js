@@ -56,7 +56,7 @@ export const checkPassword = (form, input,type = null, confirmPassword = null) =
     const confirm = document.getElementById('confirm');
     if (!input) {
         renderError(form, 'password', 'Введите пароль');
-        if (!(confirmPassword === null)) {
+        if (type) {
             if (!checkConfirmPassword(confirm, confirmPassword, input)) {
                 return false;
             }
