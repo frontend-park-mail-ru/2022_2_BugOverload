@@ -27,7 +27,13 @@ export class Collection {
     * @return {null} В случае ошибочного статуса
     */
     async getRequestData() {
-        const response = await Ajax.get(`http://movie-gate.online:8088/v1/${this._type}`);
+        let href;
+        if (this._type === 'todayInCinema') {
+            href = in_cinema;
+        } else {
+            href = popular_films;
+        }
+        const response = await Ajax.get(`http://movie-gate.online:8088/v1/${href}`);
 
         if (response.status === 200) {
             return response.body;
