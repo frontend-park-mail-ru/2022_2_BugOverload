@@ -51,7 +51,6 @@
     align-self: flex-start;
     margin-top: 14px;
     border-radius: 15px;
-    background-color: RGBA(15, 15, 15, 0.8);
 }
 
 .header__userbar-user-info-container {
@@ -111,4 +110,12 @@
     align-items: flex-start;
 
     margin-left: 12px;
+}
+
+.userbar-on{
+    background-color: RGBA(15, 15, 15, 0.8);
+}
+
+.userbar-off{
+    background-color: RGBA(15, 15, 15, 0);
 }
