@@ -5,11 +5,11 @@
     justify-content: center;
     align-content: flex-start;
     align-items: center;
-    background-color: rgba(18, 18, 18, 0.4);
+    /* background-color: rgba(18, 18, 18, 0.4); */
 
     font-weight: normal;
 
-    background-color: RGBA(18, 18, 18, 0.4);
+    /* background-color: RGBA(18, 18, 18, 0.4); */
 
     position: absolute;
     height: 95px;
