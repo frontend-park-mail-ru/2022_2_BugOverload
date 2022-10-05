@@ -1,6 +1,6 @@
-const renderFunc = (menuElement) => {
-    const target = new (menuElement.render)();
-    target.render();
+const renderFunc = ({ Render }) => {
+    const Target = new Render();
+    Target.render();
 };
 
 export const goToPage = (menuElement, callback = renderFunc, current = document.body) => {
@@ -9,5 +9,9 @@ export const goToPage = (menuElement, callback = renderFunc, current = document.
         activeLink.classList.remove('active');
     }
     current.querySelector(`[data-section="${menuElement.href.slice(1)}"]`).classList.add('active');
-    (callback != renderFunc) ? callback() : renderFunc(menuElement);
+    if (callback !== renderFunc) {
+        callback();
+    } else {
+        renderFunc(menuElement);
+    }
 };

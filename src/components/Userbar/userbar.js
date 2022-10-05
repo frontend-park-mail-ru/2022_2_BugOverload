@@ -1,85 +1,67 @@
-import { renderTemplate } from '../../utils/render_template.js';
-import { Ajax } from '../../utils/ajax.js';
 import { BACKEND_API } from '../../config/config.js';
+import { Ajax } from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
 
 export class Userbar {
-    #root
-
     constructor(root) {
         this.root = root;
     }
 
-    render(user) {
-        const userbar = document.querySelector('.header__userbar-user-info-container');
-        renderTemplate('components/Userbar/userbar', userbar, 'afterend', user);
-
-        const targetHadler =  document.querySelector('.header__userbar-items-container');
-
-        targetHadler.addEventListener('click', (e) => {
-            e.preventDefault();
-            const { target } = e;
-
-            const response = Ajax.get(BACKEND_API.logout);
-            response.then((response) => {
-                if(target.dataset.section == 'logout') {
-                    if (response.status == 200) {
-                        document.body.querySelector('.header__userbar-substrate').remove();
-
-                        const userHtml =
-                        '<a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>';
-
-                        const headerForm = document.body.querySelector('.header__form');
-                        headerForm.insertAdjacentHTML('afterend', userHtml);
-                    }
-                }
-            });
-        });
-    }
-
-
-    handler(user) {
-        const userbar = document.body.querySelector('.header__userbar-substrate');
-        console.log(userbar);
+    addHandlers(user) {
         let isOpened = false;
-
+        const { root } = this;
 
         function handlerOpenUserbar() {
             if (isOpened) {
                 return;
             }
 
-            const userbar = document.body.querySelector('.header__userbar-substrate');
-            userbar.classList.remove('userbar-off');
-            userbar.classList.add('userbar-on');
+            document.body.querySelector('.header').remove();
 
-            const target = userbar.querySelector('.header__userbar-user-info-container');
-            renderTemplate('components/UserAvatar/userAvatar', target, 'beforeend', user);
+            const props = {
+                userinfo: Handlebars.templates['components/UserInfo/userInfo'](),
+                userbar: Handlebars.templates['components/Userbar/userbar'](),
+                ...user,
+            };
 
-            const userbarElement = new Userbar(root);
-            userbarElement.render(user);
+            renderTemplate(
+                'components/Header/header',
+                root,
+                'afterbegin',
+                props,
+            );
 
             isOpened = true;
-        }
 
-        function handlerCloseUserbar() {
-            if ( !isOpened ) {
-                return;
+            const targetHadler = document.querySelector('.header__userbar-items-container');
+
+            targetHadler.addEventListener('click', (e) => {
+                e.preventDefault();
+                const { target } = e;
+
+                const resGet = Ajax.get(BACKEND_API.logout);
+                resGet.then((response) => {
+                    if (target.dataset.section === 'logout') {
+                        if (response.status === 200) {
+                            document.body.querySelector('.header').remove();
+                            renderTemplate('components/Header/header', root, 'afterbegin');
+                        }
+                    }
+                });
+            });
+
+            function handlerCloseUserbar() {
+                document.body.querySelector('.header').remove();
+
+                renderTemplate('components/Header/header', root, 'afterbegin', user);
+
+                isOpened = false;
             }
 
             const userbar = document.body.querySelector('.header__userbar-substrate');
-            userbar.classList.remove('userbar-on');
-            userbar.classList.add('userbar-off');
-
-            document.body.querySelector('.header__userbar-items-container').remove();
-            document.body.querySelector('.header__userbar-name-container').remove();
-
-            isOpened = false;
+            userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
 
-        const inputUserbar = document.body.querySelector('.header__userbar-user-info-container');
-
-        inputUserbar.addEventListener('mouseenter', handlerOpenUserbar);
-        userbar.addEventListener('mouseleave', handlerCloseUserbar);
+        this.root.addEventListener('mouseenter', handlerOpenUserbar);
     }
-
 }

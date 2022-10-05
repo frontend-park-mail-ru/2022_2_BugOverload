@@ -1,26 +1,23 @@
-import {Ajax} from '../../utils/ajax.js';
-import {renderTemplate} from '../../utils/render_template.js';
-import {goToPage} from '../../utils/goToPage.js';
-import {renderError} from '../../utils/valid.js';
-import {Modal} from '../Modal/modal.js';
-import {Header} from '../Header/header.js';
-import {BACKEND_API, config} from '../../config/config.js';
-import {UserAvatar} from '../UserAvatar/userAvatar.js';
+import { Ajax } from '../../utils/ajax.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
+import {
+    checkEmail, checkPassword,renderError,
+} from '../../utils/valid.js';
+import { Modal } from '../Modal/modal.js';
+import { Userbar } from '../Userbar/userbar.js';
 
 export class Login {
-    #root
-
     constructor(root) {
         this.root = root;
     }
 
     render() {
-        if (!root.querySelector('.modal__window')) {
-            const modal = new Modal(root);
+        if (!this.root.querySelector('.modal__window')) {
+            const modal = new Modal(this.root);
             modal.render();
         }
 
-        const modalWindow = root.querySelector('.modal__window__flex');
+        const modalWindow = this.root.querySelector('.modal__window__flex');
 
         renderTemplate('components/Login/login', modalWindow, 'afterbegin');
 
@@ -29,60 +26,58 @@ export class Login {
 
     handler(modalWindow) {
         const form = modalWindow.querySelector('.modal__form');
-        const loginImg = modalWindow.querySelector('.modal__login__img');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const user = {};
             const emailInput = form.querySelector('input[type=email]');
             const passwordInput = form.querySelector('input[type=password]');
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
+            user.email = emailInput.value.trim();
+            user.password = passwordInput.value;
+
+            let flag = false;
+
+            Object.keys(user).forEach((key) => {
+                if (key === 'email') {
+                    if (!checkEmail(form, user[key])) {
+                        flag = true;
+                    }
+                }
+                if (key === 'password') {
+                    if (!checkPassword(form, user[key])) {
+                        flag = true;
+                    }
+                }
+            });
+
+            if (flag) {
+                return;
+            }
 
             const responsePromise = Ajax.post({
                 url: BACKEND_API.login,
                 body: {email, password}
             });
 
-            console.log(responsePromise)
-
             responsePromise.then((response) => {
-                console.log(response)
                 if (response.status === 200) {
-                    console.log(response.body);
-
                     document.body
                         .querySelector('.modal__background')
                         .remove();
 
-                    const userAvatar = new UserAvatar(root);
-                    userAvatar.render(response.body);
-
-                    return;
+                    document.body.querySelector('.header').remove();
+                    renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                    const userbar = new Userbar(this.root);
+                    userbar.addHandlers(response.body);
                 }
-
-                console.log(response.status);
+                if (response.status === 400) {
+                    renderError(form, 'email', 'Такой пользователь не зарегистирован');
+                }
+                if (response.status === 403) {
+                    renderError(form, 'password', 'Неверный пароль');
+                }
             });
-        });
-
-        loginImg.addEventListener('click', (e) => {
-            const { target } = e;
-
-            if (target instanceof HTMLAnchorElement) {
-                e.preventDefault();
-
-                goToPage(config.login[target.dataset.section], () => {
-                    modalWindow
-                        .querySelector('.modal__login')
-                        .remove();
-                    modalWindow
-                        .querySelector('.modal__login__img')
-                        .remove();
-                    const signup = new config.login[target.dataset.section].render(root);
-                    signup.render();
-                },
-                modalWindow);
-            }
         });
     }
 }

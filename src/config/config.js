@@ -6,7 +6,7 @@ export const config = {
         navlink: {
             href: '/navlink',
             name: 'Главная',
-            // render: renderMainPage,
+            // render: renderMain,
         },
         login: {
             href: '/login',
@@ -14,7 +14,7 @@ export const config = {
             render: Login,
         },
     },
-    login: {
+    auth: {
         signup: {
             href: '/signup',
             name: 'Регистрация',
