@@ -70,7 +70,7 @@ export class Userbar {
             const userbar = document.body.querySelector('.header__userbar-substrate');
             userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
-
+        
         const target = document.body.querySelector('.header__userbar-user-info-container');
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }

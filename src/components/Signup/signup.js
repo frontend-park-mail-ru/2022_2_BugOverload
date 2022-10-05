@@ -24,6 +24,10 @@ export class Signup {
                     .querySelector('.modal__background')
                     .remove();
 
+                const user = response.body;
+                if(!user.hasOwnProperty(propName)) {
+                    user.avatar = 'asserts/img/elements/invisibleMan.jpeg';
+                }
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
