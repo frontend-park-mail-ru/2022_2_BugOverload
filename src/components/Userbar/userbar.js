@@ -47,7 +47,7 @@ export class Userbar {
 
                 const resGet = Ajax.get(BACKEND_API.logout);
                 resGet.then((response) => {
-                    if (target.dataset.section === 'logout') {
+                    if (target.dataset.section === 'http://movie-gate.online:8088/v1/auth/logout') {
                         if (response.status === 200) {
                             document.body.querySelector('.header').remove();
                             renderTemplate('components/Header/header', root, 'afterbegin');

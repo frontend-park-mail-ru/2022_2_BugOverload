@@ -27,7 +27,7 @@ export class Collection {
     * @return {null} В случае ошибочного статуса
     */
     async getRequestData() {
-        const response = await Ajax.get(BACKEND_API[this._type]);
+        const response = await Ajax.get(`http://movie-gate.online:8088/v1/${this._type}`);
 
         if (response.status === 200) {
             return response.body;

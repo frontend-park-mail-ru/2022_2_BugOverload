@@ -20,7 +20,7 @@ export class Login {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: BACKEND_API.login,
+            url: 'http://movie-gate.online:8088/v1/auth/login',
             body: user,
         });
 
@@ -35,11 +35,13 @@ export class Login {
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
+            form = this.root.querySelector('.modal__wrapper__input');
             if (response.status === 400) {
                 renderError(form, 'email', 'Такой пользователь не зарегистирован');
             }
+            const wrapper = document.getElementById('login_password');
             if (response.status === 403) {
-                renderError(form, 'password', 'Неверный пароль');
+                renderError(wrapper, 'password', 'Неверный пароль');
             }
         });
     }

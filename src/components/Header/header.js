@@ -15,7 +15,7 @@ export class Header {
     }
 
     getRequestData() {
-        const responsePromise = Ajax.get(BACKEND_API.auth);
+        const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();

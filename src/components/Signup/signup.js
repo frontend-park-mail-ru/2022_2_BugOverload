@@ -14,7 +14,7 @@ export class Signup {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: BACKEND_API.signup,
+            url: 'http://movie-gate.online:8088/v1/auth/signup',
             body: user,
         });
 
@@ -32,8 +32,9 @@ export class Signup {
                 return;
             }
 
-            if (response.status === 200) {
-                renderError(form, 'email', 'Пользователь с таким email уже зарегистрирован');
+            if (response.status === 400) {
+                const wrapper = document.getElementById('signup_email');
+                renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
             }
         });
     }
