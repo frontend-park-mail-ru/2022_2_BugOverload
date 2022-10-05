@@ -29,9 +29,9 @@ export class Collection {
     async getRequestData() {
         let href;
         if (this._type === 'todayInCinema') {
-            href = in_cinema;
+            href = 'in_cinema';
         } else {
-            href = popular_films;
+            href = 'popular_films';
         }
         const response = await Ajax.get(`http://movie-gate.online:8088/v1/${href}`);
 
