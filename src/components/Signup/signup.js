@@ -11,7 +11,7 @@ export class Signup {
         this.root = root;
     }
 
-    postRequestData(inputData) {
+    postRequestData(user) {
         const responsePromise = Ajax.post({
             url: 'http://movie-gate.online:8088/v1/auth/signup',
             body: user,
@@ -23,13 +23,12 @@ export class Signup {
                     .querySelector('.modal__background')
                     .remove();
 
-                const user = response.body;
-                if (!Object.prototype.hasOwnProperty.call(user, 'avatar')) {
-                    user.avatar = 'asserts/img/invisibleMan.jpeg';
+                if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
+                    response.body.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', { 
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user), 
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body), 
                     ...response.body
                 });
                 const userbar = new Userbar(this.root);
