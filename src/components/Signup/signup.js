@@ -25,7 +25,7 @@ export class Signup {
                     .remove();
 
                 const user = response.body;
-                if(!user.hasOwnProperty(propName)) {
+                if(!user.hasOwnProperty('avatar')) {
                     user.avatar = 'asserts/img/elements/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
