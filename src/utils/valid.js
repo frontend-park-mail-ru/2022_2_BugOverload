@@ -52,7 +52,7 @@ const checkConfirmPassword = (confirm, confirmPassword, password, textErrorPassw
     return true;
 };
 
-export const checkPassword = (form, input,type = null, confirmPassword = null) => {
+export const checkPassword = (form, input, type = null, confirmPassword = null) => {
     const confirm = document.getElementById('confirm');
     if (!input) {
         renderError(form, 'password', 'Введите пароль');

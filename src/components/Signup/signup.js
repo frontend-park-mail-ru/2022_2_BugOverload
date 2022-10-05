@@ -11,7 +11,7 @@ export class Signup {
         this.root = root;
     }
 
-    postRequestData(user) {
+    postRequestData(inputData) {
         const responsePromise = Ajax.post({
             url: 'http://movie-gate.online:8088/v1/auth/signup',
             body: user,
@@ -24,11 +24,14 @@ export class Signup {
                     .remove();
 
                 const user = response.body;
-                if(!user.hasOwnProperty('avatar')) {
+                if (!Object.prototype.hasOwnProperty.call(user, 'avatar')) {
                     user.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin', { 
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user), 
+                    ...response.body
+                });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
 
@@ -80,7 +83,11 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
+<<<<<<< HEAD
                     if (!checkPassword(form, user[key],'signup',confirmPassword)) {
+=======
+                    if (!checkPassword(form, user[key], 'signup', confirmPassword)) {
+>>>>>>> origin/tp-96b_auth_login_page
                         flag = true;
                     }
                 }

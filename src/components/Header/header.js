@@ -18,8 +18,11 @@ export class Header {
         const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
+                console.log(response.body)
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin', {
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body), 
+                    ...response.body});
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
@@ -68,7 +71,7 @@ export class Header {
 
                 if ((header.compareDocumentPosition(target) === 16
                         || header.compareDocumentPosition(target) === 20)
-                        && target.dataset.section === 'login' ) {
+                        && target.dataset.section === 'login') {
                     const Render = config.header[target.dataset.section].render;
                     const element = new Render(this.root);
                     element.render();
