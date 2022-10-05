@@ -31,14 +31,14 @@ export const config = {
 export const ROOT = document.getElementById('root');
 
 export const BACKEND_API = {
-    path: 'http://movie-gate.online:8088',
+    path: 'http://127.0.0.1:8088',
     port: '8088',
 
-    popular: 'http://movie-gate.online:8088/v1/popular_films',
-    todayInCinema: 'http://movie-gate.online:8088/v1/in_cinema',
-    auth: 'http://movie-gate.online:8088/v1/auth',
-    login: 'http://movie-gate.online:8088/v1/auth/login',
-    signup: 'http://movie-gate.online:8088/v1/auth/signup',
-    logout: 'http://movie-gate.online:8088/v1/auth/logout',
-    previewFilm: 'http://movie-gate.online:8088/v1/recommendation_film',
+    popular: 'http://127.0.0.1:8088/v1/popular_films',
+    todayInCinema: 'http://127.0.0.1:8088/v1/in_cinema',
+    auth: 'http://127.0.0.1:8088/v1/auth',
+    login: 'http://127.0.0.1:8088/v1/auth/login',
+    signup: 'http://127.0.0.1:8088/v1/auth/signup',
+    logout: 'http://127.0.0.1:8088/v1/auth/logout',
+    previewFilm: 'http://127.0.0.1:8088/v1/recommendation_film',
 };
