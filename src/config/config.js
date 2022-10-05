@@ -14,7 +14,7 @@ export const config = {
             render: Login,
         },
     },
-    login: {
+    auth: {
         signup: {
             href: '/signup',
             name: 'Регистрация',

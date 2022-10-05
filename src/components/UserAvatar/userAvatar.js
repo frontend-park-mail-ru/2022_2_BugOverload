@@ -1,10 +1,6 @@
-import {Userbar} from '../Userbar/userbar.js';
-import {renderTemplate} from '../../utils/render_template.js';
-
+import { Userbar } from '../Userbar/userbar.js';
 
 export class UserAvatar {
-    #root
-
     constructor(root) {
         this.root = root;
     }
@@ -12,8 +8,7 @@ export class UserAvatar {
     render(user) {
         document.body.querySelector('.header__login__btn').remove();
 
-        const userHtml =
-        `<div class="header__userbar-substrate">
+        const userHtml = `<div class="header__userbar-substrate">
             <div class="header__userbar-user-info-container">
                 <img class="header__avatar" src="${user.avatar}" alt="">
             </div>
@@ -22,7 +17,7 @@ export class UserAvatar {
         const headerForm = document.body.querySelector('.header__form');
         headerForm.insertAdjacentHTML('afterend', userHtml);
 
-        const userbar = new Userbar(root);
+        const userbar = new Userbar(this.root);
         userbar.handler(user);
     }
 }
