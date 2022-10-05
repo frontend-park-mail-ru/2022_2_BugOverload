@@ -83,11 +83,8 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
-<<<<<<< HEAD
-                    if (!checkPassword(form, user[key],'signup',confirmPassword)) {
-=======
+
                     if (!checkPassword(form, user[key], 'signup', confirmPassword)) {
->>>>>>> origin/tp-96b_auth_login_page
                         flag = true;
                     }
                 }
