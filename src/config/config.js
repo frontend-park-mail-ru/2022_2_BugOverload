@@ -30,17 +30,15 @@ export const config = {
 
 export const ROOT = document.getElementById('root');
 
-const PATH = 'http://localhost:3000';
-
 export const BACKEND_API = {
-    path: PATH,
+    path: 'http://movie-gate.online:8088',
     port: '8088',
 
-    popular: `${PATH}/v1/popular_films`,
-    todayInCinema: `${PATH}/v1/in_cinema`,
-    auth: `${PATH}/v1/auth`,
-    login: `${PATH}/v1/auth/login`,
-    signup: `${PATH}/v1/auth/signup`,
-    logout: `${PATH}/v1/auth/logout`,
-    previewFilm: `${PATH}/v1/recommendation_film`,
+    popular: 'http://movie-gate.online:8088/v1/popular_films',
+    todayInCinema: 'http://movie-gate.online:8088/v1/in_cinema',
+    auth: 'http://movie-gate.online:8088/v1/auth',
+    login: 'http://movie-gate.online:8088/v1/auth/login',
+    signup: 'http://movie-gate.online:8088/v1/auth/signup',
+    logout: 'http://movie-gate.online:8088/v1/auth/logout',
+    previewFilm: 'http://movie-gate.online:8088/v1/recommendation_film',
 };
