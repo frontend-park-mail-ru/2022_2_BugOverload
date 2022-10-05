@@ -7,11 +7,23 @@ export const COLLECTION_TYPE = {
     todayInCinema: 'todayInCinema',
 };
 
+/**
+* Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
+* Добавляет обработчики событий на кнопки слайдера
+*
+*/
 export class Collection {
     constructor(type) {
         this._type = type;
     }
 
+    /**
+    * Получает данные с бэкенда.
+    * Обрабатывает статусы ответа
+    *
+    * @return {Object} Объект с данными о коллекции
+    * @return {null} В случае ошибочного статуса
+    */
     async getRequestData() {
         const response = await Ajax.get(BACKEND_API[this._type]);
 
@@ -20,53 +32,46 @@ export class Collection {
         }
 
         if (response.status === 404) {
-            // TODO
-            // ShowErrorMessage()
-            throw new Error(404);
+            ShowErrorMessage();
+            return null;
         }
 
         if (response.status > 500) {
-            throw new Error(500);
+            ShowErrorMessage();
+            return null;
         }
 
-        throw new Error('Error collection');
+        ShowErrorMessage();
+        return null;
     }
 
+    /**
+    * Создаёт коллекцию из набора данных как HTML-шаблон, полученных с бэкенда
+    *
+    * @param {data Object} data - объект данных коллекции
+    * @return {string} отрендеренный HTML-шаблон коллеции
+    */
     renderTemplate(data) {
-        // if (response.status === 200) {
-            // this._count = response.body.films.length;
-        return this.createCollection(data);
-            // debugger;
-            // return Handlebars.templates['components/Collection/collection'](response.body);
-            // return;
-        // }
+        const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        // if (response.status === 404) {
-        //     // TODO
-        //     // ShowErrorMessage()
-        //     throw new Error(404);
-        // }
-
-        // if (response.status > 500) {
-        //     // TODO
-        //     throw new Error(500);
-        // }
-
-        // // TODO
-        // throw new Error('Error collection');
+        return Handlebars.templates['components/Collection/collection']({ title: data.title, films });
     }
 
+    /**
+    * Служит для добавления обработчиков на все отрендеренные на странице коллекции
+    *
+    */
     static addHandlers() {
         const sliders = document.querySelectorAll('.collection__container');
         sliders.forEach((slider) => Collection.addHandlerSlider(slider));
     }
 
-    createCollection(filmsData) {
-        const films = filmsData.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
-
-        return Handlebars.templates['components/Collection/collection']({ title: filmsData.title, films });
-    }
-
+    /**
+    * Служит для добавления обработчиков на переданный слайдер в виде DOM-объекта.
+    * Добавлет к слайдеру функционал скролла по нажатию соответствующей кнопки.
+    *
+    * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
+    */
     static addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
@@ -130,52 +135,4 @@ export class Collection {
             }
         });
     }
-
-    // static addColorRatingFilm(div, filmsData) {
-    //     const ratingElem = div.querySelectorAll('.film__rating');
-
-    //     ratingElem.forEach((film, index) => {
-    //         const ratingValue = filmsData.films[index].ratio;
-
-    //         if (ratingValue > 7.49) {
-    //             film.dataset.valueRating = 'positive';
-    //             return;
-    //         }
-
-    //         if (ratingValue > 5.19) {
-    //             film.dataset.valueRating = 'neutral';
-    //             return;
-    //         }
-
-    //         film.dataset.valueRating = 'negotive';
-    //     });
-    // }
 }
-
-// function decorateGenresFilm(filmsData) {
-//     filmsData.films.forEach((film) => {
-//         for (let i = 0; i < film.genres.length - 1; ++i) {
-//             film.genres[i] += ',';
-//         }
-//     });
-// }
-
-// function addColorRatingFilm(div, filmsData) {
-//     const ratingElem = div.querySelectorAll('.film__rating');
-
-//     ratingElem.forEach((film, index) => {
-//         const ratingValue = filmsData.films[index].ratio;
-
-//         if (ratingValue > 7.49) {
-//             film.dataset.valueRating = 'positive';
-//             return;
-//         }
-
-//         if (ratingValue > 5.19) {
-//             film.dataset.valueRating = 'neutral';
-//             return;
-//         }
-
-//         film.dataset.valueRating = 'negotive';
-//     });
-// }

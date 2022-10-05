@@ -1,4 +1,13 @@
+/**
+* Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
+*
+*/
 export class Film {
+    /**
+    * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
+    *
+    * @param {filmData Object} filmData - объект с данными о фильме
+    */
     static createFilm(filmData) {
         Film.decoreGenres(filmData);
 
@@ -12,12 +21,23 @@ export class Film {
         return div.innerHTML;
     }
 
+    /**
+    * Добавляет запятую ко всем жанрам, кроме последнего
+    *
+    * @param {filmData Object} filmData - объект с данными о фильме
+    */
     static decoreGenres(filmData) {
         for (let i = 0; i < filmData.genres.length - 1; ++i) {
             filmData.genres[i] += ',';
         }
     }
 
+    /**
+    * Выставляет HTML-атрибуты для дальнейшего задания цвета блока с рейтингом
+    *
+    * @param {film HTMLElement} film - DOM-объект с данными о фильме
+    * @param {filmData Object} filmData - объект с данными о фильме
+    */
     static addColorRating(film, filmData) {
         const filmRating = film.querySelector('.film__rating');
         const ratingValue = filmData.ratio;

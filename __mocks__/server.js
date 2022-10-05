@@ -23,7 +23,6 @@ const users = {
 		'nickname': 'StepByyyy',
 		'email': 'dop123@mail.ru',
 		'password': 'dop123@mail.ru',
-		// 'avatar': 'https://static.1tv.ru/uploads/photo/image/2/huge/4062_huge_876c41f50e.jpg'
 		'avatar': 'asserts/img/invisibleMan.jpeg'
 	},
 };

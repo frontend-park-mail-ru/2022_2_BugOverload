@@ -3,6 +3,10 @@ import { Collection, COLLECTION_TYPE } from '../Collection/collection.js';
 import { Header } from '../Header/header.js';
 import { ROOT } from '../../config/config.js';
 
+/**
+* Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
+*
+*/
 export function renderMainPage() {
     const header = new Header(ROOT);
     header.render();
@@ -12,12 +16,12 @@ export function renderMainPage() {
     const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
 
     Promise.all([
-        previewFilm.getRequestData(), // ходит в сеть и обрабатывает статусы
+        previewFilm.getRequestData(),
         collectionPopular.getRequestData(),
         collectionCinemaToday.getRequestData(),
     ]).then((responses) => {
         ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['components/MainPage/mainPage']({
-            previewFilm: previewFilm.renderTemplate(responses[0]), // возвращает HTML
+            previewFilm: previewFilm.renderTemplate(responses[0]),
             collectionPopular: collectionPopular.renderTemplate(responses[1]),
             collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
         }));

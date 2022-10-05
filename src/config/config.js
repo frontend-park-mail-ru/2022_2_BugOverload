@@ -6,7 +6,7 @@ export const config = {
         navlink: {
             href: '/navlink',
             name: 'Главная',
-            // render: renderMain,
+            // render: renderMainPage,
         },
         login: {
             href: '/login',
