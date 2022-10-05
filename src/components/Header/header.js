@@ -1,7 +1,7 @@
 import { Ajax } from '../../utils/ajax.js';
-import { renderTemplate } from '../../utils/render_template.js';
-import { goToPage } from '../../utils/go_to_page.js';
-import { UserAvatar } from '../UserAvatar/userAvatar.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
+import { goToPage } from '../../utils/goToPage.js';
+import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
 
 export class Header {
@@ -9,20 +9,19 @@ export class Header {
         this.root = root;
     }
 
-    render(user) {
-        if (!user) {
-            const responsePromise = Ajax.get('http://localhost:8088/v1/auth');
-            responsePromise.then((response) => {
-                if (response.status === 200) {
-                    user = response.body;
-                    const userAvatar = new UserAvatar(this.root);
-                    userAvatar.render(user);
-                }
-            });
-        }
+    render() {
+        const responsePromise = Ajax.get('http://localhost:8088/v1/auth');
+        responsePromise.then((response) => {
+            if (response.status === 200) {
+                document.body.querySelector('.header').remove();
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                const userbar = new Userbar(this.root);
+                userbar.addHandlers(response.body);
+            }
+        });
 
-        renderTemplate('components/Header/header', this.root, 'beforebegin', user);
-        this.handlerHeader(user);
+        renderTemplate('components/Header/header', this.root, 'afterbegin');
+        this.handlerHeader();
     }
 
     handlerHeader() {

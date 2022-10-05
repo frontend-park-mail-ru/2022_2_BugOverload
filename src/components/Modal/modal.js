@@ -1,4 +1,4 @@
-import { renderTemplate } from '../../utils/render_template.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
 
 export class Modal {
     constructor(root) {

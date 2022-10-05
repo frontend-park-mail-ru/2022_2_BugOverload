@@ -1,8 +1,8 @@
 import { Ajax } from '../../utils/ajax.js';
-import { renderTemplate } from '../../utils/render_template.js';
+import { renderTemplate } from '../../utils/renderTemplate.js';
 // import { renderError } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
-import { UserAvatar } from '../UserAvatar/userAvatar.js';
+import { Userbar } from '../Userbar/userbar.js';
 
 export class Login {
     constructor(root) {
@@ -44,8 +44,10 @@ export class Login {
                         .querySelector('.modal__background')
                         .remove();
 
-                    const userAvatar = new UserAvatar(this.root);
-                    userAvatar.render(response.body);
+                    document.body.querySelector('.header').remove();
+                    renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                    const userbar = new Userbar(this.root);
+                    userbar.addHandlers(response.body);
                 }
             });
         });

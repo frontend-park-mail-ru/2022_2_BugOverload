@@ -1,15 +1,16 @@
+import { regExp } from '../../config/regExp.js';
+
 export const checkNick = (form, input) => {
     if (!input) {
         renderError(form, 'text', 'Вы кое-что забыли! Скажите, как вас зовут');
         return false;
     }
-    if (!input.match(/^[a-zA-Za-яёА-ЯЁ0-9!"№;%:?*@#$%^&]{4,}$/)) {
+    if (!input.match(regExp.nick)) {
         if (input.length > 3) {
             renderError(form, 'text', 'Недопустимый символ');
         } else {
             renderError(form, 'text', 'В имени должно быть не меньше 4 символов');
         }
-
         return false;
     }
     removeError(form, 'text');
@@ -21,7 +22,7 @@ export const checkEmail = (form, input) => {
         renderError(form, 'email', 'Введите email');
         return false;
     }
-    if (!input.match(/^.+@.+\..+$/)) {
+    if (!input.match(regExp.email)) {
         renderError(form, 'email', 'Такого адреса не существует');
 
         return false;
@@ -30,20 +31,20 @@ export const checkEmail = (form, input) => {
     return true;
 };
 
-const checkConfirmPassword = (wrappers, confirmPassword, password, textErrorPassword = null) => {
+const checkConfirmPassword = (confirm, confirmPassword, password, textErrorPassword = null) => {
     if (!confirmPassword) {
-        renderError(wrappers[3], 'password', 'Введите пароль');
+        renderError(confirm, 'password', 'Введите пароль');
         return false;
     }
 
     if (confirmPassword !== password) {
-        renderError(wrappers[3], 'password', 'Пароли не совпадают');
+        renderError(confirm, 'password', 'Пароли не совпадают');
         return false;
     }
 
     if (confirmPassword === password) {
         if (textErrorPassword) {
-            renderError(wrappers[3], 'password', textErrorPassword);
+            renderError(confirm, 'password', textErrorPassword);
             return false;
         }
     }
@@ -52,37 +53,37 @@ const checkConfirmPassword = (wrappers, confirmPassword, password, textErrorPass
 };
 
 export const checkPassword = (form, input, confirmPassword = null) => {
-    const wrappers = form.querySelectorAll('.modal__wrapper__input');
+    const confirm = document.getElementById('confirm');
     if (!input) {
         renderError(form, 'password', 'Введите пароль');
         if (!(confirmPassword === null)) {
-            if (!checkConfirmPassword(wrappers, confirmPassword, input)) {
+            if (!checkConfirmPassword(confirm, confirmPassword, input)) {
                 return false;
             }
-            removeError(wrappers[3], 'password');
+            removeError(confirm, 'password');
         }
         return false;
     }
-    if (!input.match(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/g)) {
+    if (!input.match(regExp.password)) {
         let textError;
         if (input.length > 5) {
             textError = 'В пароле должна быть хотя бы одна цифра, маленькая и большая буква';
             renderError(form, 'password', textError);
             if (confirmPassword) {
-                if (!checkConfirmPassword(wrappers, confirmPassword, input, textError)) {
+                if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
                     return false;
                 }
-                removeError(wrappers[3], 'password');
+                removeError(confirm, 'password');
             }
         }
         if (input.length < 6) {
             textError = 'В пароле должно быть не меньше 6 символов';
             renderError(form, 'password', textError);
             if (confirmPassword) {
-                if (!checkConfirmPassword(wrappers, confirmPassword, input, textError)) {
+                if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
                     return false;
                 }
-                removeError(wrappers[3], 'password');
+                removeError(confirm, 'password');
             }
         }
     }
