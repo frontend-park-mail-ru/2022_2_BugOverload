@@ -20,8 +20,6 @@ export class Header {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin');
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
             }
         });
     }
