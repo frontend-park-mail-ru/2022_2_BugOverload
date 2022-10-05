@@ -7,7 +7,7 @@ export class Userbar {
     }
 
     getRequestData() {
-        
+
     }
 
     addHandlers(user) {

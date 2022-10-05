@@ -31,6 +31,7 @@ export class Signup {
                 return;
             }
 
+            const form = document.getElementById('email');
             if (response.status === 200) {
                 renderError(form, 'email', 'Пользователь с таким email уже зарегистрирован');
             }

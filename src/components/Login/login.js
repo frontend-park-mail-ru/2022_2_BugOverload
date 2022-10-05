@@ -28,11 +28,13 @@ export class Login {
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
+            const form = this.root.querySelector('.modal__wrapper__input');
             if (response.status === 400) {
                 renderError(form, 'email', 'Такой пользователь не зарегистирован');
             }
+            const password = document.getElementById('password');
             if (response.status === 403) {
-                renderError(form, 'password', 'Неверный пароль');
+                renderError(password, 'password', 'Неверный пароль');
             }
         });
     }
