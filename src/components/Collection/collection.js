@@ -1,6 +1,7 @@
 import { Ajax } from '../../utils/ajax.js';
 import { BACKEND_API } from '../../config/config.js';
 import { Film } from '../Film/film.js';
+import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 
 export const COLLECTION_TYPE = {
     popular: 'popular',
@@ -19,7 +20,8 @@ export class Collection {
 
     /**
     * Получает данные с бэкенда.
-    * Обрабатывает статусы ответа
+    * Обрабатывает статусы ответа.
+    * В случае ошибочного статуса добавляет собщение об ошибке в root в index.html
     *
     * @return {Object} Объект с данными о коллекции
     * @return {null} В случае ошибочного статуса

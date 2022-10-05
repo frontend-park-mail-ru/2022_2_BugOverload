@@ -3,7 +3,15 @@ import { renderTemplate } from '../../utils/renderTemplate.js';
 import { goToPage } from '../../utils/goToPage.js';
 import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
+import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 
+
+/**
+* Отрисовывает хедер.
+* Обращается к бэкенду для авторизации пользователя или проверки его авторизации
+* Добавляет обработчики событий.
+*
+*/
 export class Header {
     constructor(root) {
         this.root = root;
