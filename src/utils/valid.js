@@ -52,7 +52,7 @@ const checkConfirmPassword = (confirm, confirmPassword, password, textErrorPassw
     return true;
 };
 
-export const checkPassword = (form, input, confirmPassword = null) => {
+export const checkPassword = (form, input,type = null, confirmPassword = null) => {
     const confirm = document.getElementById('confirm');
     if (!input) {
         renderError(form, 'password', 'Введите пароль');
@@ -69,7 +69,7 @@ export const checkPassword = (form, input, confirmPassword = null) => {
         if (input.length > 5) {
             textError = 'В пароле должна быть хотя бы одна цифра, маленькая и большая буква';
             renderError(form, 'password', textError);
-            if (confirmPassword) {
+            if (type) {
                 if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
                     return false;
                 }
@@ -79,7 +79,7 @@ export const checkPassword = (form, input, confirmPassword = null) => {
         if (input.length < 6) {
             textError = 'В пароле должно быть не меньше 6 символов';
             renderError(form, 'password', textError);
-            if (confirmPassword) {
+            if (type) {
                 if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
                     return false;
                 }

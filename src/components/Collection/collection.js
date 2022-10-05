@@ -1,5 +1,4 @@
 import { Ajax } from '../../utils/ajax.js';
-import { BACKEND_API } from '../../config/config.js';
 import { Film } from '../Film/film.js';
 import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 

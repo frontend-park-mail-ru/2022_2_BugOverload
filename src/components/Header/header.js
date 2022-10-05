@@ -1,7 +1,7 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import { Userbar } from '../Userbar/userbar.js';
-import { BACKEND_API, config } from '../../config/config.js';
+import { config } from '../../config/config.js';
 
 /**
 * Отрисовывает хедер.

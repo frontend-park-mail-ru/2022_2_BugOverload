@@ -5,7 +5,6 @@ import {
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
-import { BACKEND_API } from '../../config/config.js';
 
 export class Signup {
     constructor(root) {
@@ -80,7 +79,7 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
-                    if (!checkPassword(form, user[key], confirmPassword)) {
+                    if (!checkPassword(form, user[key],'signup',confirmPassword)) {
                         flag = true;
                     }
                 }
