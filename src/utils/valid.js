@@ -87,6 +87,12 @@ export const checkPassword = (form, input,type = null, confirmPassword = null) =
             }
         }
     }
+    if (type) {
+        if (!checkConfirmPassword(confirm, confirmPassword, input, textError)) {
+            return false;
+        }
+        removeError(confirm, 'password');
+    }
     removeError(form, 'password');
     return true;
 };
