@@ -14,15 +14,15 @@ app.use(express.static(path.resolve(__dirname, '../src')));
 app.use(express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
-	origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
+	origin: ['http://:3000', 'http://:3001', 'http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://:5500'],
 	credentials: true,
 }));
 
 const users = {
-	'dop123@mail.ru': {
+	'Dop123@mail.ru': {
 		'nickname': 'StepByyyy',
-		'email': 'dop123@mail.ru',
-		'password': 'dop123@mail.ru',
+		'email': 'Dop123@mail.ru',
+		'password': 'Dop123@mail.ru',
 		'avatar': 'asserts/img/invisibleMan.jpeg'
 	},
 };
@@ -739,7 +739,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8088;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
