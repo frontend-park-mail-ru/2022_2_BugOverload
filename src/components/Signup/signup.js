@@ -23,12 +23,14 @@ export class Signup {
                     .querySelector('.modal__background')
                     .remove();
 
-                user = response.body;
-                if (!user.hasOwnProperty('avatar')) {
-                    user.avatar = 'asserts/img/invisibleMan.jpeg';
+                if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
+                    response.body.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin', {
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
+                    ...response.body,
+                });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
 

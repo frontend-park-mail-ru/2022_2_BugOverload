@@ -44,11 +44,13 @@ export class Userbar {
                 e.preventDefault();
                 const { target } = e;
 
-                const resGet = Ajax.get('http://localhost:8088/v1/auth/logout');
+                const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
                 resGet.then((response) => {
-                    if (target.dataset.section === 'logout' && response.status === 200) {
-                        document.body.querySelector('.header').remove();
-                        renderTemplate('components/Header/header', root, 'afterbegin');
+                    if (target.dataset.section === 'logout') {
+                        if (response.status === 200) {
+                            document.body.querySelector('.header').remove();
+                            renderTemplate('components/Header/header', root, 'afterbegin');
+                        }
                     }
                 });
             });
@@ -56,7 +58,10 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('components/Header/header', root, 'afterbegin', user);
+                renderTemplate('components/Header/header', root, 'afterbegin', {
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
+                    ...user,
+                });
 
                 const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
@@ -69,6 +74,7 @@ export class Userbar {
         }
 
         const target = document.body.querySelector('.header__userbar-user-info-container');
+        console.log(document.body.querySelector('.header__login__btn'));
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }

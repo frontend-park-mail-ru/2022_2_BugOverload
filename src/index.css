@@ -94,6 +94,7 @@ body, html {
 .button__yellow:hover {
     background-color: #CD9826;
     transition: 0.1s linear;
+    cursor: pointer;
 }
 
 .header__navlink:hover {

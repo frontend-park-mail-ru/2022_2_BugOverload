@@ -61,7 +61,7 @@
     align-items: center;
     width: 270px;
     height: 55px;
-    margin-bottom: 14px;
+    margin-bottom: 17px;
 }
 
 .modal__input {
@@ -96,15 +96,17 @@
     height: 30px;
     border-radius: 21px;
     margin-top: 4px;
+    cursor: pointer;
 }
 
 .modal__text__alternative__page{
     white-space: nowrap;
     margin-top: 25px;
     margin-right: 20px;
-    font-size: 11px;
+    font-size: 13px;
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .modal__login__signup__btn {
@@ -112,12 +114,12 @@
     margin-top: 25px;
     margin-right: 45px;
     color: #000;
-    font-size: 12px;
+    font-size: 15px;
     font-family: 'Mail Sans Roman Med';
     text-decoration: none;
-    height: 23px;
-    width: 120px;
-    border-radius: 26px;
+    height: 30px;
+    width: 150px;
+    border-radius: 21px;
 }
 
 .modal__flex__center__div {

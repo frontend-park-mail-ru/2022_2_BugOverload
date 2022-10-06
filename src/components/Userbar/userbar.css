@@ -41,6 +41,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 12px;
+    overflow: hidden;
 }
 
 .header__userbar-name {
