@@ -15,14 +15,14 @@ export class Header {
     }
 
     getRequestData() {
-        const responsePromise = Ajax.get('http://127.0.0.1:8088/v1/auth');
+        const responsePromise = Ajax.get('/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
-                console.log(response.body)
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body), 
-                    ...response.body});
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
+                    ...response.body,
+                });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }

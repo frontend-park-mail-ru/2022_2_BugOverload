@@ -32,7 +32,7 @@ export class Collection {
         } else {
             href = 'popular_films';
         }
-        const response = await Ajax.get(`http://127.0.0.1:8088/v1/${href}`);
+        const response = await Ajax.get(`/v1/${href}`);
 
         if (response.status === 200) {
             return response.body;

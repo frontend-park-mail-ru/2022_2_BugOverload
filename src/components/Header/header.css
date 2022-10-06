@@ -7,16 +7,19 @@
     font-weight: normal;
     position: absolute;
     height: 95px;
-    margin-left: 52px;
     width: 100%;
 }
 
 .header__logo {
     white-space: nowrap;
-    margin-right: 45px;
+    margin-right: 20px;
+    margin-left: 52px;
     font-size: 30px;
     color: #fff;
     text-decoration: none;
+    height: 50px;
+    width: auto;
+    cursor: pointer;
 }
 
 .header__navlink {

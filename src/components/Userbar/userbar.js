@@ -44,7 +44,7 @@ export class Userbar {
                 e.preventDefault();
                 const { target } = e;
 
-                const resGet = Ajax.get('http://127.0.0.1:8088/v1/auth/logout');
+                const resGet = Ajax.get('/v1/auth/logout');
                 resGet.then((response) => {
                     if (target.dataset.section === 'logout') {
                         if (response.status === 200) {
@@ -58,8 +58,8 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('components/Header/header', root, 'afterbegin', { 
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user), 
+                renderTemplate('components/Header/header', root, 'afterbegin', {
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                     ...user,
                 });
 
@@ -74,7 +74,6 @@ export class Userbar {
         }
 
         const target = document.body.querySelector('.header__userbar-user-info-container');
-        console.log(document.body.querySelector('.header__login__btn'));
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }
