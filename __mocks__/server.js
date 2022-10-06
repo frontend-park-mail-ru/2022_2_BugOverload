@@ -739,7 +739,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-const port = process.env.PORT || 8088;
+const port = process.env.PORT || 80;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);

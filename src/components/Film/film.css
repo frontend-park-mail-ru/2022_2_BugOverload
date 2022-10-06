@@ -30,15 +30,15 @@
     background-color: var(--rating-color, #12B77C);
 }
 
-[data-value-rating="positive"] {
+[data-value-rating='positive'] {
     background-color: #12B77C;
 }
 
-[data-value-rating="neutral"] {
+[data-value-rating='neutral'] {
     background-color: #858585;
 }
 
-[data-value-rating="negotive"] {
+[data-value-rating='negotive'] {
     background-color: #FF4350;
 }
 
