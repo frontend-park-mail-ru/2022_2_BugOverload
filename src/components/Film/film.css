@@ -10,8 +10,9 @@
     position: relative;
 }
 
-.film a {
-    transition: 0.12s linear;
+.film__container {
+    display: flex;
+    flex-direction: column;
 }
 
 .film__rating {
@@ -48,6 +49,7 @@
     height: 300px;
     border-radius: 5px;
     background-size: 210px;
+    transition: 0.12s linear;
 }
 
 .film__blackout {
@@ -58,6 +60,7 @@
     top: 0;
     transition: 0.12s linear;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 
@@ -99,7 +102,7 @@
     color: #9C9C9C;
 }
 
-.film:hover a {
+.film:hover .film__poster {
     background-size: 224px auto;
     background-position: -7px -10px;
     transition: 0.12s linear;

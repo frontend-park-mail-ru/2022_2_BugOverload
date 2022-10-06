@@ -32,11 +32,11 @@ export function renderMainPage() {
     });
 }
 
-export function addHandlersToDevelopmentLinks() {
+function addHandlersToDevelopmentLinks() {
     let elems = document.querySelectorAll('.header__navlink');
     elems.forEach((elem) => errLink(elem));
 
-    elems = document.querySelectorAll('.film__poster');
+    elems = document.querySelectorAll('.film__link');
     elems.forEach((elem) => errLink(elem));
 }
 
