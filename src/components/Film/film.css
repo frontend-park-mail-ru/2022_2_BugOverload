@@ -15,16 +15,18 @@
 }
 
 .film__rating {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    position: absolute;
     font-size: 15px;
-    color: #fff;
     padding: 1px 6px 0;
     width: 32px;
     height: 20px;
-    box-sizing: border-box;
-    position: absolute;
     top: 9px;
     left: 0;
     border-radius: 4px;
+    color: #fff;
     background-color: var(--rating-color, #12B77C);
 }
 

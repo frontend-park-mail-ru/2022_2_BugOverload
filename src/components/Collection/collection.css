@@ -59,10 +59,12 @@
     width: 43px;
     height: 43px;
     opacity: 0.8;
+    cursor: pointer;
 }
 
 .collection__slider-button_left img:hover {
     width: 43px;
     height: 43px;
     opacity: 0.8;
+    cursor: pointer;
 }
