@@ -74,26 +74,7 @@ export class Userbar {
 
             isOpened = true;
 
-<<<<<<< HEAD
-            const targetHadler = document.querySelector('.header__userbar-item-out');
-
-            targetHadler.addEventListener('click', (e) => {
-                e.preventDefault();
-                const { target } = e;
-
-                const resGet = Ajax.get('http://localhost:8088/v1/auth/logout');
-                resGet.then((response) => {
-                    if (target.dataset.section === 'logout') {
-                        if (response.status === 200) {
-                            document.body.querySelector('.header').remove();
-                            renderTemplate('components/Header/header', root, 'afterbegin');
-                        }
-                    }
-                });
-            });
-=======
             logout();
->>>>>>> origin/TP-96b_auth_login_page
 
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
