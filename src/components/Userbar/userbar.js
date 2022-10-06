@@ -6,10 +6,6 @@ export class Userbar {
         this.root = root;
     }
 
-    getRequestData() {
-
-    }
-
     addHandlers(user) {
         let isOpened = false;
         const { root } = this;
