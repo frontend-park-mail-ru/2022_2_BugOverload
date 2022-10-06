@@ -28,7 +28,7 @@ export class Login {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/login',
+            url: '/v1/auth/login',
             body: user,
         });
 
@@ -39,10 +39,7 @@ export class Login {
                     .remove();
 
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
-                    ...response.body,
-                });
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }

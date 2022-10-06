@@ -25,12 +25,12 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
+            const resGet = Ajax.get('/v1/auth/logout');
             resGet.then((response) => {
                 if (target.dataset.section === 'logout') {
                     if (response.status === 200) {
                         document.body.querySelector('.header').remove();
-                        renderTemplate('components/Header/header', root, 'afterbegin');
+                        renderTemplate('views/Header/header', root, 'afterbegin');
                     }
                 }
             });
@@ -58,13 +58,12 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                 userbar: Handlebars.templates['components/Userbar/userbar'](),
                 ...user,
             };
 
             renderTemplate(
-                'components/Header/header',
+                'views/Header/header',
                 root,
                 'afterbegin',
                 props,
@@ -79,8 +78,7 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('components/Header/header', root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
+                renderTemplate('views/Header/header', root, 'afterbegin', {
                     ...user,
                 });
 

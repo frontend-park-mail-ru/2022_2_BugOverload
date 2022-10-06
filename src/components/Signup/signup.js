@@ -29,7 +29,7 @@ export class Signup {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/signup',
+            url: '/v1/auth/signup',
             body: user,
         });
 
@@ -43,8 +43,7 @@ export class Signup {
                     response.body.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
+                renderTemplate('views/Header/header', this.root, 'afterbegin', {
                     ...response.body,
                 });
                 const userbar = new Userbar(this.root);
