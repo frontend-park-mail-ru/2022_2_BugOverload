@@ -16,7 +16,7 @@ export class PreviewFilm {
     * @return {null} В случае ошибочного статуса
     */
     async getRequestData() {
-        const response = await Ajax.get('http://localhost:8088/v1/recommendation_film');
+        const response = await Ajax.get('http://movie-gate.online:8088/v1/recommendation_film');
         if (response.status === 200) {
             return response.body;
         }
