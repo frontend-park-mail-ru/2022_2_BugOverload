@@ -18,11 +18,11 @@ export class Header {
         const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
-                console.log(response.body)
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body), 
-                    ...response.body});
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
+                    ...response.body,
+                });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }

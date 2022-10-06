@@ -27,9 +27,9 @@ export class Signup {
                     response.body.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', { 
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body), 
-                    ...response.body
+                renderTemplate('components/Header/header', this.root, 'afterbegin', {
+                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
+                    ...response.body,
                 });
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
@@ -82,7 +82,6 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
-
                     if (!checkPassword(form, user[key], 'signup', confirmPassword)) {
                         flag = true;
                     }
