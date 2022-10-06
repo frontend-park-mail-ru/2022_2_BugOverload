@@ -26,10 +26,6 @@
         "no-continue": 0,
         "import/no-cycle": 0,
         "no-plusplus": 0,
-<<<<<<< HEAD
-        "no-prototype-builtins": 0
-    }
-=======
         "no-restricted-syntax": [
             "error",
             {
@@ -39,5 +35,4 @@
           ],
     },
 
->>>>>>> origin/TP-96b_auth_login_page
 }

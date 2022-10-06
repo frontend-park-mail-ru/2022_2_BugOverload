@@ -119,7 +119,7 @@ export class Signup {
                     flag = false;
                 }
             }
-            
+
             if (key === 'nickname') {
                 if (!checkNick(form, user[key])) {
                     flag = false;
