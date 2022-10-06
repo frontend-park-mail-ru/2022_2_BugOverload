@@ -1,6 +1,9 @@
 import { Login } from '../components/Login/login.js';
 import { Signup } from '../components/Signup/signup.js';
 
+/**
+* Конфиг испульзуемый для рендера
+*/
 export const config = {
     header: {
         navlink: {
@@ -29,6 +32,7 @@ export const config = {
 };
 
 export const ROOT = document.getElementById('root');
+<<<<<<< HEAD
 
 export const BACKEND_API = {
     path: 'http://localhost:8088',
@@ -42,3 +46,5 @@ export const BACKEND_API = {
     logout: 'http://localhost:8088/v1/auth/logout',
     previewFilm: 'http://localhost:8088/v1/recommendation_film',
 };
+=======
+>>>>>>> origin/TP-96b_auth_login_page

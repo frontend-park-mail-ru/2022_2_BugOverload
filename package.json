@@ -9,7 +9,7 @@
     "clean": "rm -rf dist src/dist && mkdir dist src/dist && touch src/dist/templates.js",
     "build": "handlebars -m src/ -f src/dist/templates.js",
     "lint": "eslint --cache --ext .js src --fix",
-    "stylelint": "stylelint '**/*{.css,.scss}'",
+    "stylelint": "stylelint '**/*{.css,.scss}'  --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },
   "repository": {
