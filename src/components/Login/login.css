@@ -17,7 +17,7 @@
     align-content: stretch;
     align-items: flex-start;
     background-size: 460px;
-    background-image: url("../../asserts/img/auth/login.png");
+    background-image: url('../../asserts/img/auth/login.png');
     background-repeat: no-repeat;
     border-radius: 0 30px 30px 0;
     width: 50%;
