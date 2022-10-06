@@ -1,4 +1,3 @@
-import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 
 /**
