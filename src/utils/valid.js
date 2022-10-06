@@ -1,5 +1,11 @@
 import { regExp } from '../../config/regExp.js';
 
+/**
+ * Проверяет ник
+ * @param {Element} form - форма из которой взяты данные
+ * @param {String} input - пользовательский ввод
+ * @return {Bool} Прошла ли проверка успешно
+*/
 export const checkNick = (form, input) => {
     if (!input) {
         renderError(form, 'text', 'Вы кое-что забыли! Скажите, как вас зовут');
@@ -17,6 +23,12 @@ export const checkNick = (form, input) => {
     return true;
 };
 
+/**
+ * Проверяет email
+ * @param {Element} form - форма из которой взяты данные
+ * @param {String} input - пользовательский ввод
+ * @return {Bool} Прошла ли проверка успешно
+*/
 export const checkEmail = (form, input) => {
     if (!input) {
         renderError(form, 'email', 'Введите email');
@@ -31,6 +43,13 @@ export const checkEmail = (form, input) => {
     return true;
 };
 
+/**
+ * Проверяет подтверждение пароля
+ * @param {Element} confirm - обёртка вокруг input
+ * @param {String} confirmPassword - подтверждение пароля
+ * @param {String} confirmPassword - пароль
+ * @return {Bool} Прошла ли проверка успешно
+*/
 export const checkConfirmPassword = (confirm, confirmPassword, password) => {
     if (!confirmPassword) {
         renderError(confirm, 'password', 'Введите пароль');
@@ -38,8 +57,7 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
     }
 
     if ((confirmPassword !== password)) {
-        if(password && checkPassword(confirm.parentElement,password))
-        {
+        if (password && checkPassword(confirm.parentElement, password)) {
             renderError(confirm.parentElement, 'password', 'Пароли не совпадают');
         }
         renderError(confirm, 'password', 'Пароли не совпадают');
@@ -50,7 +68,6 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
         .previousElementSibling
         .querySelector('.modal__input__error');
 
-
     if ((confirmPassword === password) && errorPassword) {
         renderError(confirm, 'password', errorPassword.textContent);
         return false;
@@ -59,8 +76,17 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
     return true;
 };
 
+/**
+ * Проверяет пароль
+ * @param {Element} form - форма из которой взяты данные
+ * @param {String} input - пользовательский ввод
+ * @param {Bool} [validateConfirm = false] - проверять ли подтверждение пароля
+ * @param {String} [confirmPassword = null] - подтверждение пароля
+ * @return {Bool} Прошла ли проверка успешно
+*/
 export const checkPassword = (form, input, validateConfirm = false, confirmPassword = null) => {
-console.log(input)
+    const confirm = document.getElementById('confirm');
+
     if (!input) {
         renderError(form, 'password', 'Введите пароль');
         if (validateConfirm) {
@@ -103,11 +129,16 @@ console.log(input)
     return true;
 };
 
+/**
+ * Убирает сообщение об ошибке
+ * @param {Element} form - форма из которой взяты данные
+ * @param {String} type - тип input
+*/
 export const removeError = (form, type) => {
     const errorInput = form
         .querySelector(`input[type=${type}]`);
 
-    if(!errorInput) {
+    if (!errorInput) {
         return;
     }
 
@@ -115,8 +146,7 @@ export const removeError = (form, type) => {
         .parentElement
         .querySelector('.modal__input__error');
 
-        console.log(errorElement)
-    if(errorElement) {
+    if (errorElement) {
         errorElement.remove();
     }
 
@@ -125,6 +155,12 @@ export const removeError = (form, type) => {
         .classList.remove('modal__input_red_border');
 };
 
+/**
+ * Выводит сообщение об ошибке
+ * @param {Element} form - форма из которой взяты данные
+ * @param {String} type - тип input
+ * @param {String} text - текст ошибки
+*/
 export const renderError = (form, type, text) => {
     const target = form.querySelector(`input[type=${type}]`);
     target.classList.add('modal__input_red_border');

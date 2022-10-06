@@ -1,22 +1,31 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import {
-    checkEmail, checkPassword, renderError,
+    checkEmail, checkPassword, renderError, removeError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
 
 /**
-* Отрисовывает хедер.
-* Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
-* Добавляет обработчики событий.
+* Отрисовывает логин.
+* Обращается к бэкенду для проверки пользователя при логине
 *
 */
 export class Login {
+    /**
+     * Cохраняет root.
+     * @param {Element} root - div, через который происходит взаимодействие с html.
+     */
     constructor(root) {
         this.root = root;
     }
 
+    /**
+     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
+     * @param {Object} user - провалидированный пользовательский ввод
+     * @param {string} user.email - введённая почта
+     * @param {string} user.password - введённый пароль
+     */
     postRequestData(user) {
         const responsePromise = Ajax.post({
             url: '/v1/auth/login',
@@ -49,6 +58,9 @@ export class Login {
         });
     }
 
+    /**
+     * Рендерит логин
+     */
     render() {
         if (!this.root.querySelector('.modal__window')) {
             const modal = new Modal(this.root);
@@ -62,7 +74,12 @@ export class Login {
         this.handler(modalWindow);
     }
 
-    validateLogin(form) {
+    /**
+     * Проверяет пользовательский ввод
+     * @param {Element} form - форма логина
+     * @param {Bool} keyup - режим проверки полей: true - по одному, false все
+     */
+    validateLogin(form, keyup = false) {
         const user = {};
         const emailInput = form.querySelector('input[type=email]');
         const passwordInput = form.querySelector('input[type=password]');
@@ -71,7 +88,11 @@ export class Login {
 
         let flag = true;
 
-        Object.keys(user).forEach((key) => {
+        for (const key of Object.keys(user)) {
+            if (keyup && !user[key]) {
+                removeError(form, key);
+                continue;
+            }
             if (key === 'email') {
                 if (!checkEmail(form, user[key])) {
                     flag = false;
@@ -82,15 +103,19 @@ export class Login {
                     flag = false;
                 }
             }
-        });
+        }
 
         if (flag) {
             return user;
-        } 
+        }
 
         return null;
     }
 
+    /**
+     * Навешивает обработчики на валидацию
+     * @param {Element} modalWindow - модальное окно
+     */
     handler(modalWindow) {
         const form = modalWindow.querySelector('.modal__form');
 
@@ -100,10 +125,7 @@ export class Login {
         form.addEventListener('keyup', (e) => {
             e.preventDefault();
 
-            user = validate(form);
-            if (!user) {
-                return;
-            }
+            validate(form, true);
         });
 
         form.addEventListener('submit', (e) => {

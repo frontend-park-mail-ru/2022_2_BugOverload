@@ -6,11 +6,27 @@ import {
 import { Modal } from '../Modal/modal.js';
 import { Userbar } from '../Userbar/userbar.js';
 
+/**
+* Отрисовывает регистрацию.
+* Обращается к бэкенду для проверки пользователя при регистрации
+*
+*/
 export class Signup {
+    /**
+     * Cохраняет root.
+     * @param {Element} root - div, через который происходит взаимодействие с html.
+     */
     constructor(root) {
         this.root = root;
     }
 
+    /**
+     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
+     * @param {Object} user - провалидированный пользовательский ввод
+     * @param {string} user.nickname - введённый ник
+     * @param {string} user.email - введённая почта
+     * @param {string} user.password - введённый пароль
+     */
     postRequestData(user) {
         const responsePromise = Ajax.post({
             url: '/v1/auth/signup',
@@ -44,6 +60,9 @@ export class Signup {
         });
     }
 
+    /**
+     * Рендерит логин
+     */
     render() {
         if (this.root.querySelector('.modal__window') === null) {
             const modal = new Modal(this.root);
@@ -56,6 +75,11 @@ export class Signup {
         this.handler(modalWindow);
     }
 
+    /**
+     * Проверяет пользовательский ввод
+     * @param {Element} form - форма логина
+     * @param {Bool} keyup - режим проверки полей: true - по одному, false все
+     */
     validateSignup(form, keyup = false) {
         const nickInput = form.querySelector('input[type=text]');
         const emailInput = form.querySelector('input[type=email]');
@@ -70,44 +94,44 @@ export class Signup {
 
         let flag = true;
 
-        Object.keys(user).forEach((key) => {
-            if(keyup && !user[key]) {
+        for (const key of Object.keys(user)) {
+            if (keyup && !user[key]) {
                 if (key === 'nickname') {
-                    removeError(form,'text');
+                    removeError(form, 'text');
                 } else {
-                    removeError(form,key);
+                    removeError(form, key);
                 }
-                return;
+                continue;
             }
+
             if (key === 'email') {
                 if (!checkEmail(form, user[key])) {
                     flag = false;
-
                 }
             }
+
             if (key === 'password') {
-                if(keyup) {
+                if (keyup) {
                     if (!checkPassword(form, user[key])) {
                         flag = false;
                     }
-                } else {
-                    if (!checkPassword(form, user[key], keyup, confirmPassword)) {
-                        flag = false;
-                    }
+                } else if (!checkPassword(form, user[key], keyup, confirmPassword)) {
+                    flag = false;
                 }
             }
+            
             if (key === 'nickname') {
                 if (!checkNick(form, user[key])) {
                     flag = false;
                 }
             }
-        });
+        }
 
         const confirm = document.getElementById('confirm');
 
-        if(keyup && !confirmPassword) {
-            removeError(confirm,'password');
-            return;
+        if (keyup && !confirmPassword) {
+            removeError(confirm, 'password');
+            return null;
         }
 
         if (!checkConfirmPassword(confirm, confirmPassword, user.password)) {
@@ -116,11 +140,15 @@ export class Signup {
 
         if (flag) {
             return user;
-        } 
+        }
 
         return null;
     }
 
+    /**
+     * Навешивает обработчики на валидацию
+     * @param {Element} modalWindow - модальное окно
+     */
     handler(modalWindow) {
         const form = modalWindow.querySelector('.modal__form');
         const validate = this.validateSignup;
@@ -128,11 +156,7 @@ export class Signup {
 
         form.addEventListener('keyup', (e) => {
             e.preventDefault();
-
-            user = validate(form, true);
-            if (!user) {
-                return;
-            }
+            validate(form, true);
         });
 
         form.addEventListener('submit', (e) => {

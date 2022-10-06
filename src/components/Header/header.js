@@ -10,10 +10,17 @@ import { config } from '../../config/config.js';
 *
 */
 export class Header {
+    /**
+     * Cохраняет root.
+     * @param {Element} root - div, через который происходит взаимодействие с html.
+     */
     constructor(root) {
         this.root = root;
     }
 
+    /**
+     * Обрабатывает запрос на аутенфикацию пользователя.
+     */
     getRequestData() {
         const responsePromise = Ajax.get('/v1/auth');
         responsePromise.then((response) => {
@@ -29,12 +36,18 @@ export class Header {
         });
     }
 
+    /**
+     * Рендерит стандартный хэдер без пользовательских данных
+     */
     render() {
         renderTemplate('components/Header/header', this.root, 'afterbegin');
         this.getRequestData();
         this.handlerHeader();
     }
 
+    /**
+     * Наешивает события по которым пересходит рендер логина и регистрации
+     */
     handlerHeader() {
         this.root.addEventListener('click', (e) => {
             const { target } = e;

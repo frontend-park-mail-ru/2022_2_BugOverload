@@ -1,6 +1,9 @@
 import { Login } from '../components/Login/login.js';
 import { Signup } from '../components/Signup/signup.js';
 
+/**
+* Конфиг испульзуемый для рендера
+*/
 export const config = {
     header: {
         navlink: {
@@ -29,16 +32,3 @@ export const config = {
 };
 
 export const ROOT = document.getElementById('root');
-
-export const BACKEND_API = {
-    path: '',
-    port: '8088',
-
-    popular: '/v1/popular_films',
-    todayInCinema: '/v1/in_cinema',
-    auth: '/v1/auth',
-    login: '/v1/auth/login',
-    signup: '/v1/auth/signup',
-    logout: '/v1/auth/logout',
-    previewFilm: '/v1/recommendation_film',
-};
