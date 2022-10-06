@@ -62,34 +62,55 @@ export class Login {
         this.handler(modalWindow);
     }
 
+    validateLogin(form) {
+        const user = {};
+        const emailInput = form.querySelector('input[type=email]');
+        const passwordInput = form.querySelector('input[type=password]');
+        user.email = emailInput.value.trim();
+        user.password = passwordInput.value;
+
+        let flag = true;
+
+        Object.keys(user).forEach((key) => {
+            if (key === 'email') {
+                if (!checkEmail(form, user[key])) {
+                    flag = false;
+                }
+            }
+            if (key === 'password') {
+                if (!checkPassword(form, user[key])) {
+                    flag = false;
+                }
+            }
+        });
+
+        if (flag) {
+            return user;
+        }
+
+        return null;
+    }
+
     handler(modalWindow) {
         const form = modalWindow.querySelector('.modal__form');
+
+        const validate = this.validateLogin;
+        let user;
+
+        form.addEventListener('keyup', (e) => {
+            e.preventDefault();
+
+            user = validate(form);
+            if (!user) {
+                return;
+            }
+        });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const user = {};
-            const emailInput = form.querySelector('input[type=email]');
-            const passwordInput = form.querySelector('input[type=password]');
-            user.email = emailInput.value.trim();
-            user.password = passwordInput.value;
-
-            let flag = false;
-
-            Object.keys(user).forEach((key) => {
-                if (key === 'email') {
-                    if (!checkEmail(form, user[key])) {
-                        flag = true;
-                    }
-                }
-                if (key === 'password') {
-                    if (!checkPassword(form, user[key])) {
-                        flag = true;
-                    }
-                }
-            });
-
-            if (flag) {
+            user = validate(form);
+            if (!user) {
                 return;
             }
 

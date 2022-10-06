@@ -74,7 +74,6 @@ export class Userbar {
         }
 
         const target = document.body.querySelector('.header__userbar-user-info-container');
-        console.log(document.body.querySelector('.header__login__btn'));
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }
