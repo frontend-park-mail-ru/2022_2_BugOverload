@@ -1,0 +1,131 @@
+.modal__background {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgb(0 0 0 / 50%);
+}
+
+.modal__window {
+    width: 920px;
+    height: 550px;
+    min-height: 250px;
+}
+
+.modal__window__flex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    height: 100%;
+    font-weight: normal;
+}
+
+.modal__cross {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 45px;
+    right: 87px;
+    fill: #444;
+    cursor: pointer;
+}
+
+.modal__header {
+    margin-bottom: 33px;
+    color: #fff;
+    font-size: 26px;
+}
+
+.modal__form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+}
+
+.modal__wrapper__input{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+    width: 270px;
+    height: 55px;
+    margin-bottom: 17px;
+}
+
+.modal__input {
+    width: 290px;
+    height: 28px;
+    border-radius: 21px;
+    color: #fff;
+    background: #27292E;
+    opacity: .8;
+    border: 2px solid #333;
+    font-size: 12px;
+    padding-left: 15px;
+}
+
+.modal__input_red_border{
+    border: 2px solid #E72D2D;
+}
+
+.modal__input__error {
+    width: 300px;
+    height: 18px;
+    margin-top: 5px;
+    color: #E72D2D;
+    font-size: 12px;
+}
+
+.modal__input__button {
+    font-size: 15px;
+    font-family: 'Mail Sans Roman Med';
+    text-decoration: none;
+    width: 310px;
+    height: 30px;
+    border-radius: 21px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.modal__text__alternative__page{
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 20px;
+    font-size: 13px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal__login__signup__btn {
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 45px;
+    color: #000;
+    font-size: 15px;
+    font-family: 'Mail Sans Roman Med';
+    text-decoration: none;
+    height: 30px;
+    width: 150px;
+    border-radius: 21px;
+}
+
+.modal__flex__center__div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+}

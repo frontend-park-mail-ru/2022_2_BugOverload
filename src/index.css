@@ -1,0 +1,112 @@
+@import "./components/Header/header.css";
+@import "./components/Login/login.css";
+@import "./components/Modal/modal.css";
+@import "./components/Signup/signup.css";
+@import "./components/UserInfo/userInfo.css";
+@import "./components/Userbar/userbar.css";
+@import "./components/Collection/collection.css";
+@import "./components/Film/film.css";
+@import "./components/PreviewFilm/previewFilm.css";
+@import "./components/ErrorMessage/errorMessage.css";
+
+
+@font-face {
+    font-family: 'Mail Sans Roman Med';
+    src: url('fonts/MailSansRoman-Medium.eot');
+    src: local('Mail Sans Roman Medium'), local('MailSansRoman-Medium'),
+        url('fonts/MailSansRoman-Medium.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman DemBd';
+    src: url('fonts/MailSansRoman-DemiBold.eot');
+    src: local('Mail Sans Roman DemiBold'), local('MailSansRoman-DemiBold'),
+        url('fonts/MailSansRoman-DemiBold.woff2') format('woff2'),
+        url('fonts/MailSansRoman-DemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Bold.eot');
+    src: local('Mail Sans Roman Bold'), local('MailSansRoman-Bold'),
+        url('fonts/MailSansRoman-Bold.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Light.eot');
+    src: local('Mail Sans Roman Light'), local('MailSansRoman-Light'),
+        url('fonts/MailSansRoman-Light.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mail Sans Roman';
+    src: url('fonts/MailSansRoman-Regular.eot');
+    src: local('Mail Sans Roman Regular'), local('MailSansRoman-Regular'),
+        url('fonts/MailSansRoman-Regular.woff2') format('woff2'),
+        url('fonts/MailSansRoman-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+body, html {
+    font-family: 'Mail Sans Roman';
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+}
+
+.button__yellow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    background-color: #FEBA2B;
+    border: 0;
+}
+
+.button__yellow:hover {
+    background-color: #CD9826;
+    transition: 0.1s linear;
+    cursor: pointer;
+}
+
+.header__navlink:hover {
+    color:#FEBA2B;
+    transition: 0.08s linear;
+}
+
+
+@media screen and (max-width: 740px){
+    .header__form{display:none}
+};
+
+.active {
+    font-weight: bold;
+}

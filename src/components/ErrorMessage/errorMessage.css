@@ -1,0 +1,19 @@
+.error {
+    position: fixed;
+    bottom: 20px;
+    width: 400px;
+    height: 60px;
+    background-color: red;
+    opacity: 0.7;
+    z-index: 10;
+    margin-left: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.error__text {
+    color: #fff;
+    font-size: 20px;
+}

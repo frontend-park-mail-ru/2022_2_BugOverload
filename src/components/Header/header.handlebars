@@ -1,0 +1,39 @@
+<header class="header">
+
+  <a class="header__navlink" data-section="navlink">
+    <img class="header__logo" src="../../asserts/img/elements/LogoMOVIEGATE.png">
+  </a>
+  <a class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Мои фильмы</div>
+  </a>
+  <a class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Коллекции</div>
+  </a>
+  <a class="header__navlink" data-section="navlink">
+    <div class="header__navlink-area">Топ-250</div>
+  </a>
+
+
+  <form class="header__form">
+    <img class="header__form__icon-search" src="../../asserts/img/elements/icon-search.png">
+    <input class="header__form__input" maxlength="100" type="search" placeholder="фильмы, передачи, персоны.." aria-label="Search">
+
+  </form>
+
+  {{#if avatar}}
+  <div class="header__userbar-substrate">
+    <div class="header__userbar-user-info-container">
+      <img class="header__avatar" src="{{avatar}}" alt="">
+      {{#if userinfo}}
+      {{{userinfo}}}
+      {{/if}}
+    </div>
+    {{#if userbar}}
+    {{{userbar}}}
+    {{/if}}
+  </div>
+  {{else}}
+  <a href="/login" class="button__yellow header__login__btn" data-section="login">Войти</button>
+    {{/if}}
+
+</header>

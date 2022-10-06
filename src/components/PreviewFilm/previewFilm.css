@@ -1,0 +1,74 @@
+
+.preview-film {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.preview-film__blackout-bottom {
+    width: 100%;
+    height: 237px;
+    background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
+}
+
+.preview-film__container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: rgb(18 18 18 / 30%);
+}
+
+.preview-film__film-data {
+    display: flex;
+    flex-direction: column;
+    margin: 52px 0 -116px 52px;
+    z-index: 1;
+    width: 550px;
+}
+
+.preview-film__film-title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 48px;
+    width: 500px;
+}
+
+.preview-film__film-decore-line {
+    margin: 16px 0 0;
+    width: 354px;
+}
+
+.preview-film__film-description {
+    color: #fff;
+    font-size: 15px;
+    width: 317px;
+    margin-top: 16px;
+}
+
+.preview-film__button {
+    background-color: #FEBA2B;
+    border-radius: 27px;
+    box-sizing: border-box;
+    width: 180px;
+    height: 46px;
+    padding: 10px;
+    margin-top: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Mail Sans Roman Med';
+    color: #000;
+}
+
+.preview-film__button:hover {
+    cursor: pointer;
+    background-color: #CD9826;
+    transition: 0.1s linear;
+}
