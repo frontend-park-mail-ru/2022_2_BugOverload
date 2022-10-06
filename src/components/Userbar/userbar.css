@@ -51,7 +51,8 @@
 
 .header__userbar-email {
     font-size: 12px;
-    color: #AFAFAF;
+    color: #FEBA2B;
+    opacity: 0.6;
 }
 
 .header__userbar-items-container {
