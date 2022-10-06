@@ -13,7 +13,7 @@ export class Signup {
 
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/signup',
+            url: 'http://localhost:8088/v1/auth/signup',
             body: user,
         });
 
@@ -23,8 +23,8 @@ export class Signup {
                     .querySelector('.modal__background')
                     .remove();
 
-                const user = response.body;
-                if(!user.hasOwnProperty('avatar')) {
+                user = response.body;
+                if (!user.hasOwnProperty('avatar')) {
                     user.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
@@ -80,7 +80,7 @@ export class Signup {
                     }
                 }
                 if (key === 'password') {
-                    if (!checkPassword(form, user[key],'signup',confirmPassword)) {
+                    if (!checkPassword(form, user[key], 'signup', confirmPassword)) {
                         flag = true;
                     }
                 }

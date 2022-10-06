@@ -44,14 +44,12 @@ export class Userbar {
                 e.preventDefault();
                 const { target } = e;
 
-                const resGet = Ajax.get("http://movie-gate.online:8088/v1/auth/logout");
+                const resGet = Ajax.get('http://localhost:8088/v1/auth/logout');
                 resGet.then((response) => {
-                    if (target.dataset.section === 'logout') {
-                        if (response.status === 200) {
-                            document.body.querySelector('.header').remove();
-                            renderTemplate('components/Header/header', root, 'afterbegin');
-                        }
-                    } else return;
+                    if (target.dataset.section === 'logout' && response.status === 200) {
+                        document.body.querySelector('.header').remove();
+                        renderTemplate('components/Header/header', root, 'afterbegin');
+                    }
                 });
             });
 
@@ -69,7 +67,7 @@ export class Userbar {
             const userbar = document.body.querySelector('.header__userbar-substrate');
             userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
-        
+
         const target = document.body.querySelector('.header__userbar-user-info-container');
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }

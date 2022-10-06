@@ -68,7 +68,7 @@ export class Header {
 
                 if ((header.compareDocumentPosition(target) === 16
                         || header.compareDocumentPosition(target) === 20)
-                        && target.dataset.section === 'login' ) {
+                        && target.dataset.section === 'login') {
                     const Render = config.header[target.dataset.section].render;
                     const element = new Render(this.root);
                     element.render();
