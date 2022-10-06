@@ -1,6 +1,6 @@
 import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
-import { Userbar } from '../../components/Userbar/userbar.js';
+import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
 
 /**
@@ -26,7 +26,7 @@ export class Header {
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
-                renderTemplate('views/Header/header', this.root, 'afterbegin', response.body);
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
@@ -37,7 +37,7 @@ export class Header {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        renderTemplate('views/Header/header', this.root, 'afterbegin');
+        renderTemplate('components/Header/header', this.root, 'afterbegin');
         this.getRequestData();
         this.handlerHeader();
     }

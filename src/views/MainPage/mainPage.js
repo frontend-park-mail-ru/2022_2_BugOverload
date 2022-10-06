@@ -1,6 +1,6 @@
 import { PreviewFilm } from '../../components/PreviewFilm/previewFilm.js';
 import { Collection, COLLECTION_TYPE } from '../../components/Collection/collection.js';
-import { Header } from '../Header/header.js';
+import { Header } from '../../components/Header/header.js';
 import { ROOT } from '../../config/config.js';
 import { ShowErrorMessage } from '../../components/ErrorMessage/errorMessage.js';
 

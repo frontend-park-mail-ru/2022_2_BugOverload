@@ -30,7 +30,7 @@ export class Userbar {
                 if (target.dataset.section === 'logout') {
                     if (response.status === 200) {
                         document.body.querySelector('.header').remove();
-                        renderTemplate('views/Header/header', root, 'afterbegin');
+                        renderTemplate('components/Header/header', root, 'afterbegin');
                     }
                 }
             });
@@ -63,7 +63,7 @@ export class Userbar {
             };
 
             renderTemplate(
-                'views/Header/header',
+                'components/Header/header',
                 root,
                 'afterbegin',
                 props,
@@ -78,7 +78,7 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('views/Header/header', root, 'afterbegin', {
+                renderTemplate('components/Header/header', root, 'afterbegin', {
                     ...user,
                 });
 

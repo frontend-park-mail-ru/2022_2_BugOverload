@@ -43,7 +43,7 @@ export class Signup {
                     response.body.avatar = 'asserts/img/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
-                renderTemplate('views/Header/header', this.root, 'afterbegin', {
+                renderTemplate('components/Header/header', this.root, 'afterbegin', {
                     ...response.body,
                 });
                 const userbar = new Userbar(this.root);
