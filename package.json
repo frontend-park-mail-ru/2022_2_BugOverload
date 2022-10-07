@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npm run stylelint && npm run lint && npm run clean && npm run build && npm run back",
     "back": "node __mocks__/server.js",
-    "clean": "rm -rf dist src/dist && mkdir dist src/dist && touch src/dist/templates.js",
-    "build": "handlebars -m src/ -f src/dist/templates.js",
+    "clean": "rm -rf dist dist && mkdir dist dist && touch dist/templates.js",
+    "build": "handlebars -m src/ -f dist/templates.js",
     "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}'  --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
@@ -26,7 +26,6 @@
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "express": "^4.18.1",
-    "handlebars": "^4.7.7",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
