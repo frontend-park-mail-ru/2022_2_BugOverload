@@ -32,6 +32,10 @@ export function renderMainPage() {
     });
 }
 
+/**
+* Добавляет обработчики на те ссылки, функционал которых ещё разрабатывается
+*
+*/
 function addHandlersToDevelopmentLinks() {
     let elems = document.querySelectorAll('.header__navlink');
     elems.forEach((elem) => errLink(elem));
@@ -40,6 +44,10 @@ function addHandlersToDevelopmentLinks() {
     elems.forEach((elem) => errLink(elem));
 }
 
+/**
+* Добавляет обработчик на объект, на клик по которому вызывает отрисовку сообщения об ошибке
+*
+*/
 function errLink(elem) {
     elem.addEventListener('click', (e) => {
         e.preventDefault();

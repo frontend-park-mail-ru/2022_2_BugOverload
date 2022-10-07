@@ -7,9 +7,10 @@ export class Film {
     * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
     *
     * @param {filmData Object} filmData - объект с данными о фильме
+    * @return {string} HTML созданного фильма
     */
     static createFilm(filmData) {
-        Film.decoreGenres(filmData);
+        Film.decoreFilmInfo(filmData);
 
         const film = Handlebars.templates['components/Film/film'](filmData);
 
@@ -22,11 +23,28 @@ export class Film {
     }
 
     /**
-    * Добавляет запятую ко всем жанрам, кроме последнего
+    * Удаляет жанры, вставка которых приведёт к переносу строки в отображении.
+    * Добавляет запятую ко всем жанрам, кроме последнего.
     *
     * @param {filmData Object} filmData - объект с данными о фильме
     */
-    static decoreGenres(filmData) {
+    static decoreFilmInfo(filmData) {
+        const lenYear = String(filmData.year_prod).length;
+        const maxLenGenre = 31 - lenYear;
+
+        let curLen = 0;
+        const newListGenres = [];
+        filmData.genres.forEach((genre) => {
+            curLen += genre.length + 2;
+            if (curLen <= maxLenGenre) {
+                newListGenres.push(genre);
+            } else {
+                curLen -= genre.length + 2;
+            }
+        });
+
+        filmData.genres = newListGenres;
+
         for (let i = 0; i < filmData.genres.length - 1; ++i) {
             filmData.genres[i] += ',';
         }
