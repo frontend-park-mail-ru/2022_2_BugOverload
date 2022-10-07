@@ -22,14 +22,11 @@ export class Header {
      * Обрабатывает запрос на аутенфикацию пользователя.
      */
     getRequestData() {
-        const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
+        const responsePromise = Ajax.get('/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
-                    ...response.body,
-                });
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }

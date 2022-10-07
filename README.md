@@ -28,6 +28,14 @@ http://movie-gate.online/
 * [**Трущелёв Михаил**](https://github.com/ThePsina) - *Backend*
 * [**Шишова Анастасия**]() - *Interfaces*
 
+## Ссылка на swagger
+
+https://app.swaggerhub.com/apis/BugOverload/API-Kinopoisk/1.0.0
+
+## Ссылка на figma
+
+https://www.figma.com/file/WIbsjIKSCPSJph8XJ12ArL/Untitled?node-id=90%3A185
+
 ## Ссылка на backend
 
 https://github.com/go-park-mail-ru/2022_2_BugOverload

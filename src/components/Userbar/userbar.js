@@ -25,7 +25,7 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
+            const resGet = Ajax.get('/v1/auth/logout');
             resGet.then((response) => {
                 if (target.dataset.section === 'logout') {
                     if (response.status === 200) {
@@ -58,7 +58,6 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                 userbar: Handlebars.templates['components/Userbar/userbar'](),
                 ...user,
             };
@@ -80,7 +79,6 @@ export class Userbar {
                 document.body.querySelector('.header').remove();
 
                 renderTemplate('components/Header/header', root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                     ...user,
                 });
 

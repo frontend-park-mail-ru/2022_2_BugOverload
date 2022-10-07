@@ -739,7 +739,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-const default_port = 80;
+const default_port = 8088;
 let currentPort = process.argv[2]
 if (!currentPort) {
 	currentPort = default_port
