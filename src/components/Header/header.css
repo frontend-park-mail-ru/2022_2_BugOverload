@@ -79,7 +79,6 @@
 }
 
 .header__avatar {
-    /* order: 0; */
     flex: 0 1 auto;
     align-self: baseline;
     width: 36px;
@@ -87,4 +86,3 @@
     border-radius: 18px;
     object-fit: cover;
 }
-
