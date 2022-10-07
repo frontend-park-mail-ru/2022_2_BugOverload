@@ -73,14 +73,11 @@
 
 .film__info-container {
     display: flex;
-    justify-content: space-between;
     margin-top: 7px;
 }
 
 .film__genres {
     display: flex;
-    flex-wrap: wrap;
-    width: 158px;
 }
 
 .film__decore-circle {
@@ -89,7 +86,6 @@
     background-color: rgb(197 197 197);
     border-radius: 5px;
     margin: 4px 5px 0;
-
 }
 
 .film__genre {

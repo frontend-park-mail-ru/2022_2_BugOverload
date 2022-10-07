@@ -50,7 +50,7 @@ app.post('/v1/auth/login',  (req, res) => {
 });
 
 app.get('/v1/auth',  (req, res) => {
-	const email = 'dop123@mail.ru'
+	const email = 'Dop123@mail.ru'
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
@@ -102,7 +102,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/dune_poster.jpg",
 			ratio: 9.8,
-			genres: ["Фентези", "Приключения"],
+			genres: ["Фентезиушшкукл", "Приключения","apapa", "fwe"],
 		},
 		{
 			film_id: 1,
@@ -117,7 +117,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/1.png",
 			ratio: 7.1,
-			genres: ["Документальный", "Смотрю и плачу"],
+			genres: ["Документальный", "Смотрю и плачу", "www"],
 		},
 		{
 			film_id: 2,
@@ -132,7 +132,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/2.png",
 			ratio: 7.1,
-			genres: ["Фентези", "Приключения"],
+			genres: ["Фентезиушшкукл", "Приключqwqeqqweения","apapa", "fwe"],
 		},
 		{
 			film_id: 3,
@@ -147,14 +147,14 @@ app.get('/v1/in_cinema', (req, res) => {
 			posterHuge: "",
 			poster_ver: "asserts/img/posters/3.png",
 			ratio: 7.1,
-			genres: ["Фентези", "Приключения"],
+			genres: ["fwe", "aqwd", "Фентезиушшкукл", "Приключqwqeqqweения","apapa"],
 		},
 		{
 			film_id: 4,
 			film_name: "Дом, который построил Джек",
 			description: "",
 			type: "",
-			year_prod: 2021,
+			year_prod: "1922-2021",
 			prodCompany: "",
 			prodCountry: "",
 			ageLimit: "",
@@ -169,7 +169,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			film_name: "Доказательство смерти",
 			description: "",
 			type: "",
-			year_prod: 2021,
+			year_prod: "12-1221",
 			prodCompany: "",
 			prodCountry: "",
 			ageLimit: "",
@@ -184,7 +184,7 @@ app.get('/v1/in_cinema', (req, res) => {
 			film_name: "Убить Билла",
 			description: "",
 			type: "",
-			year_prod: 2021,
+			year_prod: "20223-12332",
 			prodCompany: "",
 			prodCountry: "",
 			ageLimit: "",
