@@ -6,11 +6,6 @@ import { Signup } from '../components/Signup/signup.js';
 */
 export const config = {
     header: {
-        navlink: {
-            href: '/navlink',
-            name: 'Главная',
-            // render: renderMain,
-        },
         login: {
             href: '/login',
             name: 'Авторизация',
