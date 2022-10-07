@@ -46,7 +46,7 @@ function addHandlersToDevelopmentLinks() {
 
 /**
 * Добавляет обработчик на объект, на клик по которому вызывает отрисовку сообщения об ошибке
-*
+* @param {elem DOMElement} elem - DOM-элемент, на который будет добавлен обработчик
 */
 function errLink(elem) {
     elem.addEventListener('click', (e) => {
