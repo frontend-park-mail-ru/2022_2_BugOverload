@@ -52,7 +52,7 @@ export class Login {
             }
             const wrapper = document.getElementById('login_password');
 
-            if (response.status === 403) {
+            if (response.status === 401) {
                 renderError(wrapper, 'password', 'Неверный пароль');
             }
         });
