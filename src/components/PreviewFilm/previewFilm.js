@@ -22,7 +22,7 @@ export class PreviewFilm {
         }
 
         if (response.status > 500) {
-            ShowErrorMessage();
+            ShowErrorMessage('Произошла ошибка сервера');
             return null;
         }
 
