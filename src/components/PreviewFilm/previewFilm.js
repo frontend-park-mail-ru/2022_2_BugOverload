@@ -21,7 +21,7 @@ export class PreviewFilm {
             return response.body;
         }
 
-        if (response.status > 500) {
+        if (response.status >= 500) {
             ShowErrorMessage();
             return null;
         }
