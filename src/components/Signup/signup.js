@@ -44,7 +44,6 @@ export class Signup {
                 }
                 document.body.querySelector('.header').remove();
                 renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
                     ...response.body,
                 });
                 const userbar = new Userbar(this.root);

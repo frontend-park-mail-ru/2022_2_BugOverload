@@ -58,7 +58,6 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                 userbar: Handlebars.templates['components/Userbar/userbar'](),
                 ...user,
             };
@@ -80,7 +79,6 @@ export class Userbar {
                 document.body.querySelector('.header').remove();
 
                 renderTemplate('components/Header/header', root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](user),
                     ...user,
                 });
 

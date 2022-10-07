@@ -1,3 +1,3 @@
-import { renderMainPage } from './components/MainPage/mainPage.js';
+import { renderMainPage } from './views/MainPage/mainPage.js';
 
 renderMainPage();

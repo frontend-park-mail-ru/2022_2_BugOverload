@@ -39,10 +39,7 @@ export class Login {
                     .remove();
 
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    userinfo: Handlebars.templates['components/UserInfo/userInfo'](response.body),
-                    ...response.body,
-                });
+                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
@@ -52,7 +49,7 @@ export class Login {
             }
             const wrapper = document.getElementById('login_password');
 
-            if (response.status === 403) {
+            if (response.status === 401) {
                 renderError(wrapper, 'password', 'Неверный пароль');
             }
         });
