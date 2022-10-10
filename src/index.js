@@ -1,3 +1,5 @@
-import { renderMainPage } from './views/MainPage/mainPage.js';
+import { MainView } from './views/MainPage/mainPage.js';
 
-renderMainPage();
+const root = document.body.querySelector('.root');
+const main = new MainView(root);
+main.render();

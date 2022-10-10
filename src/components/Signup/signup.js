@@ -29,7 +29,7 @@ export class Signup {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/signup',
+            url: 'http://localhost:80/v1/auth/signup',
             body: user,
         });
 

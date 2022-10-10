@@ -4,32 +4,42 @@ import { Header } from '../../components/Header/header.js';
 import { ROOT } from '../../config/config.js';
 import { ShowErrorMessage } from '../../components/ErrorMessage/errorMessage.js';
 
-/**
-* Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
-*
-*/
-export function renderMainPage() {
-    const header = new Header(ROOT);
-    header.render();
+export class MainView {
+    /**
+     * Cохраняет root.
+     * @param {Element} root - div, через который происходит взаимодействие с html.
+     */
+    constructor(root) {
+        this.root = root;
+    }
 
-    const previewFilm = new PreviewFilm();
-    const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-    const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
+    /**
+    * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
+    *
+    */
+    render() {
+        const header = new Header(ROOT);
+        header.render();
 
-    Promise.all([
-        previewFilm.getRequestData(),
-        collectionPopular.getRequestData(),
-        collectionCinemaToday.getRequestData(),
-    ]).then((responses) => {
-        ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['views/MainPage/mainPage']({
-            previewFilm: previewFilm.renderTemplate(responses[0]),
-            collectionPopular: collectionPopular.renderTemplate(responses[1]),
-            collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
-        }));
+        const previewFilm = new PreviewFilm();
+        const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
+        const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
 
-        Collection.addHandlers();
-        addHandlersToDevelopmentLinks();
-    });
+        Promise.all([
+            previewFilm.getRequestData(),
+            collectionPopular.getRequestData(),
+            collectionCinemaToday.getRequestData(),
+        ]).then((responses) => {
+            ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['views/MainPage/mainPage']({
+                previewFilm: previewFilm.renderTemplate(responses[0]),
+                collectionPopular: collectionPopular.renderTemplate(responses[1]),
+                collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
+            }));
+
+            Collection.addHandlers();
+            addHandlersToDevelopmentLinks();
+        });
+    }
 }
 
 /**

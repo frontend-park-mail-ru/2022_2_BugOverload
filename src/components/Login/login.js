@@ -28,7 +28,7 @@ export class Login {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/login',
+            url: 'http://localhost:80/v1/auth/login',
             body: user,
         });
 
