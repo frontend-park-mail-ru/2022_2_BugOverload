@@ -4,42 +4,32 @@ import { Header } from '../../components/Header/header.js';
 import { ROOT } from '../../config/config.js';
 import { ShowErrorMessage } from '../../components/ErrorMessage/errorMessage.js';
 
-export class MainView {
-    /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
-     */
-    constructor(root) {
-        this.root = root;
-    }
+/**
+* Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
+*
+*/
+export function renderMainPage() {
+    const header = new Header(ROOT);
+    header.render();
 
-    /**
-    * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
-    *
-    */
-    render() {
-        const header = new Header(ROOT);
-        header.render();
+    const previewFilm = new PreviewFilm();
+    const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
+    const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
 
-        const previewFilm = new PreviewFilm();
-        const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-        const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
+    Promise.all([
+        previewFilm.getRequestData(),
+        collectionPopular.getRequestData(),
+        collectionCinemaToday.getRequestData(),
+    ]).then((responses) => {
+        ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['views/MainPage/mainPage']({
+            previewFilm: previewFilm.renderTemplate(responses[0]),
+            collectionPopular: collectionPopular.renderTemplate(responses[1]),
+            collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
+        }));
 
-        Promise.all([
-            previewFilm.getRequestData(),
-            collectionPopular.getRequestData(),
-            collectionCinemaToday.getRequestData(),
-        ]).then((responses) => {
-            ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['views/MainPage/mainPage']({
-                previewFilm: previewFilm.renderTemplate(responses[0]),
-                collectionPopular: collectionPopular.renderTemplate(responses[1]),
-                collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
-            }));
-
-            Collection.addHandlers();
-            addHandlersToDevelopmentLinks();
-        });
-    }
+        Collection.addHandlers();
+        addHandlersToDevelopmentLinks();
+    });
 }
 
 /**
