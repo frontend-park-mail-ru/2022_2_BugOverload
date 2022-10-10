@@ -1,9 +1,8 @@
-import { renderMainPage } from './views/MainPage/mainPage.js';
 /**
 * Осуществляет измениние приложения согласно его состояниям
 *
 */
-class Router {
+export class Router {
     /**
      * Cохраняет root, создаёт Map для сопоставления путей views и стэк для истории переходов
      * @param {Element} root - div, через который происходит взаимодействие с html.
@@ -11,16 +10,16 @@ class Router {
     constructor(root) {
         this.root = root;
         this.mapViews = new Map();
-        this.historyStack = [];
+        this.history = [];
     }
 
     /**
      * Соопоставляет url и view
      * @param {String} path - url
-     * @param {Class} view - класс view
+     * @param {Function} renderView -функция рендера view
      */
-    register(path, view) {
-        this.mapViews.set(path, view);
+    register(path, renderView ) {
+        this.mapViews.set(path, renderView);
     }
 
     /**
@@ -30,104 +29,51 @@ class Router {
      * @param {string} stateObject.props - состояние приложения
      */
     go(stateObject) {
-        const view = new this.mapViews.get(stateObject.path)(this.root);
+        this.history.push({ 
+            path: stateObject.path, 
+            view: this.mapViews.get(stateObject.path),
+            props: stateObject.props,
+        });
+
+        this.current = this.history.length - 1;
+
+        const renderView = this.mapViews.get(stateObject.path);
         this.root.replaceChildren();
-        view.render(this);
+        renderView(this.history[this.current].props);
+        this.navigate(stateObject.path);
+    }
+
+    navigate(path) {
+        if(path !== '/') {
+            const location = window.location.href
+                .match(/\w+:\/\/\w+/i)[0];
+            history.replaceState( null, null, location + path)
+        }
+    }
+ 
+    flush() {
+        this.history = [];
     }
 
     back() {
+        if(this.current && this.current > 0) {
+            this.current--;
 
+            const renderView = this.history[this.current].view;
+            this.root.replaceChildren();
+            renderView(this.history[this.current].props);
+            this.navigate(this.history[this.current].path);
+        }
     }
 
     forward() {
+        if(this.current && this.current < this.history.length - 1) {
+            this.current++;
 
-    }
-}
-
-
-class Router {
-    /**
-     * Cохраняет root, создаёт массив routes 
-     * @param {Element} root - div, через который происходит взаимодействие с html.
-     */
-    constructor(root) {
-        this.root = options.root;
-        this.routes = [];
-        this.listen();
-    }
-  
-    /**
-     * Соопоставляет url и view
-     * @param {String} path - url
-     * @param {Class} classView - класс view
-     */
-    add = (path, classView) => {
-        this.routes.push({ path, classView });
-        return this;
-    };
-  
-    /**
-     * Удаляет url и view
-     * @param {String} path - url
-     */
-    remove = path => {
-        for (let i = 0; i < this.routes.length; i += 1) {
-            if (this.routes[i].path === path) {
-            this.routes.slice(i, 1);
-            return this;
-            }
+            const renderView = this.history[this.current];
+            this.root.replaceChildren();
+            renderView(this.history[this.current].props);
+            this.navigate(this.history[this.current].path);
         }
-        return this;
-    };
-  
-    /**
-     * Очищает историю
-     */
-    flush = () => {
-        this.routes = [];
-        return this;
-    };
-  
-    /**
-     * Убирает / из url
-     */
-    clearSlashes = path =>
-        path
-            .toString()
-            .replace(/\/$/, '')
-            .replace(/^\//, '');
-  
-    getFragment = () => {
-        let fragment = '';
-
-        fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
-        fragment = fragment.replace(/\?(.*)$/, '');
-        fragment = this.root !== '/' ? fragment.replace(this.root, '') : fragment;
-        return this.clearSlashes(fragment);
-    };
-  
-    navigate = (path = '') => {
-        window.history.pushState(null, null, this.root + this.clearSlashes(path));
-        return this;
-    };
-  
-    listen = () => {
-        clearInterval(this.interval);
-        this.interval = setInterval(this.interval, 50);
-    };
-  
-    interval = () => {
-        if (this.current === this.getFragment()) return;
-        this.current = this.getFragment();
-    
-        this.routes.some(route => {
-            const match = this.current.match(route.path);
-            if (match) {
-            match.shift();
-            route.classView.apply({}, match);
-            return match;
-            }
-            return false;
-        });
-    };
+    }
 }
