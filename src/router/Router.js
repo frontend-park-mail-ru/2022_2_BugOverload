@@ -17,18 +17,24 @@ export class Router {
      * Обрабатывает перемещение между views, доб. стандартные пути в приложении и рендерит главную
      */
     start() {
-        root.addEventListener('click', (e) => {
+        this.root.addEventListener('click', (e) => {
             if (this.mapViews.get(e.target.dataset.section)) {
                 e.preventDefault();
-                this.go(e.target.dataset.section);
+                this.go({ path: e.target.dataset.section }, true);
             }
         });
+
+        window.onpopstate = ({ state }) => setTimeout(() => {
+            const path = window.location.href
+                .replace(/^\w+:\/\/\w+/i, '');
+            this.go({ path, renderView: state });
+        }, 0);
 
         for (const rout of routes) {
             this.register(rout);
         }
-        
-        this.go(routes[0]); // рендер главной страницы
+
+        this.go(routes[0], true); // рендер главной страницы
     }
 
     /**
@@ -46,12 +52,12 @@ export class Router {
      * @param {string} stateObject.path - относительный url
      * @param {string} stateObject.props - состояние приложения
      */
-    go(stateObject) {
+    go(stateObject, pushState = false) {
         const renderView = this.mapViews.get(stateObject.path);
 
         this.root.replaceChildren();
         renderView(stateObject.props);
-        this.navigate(stateObject);
+        this.navigate(stateObject, pushState);
     }
 
     /**
@@ -59,9 +65,11 @@ export class Router {
      * @param {string} path - относительный url
      * @param {string} props - состояние приложения
      */
-    navigate({ path, props }) {
+    navigate({ path, props }, pushState = false) {
         const location = window.location.href
             .match(/\w+:\/\/\w+/i)[0];
-        window.history.pushState(props, null, location + path);
+        if (pushState) {
+            window.history.pushState(props, null, location + path);
+        }
     }
 }
