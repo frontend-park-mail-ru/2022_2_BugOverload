@@ -1,16 +1,34 @@
+import { routes } from '../../config/config.js';
 /**
 * Осуществляет измениние приложения согласно его состояниям
 *
 */
 export class Router {
     /**
-     * Cохраняет root, создаёт Map для сопоставления путей views и стэк для истории переходов
+     * Cохраняет root, создаёт Map для сопоставления путей views
      * @param {Element} root - div, через который происходит взаимодействие с html.
      */
     constructor(root) {
         this.root = root;
         this.mapViews = new Map();
-        this.history = [];
+    }
+
+    /**
+     * Обрабатывает перемещение между views, доб. стандартные пути в приложении и рендерит главную
+     */
+    start() {
+        root.addEventListener('click', (e) => {
+            if (this.mapViews.get(e.target.dataset.section)) {
+                e.preventDefault();
+                this.go(e.target.dataset.section);
+            }
+        });
+
+        for (const rout of routes) {
+            this.register(rout);
+        }
+        
+        this.go(routes[0]); // рендер главной страницы
     }
 
     /**
@@ -18,7 +36,7 @@ export class Router {
      * @param {String} path - url
      * @param {Function} renderView -функция рендера view
      */
-    register(path, renderView ) {
+    register({ path, renderView }) {
         this.mapViews.set(path, renderView);
     }
 
@@ -29,51 +47,21 @@ export class Router {
      * @param {string} stateObject.props - состояние приложения
      */
     go(stateObject) {
-        this.history.push({ 
-            path: stateObject.path, 
-            view: this.mapViews.get(stateObject.path),
-            props: stateObject.props,
-        });
-
-        this.current = this.history.length - 1;
-
         const renderView = this.mapViews.get(stateObject.path);
+
         this.root.replaceChildren();
-        renderView(this.history[this.current].props);
-        this.navigate(stateObject.path);
+        renderView(stateObject.props);
+        this.navigate(stateObject);
     }
 
-    navigate(path) {
-        if(path !== '/') {
-            const location = window.location.href
-                .match(/\w+:\/\/\w+/i)[0];
-            history.replaceState( null, null, location + path)
-        }
-    }
- 
-    flush() {
-        this.history = [];
-    }
-
-    back() {
-        if(this.current && this.current > 0) {
-            this.current--;
-
-            const renderView = this.history[this.current].view;
-            this.root.replaceChildren();
-            renderView(this.history[this.current].props);
-            this.navigate(this.history[this.current].path);
-        }
-    }
-
-    forward() {
-        if(this.current && this.current < this.history.length - 1) {
-            this.current++;
-
-            const renderView = this.history[this.current];
-            this.root.replaceChildren();
-            renderView(this.history[this.current].props);
-            this.navigate(this.history[this.current].path);
-        }
+    /**
+     * Изменение url
+     * @param {string} path - относительный url
+     * @param {string} props - состояние приложения
+     */
+    navigate({ path, props }) {
+        const location = window.location.href
+            .match(/\w+:\/\/\w+/i)[0];
+        window.history.pushState(props, null, location + path);
     }
 }
