@@ -15,7 +15,10 @@ export class Ajax {
             credentials: 'include',
         });
 
-        const result = await response.json();
+        let result = await response.text();
+
+        result ? result = JSON.parse(result) : {};
+
         return { status: response.status, body: result };
     }
 
