@@ -19,7 +19,7 @@ export class Header {
     }
 
     /**
-     * Обрабатывает запрос на аутенфикацию пользователя.
+     * Обрабатывает запрос на аутентификацию пользователя.
      */
     getRequestData() {
         const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
@@ -43,7 +43,7 @@ export class Header {
     }
 
     /**
-     * Наешивает события по которым пересходит рендер логина и регистрации
+     * Навешивает события, по которым происходит рендер логина и регистрации
      */
     handlerHeader() {
         this.root.addEventListener('click', (e) => {

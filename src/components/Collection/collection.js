@@ -39,12 +39,12 @@ export class Collection {
         }
 
         if (response.status === 404) {
-            ShowErrorMessage();
+            ShowErrorMessage('Данная коллекция не найдена');
             return null;
         }
 
-        if (response.status > 500) {
-            ShowErrorMessage();
+        if (response.status >= 500) {
+            ShowErrorMessage('Произошла ошибка сервера');
             return null;
         }
 
