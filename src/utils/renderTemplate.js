@@ -6,9 +6,9 @@
  * @param {String} place - место относительно target
 */
 const renderTemplate = (templateName, target, place, props = {}) => {
-    const template = Handlebars.templates[templateName];
-    const templateHtml = template(props);
-    target.insertAdjacentHTML(place, templateHtml);
+    // const template = Handlebars.templates[templateName];
+    // const templateHtml = template(props);
+    // target.insertAdjacentHTML(place, templateHtml);
 };
 
 export { renderTemplate };

@@ -1,4 +1,5 @@
-import { renderTemplate } from '../../utils/renderTemplate.js';
+import { renderTemplate } from '@utils/renderTemplate.js';
+import template from '@components/Modal/modal.handlebars';
 
 /**
 * Отрисовывает модальное окно
@@ -16,7 +17,8 @@ export class Modal {
      * Рендерит модальное окно
      */
     render() {
-        renderTemplate('components/Modal/modal', this.root, 'afterbegin');
+        // renderTemplate('components/Modal/modal', this.root, 'afterbegin');
+        this.root.insertAdjacentHTML('afterbegin', template());
         this.handler();
     }
 

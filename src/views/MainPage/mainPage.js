@@ -1,8 +1,9 @@
-import { PreviewFilm } from '../../components/PreviewFilm/previewFilm.js';
-import { Collection, COLLECTION_TYPE } from '../../components/Collection/collection.js';
-import { Header } from '../../components/Header/header.js';
-import { ROOT } from '../../config/config.js';
-import { ShowErrorMessage } from '../../components/ErrorMessage/errorMessage.js';
+import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
+import { Collection, COLLECTION_TYPE } from '@components/Collection/collection.js';
+import { Header } from '@components/Header/header.js';
+import { ROOT } from '@config/config.js';
+import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import template from '@views/MainPage/mainPage.handlebars';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -21,7 +22,7 @@ export function renderMainPage() {
         collectionPopular.getRequestData(),
         collectionCinemaToday.getRequestData(),
     ]).then((responses) => {
-        ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['views/MainPage/mainPage']({
+        ROOT.insertAdjacentHTML('beforeend', template({
             previewFilm: previewFilm.renderTemplate(responses[0]),
             collectionPopular: collectionPopular.renderTemplate(responses[1]),
             collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),

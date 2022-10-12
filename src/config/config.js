@@ -1,5 +1,5 @@
-import { Login } from '../components/Login/login.js';
-import { Signup } from '../components/Signup/signup.js';
+import { Login } from '@components/Login/login.js';
+import { Signup } from '@components/Signup/signup.js';
 
 /**
 * Конфиг испульзуемый для рендера
