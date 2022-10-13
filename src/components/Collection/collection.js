@@ -33,7 +33,7 @@ export class Collection {
         } else {
             href = 'popular_films';
         }
-        const response = await Ajax.get(`http://localhost:3000/v1/${href}`);
+        const response = await Ajax.get(`http://${DOMAIN}/v1/${href}`);
 
         if (response.status === 200) {
             return response.body;
@@ -62,7 +62,6 @@ export class Collection {
     renderTemplate(data) {
         const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        // return Handlebars.templates['components/Collection/collection']({ title: data.title, films });
         return template({ title: data.title, films });
     }
 

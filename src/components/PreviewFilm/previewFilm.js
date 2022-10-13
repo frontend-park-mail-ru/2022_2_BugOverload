@@ -17,7 +17,7 @@ export class PreviewFilm {
     * @return {null} В случае ошибочного статуса
     */
     async getRequestData() {
-        const response = await Ajax.get('http://localhost:3000/v1/recommendation_film');
+        const response = await Ajax.get(`http://${DOMAIN}/v1/recommendation_film`);
         if (response.status === 200) {
             return response.body;
         }

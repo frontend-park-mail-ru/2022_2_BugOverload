@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -13,18 +13,18 @@ const isProd = process.env.NODE_ENV === 'production';
 const optimization = () => {
     const config = {
         splitChunks: {
-            chunks: 'all'
-        }
+            chunks: 'all',
+        },
     };
 
     if (isProd) {
         config.minimizer = [
             new CssMinimizerPlugin(),
             new TerserWebpackPlugin(),
-        ]
+        ];
     }
 
-    return config
+    return config;
 };
 
 module.exports = {

@@ -1,5 +1,4 @@
 import { Ajax } from '@utils/ajax.js';
-import { renderTemplate } from '@utils/renderTemplate.js';
 import templateHeader from '@components/Header/header.handlebars';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
 
@@ -27,12 +26,11 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get('http://localhost:3000/v1/auth/logout');
+            const resGet = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
             resGet.then((response) => {
                 if (target.dataset.section === 'logout') {
                     if (response.status === 200) {
                         document.body.querySelector('.header').remove();
-                        // renderTemplate('components/Header/header', root, 'afterbegin');
                         root.insertAdjacentHTML('afterbegin', templateHeader());
                     }
                 }
@@ -65,12 +63,6 @@ export class Userbar {
                 ...user,
             };
 
-            // renderTemplate(
-            //     'components/Header/header',
-            //     root,
-            //     'afterbegin',
-            //     props,
-            // );
             root.insertAdjacentHTML('afterbegin', templateHeader(props));
 
             root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
@@ -82,9 +74,6 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                // renderTemplate('components/Header/header', root, 'afterbegin', {
-                //     ...user,
-                // });
                 root.insertAdjacentHTML('afterbegin', templateHeader({ ...user }));
 
                 const newUserbar = document.body.querySelector('.header__userbar-user-info-container');

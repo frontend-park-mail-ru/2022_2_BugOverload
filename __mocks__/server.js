@@ -10,7 +10,7 @@ const cors = require('cors');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.resolve(__dirname, '../src')));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use(express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
@@ -57,7 +57,6 @@ app.get('/v1/auth',  (req, res) => {
 app.get('/v1/auth/logout',  (req, res) => {
 	res.status(200).json("de");
 });
-
 
 
 app.post('/v1/auth/signup', (req, res) => {

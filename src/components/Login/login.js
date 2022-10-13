@@ -1,5 +1,4 @@
 import { Ajax } from '@utils/ajax.js';
-import { renderTemplate } from '@utils/renderTemplate.js';
 import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
@@ -30,7 +29,7 @@ export class Login {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://localhost:3000/v1/auth/login',
+            url: `http://${DOMAIN}/v1/auth/login`,
             body: user,
         });
 
@@ -41,7 +40,6 @@ export class Login {
                     .remove();
 
                 document.body.querySelector('.header').remove();
-                // renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
                 this.root.insertAdjacentHTML('afterbegin', templateHeader(response.body));
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
