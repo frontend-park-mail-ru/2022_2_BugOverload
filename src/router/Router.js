@@ -14,7 +14,7 @@ export class Router {
     }
 
     /**
-     * Обрабатывает перемещение между views, доб. стандартные пути в приложении и рендерит главную
+     * Обрабатывает перемещение между views, доб. стандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
      */
     start() {
         this.root.addEventListener('click', (e) => {
@@ -24,17 +24,29 @@ export class Router {
             }
         });
 
-        window.onpopstate = ({ state }) => setTimeout(() => {
+        window.addEventListener('popstate', ({ state }) => setTimeout(() => {
             const path = window.location.href
                 .replace(/^\w+:\/\/\w+/i, '');
             this.go({ path, renderView: state });
-        }, 0);
+        }, 0));
 
         for (const rout of routes) {
             this.register(rout);
         }
 
-        this.go(routes[0], true); // рендер главной страницы
+        //рендерит страницы ппри перезагрузке
+        let location = window.location.href
+            .replace(/\w+:\/\/\w+/i,'');
+        if(location !== '/') {
+            location = location.replace(/\/$/i,'');
+        }
+
+        if (this.mapViews.get(location)) {
+            this.go({path: location});
+        } else {
+            //тут будет рендер 404 страницы
+        }
+         
     }
 
     /**

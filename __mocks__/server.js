@@ -10,8 +10,8 @@ const cors = require('cors');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.resolve(__dirname, '../src')));
-app.use(express.static(path.resolve(__dirname, 'images')));
+app.use('/',express.static(path.resolve(__dirname, '../src')));
+app.use('/',express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
 	origin: ['http://:3000', 'http://:3001', 'http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://:5500'],
