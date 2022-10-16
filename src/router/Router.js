@@ -1,5 +1,5 @@
-import { routes } from '../config/config.js';
-import { idRedExp } from '../config/regExp.js';
+import { routes } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 /**
 * Осуществляет измениние приложения согласно его состояниям
 *
@@ -14,10 +14,14 @@ export class Router {
         this.mapViews = new Map();
     }
 
+    /**
+     * Получает получает путь для обработчика view и динамические параметры
+     * @param {String} href - ccылка без домена и id
+     */
     matchHref(href) {
-        const reg = new RegExp(`^${href.replace(idRedExp.idFilms, '(\\w+)')}?$`);
+        const reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, '(\\w+)')}?$`);
         const matchHref = href.match(reg);
-        matchHref[0] = matchHref[0].replace(idRedExp.idFilms, '');
+        matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
         return matchHref;
     }
 
@@ -36,7 +40,7 @@ export class Router {
         window.addEventListener('popstate', ({ state }) => setTimeout(() => {
             let matchedHref = [];
             matchedHref[0] = window.location.href
-                .replace(/^\w+:\/\/\w+/i, '');
+                .replace(hrefRegExp.host, '');
 
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
@@ -52,9 +56,10 @@ export class Router {
         // рендерит страницы при перезагрузке
         let matchedHref = [];
         let location = window.location.href
-            .replace(/\w+:\/\/\w+/i, '');
+            .replace(/\w+:\/\/\w+:\d+/i, '');
 
         matchedHref[0] = location;
+
         if (location !== '/') {
             location = location.replace(/\/$/i, '');
 
@@ -63,7 +68,7 @@ export class Router {
 
         if (this.mapViews.get(location)) {
             this.go({
-                path: matchedHref[0].replace(/\d+$/, ''),
+                path: matchedHref[0],
                 props: matchedHref[1],
             });
         } else {
@@ -101,7 +106,7 @@ export class Router {
      */
     navigate({ path, props }, pushState = false) {
         const location = window.location.href
-            .match(/\w+:\/\/\w+/i)[0];
+            .match(hrefRegExp.host)[0];
         if (pushState) {
             window.history.pushState(props, null, location + path);
         }

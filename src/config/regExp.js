@@ -8,6 +8,7 @@ export const regExp = {
 
 };
 
-export const idRedExp = {
+export const hrefRegExp = {
+    host: /^\w+:\/\/\w+/i,
     idFilms: /\d+$/,
 };
