@@ -7,12 +7,12 @@ import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
 *
 */
-export class MainBody{
-    renderMainPage() {    
+export class MainBody {
+    renderMainPage() {
         const previewFilm = new PreviewFilm();
         const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
         const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-    
+
         Promise.all([
             previewFilm.getRequestData(),
             collectionPopular.getRequestData(),
@@ -23,7 +23,7 @@ export class MainBody{
                 collectionPopular: collectionPopular.renderTemplate(responses[1]),
                 collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
             }));
-    
+
             Collection.addHandlers();
             this.addHandlersToDevelopmentLinks();
         });
@@ -36,10 +36,10 @@ export class MainBody{
     addHandlersToDevelopmentLinks() {
         let elems = document.querySelectorAll('.header__navlink');
         elems.forEach((elem) => this.errLink(elem));
-    
+
         elems = document.querySelectorAll('.preview-film__button');
         elems.forEach((elem) => this.errLink(elem));
-    
+
         elems = document.querySelectorAll('.film__link');
         elems.forEach((elem) => this.errLink(elem));
     }

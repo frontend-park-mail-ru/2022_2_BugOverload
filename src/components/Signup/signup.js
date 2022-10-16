@@ -47,7 +47,7 @@ export class Signup {
         }
     }
 
-    /** 
+    /**
      * Рендерит логин
      */
     render(user) {

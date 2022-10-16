@@ -31,19 +31,18 @@ class UserStore extends UserMixin(Store) {
                 status: response.status,
                 ...response.body,
             }));
-        })
+        });
     }
 
     auth() {
         const responsePromise = Ajax.get('http://localhost:80/v1/auth');
 
         responsePromise.then((response) => {
-            console.log(response.status)
-            if(response.status === 200) {
+            if (response.status === 200) {
                 dispatcher.dispatch({
                     method: 'setUser',
                     value: response.body,
-                })
+                });
             }
         });
     }
@@ -52,11 +51,11 @@ class UserStore extends UserMixin(Store) {
         const resGet = Ajax.get('http://localhost:80/v1/auth/logout');
 
         resGet.then((response) => {
-            if(response.status === 200) {
+            if (response.status === 200) {
                 dispatcher.dispatch({
                     method: 'setUser',
                     value: null,
-                })
+                });
             }
         });
     }

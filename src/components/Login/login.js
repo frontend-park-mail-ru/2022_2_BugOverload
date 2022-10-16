@@ -48,7 +48,6 @@ export class Login {
 
         if (user.status === 401) {
             renderError(wrapper, 'password', 'Неверный пароль');
-            return;
         }
     }
 

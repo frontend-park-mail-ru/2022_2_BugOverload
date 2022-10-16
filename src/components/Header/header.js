@@ -8,7 +8,7 @@ import { dispatcher } from '../../store/Dispatcher.js';
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
 * Добавляет обработчики событий.
 *
-*/ 
+*/
 export class Header {
     /**
      * Cохраняет root.
@@ -24,22 +24,22 @@ export class Header {
     render() {
         const user = dispatcher.dispatch({
             method: 'getUser',
-        })
-        console.log(user)
+        });
+
         const header = this.root.querySelector('.header');
-        if(header) {
+        if (header) {
             header.remove();
         }
 
-        if(user) {
+        if (user) {
             renderTemplate('components/Header/header', this.root, 'afterbegin', user);
             const userbar = new Userbar(this.root);
             userbar.addHandlers(user);
         } else {
             renderTemplate('components/Header/header', this.root, 'afterbegin');
-            
+
             dispatcher.dispatch({
-                method: 'auth'  
+                method: 'auth',
             });
         }
     }
@@ -67,7 +67,6 @@ export class Header {
                         removeElement = 'login';
                     }
 
-                    console.log(removeElement)
                     modalWindow
                         .querySelector(`.modal__${removeElement}`)
                         .remove();

@@ -17,15 +17,13 @@ class Dispatcher {
 
     dispatch(action) {
         const storeMethod = this.mapActionHandlers.get(action.method);
-        console.log(action)
+
         if (!storeMethod) {
             return;
         }
 
         const subsribers = this.mapSubscribers.get(action.method);
 
-        console.log(subsribers)
-        console.log(storeMethod)
         if (Object.hasOwn(action, 'value')) {
             storeMethod(action.value, subsribers);
         } else {

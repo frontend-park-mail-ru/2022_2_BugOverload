@@ -28,7 +28,7 @@ export class Userbar {
             if (target.dataset.section === 'logout') {
                 dispatcher.dispatch({
                     method: 'logout',
-                })
+                });
             }
         });
     }
