@@ -17,7 +17,7 @@ export class Ajax {
 
         let result = await response.text();
 
-        result ? result = JSON.parse(result) : {};
+        result = result ? result = JSON.parse(result) : {};
 
         return { status: response.status, body: result };
     }
@@ -41,7 +41,7 @@ export class Ajax {
 
         let result = await response.text();
 
-        result ? result = JSON.parse(result) : {};
+        result = result ? result = JSON.parse(result) : {};
 
         return { status: response.status, body: result };
     }

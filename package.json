@@ -4,20 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run stylelint && npm run lint && npm run clean && npm run build && npm run back",
+    "start": "npm run stand",
     "back": "node __mocks__/server.js",
 
-    "dev": "npm run stylelint && npm run lint && cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
+    "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
     "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8080 webpack --mode production",
     "stand": "npm run dev && npm run back 3000",
     "deploy": "npm run prod && npm run back 80",
     "dev-deploy": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=movie-gate.online:8080 webpack --mode development && npm run back 80",
 
-    "clean": "rm -rf dist src/dist && mkdir dist src/dist && touch src/dist/templates.js",
-    "build": "handlebars -m src/ -f src/dist/templates.js",
-
-    "lint": "eslint --cache --ext .js src --fix",
-    "stylelint": "stylelint '**/*{.css,.scss}'  --allow-empty-input",
+    "check": "npm run lint && npm run stylelint:fix",
+    "lint": "eslint --cache --ext .js src",
+    "stylelint": "stylelint '**/*{.css,.scss}' --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },
   "repository": {
