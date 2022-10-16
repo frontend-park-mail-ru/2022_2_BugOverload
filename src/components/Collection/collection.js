@@ -35,7 +35,7 @@ export class Collection {
         const response = await Ajax.get(`http://localhost:80/v1/${href}`);
 
         if (response.status === 200) {
-            return response.body;
+            return response.body; 
         }
 
         if (response.status === 404) {

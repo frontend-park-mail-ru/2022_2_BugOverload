@@ -1,6 +1,6 @@
 import { Login } from '../components/Login/login.js';
 import { Signup } from '../components/Signup/signup.js';
-import { renderMainPage } from '../views/MainPage/mainPage.js';
+import { renderMainPage } from '../views/MainPage/MainPage.js';
 
 export const routes = [
     { path: '/', renderView: renderMainPage },
