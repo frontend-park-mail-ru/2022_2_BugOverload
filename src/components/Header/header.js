@@ -22,7 +22,7 @@ export class Header {
      * Обрабатывает запрос на аутентификацию пользователя.
      */
     getRequestData() {
-        const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
+        const responsePromise = Ajax.get('http://localhost:80/v1/auth');
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();

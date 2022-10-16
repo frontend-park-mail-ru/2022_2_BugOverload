@@ -1,4 +1,4 @@
-import { regExp } from '../../config/regExp.js';
+import { regExp } from '../config/regExp.js';
 
 /**
  * Проверяет ник

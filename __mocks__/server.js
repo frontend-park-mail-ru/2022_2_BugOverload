@@ -3,7 +3,6 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const uuid = require('uuid').v4;
 const body = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
