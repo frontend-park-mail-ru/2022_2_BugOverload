@@ -1,5 +1,6 @@
-import { Ajax } from '../../utils/ajax.js';
-import { renderTemplate } from '../../utils/renderTemplate.js';
+import { Ajax } from '@utils/ajax.js';
+import templateHeader from '@components/Header/header.handlebars';
+import templateUserbar from '@components/Userbar/userbar.handlebars';
 
 /**
 * Отрисовывает выпадающее меню.
@@ -25,12 +26,12 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
+            const resGet = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
             resGet.then((response) => {
                 if (target.dataset.section === 'logout') {
-                    if (response.status === 200) {
+                    if (response.status === 204) {
                         document.body.querySelector('.header').remove();
-                        renderTemplate('components/Header/header', root, 'afterbegin');
+                        root.insertAdjacentHTML('afterbegin', templateHeader());
                     }
                 }
             });
@@ -58,16 +59,11 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userbar: Handlebars.templates['components/Userbar/userbar'](),
+                userbar: templateUserbar(),
                 ...user,
             };
 
-            renderTemplate(
-                'components/Header/header',
-                root,
-                'afterbegin',
-                props,
-            );
+            root.insertAdjacentHTML('afterbegin', templateHeader(props));
 
             root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
@@ -78,9 +74,7 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('components/Header/header', root, 'afterbegin', {
-                    ...user,
-                });
+                root.insertAdjacentHTML('afterbegin', templateHeader({ ...user }));
 
                 const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
