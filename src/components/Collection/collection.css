@@ -17,7 +17,7 @@
 
 .collection__title {
     font-size: 28px;
-    color:#fff;
+    color: var(--main-color-text);
 }
 
 .collection__slider {

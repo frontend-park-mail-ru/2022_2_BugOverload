@@ -31,7 +31,7 @@
 }
 
 .preview-film__film-title {
-    color: #fff;
+    color: var(--main-color-text);
     font-weight: bold;
     font-size: 48px;
     width: 500px;
@@ -43,28 +43,17 @@
 }
 
 .preview-film__film-description {
-    color: #fff;
+    color: var(--main-color-text);
     font-size: 15px;
     width: 317px;
     margin-top: 16px;
 }
 
 .preview-film__button {
-    background-color: var(--primary-color);
-    border-radius: 27px;
-    box-sizing: border-box;
     width: 180px;
     height: 46px;
-    padding: 10px;
     margin-top: 23px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    text-decoration: none;
-    font-size: 20px;
-    font-family: 'Mail Sans Roman Med';
-    color: #000;
+
 }
 
 .preview-film__button:hover {

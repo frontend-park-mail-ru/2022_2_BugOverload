@@ -41,7 +41,7 @@
 
 .modal__header {
     margin-bottom: 33px;
-    color: #fff;
+    color: var(--main-color-text);
     font-size: 26px;
 }
 
@@ -68,7 +68,7 @@
     width: 290px;
     height: 28px;
     border-radius: 21px;
-    color: #fff;
+    color: var(--main-color-text);
     background: #27292E;
     opacity: .8;
     border: 2px solid #333;
@@ -104,7 +104,7 @@
     margin-top: 25px;
     margin-right: 20px;
     font-size: 13px;
-    color: #fff;
+    color: var(--main-color-text);
     text-decoration: none;
     cursor: pointer;
 }

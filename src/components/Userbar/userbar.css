@@ -46,7 +46,7 @@
 
 .header__userbar-name {
     font-size: 15px;
-    color: #fff;
+    color: var(--main-color-text);
 }
 
 .header__userbar-email {
@@ -66,7 +66,7 @@
     margin-top: 12px;
     font-size: 15px;
     text-decoration: none;
-    color: #fff;
+    color: var(--main-color-text);
     cursor: pointer;
 }
 

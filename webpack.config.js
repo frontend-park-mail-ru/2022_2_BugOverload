@@ -49,6 +49,9 @@ module.exports = {
         },
     },
     optimization: optimization(),
+    devServer: {
+        port: 3001,
+    },
     module: {
         rules: [
             {
@@ -82,6 +85,10 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/assets/favicons'),
+                    to: path.resolve(__dirname, 'dist'),
+                },
+                {
+                    from: path.resolve(__dirname, 'src/assets/icons'),
                     to: path.resolve(__dirname, 'dist'),
                 },
                 {

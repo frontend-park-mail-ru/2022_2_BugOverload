@@ -15,26 +15,32 @@
         </div>
         <div class="about-film__short-description">{{short_description}}</div>
         <div class="about-film__directors">
+            <div class="about-film__label-director">Режиссёр:</div>
+
             {{#each directors}}
-            <a class="about-film__director">{{this}}&nbsp</a>
+            <a href="/" class="about-film__director">{{this}}&nbsp</a>
             {{/each}}
         </div>
         <div class="about-film__roles">
+            <div class="about-film__label-role">В ролях:</div>
+
             {{#each roles}}
-            <a class="about-film__role">{{this}}&nbsp</a>
+            <a href="/" class="about-film__role">{{this}}&nbsp</a>
             {{/each}}
         </div>
-        <a class="about-film__button primary-btn">
-            <img class="about-film__button_play-trailer" src="img/ico/play_trailer.png" alt="">
-            Трейлер
-        </a>
-        <a class="about-film__button secondary-btn">
-            <img class="about-film__button_bookmark" src="img/ico/bookmark.png" alt="">
-        </a>
-        <a class="about-film__button secondary-btn">
-            <img class="about-film__button_plus" src="img/ico/plus.png" alt="">
-        </a>
+        <div class="about-film__buttons-container">
+            <a href="/" class="about-film__button-trailer primary-btn-big">
+            <img class="about-film__button_play-trailer" src="play.png" alt="">
+                Трейлер
+            </a>
+            <a href="/" class="about-film__button-bookmark secondary-btn-big">
+                <img class="about-film__button_bookmark" src="bookmark.png" alt="">
+            </a>
+            <a href="/" class="about-film__button-plus secondary-btn-big">
+                <img class="about-film__button_plus" src="plus-save.png" alt="">
+            </a>
+        </div>
 
+        <div class="about-film__blackout-bottom"></div>
     </div>
-    <div class="about-film__blackout-bottom"></div>
 </div>
