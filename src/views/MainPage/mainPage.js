@@ -41,6 +41,9 @@ function addHandlersToDevelopmentLinks() {
     let elems = document.querySelectorAll('.header__navlink');
     elems.forEach((elem) => errLink(elem));
 
+    elems = document.querySelectorAll('.preview-film__button');
+    elems.forEach((elem) => errLink(elem));
+
     elems = document.querySelectorAll('.film__link');
     elems.forEach((elem) => errLink(elem));
 }

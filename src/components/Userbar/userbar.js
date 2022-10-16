@@ -29,7 +29,7 @@ export class Userbar {
             const resGet = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
             resGet.then((response) => {
                 if (target.dataset.section === 'logout') {
-                    if (response.status === 200) {
+                    if (response.status === 204) {
                         document.body.querySelector('.header').remove();
                         root.insertAdjacentHTML('afterbegin', templateHeader());
                     }

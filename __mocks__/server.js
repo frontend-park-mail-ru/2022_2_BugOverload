@@ -55,7 +55,7 @@ app.get('/v1/auth',  (req, res) => {
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
-	res.status(200).json("de");
+	res.sendStatus(204);
 });
 
 
