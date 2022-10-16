@@ -7,7 +7,7 @@ export const routes = [
 ];
 
 /**
-* Конфиг испульзуемый для рендера
+* Конфиг используемый для рендера
 */
 export const config = {
     header: {
