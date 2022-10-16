@@ -1,0 +1,40 @@
+<div class="about-film" style="background-image: url('{{poster_hor}}');">
+    <div class="about-film__blackout-left"></div>
+    <div class="about-film__container">
+
+        <div class="about-film__title">{{film_name}}</div>
+        <div class="about-film__original-title">{{original_name}}</div>
+        <div class="about-film__base-info">
+            <div class="about-film__rating">{{rating}}</div>
+            <div class="about-film__year">{{year_prod}}</div>
+            <div class="about-film__duration">{{duration}}</div>
+            {{#if type_serial}}
+            <div class="about-film__count-seasons">{{count_seasons}}</div>
+            {{/if}}
+            <div class="about-film__age-limit">{{age_limit}}</div>
+        </div>
+        <div class="about-film__short-description">{{short_description}}</div>
+        <div class="about-film__directors">
+            {{#each directors}}
+            <a class="about-film__director">{{this}}&nbsp</a>
+            {{/each}}
+        </div>
+        <div class="about-film__roles">
+            {{#each roles}}
+            <a class="about-film__role">{{this}}&nbsp</a>
+            {{/each}}
+        </div>
+        <a class="about-film__button primary-btn">
+            <img class="about-film__button_play-trailer" src="img/ico/play_trailer.png" alt="">
+            Трейлер
+        </a>
+        <a class="about-film__button secondary-btn">
+            <img class="about-film__button_bookmark" src="img/ico/bookmark.png" alt="">
+        </a>
+        <a class="about-film__button secondary-btn">
+            <img class="about-film__button_plus" src="img/ico/plus.png" alt="">
+        </a>
+
+    </div>
+    <div class="about-film__blackout-bottom"></div>
+</div>

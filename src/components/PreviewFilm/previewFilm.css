@@ -50,7 +50,7 @@
 }
 
 .preview-film__button {
-    background-color: #FEBA2B;
+    background-color: var(--primary-color);
     border-radius: 27px;
     box-sizing: border-box;
     width: 180px;
@@ -69,6 +69,6 @@
 
 .preview-film__button:hover {
     cursor: pointer;
-    background-color: #CD9826;
+    background-color: var(--primary-color-hover);
     transition: 0.1s linear;
 }
