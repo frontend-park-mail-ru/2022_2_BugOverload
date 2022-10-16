@@ -1,10 +1,11 @@
-import { Ajax } from '../../utils/ajax.js';
-import { renderTemplate } from '../../utils/renderTemplate.js';
+import { Ajax } from '@utils/ajax.js';
 import {
     checkEmail, checkPassword, renderError, removeError,
-} from '../../utils/valid.js';
-import { Modal } from '../Modal/modal.js';
-import { Userbar } from '../Userbar/userbar.js';
+} from '@utils/valid.js';
+import { Modal } from '@components/Modal/modal.js';
+import { Userbar } from '@components/Userbar/userbar.js';
+import templateHeader from '@components/Header/header.handlebars';
+import templateLogin from '@components/Login/login.handlebars';
 
 /**
 * Отрисовывает логин.
@@ -28,7 +29,7 @@ export class Login {
      */
     postRequestData(user) {
         const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/login',
+            url: `http://${DOMAIN}/v1/auth/login`,
             body: user,
         });
 
@@ -39,7 +40,7 @@ export class Login {
                     .remove();
 
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                this.root.insertAdjacentHTML('afterbegin', templateHeader(response.body));
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
@@ -66,7 +67,8 @@ export class Login {
 
         const modalWindow = this.root.querySelector('.modal__window__flex');
 
-        renderTemplate('components/Login/login', modalWindow, 'afterbegin');
+        // renderTemplate('components/Login/login', modalWindow, 'afterbegin');
+        modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
 
         this.handler(modalWindow);
     }

@@ -1,3 +1,5 @@
+import template from '@components/Film/film.handlebars';
+
 /**
 * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
 *
@@ -12,7 +14,7 @@ export class Film {
     static createFilm(filmData) {
         Film.decoreFilmInfo(filmData);
 
-        const film = Handlebars.templates['components/Film/film'](filmData);
+        const film = template(filmData);
 
         const div = document.createElement('div');
         div.insertAdjacentHTML('afterbegin', film);

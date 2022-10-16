@@ -1,7 +1,7 @@
-import { Ajax } from '../../utils/ajax.js';
-import { renderTemplate } from '../../utils/renderTemplate.js';
-import { Userbar } from '../Userbar/userbar.js';
-import { config } from '../../config/config.js';
+import { Ajax } from '@utils/ajax.js';
+import { Userbar } from '@components/Userbar/userbar.js';
+import { config } from '@config/config.js';
+import template from '@components/Header/header.handlebars';
 
 /**
 * Отрисовывает хедер.
@@ -22,11 +22,11 @@ export class Header {
      * Обрабатывает запрос на аутентификацию пользователя.
      */
     getRequestData() {
-        const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
+        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/auth`);
         responsePromise.then((response) => {
             if (response.status === 200) {
                 document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
+                this.root.insertAdjacentHTML('afterbegin', template(response.body));
                 const userbar = new Userbar(this.root);
                 userbar.addHandlers(response.body);
             }
@@ -37,7 +37,7 @@ export class Header {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        renderTemplate('components/Header/header', this.root, 'afterbegin');
+        this.root.insertAdjacentHTML('afterbegin', template());
         this.getRequestData();
         this.handlerHeader();
     }
