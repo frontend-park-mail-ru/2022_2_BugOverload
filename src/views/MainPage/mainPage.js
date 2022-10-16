@@ -11,6 +11,7 @@ import { ShowErrorMessage } from '../../components/ErrorMessage/errorMessage.js'
 export function renderMainPage() {
     const header = new Header(ROOT);
     header.render();
+    header.handlerHeader();
 
     const previewFilm = new PreviewFilm();
     const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);

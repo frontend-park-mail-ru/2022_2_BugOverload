@@ -1,14 +1,14 @@
-import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
+import { dispatcher } from '../../store/Dispatcher.js';
 
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
 * Добавляет обработчики событий.
 *
-*/
+*/ 
 export class Header {
     /**
      * Cохраняет root.
@@ -19,27 +19,29 @@ export class Header {
     }
 
     /**
-     * Обрабатывает запрос на аутентификацию пользователя.
-     */
-    getRequestData() {
-        const responsePromise = Ajax.get('http://movie-gate.online:8088/v1/auth');
-        responsePromise.then((response) => {
-            if (response.status === 200) {
-                document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
-            }
-        });
-    }
-
-    /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        renderTemplate('components/Header/header', this.root, 'afterbegin');
-        this.getRequestData();
-        this.handlerHeader();
+        const user = dispatcher.dispatch({
+            method: 'getUser',
+        })
+        console.log(user)
+        const header = this.root.querySelector('.header');
+        if(header) {
+            header.remove();
+        }
+
+        if(user) {
+            renderTemplate('components/Header/header', this.root, 'afterbegin', user);
+            const userbar = new Userbar(this.root);
+            userbar.addHandlers(user);
+        } else {
+            renderTemplate('components/Header/header', this.root, 'afterbegin');
+            
+            dispatcher.dispatch({
+                method: 'auth'  
+            });
+        }
     }
 
     /**
@@ -65,6 +67,7 @@ export class Header {
                         removeElement = 'login';
                     }
 
+                    console.log(removeElement)
                     modalWindow
                         .querySelector(`.modal__${removeElement}`)
                         .remove();

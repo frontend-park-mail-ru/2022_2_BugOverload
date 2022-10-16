@@ -14,7 +14,8 @@ export class Router {
     }
 
     /**
-     * Обрабатывает перемещение между views, доб. стандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
+     * Обрабатывает перемещение между views, добавляет
+     * cтандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
      */
     start() {
         this.root.addEventListener('click', (e) => {
@@ -34,19 +35,18 @@ export class Router {
             this.register(rout);
         }
 
-        //рендерит страницы ппри перезагрузке
+        // рендерит страницы ппри перезагрузке
         let location = window.location.href
-            .replace(/\w+:\/\/\w+/i,'');
-        if(location !== '/') {
-            location = location.replace(/\/$/i,'');
+            .replace(/\w+:\/\/\w+/i, '');
+        if (location !== '/') {
+            location = location.replace(/\/$/i, '');
         }
 
         if (this.mapViews.get(location)) {
-            this.go({path: location});
+            this.go({ path: location });
         } else {
-            //тут будет рендер 404 страницы
+            // тут будет рендер 404 страницы
         }
-         
     }
 
     /**

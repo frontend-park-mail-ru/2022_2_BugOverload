@@ -1,10 +1,9 @@
-import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import {
     checkEmail, checkPassword, renderError, removeError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
-import { Userbar } from '../Userbar/userbar.js';
+import { dispatcher } from '../../store/Dispatcher.js';
 
 /**
 * Отрисовывает логин.
@@ -26,42 +25,45 @@ export class Login {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    postRequestData(user) {
-        const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/login',
-            body: user,
-        });
+    handlerStatus(user = null) {
+        if (user.status === 200) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
 
-        responsePromise.then((response) => {
-            if (response.status === 200) {
-                document.body
-                    .querySelector('.modal__background')
-                    .remove();
+            document.body.querySelector('.header').remove();
 
-                document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', response.body);
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
-            }
-            const form = this.root.querySelector('.modal__wrapper__input');
-            if (response.status === 400) {
-                renderError(form, 'email', 'Такой пользователь не зарегистирован');
-            }
-            const wrapper = document.getElementById('login_password');
+            dispatcher.dispatch({
+                method: 'setUser',
+                value: user,
+            });
+            return;
+        }
+        const form = this.root.querySelector('.modal__wrapper__input');
+        if (user.status === 400) {
+            renderError(form, 'email', 'Такой пользователь не зарегистирован');
+            return;
+        }
+        const wrapper = document.getElementById('login_password');
 
-            if (response.status === 401) {
-                renderError(wrapper, 'password', 'Неверный пароль');
-            }
-        });
+        if (user.status === 401) {
+            renderError(wrapper, 'password', 'Неверный пароль');
+            return;
+        }
     }
 
     /**
      * Рендерит логин
      */
-    render() {
+    render(user) {
         if (!this.root.querySelector('.modal__window')) {
             const modal = new Modal(this.root);
             modal.render();
+        }
+
+        if (user && user.status) {
+            this.handlerStatus(user);
+            return;
         }
 
         const modalWindow = this.root.querySelector('.modal__window__flex');
@@ -133,7 +135,10 @@ export class Login {
                 return;
             }
 
-            this.postRequestData(user);
+            dispatcher.dispatch({
+                method: 'login',
+                value: user,
+            });
         });
     }
 }

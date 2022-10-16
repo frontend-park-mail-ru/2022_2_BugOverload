@@ -1,4 +1,4 @@
-import { Ajax } from '../../utils/ajax.js';
+import { dispatcher } from '../../store/Dispatcher.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 
 /**
@@ -25,15 +25,11 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get('http://movie-gate.online:8088/v1/auth/logout');
-            resGet.then((response) => {
-                if (target.dataset.section === 'logout') {
-                    if (response.status === 200) {
-                        document.body.querySelector('.header').remove();
-                        renderTemplate('components/Header/header', root, 'afterbegin');
-                    }
-                }
-            });
+            if (target.dataset.section === 'logout') {
+                dispatcher.dispatch({
+                    method: 'logout',
+                })
+            }
         });
     }
 

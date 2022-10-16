@@ -32,7 +32,7 @@ export class Collection {
         } else {
             href = 'popular_films';
         }
-        const response = await Ajax.get(`http://movie-gate.online:8088/v1/${href}`);
+        const response = await Ajax.get(`http://localhost:80/v1/${href}`);
 
         if (response.status === 200) {
             return response.body;

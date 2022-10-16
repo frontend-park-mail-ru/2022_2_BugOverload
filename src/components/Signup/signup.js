@@ -1,10 +1,9 @@
-import { Ajax } from '../../utils/ajax.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
-import { Userbar } from '../Userbar/userbar.js';
+import { dispatcher } from '../../store/Dispatcher.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -27,45 +26,39 @@ export class Signup {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    postRequestData(user) {
-        const responsePromise = Ajax.post({
-            url: 'http://movie-gate.online:8088/v1/auth/signup',
-            body: user,
-        });
+    handlerStatus(user = null) {
+        if (user.status === 201) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
 
-        responsePromise.then((response) => {
-            if (response.status === 201) {
-                document.body
-                    .querySelector('.modal__background')
-                    .remove();
+            document.body.querySelector('.header').remove();
 
-                if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
-                    response.body.avatar = 'asserts/img/invisibleMan.jpeg';
-                }
-                document.body.querySelector('.header').remove();
-                renderTemplate('components/Header/header', this.root, 'afterbegin', {
-                    ...response.body,
-                });
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
+            dispatcher.dispatch({
+                method: 'setUser',
+                value: user,
+            });
+            return;
+        }
 
-                return;
-            }
-
-            if (response.status === 400) {
-                const wrapper = document.getElementById('signup_email');
-                renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
-            }
-        });
+        if (user.status === 400) {
+            const wrapper = document.getElementById('signup_email');
+            renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
+        }
     }
 
-    /**
+    /** 
      * Рендерит логин
      */
-    render() {
+    render(user) {
         if (this.root.querySelector('.modal__window') === null) {
             const modal = new Modal(this.root);
             modal.render();
+        }
+
+        if (user && user.status) {
+            this.handlerStatus(user);
+            return;
         }
 
         const modalWindow = this.root.querySelector('.modal__window__flex');
@@ -166,7 +159,10 @@ export class Signup {
                 return;
             }
 
-            this.postRequestData(user);
+            dispatcher.dispatch({
+                method: 'register',
+                value: user,
+            });
         });
     }
 }
