@@ -1,4 +1,4 @@
-import { Router } from './router/Router.js';
+import { router } from '@/router/Router.js';
+import '@/index.css';
 
-const rout = new Router(document.getElementById('root'));
-rout.start();
+router.start();

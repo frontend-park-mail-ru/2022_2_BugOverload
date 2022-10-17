@@ -1,6 +1,7 @@
-import { renderTemplate } from '../../utils/renderTemplate.js';
-import { store } from '../../store/Store.js';
-import { actionLogout } from '../../store/actionCreater/userActions.js';
+import templateHeader from '@components/Header/header.handlebars';
+import templateUserbar from '@components/Userbar/userbar.handlebars';
+import { store } from '@store/Store.js';
+import { actionLogout } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает выпадающее меню.
@@ -53,16 +54,11 @@ export class Userbar {
             document.body.querySelector('.header').remove();
 
             const props = {
-                userbar: Handlebars.templates['components/Userbar/userbar'](),
+                userbar: templateUserbar(),
                 ...user,
             };
 
-            renderTemplate(
-                'components/Header/header',
-                root,
-                'afterbegin',
-                props,
-            );
+            root.insertAdjacentHTML('afterbegin', templateHeader(props));
 
             root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
@@ -73,9 +69,7 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                renderTemplate('components/Header/header', root, 'afterbegin', {
-                    ...user,
-                });
+                root.insertAdjacentHTML('afterbegin', templateHeader(user));
 
                 const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);

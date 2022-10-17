@@ -1,9 +1,11 @@
-import { routes } from '../../config/config.js';
+import { routes } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
+import { ROOT } from '@config/config.js';
 /**
-* Осуществляет измениние приложения согласно его состояниям
+* Осуществляет изменение приложения согласно его состояниям
 *
 */
-export class Router {
+class Router {
     /**
      * Cохраняет root, создаёт Map для сопоставления путей views
      * @param {Element} root - div, через который происходит взаимодействие с html.
@@ -14,8 +16,19 @@ export class Router {
     }
 
     /**
-     * Обрабатывает перемещение между views, добавляет
-     * cтандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
+     * Получает получает путь для обработчика view и динамические параметры
+     * @param {String} href - ccылка без домена и id
+     */
+    matchHref(href) {
+        const reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
+        const matchHref = href.match(reg);
+        matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
+        return matchHref;
+    }
+
+    /**
+     * Обрабатывает перемещение между views,
+     * добавляет стандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
      */
     start() {
         this.root.addEventListener('click', (e) => {
@@ -26,26 +39,39 @@ export class Router {
         });
 
         window.addEventListener('popstate', ({ state }) => setTimeout(() => {
-            const path = window.location.href
-                .replace(/^\w+:\/\/\w+/i, '');
-            this.go({ path, renderView: state });
+            let matchedHref = [];
+            matchedHref[0] = window.location.href
+                .replace(hrefRegExp.host, '');
+
+            if (matchedHref[0] !== '/') {
+                matchedHref = this.matchHref(matchedHref[0]);
+            }
+
+            this.go({ path: matchedHref[0], renderView: state });
         }, 0));
 
         for (const rout of routes) {
             this.register(rout);
         }
 
-        // рендерит страницы ппри перезагрузке
+        // рендерит страницы при перезагрузке
+        let matchedHref = [];
         let location = window.location.href
-            .replace(/\w+:\/\/\w+/i, '');
+            .replace(hrefRegExp.host, '');
+
+        matchedHref[0] = location;
+
         if (location !== '/') {
-            location = location.replace(/\/$/i, '');
+            matchedHref = this.matchHref(location);
         }
 
         if (this.mapViews.get(location)) {
-            this.go({ path: location });
+            this.go({
+                path: matchedHref[0],
+                props: matchedHref[1],
+            });
         } else {
-            // тут будет рендер 404 страницы
+            // TODO рендер 404 страницы
         }
     }
 
@@ -79,9 +105,11 @@ export class Router {
      */
     navigate({ path, props }, pushState = false) {
         const location = window.location.href
-            .match(/\w+:\/\/\w+/i)[0];
+            .match(hrefRegExp.host)[0];
         if (pushState) {
             window.history.pushState(props, null, location + path);
         }
     }
 }
+
+export const router = new Router(ROOT);

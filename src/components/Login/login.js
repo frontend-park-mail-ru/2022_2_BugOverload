@@ -1,10 +1,10 @@
-import { renderTemplate } from '../../utils/renderTemplate.js';
+import templateLogin from '@components/Login/login.handlebars';
 import {
     checkEmail, checkPassword, renderError, removeError,
-} from '../../utils/valid.js';
-import { Modal } from '../Modal/modal.js';
-import { store } from '../../store/Store.js';
-import { actionLogin } from '../../store/actionCreater/userActions.js'
+} from '@utils/valid.js';
+import { Modal } from '@components/Modal/modal.js';
+import { store } from '@store/Store.js';
+import { actionLogin } from '@store/actionCreater/userActions.js'
 
 /**
 * Отрисовывает логин.
@@ -66,7 +66,7 @@ export class Login {
 
         const modalWindow = this.root.querySelector('.modal__window__flex');
 
-        renderTemplate('components/Login/login', modalWindow, 'afterbegin');
+        modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
 
         this.handler(modalWindow);
     }

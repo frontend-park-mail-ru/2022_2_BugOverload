@@ -1,8 +1,10 @@
-import { renderTemplate } from '../../utils/renderTemplate.js';
-import { Userbar } from '../Userbar/userbar.js';
-import { config } from '../../config/config.js';
-import { store } from '../../store/Store.js';
-import { actionAuth } from '../../store/actionCreater/userActions.js';
+import { Userbar } from '@components/Userbar/userbar.js';
+import { config } from '@config/config.js';
+import template from '@components/Header/header.handlebars';
+import { store } from '@store/Store.js';
+import { actionAuth } from '@store/actionCreater/userActions.js';
+
+
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
@@ -30,7 +32,7 @@ export class Header {
             header.remove();
         }
 
-        renderTemplate('components/Header/header', this.root, 'afterbegin', user);
+        this.root.insertAdjacentHTML('afterbegin', template(user));
 
         if (user) {
             const userbar = new Userbar(this.root);

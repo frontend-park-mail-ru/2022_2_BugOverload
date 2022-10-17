@@ -1,10 +1,10 @@
-import { renderTemplate } from '../../utils/renderTemplate.js';
+import templateSignup from '@components/Signup/signup.handlebars';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
-} from '../../utils/valid.js';
-import { Modal } from '../Modal/modal.js';
+} from '@utils/valid.js';
+import { Modal } from '@components/Modal/modal.js';
 import { store } from '../../store/Store.js';
-import { actionRegister } from '../../store/actionCreater/userActions.js'
+import { actionRegister } from '../../store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -60,7 +60,7 @@ export class Signup {
         }
 
         const modalWindow = this.root.querySelector('.modal__window__flex');
-        renderTemplate('components/Signup/signup', modalWindow, 'afterbegin');
+        modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
 
         this.handler(modalWindow);
     }
