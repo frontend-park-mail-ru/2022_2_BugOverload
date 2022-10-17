@@ -1,8 +1,8 @@
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
-import { dispatcher } from '../../store/Dispatcher.js';
-
+import { store } from '../../store/Store.js';
+import { actionAuth } from '../../store/actionCreater/userActions.js'
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
@@ -16,31 +16,27 @@ export class Header {
      */
     constructor(root) {
         this.root = root;
+        store.subscribe('setUser', this.render.bind(this));
     }
 
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        const user = dispatcher.dispatch({
-            method: 'getUser',
-        });
+        const user = store.getSate('user');
 
         const header = this.root.querySelector('.header');
         if (header) {
             header.remove();
         }
 
+        renderTemplate('components/Header/header', this.root, 'afterbegin', user);
+
         if (user) {
-            renderTemplate('components/Header/header', this.root, 'afterbegin', user);
             const userbar = new Userbar(this.root);
             userbar.addHandlers(user);
         } else {
-            renderTemplate('components/Header/header', this.root, 'afterbegin');
-
-            dispatcher.dispatch({
-                method: 'auth',
-            });
+            store.dispatch(actionAuth());
         }
     }
 

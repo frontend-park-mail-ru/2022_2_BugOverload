@@ -1,12 +1,13 @@
-import { userStore } from '../store/models/User/user.js';
+import { reducerUser } from '../store/reducers/reducerUser.js';
 
 const handlers = [
-    { method: 'getUser', methodStore: userStore.get.bind(userStore) },
-    { method: 'setUser', methodStore: userStore.set.bind(userStore) },
-    { method: 'login', methodStore: userStore.login.bind(userStore) },
-    { method: 'register', methodStore: userStore.register.bind(userStore) },
-    { method: 'auth', methodStore: userStore.auth.bind(userStore) },
-    { method: 'logout', methodStore: userStore.logout.bind(userStore) },
+    { type: 'user', methodStore: reducerUser.get.bind(reducerUser) },
+
+    { type: 'setUser', methodStore: reducerUser.set.bind(reducerUser) },
+    { type: 'login', methodStore: reducerUser.login.bind(reducerUser) },
+    { type: 'signup', methodStore: reducerUser.signup.bind(reducerUser) },
+    { type: 'auth', methodStore: reducerUser.auth.bind(reducerUser) },
+    { type: 'logout', methodStore: reducerUser.logout.bind(reducerUser) },
 ];
 
 export { handlers };

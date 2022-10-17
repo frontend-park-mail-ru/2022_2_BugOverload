@@ -1,5 +1,6 @@
-import { dispatcher } from '../../store/Dispatcher.js';
 import { renderTemplate } from '../../utils/renderTemplate.js';
+import { store } from '../../store/Store.js';
+import { actionLogout } from '../../store/actionCreater/userActions.js'
 
 /**
 * Отрисовывает выпадающее меню.
@@ -26,9 +27,7 @@ export class Userbar {
             const { target } = e;
 
             if (target.dataset.section === 'logout') {
-                dispatcher.dispatch({
-                    method: 'logout',
-                });
+                store.dispatch(actionLogout());
             }
         });
     }

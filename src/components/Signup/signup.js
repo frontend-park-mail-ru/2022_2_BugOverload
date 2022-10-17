@@ -3,7 +3,8 @@ import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
-import { dispatcher } from '../../store/Dispatcher.js';
+import { store } from '../../store/Store.js';
+import { actionRegister } from '../../store/actionCreater/userActions.js'
 
 /**
 * Отрисовывает регистрацию.
@@ -17,6 +18,7 @@ export class Signup {
      */
     constructor(root) {
         this.root = root;
+        store.subscribe('signup', this.render.bind(this));
     }
 
     /**
@@ -27,20 +29,6 @@ export class Signup {
      * @param {string} user.password - введённый пароль
      */
     handlerStatus(user = null) {
-        if (user.status === 201) {
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-
-            document.body.querySelector('.header').remove();
-
-            dispatcher.dispatch({
-                method: 'setUser',
-                value: user,
-            });
-            return;
-        }
-
         if (user.status === 400) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
@@ -50,14 +38,24 @@ export class Signup {
     /**
      * Рендерит логин
      */
-    render(user) {
+    render() {
+        const userStatus = store.getSate('user')?.statusSignup;
+
         if (this.root.querySelector('.modal__window') === null) {
             const modal = new Modal(this.root);
             modal.render();
         }
 
-        if (user && user.status) {
-            this.handlerStatus(user);
+        if (userStatus) {
+            this.handlerStatus(userStatus);
+            return;
+        }
+
+        if(store.getSate('user')) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
+
             return;
         }
 
@@ -159,10 +157,7 @@ export class Signup {
                 return;
             }
 
-            dispatcher.dispatch({
-                method: 'register',
-                value: user,
-            });
+            store.dispatch(actionRegister(user));
         });
     }
 }

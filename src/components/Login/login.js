@@ -3,7 +3,8 @@ import {
     checkEmail, checkPassword, renderError, removeError,
 } from '../../utils/valid.js';
 import { Modal } from '../Modal/modal.js';
-import { dispatcher } from '../../store/Dispatcher.js';
+import { store } from '../../store/Store.js';
+import { actionLogin } from '../../store/actionCreater/userActions.js'
 
 /**
 * Отрисовывает логин.
@@ -17,6 +18,7 @@ export class Login {
      */
     constructor(root) {
         this.root = root;
+        store.subscribe('login', this.render.bind(this));
     }
 
     /**
@@ -25,28 +27,15 @@ export class Login {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    handlerStatus(user = null) {
-        if (user.status === 200) {
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-
-            document.body.querySelector('.header').remove();
-
-            dispatcher.dispatch({
-                method: 'setUser',
-                value: user,
-            });
-            return;
-        }
+    handlerStatus(userStatus) {
         const form = this.root.querySelector('.modal__wrapper__input');
-        if (user.status === 400) {
+        if (userStatus === 400) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
         const wrapper = document.getElementById('login_password');
 
-        if (user.status === 401) {
+        if (userStatus === 401) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }
@@ -54,14 +43,24 @@ export class Login {
     /**
      * Рендерит логин
      */
-    render(user) {
+    render() {
+        const userStatus = store.getSate('user')?.statusLogin;
+
         if (!this.root.querySelector('.modal__window')) {
             const modal = new Modal(this.root);
             modal.render();
         }
 
-        if (user && user.status) {
-            this.handlerStatus(user);
+        if (userStatus) {
+            this.handlerStatus(userStatus);
+            return;
+        }
+
+        if(store.getSate('user')) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
+
             return;
         }
 
@@ -134,10 +133,7 @@ export class Login {
                 return;
             }
 
-            dispatcher.dispatch({
-                method: 'login',
-                value: user,
-            });
+            store.dispatch(actionLogin(user));
         });
     }
 }
