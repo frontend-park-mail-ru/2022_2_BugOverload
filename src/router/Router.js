@@ -1,10 +1,11 @@
 import { routes } from '@config/config.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { ROOT } from '@config/config.js';
 /**
-* Осуществляет измениние приложения согласно его состояниям
+* Осуществляет изменение приложения согласно его состояниям
 *
 */
-export class Router {
+class Router {
     /**
      * Cохраняет root, создаёт Map для сопоставления путей views
      * @param {Element} root - div, через который происходит взаимодействие с html.
@@ -19,7 +20,7 @@ export class Router {
      * @param {String} href - ccылка без домена и id
      */
     matchHref(href) {
-        const reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, '(\\w+)')}?$`);
+        const reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
         const matchHref = href.match(reg);
         matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
         return matchHref;
@@ -56,13 +57,11 @@ export class Router {
         // рендерит страницы при перезагрузке
         let matchedHref = [];
         let location = window.location.href
-            .replace(/\w+:\/\/\w+:\d+/i, '');
+            .replace(hrefRegExp.host, '');
 
         matchedHref[0] = location;
 
         if (location !== '/') {
-            location = location.replace(/\/$/i, '');
-
             matchedHref = this.matchHref(location);
         }
 
@@ -72,7 +71,7 @@ export class Router {
                 props: matchedHref[1],
             });
         } else {
-            // тут будет рендер 404 страницы
+            // TODO рендер 404 страницы
         }
     }
 
@@ -112,3 +111,5 @@ export class Router {
         }
     }
 }
+
+export const router = new Router(ROOT);

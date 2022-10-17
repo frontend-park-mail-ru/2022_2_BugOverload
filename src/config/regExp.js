@@ -9,6 +9,7 @@ export const regExp = {
 };
 
 export const hrefRegExp = {
-    host: /^\w+:\/\/\w+/i,
+    host: /^\w+:\/\/\w+:\d+/i,
     idFilms: /\d+$/,
+    filmProps: '(\\w+)',
 };
