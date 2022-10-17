@@ -1,7 +1,8 @@
-import { PreviewFilm } from '../PreviewFilm/previewFilm.js';
-import { Collection, COLLECTION_TYPE } from '../Collection/collection.js';
-import { ROOT } from '../../config/config.js';
-import { ShowErrorMessage } from '../ErrorMessage/errorMessage.js';
+import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
+import { Collection, COLLECTION_TYPE } from '@components/Collection/collection.js';
+import { ROOT } from '@config/config.js';
+import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import template from '@components/MainBody/mainBody.handlebars';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -12,18 +13,18 @@ export class MainBody {
         const previewFilm = new PreviewFilm();
         const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
         const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-
+    
         Promise.all([
             previewFilm.getRequestData(),
             collectionPopular.getRequestData(),
             collectionCinemaToday.getRequestData(),
         ]).then((responses) => {
-            ROOT.insertAdjacentHTML('beforeend', Handlebars.templates['components/MainBody/mainBody']({
+            ROOT.insertAdjacentHTML('beforeend', template({
                 previewFilm: previewFilm.renderTemplate(responses[0]),
                 collectionPopular: collectionPopular.renderTemplate(responses[1]),
                 collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
             }));
-
+    
             Collection.addHandlers();
             this.addHandlersToDevelopmentLinks();
         });

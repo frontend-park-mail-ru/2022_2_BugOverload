@@ -3,8 +3,8 @@ import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
 import { Modal } from '@components/Modal/modal.js';
-import { store } from '../../store/Store.js';
-import { actionRegister } from '../../store/actionCreater/userActions.js';
+import { store } from '@store/Store.js';
+import { actionRegister } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает регистрацию.

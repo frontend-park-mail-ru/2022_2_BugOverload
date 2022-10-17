@@ -1,4 +1,4 @@
-import { reducerUser } from '../store/reducers/reducerUser.js';
+import { reducerUser } from '@store/reducers/reducerUser.js';
 
 const handlers = [
     { type: 'user', methodStore: reducerUser.get.bind(reducerUser) },

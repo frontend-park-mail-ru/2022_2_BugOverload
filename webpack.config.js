@@ -47,6 +47,7 @@ module.exports = {
             '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
             '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
             '@router':path.resolve(__dirname,'src/router'),
+            '@store':path.resolve(__dirname,'src/store'),
         },
     },
     optimization: optimization(),

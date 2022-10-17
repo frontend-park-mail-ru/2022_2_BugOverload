@@ -1,4 +1,4 @@
-import { handlers } from '../config/storeHandlers.js';
+import { handlers } from '@config/storeHandlers.js';
 
 class Store {
     constructor() {
