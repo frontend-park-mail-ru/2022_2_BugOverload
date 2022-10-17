@@ -1,12 +1,9 @@
 import { Reducer } from '../Reducer.js';
 import { Ajax } from '../../utils/ajax.js';
-import { store } from '../Store.js'
-import { setUser } from '../actionCreater/userActions.js'
+import { store } from '../Store.js';
+import { setUser } from '../actionCreater/userActions.js';
 
-const UserMixin = (superclass) => class extends superclass {
-};
-
-class ReducerUser extends UserMixin(Reducer) {
+class ReducerUser extends Reducer {
     login(user, subsribers = null) {
         const responsePromise = Ajax.post({
             url: 'http://localhost:80/v1/auth/login',
@@ -15,13 +12,15 @@ class ReducerUser extends UserMixin(Reducer) {
 
         responsePromise.then((response) => {
             if (response.status === 200) {
-                store.dispatch(setUser(response.body)); //вызываем dispatch, потому что у login и set разные подписчики
+                // вызываем dispatch, потому что у login и set разные подписчики
+                store.dispatch(setUser(response.body));
             } else {
-                this.set({ //set потому что меняем не user а статус
+                // set потому что меняем не user а статус
+                this.set({
                     statusLogin: response.status,
-                })
+                });
             }
-            if(subsribers) {
+            if (subsribers) {
                 subsribers.forEach((subscriber) => subscriber());
             }
         });
@@ -35,13 +34,13 @@ class ReducerUser extends UserMixin(Reducer) {
 
         responsePromise.then((response) => {
             if (response.status === 201) {
-                store.dispatch(setUser(response.body)); //вызываем dispatch, потому что у login и set разные подписчики
+                store.dispatch(setUser(response.body));
             } else {
-                this.set({ //set потому что меняем не user а статус
+                this.set({
                     statusSignup: response.status,
-                })
+                });
             }
-            if(subsribers) {
+            if (subsribers) {
                 subsribers.forEach((subscriber) => subscriber());
             }
         });
@@ -53,7 +52,7 @@ class ReducerUser extends UserMixin(Reducer) {
         responsePromise.then((response) => {
             if (response.status === 200) {
                 store.dispatch(setUser(response.body));
-                if(subsribers) {
+                if (subsribers) {
                     subsribers.forEach((subscriber) => subscriber());
                 }
             }
@@ -66,7 +65,7 @@ class ReducerUser extends UserMixin(Reducer) {
         resGet.then((response) => {
             if (response.status === 200) {
                 store.dispatch(setUser(null));
-                if(subsribers) {
+                if (subsribers) {
                     subsribers.forEach((subscriber) => subscriber());
                 }
             }

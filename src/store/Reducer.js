@@ -5,7 +5,7 @@ export class Reducer {
 
     set(newVal, subsribers = null) {
         this.value = newVal;
-        if(subsribers) {
+        if (subsribers) {
             subsribers.forEach((subscriber) => subscriber());
         }
     }

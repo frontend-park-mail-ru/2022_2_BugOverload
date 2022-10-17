@@ -2,7 +2,7 @@ import { renderTemplate } from '../../utils/renderTemplate.js';
 import { Userbar } from '../Userbar/userbar.js';
 import { config } from '../../config/config.js';
 import { store } from '../../store/Store.js';
-import { actionAuth } from '../../store/actionCreater/userActions.js'
+import { actionAuth } from '../../store/actionCreater/userActions.js';
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.

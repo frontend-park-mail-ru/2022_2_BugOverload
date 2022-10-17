@@ -1,6 +1,6 @@
 import { renderTemplate } from '../../utils/renderTemplate.js';
 import { store } from '../../store/Store.js';
-import { actionLogout } from '../../store/actionCreater/userActions.js'
+import { actionLogout } from '../../store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает выпадающее меню.
