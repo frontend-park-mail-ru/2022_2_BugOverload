@@ -1,6 +1,7 @@
 import { Userbar } from '@components/Userbar/userbar.js';
 import { config } from '@config/config.js';
 import template from '@components/Header/header.handlebars';
+import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionAuth } from '@store/actionCreater/userActions.js';
 
@@ -11,32 +12,35 @@ import { actionAuth } from '@store/actionCreater/userActions.js';
 * Добавляет обработчики событий.
 *
 */
-export class Header {
+export class Header extends Component {
     /**
      * Cохраняет root.
      * @param {Element} root - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
-        this.root = root;
-        store.subscribe('setUser', this.render.bind(this));
+    constructor(props, currentRootNode) {
+        super(props, currentRootNode);
+        this.state = {
+            user: null,
+        };
+        store.subscribe('user', () => {
+            this.state.user = store.getSate('user');
+        });
     }
 
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        const user = store.getSate('user');
-
         const header = this.root.querySelector('.header');
         if (header) {
             header.remove();
         }
 
-        this.root.insertAdjacentHTML('afterbegin', template(user));
+        this.root.insertAdjacentHTML('afterbegin', template(this.state.user));
 
-        if (user) {
+        if (this.state.user) {
             const userbar = new Userbar(this.root);
-            userbar.addHandlers(user);
+            userbar.addHandlers(this.state.user);
         } else {
             store.dispatch(actionAuth());
         }

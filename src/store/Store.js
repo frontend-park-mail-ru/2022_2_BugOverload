@@ -2,6 +2,8 @@ import { handlers } from '@config/storeHandlers.js';
 
 class Store {
     constructor() {
+        this.state = {};
+
         this.mapActionHandlers = new Map();
 
         this.mapSubscribers = new Map();
@@ -24,26 +26,46 @@ class Store {
         }
     }
 
-    dispatch(action) {
-        const storeMethod = this.mapActionHandlers.get(action.type);
+    setState(newState) {
+        Object.keys(newState).forEach((key) => {
+            this.state[key] = newState[key];
+        });
+    }
 
-        if (!storeMethod) {
+    dispatch(action) {
+        const storeReducer = this.mapActionHandlers.get(action.type);
+
+        if (!storeReducer) {
             return;
         }
 
         const subsribers = this.mapSubscribers.get(action.type);
 
+        let newState = {};
         if (Object.hasOwnProperty.call(action, 'value')) {
-            storeMethod(action.value, subsribers);
+            newState = storeReducer(action.value, subsribers);
+
+            this.setState(newState);
+
+            if (subsribers) {
+                subsribers.forEach((subscriber) => subscriber());
+            }
         } else {
-            storeMethod(subsribers);
+            newState = storeReducer(subsribers);
+
+            this.setState(newState);
+
+            if (subsribers) {
+                subsribers.forEach((subscriber) => subscriber());
+            }
         }
     }
 
     getSate(nameObject) {
-        const storeMethod = this.mapActionHandlers.get(nameObject);
-
-        return storeMethod();
+        if(Object.hasOwnProperty.call(this.state ,nameObject)) {
+            return this.state[nameObject];
+        } 
+        return null;
     }
 }
 
