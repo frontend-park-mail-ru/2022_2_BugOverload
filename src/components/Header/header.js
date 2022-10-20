@@ -24,7 +24,7 @@ export class Header extends Component {
         };
         store.subscribe('user', () => {
             this.state.user = store.getSate('user');
-            console.log(this.state.user)
+            this.componentWillUnmount();
             this.render();
         });
     }
@@ -48,51 +48,59 @@ export class Header extends Component {
         }
     }
 
-    /**
-     * Навешивает события, по которым происходит рендер логина и регистрации
-     */
-    handlerHeader() {
-        this.rootNode.addEventListener('click', (e) => {
-            const { target } = e;
+    handler(e) {
+        const { target } = e;
 
-            if (target.dataset.section === 'logout') {
+        if (target.dataset.section === 'logout') {
+            return;
+        }
+
+        if (target instanceof HTMLAnchorElement) {
+            e.preventDefault();
+            const modalWindow = this.rootNode.querySelector('.modal__window');
+            if (modalWindow && (target.dataset.section === 'login' || target.dataset.section === 'signup')) {
+                let removeElement;
+                if (target.dataset.section === 'login') {
+                    removeElement = 'signup';
+                }
+                if (target.dataset.section === 'signup') {
+                    removeElement = 'login';
+                }
+
+                modalWindow
+                    .querySelector(`.modal__${removeElement}`)
+                    .remove();
+                modalWindow
+                    .querySelector(`.modal__${removeElement}__img`)
+                    .remove();
+                const Render = config.auth[target.dataset.section].render;
+                const element = new Render({rootNode: this.rootNode});
+                element.render();
+                element.componentDidMount();
                 return;
             }
 
-            if (target instanceof HTMLAnchorElement) {
-                e.preventDefault();
-                const modalWindow = this.rootNode.querySelector('.modal__window');
-                if (modalWindow && (target.dataset.section === 'login' || target.dataset.section === 'signup')) {
-                    let removeElement;
-                    if (target.dataset.section === 'login') {
-                        removeElement = 'signup';
-                    }
-                    if (target.dataset.section === 'signup') {
-                        removeElement = 'login';
-                    }
+            const header = this.rootNode.querySelector('.header');
 
-                    modalWindow
-                        .querySelector(`.modal__${removeElement}`)
-                        .remove();
-                    modalWindow
-                        .querySelector(`.modal__${removeElement}__img`)
-                        .remove();
-                    const Render = config.auth[target.dataset.section].render;
-                    const element = new Render(this.rootNode);
-                    element.render();
-                    return;
-                }
-
-                const header = this.rootNode.querySelector('.header');
-
-                if ((header.compareDocumentPosition(target) === 16
-                        || header.compareDocumentPosition(target) === 20)
-                        && target.dataset.section === 'login') {
-                    const Render = config.header[target.dataset.section].render;
-                    const element = new Render(this.rootNode);
-                    element.render();
-                }
+            if ((header.compareDocumentPosition(target) === 16
+                    || header.compareDocumentPosition(target) === 20)
+                    && target.dataset.section === 'login') {
+                const Render = config.header[target.dataset.section].render;
+                const element = new Render({rootNode: this.rootNode});
+                element.render();
+                element.componentDidMount();
             }
-        });
+        }
+    }
+
+    /**
+     * Навешивает события, по которым происходит рендер логина и регистрации
+     */
+    componentDidMount() {
+        this.rootNode.addEventListener('click', this.handler.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.rootNode.removeEventListener('click', this.handler.bind(this));
     }
 }

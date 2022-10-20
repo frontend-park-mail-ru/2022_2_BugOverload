@@ -50,7 +50,7 @@ app.post('/v1/auth/login',  (req, res) => {
 
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(404).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {

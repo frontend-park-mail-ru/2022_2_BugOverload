@@ -31,7 +31,7 @@ class Store {
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
             subsribers = this.mapSubscribers.get(key);
-            console.log(key)
+
             if (subsribers) {
                 subsribers.forEach((subscriber) => subscriber());
             }   
