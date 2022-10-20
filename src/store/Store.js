@@ -27,37 +27,33 @@ class Store {
     }
 
     setState(newState) {
+        let subsribers;
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
+            subsribers = this.mapSubscribers.get(key);
+            console.log(key)
+            if (subsribers) {
+                subsribers.forEach((subscriber) => subscriber());
+            }   
         });
     }
 
-    dispatch(action) {
+    async dispatch(action) {
         const storeReducer = this.mapActionHandlers.get(action.type);
 
         if (!storeReducer) {
             return;
         }
 
-        const subsribers = this.mapSubscribers.get(action.type);
-
         let newState = {};
         if (Object.hasOwnProperty.call(action, 'value')) {
-            newState = storeReducer(action.value, subsribers);
-
-            this.setState(newState);
-
-            if (subsribers) {
-                subsribers.forEach((subscriber) => subscriber());
-            }
+            newState = await storeReducer(action.value);
         } else {
-            newState = storeReducer(subsribers);
+            newState = await storeReducer();
+        }
 
+        if (newState) {
             this.setState(newState);
-
-            if (subsribers) {
-                subsribers.forEach((subscriber) => subscriber());
-            }
         }
     }
 

@@ -14,16 +14,18 @@ import { actionAuth } from '@store/actionCreater/userActions.js';
 */
 export class Header extends Component {
     /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(props, currentRootNode) {
-        super(props, currentRootNode);
+    constructor(props) {
+        super(props);
         this.state = {
             user: null,
         };
         store.subscribe('user', () => {
             this.state.user = store.getSate('user');
+            console.log(this.state.user)
+            this.render();
         });
     }
 
@@ -31,15 +33,15 @@ export class Header extends Component {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        const header = this.root.querySelector('.header');
+        const header = this.rootNode.querySelector('.header');
         if (header) {
             header.remove();
         }
 
-        this.root.insertAdjacentHTML('afterbegin', template(this.state.user));
+        this.rootNode.insertAdjacentHTML('afterbegin', template(this.state.user));
 
         if (this.state.user) {
-            const userbar = new Userbar(this.root);
+            const userbar = new Userbar(this.rootNode);
             userbar.addHandlers(this.state.user);
         } else {
             store.dispatch(actionAuth());
@@ -50,7 +52,7 @@ export class Header extends Component {
      * Навешивает события, по которым происходит рендер логина и регистрации
      */
     handlerHeader() {
-        this.root.addEventListener('click', (e) => {
+        this.rootNode.addEventListener('click', (e) => {
             const { target } = e;
 
             if (target.dataset.section === 'logout') {
@@ -59,7 +61,7 @@ export class Header extends Component {
 
             if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
-                const modalWindow = this.root.querySelector('.modal__window');
+                const modalWindow = this.rootNode.querySelector('.modal__window');
                 if (modalWindow && (target.dataset.section === 'login' || target.dataset.section === 'signup')) {
                     let removeElement;
                     if (target.dataset.section === 'login') {
@@ -76,18 +78,18 @@ export class Header extends Component {
                         .querySelector(`.modal__${removeElement}__img`)
                         .remove();
                     const Render = config.auth[target.dataset.section].render;
-                    const element = new Render(this.root);
+                    const element = new Render(this.rootNode);
                     element.render();
                     return;
                 }
 
-                const header = this.root.querySelector('.header');
+                const header = this.rootNode.querySelector('.header');
 
                 if ((header.compareDocumentPosition(target) === 16
                         || header.compareDocumentPosition(target) === 20)
                         && target.dataset.section === 'login') {
                     const Render = config.header[target.dataset.section].render;
-                    const element = new Render(this.root);
+                    const element = new Render(this.rootNode);
                     element.render();
                 }
             }

@@ -1,7 +1,9 @@
 export class Component {
-    constructor(props, currentRootNode) {
+    constructor(props) {
         this.state = {};
         this.props = props || {};
-        this.currentRootNode = currentRootNode;
+        if (Object.hasOwnProperty.call(props, 'rootNode')) {
+            this.rootNode = props['rootNode'];
+        }
     }
 }
