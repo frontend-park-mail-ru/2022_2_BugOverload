@@ -17,7 +17,7 @@ export class Signup extends Component {
      * Cохраняет rootNode.
      * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-     constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             user: null,

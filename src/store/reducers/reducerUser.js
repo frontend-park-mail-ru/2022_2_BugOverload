@@ -48,7 +48,7 @@ class ReducerUser{
         const responsePromise = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
 
         const response = await responsePromise;
-        if (response.status === 200) {
+        if (response.status === 204) {
             return { user: null };
         }   
     }

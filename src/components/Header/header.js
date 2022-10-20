@@ -41,8 +41,8 @@ export class Header extends Component {
         this.rootNode.insertAdjacentHTML('afterbegin', template(this.state.user));
 
         if (this.state.user) {
-            const userbar = new Userbar(this.rootNode);
-            userbar.addHandlers(this.state.user);
+            const userbar = new Userbar({rootNode: this.rootNode});
+            userbar.componentDidMount(this.state.user);
         } else {
             store.dispatch(actionAuth());
         }
