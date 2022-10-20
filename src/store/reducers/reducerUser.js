@@ -26,9 +26,12 @@ class ReducerUser{
 
         const response = await responsePromise;
         if (response.status === 201) {
-            return { user: response.body };
+            return { 
+                user: response.body,
+                statusSignup: response.status,
+            };
         } else {
-            return { statusLogin: response.status};
+            return { statusSignup: response.status };
         }    
     }
 

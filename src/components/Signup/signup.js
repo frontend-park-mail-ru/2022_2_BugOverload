@@ -2,6 +2,7 @@ import templateSignup from '@components/Signup/signup.handlebars';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
+import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
@@ -11,14 +12,20 @@ import { actionRegister } from '@store/actionCreater/userActions.js';
 * Обращается к бэкенду для проверки пользователя при регистрации
 *
 */
-export class Signup {
+export class Signup extends Component {
     /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
-        this.root = root;
-        store.subscribe('signup', this.render.bind(this));
+     constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+        };
+        store.subscribe('statusSignup', () => {
+            this.state.statusSignup = store.getSate('statusSignup');
+            this.render();
+        });
     }
 
     /**
@@ -28,7 +35,7 @@ export class Signup {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    handlerStatus(user = null) {
+    handlerStatus() {
         if (user.status === 400) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
@@ -39,16 +46,9 @@ export class Signup {
      * Рендерит логин
      */
     render() {
-        const userStatus = store.getSate('user')?.statusSignup;
-
-        if (this.root.querySelector('.modal__window') === null) {
-            const modal = new Modal(this.root);
+        if (this.rootNode.querySelector('.modal__window') === null) {
+            const modal = new Modal(this.rootNode);
             modal.render();
-        }
-
-        if (userStatus) {
-            this.handlerStatus(userStatus);
-            return;
         }
 
         if(store.getSate('user')) {
@@ -58,11 +58,14 @@ export class Signup {
 
             return;
         }
+        
+        if (this.state.statusSignup) {
+            this.handlerStatus(userStatus);
+            return;
+        }
 
-        const modalWindow = this.root.querySelector('.modal__window__flex');
+        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
-
-        this.handler(modalWindow);
     }
 
     /**
@@ -137,10 +140,9 @@ export class Signup {
 
     /**
      * Навешивает обработчики на валидацию
-     * @param {Element} modalWindow - модальное окно
      */
-    handler(modalWindow) {
-        const form = modalWindow.querySelector('.modal__form');
+     componentDidMount() {
+        const form = this.rootNode.querySelector('.modal__form');
         const validate = this.validateSignup;
         let user;
 
