@@ -51,14 +51,14 @@ export class Signup extends Component {
             modal.render();
         }
 
-        if(store.getSate('user')) {
+        if (store.getSate('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
 
             return;
         }
-        
+
         if (this.state.statusSignup) {
             this.handlerStatus(userStatus);
             return;
@@ -141,7 +141,7 @@ export class Signup extends Component {
     /**
      * Навешивает обработчики на валидацию
      */
-     componentDidMount() {
+    componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
         const validate = this.validateSignup;
         let user;

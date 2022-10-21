@@ -3,7 +3,7 @@ export class Component {
         this.state = {};
         this.props = props || {};
         if (Object.hasOwnProperty.call(props, 'rootNode')) {
-            this.rootNode = props['rootNode'];
+            this.rootNode = props.rootNode;
         }
     }
 }

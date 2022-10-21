@@ -34,7 +34,7 @@ class Store {
 
             if (subsribers) {
                 subsribers.forEach((subscriber) => subscriber());
-            }   
+            }
         });
     }
 
@@ -58,9 +58,9 @@ class Store {
     }
 
     getSate(nameObject) {
-        if(Object.hasOwnProperty.call(this.state ,nameObject)) {
+        if (Object.hasOwnProperty.call(this.state, nameObject)) {
             return this.state[nameObject];
-        } 
+        }
         return null;
     }
 }

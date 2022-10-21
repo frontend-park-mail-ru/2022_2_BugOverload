@@ -14,7 +14,7 @@
     "dev-deploy": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=movie-gate.online:8080 webpack --mode development && npm run back 80",
 
     "check": "npm run lint && npm run stylelint:fix",
-    "lint": "eslint --cache --ext .js src",
+    "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}' --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },

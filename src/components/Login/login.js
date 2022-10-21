@@ -5,7 +5,7 @@ import {
 import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
-import { actionLogin } from '@store/actionCreater/userActions.js'
+import { actionLogin } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает логин.
@@ -56,7 +56,7 @@ export class Login extends Component {
             modal.render();
         }
 
-        if(store.getSate('user')) {
+        if (store.getSate('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
