@@ -658,6 +658,31 @@ app.get('/v1/popular_films', (req, res) => {
 	res.status(200).json(collectionPopularData);
 })
 
+app.get('/v1/actor/beil', (req, res) => {
+	const actor = {
+		name: 'Кристиан Бэйл',
+		originalName: 'Christian Bale',
+		career: 'Актер, Продюссер',
+		birthday: '09.10.2022, 48 лет',
+		growth: '1.83 м',
+		filmsCount: '130',
+		profileImage: "assets/img/actor/beil/beil.webp",
+		photo: [
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/beil/beil_photo.jpg",
+		],
+	}
+
+	res.status(200).json(actor);
+})
+
 app.get('/v1/recommendation_film', (req, res) => {
 	console.log('GET: recommendation_film')
 	const previewSpace = {
