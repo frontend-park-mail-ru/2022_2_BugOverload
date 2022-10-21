@@ -17,7 +17,7 @@
     align-content: stretch;
     align-items: flex-start;
     background-size: 460px;
-    background-image: url('http://movie-gate.online:8088/v1/images?object=default&key=default_login');
+    background-image: url('http://movie-gate.online:8088/v1/images?object=default&key=login');
     background-repeat: no-repeat;
     border-radius: 0 30px 30px 0;
     width: 50%;
