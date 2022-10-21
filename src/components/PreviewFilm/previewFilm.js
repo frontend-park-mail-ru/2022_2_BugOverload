@@ -31,7 +31,7 @@ export class PreviewFilm {
         return null;
     }
 
-    renderTemplate(data) {
+    getTemplate(data) {
         return template(data);
     }
 }

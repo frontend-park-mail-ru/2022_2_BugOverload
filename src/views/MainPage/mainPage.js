@@ -23,9 +23,9 @@ export function renderMainPage() {
         collectionCinemaToday.getRequestData(),
     ]).then((responses) => {
         ROOT.insertAdjacentHTML('beforeend', template({
-            previewFilm: previewFilm.renderTemplate(responses[0]),
-            collectionPopular: collectionPopular.renderTemplate(responses[1]),
-            collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
+            previewFilm: previewFilm.getTemplate(responses[0]),
+            collectionPopular: collectionPopular.getTemplate(responses[1]),
+            collectionTodayInCinema: collectionCinemaToday.getTemplate(responses[2]),
         }));
 
         Collection.addHandlers();

@@ -23,10 +23,10 @@ const users = {
 		'nickname': 'StepByyyy',
 		'email': 'Dop123@mail.ru',
 		'password': 'Dop123@mail.ru',
-		'avatar': 'assets/img/invisibleMan.jpeg'
+		'avatar': 'assets/img/users/invisibleMan.jpeg'
 	},
 };
-const DEFAULT_AVATAR = 'assets/img/invisibleMan.jpeg'
+const DEFAULT_AVATAR = 'assets/img/users/invisibleMan.jpeg'
 const ids = {};
 
 app.post('/v1/auth/login',  (req, res) => {
@@ -671,7 +671,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/space_odyssey_hor.jpg",
+		poster_hor: "assets/img/previews/space_odyssey_hor.jpg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -686,7 +686,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/dune.jpg",
+		poster_hor: "assets/img/previews/dune.jpg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -699,7 +699,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		year_prod: 2019,
 		ageLimit: "18+",
 		duration: "2:10",
-		poster_hor: "assets/img/joker_hor.jpg",
+		poster_hor: "assets/img/previews/joker_hor.jpg",
 		ratio: 7.1,
 	}
 
@@ -717,7 +717,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/StarWars.jpeg",
+		poster_hor: "assets/img/previews/StarWars.jpeg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -740,19 +740,75 @@ app.get('/v1/recommendation_film', (req, res) => {
 
 app.get('/v1/about_film/1',  (req, res) => {
 	const info = {
-		poster_hor: 'assets/img/films_hor/trueDetective.jpg',
-		film_name: 'Настоящий Детектив',
-		original_name: 'True detective',
-		rating: '8.7',
-		year_prod: '2014-2019',
-		duration: '60',
-		type_serial: 'true',
-		count_seasons: '3',
-		age_limit: '18',
-		short_description: 'Кто стоит за необычайно жестокими и запутанными убийствами? Суперзвезды в главном детективном сериале 2010-х',
-		directors: ['Кэри Дзёдзи Фукунага', 'ещё чел'],
-		roles: ['Мэттью МакКонахи', 'Колин Фаррелл', 'Вуди Харрельсон'],
+		about: {
+			poster_hor: 'assets/img/films_hor/trueDetective.jpg',
+			film_name: 'Настоящий Детектив',
+			original_name: 'True detective',
+			rating: '8.7',
+			year_prod: '2014-2019',
+			duration: '60',
+			type_serial: 'true',
+			count_seasons: '3',
+			age_limit: '18',
+			short_description: 'Кто стоит за необычайно жестокими и запутанными убийствами? Суперзвезды в главном детективном сериале 2010-х',
+			directors: ['Кэри Дзёдзи Фукунага', 'ещё чел'],
+			roles: ['Мэттью МакКонахи', 'Колин Фаррелл', 'Вуди Харрельсон'],
+		},
+
+		descriptionText: `Первый сезон. В Луизиане в 1995 году происходит странное убийство девушки. В 2012 году дело об убийстве 1995 года повторно открывают, так как произошло похожее убийство. Чтобы продвинуться в расследовании, полиция решает допросить бывших детективов, которые работали над тем делом.
+
+		Второй сезон. В калифорнийском городе Винчи в преддверии презентации новой линии железной дороги, которая улучшит финансовое положение города, пропадает глава администрации города. Позже его труп находят на шоссе. К расследованию подключают детектива из полиции Винчи и детектива из департамента шерифа округа Вентура.
+
+		Третий сезон. Известняковое плато Озарк, расположенное одновременно в нескольких штатах. Детектив Уэйн Хейз совместно со следователем из Арканзаса Роландом Уэстом пытаются разобраться в загадочном преступлении, растянувшемся на три десятилетия.`,
+
+		details: {
+			// type_serial: 'true',
+			// year_prod: this.about.year_prod,
+			contry_prod: 'США, Канада',
+			genres: ['Триллер', 'Криминал', 'Мухтар'],
+			// directors: this.about.directors,
+			producers: ['первый', 'второй'],
+			scenario: ['Ник Пиццолатто', 'Scott Lasser', 'Грэм Горди'],
+			dues: '300',
+			// age_limit: this.about.age_limit,
+			// duration: this.about.	duration,
+
+			actors: [
+				{
+					name: '11111',
+					role: '22222',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '33333',
+					role: '44444',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '55555',
+					role: '66666',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '77777',
+					role: '88888',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '99999',
+					role: '00000',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '12121',
+					role: '23232',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				}
+			]
+		},
+
 	}
+
 	res.status(200).json(info);
 });
 

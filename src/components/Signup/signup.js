@@ -41,7 +41,7 @@ export class Signup {
                     .remove();
 
                 if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
-                    response.body.avatar = 'assets/img/invisibleMan.jpeg';
+                    response.body.avatar = 'assets/img/users/invisibleMan.jpeg';
                 }
                 document.body.querySelector('.header').remove();
                 this.root.insertAdjacentHTML('afterbegin', templateHeader({ ...response.body }));

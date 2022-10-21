@@ -1,0 +1,92 @@
+.details-film {
+    display: flex;
+    margin-left: 52px;
+}
+
+.details-film__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 34px;
+}
+
+.details-film__list-info-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+}
+
+.details-film__info-pair {
+    display: flex;
+    margin-top: 37px;
+}
+
+.details-film__info-item-key {
+    font-size: 15px;
+    color: var(--secondary-color-text);
+    width: 270px;
+}
+
+.details-film__info-item-value {
+    font-size: 15px;
+    color: var(--main-color-text);
+    flex-wrap: nowrap;
+}
+
+.details-film__actor {
+    height: 520px;
+}
+
+.details-film__actor__container {
+    display: flex;
+    position: relative;
+    margin-top: 29px;
+}
+
+.details-film__list-actors {
+    display: flex;
+    height: 550px;
+    flex-flow: column wrap;
+    margin-top: 37px;
+}
+
+.details-film__list-actors-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+}
+
+.details-film__actor__blackout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 81px;
+    height: 108px;
+    background-color: #fff;
+    opacity: 0;
+    z-index: 2;
+}
+
+
+
+.details-film__actor__photo {
+    width: 81px;
+    height: 108px;
+}
+
+.details-film__actor__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+}
+
+.details-film__actor__name {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-top: 8px;
+
+    /* width: 284px; */
+}
+
+.details-film__actor__role {
+    color: var(--secondary-color-text);
+    font-size: 12px;
+    margin-top: 4px;
+}

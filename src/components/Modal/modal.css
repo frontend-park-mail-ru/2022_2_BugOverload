@@ -65,9 +65,9 @@
 }
 
 .modal__input {
-    width: 290px;
-    height: 28px;
-    border-radius: 21px;
+    width: 289px;
+    height: 29px;
+    border-radius: 4px;
     color: var(--main-color-text);
     background: #27292E;
     opacity: .8;
@@ -89,14 +89,8 @@
 }
 
 .modal__input__button {
-    font-size: 15px;
-    font-family: 'Mail Sans Roman Med';
-    text-decoration: none;
     width: 310px;
-    height: 30px;
-    border-radius: 21px;
-    margin-top: 4px;
-    cursor: pointer;
+    height: 35px;
 }
 
 .modal__text__alternative__page{
@@ -109,17 +103,22 @@
     cursor: pointer;
 }
 
-.modal__login__signup__btn {
+.modal__login__switch__btn {
     white-space: nowrap;
     margin-top: 25px;
     margin-right: 45px;
-    color: #000;
-    font-size: 15px;
-    font-family: 'Mail Sans Roman Med';
-    text-decoration: none;
+
+    /* color: #000; */
+
+    /* font-size: 15px; */
+
+    /* font-family: 'Mail Sans Roman Med'; */
+
+    /* text-decoration: none; */
     height: 30px;
     width: 150px;
-    border-radius: 21px;
+
+    /* border-radius: 21px; */
 }
 
 .modal__flex__center__div {

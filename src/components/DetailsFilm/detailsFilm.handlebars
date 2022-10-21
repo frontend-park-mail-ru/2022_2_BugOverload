@@ -1,0 +1,98 @@
+<div class="details-film">
+    <div class="details-film__info-container">
+        <div class="details-film__list-info-title">
+            {{!-- {{ifEquals type "serial"}} --}}
+            {{#if type_serial}}
+            О сериале
+            {{/if}}
+            {{!-- {{/ifEquals}} --}}
+
+            {{!-- {{ifEquals type "film"}} --}}
+            {{#if type_film}}
+            О фильме
+            {{/if}}
+            {{!-- {{/ifEquals}} --}}
+        </div>
+
+        {{!-- {{#each info_item}}
+            <div class="details-film__info-item-key">{{item_key}}</div>
+            <div class="details-film__info-item-value">{{item_value}}</div>
+        {{/each}} --}}
+        {{#if year_prod}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Год производства</div>
+            <div class="details-film__info-item-value">{{year_prod}}</div>
+        </div>
+        {{/if}}
+
+        {{#if contry_prod}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Страна</div>
+            <div class="details-film__info-item-value">{{contry_prod}}</div>
+        </div>
+        {{/if}}
+
+        {{#if genres}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Жанр</div>
+            <div class="details-film__info-item-value">{{genres}}</div>
+        </div>
+        {{/if}}
+
+        {{#if directors}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Режиссёр</div>
+            <div class="details-film__info-item-value">{{directors}}</div>
+        </div>
+        {{/if}}
+
+        {{#if producers}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Продюссер</div>
+            <div class="details-film__info-item-value">{{producers}}</div>
+        </div>
+        {{/if}}
+
+        {{#if scenario}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Сценарий</div>
+            <div class="details-film__info-item-value">{{scenario}}</div>
+        </div>
+        {{/if}}
+
+        {{#if dues}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Сборы</div>
+            <div class="details-film__info-item-value">{{dues}}</div>
+        </div>
+        {{/if}}
+
+        {{#if age_limit}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Возраст</div>
+            <div class="details-film__info-item-value">{{age_limit}}</div>
+        </div>
+        {{/if}}
+
+        {{#if duration}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Длительность</div>
+            <div class="details-film__info-item-value">{{duration}}</div>
+        </div>
+        {{/if}}
+
+    </div>
+    <div class="details-film__list-actors">
+        <div class="details-film__list-actors-title">В главных ролях</div>
+        {{#each actors}}
+        <div class="details-film__actor__container">
+            <div class="details-film__actor__blackout"></div>
+            <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
+            <div class="details-film__actor__info-container">
+                <div class="details-film__actor__name">{{this.name}}</div>
+                <div class="details-film__actor__role">{{role}}</div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

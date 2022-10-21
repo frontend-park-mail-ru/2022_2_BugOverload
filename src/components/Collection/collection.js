@@ -59,7 +59,7 @@ export class Collection {
     * @param {data Object} data - объект данных коллекции
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
-    renderTemplate(data) {
+    getTemplate(data) {
         const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         return template({ title: data.title, films });

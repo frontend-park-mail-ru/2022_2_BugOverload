@@ -1,0 +1,51 @@
+.menu-info-film {
+    width: auto;
+
+    /* height: 62px; */
+
+    /* margin-left: 52px; */
+    padding-left: 52px;
+    padding-right: 52px;
+
+    /* margin-right: 52px;
+    padding-right: 52px;
+    box-sizing: border-box; */
+}
+
+.menu-info-film__items {
+    display: flex;
+    border-bottom: 3px;
+    border-color: #2E2E2E;
+    border-bottom-style: solid;
+}
+
+.menu-info-film__item-description {
+    font-size: 22px;
+    color: var(--main-color-text);
+    width: 140px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -3px;
+    cursor: pointer;
+}
+
+
+.menu-info-film__item-details {
+    font-size: 22px;
+    color: var(--main-color-text);
+    width: 172px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -3px;
+    cursor: pointer;
+}
+
+[data-menu-info-film-item-active="true"] {
+    border-bottom: 3px;
+    border-bottom-style: solid;
+    border-color: var(--primary-color);
+}
