@@ -6,13 +6,11 @@
   "scripts": {
     "start": "npm run stand",
     "back": "node __mocks__/server.js",
-
     "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
     "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8080 webpack --mode production",
     "stand": "npm run dev && npm run back 3000",
     "deploy": "npm run prod && npm run back 80",
     "dev-deploy": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=movie-gate.online:8080 webpack --mode development && npm run back 80",
-
     "check": "npm run lint && npm run stylelint:fix",
     "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}' --allow-empty-input",
@@ -49,6 +47,7 @@
     "handlebars-loader": "^1.7.2",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "nvm": "^0.0.4",
     "prettier": "^2.7.1",
     "style-loader": "^3.3.1",
     "stylelint": "^14.13.0",
