@@ -1,0 +1,96 @@
+.rating {
+    margin-top: 36px;
+    margin-right: 52px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rating__title {
+    color: var(--main-color-text);
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.rating__content-container {
+    display: flex;
+    justify-content: space-between;
+    width: 655px;
+    height: 64px;
+}
+
+.rating__star-list {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 500px;
+    cursor: pointer;
+
+    /* justify-content: space-between; */
+}
+
+.rating__star {
+    width: 40px;
+    height: 40px;
+    padding-right: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.rating__star-image {
+    width: 40px;
+    height: 40px;
+    content: url('@assets/icons/star-empty.png');
+}
+
+.rating__rate-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+
+.rating__star:hover {
+    /* filter: invert(56%) sepia(71%) saturate(495%) hue-rotate(3deg) brightness(125%) contrast(100%); */
+
+    background-size: 40px auto;
+    background-position-y: 12px;
+    background-repeat: no-repeat;
+    z-index: 2;
+    background-image: url('@assets/icons/star-fill.png');
+
+    /* content: url('@assets/icons/star-fill.png'); */
+
+}
+
+.rating__star:hover ~ .rating__star {
+    /* filter: invert(56%) sepia(71%) saturate(495%) hue-rotate(3deg) brightness(125%) contrast(100%); */
+
+    background-size: 40px auto;
+    background-position-y: 12px;
+    background-repeat: no-repeat;
+
+    /* content: url('@assets/icons/star-fill.png'); */
+}
+
+.rating__text-stars-container {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    margin-top: 7px;
+}
+
+.rating__text-stars {
+    color: var(--main-color-text);
+    font-size: 12px;
+}
+
+.rating__button-write-review {
+    width: 210px;
+    height: 42px;
+    font-size: 15px;
+    margin-top: 22px;
+
+}

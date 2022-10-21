@@ -33,6 +33,7 @@ export function renderFilmPage() {
         const menuInfoFilm = new MenuInfoFilm({
             description: responses[0].descriptionText,
             details: tmp,
+            rating: responses[0].about.rating,
         });
         menuInfoFilm.renderTemplate();
         menuInfoFilm.addHandlers();

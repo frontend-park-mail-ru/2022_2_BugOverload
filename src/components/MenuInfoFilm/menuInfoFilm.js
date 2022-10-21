@@ -1,6 +1,7 @@
 import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
 import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js';
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
+import { Rating } from '@components/Rating/rating.js';
 
 export class MenuInfoFilm {
     constructor(filmData) {
@@ -21,6 +22,7 @@ export class MenuInfoFilm {
             : new DescriptionFilm(this.filmData.description);
 
         this.details = this.details ? this.details : new DetailsFilm(this.filmData.details);
+        this.rating = this.rating ? this.rating : new Rating();
 
         this.switchState(state);
     }
@@ -35,6 +37,7 @@ export class MenuInfoFilm {
             delete this.location.querySelector('.js-menu-info-film__item-details').dataset.menuInfoFilmItemActive;
 
             this.description.renderTemplate();
+            this.rating.renderTemplate();
             this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive = 'true';
             this.state = this.menuState.description;
             break;
@@ -43,6 +46,7 @@ export class MenuInfoFilm {
                 break;
             }
             this.description.remove();
+            this.rating.remove();
             delete this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive;
 
             this.details.renderTemplate();

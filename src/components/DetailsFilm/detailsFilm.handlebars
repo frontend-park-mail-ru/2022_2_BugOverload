@@ -82,17 +82,22 @@
         {{/if}}
 
     </div>
-    <div class="details-film__list-actors">
+    <div class="details-film__list-actors-container">
         <div class="details-film__list-actors-title">В главных ролях</div>
-        {{#each actors}}
-        <div class="details-film__actor__container">
-            <div class="details-film__actor__blackout"></div>
-            <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
-            <div class="details-film__actor__info-container">
-                <div class="details-film__actor__name">{{this.name}}</div>
-                <div class="details-film__actor__role">{{role}}</div>
+        <div class="details-film__list-actors">
+            {{#each actors}}
+            <div class="details-film__actor">
+                <div class="details-film__actor__container">
+                    <div class="details-film__actor__blackout"></div>
+                    <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
+                    <div class="details-film__actor__info-container">
+                        <a href="/"><div class="details-film__actor__name">{{this.name}}</div></a>
+                        <a href="/"><div class="details-film__actor__role">{{role}}</div></a>
+                    </div>
+                </div>
             </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
 </div>
+
