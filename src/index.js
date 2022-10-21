@@ -1,4 +1,4 @@
-import { renderMainPage } from '@views/MainPage/mainPage.js';
+import { router } from '@/router/Router.js';
 import '@/index.css';
 
-renderMainPage();
+router.start();

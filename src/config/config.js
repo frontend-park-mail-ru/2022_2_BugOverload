@@ -1,5 +1,10 @@
-import { Login } from '@components/Login/login.js';
-import { Signup } from '@components/Signup/signup.js';
+import { Login } from '@/components/Login/login.js';
+import { Signup } from '@/components/Signup/signup.js';
+import { renderMainPage } from '@/views/MainPage/mainPage.js';
+
+export const routes = [
+    { path: '/', renderView: renderMainPage },
+];
 
 /**
 * Конфиг испульзуемый для рендера

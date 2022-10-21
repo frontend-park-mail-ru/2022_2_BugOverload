@@ -3,15 +3,14 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const uuid = require('uuid').v4;
 const body = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use(express.static(path.resolve(__dirname, 'images')));
+app.use('/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/',express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
 	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
