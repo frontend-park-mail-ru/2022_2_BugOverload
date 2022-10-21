@@ -13,7 +13,7 @@ export class MainBody {
         const previewFilm = new PreviewFilm();
         const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
         const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
-    
+
         Promise.all([
             previewFilm.getRequestData(),
             collectionPopular.getRequestData(),
@@ -24,7 +24,7 @@ export class MainBody {
                 collectionPopular: collectionPopular.renderTemplate(responses[1]),
                 collectionTodayInCinema: collectionCinemaToday.renderTemplate(responses[2]),
             }));
-    
+
             Collection.addHandlers();
             this.addHandlersToDevelopmentLinks();
         });

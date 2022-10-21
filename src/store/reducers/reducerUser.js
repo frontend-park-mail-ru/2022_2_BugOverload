@@ -1,6 +1,6 @@
 import { Ajax } from '@utils/ajax.js';
 
-class ReducerUser{
+class ReducerUser {
     async login(user) {
         const responsePromise = Ajax.post({
             url: `http://${DOMAIN}/v1/auth/login`,
@@ -9,13 +9,12 @@ class ReducerUser{
 
         const response = await responsePromise;
         if (response.status === 200) {
-            return { 
+            return {
                 user: response.body,
                 statusLogin: response.status,
             };
-        } else {
-            return { statusLogin: response.status};
         }
+        return { statusLogin: response.status };
     }
 
     async signup(user) {
@@ -26,13 +25,12 @@ class ReducerUser{
 
         const response = await responsePromise;
         if (response.status === 201) {
-            return { 
+            return {
                 user: response.body,
                 statusSignup: response.status,
             };
-        } else {
-            return { statusSignup: response.status };
-        }    
+        }
+        return { statusSignup: response.status };
     }
 
     async auth() {
@@ -41,7 +39,8 @@ class ReducerUser{
         const response = await responsePromise;
         if (response.status === 200) {
             return { user: response.body };
-        }   
+        }
+        return null;
     }
 
     async logout() {
@@ -50,7 +49,8 @@ class ReducerUser{
         const response = await responsePromise;
         if (response.status === 204) {
             return { user: null };
-        }   
+        }
+        return null;
     }
 }
 

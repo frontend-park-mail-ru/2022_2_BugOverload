@@ -49,7 +49,7 @@ export class Userbar extends Component {
      */
     componentDidMount(user) {
         let isOpened = false;
-        const rootNode = this.rootNode;
+        const { rootNode } = this;
 
         const logout = this.addLogoutHandler;
 

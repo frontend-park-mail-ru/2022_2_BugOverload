@@ -7,7 +7,7 @@ import { ROOT } from '@config/config.js';
 *
 */
 export function renderMainPage() {
-    const header = new Header({rootNode: ROOT});
+    const header = new Header({ rootNode: ROOT });
     header.render();
     header.componentDidMount();
 

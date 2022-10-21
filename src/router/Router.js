@@ -1,6 +1,6 @@
-import { routes } from '@config/config.js';
+import { routes, ROOT } from '@config/config.js';
 import { hrefRegExp } from '@config/regExp.js';
-import { ROOT } from '@config/config.js';
+
 /**
 * Осуществляет изменение приложения согласно его состояниям
 *
@@ -56,7 +56,7 @@ class Router {
 
         // рендерит страницы при перезагрузке
         let matchedHref = [];
-        let location = window.location.href
+        const location = window.location.href
             .replace(hrefRegExp.host, '');
 
         matchedHref[0] = location;
