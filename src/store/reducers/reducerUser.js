@@ -40,7 +40,6 @@ class ReducerUser {
         if (response.status === 200) {
             return { user: response.body };
         }
-
         return null;
     }
 
@@ -51,7 +50,6 @@ class ReducerUser {
         if (response.status === 204) {
             return { user: null };
         }
-
         return null;
     }
 }
