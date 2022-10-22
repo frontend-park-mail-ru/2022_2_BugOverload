@@ -26,14 +26,14 @@ export class Collection {
     * @return {Object} Объект с данными о коллекции
     * @return {null} В случае ошибочного статуса
     */
-    async getRequestData() {
-        let href;
-        if (this._type === 'todayInCinema') {
-            href = 'in_cinema';
-        } else {
-            href = 'popular_films';
-        }
-        const response = await Ajax.get(`http://${DOMAIN}/v1/${href}`);
+    static async getRequestData(url) {
+        // let href;
+        // if (this._type === 'todayInCinema') {
+        //     href = 'in_cinema';
+        // } else {
+        //     href = 'popular_films';
+        // }
+        const response = await Ajax.get(url);/* `http://${DOMAIN}/v1/${href}` */
 
         if (response.status === 200) {
             return response.body;

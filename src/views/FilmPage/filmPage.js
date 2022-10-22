@@ -2,8 +2,11 @@ import { Ajax } from '@utils/ajax.js';
 import { Header } from '@components/Header/header.js';
 import { AboutFilm } from '@components/AboutFilm/aboutFilm.js';
 import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm.js';
-import { ROOT } from '@config/config.js';
+import { ROOT, API } from '@config/config.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Collection } from '@components/Collection/collection.js';
+
+
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 
 /**
@@ -11,18 +14,27 @@ import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 *
 */
 export function renderFilmPage() {
-    const header = new Header(ROOT);
+    const header = new Header({ rootNode: ROOT });
     header.render();
+    header.componentDidMount();
+
+    const likelyFilms = new Collection();
+    const directorFilms = new Collection();
+
 
     Promise.all([
         getRequestData(),
         // get рецензии тут же
+        Collection.getRequestData(API.popular_films),
+        Collection.getRequestData(API.in_cinema),
     ]).then((responses) => {
         const aboutFilm = new AboutFilm(responses[0].about);
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
             about: aboutFilm.getTemplate(responses[0].about),
-
+            collectionLikely: likelyFilms.getTemplate(responses[1]),
+            collectionDirector: directorFilms.getTemplate(responses[2]),
         }));
+        Collection.addHandlers();
 
         const tmp = responses[0].details;
         tmp.type_serial = responses[0].about.type_serial;
@@ -42,8 +54,17 @@ export function renderFilmPage() {
     });
 }
 
+// export function renderMainPage() {
+//     // const header = new Header({ rootNode: ROOT });
+//     // header.render();
+//     // header.componentDidMount();
+
+//     // const mainBody = new MainBody(ROOT);
+//     // mainBody.renderMainPage();
+// }
+
 async function getRequestData() {
-    const response = await Ajax.get(`http://${DOMAIN}/v1/about_film/1`);
+    const response = await Ajax.get(API.about_film(1));
     if (response.status === 200) {
         return response.body;
     }

@@ -1,19 +1,27 @@
-import { Ajax } from '@utils/ajax.js';
 import templateHeader from '@components/Header/header.handlebars';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
+import { actionLogout } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает выпадающее меню.
 * Обращается к бэкенду для logout
 *
 */
-export class Userbar {
+export class Userbar extends Component {
     /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
-        this.root = root;
+    constructor(props) {
+        super(props);
+        store.subscribe('user', () => {
+            if (!store.getSate('user')) {
+                this.rootNode.querySelector('.header').remove();
+                this.rootNode.insertAdjacentHTML('afterbegin', templateHeader());
+            }
+        });
     }
 
     /**
@@ -26,15 +34,9 @@ export class Userbar {
             e.preventDefault();
             const { target } = e;
 
-            const resGet = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
-            resGet.then((response) => {
-                if (target.dataset.section === 'logout') {
-                    if (response.status === 204) {
-                        document.body.querySelector('.header').remove();
-                        root.insertAdjacentHTML('afterbegin', templateHeader());
-                    }
-                }
-            });
+            if (target.dataset.section === 'logout') {
+                store.dispatch(actionLogout());
+            }
         });
     }
 
@@ -45,9 +47,9 @@ export class Userbar {
      * @param {string} user.email - почта
      * @param {string} user.nickname - ник
      */
-    addHandlers(user) {
+    componentDidMount(user) {
         let isOpened = false;
-        const { root } = this;
+        const { rootNode } = this;
 
         const logout = this.addLogoutHandler;
 
@@ -63,9 +65,9 @@ export class Userbar {
                 ...user,
             };
 
-            root.insertAdjacentHTML('afterbegin', templateHeader(props));
+            rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));
 
-            root.querySelector('.header__userbar-substrate').classList.add('userbar-on');
+            rootNode.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
             isOpened = true;
 
@@ -74,7 +76,7 @@ export class Userbar {
             function handlerCloseUserbar() {
                 document.body.querySelector('.header').remove();
 
-                root.insertAdjacentHTML('afterbegin', templateHeader({ ...user }));
+                rootNode.insertAdjacentHTML('afterbegin', templateHeader(user));
 
                 const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);

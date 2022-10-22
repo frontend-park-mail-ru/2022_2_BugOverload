@@ -12,6 +12,12 @@
 @import "@components/DescriptionFilm/descriptionFilm.css";
 @import "@components/DetailsFilm/detailsFilm.css";
 @import "@components/Rating/rating.css";
+@import "@components/InputReview/inputReview.css";
+@import "@components/InfoReviews/infoReviews.css";
+@import "@components/ListReviews/listReviews.css";
+@import "@components/Review/review.css";
+
+
 @import "@views/FilmPage/filmPage.css";
 
 

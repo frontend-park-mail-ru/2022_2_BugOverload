@@ -38,6 +38,7 @@
 .details-film__list-actors-container {
     display: flex;
     flex-direction: column;
+    margin-right: 52px;
 }
 
 .details-film__actor__container {
