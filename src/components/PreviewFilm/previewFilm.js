@@ -8,6 +8,7 @@ import { API } from '@config/config.js';
 *
 */
 export class PreviewFilm {
+
     /**
     * Получает данные с бэкенда.
     * Обрабатывает статусы ответа
@@ -19,7 +20,8 @@ export class PreviewFilm {
     async getRequestData() {
         const response = await Ajax.get(API.recommendation_film);
         if (response.status === 200) {
-            return response.body;
+            this.data = response.body;
+            return null;
         }
 
         if (response.status >= 500) {
@@ -31,7 +33,7 @@ export class PreviewFilm {
         return null;
     }
 
-    getTemplate(data) {
-        return template(data);
+    getTemplate() {
+        return template(this.data);
     }
 }

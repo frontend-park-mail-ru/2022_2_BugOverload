@@ -1,7 +1,7 @@
 .details-film {
     display: flex;
     justify-content: space-between;
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
 }
 
 .details-film__info-container {
@@ -38,7 +38,7 @@
 .details-film__list-actors-container {
     display: flex;
     flex-direction: column;
-    margin-right: 52px;
+    margin-right: var(--standart-margin);
 }
 
 .details-film__actor__container {

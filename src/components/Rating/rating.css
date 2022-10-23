@@ -1,6 +1,7 @@
 .rating {
     margin-top: 36px;
-    margin-right: 52px;
+    margin-right: var(--standart-margin);
+    margin-left: var(--standart-margin);
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +40,7 @@
 .rating__star-image {
     width: 40px;
     height: 40px;
-    background-image: url('@assets/icons/star-empty.png');
+    background-image: url('@icons/star-empty.png');
     background-repeat: no-repeat;
 }
 
@@ -55,12 +56,12 @@
 
 .rating__star:hover .rating__star-image{
     background-repeat: no-repeat;
-    background-image: url('@assets/icons/star-fill.png');
+    background-image: url('@icons/star-fill.png');
 }
 
 .rating__star:hover ~ .rating__star .rating__star-image {
     background-repeat: no-repeat;
-    background-image: url('@assets/icons/star-fill.png');
+    background-image: url('@icons/star-fill.png');
 }
 
 .rating__text-stars-container {

@@ -1,5 +1,6 @@
 .about-film {
     display: flex;
+    position: relative;
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -18,18 +19,27 @@
 .about-film__blackout-bottom {
     width: 100%;
     height: 237px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    /* z-index: -1; */
     background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
 }
 
 
 .about-film__container {
     display: flex;
+    position: relative;
     width: 100%;
-    height: 100vh;
+
+    /* height: 100vh; */
     z-index: 1;
-    justify-content: flex-end;
+
+    /* justify-content: flex-end; */
     flex-direction: column;
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
+    margin-top: 305px;
 }
 
 .about-film__title {

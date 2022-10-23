@@ -18,4 +18,8 @@ export class Rating {
 
         // this.isActive = false;
     }
+
+    static addHandlers() {
+        document.querySelector('.rating__button-write-review');
+    }
 }

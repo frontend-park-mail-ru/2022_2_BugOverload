@@ -1,5 +1,5 @@
 .description-film {
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
     margin-top: 36px;
     width: 900px;
     height: auto;

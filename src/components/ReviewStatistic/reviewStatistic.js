@@ -1,6 +1,6 @@
-import template from '@components/AboutFilm/aboutFilm.handlebars';
+import template from '@components/ReviewStatistic/reviewStatistic.handlebars';
 
-export class AboutFilm {
+export class ReviewStatistic {
     constructor(data) {
         this.data = data;
     }

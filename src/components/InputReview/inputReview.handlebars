@@ -1,3 +1,39 @@
 <div class="input-review">
-
+    <div class="input-review__container">
+        <div class="input-review__head">Новая рецензия</div>
+        <div class="input-review__user-container">
+            <div class="input-review__user-avatar" style="background-image: url('assets/img/users/invisibleMan.jpeg');"></div>
+            <div class="input-review__info-user-container">
+                <div class="input-review__username">Babrazyaka_bro</div>
+                <div class="input-review__user-counter-reviews">1337 рецензий</div>
+            </div>
+        </div>
+        <form class="input-review__form">
+            {{!-- <input class="input-review__input-title" type="radio">
+            --}}
+            <div class="input-review__select">
+                <input class="input-review__select-input js-input-review__select-input" type="hidden" name="">
+                <div class="input-review__select-head">
+                    <div class="input-review__select-head-text">
+                        Выберите тип рецензии
+                    </div>
+                    <div class="input-review__select-head-icon"></div>
+                </div>
+                <ul class="input-review__select-list" hidden>
+                    <li class="input-review__select-item" data-value="1">
+                        <div class="input-review__select-icon-positive"></div>
+                        Положительная</li>
+                    <li class="input-review__select-item" data-value="0">
+                        <div class="input-review__select-icon-neutral"></div>
+                        Нейтральная</li>
+                    <li class="input-review__select-item" data-value="-1">
+                        <div class="input-review__select-icon-negotive"></div>
+                        Отрицательная</li>
+                </ul>
+            </div>
+            <input class="input-review__input-title" type="text" placeholder="Заголовок">
+            <textarea placeholder="Текст рецензии" class="input-review__input-text" name="review" cols="40" rows="3"></textarea>
+            <button type="submit" class="modal__input__button-review primary-btn-big">Опубликовать рецензию</button>
+        </form>
+    </div>
 </div>

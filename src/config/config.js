@@ -6,7 +6,6 @@ import { renderFilmPage } from '@views/FilmPage/filmPage.js';
 export const routes = [
     // { path: '/', renderView: renderMainPage },
     { path: '/', renderView: renderFilmPage },
-
 ];
 
 /**

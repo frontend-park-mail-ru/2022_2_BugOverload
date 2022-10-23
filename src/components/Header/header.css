@@ -14,7 +14,7 @@
 .header__logo {
     white-space: nowrap;
     margin-right: 20px;
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
     font-size: 30px;
     color: #fff;
     text-decoration: none;
@@ -84,7 +84,7 @@
     font-size: 15px;
     font-family: 'Mail Sans Roman Med';
     text-decoration: none;
-    margin-right: 74px;
+    margin-right: calc(var(--standart-margin) + 0px);
     height: 35px;
     width: 178px;
     min-width: 100px;

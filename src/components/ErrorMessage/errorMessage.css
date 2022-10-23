@@ -6,7 +6,7 @@
     background-color: red;
     opacity: 0.7;
     z-index: 10;
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
     display: flex;
     justify-content: center;
     align-items: center;

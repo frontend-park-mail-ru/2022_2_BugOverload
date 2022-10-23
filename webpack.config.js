@@ -44,6 +44,7 @@ module.exports = {
             '@config': path.resolve(__dirname, 'src/config'),
             '@views': path.resolve(__dirname, 'src/views'),
             '@assets': path.resolve(__dirname, 'src/assets'),
+            '@icons': path.resolve(__dirname, 'src/assets/icons'),
             '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
             '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
             '@router': path.resolve(__dirname, 'src/router'),

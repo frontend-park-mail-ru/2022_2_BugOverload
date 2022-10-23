@@ -20,7 +20,7 @@ export class MainBody {
             Collection.getRequestData(API.in_cinema),
         ]).then((responses) => {
             ROOT.insertAdjacentHTML('beforeend', template({
-                previewFilm: previewFilm.getTemplate(responses[0]),
+                previewFilm: previewFilm.getTemplate(),
                 collectionPopular: collectionPopular.getTemplate(responses[1]),
                 collectionTodayInCinema: collectionCinemaToday.getTemplate(responses[2]),
             }));

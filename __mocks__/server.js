@@ -803,8 +803,34 @@ app.get('/v1/about_film/1',  (req, res) => {
 					role: '23232',
 					photo: 'assets/img/actor_photos/KBeil.png'
 				}
-			]
+			],
 		},
+
+		reviews: [
+			{
+				avatar: DEFAULT_AVATAR,
+				username: "Azazin",
+				userCountReviews: 13,
+				date: "11.09.2001",
+				title: "Ребята, не затягивайте, РК близко....",
+				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+			},
+			{
+				avatar: DEFAULT_AVATAR,
+				username: "A124gr",
+				userCountReviews: 1312,
+				date: "11.09.2001",
+				title: "Ребята, не затягивайте, РК близко....",
+				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+			}
+		],
+
+		reviewInfo: {
+			total: 2224,
+			positive: 244,
+			neutral: 122,
+			negotive: 1999,
+		}
 
 	}
 

@@ -88,8 +88,10 @@
             {{#each actors}}
             <div class="details-film__actor">
                 <div class="details-film__actor__container">
-                    <div class="details-film__actor__blackout"></div>
-                    <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
+                    <a href="/">
+                        <div class="details-film__actor__blackout"></div>
+                        <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
+                    </a>
                     <div class="details-film__actor__info-container">
                         <a href="/"><div class="details-film__actor__name">{{this.name}}</div></a>
                         <a href="/"><div class="details-film__actor__role">{{role}}</div></a>

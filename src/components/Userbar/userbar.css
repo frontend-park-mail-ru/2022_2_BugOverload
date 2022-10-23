@@ -22,7 +22,7 @@
     z-index: 5;
     width: 209px;
     height: 219px;
-    margin-right: 52px;
+    margin-right: var(--standart-margin);
     padding: 16px 0 0 16px;
     display: flex;
     color: #fff;

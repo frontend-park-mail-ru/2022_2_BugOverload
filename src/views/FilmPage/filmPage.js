@@ -5,7 +5,9 @@ import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm.js';
 import { ROOT, API } from '@config/config.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import { Collection } from '@components/Collection/collection.js';
-
+import { ListReviews } from '@components/ListReviews/listReviews.js';
+import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
+import { InputReview } from '@components/InputReview/inputReview.js';
 
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 
@@ -20,6 +22,8 @@ export function renderFilmPage() {
 
     const likelyFilms = new Collection();
     const directorFilms = new Collection();
+    // const review = new Review();
+
 
 
     Promise.all([
@@ -29,12 +33,22 @@ export function renderFilmPage() {
         Collection.getRequestData(API.in_cinema),
     ]).then((responses) => {
         const aboutFilm = new AboutFilm(responses[0].about);
+        const listReviews = new ListReviews(responses[0].reviews);
+        const reviewStatistic = new ReviewStatistic(responses[0].reviewInfo);
+
+        const inputReview = new InputReview();
+
+
+
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
             about: aboutFilm.getTemplate(responses[0].about),
+            reviews: listReviews.getTemplate(),
+            reviewInfo: reviewStatistic.getTemplate(),
+            inputReview: inputReview.getTemplate(),
             collectionLikely: likelyFilms.getTemplate(responses[1]),
             collectionDirector: directorFilms.getTemplate(responses[2]),
+
         }));
-        Collection.addHandlers();
 
         const tmp = responses[0].details;
         tmp.type_serial = responses[0].about.type_serial;
@@ -46,9 +60,12 @@ export function renderFilmPage() {
             description: responses[0].descriptionText,
             details: tmp,
             rating: responses[0].about.rating,
+
         });
         menuInfoFilm.renderTemplate();
         menuInfoFilm.addHandlers();
+        Collection.addHandlers();
+        InputReview.addHandlers();
 
         // addHandlersToDevelopmentLinks();
     });
