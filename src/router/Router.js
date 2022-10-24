@@ -39,8 +39,11 @@ class Router {
 
         window.addEventListener('popstate', ({ state }) => setTimeout(() => {
             let matchedHref = [];
-            matchedHref[0] = window.location.href
-                .replace(hrefRegExp.host, '');
+            matchedHref[0] = 
+                (window.location.href.match(hrefRegExp.host))?
+                    window.location.href.replace(hrefRegExp.host, ''):
+                    window.location.href.replace(hrefRegExp.localhost, '');
+                    
 
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
@@ -55,8 +58,10 @@ class Router {
 
         // рендерит страницы при перезагрузке
         let matchedHref = [];
-        const location = window.location.href
-            .replace(hrefRegExp.host, '');
+        const location =
+            (window.location.href.match(hrefRegExp.host))?
+                window.location.href.replace(hrefRegExp.host, ''):
+                window.location.href.replace(hrefRegExp.localhost, '');
 
         matchedHref[0] = location;
 
@@ -103,8 +108,11 @@ class Router {
      * @param {string} props - состояние приложения
      */
     navigate({ path, props }, pushState = false) {
-        const location = window.location.href
-            .match(hrefRegExp.host)[0];
+        const location = 
+            (window.location.href.match(hrefRegExp.host))?
+                window.location.href.match(hrefRegExp.host, '')[0]:
+                window.location.href.match(hrefRegExp.localhost, '')[0];
+
         if (pushState) {
             window.history.pushState(props, null, location + path);
         }
