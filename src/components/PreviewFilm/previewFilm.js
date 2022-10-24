@@ -8,7 +8,6 @@ import { API } from '@config/config.js';
 *
 */
 export class PreviewFilm {
-
     /**
     * Получает данные с бэкенда.
     * Обрабатывает статусы ответа

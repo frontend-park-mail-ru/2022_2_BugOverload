@@ -24,8 +24,6 @@ export function renderFilmPage() {
     const directorFilms = new Collection();
     // const review = new Review();
 
-
-
     Promise.all([
         getRequestData(),
         // get рецензии тут же
@@ -37,8 +35,6 @@ export function renderFilmPage() {
         const reviewStatistic = new ReviewStatistic(responses[0].reviewInfo);
 
         const inputReview = new InputReview();
-
-
 
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
             about: aboutFilm.getTemplate(responses[0].about),
@@ -66,6 +62,7 @@ export function renderFilmPage() {
         menuInfoFilm.addHandlers();
         Collection.addHandlers();
         InputReview.addHandlers();
+        aboutFilm.addHandlers();
 
         // addHandlersToDevelopmentLinks();
     });

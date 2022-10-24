@@ -3,7 +3,6 @@ import { Review } from '@components/Review/review.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import template from '@components/ListReviews/listReviews.handlebars';
 
-
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
 * Добавляет обработчики событий на кнопки слайдера
