@@ -17,6 +17,7 @@ export class Modal {
      */
     render() {
         this.root.insertAdjacentHTML('afterbegin', template());
+        document.body.classList.add('body_hide_y_scroll');
         this.handler();
     }
 
@@ -30,6 +31,12 @@ export class Modal {
                 const { target } = e;
 
                 if (target.classList.contains('modal__background')) {
+                    document.body.classList.remove('body_hide_y_scroll');
+                    window.history.pushState(
+                        null,
+                        '',
+                        window.location.href.replace(/\w+\/$/i, ''),
+                    );
                     document.body
                         .querySelector('.modal__background')
                         .remove();

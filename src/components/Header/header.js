@@ -23,7 +23,7 @@ export class Header extends Component {
         };
         store.subscribe('user', () => {
             this.state.user = store.getSate('user');
-            this.componentWillUnmount();
+            //this.componentWillUnmount();
             this.render();
         });
     }
@@ -47,7 +47,7 @@ export class Header extends Component {
         }
     }
 
-    handler(e) {
+    /*handler(e) {
         const { target } = e;
 
         if (target.dataset.section === 'logout') {
@@ -90,16 +90,16 @@ export class Header extends Component {
                 element.componentDidMount();
             }
         }
-    }
+    }*/
 
     /**
      * Навешивает события, по которым происходит рендер логина и регистрации
      */
-    componentDidMount() {
+    /*componentDidMount() {
         this.rootNode.addEventListener('click', this.handler.bind(this));
     }
 
     componentWillUnmount() {
         this.rootNode.removeEventListener('click', this.handler.bind(this));
-    }
+    }*/
 }

@@ -46,7 +46,10 @@ export class Signup extends Component {
      * Рендерит логин
      */
     render() {
-        if (this.rootNode.querySelector('.modal__window') === null) {
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
             const modal = new Modal(this.rootNode);
             modal.render();
         }
@@ -55,7 +58,11 @@ export class Signup extends Component {
             document.body
                 .querySelector('.modal__background')
                 .remove();
-
+            window.history.pushState(
+                null,
+                '',
+                window.location.href.replace(/\w+\/$/i, ''),
+            );
             return;
         }
 
@@ -66,6 +73,7 @@ export class Signup extends Component {
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
+        this.componentDidMount();
     }
 
     /**

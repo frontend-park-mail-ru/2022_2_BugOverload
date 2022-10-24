@@ -51,7 +51,10 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        if (!this.rootNode.querySelector('.modal__window')) {
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
             const modal = new Modal(this.rootNode);
             modal.render();
         }
@@ -60,7 +63,11 @@ export class Login extends Component {
             document.body
                 .querySelector('.modal__background')
                 .remove();
-
+            window.history.pushState(
+                null,
+                '',
+                window.location.href.replace(/\w+\/$/i, ''),
+            );
             return;
         }
 
@@ -72,6 +79,7 @@ export class Login extends Component {
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
 
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
+        this.componentDidMount();
     }
 
     /**

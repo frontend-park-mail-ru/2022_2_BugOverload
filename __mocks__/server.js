@@ -10,6 +10,8 @@ const cors = require('cors');
 
 app.use(morgan('dev'));
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/',express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({

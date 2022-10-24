@@ -2,33 +2,12 @@ import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { renderMainPage } from '@views/MainPage/mainPage.js';
 
+export const ROOT = document.getElementById('root');
+
+const login = new Login({ rootNode: ROOT });
+const signup = new Signup({ rootNode: ROOT });
 export const routes = [
     { path: '/', renderView: renderMainPage },
+    { path: '/login/', renderView: login.render.bind(login) },
+    { path: '/signup/', renderView: signup.render.bind(signup) },
 ];
-
-/**
-* Конфиг используемый для рендера
-*/
-export const config = {
-    header: {
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: Login,
-        },
-    },
-    auth: {
-        signup: {
-            href: '/signup',
-            name: 'Регистрация',
-            render: Signup,
-        },
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: Login,
-        },
-    },
-};
-
-export const ROOT = document.getElementById('root');
