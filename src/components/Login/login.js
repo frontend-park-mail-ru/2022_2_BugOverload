@@ -25,6 +25,7 @@ export class Login extends Component {
         store.subscribe('statusLogin', () => {
             this.state.statusLogin = store.getSate('statusLogin');
             this.render();
+            this.state.statusLogin = null;
         });
     }
 
@@ -71,8 +72,10 @@ export class Login extends Component {
             return;
         }
 
+        console.log(this.state.statusLogin)
         if (this.state.statusLogin) {
-            this.handlerStatus(userStatus);
+            this.handlerStatus(this.state.statusLogin);
+            console.log(this.state.statusLogin)
             return;
         }
 

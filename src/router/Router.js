@@ -47,7 +47,6 @@ class Router {
             const { target } = e;
             if (target instanceof HTMLAnchorElement) {
                 if (this.mapViews.get(target.dataset.section)) {
-                    console.log(target.dataset.section)
                     e.preventDefault();
                     this.go({ path: target.dataset.section }, true);
                 }
@@ -82,7 +81,6 @@ class Router {
         matchedHref[0] = location;
 
         if (location !== '/') {
-            console.log(location)
             matchedHref = this.matchHref(location);
         }
 

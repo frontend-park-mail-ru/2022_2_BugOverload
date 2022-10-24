@@ -25,6 +25,7 @@ export class Signup extends Component {
         store.subscribe('statusSignup', () => {
             this.state.statusSignup = store.getSate('statusSignup');
             this.render();
+            this.state.statusSignup = null;
         });
     }
 
@@ -67,7 +68,7 @@ export class Signup extends Component {
         }
 
         if (this.state.statusSignup) {
-            this.handlerStatus(userStatus);
+            this.handlerStatus(this.state.statusSignup);
             return;
         }
 
