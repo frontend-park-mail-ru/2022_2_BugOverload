@@ -13,13 +13,13 @@ export class SaveToCollectionMenu {
     open() {
         this.placeholder = this.placeholder ? this.placeholder : document.querySelector('.js-place-save-to-collection');
         let menu = this.placeholder.querySelector('.js-menu-save__container');
-        if (menu?.hasAttribute('open')) {
+        if (menu.hasAttribute('open')) {
             this.close();
             return;
         }
         this.render();
         menu = this.placeholder.querySelector('.js-menu-save__container');
-        menu?.setAttribute('open', '');
+        menu.setAttribute('open', '');
     }
 
     close() {
@@ -28,7 +28,7 @@ export class SaveToCollectionMenu {
     }
 
     getTemplate() {
-        return template({collections: this.collections});
+        return template({ collections: this.collections });
     }
 
     render() {

@@ -68,14 +68,6 @@ export function renderFilmPage() {
     });
 }
 
-// export function renderMainPage() {
-//     // const header = new Header({ rootNode: ROOT });
-//     // header.render();
-//     // header.componentDidMount();
-
-//     // const mainBody = new MainBody(ROOT);
-//     // mainBody.renderMainPage();
-// }
 
 async function getRequestData() {
     const response = await Ajax.get(API.about_film(1));
