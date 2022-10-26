@@ -19,7 +19,6 @@ export class AboutFilm {
         const menu = new SaveToCollectionMenu([
             {
                 coll_name: 'Избранное',
-                // isUsed: 'false',
             },
             {
                 coll_name: 'Топчик',
@@ -27,7 +26,6 @@ export class AboutFilm {
             },
             {
                 coll_name: 'Друг посоветовал',
-                // isUsed: 'false',
             },
         ]);
 

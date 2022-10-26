@@ -54,7 +54,6 @@ export class MenuInfoFilm {
             this.state = this.menuState.details;
             break;
         default:
-            // this.description.renderTemplate();
             break;
         }
     }

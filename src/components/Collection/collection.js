@@ -27,13 +27,7 @@ export class Collection {
     * @return {null} В случае ошибочного статуса
     */
     static async getRequestData(url) {
-        // let href;
-        // if (this._type === 'todayInCinema') {
-        //     href = 'in_cinema';
-        // } else {
-        //     href = 'popular_films';
-        // }
-        const response = await Ajax.get(url);/* `http://${DOMAIN}/v1/${href}` */
+        const response = await Ajax.get(url);
 
         if (response.status === 200) {
             return response.body;

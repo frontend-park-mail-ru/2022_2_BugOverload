@@ -7,16 +7,11 @@ export class Rating {
     }
 
     renderTemplate() {
-        // this.isActive = true;
         this.location.insertAdjacentHTML('afterbegin', template(this.information));
     }
 
     remove() {
-        // if (this.isActive) {
-        document.querySelector('.js-film-page__rating').innerHTML = '';
-        // }
-
-        // this.isActive = false;
+        document.querySelector('.js-film-page__rating').remove();
     }
 
     static addHandlers() {

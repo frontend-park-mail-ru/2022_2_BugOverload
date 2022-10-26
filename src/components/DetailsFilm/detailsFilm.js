@@ -1,5 +1,4 @@
 import template from '@components/DetailsFilm/detailsFilm.handlebars';
-// import { helper } from '@utils/hbsHelpers';
 
 export class DetailsFilm {
     constructor(information = {}) {

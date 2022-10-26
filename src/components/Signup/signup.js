@@ -28,43 +28,6 @@ export class Signup extends Component {
         });
     }
 
-    // /**
-    //  * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
-    //  * @param {Object} user - провалидированный пользовательский ввод
-    //  * @param {string} user.nickname - введённый ник
-    //  * @param {string} user.email - введённая почта
-    //  * @param {string} user.password - введённый пароль
-    //  */
-    // postRequestData(user) {
-    //     const responsePromise = Ajax.post({
-    //         url: `http://${DOMAIN}/v1/auth/signup`,
-    //         body: user,
-    //     });
-
-    //     responsePromise.then((response) => {
-    //         if (response.status === 201) {
-    //             document.body
-    //                 .querySelector('.modal__background')
-    //                 .remove();
-
-    //             if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
-    //                 response.body.avatar = 'assets/img/users/invisibleMan.jpeg';
-    //             }
-    //             document.body.querySelector('.header').remove();
-    //             this.root.insertAdjacentHTML('afterbegin', templateHeader({ ...response.body }));
-    //             const userbar = new Userbar(this.root);
-    //             userbar.addHandlers(response.body);
-
-    //             return;
-    //         }
-
-    //         if (response.status === 400) {
-    //             const wrapper = document.getElementById('signup_email');
-    //             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
-    //         }
-    //     });
-    // }
-
     handlerStatus() {
         if (user.status === 400) {
             const wrapper = document.getElementById('signup_email');

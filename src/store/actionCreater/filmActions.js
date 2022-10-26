@@ -41,12 +41,20 @@ export const actionDelRate = (filmId) => ({
     value: filmId,
 });
 
-export const actionPostReview = (filmId) => ({
+export const actionPostReview = (filmId, data) => ({
     type: 'postReview',
-    value: filmId,
+    value: {
+        filmId,
+        data,
+    },
 });
 
 export const actionMoreReviews = (filmId) => ({
     type: 'moreReviews',
+    value: filmId,
+});
+
+export const actionGetFilmData = (filmId) => ({
+    type: 'GetFilmData',
     value: filmId,
 });
