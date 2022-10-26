@@ -32,11 +32,6 @@ export class Modal {
 
                 if (target.classList.contains('modal__background')) {
                     document.body.classList.remove('body_hide_y_scroll');
-                    window.history.pushState(
-                        null,
-                        '',
-                        window.location.href.replace(/\w+\/$/i, ''),
-                    );
                     document.body
                         .querySelector('.modal__background')
                         .remove();

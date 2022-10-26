@@ -52,14 +52,6 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        const windowModal = this.rootNode.querySelector('.modal__window__flex');
-        if (windowModal) {
-            windowModal.replaceChildren();
-        } else {
-            const modal = new Modal(this.rootNode);
-            modal.render();
-        }
-
         if (store.getSate('user')) {
             document.body
                 .querySelector('.modal__background')
@@ -72,11 +64,17 @@ export class Login extends Component {
             return;
         }
 
-        console.log(this.state.statusLogin)
         if (this.state.statusLogin) {
             this.handlerStatus(this.state.statusLogin);
-            console.log(this.state.statusLogin)
             return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
+            const modal = new Modal(this.rootNode);
+            modal.render();
         }
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
@@ -124,7 +122,7 @@ export class Login extends Component {
     }
 
     /**
-     * Навешивает обработчики на валидацию
+     * Навешивает обработчики на валидацию и на смену url при выходе
      */
     componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
@@ -148,5 +146,18 @@ export class Login extends Component {
 
             store.dispatch(actionLogin(user));
         });
+
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', (e) => {
+                const { target } = e;
+                if (target.classList.contains('modal__background')) {
+                    window.history.pushState(
+                        null,
+                        '',
+                        window.location.href.replace(/\w+\/$/i, ''),
+                    );
+                }
+            });
     }
 }

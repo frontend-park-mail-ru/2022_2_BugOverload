@@ -36,7 +36,7 @@ class Router {
 
     /**
      * Обрабатывает перемещение между views,
-     * добавляет стандартные пути приложения в mapViews и рендерит страницы ппри перезагрузке
+     * добавляет стандартные пути приложения в mapViews и рендерит страницы при перезагрузке
      */
     start() {
         for (const rout of routes) {
@@ -65,8 +65,13 @@ class Router {
 
             this.go({ path: matchedHref[0], renderView: state });
         }, 0));
+        this.refresh();
+    }
 
-        // рендерит страницы при перезагрузке
+    /**
+     * Рендерит страницы при перезагрузке
+     */
+    refresh() {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');

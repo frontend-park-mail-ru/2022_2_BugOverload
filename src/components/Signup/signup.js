@@ -20,7 +20,7 @@ export class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusSignup: null,
         };
         store.subscribe('statusSignup', () => {
             this.state.statusSignup = store.getSate('statusSignup');
@@ -37,7 +37,7 @@ export class Signup extends Component {
      * @param {string} user.password - введённый пароль
      */
     handlerStatus() {
-        if (user.status === 400) {
+        if (this.state.statusSignup === 400) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
         }
@@ -47,14 +47,6 @@ export class Signup extends Component {
      * Рендерит логин
      */
     render() {
-        const windowModal = this.rootNode.querySelector('.modal__window__flex');
-        if (windowModal) {
-            windowModal.replaceChildren();
-        } else {
-            const modal = new Modal(this.rootNode);
-            modal.render();
-        }
-
         if (store.getSate('user')) {
             document.body
                 .querySelector('.modal__background')
@@ -70,6 +62,14 @@ export class Signup extends Component {
         if (this.state.statusSignup) {
             this.handlerStatus(this.state.statusSignup);
             return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
+            const modal = new Modal(this.rootNode);
+            modal.render();
         }
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
@@ -170,5 +170,18 @@ export class Signup extends Component {
 
             store.dispatch(actionRegister(user));
         });
+
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', (e) => {
+                const { target } = e;
+                if (target.classList.contains('modal__background')) {
+                    window.history.pushState(
+                        null,
+                        '',
+                        window.location.href.replace(/\w+\/$/i, ''),
+                    );
+                }
+            });
     }
 }
