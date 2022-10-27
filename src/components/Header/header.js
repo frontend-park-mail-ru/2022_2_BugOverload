@@ -5,7 +5,6 @@ import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionAuth } from '@store/actionCreater/userActions.js';
 
-
 /**
 * Отрисовывает хедер.
 * Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
@@ -41,7 +40,7 @@ export class Header extends Component {
         this.rootNode.insertAdjacentHTML('afterbegin', template(this.state.user));
 
         if (this.state.user) {
-            const userbar = new Userbar({rootNode: this.rootNode});
+            const userbar = new Userbar({ rootNode: this.rootNode });
             userbar.componentDidMount(this.state.user);
         } else {
             store.dispatch(actionAuth());
@@ -74,7 +73,7 @@ export class Header extends Component {
                     .querySelector(`.modal__${removeElement}__img`)
                     .remove();
                 const Render = config.auth[target.dataset.section].render;
-                const element = new Render({rootNode: this.rootNode});
+                const element = new Render({ rootNode: this.rootNode });
                 element.render();
                 element.componentDidMount();
                 return;
@@ -86,7 +85,7 @@ export class Header extends Component {
                     || header.compareDocumentPosition(target) === 20)
                     && target.dataset.section === 'login') {
                 const Render = config.header[target.dataset.section].render;
-                const element = new Render({rootNode: this.rootNode});
+                const element = new Render({ rootNode: this.rootNode });
                 element.render();
                 element.componentDidMount();
             }
