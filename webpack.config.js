@@ -29,7 +29,7 @@ const optimization = () => {
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        app: './index.js',
+        app: ['@babel/polyfill', './index.js'],
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -46,8 +46,8 @@ module.exports = {
             '@assets': path.resolve(__dirname, 'src/assets'),
             '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
             '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
-            '@router':path.resolve(__dirname,'src/router'),
-            '@store':path.resolve(__dirname,'src/store'),
+            '@router': path.resolve(__dirname, 'src/router'),
+            '@store': path.resolve(__dirname, 'src/store'),
         },
     },
     optimization: optimization(),
@@ -56,7 +56,7 @@ module.exports = {
             {
                 test: /\.handlebars$/,
                 use: ['handlebars-loader'],
-                exclude: /(node_moodules|bower_components)/,
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -69,6 +69,25 @@ module.exports = {
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
                 type: 'asset/resource',
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+                // options: {
+                //     presets: [
+                //         '@babel/preset-env',
+                //     ],
+                // },
+
             },
         ],
     },
