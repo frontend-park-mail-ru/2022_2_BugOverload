@@ -68,7 +68,6 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
         app: ['@babel/polyfill', './index.js'],
-        ttt: './ttt.ts',
     },
     output: {
         filename: '[name].[contenthash].js',

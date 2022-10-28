@@ -1,0 +1,16 @@
+.profile__menu__flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    color: aliceblue;
+}
+
+.profile__menu__links{
+    font-size: 20px;
+    color: #fff;
+}

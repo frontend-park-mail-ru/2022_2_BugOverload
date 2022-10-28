@@ -22,7 +22,6 @@ export class Header extends Component {
         };
         store.subscribe('user', () => {
             this.state.user = store.getSate('user');
-            // this.componentWillUnmount();
             this.render();
         });
     }
