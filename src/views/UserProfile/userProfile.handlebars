@@ -1,3 +1,70 @@
 <div class="profile">
     {{{profileMenu}}}
+
+    <div class="profile__avatar__flex">
+        <img class="profile__avatar" src="http://movie-gate.online:8088/v1/image?object=avatar&key={{avatar}}">
+        <button class="profile__avatar__button">
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_541_3941)">
+                    <path d="M0.791992 3.16675V7.91675H5.54199" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M18.208 15.8333V11.0833H13.458" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M16.2216 7.12508C15.8201 5.99045 15.1377 4.97602 14.2381 4.17645C13.3385 3.37688 12.251 2.81823 11.0771 2.55262C9.9032 2.28701 8.68114 2.3231 7.52497 2.65753C6.36879 2.99195 5.31617 3.61381 4.46533 4.46508L0.791992 7.91675M18.2087 11.0834L14.5353 14.5351C13.6845 15.3863 12.6319 16.0082 11.4757 16.3426C10.3195 16.6771 9.09745 16.7132 7.92355 16.4475C6.74965 16.1819 5.66217 15.6233 4.76257 14.8237C3.86297 14.0241 3.18058 13.0097 2.77908 11.8751"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_541_3941">
+                        <rect width="19" height="19" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <div class="profile__avatar__button_center">Выбрать файл</div>
+        </button>
+    </div>
+
+    <div class="profile__user__flex">
+        <div class="profile__username">{{nickname}}</div>
+        <div class="profile__email">{{email}}</div>
+        <div class="profile__info__flex">
+            <div class="profile__info__wrapper">
+                <div class="profile__info__field">
+                    Дата регистрации:
+                </div>
+                <div class="profile__info__field">
+                    Просмотрено:
+                </div>
+                <div class="profile__info__field">
+                    Коллекций:
+                </div>
+                <div class="profile__info__field">
+                    Рецензий:
+                </div>
+            </div>
+            <div class="profile__info__value__wrapper">
+                <div class="profile__info__value">
+                    {{joined_date}}
+                </div>
+                <div class="profile__info__value">
+                    {{count_views_films}}
+                </div>
+                <div class="profile__info__value">
+                    {{count_collections}}
+                </div>
+                <div class="profile__info__value">
+                    {{count_reviews}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile__change">
+        <svg class="profile__change__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.6667 2.66675L24 8.00008L9.33333 22.6667H4V17.3334L18.6667 2.66675Z" stroke="white"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 29.3333H28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        {{{profileChange}}}
+    </div>
 </div>

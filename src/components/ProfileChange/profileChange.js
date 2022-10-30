@@ -1,0 +1,1 @@
+import { actionPutSettings } from '@store/actionCreater/userActions.js';

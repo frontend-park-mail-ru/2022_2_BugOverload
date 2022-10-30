@@ -1,10 +1,9 @@
 import { View } from '@views/View.js';
 import templateProfile from '@views/userProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
+import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
 import { store } from '@store/Store.js';
-import { actionAuth } from '@store/actionCreater/userActions.js';
 import { actionGetSettings } from '@store/actionCreater/userActions.js';
-import { actionPutSettings } from '@store/actionCreater/userActions.js';
 
 export class UserProfile extends View {
     constructor(props) {
@@ -12,6 +11,7 @@ export class UserProfile extends View {
         this.state = {
             user: null,
             authStatus: null,
+            userInfo: null,
         }
     }
 
@@ -41,8 +41,27 @@ export class UserProfile extends View {
             return;
         }
 
-        this.rootNode.insertAdjacentHTML('beforeend', templateProfile({
-            profileMenu: templateProfileMenu(),
-        }));
+        this.state.userInfo = store.getSate('userInfo');
+        const subscribeFunc = () => {
+            this.render();
+        };
+        if(!this.state.userInfo) {
+            store.subscribe('userInfo', subscribeFunc)
+            store.dispatch(actionGetSettings());
+        } else {
+            store.unsubscribe('userInfo', subscribeFunc);
+        }
+
+        const profile = this.rootNode.querySelector('.profile');
+        if(profile) {
+            profile.remove();
+        }
+        this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
+            Object.assign(
+                {profileMenu: templateProfileMenu()},
+                this.state.user,
+                this.state.userInfo,
+            )
+        ));
     }
 }
