@@ -20,3 +20,12 @@ export const actionRegister = (user) => ({
     type: 'signup',
     value: user,
 });
+
+export const actionGetSettings = () => ({
+    type: 'getSettings',
+});
+
+export const actionPutSettings = (user) => ({
+    type: 'putSettings',
+    value: user,
+});

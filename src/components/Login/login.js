@@ -20,12 +20,11 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusLogin: null,
         };
         store.subscribe('statusLogin', () => {
             this.state.statusLogin = store.getSate('statusLogin');
             this.render();
-            this.state.statusLogin = null;
         });
     }
 

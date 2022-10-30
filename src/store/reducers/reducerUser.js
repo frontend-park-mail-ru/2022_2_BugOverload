@@ -11,7 +11,7 @@ class ReducerUser {
         if (response.status === 200) {
             return {
                 user: response.body,
-                statusLogin: response.status,
+                statusLogin: null,
             };
         }
         return { statusLogin: response.status };
@@ -27,7 +27,7 @@ class ReducerUser {
         if (response.status === 201) {
             return {
                 user: response.body,
-                statusSignup: response.status,
+                statusSignup: null,
             };
         }
         return { statusSignup: response.status };
@@ -38,9 +38,12 @@ class ReducerUser {
 
         const response = await responsePromise;
         if (response.status === 200) {
-            return { user: response.body };
+            return { 
+                user: response.body,
+                authStatus: null,
+            };
         }
-        return null;
+        return { authStatus: response.status };
     }
 
     async logout() {
@@ -51,6 +54,33 @@ class ReducerUser {
             return { user: null };
         }
         return null;
+    }
+
+    async getSettings() {
+        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/user/settings`);
+
+        const response = await responsePromise;
+        if (response.status === 200) {
+            return { 
+                user: response.body,
+            };
+        }
+        return null;
+    }
+
+    async putSettings(user) {
+        const responsePromise = Ajax.put({
+            url: `http://${DOMAIN}/v1/user/settings`,
+            body: user,
+        });
+
+        const response = await responsePromise;
+        if (response.status !== 204) {
+            return {
+                statusChangeSettings: response.status,
+            };
+        }
+        return { statusChangeSettings: null };
     }
 }
 

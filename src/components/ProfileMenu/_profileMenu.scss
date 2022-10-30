@@ -4,7 +4,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     height: 470px;
     width: 307px;
     color: aliceblue;
@@ -13,4 +13,5 @@
 .profile__menu__links{
     font-size: 20px;
     color: #fff;
+    margin-left: 52px;
 }
