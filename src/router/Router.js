@@ -46,7 +46,7 @@ class Router {
 
         this.root.addEventListener('click', (e) => {
             const { target } = e;
-            if (target instanceof HTMLAnchorElement) {
+            if (target instanceof HTMLAnchorElement || target instanceof HTMLImageElement) {
                 if (this.mapViews.get(target.dataset.section)) {
                     e.preventDefault();
                     this.go({ path: target.dataset.section }, true);
