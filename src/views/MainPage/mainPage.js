@@ -9,7 +9,7 @@ import template from '@views/MainPage/MainPage.handlebars';
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
 *
 */
-export class MainPage extends View {
+class MainPage extends View {
     render() {
         super.render();
         const previewFilm = new PreviewFilm();
@@ -58,3 +58,5 @@ export class MainPage extends View {
         });
     }
 }
+
+export const mainPage = new MainPage({ rootNode: document.getElementById('root') });

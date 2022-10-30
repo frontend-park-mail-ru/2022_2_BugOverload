@@ -23,7 +23,7 @@ export class Signup extends Component {
             statusSignup: null,
         };
         store.subscribe('statusSignup', () => {
-            this.state.statusSignup = store.getSate('statusSignup');
+            this.state.statusSignup = store.getState('statusSignup');
             this.render();
         });
     }
@@ -46,7 +46,7 @@ export class Signup extends Component {
      * Рендерит логин
      */
     render() {
-        if (store.getSate('user')) {
+        if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
@@ -145,8 +145,8 @@ export class Signup extends Component {
 
         return null;
     }
-        
-    deleteSignup = (e) => {
+
+    deleteSignup(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
             const redirectMain = new Event(
@@ -154,8 +154,9 @@ export class Signup extends Component {
                 {
                     bubbles: true,
                     cancelable: true,
-                });
-            this.rootNode.querySelector(`a[data-section="/"]`).dispatchEvent(redirectMain);
+                },
+            );
+            this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
         }
     }
 
@@ -183,16 +184,18 @@ export class Signup extends Component {
             store.dispatch(actionRegister(user));
         });
 
+        const { deleteSignup } = this;
         document.body
             .querySelector('.modal__background')
-            .addEventListener('click', this.deleteSignup);
+            .addEventListener('click', deleteSignup);
     }
 
     componentWillUnmount() {
         const modalBackground = document.body
             .querySelector('.modal__background');
-        if(modalBackground) {
-            modalBackground.removeEventListener('click', this.deleteSignup);
+        const { deleteSignup } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteSignup);
         }
     }
 }

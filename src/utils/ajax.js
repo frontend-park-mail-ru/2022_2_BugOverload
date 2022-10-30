@@ -41,7 +41,11 @@ export class Ajax {
 
         let result = await response.text();
 
-        result = result ? result = JSON.parse(result) : {};
+        if (result && result !== 'Forbidden') {
+            result = JSON.parse(result);
+        } else {
+            result = {};
+        }
 
         return { status: response.status, body: result };
     }
@@ -59,7 +63,11 @@ export class Ajax {
 
         let result = await response.text();
 
-        result = result ? result = JSON.parse(result) : {};
+        if (result && result !== 'Forbidden') {
+            result = JSON.parse(result);
+        } else {
+            result = {};
+        }
 
         return { status: response.status, body: result };
     }

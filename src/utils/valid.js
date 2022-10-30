@@ -19,6 +19,7 @@ export const checkNick = (form, input) => {
         }
         return false;
     }
+
     removeError(form, 'text');
     return true;
 };
@@ -57,8 +58,8 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
     }
 
     if ((confirmPassword !== password)) {
-        if (password && checkPassword(confirm.parentElement, password)) {
-            renderError(confirm.parentElement, 'password', 'Пароли не совпадают');
+        if (password && checkPassword(confirm, password)) {
+            renderError(confirm, 'password', 'Пароли не совпадают');
         }
         renderError(confirm, 'password', 'Пароли не совпадают');
         return false;
@@ -169,6 +170,7 @@ export const renderError = (form, type, text) => {
         if (text === erorElement.textContent) {
             return;
         }
+
         erorElement.remove();
     }
     const insertHtml = `<div class="modal__input__error">${text}</div>`;

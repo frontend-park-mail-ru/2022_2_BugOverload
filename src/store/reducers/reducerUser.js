@@ -38,7 +38,7 @@ class ReducerUser {
 
         const response = await responsePromise;
         if (response.status === 200) {
-            return { 
+            return {
                 user: response.body,
                 authStatus: null,
             };
@@ -61,7 +61,7 @@ class ReducerUser {
 
         const response = await responsePromise;
         if (response.status === 200) {
-            return { 
+            return {
                 userInfo: response.body,
             };
         }
@@ -70,7 +70,7 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/user/settings`,
+            url: `http://${DOMAIN}/v1/user/setting`,
             body: user,
         });
 

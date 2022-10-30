@@ -29,11 +29,11 @@ class Store {
     unsubscribe(type, activeFunc) {
         const arraySubsribes = this.mapSubscribers.get(type);
         this.mapSubscribers.set(
-            type, 
+            type,
             arraySubsribes.filter(
-                item => 
-                item.name !== activeFunc.name)
-            );
+                (item) => item.name !== activeFunc.name,
+            ),
+        );
     }
 
     setState(newState) {
@@ -67,7 +67,7 @@ class Store {
         }
     }
 
-    getSate(nameObject) {
+    getState(nameObject) {
         if (Object.hasOwnProperty.call(this.state, nameObject)) {
             return this.state[nameObject];
         }

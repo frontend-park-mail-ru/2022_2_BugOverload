@@ -23,7 +23,7 @@ export class Login extends Component {
             statusLogin: null,
         };
         store.subscribe('statusLogin', () => {
-            this.state.statusLogin = store.getSate('statusLogin');
+            this.state.statusLogin = store.getState('statusLogin');
             this.render();
         });
     }
@@ -42,7 +42,7 @@ export class Login extends Component {
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === 401) {
+        if (userStatus === 403) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }
@@ -51,7 +51,7 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        if (store.getSate('user')) {
+        if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
@@ -119,8 +119,8 @@ export class Login extends Component {
 
         return null;
     }
-    
-    deleteLogin = (e) => {
+
+    deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
             const redirectMain = new Event(
@@ -128,8 +128,9 @@ export class Login extends Component {
                 {
                     bubbles: true,
                     cancelable: true,
-                });
-            this.rootNode.querySelector(`a[data-section="/"]`).dispatchEvent(redirectMain);
+                },
+            );
+            this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
         }
     }
 
@@ -159,16 +160,18 @@ export class Login extends Component {
             store.dispatch(actionLogin(user));
         });
 
+        const { deleteLogin } = this;
         document.body
             .querySelector('.modal__background')
-            .addEventListener('click', this.deleteLogin);
+            .addEventListener('click', deleteLogin);
     }
 
     componentWillUnmount() {
         const modalBackground = document.body
             .querySelector('.modal__background');
-        if(modalBackground) {
-            modalBackground.removeEventListener('click', this.deleteLogin);
+        const { deleteLogin } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteLogin);
         }
     }
 }

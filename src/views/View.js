@@ -7,7 +7,7 @@ import { Component } from '@components/Component.js';
 */
 export class View extends Component {
     render() {
-        if(!document.body.querySelector('.header')) {
+        if (!document.body.querySelector('.header')) {
             const header = new Header({ rootNode: this.rootNode });
             header.render();
         }

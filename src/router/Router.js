@@ -12,7 +12,7 @@ class Router {
     constructor(root) {
         this.root = root;
         this.mapViews = new Map();
-        this.lastView;
+        this.lastView = null;
     }
 
     /**
@@ -115,10 +115,11 @@ class Router {
             currentView.render(window.history.state);
         }
 
-        if(
-            this.lastView && 
-            Object.getOwnPropertyNames(
-                Object.getPrototypeOf(this.lastView))
+        if (
+            this.lastView
+            && Object.getOwnPropertyNames(
+                Object.getPrototypeOf(this.lastView),
+            )
                 .includes('componentWillUnmount')
         ) {
             this.lastView.componentWillUnmount();

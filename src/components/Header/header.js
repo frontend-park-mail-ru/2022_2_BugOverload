@@ -21,7 +21,7 @@ export class Header extends Component {
             user: null,
         };
         store.subscribe('user', () => {
-            this.state.user = store.getSate('user');
+            this.state.user = store.getState('user');
             this.render();
         });
     }

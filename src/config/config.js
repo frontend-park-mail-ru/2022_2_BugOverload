@@ -1,7 +1,7 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-import { MainPage } from '@views/MainPage/mainPage.js';
-import { UserProfile } from '@views/UserProfile/UserProfile.js';
+import { mainPage } from '@views/MainPage/mainPage.js';
+import { profile } from '@views/UserProfile/UserProfile.js';
 
 export const API = {
     img: {
@@ -28,8 +28,6 @@ export const ROOT = document.getElementById('root');
 
 const login = new Login({ rootNode: ROOT });
 const signup = new Signup({ rootNode: ROOT });
-const mainPage = new MainPage({ rootNode: ROOT });
-const profile = new UserProfile({ rootNode: ROOT });
 export const routes = [
     { path: '/', view: mainPage },
     { path: '/login/', view: login },

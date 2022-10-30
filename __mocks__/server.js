@@ -52,16 +52,16 @@ app.post('/v1/auth/login',  (req, res) => {
 
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(404).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+});
+
+app.put('/v1/user/setting',  (req, res) => {
+	res.sendStatus(403);
 });
 
 app.get('/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
-});
-
-app.put('/v1/user/settings',  (req, res) => {
-	res.status(204);
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
