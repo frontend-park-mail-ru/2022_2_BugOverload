@@ -17,7 +17,7 @@ export class Userbar extends Component {
     constructor(props) {
         super(props);
         store.subscribe('user', () => {
-            if (!store.getSate('user')) {
+            if (!store.getState('user')) {
                 this.rootNode.querySelector('.header').remove();
                 this.rootNode.insertAdjacentHTML('afterbegin', templateHeader());
             }

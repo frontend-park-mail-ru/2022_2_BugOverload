@@ -35,11 +35,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
 body, html {
-    font-family: 'Mail Sans Roman';
-    background-color: #121212;
-    margin: 0;
-    padding: 0;
-
+    --backgr-color: #121212;
     --primary-color: #FEBA2B;
     --primary-color-hover: #CD9826;
     --secondary-color: rgb(86 86 86 / 50%);
@@ -47,6 +43,12 @@ body, html {
     --main-color-text: #fff;
     --secondary-color-text: #BEBEBE;
     --standart-margin: 52px;
+
+    font-family: 'Mail Sans Roman';
+    background-color: var(--backgr-color);
+    margin: 0;
+    padding: 0;
+
 }
 
 a {

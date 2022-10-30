@@ -23,11 +23,15 @@
     font-weight: bolder;
 }
 
-.menu-save__used-icon {
+[used-in-collection="true"] {
     width: 20px;
     height: 20px;
     background-image: url('@icons/check.png');
     background-position-y: -3px;
+}
+
+.menu-save__used-icon {
+
 }
 
 .menu-save__item {

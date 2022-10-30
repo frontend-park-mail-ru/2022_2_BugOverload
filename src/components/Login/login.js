@@ -23,7 +23,7 @@ export class Login extends Component {
             user: null,
         };
         store.subscribe('statusLogin', () => {
-            this.state.statusLogin = store.getSate('statusLogin');
+            this.state.statusLogin = store.getState('statusLogin');
             this.render();
         });
     }
@@ -56,7 +56,7 @@ export class Login extends Component {
             modal.render();
         }
 
-        if (store.getSate('user')) {
+        if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();

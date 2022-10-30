@@ -50,7 +50,11 @@ app.post('/v1/auth/login',  (req, res) => {
 
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(404).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+
+	let randomIndex = Math.floor(Math.random() * 2);
+	const variants = [200, 404];
+
+	res.status(variants[randomIndex]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
@@ -737,8 +741,9 @@ app.get('/v1/recommendation_film', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-app.get('/v1/about_film/1',  (req, res) => {
+app.get('/v1/film/321',  (req, res) => {
 	const info = {
+		id: 321,
 		about: {
 			poster_hor: 'assets/img/films_hor/trueDetective.jpg',
 			film_name: 'Настоящий Детектив',

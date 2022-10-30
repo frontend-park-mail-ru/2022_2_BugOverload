@@ -1,6 +1,9 @@
 import { reducerUser } from '@store/reducers/reducerUser.js';
 import { reducerFilm } from '@store/reducers/reducerFilm.js';
 
+/**
+* Устанавливает соответствие между типом Action'а и методом редьюсера
+*/
 const handlers = [
     { type: 'login', methodStore: reducerUser.login.bind(reducerUser) },
     { type: 'signup', methodStore: reducerUser.signup.bind(reducerUser) },
@@ -8,6 +11,8 @@ const handlers = [
     { type: 'logout', methodStore: reducerUser.logout.bind(reducerUser) },
 
     { type: 'getFilmData', methodStore: reducerFilm.getFilmData.bind(reducerFilm) },
+    { type: 'openDescription', methodStore: reducerFilm.openDescription.bind(reducerFilm) },
+    { type: 'openDetails', methodStore: reducerFilm.openDetails.bind(reducerFilm) },
 ];
 
 export { handlers };

@@ -3,14 +3,37 @@ import { API } from '@config/config.js';
 
 class ReducerFilm {
     async getFilmData() {
-        const responsePromise = await Ajax.get(API.about_film(1));
-        const response = await responsePromise;
+        const response = await Ajax.get(API.film(321));
         if (response.status === 200) {
             return { film: response.body };
         }
 
         return null;
     }
+
+    async openDescription() {
+        return {
+            descriptionIsActive: true,
+            ratingIsActive: true,
+            detailsIsActive: false,
+        };
+    }
+
+    async openDetails() {
+        return {
+            descriptionIsActive: false,
+            ratingIsActive: false,
+            detailsIsActive: true,
+        };
+    }
+
+    // async closeDescription() {
+    //     return { descriptionIsActive: false };
+    // }
+
+    // async closeDetails() {
+    //     return { detailsIsActive: false };
+    // }
 }
 
 export const reducerFilm = new ReducerFilm();

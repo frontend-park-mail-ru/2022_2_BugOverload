@@ -3,12 +3,11 @@
     flex-direction: column;
     padding: 48px;
     box-sizing: border-box;
-    background-color: rgb(133 133 133 / 20%);
+    background-color: rgb(43 43 46 / 80%);
+    backdrop-filter: blur(30px);
     border-radius: 20px;
-    margin-bottom: 48px;
     width: 900px;
     height: auto;
-    margin-left: var(--standart-margin);
 }
 
 .input-review__head {

@@ -1,6 +1,6 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-// import { renderMainPage } from '@views/MainPage/mainPage.js';
+import { renderMainPage } from '@views/MainPage/mainPage.js';
 import { FilmView } from '@views/FilmPage/filmPage.js';
 
 export const ROOT = document.getElementById('root');
@@ -23,7 +23,7 @@ export const API = {
     in_cinema: `http://${DOMAIN}/v1/in_cinema`,
     popular_films: `http://${DOMAIN}/v1/popular_films`,
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
-    about_film(id) { return `http://${DOMAIN}/v1/about_film/${id}`; },
+    film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
 
     testApiConfig,
 };
@@ -59,8 +59,6 @@ export const config = {
     },
 };
 
-
-
 function testApiConfig() {
     console.log(API.img.poster_hor(12));
     console.log(API.img.poster_ver(13));
@@ -78,5 +76,3 @@ function testApiConfig() {
     console.log(API.popular_films);
     console.log(API.recommendation_film);
 }
-
-

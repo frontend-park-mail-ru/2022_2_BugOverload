@@ -3,6 +3,7 @@ import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.hand
 export class SaveToCollectionMenu {
     constructor(collections) {
         this.collections = collections;
+        this.placeholder = document.querySelector('.js-place-save-to-collection');
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.js-place-save-to-collection')) {
                 this.close();
@@ -11,9 +12,11 @@ export class SaveToCollectionMenu {
     }
 
     open() {
-        this.placeholder = this.placeholder ? this.placeholder : document.querySelector('.js-place-save-to-collection');
+        if (!this.placeholder) {
+            return;
+        }
         let menu = this.placeholder.querySelector('.js-menu-save__container');
-        if (menu.hasAttribute('open')) {
+        if (menu && menu.hasAttribute('open')) {
             this.close();
             return;
         }
@@ -23,8 +26,14 @@ export class SaveToCollectionMenu {
     }
 
     close() {
+        if (!this.placeholder) {
+            return;
+        }
+
         const menu = this.placeholder.querySelector('.js-menu-save__container');
-        menu.remove();
+        if (menu) {
+            menu.remove();
+        }
     }
 
     getTemplate() {

@@ -6,6 +6,7 @@ import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { store } from '@store/Store.js';
+import { actionGetFilmData } from '@actions/filmActions.js';
 
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View.js';
@@ -21,20 +22,35 @@ export class FilmView extends View {
             film: null,
         };
 
+        // super.render();
+        // debugger;
+
         store.subscribe('film', () => {
-            this.state.film = store.getSate('film');
+            // debugger;
+            this.state.film = store.getState('film');
             this.render();
         });
     }
 
     render() {
-        debugger;
+        if (this.rootNode.querySelector('.js-film-page')) {
+            return;
+        }
+
+        if (!this.state.film) {
+            store.dispatch(actionGetFilmData(321));
+            return;
+        }
+
         super.render();
+        // console.log(this.state.film);
+
         const likelyFilms = new Collection();
         const directorFilms = new Collection();
 
         Promise.all([
-            getRequestData(),
+            // getRequestData(),
+            this.state.film,
             // get рецензии тут же
             Collection.getRequestData(API.popular_films),
             Collection.getRequestData(API.in_cinema),
@@ -43,13 +59,13 @@ export class FilmView extends View {
             const listReviews = new ListReviews(responses[0].reviews);
             const reviewStatistic = new ReviewStatistic(responses[0].reviewInfo);
 
-            const inputReview = new InputReview();
+            // const inputReview = new InputReview();
 
             ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
                 about: aboutFilm.getTemplate(responses[0].about),
                 reviews: listReviews.getTemplate(),
                 reviewInfo: reviewStatistic.getTemplate(),
-                inputReview: inputReview.getTemplate(),
+                // inputReview: inputReview.getTemplate(),
                 collectionLikely: likelyFilms.getTemplate(responses[1]),
                 collectionDirector: directorFilms.getTemplate(responses[2]),
 
@@ -67,11 +83,15 @@ export class FilmView extends View {
                 rating: responses[0].about.rating,
 
             });
-            menuInfoFilm.renderTemplate();
-            menuInfoFilm.addHandlers();
+
+            menuInfoFilm.render();
+            menuInfoFilm.componentDidMount();
+            // menuInfoFilm.addHandlers();
             Collection.addHandlers();
-            InputReview.addHandlers();
-            aboutFilm.addHandlers();
+            // InputReview.addHandlers();
+            aboutFilm.componentDidMount();
+            listReviews.componentDidMount();
+            // rating.componentDidMount();
         });
     }
 }

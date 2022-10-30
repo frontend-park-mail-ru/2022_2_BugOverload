@@ -21,14 +21,14 @@ export const actionCreateColl = (nameColl) => ({
     value: nameColl,
 });
 
-export const actionOpenDescription = (filmId) => ({
+export const actionOpenDescription = (/* filmId */) => ({
     type: 'openDescription',
-    value: filmId,
+    // value: filmId,
 });
 
-export const actionOpenDetails = (filmId) => ({
+export const actionOpenDetails = (/* filmId */) => ({
     type: 'openDetails',
-    value: filmId,
+    // value: filmId,
 });
 
 export const actionSetRate = (filmId) => ({
@@ -55,6 +55,6 @@ export const actionMoreReviews = (filmId) => ({
 });
 
 export const actionGetFilmData = (filmId) => ({
-    type: 'GetFilmData',
+    type: 'getFilmData',
     value: filmId,
 });

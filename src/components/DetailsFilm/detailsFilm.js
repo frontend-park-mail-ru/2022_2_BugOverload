@@ -6,14 +6,22 @@ export class DetailsFilm {
         this.location = document.querySelector('.js-film-page__details');
     }
 
-    renderTemplate() {
+    render() {
+        if (!this.location) {
+            return;
+        }
+
         this.isActive = true;
         this.location.insertAdjacentHTML('afterbegin', template(this.information));
     }
 
     remove() {
+        if (!this.location) {
+            return;
+        }
+
         if (this.isActive) {
-            document.querySelector('.js-film-page__details').innerHTML = '';
+            this.location.innerHTML = '';
         }
 
         this.isActive = false;

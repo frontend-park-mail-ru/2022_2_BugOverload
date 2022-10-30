@@ -1,7 +1,11 @@
 import template from '@components/InputReview/inputReview.handlebars';
+import { Modal } from '@components/Modal/modal.js';
+import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Component } from '@components/Component.js';
 
-export class InputReview {
+export class InputReview extends Component {
     constructor(data) {
+        super();
         this.data = data;
     }
 
@@ -9,7 +13,22 @@ export class InputReview {
         return template(this.data);
     }
 
-    static addHandlers() {
+    render() {
+        let modalWindow = this.rootNode.querySelector('.modal__window');
+        if (modalWindow) {
+            return;
+        }
+
+        const modal = new Modal(this.rootNode);
+        modal.render();
+
+        // const inputReview = new InputReview(user);
+
+        modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        modalWindow.insertAdjacentHTML('afterbegin', this.getTemplate());
+    }
+
+    componentDidMount() {
         const select = document.querySelector('.input-review__select');
         const input = select.querySelector('.js-input-review__select-input');
         const head = select.querySelector('.input-review__select-head');

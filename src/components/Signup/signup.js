@@ -23,7 +23,7 @@ export class Signup extends Component {
             user: null,
         };
         store.subscribe('statusSignup', () => {
-            this.state.statusSignup = store.getSate('statusSignup');
+            this.state.statusSignup = store.getState('statusSignup');
             this.render();
         });
     }
@@ -44,7 +44,7 @@ export class Signup extends Component {
             modal.render();
         }
 
-        if (store.getSate('user')) {
+        if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();

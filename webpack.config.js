@@ -49,6 +49,8 @@ module.exports = {
             '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
             '@router': path.resolve(__dirname, 'src/router'),
             '@store': path.resolve(__dirname, 'src/store'),
+            '@reducers': path.resolve(__dirname, 'src/store/reducers'),
+            '@actions': path.resolve(__dirname, 'src/store/actionCreater'),
         },
     },
     optimization: optimization(),
