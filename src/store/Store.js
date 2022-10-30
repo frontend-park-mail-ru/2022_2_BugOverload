@@ -26,6 +26,16 @@ class Store {
         }
     }
 
+    unsubscribe(type, activeFunc) {
+        const arraySubsribes = this.mapSubscribers.get(type);
+        this.mapSubscribers.set(
+            type, 
+            arraySubsribes.filter(
+                item => 
+                item.name !== activeFunc.name)
+            );
+    }
+
     setState(newState) {
         let subscribers;
         Object.keys(newState).forEach((key) => {

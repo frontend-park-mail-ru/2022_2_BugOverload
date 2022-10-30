@@ -12,6 +12,7 @@ class Router {
     constructor(root) {
         this.root = root;
         this.mapViews = new Map();
+        this.lastView;
     }
 
     /**
@@ -28,10 +29,10 @@ class Router {
     /**
      * Соопоставляет url и view
      * @param {String} path - url
-     * @param {Function} renderView -функция рендера view
+     * @param {Function} view - view
      */
-    register({ path, renderView }) {
-        this.mapViews.set(path, renderView);
+    register({ path, view }) {
+        this.mapViews.set(path, view);
     }
 
     /**
@@ -63,7 +64,7 @@ class Router {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
 
-            this.go({ path: matchedHref[0], renderView: state });
+            this.go({ path: matchedHref[0], props: state });
         }, 0));
         this.refresh();
     }
@@ -106,16 +107,25 @@ class Router {
      * @param {string} stateObject.props - состояние приложения
      */
     go(stateObject, pushState = false) {
-        const renderView = this.mapViews.get(stateObject.path);
+        const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             this.root.replaceChildren();
         } else {
             const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-            currentView(window.history.state);
+            currentView.render(window.history.state);
         }
 
-        renderView(stateObject.props);
+        if(
+            this.lastView && 
+            Object.getOwnPropertyNames(
+                Object.getPrototypeOf(this.lastView))
+                .includes('componentWillUnmount')
+        ) {
+            this.lastView.componentWillUnmount();
+        }
+        view.render(stateObject.props);
         this.navigate(stateObject, pushState);
+        this.lastView = view;
     }
 
     /**

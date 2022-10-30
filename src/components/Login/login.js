@@ -119,6 +119,19 @@ export class Login extends Component {
 
         return null;
     }
+    
+    deleteLogin = (e) => {
+        const { target } = e;
+        if (target.classList.contains('modal__background')) {
+            const redirectMain = new Event(
+                'click',
+                {
+                    bubbles: true,
+                    cancelable: true,
+                });
+            this.rootNode.querySelector(`a[data-section="/"]`).dispatchEvent(redirectMain);
+        }
+    }
 
     /**
      * Навешивает обработчики на валидацию и на смену url при выходе
@@ -148,15 +161,14 @@ export class Login extends Component {
 
         document.body
             .querySelector('.modal__background')
-            .addEventListener('click', (e) => {
-                const { target } = e;
-                if (target.classList.contains('modal__background')) {
-                    window.history.pushState(
-                        null,
-                        '',
-                        window.location.href.replace(/\w+\/$/i, ''),
-                    );
-                }
-            });
+            .addEventListener('click', this.deleteLogin);
+    }
+
+    componentWillUnmount() {
+        const modalBackground = document.body
+            .querySelector('.modal__background');
+        if(modalBackground) {
+            modalBackground.removeEventListener('click', this.deleteLogin);
+        }
     }
 }

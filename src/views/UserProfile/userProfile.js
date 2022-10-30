@@ -10,28 +10,36 @@ export class UserProfile extends View {
     constructor(props) {
         super(props);
         this.state = {
-            authStatus: null,
             user: null,
+            authStatus: null,
         }
-        store.subscribe('authStatus', () => {
-            this.state.authStatus = store.getSate('authStatus');
-            if(!this.state.authStatus) {
-                return;
-            } else {
-                this.render();
-            }
-        });
-        store.subscribe('user', () => {
-            this.state.user = store.getSate('user');
-            this.render();
-        });
     }
-    render() {
 
-        if(!this.state.user) {
-            
-        }
+    setAuthStatus = () => {
+        this.state.authStatus = store.getSate('authStatus');
+        this.render();
+    }
+
+    render() {
         super.render();
+
+        this.state.user = store.getSate('user');
+        if(!this.state.user) {
+            if(this.state.authStatus) {
+                store.unsubscribe('authStatus',this.setAuthStatus);
+                
+                const redirectMain = new Event(
+                    'click',
+                    {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                this.rootNode.querySelector(`a[data-section="/"]`).dispatchEvent(redirectMain);
+                return;
+            }
+            store.subscribe('authStatus',this.setAuthStatus);
+            return;
+        }
 
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile({
             profileMenu: templateProfileMenu(),

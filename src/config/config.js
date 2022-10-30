@@ -31,8 +31,8 @@ const signup = new Signup({ rootNode: ROOT });
 const mainPage = new MainPage({ rootNode: ROOT });
 const profile = new UserProfile({ rootNode: ROOT });
 export const routes = [
-    { path: '/', renderView: mainPage.render.bind(mainPage) },
-    { path: '/login/', renderView: login.render.bind(login) },
-    { path: '/signup/', renderView: signup.render.bind(signup) },
-    { path: '/profile/', renderView: profile.render.bind(profile) },
+    { path: '/', view: mainPage },
+    { path: '/login/', view: login },
+    { path: '/signup/', view: signup },
+    { path: '/profile/', view: profile },
 ];
