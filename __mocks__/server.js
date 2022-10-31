@@ -55,10 +55,9 @@ app.post('/v1/auth/login',  (req, res) => {
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 
-	let randomIndex = Math.floor(Math.random() * 2);
 	const variants = [200, 404];
 
-	res.status(variants[randomIndex]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(variants[1]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
 app.put('/v1/user/setting',  (req, res) => {

@@ -130,7 +130,7 @@ export class Login extends Component {
                     cancelable: true,
                 },
             );
-            this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+            document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
         }
     }
 
