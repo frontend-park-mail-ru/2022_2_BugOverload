@@ -10,9 +10,7 @@ import template from '@views/MainPage/MainPage.handlebars';
 */
 class MainPage extends View {
     render() {
-        console.log('renderMain')
         const mainBody = document.querySelector('.main-page');
-        console.log(mainBody )
         if (mainBody) {
             mainBody.remove();
         }
