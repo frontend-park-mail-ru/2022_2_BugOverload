@@ -11,8 +11,11 @@ const handlers = [
     { type: 'logout', methodStore: reducerUser.logout.bind(reducerUser) },
 
     { type: 'getFilmData', methodStore: reducerFilm.getFilmData.bind(reducerFilm) },
-    { type: 'openDescription', methodStore: reducerFilm.openDescription.bind(reducerFilm) },
-    { type: 'openDetails', methodStore: reducerFilm.openDetails.bind(reducerFilm) },
+    // { type: 'openDescription', methodStore: reducerFilm.openDescription.bind(reducerFilm) },
+    // { type: 'openDetails', methodStore: reducerFilm.openDetails.bind(reducerFilm) },
+
+    { type: 'getSettings', methodStore: reducerUser.getSettings.bind(reducerUser) },
+    { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },
 ];
 
 export { handlers };

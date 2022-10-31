@@ -1,4 +1,4 @@
 import { router } from '@router/Router.js';
-import '@/index.css';
+import '@/index.scss';
 
 router.start();

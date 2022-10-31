@@ -20,7 +20,7 @@ export class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusSignup: null,
         };
         store.subscribe('statusSignup', () => {
             this.state.statusSignup = store.getState('statusSignup');
@@ -29,7 +29,7 @@ export class Signup extends Component {
     }
 
     handlerStatus() {
-        if (user.status === 400) {
+        if (this.state.statusSignup === 400) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
         }
@@ -39,26 +39,34 @@ export class Signup extends Component {
      * Рендерит логин
      */
     render() {
-        if (this.rootNode.querySelector('.modal__window') === null) {
-            const modal = new Modal(this.rootNode);
-            modal.render();
-        }
-
         if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
-
+            window.history.pushState(
+                null,
+                '',
+                window.location.href.replace(/\w+\/$/i, ''),
+            );
             return;
         }
 
         if (this.state.statusSignup) {
-            this.handlerStatus(userStatus);
+            this.handlerStatus(this.state.statusSignup);
             return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
+            const modal = new Modal(this.rootNode);
+            modal.render();
         }
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
+        this.componentDidMount();
     }
 
     /**
@@ -131,6 +139,20 @@ export class Signup extends Component {
         return null;
     }
 
+    deleteSignup(e) {
+        const { target } = e;
+        if (target.classList.contains('modal__background')) {
+            const redirectMain = new Event(
+                'click',
+                {
+                    bubbles: true,
+                    cancelable: true,
+                },
+            );
+            this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+        }
+    }
+
     /**
      * Навешивает обработчики на валидацию
      */
@@ -154,5 +176,19 @@ export class Signup extends Component {
 
             store.dispatch(actionRegister(user));
         });
+
+        const { deleteSignup } = this;
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', deleteSignup);
+    }
+
+    componentWillUnmount() {
+        const modalBackground = document.body
+            .querySelector('.modal__background');
+        const { deleteSignup } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteSignup);
+        }
     }
 }

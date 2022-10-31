@@ -26,14 +26,24 @@ class Store {
         }
     }
 
+    unsubscribe(type, activeFunc) {
+        const arraySubsribes = this.mapSubscribers.get(type);
+        this.mapSubscribers.set(
+            type,
+            arraySubsribes.filter(
+                (item) => item.name !== activeFunc.name,
+            ),
+        );
+    }
+
     setState(newState) {
-        let subsribers;
+        let subscribers;
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
-            subsribers = this.mapSubscribers.get(key);
+            subscribers = this.mapSubscribers.get(key);
 
-            if (subsribers) {
-                subsribers.forEach((subscriber) => subscriber());
+            if (subscribers) {
+                subscribers.forEach((subscriber) => subscriber());
             }
         });
     }

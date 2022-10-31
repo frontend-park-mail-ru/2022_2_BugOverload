@@ -26,6 +26,7 @@
         "no-continue": 0,
         "import/no-cycle": 0,
         "no-plusplus": 0,
+        "no-useless-escape": 0,
         "no-restricted-syntax": [
             "error",
             {

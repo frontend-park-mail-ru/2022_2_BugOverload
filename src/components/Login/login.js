@@ -20,7 +20,7 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusLogin: null,
         };
         store.subscribe('statusLogin', () => {
             this.state.statusLogin = store.getState('statusLogin');
@@ -42,7 +42,7 @@ export class Login extends Component {
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === 401) {
+        if (userStatus === 403) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }
@@ -51,27 +51,35 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        if (!this.rootNode.querySelector('.modal__window')) {
-            const modal = new Modal(this.rootNode);
-            modal.render();
-        }
-
         if (store.getState('user')) {
             document.body
                 .querySelector('.modal__background')
                 .remove();
-
+            window.history.pushState(
+                null,
+                '',
+                window.location.href.replace(/\w+\/$/i, ''),
+            );
             return;
         }
 
         if (this.state.statusLogin) {
-            this.handlerStatus(userStatus);
+            this.handlerStatus(this.state.statusLogin);
             return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
+            const modal = new Modal(this.rootNode);
+            modal.render();
         }
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
 
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
+        this.componentDidMount();
     }
 
     /**
@@ -112,8 +120,22 @@ export class Login extends Component {
         return null;
     }
 
+    deleteLogin(e) {
+        const { target } = e;
+        if (target.classList.contains('modal__background')) {
+            const redirectMain = new Event(
+                'click',
+                {
+                    bubbles: true,
+                    cancelable: true,
+                },
+            );
+            this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+        }
+    }
+
     /**
-     * Навешивает обработчики на валидацию
+     * Навешивает обработчики на валидацию и на смену url при выходе
      */
     componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
@@ -137,5 +159,19 @@ export class Login extends Component {
 
             store.dispatch(actionLogin(user));
         });
+
+        const { deleteLogin } = this;
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', deleteLogin);
+    }
+
+    componentWillUnmount() {
+        const modalBackground = document.body
+            .querySelector('.modal__background');
+        const { deleteLogin } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteLogin);
+        }
     }
 }

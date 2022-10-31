@@ -1,0 +1,49 @@
+.profile__form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    align-items: flex-start;
+}
+
+.profile__wrapper__nick{
+    margin-top: 32px;
+    height: 42px+38px;
+    width: 410px;
+    margin-bottom: 10px;
+}
+
+.profile__wrapper__password{
+    margin-top: 10px;
+    height: 80px;
+    width: 410px;
+    margin-top: 30px;
+}
+
+@mixin input{
+    font-size: 15px;
+
+    height: 42px;
+    width: 406px - 19px - 2px;
+
+    border: 2px solid #333333;
+    border-radius: 6px;
+    padding-left: 19px;
+
+    background-color: #27292E;
+    color: #9C9C9C;
+}
+
+.profile__input{
+    @include input;
+}
+
+.profile__confirm__input{
+    @include input;
+}
+
+.profile__input__button{
+    @include input;
+    border-radius: 8px;
+    width: 210px;
+    margin-top: 15px;
+}

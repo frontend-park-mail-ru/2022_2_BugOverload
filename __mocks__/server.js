@@ -10,7 +10,9 @@ const cors = require('cors');
 
 app.use(morgan('dev'));
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/',express.static(path.resolve(__dirname, 'images')));
+app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
 app.use(body.json());
 app.use(cors({
 	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
@@ -55,6 +57,15 @@ app.get('/v1/auth',  (req, res) => {
 	const variants = [200, 404];
 
 	res.status(variants[randomIndex]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+});
+
+app.put('/v1/user/setting',  (req, res) => {
+	res.sendStatus(403);
+});
+
+app.get('/v1/user/settings',  (req, res) => {
+	const email = 'Dop123@mail.ru'
+	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {

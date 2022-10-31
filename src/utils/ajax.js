@@ -41,7 +41,33 @@ export class Ajax {
 
         let result = await response.text();
 
-        result = result ? result = JSON.parse(result) : {};
+        if (result && result !== 'Forbidden') {
+            result = JSON.parse(result);
+        } else {
+            result = {};
+        }
+
+        return { status: response.status, body: result };
+    }
+
+    static async put({ url, body }) {
+        const response = await fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        });
+
+        let result = await response.text();
+
+        if (result && result !== 'Forbidden') {
+            result = JSON.parse(result);
+        } else {
+            result = {};
+        }
 
         return { status: response.status, body: result };
     }

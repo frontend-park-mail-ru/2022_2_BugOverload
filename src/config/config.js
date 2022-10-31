@@ -5,10 +5,14 @@ import { FilmView } from '@views/FilmPage/filmPage.js';
 
 export const ROOT = document.getElementById('root');
 
+import { mainPage } from '@views/MainPage/mainPage.js';
+import { profile } from '@views/UserProfile/UserProfile.js';
+
 export const API = {
     img: {
         poster_hor(key) { return `http://${DOMAIN}/v1/image?object=poster_hor&key=${key}`; },
         poster_ver(key) { return `http://${DOMAIN}/v1/image?object=poster_ver&key=${key}`; },
+        avatar(key) { return `http://${DOMAIN}/v1/image?object=avatar&key=${key}`; },
 
         avatar_default: `http://${DOMAIN}/v1/image?object=default&key=avatar_avatar`,
         auth_login: `http://${DOMAIN}/v1/image?object=default&key=login`,
@@ -34,30 +38,6 @@ export const routes = [
     { path: '/', renderView: filmView.render.bind(filmView) },
 ];
 
-/**
-* Конфиг используемый для рендера
-*/
-export const config = {
-    header: {
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: Login,
-        },
-    },
-    auth: {
-        signup: {
-            href: '/signup',
-            name: 'Регистрация',
-            render: Signup,
-        },
-        login: {
-            href: '/login',
-            name: 'Авторизация',
-            render: Login,
-        },
-    },
-};
 
 function testApiConfig() {
     console.log(API.img.poster_hor(12));
@@ -76,3 +56,12 @@ function testApiConfig() {
     console.log(API.popular_films);
     console.log(API.recommendation_film);
 }
+
+const login = new Login({ rootNode: ROOT });
+const signup = new Signup({ rootNode: ROOT });
+export const routes = [
+    { path: '/', view: mainPage },
+    { path: '/login/', view: login },
+    { path: '/signup/', view: signup },
+    { path: '/profile/', view: profile },
+];

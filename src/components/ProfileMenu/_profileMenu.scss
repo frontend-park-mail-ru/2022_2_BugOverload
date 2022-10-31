@@ -1,0 +1,51 @@
+@mixin column__flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.profile__menu{
+    margin-top: 95px;
+    background: linear-gradient(to top, rgba(23, 23, 23, 1), rgba(23, 23, 23, 0));
+}
+
+.profile__gradient{
+    height: 100%;
+    width: 307px;
+    background: linear-gradient(to bottom, rgba(23, 23, 23, 1), rgba(23, 23, 23, 0));
+}
+
+.profile__menu__flex {
+    @include column__flex;
+    height: 470px;
+    width: 307px;
+    color: aliceblue;
+}
+
+.profile__menu__column{
+    @include column__flex;
+    height: 100%;
+}
+
+.profile__menu__links{
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+    margin-left: 52px;
+    margin-bottom: 30px;
+}
+
+.profile__menu__links:hover {
+    color:#FEBA2B;
+    transition: 0.08s linear;
+}
+
+.profile__menu__header{
+    font-size: 36px;
+    color: #fff;
+    margin-left: 52px;
+    margin-bottom: 45px;
+}
