@@ -43,6 +43,7 @@ export class Signup extends Component {
             document.body
                 .querySelector('.modal__background')
                 .remove();
+            document.body.classList.remove('body_hide_y_scroll');
             window.history.pushState(
                 null,
                 '',

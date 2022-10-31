@@ -6,6 +6,7 @@ import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает логин.
@@ -55,10 +56,11 @@ export class Login extends Component {
             document.body
                 .querySelector('.modal__background')
                 .remove();
+            document.body.classList.remove('body_hide_y_scroll');
             window.history.pushState(
                 null,
                 '',
-                window.location.href.replace(/\w+\/$/i, ''),
+                window.location.href.replace(hrefRegExp.auth, ''),
             );
             return;
         }

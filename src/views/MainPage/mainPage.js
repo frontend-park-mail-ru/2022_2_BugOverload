@@ -10,6 +10,10 @@ import template from '@views/MainPage/MainPage.handlebars';
 */
 class MainPage extends View {
     render() {
+        const mainBody = this.rootNode.querySelector('.main-page');
+        if(mainBody) {
+            mainBody.remove();
+        }
         super.render();
         const previewFilm = new PreviewFilm();
         const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
