@@ -28,8 +28,7 @@ class Store {
 
     unsubscribe(type, activeFunc) {
         const arraySubsribes = this.mapSubscribers.get(type);
-        console.log(type,' ',arraySubsribes)
-        if(arraySubsribes) {
+        if (arraySubsribes) {
             this.mapSubscribers.set(
                 type,
                 arraySubsribes.filter(
@@ -37,7 +36,6 @@ class Store {
                 ),
             );
         }
-        console.log(type,' ',this.mapSubscribers.get(type))
     }
 
     setState(newState) {

@@ -20,7 +20,7 @@ class UserProfile extends View {
     render() {
         super.render();
 
-        if(!this.subscribeedOnLogout) {
+        if (!this.subscribeedOnLogout) {
             store.subscribe('logoutStatus', userProfileOnSubscribe);
             this.subscribeedOnLogout = true;
         }
@@ -30,7 +30,6 @@ class UserProfile extends View {
             const logoutStatus = store.getState('logoutStatus');
             if (this.state.authStatus || logoutStatus) {
                 this.componentWillUnmount();
-                console.log('event')
                 const redirectMain = new Event(
                     'click',
                     {
@@ -38,14 +37,13 @@ class UserProfile extends View {
                         cancelable: true,
                     },
                 );
-                console.log('event')
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
             store.subscribe('authStatus', setAuthStatus);
             return;
         }
-        if(!this.subscribeedOnUser) {
+        if (!this.subscribeedOnUser) {
             store.subscribe('user', userProfileOnSubscribe);
             this.subscribeedOnUser = true;
         }

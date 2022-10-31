@@ -11,14 +11,6 @@ import { actionLogout } from '@store/actionCreater/userActions.js';
 */
 export class Userbar extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
-     */
-    constructor(props) {
-        super(props);
-    }
-
-    /**
      * Навешивает обработчики на меню для обработки logout
      */
     addLogoutHandler() {
@@ -71,7 +63,7 @@ export class Userbar extends Component {
                     rootNode.insertAdjacentHTML('afterbegin', templateHeader());
                     store.unsubscribe('user', userbarSubscribe);
                 }
-            }
+            };
             store.subscribe('user', userbarSubscribe);
 
             logout();

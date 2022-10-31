@@ -47,3 +47,5 @@ export class Header extends Component {
         }
     }
 }
+
+export const header = new Header({ rootNode: document.getElementById('root') });

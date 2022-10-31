@@ -52,7 +52,7 @@ class ReducerUser {
 
         const response = await responsePromise;
         if (response.status === 204) {
-            return { 
+            return {
                 user: null,
                 logoutStatus: 204,
             };
