@@ -26,8 +26,7 @@ class UserProfile extends View {
         this.state.user = store.getState('user');
         if (!this.state.user) {
             if (this.state.authStatus) {
-                store.unsubscribe('authStatus', setAuthStatus);
-                store.unsubscribe('user', userProfileOnSubscribe);
+                this.componentWillUnmount();
 
                 const redirectMain = new Event(
                     'click',
