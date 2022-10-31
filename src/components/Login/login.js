@@ -1,24 +1,31 @@
-import { Ajax } from '@utils/ajax.js';
+import templateLogin from '@components/Login/login.handlebars';
 import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
+import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
-import { Userbar } from '@components/Userbar/userbar.js';
-import templateHeader from '@components/Header/header.handlebars';
-import templateLogin from '@components/Login/login.handlebars';
+import { store } from '@store/Store.js';
+import { actionLogin } from '@store/actionCreater/userActions.js'
 
 /**
 * Отрисовывает логин.
 * Обращается к бэкенду для проверки пользователя при логине
 *
 */
-export class Login {
+export class Login extends Component {
     /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
-        this.root = root;
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+        };
+        store.subscribe('statusLogin', () => {
+            this.state.statusLogin = store.getSate('statusLogin');
+            this.render();
+        });
     }
 
     /**
@@ -27,50 +34,44 @@ export class Login {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    postRequestData(user) {
-        const responsePromise = Ajax.post({
-            url: `http://${DOMAIN}/v1/auth/login`,
-            body: user,
-        });
+    handlerStatus(userStatus) {
+        const form = this.rootNode.querySelector('.modal__wrapper__input');
+        if (userStatus === 400) {
+            renderError(form, 'email', 'Такой пользователь не зарегистирован');
+            return;
+        }
+        const wrapper = document.getElementById('login_password');
 
-        responsePromise.then((response) => {
-            if (response.status === 200) {
-                document.body
-                    .querySelector('.modal__background')
-                    .remove();
-
-                document.body.querySelector('.header').remove();
-                this.root.insertAdjacentHTML('afterbegin', templateHeader(response.body));
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
-            }
-            const form = this.root.querySelector('.modal__wrapper__input');
-            if (response.status === 400) {
-                renderError(form, 'email', 'Такой пользователь не зарегистирован');
-            }
-            const wrapper = document.getElementById('login_password');
-
-            if (response.status === 401) {
-                renderError(wrapper, 'password', 'Неверный пароль');
-            }
-        });
+        if (userStatus === 401) {
+            renderError(wrapper, 'password', 'Неверный пароль');
+        }
     }
 
     /**
      * Рендерит логин
      */
     render() {
-        if (!this.root.querySelector('.modal__window')) {
-            const modal = new Modal(this.root);
+        if (!this.rootNode.querySelector('.modal__window')) {
+            const modal = new Modal(this.rootNode);
             modal.render();
         }
 
-        const modalWindow = this.root.querySelector('.modal__window__flex');
+        if(store.getSate('user')) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
 
-        // renderTemplate('components/Login/login', modalWindow, 'afterbegin');
+            return;
+        }
+
+        if (this.state.statusLogin) {
+            this.handlerStatus(userStatus);
+            return;
+        }
+
+        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
+
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
-
-        this.handler(modalWindow);
     }
 
     /**
@@ -113,10 +114,9 @@ export class Login {
 
     /**
      * Навешивает обработчики на валидацию
-     * @param {Element} modalWindow - модальное окно
      */
-    handler(modalWindow) {
-        const form = modalWindow.querySelector('.modal__form');
+    componentDidMount() {
+        const form = this.rootNode.querySelector('.modal__form');
 
         const validate = this.validateLogin;
         let user;
@@ -135,7 +135,7 @@ export class Login {
                 return;
             }
 
-            this.postRequestData(user);
+            store.dispatch(actionLogin(user));
         });
     }
 }

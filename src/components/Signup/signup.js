@@ -1,24 +1,31 @@
-import { Ajax } from '@utils/ajax.js';
+import templateSignup from '@components/Signup/signup.handlebars';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
+import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
-import { Userbar } from '@components/Userbar/userbar.js';
-import templateHeader from '@components/Header/header.handlebars';
-import templateSignup from '@components/Signup/signup.handlebars';
+import { store } from '@store/Store.js';
+import { actionRegister } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает регистрацию.
 * Обращается к бэкенду для проверки пользователя при регистрации
 *
 */
-export class Signup {
+export class Signup extends Component {
     /**
-     * Cохраняет root.
-     * @param {Element} root - div, через который происходит взаимодействие с html.
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
-        this.root = root;
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+        };
+        store.subscribe('statusSignup', () => {
+            this.state.statusSignup = store.getSate('statusSignup');
+            this.render();
+        });
     }
 
     /**
@@ -28,49 +35,37 @@ export class Signup {
      * @param {string} user.email - введённая почта
      * @param {string} user.password - введённый пароль
      */
-    postRequestData(user) {
-        const responsePromise = Ajax.post({
-            url: `http://${DOMAIN}/v1/auth/signup`,
-            body: user,
-        });
-
-        responsePromise.then((response) => {
-            if (response.status === 201) {
-                document.body
-                    .querySelector('.modal__background')
-                    .remove();
-
-                if (!Object.prototype.hasOwnProperty.call(response.body, 'avatar')) {
-                    response.body.avatar = 'assets/img/invisibleMan.jpeg';
-                }
-                document.body.querySelector('.header').remove();
-                this.root.insertAdjacentHTML('afterbegin', templateHeader({ ...response.body }));
-                const userbar = new Userbar(this.root);
-                userbar.addHandlers(response.body);
-
-                return;
-            }
-
-            if (response.status === 400) {
-                const wrapper = document.getElementById('signup_email');
-                renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
-            }
-        });
+    handlerStatus() {
+        if (user.status === 400) {
+            const wrapper = document.getElementById('signup_email');
+            renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
+        }
     }
 
     /**
      * Рендерит логин
      */
     render() {
-        if (this.root.querySelector('.modal__window') === null) {
-            const modal = new Modal(this.root);
+        if (this.rootNode.querySelector('.modal__window') === null) {
+            const modal = new Modal(this.rootNode);
             modal.render();
         }
 
-        const modalWindow = this.root.querySelector('.modal__window__flex');
-        modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
+        if(store.getSate('user')) {
+            document.body
+                .querySelector('.modal__background')
+                .remove();
 
-        this.handler(modalWindow);
+            return;
+        }
+        
+        if (this.state.statusSignup) {
+            this.handlerStatus(userStatus);
+            return;
+        }
+
+        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
     }
 
     /**
@@ -145,10 +140,9 @@ export class Signup {
 
     /**
      * Навешивает обработчики на валидацию
-     * @param {Element} modalWindow - модальное окно
      */
-    handler(modalWindow) {
-        const form = modalWindow.querySelector('.modal__form');
+     componentDidMount() {
+        const form = this.rootNode.querySelector('.modal__form');
         const validate = this.validateSignup;
         let user;
 
@@ -165,7 +159,7 @@ export class Signup {
                 return;
             }
 
-            this.postRequestData(user);
+            store.dispatch(actionRegister(user));
         });
     }
 }

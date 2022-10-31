@@ -3,15 +3,14 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const uuid = require('uuid').v4;
 const body = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use(express.static(path.resolve(__dirname, 'images')));
+app.use('/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/',express.static(path.resolve(__dirname, 'images')));
 app.use(body.json());
 app.use(cors({
 	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
@@ -42,7 +41,7 @@ app.post('/v1/auth/login',  (req, res) => {
 		return res.status(400).json({error: 'Не верный E-Mail и/или пароль'});
 	}
 
-	const id = uuid();
+	const id = 1;
 	ids[id] = email;
 
 	res.cookie('red', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
@@ -51,7 +50,7 @@ app.post('/v1/auth/login',  (req, res) => {
 
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(404).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
@@ -73,7 +72,7 @@ app.post('/v1/auth/signup', (req, res) => {
 		return res.status(200).json({error: 'Пользователь уже существует'});
 	}
 
-	const id = uuid();
+	const id = 1;
 	const user = {nickname,email,password};
 	ids[id] = email;
 	users[email] = user;
