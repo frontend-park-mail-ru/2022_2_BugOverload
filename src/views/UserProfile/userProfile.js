@@ -65,6 +65,8 @@ class UserProfile extends View {
             },
         ));
 
+        //TODO обработчик на кнопку для загрузки авы 
+
         const profileChange = new ProfileChange({
             rootNode: this.rootNode,
             user: Object.assign(
