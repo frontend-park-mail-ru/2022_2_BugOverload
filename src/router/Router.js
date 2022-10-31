@@ -46,6 +46,7 @@ class Router {
 
         this.root.addEventListener('click', (e) => {
             const { target } = e;
+            e.preventDefault();
             if (target instanceof HTMLAnchorElement || target instanceof HTMLImageElement) {
                 if (this.mapViews.get(target.dataset.section)) {
                     e.preventDefault();
