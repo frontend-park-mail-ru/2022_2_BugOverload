@@ -1,9 +1,9 @@
 import { actionPutSettings } from '@store/actionCreater/userActions.js';
 import { Component } from '@components/Component.js';
-import templateProfile from '@views/userProfile/userProfile.handlebars';
+import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
-import { profile } from '@views/UserProfile/UserProfile.js';
+import { profile } from '@views/UserProfile/userProfile.js';
 import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid.js';

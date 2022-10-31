@@ -1,5 +1,5 @@
 import { View } from '@views/View.js';
-import templateProfile from '@views/userProfile/userProfile.handlebars';
+import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { store } from '@store/Store.js';
 import { actionGetSettings } from '@store/actionCreater/userActions.js';
