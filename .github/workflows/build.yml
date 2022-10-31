@@ -45,4 +45,4 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           source: "dist/*"
           target: "/home/webapps/movie-gate.online/frontend/2022_2_BugOverload/dist"
-          strip-components: 1
+          strip_components: 1
