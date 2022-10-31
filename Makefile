@@ -3,8 +3,7 @@
 all: start run
 
 run:
-	npm run prod
-	npm run back 80
+	npm run back 3000
 
 start:
 	docker-compose up -d
