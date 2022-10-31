@@ -11,7 +11,8 @@ import template from '@views/MainPage/MainPage.handlebars';
 class MainPage extends View {
     render() {
         console.log('renderMain')
-        const mainBody = this.rootNode.querySelector('.main-page');
+        const mainBody = document.querySelector('.main-page');
+        console.log(mainBody )
         if (mainBody) {
             mainBody.remove();
         }
