@@ -1,7 +1,7 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
-import { profile } from '@views/UserProfile/UserProfile.js';
+import { profile } from '@views/UserProfile/userProfile.js';
 
 export const API = {
     img: {
