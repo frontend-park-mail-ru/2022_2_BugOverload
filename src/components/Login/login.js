@@ -53,15 +53,17 @@ export class Login extends Component {
      */
     render() {
         if (store.getState('user')) {
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-            document.body.classList.remove('body_hide_y_scroll');
-            window.history.pushState(
-                null,
-                '',
-                window.location.href.replace(hrefRegExp.auth, ''),
-            );
+            const background = document.body.querySelector('.modal__background');
+            if(background) {
+                background.remove();
+                document.body.classList.remove('body_hide_y_scroll');
+                window.history.pushState(
+                    null,
+                    '',
+                    window.location.href.replace(hrefRegExp.auth, ''),
+                );
+            }
+
             return;
         }
 
