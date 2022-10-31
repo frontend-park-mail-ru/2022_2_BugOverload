@@ -1,6 +1,8 @@
 .PHONY: run start stop restart
 
-run: 
+all: start run
+
+run:
 	npm run prod
 	npm run back 80
 

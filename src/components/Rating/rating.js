@@ -31,7 +31,7 @@ export class Rating extends Component {
     //     document.querySelector('.rating__button-write-review');
     // }
 
-    handler(e) {
+    handlerReview(e) {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
@@ -50,11 +50,38 @@ export class Rating extends Component {
     componentDidMount() {
         // debugger;
         const btn = document.querySelector('.rating__button-write-review');
-        btn.addEventListener('click', this.handler.bind(this));
+        btn.addEventListener('click', this.handlerReview.bind(this));
+
+        // componentDidMount() {
+        //     const form = this.rootNode.querySelector('.modal__form');
+        //     const validate = this.validateSignup;
+        //     let user;
+
+        //     form.addEventListener('keyup', (e) => {
+        //         e.preventDefault();
+        //         validate(form, true);
+        //     });
+
+        //     form.addEventListener('submit', (e) => {
+        //         e.preventDefault();
+
+        //         user = validate(form);
+        //         if (!user) {
+        //             return;
+        //         }
+
+        //         store.dispatch(actionRegister(user));
+        //     });
+
+        //     const { deleteSignup } = this;
+        //     document.body
+        //         .querySelector('.modal__background')
+        //         .addEventListener('click', deleteSignup);
+        // }
     }
 
     componentDidUnmount() {
         const btn = document.querySelector('.rating__button-write-review');
-        btn.removeEventListener('click', this.handler.bind(this));
+        btn.removeEventListener('click', this.handlerReview.bind(this));
     }
 }

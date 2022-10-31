@@ -81,14 +81,10 @@
 }
 
 .header__login__btn {
-    font-size: 15px;
-    font-family: 'Mail Sans Roman Med';
-    text-decoration: none;
-    margin-right: calc(var(--standart-margin) + 0px);
+    margin-right: var(--standart-margin);
     height: 35px;
     width: 178px;
     min-width: 100px;
-    border-radius: 40px;
     margin-left: 25px;
 }
 

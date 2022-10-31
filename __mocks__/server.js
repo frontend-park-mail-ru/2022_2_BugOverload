@@ -13,6 +13,8 @@ app.use('/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/film/321/',express.static(path.resolve(__dirname, '../dist')));
+
 app.use(body.json());
 app.use(cors({
 	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
@@ -850,7 +852,106 @@ app.get('/v1/film/321',  (req, res) => {
 
 	}
 
+	console.log('wefwegwegbweRECEIVED');
+
 	res.status(200).json(info);
+});
+
+
+const filmRateStorage = {
+	'Dop123@mail.ru': {
+			'321': {
+				'rate': 7,
+				'date': '11.11.2007',
+			},
+		},
+};
+
+app.post('/v1/rate', (req, res) => {
+	const rate = req.body.rate;
+	const email = req.body.email;
+	const filmID = req.body.filmID;
+	console.log(rate);
+	console.log(email);
+	console.log(filmID);
+
+	if ( !rate || !email || !filmID) {
+		return res.status(400).json({error: 'Не валидный запрос'});
+	}
+	if (filmRateStorage[email][filmID]) {
+		return res.status(403).json({error: 'Оценка уже стоит'});
+	}
+
+	let d = new Date(),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+
+	if (month.length < 2)
+		month = '0' + month;
+	if (day.length < 2)
+		day = '0' + day;
+
+
+	filmRateStorage[email][filmID] = {
+		rate: rate,
+		date: [year, month, day].join('-'),
+	}
+	console.log(filmRateStorage[email][filmID].filmID = filmID);
+	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
+});
+
+// app.get('/v1/rate', (req, res) => {
+// 	const rate = 3;
+// 	const email = "qwg@dg.q";
+// 	const filmID = 321;
+// 	console.log(rate);
+// 	console.log(email);
+// 	console.log(filmID);
+
+// 	if ( !rate || !email || !filmID) {
+// 		return res.status(400).json({error: 'Не валидный запрос'});
+// 	}
+// 	if (filmRateStorage[email][filmID]) {
+// 		return res.status(403).json({error: 'Оценка уже стоит'});
+// 	}
+
+// 	let d = new Date(),
+// 	month = '' + (d.getMonth() + 1),
+// 	day = '' + d.getDate(),
+// 	year = d.getFullYear();
+
+// 	if (month.length < 2)
+// 		month = '0' + month;
+// 	if (day.length < 2)
+// 		day = '0' + day;
+
+
+// 	filmRateStorage[email][filmID] = {
+// 		rate: rate,
+// 		date: [year, month, day].join('-'),
+// 	}
+// 	console.log(filmRateStorage[email][filmID].filmID = filmID);
+// 	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
+// });
+
+app.post('/v1/delrate', (req, res) => {
+	const email = req.body.email;
+	const filmID = req.body.filmID;
+	console.log(rate);
+	console.log(email);
+	console.log(filmID);
+
+	if (!email || !filmID) {
+		return res.status(400).json({error: 'Не валидный запрос'});
+	}
+	if (!filmRateStorage[email][filmID]) {
+		return res.status(403).json({error: 'Оценка не стоит'});
+	}
+
+	delete filmRateStorage[email][filmID];
+	console.log(filmRateStorage[email]);
+	res.status(200).json({});
 });
 
 const default_port = 80;

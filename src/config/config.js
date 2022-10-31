@@ -1,12 +1,11 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 // import { renderMainPage } from '@views/MainPage/mainPage.js';
-import { FilmView } from '@views/FilmPage/filmPage.js';
+import { filmView } from '@views/FilmPage/filmPage.js';
+import { mainPage } from '@views/MainPage/mainPage.js';
+import { profile } from '@views/UserProfile/userProfile.js';
 
 export const ROOT = document.getElementById('root');
-
-import { mainPage } from '@views/MainPage/mainPage.js';
-import { profile } from '@views/UserProfile/UserProfile.js';
 
 export const API = {
     img: {
@@ -29,16 +28,13 @@ export const API = {
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
     film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
 
+    rate: `http://${DOMAIN}/v1/rate`,
+    delrate: `http://${DOMAIN}/v1/delrate`,
+
     testApiConfig,
 };
 
-const filmView = new FilmView();
-export const routes = [
-    // { path: '/', renderView: renderMainPage },
-    { path: '/', renderView: filmView.render.bind(filmView) },
-];
-
-
+// удалим перед релизом
 function testApiConfig() {
     console.log(API.img.poster_hor(12));
     console.log(API.img.poster_ver(13));
@@ -59,9 +55,12 @@ function testApiConfig() {
 
 const login = new Login({ rootNode: ROOT });
 const signup = new Signup({ rootNode: ROOT });
+// const filmView = new FilmView({ rootNode: ROOT });
+
 export const routes = [
     { path: '/', view: mainPage },
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
+    { path: '/film/321/', view: filmView },
 ];

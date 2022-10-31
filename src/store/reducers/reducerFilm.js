@@ -11,21 +11,50 @@ class ReducerFilm {
         return null;
     }
 
-    async openDescription() {
-        return {
-            descriptionIsActive: true,
-            ratingIsActive: true,
-            detailsIsActive: false,
-        };
+    async rate(ratingData) {
+        const response = await Ajax.post({
+            url: API.rate,
+            body: ratingData,
+        });
+
+        if (response.status === 200) {
+            return {
+                rating: response.body,
+                statusRating: null,
+            };
+        }
+        return { statusRating: response.status };
     }
 
-    async openDetails() {
-        return {
-            descriptionIsActive: false,
-            ratingIsActive: false,
-            detailsIsActive: true,
-        };
+    async deleteRate(ratingData) {
+        const response = await Ajax.post({
+            url: API.delrate,
+            body: ratingData,
+        });
+
+        if (response.status === 200) {
+            return {
+                statusRating: null,
+            };
+        }
+        return { statusRating: response.status };
     }
+
+    // async openDescription() {
+    //     return {
+    //         descriptionIsActive: true,
+    //         ratingIsActive: true,
+    //         detailsIsActive: false,
+    //     };
+    // }
+
+    // async openDetails() {
+    //     return {
+    //         descriptionIsActive: false,
+    //         ratingIsActive: false,
+    //         detailsIsActive: true,
+    //     };
+    // }
 
     // async closeDescription() {
     //     return { descriptionIsActive: false };

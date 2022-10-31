@@ -94,3 +94,5 @@ export class FilmView extends View {
         });
     }
 }
+
+export const filmView = new FilmView({ rootNode: document.getElementById('root') });
