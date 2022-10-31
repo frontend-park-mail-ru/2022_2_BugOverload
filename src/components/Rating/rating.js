@@ -40,7 +40,6 @@ export class Rating extends Component {
             // store.dispatch(actionShowFormLogin()); //Обдумать. TODO
             return;
         }
-        console.log(store.getState('user'));
 
         const inputReview = new InputReview(user);
         inputReview.render();

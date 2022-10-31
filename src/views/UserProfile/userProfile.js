@@ -16,11 +16,8 @@ class UserProfile extends View {
     }
 
     render() {
-        console.log('renderProfile')
-
         const profilePage = this.rootNode.querySelector('.profile');
-        console.log(profilePage)
-        if(profilePage) {
+        if (profilePage) {
             profilePage.remove();
         }
 
@@ -70,7 +67,7 @@ class UserProfile extends View {
             },
         ));
 
-        //TODO обработчик на кнопку для загрузки авы 
+        // TODO обработчик на кнопку для загрузки авы
 
         const profileChange = new ProfileChange({
             rootNode: this.rootNode,
