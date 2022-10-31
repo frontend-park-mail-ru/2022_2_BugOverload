@@ -10,7 +10,7 @@ import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
  *
  */
 export function renderActorProfilePage() {
-    const header = new Header(ROOT);
+    const header = new Header({ rootNode: ROOT });
     header.render();
 
     const actorProfile = new ActorProfile();

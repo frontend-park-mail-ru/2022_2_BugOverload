@@ -657,7 +657,7 @@ app.get('/v1/popular_films', (req, res) => {
 	res.status(200).json(collectionPopularData);
 })
 
-app.get('/v1/actor/beil', (req, res) => {
+app.get('/v1/actor/1', (req, res) => {
 	const actor = {
 		name: 'Кристиан Бэйл',
 		originalName: 'Christian Bale',
@@ -665,17 +665,17 @@ app.get('/v1/actor/beil', (req, res) => {
 		birthday: '09.10.2022, 48 лет',
 		growth: '1.83 м',
 		filmsCount: '130',
-		profileImage: "assets/img/actor/beil/beil.webp",
+		profileImage: "assets/img/actor/bale/bale.webp",
 		photo: [
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
-			"assets/img/actor/beil/beil_photo.jpg",
+			"assets/img/actor/bale/bale1.jpg",
+			"assets/img/actor/bale/bale2.webp",
+			"assets/img/actor/bale/bale3.jpg",
+			"assets/img/actor/bale/bale2.webp",
+			"assets/img/actor/bale/bale1.jpg",
+			"assets/img/actor/bale/bale3.jpg",
+			"assets/img/actor/bale/bale3.jpg",
+			"assets/img/actor/bale/bale2.webp",
+			"assets/img/actor/bale/bale1.jpg",
 		],
 	}
 

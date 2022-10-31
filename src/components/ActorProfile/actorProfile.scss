@@ -1,25 +1,33 @@
 .actor-profile {
     display: flex;
     justify-content: flex-end;
-    flex-flow: column;
-    height: 600px;
+    flex-flow: column wrap;
     margin-left: 52px;
     margin-bottom: 80px;
 }
 
 .actor-profile__content {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-flow: row nowrap;
+    height: 80%;
+    margin-top: 100px;
 }
 
 .actor-profile__primary {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 40%;
+    min-width: 760px;
 }
 
 .actor-profile__gallery {
     display: flex;
+    justify-content: flex-start;
+    width: 50%;
+    min-width: 760px;
+    height: 450px;
     flex-flow: row nowrap;
 }
 
@@ -27,28 +35,28 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    width: 687px;
-    margin-left: 195px;
-    height: 455px;
+    width: 60%;
 }
 
 .actor-profile__gallery-item {
     display: flex;
-    width: 223px;
-    height: 145px;
-    background-size: 223px;
-    border-radius: 4px;
+    width: 33%;
+    height: 33%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
 }
 
 .actor-profile__image {
-    width: 300px;
+    width: 40%;
     height: 400px;
-    background-size: 300px;
-    margin-right: 49px;
+    background-size: cover;
+    background-repeat: no-repeat;
     border-radius: 8px;
 }
 
 .actor-profile__information {
+    width: 50%;
     font-style: normal;
     display: flex;
     flex-flow: column nowrap;

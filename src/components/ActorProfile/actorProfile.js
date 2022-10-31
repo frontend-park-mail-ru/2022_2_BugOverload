@@ -18,7 +18,7 @@ export class ActorProfile {
     */
     async getRequestData() {
         // Временно, пока нет данных с актерами дергаем конкретного
-        const response = await Ajax.get(`http://${DOMAIN}/v1/actor/beil`);
+        const response = await Ajax.get(`http://${DOMAIN}/v1/actor/1`);
         if (response.status === 200) {
             return response.body;
         }

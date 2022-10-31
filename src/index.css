@@ -4,7 +4,7 @@
 @import "@components/Signup/signup.css";
 @import "@components/Userbar/userbar.css";
 @import "@components/Collection/collection.css";
-@import "@components/ActorProfile/actorProfile.css";
+@import "@components/ActorProfile/actorProfile.scss";
 @import "@components/Film/film.css";
 @import "@components/PreviewFilm/previewFilm.css";
 @import "@components/ErrorMessage/errorMessage.css";
