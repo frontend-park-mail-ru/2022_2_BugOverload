@@ -1,6 +1,5 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-import { filmView } from '@views/FilmPage/filmPage.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
 
@@ -60,5 +59,4 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
-    { path: '/film/321/', view: filmView },
 ];
