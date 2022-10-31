@@ -1,6 +1,5 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-// import { renderMainPage } from '@views/MainPage/mainPage.js';
 import { filmView } from '@views/FilmPage/filmPage.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
@@ -51,9 +50,10 @@ function testApiConfig() {
     console.log(API.recommendation_film);
 }
 
+export const ROOT = document.getElementById('root');
+
 const login = new Login({ rootNode: ROOT });
 const signup = new Signup({ rootNode: ROOT });
-// const filmView = new FilmView({ rootNode: ROOT });
 
 export const routes = [
     { path: '/', view: mainPage },
