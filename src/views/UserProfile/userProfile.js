@@ -4,7 +4,6 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { store } from '@store/Store.js';
 import { actionGetSettings } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
-import { actionAuth } from '@store/actionCreater/userActions.js';
 
 class UserProfile extends View {
     constructor(props) {
@@ -14,15 +13,22 @@ class UserProfile extends View {
             authStatus: null,
             userInfo: null,
             subscribeedOnUser: false,
+            subscribeedOnLogout: false,
         };
     }
 
     render() {
         super.render();
 
+        if(!this.subscribeedOnLogout) {
+            store.subscribe('logoutStatus', userProfileOnSubscribe);
+            this.subscribeedOnLogout = true;
+        }
+
         this.state.user = store.getState('user');
         if (!this.state.user) {
-            if (this.state.authStatus) {
+            const logoutStatus = store.getState('logoutStatus');
+            if (this.state.authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 console.log('event')
                 const redirectMain = new Event(
@@ -36,7 +42,6 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            //store.dispatch(actionAuth());
             store.subscribe('authStatus', setAuthStatus);
             return;
         }
@@ -83,7 +88,9 @@ class UserProfile extends View {
     componentWillUnmount() {
         store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);
+        store.unsubscribe('logoutStatus', userProfileOnSubscribe);
         this.subscribeedOnUser = false;
+        this.subscribeedOnLogout = false;
     }
 }
 
