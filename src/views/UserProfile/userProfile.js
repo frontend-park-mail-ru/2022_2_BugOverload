@@ -4,6 +4,7 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { store } from '@store/Store.js';
 import { actionGetSettings } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
+import { actionAuth } from '@store/actionCreater/userActions.js';
 
 class UserProfile extends View {
     constructor(props) {
@@ -12,6 +13,7 @@ class UserProfile extends View {
             user: null,
             authStatus: null,
             userInfo: null,
+            subscribeedOnUser: false,
         };
     }
 
@@ -22,7 +24,7 @@ class UserProfile extends View {
         if (!this.state.user) {
             if (this.state.authStatus) {
                 this.componentWillUnmount();
-
+                console.log('event')
                 const redirectMain = new Event(
                     'click',
                     {
@@ -34,10 +36,14 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
+            store.dispatch(actionAuth());
             store.subscribe('authStatus', setAuthStatus);
             return;
         }
-        store.subscribe('user', userProfileOnSubscribe);
+        if(!this.subscribeedOnUser) {
+            store.subscribe('user', userProfileOnSubscribe);
+            this.subscribeedOnUser = true;
+        }
 
         const profile = this.rootNode.querySelector('.profile');
         if (profile) {
@@ -77,6 +83,7 @@ class UserProfile extends View {
     componentWillUnmount() {
         store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);
+        this.subscribeedOnUser = false;
     }
 }
 
