@@ -27,7 +27,9 @@ class Store {
     }
 
     unsubscribe(type, activeFunc) {
+        console.log('unsubscribe')
         const arraySubsribes = this.mapSubscribers.get(type);
+        console.log(type, activeFunc,activeFunc.name,arraySubsribes )
         this.mapSubscribers.set(
             type,
             arraySubsribes.filter(

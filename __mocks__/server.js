@@ -57,7 +57,7 @@ app.get('/v1/auth',  (req, res) => {
 
 	const variants = [200, 404];
 
-	res.status(variants[1]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(variants[0]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 });
 
 app.put('/v1/user/setting',  (req, res) => {

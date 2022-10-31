@@ -16,15 +16,15 @@ class UserProfile extends View {
     }
 
     render() {
-        super.render();
-        const userProfileOnSubscribe = () => {
-            this.render();
-        };
+        console.log('renderProfile')
 
-        const setAuthStatus = () => {
-            this.state.authStatus = store.getState('authStatus');
-            this.render();
-        };
+        const profilePage = this.rootNode.querySelector('.profile');
+        console.log(profilePage)
+        if(profilePage) {
+            profilePage.remove();
+        }
+
+        super.render();
 
         this.state.user = store.getState('user');
         if (!this.state.user) {
@@ -81,6 +81,20 @@ class UserProfile extends View {
         });
         profileChange.componentDidMount();
     }
+
+    componentWillUnmount() {
+        store.unsubscribe('authStatus', setAuthStatus);
+        store.unsubscribe('user', userProfileOnSubscribe);
+    }
 }
 
 export const profile = new UserProfile({ rootNode: document.getElementById('root') });
+
+const userProfileOnSubscribe = () => {
+    profile.render();
+};
+
+const setAuthStatus = () => {
+    profile.state.authStatus = store.getState('authStatus');
+    profile.render();
+};

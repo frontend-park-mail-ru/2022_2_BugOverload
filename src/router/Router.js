@@ -108,7 +108,9 @@ class Router {
      */
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
+        console.log(stateObject.path,view )
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
+            console.log(stateObject.path,view )
             this.root.replaceChildren();
         } else {
             const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
