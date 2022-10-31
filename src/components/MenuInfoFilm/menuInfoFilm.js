@@ -2,10 +2,7 @@ import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
 import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js';
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
-import { store } from '@store/Store.js';
-import { actionOpenDescription, actionOpenDetails } from '@actions/filmActions.js';
 import { Component } from '@components/Component.js';
-
 
 export class MenuInfoFilm extends Component {
     constructor(filmData) {

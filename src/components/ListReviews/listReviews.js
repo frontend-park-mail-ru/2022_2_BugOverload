@@ -16,7 +16,6 @@ export class ListReviews extends Component {
         this.data = data;
     }
 
-
     /**
     * Создаёт коллекцию из набора данных как HTML-шаблон, полученных с бэкенда
     *

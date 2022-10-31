@@ -1,6 +1,5 @@
 import template from '@components/InputReview/inputReview.handlebars';
 import { Modal } from '@components/Modal/modal.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import { Component } from '@components/Component.js';
 
 export class InputReview extends Component {

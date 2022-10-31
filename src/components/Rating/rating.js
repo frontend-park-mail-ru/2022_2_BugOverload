@@ -6,7 +6,6 @@ import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 
 // import { actionLogin } from '@store/actionCreater/userActions.js';
 
-
 export class Rating extends Component {
     constructor(information = {}) {
         super();

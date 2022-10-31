@@ -1,6 +1,6 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-import { renderMainPage } from '@views/MainPage/mainPage.js';
+// import { renderMainPage } from '@views/MainPage/mainPage.js';
 import { FilmView } from '@views/FilmPage/filmPage.js';
 
 export const ROOT = document.getElementById('root');

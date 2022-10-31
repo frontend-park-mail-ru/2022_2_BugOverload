@@ -1,5 +1,4 @@
 import template from '@components/DescriptionFilm/descriptionFilm.handlebars';
-import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 
 export class DescriptionFilm extends Component {

@@ -4,7 +4,6 @@ import { ROOT, API } from '@config/config.js';
 import { Collection } from '@components/Collection/collection.js';
 import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
-import { InputReview } from '@components/InputReview/inputReview.js';
 import { store } from '@store/Store.js';
 import { actionGetFilmData } from '@actions/filmActions.js';
 
