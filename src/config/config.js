@@ -1,5 +1,7 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
+// import { renderMainPage } from '@views/MainPage/mainPage.js';
+import { filmView } from '@views/FilmPage/filmPage.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
 
@@ -9,6 +11,7 @@ export const API = {
         poster_ver(key) { return `http://${DOMAIN}/v1/image?object=poster_ver&key=${key}`; },
         avatar(key) { return `http://${DOMAIN}/v1/image?object=avatar&key=${key}`; },
 
+        avatar_default: `http://${DOMAIN}/v1/image?object=default&key=avatar_avatar`,
         auth_login: `http://${DOMAIN}/v1/image?object=default&key=login`,
         auth_signup: `http://${DOMAIN}/v1/image?object=default&key=signup`,
     },
@@ -21,16 +24,41 @@ export const API = {
     in_cinema: `http://${DOMAIN}/v1/in_cinema`,
     popular_films: `http://${DOMAIN}/v1/popular_films`,
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
-    about_film(id) { return `http://${DOMAIN}/v1/about_film/${id}`; },
+    film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
+
+    rate: `http://${DOMAIN}/v1/rate`,
+    delrate: `http://${DOMAIN}/v1/delrate`,
+
+    testApiConfig,
 };
 
-export const ROOT = document.getElementById('root');
+// удалим перед релизом
+function testApiConfig() {
+    console.log(API.img.poster_hor(12));
+    console.log(API.img.poster_ver(13));
+
+    console.log(API.img.avatar_default);
+    console.log(API.img.auth_login);
+    console.log(API.img.auth_signup);
+
+    console.log(API.auth);
+    console.log(API.login);
+    console.log(API.signup);
+    console.log(API.logout);
+
+    console.log(API.in_cinema);
+    console.log(API.popular_films);
+    console.log(API.recommendation_film);
+}
 
 const login = new Login({ rootNode: ROOT });
 const signup = new Signup({ rootNode: ROOT });
+// const filmView = new FilmView({ rootNode: ROOT });
+
 export const routes = [
     { path: '/', view: mainPage },
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
+    { path: '/film/321/', view: filmView },
 ];

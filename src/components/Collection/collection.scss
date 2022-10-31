@@ -1,5 +1,5 @@
 .collection {
-    margin-left: 52px;
+    margin-left: var(--standart-margin);
 }
 
 .collection__container {
@@ -17,7 +17,7 @@
 
 .collection__title {
     font-size: 28px;
-    color:#fff;
+    color: var(--main-color-text);
 }
 
 .collection__slider {
@@ -29,7 +29,7 @@
 
 .collection__slider-button_right {
     position: absolute;
-    right: 52px;
+    right: var(--standart-margin);
     top: calc(50% - 80px);
     width: 43px;
     height: 43px;

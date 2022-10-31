@@ -26,14 +26,8 @@ export class Collection {
     * @return {Object} Объект с данными о коллекции
     * @return {null} В случае ошибочного статуса
     */
-    async getRequestData() {
-        let href;
-        if (this._type === 'todayInCinema') {
-            href = 'in_cinema';
-        } else {
-            href = 'popular_films';
-        }
-        const response = await Ajax.get(`http://${DOMAIN}/v1/${href}`);
+    static async getRequestData(url) {
+        const response = await Ajax.get(url);
 
         if (response.status === 200) {
             return response.body;
@@ -59,7 +53,7 @@ export class Collection {
     * @param {data Object} data - объект данных коллекции
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
-    renderTemplate(data) {
+    getTemplate(data) {
         const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         return template({ title: data.title, films });

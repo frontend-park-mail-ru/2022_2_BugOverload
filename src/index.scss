@@ -7,66 +7,25 @@
 @import "@components/Film/film";
 @import "@components/PreviewFilm/previewFilm";
 @import "@components/ErrorMessage/errorMessage";
+@import "@components/AboutFilm/aboutFilm";
+@import "@components/MenuInfoFilm/menuInfoFilm";
+@import "@components/DescriptionFilm/descriptionFilm";
+@import "@components/DetailsFilm/detailsFilm";
+@import "@components/Rating/rating";
+@import "@components/InputReview/inputReview";
+@import "@components/ReviewStatistic/reviewStatistic";
+@import "@components/ListReviews/listReviews";
+@import "@components/Review/review";
+@import "@components/SaveToCollectionMenu/saveToCollectionMenu";
 @import "@components/ProfileMenu/profileMenu";
 @import "@components/ProfileChange/profileChange";
 @import "@views/UserProfile/userProfile";
 
+@import "@components/Components";
 
+@import "@views/FilmPage/filmPage";
 
-@font-face {
-    font-family: 'Mail Sans Roman Med';
-    src: url('@fonts/MailSansRoman-Medium.eot');
-    src: local('Mail Sans Roman Medium'), local('MailSansRoman-Medium'),
-        url('@fonts/MailSansRoman-Medium.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Mail Sans Roman DemBd';
-    src: url('@fonts/MailSansRoman-DemiBold.eot');
-    src: local('Mail Sans Roman DemiBold'), local('MailSansRoman-DemiBold'),
-        url('@fonts/MailSansRoman-DemiBold.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-DemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Bold.eot');
-    src: local('Mail Sans Roman Bold'), local('MailSansRoman-Bold'),
-        url('@fonts/MailSansRoman-Bold.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Light.eot');
-    src: local('Mail Sans Roman Light'), local('MailSansRoman-Light'),
-        url('@fonts/MailSansRoman-Light.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Regular.eot');
-    src: local('Mail Sans Roman Regular'), local('MailSansRoman-Regular'),
-        url('@fonts/MailSansRoman-Regular.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import "@fonts/fonts.css";
 
 input:focus, textarea:focus, select:focus {
     outline: none;
@@ -76,35 +35,28 @@ input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
-
+input[type="radio"] { all: unset; }
 
 body, html {
+    --backgr-color: #121212;
+    --primary-color: #FEBA2B;
+    --primary-color-hover: #CD9826;
+    --secondary-color: rgb(86 86 86 / 50%);
+    --secondary-color-hover: rgb(177 177 177 / 35%);
+    --main-color-text: #fff;
+    --secondary-color-text: #BEBEBE;
+    --standart-margin: 52px;
+
     font-family: 'Mail Sans Roman';
-    background-color: #121212;
+    background-color: var(--backgr-color);
     margin: 0;
     padding: 0;
+
 }
 
-.button__yellow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    background-color: #FEBA2B;
-    border: 0;
+a {
+    text-decoration: none;
 }
-
-.button__yellow:hover {
-    background-color: #CD9826;
-    transition: 0.1s linear;
-    cursor: pointer;
-}
-
-.header__navlink:hover {
-    color:#FEBA2B;
-    transition: 0.08s linear;
-}
-
 
 @media screen and (max-width: 740px){
     .header__form{display:none}

@@ -28,13 +28,6 @@ export class Signup extends Component {
         });
     }
 
-    /**
-     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
-     * @param {Object} user - провалидированный пользовательский ввод
-     * @param {string} user.nickname - введённый ник
-     * @param {string} user.email - введённая почта
-     * @param {string} user.password - введённый пароль
-     */
     handlerStatus() {
         if (this.state.statusSignup === 400) {
             const wrapper = document.getElementById('signup_email');

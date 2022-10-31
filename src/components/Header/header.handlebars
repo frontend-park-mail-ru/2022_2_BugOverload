@@ -1,7 +1,7 @@
 <header class="header">
 
-  <a class="header__navlink" data-section="/">
-    <img class="header__logo" src="assets/img/elements/LogoMOVIEGATE.png">
+  <a href="/" class="header__navlink" data-section="/">
+    <img class="header__logo" src="LogoMOVIEGATE.png">
   </a>
   <a class="header__navlink" data-section="navlink">
     <div class="header__navlink-area">Мои фильмы</div>
@@ -15,16 +15,17 @@
 
 
   <form class="header__form">
-    <img class="header__form__icon-search" src="assets/img/elements/icon-search.png">
+
     <input class="header__form__input" maxlength="100" type="search" placeholder="фильмы, передачи, персоны.."
       aria-label="Search">
+    <img class="header__form__icon-search">
 
   </form>
 
   {{#if avatar}}
   <div class="header__userbar-substrate">
     <div class="header__userbar-user-info-container">
-      <img class="header__avatar" data-section="/profile/" src="http://movie-gate.online:8088/v1/image?object=avatar&key={{avatar}}" alt="">
+      <img class="header__avatar" data-section="/profile/" src="{{!-- http://movie-gate.online:8088/v1/image?object=avatar&key= --}}{{avatar}}" alt="">
       {{!-- object=film_poster_ver&key=16 --}}
        {{!-- {{avatar}} --}}
       {{#if email}}
@@ -39,7 +40,7 @@
     {{/if}}
   </div>
   {{else}}
-  <a href="/login" class="button__yellow header__login__btn" data-section="/login/">Войти</button>
+  <a href="/login" class="primary-btn-small header__login__btn" data-section="login">Войти</button>
     {{/if}}
 
 </header>

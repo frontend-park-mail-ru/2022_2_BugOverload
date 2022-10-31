@@ -1,9 +1,10 @@
 import { Ajax } from '@utils/ajax.js';
+import { API } from '@config/config.js';
 
 class ReducerUser {
     async login(user) {
         const responsePromise = Ajax.post({
-            url: `http://${DOMAIN}/v1/auth/login`,
+            url: API.login,
             body: user,
         });
 
@@ -19,7 +20,7 @@ class ReducerUser {
 
     async signup(user) {
         const responsePromise = Ajax.post({
-            url: `http://${DOMAIN}/v1/auth/signup`,
+            url: API.signup,
             body: user,
         });
 
@@ -34,7 +35,7 @@ class ReducerUser {
     }
 
     async auth() {
-        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/auth`);
+        const responsePromise = Ajax.get(API.auth);
 
         const response = await responsePromise;
         if (response.status === 200) {
@@ -47,7 +48,7 @@ class ReducerUser {
     }
 
     async logout() {
-        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/auth/logout`);
+        const responsePromise = Ajax.get(API.logout);
 
         const response = await responsePromise;
         if (response.status === 204) {

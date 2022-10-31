@@ -1,4 +1,4 @@
-export const setUser = (user) => ({
+export const setUser = (user) => ({ // не используется
     type: 'setUser',
     value: user,
 });

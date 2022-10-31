@@ -17,12 +17,12 @@ class Store {
         this.mapActionHandlers.set(type, methodStore);
     }
 
-    subscribe(type, activeFunc) {
+    subscribe(type, callback) {
         const arraySubsribes = this.mapSubscribers.get(type);
         if (arraySubsribes) {
-            arraySubsribes.push(activeFunc);
+            arraySubsribes.push(callback);
         } else {
-            this.mapSubscribers.set(type, [activeFunc]);
+            this.mapSubscribers.set(type, [callback]);
         }
     }
 
