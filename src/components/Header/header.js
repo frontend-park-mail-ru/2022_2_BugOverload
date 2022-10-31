@@ -20,12 +20,10 @@ export class Header extends Component {
         this.state = {
             user: null,
         };
-        const headerSubscribe = () => {
+        store.subscribe('user', () => {
             this.state.user = store.getState('user');
             this.render();
-            store.unsubscribe('user', headerSubscribe);
-        };
-        store.subscribe('user', headerSubscribe);
+        });
     }
 
     /**
