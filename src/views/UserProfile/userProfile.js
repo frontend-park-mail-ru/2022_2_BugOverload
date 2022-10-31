@@ -17,6 +17,9 @@ class UserProfile extends View {
 
     render() {
         super.render();
+        const userProfileOnSubscribe = () => {
+            this.render();
+        };
 
         const setAuthStatus = () => {
             this.state.authStatus = store.getState('authStatus');
@@ -27,6 +30,7 @@ class UserProfile extends View {
         if (!this.state.user) {
             if (this.state.authStatus) {
                 store.unsubscribe('authStatus', setAuthStatus);
+                store.unsubscribe('user', userProfileOnSubscribe);
 
                 const redirectMain = new Event(
                     'click',
@@ -41,6 +45,7 @@ class UserProfile extends View {
             store.subscribe('authStatus', setAuthStatus);
             return;
         }
+        store.subscribe('user', userProfileOnSubscribe);
 
         this.state.userInfo = store.getState('userInfo');
         const subscribeFunc = () => {
