@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install Node
         uses: actions/setup-node@v3
@@ -23,7 +23,7 @@ jobs:
         run: npm run prod
 
       - name: Upload build result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: dist
           path: ./dist
@@ -33,7 +33,7 @@ jobs:
     needs: build
     steps:
       - name: Download build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v1
         with:
           name: dist
 
