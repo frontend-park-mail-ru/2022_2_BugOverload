@@ -19,8 +19,8 @@ class UserProfile extends View {
         const profilePage = this.rootNode.querySelector('.profile');
         if (profilePage) {
             profilePage.remove();
+            return;
         }
-
         super.render();
 
         this.state.user = store.getState('user');

@@ -52,12 +52,18 @@ app.post('/v1/auth/login',  (req, res) => {
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
+let i = 0;
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 
 	const variants = [200, 404];
 
-	res.status(variants[0]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	if(i == 0) {
+		i = 1;
+	} else {
+		i = 0;	
+	}
 });
 
 app.put('/v1/user/setting',  (req, res) => {
