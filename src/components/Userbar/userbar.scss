@@ -21,7 +21,7 @@
 .header__userbar-substrate {
     z-index: 5;
     width: 209px;
-    height: 219px;
+    height: auto;
     margin-right: var(--standart-margin);
     padding: 16px 0 0 16px;
     display: flex;
@@ -78,6 +78,7 @@
 .header__userbar-item-out {
     color: #AFAFAF;
     margin-top: 12px;
+    margin-bottom: 12px;
     text-decoration: none;
 }
 

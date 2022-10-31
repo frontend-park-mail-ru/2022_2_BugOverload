@@ -16,12 +16,6 @@ export class Userbar extends Component {
      */
     constructor(props) {
         super(props);
-        store.subscribe('user', () => {
-            if (!store.getState('user')) {
-                this.rootNode.querySelector('.header').remove();
-                this.rootNode.insertAdjacentHTML('afterbegin', templateHeader());
-            }
-        });
     }
 
     /**
@@ -70,6 +64,15 @@ export class Userbar extends Component {
             rootNode.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
             isOpened = true;
+
+            const userbarSubscribe = () => {
+                if (!store.getState('user')) {
+                    rootNode.querySelector('.header').remove();
+                    rootNode.insertAdjacentHTML('afterbegin', templateHeader());
+                    store.unsubscribe('user', userbarSubscribe);
+                }
+            }
+            store.subscribe('user', userbarSubscribe);
 
             logout();
 

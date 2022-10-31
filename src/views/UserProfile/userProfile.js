@@ -16,11 +16,6 @@ class UserProfile extends View {
     }
 
     render() {
-        const profilePage = this.rootNode.querySelector('.profile');
-        if (profilePage) {
-            profilePage.remove();
-            return;
-        }
         super.render();
 
         this.state.user = store.getState('user');
@@ -35,6 +30,7 @@ class UserProfile extends View {
                         cancelable: true,
                     },
                 );
+                console.log('event')
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
@@ -42,17 +38,6 @@ class UserProfile extends View {
             return;
         }
         store.subscribe('user', userProfileOnSubscribe);
-
-        this.state.userInfo = store.getState('userInfo');
-        const subscribeFunc = () => {
-            this.render();
-        };
-        if (!this.state.userInfo) {
-            store.subscribe('userInfo', subscribeFunc);
-            store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
-        }
 
         const profile = this.rootNode.querySelector('.profile');
         if (profile) {
@@ -65,6 +50,17 @@ class UserProfile extends View {
                 ...this.state.userInfo,
             },
         ));
+
+        this.state.userInfo = store.getState('userInfo');
+        const subscribeFunc = () => {
+            this.render();
+        };
+        if (!this.state.userInfo) {
+            store.subscribe('userInfo', subscribeFunc);
+            store.dispatch(actionGetSettings());
+        } else {
+            store.unsubscribe('userInfo', subscribeFunc);
+        }
 
         // TODO обработчик на кнопку для загрузки авы
 
