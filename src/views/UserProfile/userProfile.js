@@ -36,7 +36,7 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            store.dispatch(actionAuth());
+            //store.dispatch(actionAuth());
             store.subscribe('authStatus', setAuthStatus);
             return;
         }
