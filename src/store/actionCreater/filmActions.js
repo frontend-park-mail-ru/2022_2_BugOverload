@@ -68,5 +68,3 @@ export const actionDeleteRate = (ratingData) => ({
 //     type: 'moreReviews',
 //     value: filmId,
 // });
-
-
