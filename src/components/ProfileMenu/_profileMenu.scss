@@ -1,7 +1,6 @@
 @mixin column__flex {
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     justify-content: center;
     align-content: flex-start;
     align-items: flex-start;
@@ -9,13 +8,13 @@
 
 .profile__menu{
     margin-top: 95px;
-    background: linear-gradient(to top, rgba(23, 23, 23, 1), rgba(23, 23, 23, 0));
+    background: linear-gradient(to top, rgba(23 23 23 /100%), rgba(23 23 23 /0%));
 }
 
 .profile__gradient{
     height: 100%;
     width: 307px;
-    background: linear-gradient(to bottom, rgba(23, 23, 23, 1), rgba(23, 23, 23, 0));
+    background: linear-gradient(to bottom, rgba(23 23 23 /100%), rgba(23 23 23 /0%));
 }
 
 .profile__menu__flex {
