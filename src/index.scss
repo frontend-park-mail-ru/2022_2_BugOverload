@@ -36,8 +36,7 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
-body,
-html {
+body, html {
   --backgr-color: #121212;
   --primary-color: #feba2b;
   --primary-color-hover: #cd9826;
@@ -53,8 +52,12 @@ html {
   padding: 0;
 }
 
-a {
+a, button {
+  border: none;
+  margin: 0;
   text-decoration: none;
+  background: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 740px) {

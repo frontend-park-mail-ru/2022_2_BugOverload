@@ -1,15 +1,7 @@
 .menu-info-film {
   width: auto;
-
-  /* height: 62px; */
-
-  /* margin-left: 52px; */
   padding-left: var(--standart-margin);
   padding-right: var(--standart-margin);
-
-  /* margin-right: 52px;
-    padding-right: 52px;
-    box-sizing: border-box; */
 }
 
 .menu-info-film__items {
@@ -29,6 +21,9 @@
   justify-content: center;
   margin-bottom: -3px;
   cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
 }
 
 .menu-info-film__item-details {
@@ -41,10 +36,16 @@
   justify-content: center;
   margin-bottom: -3px;
   cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
 }
 
 [data-menu-info-film-item-active="true"] {
   border-bottom: 3px;
   border-bottom-style: solid;
   border-color: var(--primary-color);
+  &:hover {
+    color: var(--main-color-text);
+  }
 }

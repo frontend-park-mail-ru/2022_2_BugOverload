@@ -3,6 +3,7 @@ import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { actionRate, actionDeleteRate } from '@actions/filmActions.js';
 
 // import { actionLogin } from '@store/actionCreater/userActions.js';
 
@@ -52,7 +53,7 @@ export class Rating extends Component {
         btn.addEventListener('click', this.handlerReview.bind(this));
 
         // componentDidMount() {
-        //     const form = this.rootNode.querySelector('.modal__form');
+        const form = this.rootNode.querySelector('.js-rating-form');
         //     const validate = this.validateSignup;
         //     let user;
 
@@ -61,16 +62,48 @@ export class Rating extends Component {
         //         validate(form, true);
         //     });
 
-        //     form.addEventListener('submit', (e) => {
-        //         e.preventDefault();
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        //         user = validate(form);
-        //         if (!user) {
-        //             return;
-        //         }
 
-        //         store.dispatch(actionRegister(user));
-        //     });
+
+            const rateValue = e.submitter.value;
+
+            const user = store.getState('user');
+            if (!user) {
+                ShowErrorMessage('Вы должны быть авторизованы');
+                // error.render();
+                return;
+            }
+            console.log(`SUBMIT RATING userEmail ${user.email}`);
+
+            const filmState = store.getState('film');
+            if (!filmState) {
+                console.log(`Empty FILM STATE ${rateValue}`);
+                return;
+            }
+
+            if (rateValue === 'delete') {
+                store.dispatch(
+                    actionDeleteRate({
+                        filmID: filmState.id,
+                        email: user.email,
+                    }),
+                );
+                return;
+            }
+
+            console.log(`SUBMIT RATING ID ${filmState.id}`);
+            console.log(`SUBMIT RATING VALUE ${rateValue}`);
+
+            store.dispatch(
+                actionRate({
+                    filmID: filmState.id,
+                    email: user.email,
+                    rate: rateValue,
+                }),
+            );
+        });
 
         //     const { deleteSignup } = this;
         //     document.body
@@ -81,6 +114,9 @@ export class Rating extends Component {
 
     componentDidUnmount() {
         const btn = document.querySelector('.rating__button-write-review');
+        if (!btn) {
+            return;
+        }
         btn.removeEventListener('click', this.handlerReview.bind(this));
     }
 }

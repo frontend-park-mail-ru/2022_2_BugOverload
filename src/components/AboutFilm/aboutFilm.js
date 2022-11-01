@@ -54,7 +54,7 @@ export class AboutFilm extends Component {
                 error.render();
                 return;
             }
-            const error = new ShowErrorMessage('Ну типа сохранил :)'); // TODO
+            const error = new ShowErrorMessage('Сохранение в Избранное пока не доступно'); // TODO
             error.render();
         });
 
@@ -64,7 +64,7 @@ export class AboutFilm extends Component {
         }
         buttonTrailer.addEventListener('click', (e) => {
             e.preventDefault();
-            const error = new ShowErrorMessage('Представьте, что вы смотрите трейлер :)'); // TODO
+            const error = new ShowErrorMessage('Просмотр трейлера пока не доступен'); // TODO
             error.render();
         });
     }

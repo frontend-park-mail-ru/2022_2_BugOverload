@@ -18,6 +18,10 @@
   margin-left: 18px;
   width: 46px;
   height: 46px;
+  &:hover {
+    background-color: rgba(#5C5C5C, 0.4);
+    border-radius: 5px;
+  }
 }
 
 .list-reviews__content-container {

@@ -1,4 +1,4 @@
-<form class="rating">
+<form class="rating js-rating-form">
     <div class="rating__container">
         <div class="rating__title">
             Как вам сериал?
@@ -12,47 +12,36 @@
         </div>
         <div class="rating__content-container">
             <div class="rating__star-list">
-                {{!-- //TODO --}}
-                <a href="/" class="rating__star js-rating__star" title="10" selected hovered>
-                    <input type="radio" name="stars" class="" value="10">
+                <button type="submit" class="rating__star js-rating__star" value="10">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="9" selected hovered>
-                    <input type="radio" name="stars" class="" value="9">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="9" >
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="8" selected hovered>
-                    <input type="radio" name="stars" class="" value="8">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="8">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="7" selected hovered>
-                    <input type="radio" name="stars" class="" value="7">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="7">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="6" selected hovered>
-                    <input type="radio" name="stars" class="" value="6">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="6" setted-rate>
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="5" selected hovered>
-                    <input type="radio" name="stars" class="" value="5">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="5">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="4" selected hovered>
-                    <input type="radio" name="stars" class="" value="4">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="4">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="3" selected hovered>
-                    <input type="radio" name="stars" class="" value="3">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="3">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="2" selected hovered>
-                    <input type="radio" name="stars" class="" value="2">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="2">
                     <div class="rating__star-image"></div>
-                </a>
-                <a href="/" class="rating__star js-rating__star" title="1" selected hovered>
-                    <input type="radio" name="stars" class="" value="1">
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="1">
                     <div class="rating__star-image"></div>
-                </a>
+                </button>
             </div>
             <div class="rating__rate-value">8.7</div>
         </div>
@@ -62,6 +51,19 @@
             <span class="rating__text-stars">очень плохо</span>
             <span class="rating__text-stars">отлично</span>
         </div>
+
+        <div class="rating__setted-container">
+            {{!-- <div class="rating__setted-date-container"></div> --}}
+            <div class="rating__setted-name">
+                Моя оценка
+            </div>
+            <div class="rating__setted-value">7{{rate}}</div>
+            <div class="rating__setted-icon-star"></div>
+            <div class="rating__setted-date">11-09-2001{{date}}</div>
+            <button type="submit" value="delete" class="rating__setted-delete-btn">удалить</button>
+
+        </div>
+
         <a href="/"> <div class="rating__button-write-review secondary-btn-med">Написать рецензию</div></a>
     </div>
 </form>

@@ -14,7 +14,7 @@
     "dev-deploy": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development && npm run back 80",
     "watch": "cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development --watch",
     "stats": "cross-env STATS=stats webpack --mode development --json > stats.json && webpack-bundle-analyzer stats.json",
-    "check": "npm run lint && npm run stylelint:fix",
+    "check": "npm run lint && npm run stylelint",
     "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}' --fix --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"

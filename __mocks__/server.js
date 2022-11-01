@@ -62,7 +62,7 @@ app.get('/v1/auth',  (req, res) => {
 	if(i == 0) {
 		i = 1;
 	} else {
-		i = 0;	
+		i = 0;
 	}
 });
 
@@ -883,6 +883,7 @@ app.post('/v1/rate', (req, res) => {
 	if ( !rate || !email || !filmID) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
+	delete filmRateStorage[email][filmID]; //
 	if (filmRateStorage[email][filmID]) {
 		return res.status(403).json({error: 'Оценка уже стоит'});
 	}
@@ -902,48 +903,18 @@ app.post('/v1/rate', (req, res) => {
 		rate: rate,
 		date: [year, month, day].join('-'),
 	}
-	console.log(filmRateStorage[email][filmID].filmID = filmID);
-	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
+	console.log(filmRateStorage[email][filmID]);
+	res.status(200).json({
+		rate: filmRateStorage[email][filmID].rate,
+		date: filmRateStorage[email][filmID].date,
+		filmID: filmID,
+	});
 });
 
-// app.get('/v1/rate', (req, res) => {
-// 	const rate = 3;
-// 	const email = "qwg@dg.q";
-// 	const filmID = 321;
-// 	console.log(rate);
-// 	console.log(email);
-// 	console.log(filmID);
-
-// 	if ( !rate || !email || !filmID) {
-// 		return res.status(400).json({error: 'Не валидный запрос'});
-// 	}
-// 	if (filmRateStorage[email][filmID]) {
-// 		return res.status(403).json({error: 'Оценка уже стоит'});
-// 	}
-
-// 	let d = new Date(),
-// 	month = '' + (d.getMonth() + 1),
-// 	day = '' + d.getDate(),
-// 	year = d.getFullYear();
-
-// 	if (month.length < 2)
-// 		month = '0' + month;
-// 	if (day.length < 2)
-// 		day = '0' + day;
-
-
-// 	filmRateStorage[email][filmID] = {
-// 		rate: rate,
-// 		date: [year, month, day].join('-'),
-// 	}
-// 	console.log(filmRateStorage[email][filmID].filmID = filmID);
-// 	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
-// });
 
 app.post('/v1/delrate', (req, res) => {
 	const email = req.body.email;
 	const filmID = req.body.filmID;
-	console.log(rate);
 	console.log(email);
 	console.log(filmID);
 
