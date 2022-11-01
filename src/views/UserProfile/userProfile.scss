@@ -38,10 +38,9 @@
     object-fit: cover;
 }
 
-.button_grey{
-    color: #FFF;
-    background-color: #4E4D4D;
-    cursor: pointer;
+.profile__img__form{
+    width: 100%;
+    height: auto;
 }
 
 .profile__avatar__button{ 
@@ -57,6 +56,10 @@
     border-radius: 8px;
 
     font-size: 15px;
+}
+
+.profile__file__input_none{
+    opacity: 0;
 }
 
 .profile__avatar__button:hover{
