@@ -1,81 +1,81 @@
 .primary-btn-big {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--primary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-family: 'Mail Sans Roman Med';
-    font-size: 20px;
-    color: #000;
-    border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  font-family: "Mail Sans Roman Med";
+  font-size: 20px;
+  color: #000;
+  border: 0;
 
-    &:hover {
-        background-color: var(--primary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: var(--primary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+  }
 }
 
 .primary-btn-small {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--primary-color);
-    border-radius: 4px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-family: 'Mail Sans Roman Med';
-    font-size: 15px;
-    color: #000;
-    border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  font-family: "Mail Sans Roman Med";
+  font-size: 15px;
+  color: #000;
+  border: 0;
 
-    &:hover {
-        background-color: var(--primary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: var(--primary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+  }
 }
 
 .secondary-btn-big {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-size: 20px;
-    font-family: 'Mail Sans Roman Med';
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  font-size: 20px;
+  font-family: "Mail Sans Roman Med";
+  color: #fff;
 
-    &:hover {
-        background-color: var(--secondary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: var(--secondary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+  }
 }
 
 .secondary-btn-med {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-size: 15px;
-    font-family: 'Mail Sans Roman';
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  font-size: 15px;
+  font-family: "Mail Sans Roman";
+  color: #fff;
 
-    &:hover {
-        background-color: var(--secondary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: var(--secondary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+  }
 }

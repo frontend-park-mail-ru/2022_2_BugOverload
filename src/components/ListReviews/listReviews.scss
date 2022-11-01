@@ -1,39 +1,39 @@
 .list-reviews__container {
-    display: flex;
-    flex-direction: column;
-    margin-left: var(--standart-margin);
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--standart-margin);
 }
 
 .list-reviews__head-container {
-    display: flex;
+  display: flex;
 }
 
 .list-reviews__title {
-    font-size: 36px;
-    color: var(--main-color-text);
+  font-size: 36px;
+  color: var(--main-color-text);
 }
 
 .list-reviews__btn-write-review {
-    background-image: url('@icons/plus-review.png');
-    margin-left: 18px;
-    width: 46px;
-    height: 46px;
+  background-image: url("@icons/plus-review.png");
+  margin-left: 18px;
+  width: 46px;
+  height: 46px;
 }
 
 .list-reviews__content-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
 }
 
 .list-reviews__btn-show-more {
-    display: flex;
-    justify-content: flex-end;
-    color: var(--main-color-text);
-    font-size: 20px;
+  display: flex;
+  justify-content: flex-end;
+  color: var(--main-color-text);
+  font-size: 20px;
 }
 
 .list-reviews__btn-show-more:hover {
-    color: var(--primary-color);
-    cursor: pointer;
+  color: var(--primary-color);
+  cursor: pointer;
 }

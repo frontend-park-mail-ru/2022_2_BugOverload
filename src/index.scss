@@ -20,15 +20,14 @@
 @import "@components/ProfileMenu/profileMenu";
 @import "@components/ProfileChange/profileChange";
 @import "@views/UserProfile/userProfile";
-
 @import "@components/Components";
-
 @import "@views/FilmPage/filmPage";
-
 @import "@fonts/fonts.css";
 
-input:focus, textarea:focus, select:focus {
-    outline: none;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -37,31 +36,31 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
-body, html {
-    --backgr-color: #121212;
-    --primary-color: #FEBA2B;
-    --primary-color-hover: #CD9826;
-    --secondary-color: rgb(86 86 86 / 50%);
-    --secondary-color-hover: rgb(177 177 177 / 35%);
-    --main-color-text: #fff;
-    --secondary-color-text: #BEBEBE;
-    --standart-margin: 52px;
+body,
+html {
+  --backgr-color: #121212;
+  --primary-color: #feba2b;
+  --primary-color-hover: #cd9826;
+  --secondary-color: rgb(86 86 86 / 50%);
+  --secondary-color-hover: rgb(177 177 177 / 35%);
+  --main-color-text: #fff;
+  --secondary-color-text: #bebebe;
+  --standart-margin: 52px;
 
-    font-family: 'Mail Sans Roman';
-    background-color: var(--backgr-color);
-    margin: 0;
-    padding: 0;
-
+  font-family: "Mail Sans Roman";
+  background-color: var(--backgr-color);
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-@media screen and (max-width: 740px){
-    .header__form{display:none}
-};
+@media screen and (max-width: 740px) {
+  .header__form { display: none; }
+}
 
 .active {
-    font-weight: bold;
+  font-weight: bold;
 }
