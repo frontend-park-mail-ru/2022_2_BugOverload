@@ -90,7 +90,7 @@ class ReducerUser {
     async putAvatar(formDataAvatar) {
         formDataAvatar.append('key', 'user_avatar');
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/image`,
+            url: `http://${DOMAIN}/v1/image?key=session`,
             body: formDataAvatar,
         }, true);
 
