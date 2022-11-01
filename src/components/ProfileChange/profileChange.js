@@ -22,7 +22,7 @@ export class ProfileChange extends Component {
 
     handlerStatusPut() {
         if (this.state.statusChangeSettings === 403) {
-            const wrapper = this.rootNode.querySelector('.profile__wrapper__password');
+            const wrapper = this.rootNode.querySelector('.profile__wrapper__old__password');
             renderError(wrapper, 'password', 'Неправильный пароль');
         }
     }
@@ -63,18 +63,80 @@ export class ProfileChange extends Component {
         });
     }
 
+    addValidate() {
+        const forms = {};
+        forms.formNick = this.rootNode.querySelector('.profile__form__nick');
+        forms.formPassword = this.rootNode.querySelector('.profile__form__password');
+        let user;
+
+        for (const key in forms) {
+            let validate;
+            key === 'formNick'?
+                validate = this.validateNick:
+                validate = this.validatePassword;
+            console.log(forms[key])
+            
+            forms[key].addEventListener('keyup', (e) => {
+                e.preventDefault();
+                validate(forms[key], true);
+            });
+    
+            forms[key].addEventListener('submit', (e) => {
+                e.preventDefault();
+                user = validate(forms[key]);
+                if (!user) {
+                    return;
+                }
+    
+                store.dispatch(actionPutSettings(user));
+            });
+        };
+    }
+
     /**
      * Проверяет пользовательский ввод
      * @param {Element} form - форма
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
-    validateProfile(form, keyup = false) {
+    validateNick(form, keyup = false) {
+        console.log(form)
         const nickInput = form.querySelector('input[type=text]');
-        const passwordInput = form.querySelector('input[type=password]');
-        const confirmInput = form.querySelector('.profile__wrapper__password').childNodes[1];
 
         const user = {};
         user.nickname = nickInput.value.trim();
+
+        let flag = true;
+
+        if (keyup && !user.nickname) {
+            removeError(form, 'text');
+        } else {
+            if (!checkNick(form, user.nickname)) {
+                flag = false;
+            }
+        }            
+
+        if (flag) {
+            return {
+                nickname: user.nickname,
+            };
+        }
+
+        return null;
+    }
+
+    /**
+     * Проверяет пользовательский ввод
+     * @param {Element} form - форма
+     * @param {Bool} keyup - режим проверки полей: true - по одному, false все
+     */
+    validatePassword(form, keyup = false) {
+        console.log('Password')
+        const oldPassword = form.querySelector('.profile__wrapper__old__password').childNodes[1];
+        const passwordInput = form.querySelector('.profile__input');
+        const confirmInput = form.querySelector('.profile__wrapper__password').childNodes[1];
+
+        const user = {};
+        user.oldPassword = oldPassword.value;
         user.password = passwordInput.value;
         user.confirmPassword = confirmInput.value;
 
@@ -82,15 +144,17 @@ export class ProfileChange extends Component {
 
         for (const key of Object.keys(user)) {
             if (keyup && !user[key]) {
-                if (key === 'nickname') {
-                    removeError(form, 'text');
-                } else {
-                    removeError(confirmInput.parentElement, key);
+                if(key === 'oldPassword'){
+                    removeError(oldPassword.parentElement, 'password');
                 }
+                if(key === 'password'){
+                    removeError(confirmInput.parentElement, 'password');
+                }
+
                 continue;
             }
 
-            if (key === 'password' || key === 'confirmPassword') {
+            if(key === 'password' || key === 'confirmPassword') {
                 if (!checkConfirmPassword(
                     confirmInput.parentElement,
                     user.confirmPassword,
@@ -102,8 +166,9 @@ export class ProfileChange extends Component {
                 }
             }
 
-            if (key === 'nickname') {
-                if (!checkNick(form, user[key])) {
+            if(key === 'oldPassword') {
+                console.log(checkPassword(confirmInput.parentElement, user.oldPassword))
+                if (!checkPassword(oldPassword.parentElement, user.oldPassword)) {
                     flag = false;
                 }
             }
@@ -111,32 +176,11 @@ export class ProfileChange extends Component {
 
         if (flag) {
             return {
-                nickname: user.nickname,
                 password: user.password,
+                oldPassword: user.oldPassword,
             };
         }
 
         return null;
-    }
-
-    addValidate() {
-        const form = this.rootNode.querySelector('.profile__form');
-        const validate = this.validateProfile;
-        let user;
-
-        form.addEventListener('keyup', (e) => {
-            e.preventDefault();
-            validate(form, true);
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            user = validate(form);
-            if (!user) {
-                return;
-            }
-
-            store.dispatch(actionPutSettings(user));
-        });
     }
 }

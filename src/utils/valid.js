@@ -163,6 +163,7 @@ export const removeError = (form, type) => {
  * @param {String} text - текст ошибки
 */
 export const renderError = (form, type, text) => {
+    console.log(form,type,text)
     const target = form.querySelector(`input[type=${type}]`);
     target.classList.add('modal__input_red_border');
     if (target.parentElement.querySelector('.modal__input__error')) {

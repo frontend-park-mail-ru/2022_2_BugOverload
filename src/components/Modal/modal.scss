@@ -69,8 +69,8 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: center;
-    width: 270px;
+    align-items: flex-start;
+    width: 310px;
     height: 55px;
     margin-bottom: 17px;
 }
@@ -92,7 +92,7 @@
 }
 
 .modal__input__error {
-    width: 300px;
+    width: auto;
     height: 18px;
     margin-top: 5px;
     color: #E72D2D;
