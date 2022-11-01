@@ -34,7 +34,7 @@
     border-radius: 8px;
     height: 400px;
     width: 300px;
-    
+
     object-fit: cover;
 }
 
@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 
-.profile__avatar__button{ 
+.profile__avatar__button{
     @include flex__row;
     justify-content: center;
     align-content: center;
