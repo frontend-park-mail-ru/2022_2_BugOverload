@@ -13,7 +13,6 @@ $margin_bottom_error: 5px;
     flex-flow: column nowrap;
     align-content: stretch;
     align-items: flex-start;
-    
     margin-top: 10px;
 }
 
@@ -44,14 +43,11 @@ $margin_bottom_error: 5px;
 
 @mixin input{
     font-size: 15px;
-
     height: 42px;
     width: $width_wrapper - $padding_input;
-
-    border: 2px solid #333333;
+    border: 2px solid #333;
     border-radius: 8px;
     padding-left: $padding_input;
-
     background-color: #27292E;
     color: #9C9C9C;
 }
@@ -73,9 +69,7 @@ $margin_bottom_error: 5px;
 
 .profile__input__button{
     height: 42px;
-
-    border: 0px;
-
+    border: 0;
     width: 210px;
     margin-bottom: $margin_top_button;
 }
