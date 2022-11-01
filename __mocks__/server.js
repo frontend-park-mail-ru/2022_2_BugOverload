@@ -901,7 +901,7 @@ app.post('/v1/rate', (req, res) => {
 
 	filmRateStorage[email][filmID] = {
 		rate: rate,
-		date: [year, month, day].join('-'),
+		date: [day,month,year].join('.'),
 	}
 	console.log(filmRateStorage[email][filmID]);
 	res.status(200).json({

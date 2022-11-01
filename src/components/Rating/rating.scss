@@ -64,12 +64,12 @@
   background-image: url("@icons/star-fill.png");
 }
 
-[setted-rate] .rating__star-image {
+[data-setted-rate="true"] .rating__star-image {
   background-repeat: no-repeat;
   background-image: url("@icons/star-fill.png");
 }
 
-[setted-rate] ~ .rating__star .rating__star-image {
+[data-setted-rate="true"] ~ .rating__star .rating__star-image {
   background-repeat: no-repeat;
   background-image: url("@icons/star-fill.png");
 }

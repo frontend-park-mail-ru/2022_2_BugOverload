@@ -28,14 +28,14 @@ class ReducerFilm {
     }
 
     async deleteRate(ratingData) {
-        console.log(`GETTED IN DELETE RATE: ${response.body.filmID}`);
         const response = await Ajax.post({
             url: API.delrate,
             body: ratingData,
         });
-
         if (response.status === 200) {
+            console.log(`GETTED IN DELETE RATE: ${API.delrate} ${response.body.toString()}`);
             return {
+                rating: null,
                 statusRating: null,
             };
         }

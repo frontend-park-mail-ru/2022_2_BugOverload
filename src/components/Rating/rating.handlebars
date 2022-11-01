@@ -15,7 +15,7 @@
                 <button type="submit" class="rating__star js-rating__star" value="10">
                     <div class="rating__star-image"></div>
                 </button>
-                <button type="submit"  class="rating__star js-rating__star" value="9" >
+                <button type="submit"  class="rating__star js-rating__star" value="9">
                     <div class="rating__star-image"></div>
                 </button>
                 <button type="submit"  class="rating__star js-rating__star" value="8">
@@ -24,7 +24,7 @@
                 <button type="submit"  class="rating__star js-rating__star" value="7">
                     <div class="rating__star-image"></div>
                 </button>
-                <button type="submit"  class="rating__star js-rating__star" value="6" setted-rate>
+                <button type="submit"  class="rating__star js-rating__star" value="6">
                     <div class="rating__star-image"></div>
                 </button>
                 <button type="submit"  class="rating__star js-rating__star" value="5">
@@ -52,17 +52,19 @@
             <span class="rating__text-stars">отлично</span>
         </div>
 
+        {{#if rate}}
         <div class="rating__setted-container">
             {{!-- <div class="rating__setted-date-container"></div> --}}
             <div class="rating__setted-name">
                 Моя оценка
             </div>
-            <div class="rating__setted-value">7{{rate}}</div>
+            <div class="rating__setted-value">{{rate}}</div>
             <div class="rating__setted-icon-star"></div>
-            <div class="rating__setted-date">11-09-2001{{date}}</div>
+            <div class="rating__setted-date">{{date}}</div>
             <button type="submit" value="delete" class="rating__setted-delete-btn">удалить</button>
 
         </div>
+        {{/if}}
 
         <a href="/"> <div class="rating__button-write-review secondary-btn-med">Написать рецензию</div></a>
     </div>

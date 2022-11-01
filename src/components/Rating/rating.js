@@ -12,13 +12,39 @@ export class Rating extends Component {
         super();
         this.information = information;
         this.location = document.querySelector('.js-film-page__rating');
+
+        this.state = {
+            rating: null,
+            statusRating: null,
+        };
+
+        store.subscribe('rating', () => {
+            this.state.rating = store.getState('rating');
+            this.state.statusRating = store.getState('statusRating');
+
+            this.render();
+        });
+
+        // store.subscribe('statusRating', () => {
+        // this.state.statusRating = store.getState('statusRating');
+        // this.render();
+        // });
     }
 
     render() {
         if (!this.location) {
             return;
         }
-        this.location.insertAdjacentHTML('afterbegin', template(this.information));
+        // Object.assign(this.information, this.state.statusRating, this.state.rating);
+        // console.log(`Render ${JSON.stringify(this.information)}`);
+        this.location.innerHTML = '';
+        this.location.insertAdjacentHTML('afterbegin', template(Object.assign({}, this.information, this.state.statusRating, this.state.rating)));
+        this.componentDidMount();
+        if (this.state.rating === null) {
+            return;
+        }
+        // debugger;
+        this.location.querySelector(`[value="${this.state.rating.rate}"]`).dataset.settedRate = true;
     }
 
     remove() {
@@ -64,8 +90,7 @@ export class Rating extends Component {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-
-
+            // debugger;
 
             const rateValue = e.submitter.value;
 
