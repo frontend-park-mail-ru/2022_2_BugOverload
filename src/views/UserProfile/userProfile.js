@@ -2,7 +2,7 @@ import { View } from '@views/View.js';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { store } from '@store/Store.js';
-import { actionGetSettings } from '@store/actionCreater/userActions.js';
+import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
 
 class UserProfile extends View {
@@ -11,6 +11,7 @@ class UserProfile extends View {
         this.state = {
             user: null,
             authStatus: null,
+            putAvatarStatus: null,
             userInfo: null,
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
@@ -71,7 +72,18 @@ class UserProfile extends View {
             store.unsubscribe('userInfo', subscribeFunc);
         }
 
-        // TODO обработчик на кнопку для загрузки авы
+        // обработчик загрузки авы
+        if (this.state.putAvatarStatus) {
+            store.unsubscribe('statusChangeAvatar', setProfileAvatar);
+            this.state.putAvatarStatus = null;
+        }
+        const inputImgForm = this.rootNode.querySelector('.profile__img__form');
+        inputImgForm.addEventListener('change', (e) => {
+            e.preventDefault();
+            store.subscribe('statusChangeAvatar', setProfileAvatar);
+            const formData = new FormData(inputImgForm);
+            store.dispatch(actionPutAvatar(formData));
+        });
 
         const profileChange = new ProfileChange({
             rootNode: this.rootNode,
@@ -101,4 +113,9 @@ const userProfileOnSubscribe = () => {
 const setAuthStatus = () => {
     profile.state.authStatus = store.getState('authStatus');
     profile.render();
+};
+
+const setProfileAvatar = () => {
+    profile.state.putAvatarStatus = store.getState('statusChangeAvatar');
+    store.dispatch(actionAuth());
 };

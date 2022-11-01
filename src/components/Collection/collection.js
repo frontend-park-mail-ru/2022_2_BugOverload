@@ -2,6 +2,7 @@ import { Ajax } from '@utils/ajax.js';
 import { Film } from '@components/Film/film.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import template from '@components/Collection/collection.handlebars';
+import { responsStatuses } from '@config/config.js';
 
 export const COLLECTION_TYPE = {
     popular: 'popular',
@@ -29,16 +30,16 @@ export class Collection {
     static async getRequestData(url) {
         const response = await Ajax.get(url);
 
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return response.body;
         }
 
-        if (response.status === 404) {
+        if (response.status === responsStatuses.NotFound) {
             ShowErrorMessage('Данная коллекция не найдена');
             return null;
         }
 
-        if (response.status >= 500) {
+        if (response.status >= responsStatuses.InternalServerError) {
             ShowErrorMessage('Произошла ошибка сервера');
             return null;
         }

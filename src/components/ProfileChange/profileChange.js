@@ -8,6 +8,7 @@ import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid.js';
 import { store } from '@store/Store.js';
+import { responsStatuses } from '@config/config.js';
 
 export class ProfileChange extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export class ProfileChange extends Component {
     }
 
     handlerStatusPut() {
-        if (this.state.statusChangeSettings === 403) {
+        if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
             const wrapper = this.rootNode.querySelector('.profile__wrapper__old__password');
             renderError(wrapper, 'password', 'Неправильный пароль');
         }

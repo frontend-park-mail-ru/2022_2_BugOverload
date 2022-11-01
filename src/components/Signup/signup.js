@@ -7,6 +7,7 @@ import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -30,7 +31,7 @@ export class Signup extends Component {
     }
 
     handlerStatus() {
-        if (this.state.statusSignup === 400) {
+        if (this.state.statusSignup === responsStatuses.BadRequest) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
         }

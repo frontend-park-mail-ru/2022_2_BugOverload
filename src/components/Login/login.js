@@ -7,6 +7,7 @@ import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает логин.
@@ -37,13 +38,13 @@ export class Login extends Component {
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === 400) {
+        if (userStatus === responsStatuses.BadRequest) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === 403) {
+        if (userStatus === responsStatuses.Forbidden) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }

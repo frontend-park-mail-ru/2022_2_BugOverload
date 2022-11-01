@@ -29,3 +29,8 @@ export const actionPutSettings = (user) => ({
     type: 'putSettings',
     value: user,
 });
+
+export const actionPutAvatar = (formDataAvatar) => ({
+    type: 'putAvatar',
+    value: formDataAvatar,
+});

@@ -5,6 +5,26 @@ on:
     branches: [ production ]
 
 jobs:
+  check:
+      runs-on: ubuntu-20.04
+    steps:
+     - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name:  Install deps
+        run: npm install
+        
+      - name: Lint
+        run: npm run lint
+
+      - name: Stylelint
+        run: npm run stylelint
+
   build:
     runs-on: ubuntu-20.04
     steps:
