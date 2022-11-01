@@ -67,30 +67,30 @@ export class ProfileChange extends Component {
         const forms = {};
         forms.formNick = this.rootNode.querySelector('.profile__form__nick');
         forms.formPassword = this.rootNode.querySelector('.profile__form__password');
-        let user;
 
-        for (const key in forms) {
+        for (const key of Object.keys(forms)) {
             let validate;
-            key === 'formNick'?
-                validate = this.validateNick:
+            if (key === 'formNick') {
+                validate = this.validateNick;
+            } else {
                 validate = this.validatePassword;
-            console.log(forms[key])
-            
+            }
+
             forms[key].addEventListener('keyup', (e) => {
                 e.preventDefault();
                 validate(forms[key], true);
             });
-    
+
             forms[key].addEventListener('submit', (e) => {
                 e.preventDefault();
-                user = validate(forms[key]);
+                const user = validate(forms[key]);
                 if (!user) {
                     return;
                 }
-    
+
                 store.dispatch(actionPutSettings(user));
             });
-        };
+        }
     }
 
     /**
@@ -99,7 +99,6 @@ export class ProfileChange extends Component {
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
     validateNick(form, keyup = false) {
-        console.log(form)
         const nickInput = form.querySelector('input[type=text]');
 
         const user = {};
@@ -109,11 +108,9 @@ export class ProfileChange extends Component {
 
         if (keyup && !user.nickname) {
             removeError(form, 'text');
-        } else {
-            if (!checkNick(form, user.nickname)) {
-                flag = false;
-            }
-        }            
+        } else if (!checkNick(form, user.nickname)) {
+            flag = false;
+        }
 
         if (flag) {
             return {
@@ -130,7 +127,6 @@ export class ProfileChange extends Component {
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
     validatePassword(form, keyup = false) {
-        console.log('Password')
         const oldPassword = form.querySelector('.profile__wrapper__old__password').childNodes[1];
         const passwordInput = form.querySelector('.profile__input');
         const confirmInput = form.querySelector('.profile__wrapper__password').childNodes[1];
@@ -144,17 +140,17 @@ export class ProfileChange extends Component {
 
         for (const key of Object.keys(user)) {
             if (keyup && !user[key]) {
-                if(key === 'oldPassword'){
+                if (key === 'oldPassword') {
                     removeError(oldPassword.parentElement, 'password');
                 }
-                if(key === 'password'){
+                if (key === 'password') {
                     removeError(confirmInput.parentElement, 'password');
                 }
 
                 continue;
             }
 
-            if(key === 'password' || key === 'confirmPassword') {
+            if (key === 'password' || key === 'confirmPassword') {
                 if (!checkConfirmPassword(
                     confirmInput.parentElement,
                     user.confirmPassword,
@@ -166,8 +162,7 @@ export class ProfileChange extends Component {
                 }
             }
 
-            if(key === 'oldPassword') {
-                console.log(checkPassword(confirmInput.parentElement, user.oldPassword))
+            if (key === 'oldPassword') {
                 if (!checkPassword(oldPassword.parentElement, user.oldPassword)) {
                     flag = false;
                 }
