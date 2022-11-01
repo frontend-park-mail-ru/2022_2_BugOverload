@@ -8,6 +8,6 @@
     "selector-id-pattern": "^[a-z][a-zA-Z0-9_-]+$",
     "font-family-no-missing-generic-family-keyword": null,
     "at-rule-no-unknown": null,
-    "string": "never",
+    "declaration-empty-line-before": "never",
   }
 }
