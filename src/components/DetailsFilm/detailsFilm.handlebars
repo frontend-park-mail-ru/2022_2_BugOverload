@@ -14,21 +14,17 @@
             {{!-- {{/ifEquals}} --}}
         </div>
 
-        {{!-- {{#each info_item}}
-            <div class="details-film__info-item-key">{{item_key}}</div>
-            <div class="details-film__info-item-value">{{item_value}}</div>
-        {{/each}} --}}
         {{#if year_prod}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Год производства</div>
-            <div class="details-film__info-item-value">{{year_prod}}</div>
+            <div class="details-film__info-item-value-info">{{year_prod}}</div>
         </div>
         {{/if}}
 
         {{#if contry_prod}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Страна</div>
-            <div class="details-film__info-item-value">{{contry_prod}}</div>
+            <div class="details-film__info-item-value-info">{{contry_prod}}</div>
         </div>
         {{/if}}
 
@@ -49,7 +45,7 @@
         {{#if producers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Продюссер</div>
-            <div class="details-film__info-item-value">{{producers}}</div>
+            <a><div class="details-film__info-item-value">{{producers}}</div></a>
         </div>
         {{/if}}
 
@@ -63,21 +59,21 @@
         {{#if dues}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Сборы</div>
-            <div class="details-film__info-item-value">{{dues}}</div>
+            <div class="details-film__info-item-value-info">{{dues}}</div>
         </div>
         {{/if}}
 
         {{#if age_limit}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Возраст</div>
-            <div class="details-film__info-item-value">{{age_limit}}</div>
+            <div class="details-film__info-item-value-info">{{age_limit}}+</div>
         </div>
         {{/if}}
 
         {{#if duration}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Длительность</div>
-            <div class="details-film__info-item-value">{{duration}}</div>
+            <div class="details-film__info-item-value-info">{{duration}}</div>
         </div>
         {{/if}}
 

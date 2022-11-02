@@ -3,7 +3,7 @@ import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
-import { actionRate, actionDeleteRate } from '@actions/filmActions.js';
+import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
 // import { actionLogin } from '@store/actionCreater/userActions.js';
 
@@ -24,7 +24,11 @@ export class Rating extends Component {
 
             this.render();
         });
+        // debugger;
 
+        if (store.getState('user')) {
+            store.dispatch(actionGetMetaDataFilm({ filmID: store.getState('film').id }));
+        }
         // store.subscribe('statusRating', () => {
         // this.state.statusRating = store.getState('statusRating');
         // this.render();
@@ -44,7 +48,11 @@ export class Rating extends Component {
             return;
         }
         // debugger;
-        this.location.querySelector(`[value="${this.state.rating.rate}"]`).dataset.settedRate = true;
+        const selectedStar = this.location.querySelector(`[value="${this.state.rating?.rate}"]`);
+        if (!selectedStar) {
+            return;
+        }
+        selectedStar.dataset.settedRate = true;
     }
 
     remove() {
@@ -62,20 +70,19 @@ export class Rating extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            const error = new ShowErrorMessage('Вы должны быть авторизованы');
-            error.render();
+            ShowErrorMessage('Вы должны быть авторизованы');
             // store.dispatch(actionShowFormLogin()); //Обдумать. TODO
             return;
         }
 
         const inputReview = new InputReview(user);
         inputReview.render();
-        inputReview.componentDidMount();
+        // inputReview.componentDidMount();
     }
 
     componentDidMount() {
         // debugger;
-        const btn = document.querySelector('.rating__button-write-review');
+        const btn = this.location.querySelector('.rating__button-write-review');
         btn.addEventListener('click', this.handlerReview.bind(this));
 
         // componentDidMount() {

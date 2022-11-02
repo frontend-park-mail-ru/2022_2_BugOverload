@@ -36,15 +36,14 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            const error = new ShowErrorMessage('Вы должны быть авторизованы');
-            error.render();
+            ShowErrorMessage('Вы должны быть авторизованы');
             // store.dispatch(actionShowFormLogin()); //Обдумать. TODO
             return;
         }
 
         const inputReview = new InputReview(user);
         inputReview.render();
-        inputReview.componentDidMount();
+        // inputReview.componentDidMount();
     }
 
     componentDidMount() {

@@ -20,24 +20,24 @@ export class AboutFilm extends Component {
             return;
         }
 
-        const menu = new SaveToCollectionMenu([
-            {
-                coll_name: 'Избранное',
-            },
-            {
-                coll_name: 'Топчик',
-                isUsed: 'true',
-            },
-            {
-                coll_name: 'Друг посоветовал',
-            },
-        ]);
+        const menu = new SaveToCollectionMenu();
+        //     [
+        //     {
+        //         coll_name: 'Избранное',
+        //     },
+        //     {
+        //         coll_name: 'Топчик',
+        //         isUsed: 'true',
+        //     },
+        //     {
+        //         coll_name: 'Друг посоветовал',
+        //     },
+        // ]
 
         buttonPlus.addEventListener('click', (e) => {
             e.preventDefault();
             if (!store.getState('user')) {
-                const error = new ShowErrorMessage('Вы должны быть авторизованы');
-                error.render();
+                ShowErrorMessage('Вы должны быть авторизованы');
                 return;
             }
             menu.open.apply(menu);
@@ -50,12 +50,10 @@ export class AboutFilm extends Component {
         buttonBookmark.addEventListener('click', (e) => {
             e.preventDefault();
             if (!store.getState('user')) {
-                const error = new ShowErrorMessage('Вы должны быть авторизованы');
-                error.render();
+                ShowErrorMessage('Вы должны быть авторизованы');
                 return;
             }
-            const error = new ShowErrorMessage('Сохранение в Избранное пока не доступно'); // TODO
-            error.render();
+            ShowErrorMessage('Сохранение в Избранное пока не доступно'); // TODO
         });
 
         const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
@@ -64,8 +62,7 @@ export class AboutFilm extends Component {
         }
         buttonTrailer.addEventListener('click', (e) => {
             e.preventDefault();
-            const error = new ShowErrorMessage('Просмотр трейлера пока не доступен'); // TODO
-            error.render();
+            ShowErrorMessage('Просмотр трейлера пока не доступен'); // TODO
         });
     }
 }

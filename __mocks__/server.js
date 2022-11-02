@@ -6,9 +6,11 @@ const app = express();
 const body = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+var cookieParser = require('cookie-parser')
 
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
@@ -57,6 +59,11 @@ app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 
 	const variants = [200, 404];
+	if (variants[i] === 200) {
+		res.cookie('red', 1, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+	} else {
+		res.cookie('red', 1, {expires: new Date(Date.now() - 1000 * 60 * 10)});
+	}
 
 	res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 	if(i == 0) {
@@ -852,7 +859,7 @@ app.get('/v1/film/321',  (req, res) => {
 			total: 2224,
 			positive: 244,
 			neutral: 122,
-			negotive: 1999,
+			negative: 1999,
 		}
 
 	}
@@ -871,6 +878,111 @@ const filmRateStorage = {
 			},
 		},
 };
+
+const reviewsTotalCountsStorage = {
+	'321': {
+		total: 2033,
+		positive: 1233,
+		neutral: 753,
+		negative: 234,
+	},
+};
+
+
+const filmUsersMetaStorage = {
+	'Dop123@mail.ru': {
+			listCollections: {
+				'Буду смотреть': ['321', '137', '235'],
+				'Избранное': ['137', '235'],
+				'Друг посоветовал': ['123', '323', '111'],
+				'Патриотическое': ['321', '137', '235'],
+			},
+		},
+};
+
+const reviewsUsersMetaStorage = {
+	'Dop123@mail.ru': {
+		countReviews: 335,
+	},
+};
+
+const reviewsStorage = {
+	'321': [
+		{
+			author: 'Dop123@mail.ru',
+			id: 0,
+			type: -1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			date: '11.11.2007',
+		},
+		{
+			author: 'Doqp123@mail.ru',
+			id: 1,
+			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			date: '11.11.2107',
+		},
+		{
+			author: 'Doqwep123@mail.ru',
+			id: 2,
+			type: 0, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			date: '11.11.2027',
+		},
+		{
+			author: 'Dop123@mail.ru',
+			id: 3,
+			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			date: '11.11.20q7',
+		},
+	]
+};
+
+app.get('/v1/film/:id/metadata',  (req, res) => {
+	if (Object.keys(req.cookies).length == 0) {
+		console.log(JSON.stringify(req.cookies) + 'cc');
+		res.status(401).json({});
+		return;
+	}
+
+	const email = 'Dop123@mail.ru' // Аналог куки
+
+	const filmID = req.params.id; // Получен из url-параметра
+	console.log(filmID + 'wegwegweg\n');
+	let collList = [];
+	for (const list in filmUsersMetaStorage[email].listCollections) {
+
+		if (filmUsersMetaStorage[email].listCollections[list].includes(filmID)) {
+			collList.push({
+				coll_name: list,
+				isUsed: true
+			});
+		} else {
+			collList.push({coll_name: list, isUsed: false});
+		}
+	};
+
+	const meta = Object.assign({},
+		{listCollections: collList},
+		{countReviews: reviewsUsersMetaStorage[email].countReviews});
+
+		if (filmRateStorage[email][filmID]) {
+			Object.assign(meta, {rating : {
+					rate: filmRateStorage[email][filmID].rate,
+					date: filmRateStorage[email][filmID].date,
+					filmID: filmID,
+				}
+			});
+		}
+
+	console.log(JSON.stringify(meta));
+	res.status(200).json(meta);
+});
 
 app.post('/v1/rate', (req, res) => {
 	const rate = req.body.rate;
@@ -911,7 +1023,6 @@ app.post('/v1/rate', (req, res) => {
 	});
 });
 
-
 app.post('/v1/delrate', (req, res) => {
 	const email = req.body.email;
 	const filmID = req.body.filmID;
@@ -928,6 +1039,90 @@ app.post('/v1/delrate', (req, res) => {
 	delete filmRateStorage[email][filmID];
 	console.log(filmRateStorage[email]);
 	res.status(200).json({});
+});
+
+app.get('/v1/film/:id/reviews',  (req, res) => {
+	const filmID = req.params.id; // Получен из url-параметра, но должен из get-параметров (по АПИ)
+
+	let reviewsList = [];
+	for (const review of reviewsStorage[filmID]) {
+		reviewsList.push({
+			author: {
+				avatar: DEFAULT_AVATAR,
+				count_reviews: 42,
+				id: 54521, // Это айди юзера?
+				nickname: review.author,
+			},
+			/* text */
+			id: 1,
+			body: review.text,
+			//title
+			name: review.title,
+			//date
+			time: review.date,
+			type: review.type,
+		});
+	}
+
+	console.log(JSON.stringify(reviewsList));
+	res.status(200).json(reviewsList);
+});
+
+app.post('/v1/sendreview', (req, res) => {
+	if (Object.keys(req.cookies).length == 0) {
+		console.log(JSON.stringify(req.cookies) + 'zzzz');
+		res.status(401).json({});
+		return;
+	}
+
+	const email = req.body.email;
+	const filmID = req.body.filmID;
+	const title = req.body.title;
+	const text = req.body.text;
+	const type = req.body.type;
+
+	console.log(email + 'review');
+	console.log(filmID + 'review');
+	console.log(type + 'review');
+	console.log(title + 'review');
+	console.log(text + 'review');
+
+	if ( !email || !filmID || !type || !text || !title) {
+		return res.status(400).json({error: 'Не валидный запрос'});
+	}
+	//Пусть пишут сколько хотят рецензий
+	// if (reviewsStorage[email][filmID]) {
+	// 	return res.status(403).json({error: 'Рецензия уже написана'});
+	// }
+
+	let d = new Date(),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+
+	if (month.length < 2)
+		month = '0' + month;
+	if (day.length < 2)
+		day = '0' + day;
+
+	const newReview = {
+		author: {
+			avatar: DEFAULT_AVATAR,
+			count_reviews: 433,
+			id: 541,
+			nickname: email,
+		},
+		id: reviewsStorage[filmID].length,
+		type: type,
+		name: title,
+		body: text,
+		time: [day,month,year].join('.'),
+	}
+
+	reviewsStorage[email][filmID].push(newReview);
+	++reviewsUsersMetaStorage[email].countReviews;
+
+	res.status(200).json(newReview);
 });
 
 const default_port = 80;

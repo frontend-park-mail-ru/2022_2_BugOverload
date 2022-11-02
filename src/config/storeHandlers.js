@@ -11,6 +11,7 @@ const handlers = [
     { type: 'logout', methodStore: reducerUser.logout.bind(reducerUser) },
 
     { type: 'getFilmData', methodStore: reducerFilm.getFilmData.bind(reducerFilm) },
+    { type: 'getMetaDataFilm', methodStore: reducerFilm.getMetaDataFilm.bind(reducerFilm) },
     { type: 'rate', methodStore: reducerFilm.rate.bind(reducerFilm) },
     { type: 'deleteRate', methodStore: reducerFilm.deleteRate.bind(reducerFilm) },
 

@@ -25,6 +25,7 @@ export class InputReview extends Component {
 
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', this.getTemplate());
+        this.componentDidMount();
     }
 
     componentDidMount() {

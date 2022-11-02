@@ -1,13 +1,24 @@
 import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.handlebars';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
 
-export class SaveToCollectionMenu {
-    constructor(collections) {
-        this.collections = collections;
+export class SaveToCollectionMenu extends Component {
+    constructor(collections = [
+        { coll_name: 'Буду смотреть' },
+        { coll_name: 'Избранное',
+            isUsed: 'true' }]) {
+        super();
+        this.state.collections = collections;
         this.placeholder = document.querySelector('.js-place-save-to-collection');
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.js-place-save-to-collection')) {
                 this.close();
             }
+        });
+        store.subscribe('listCollections', () => {
+            //TODO обработку данных под формат шаблона
+
+            this.state.collections = store.getState('listCollections');
         });
     }
 
@@ -37,7 +48,7 @@ export class SaveToCollectionMenu {
     }
 
     getTemplate() {
-        return template({ collections: this.collections });
+        return template({ collections: this.state.collections });
     }
 
     render() {

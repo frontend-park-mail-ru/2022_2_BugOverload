@@ -30,6 +30,16 @@
   font-size: 15px;
   color: var(--main-color-text);
   flex-wrap: nowrap;
+  &:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+}
+
+.details-film__info-item-value-info {
+  font-size: 15px;
+  color: var(--main-color-text);
+  flex-wrap: nowrap;
 }
 
 /* .details-film__actor {
@@ -95,10 +105,16 @@
   color: var(--main-color-text);
   font-size: 15px;
   margin-top: 8px;
+  &:hover {
+    color: var(--primary-color);
+  }
 }
 
 .details-film__actor__role {
   color: var(--secondary-color-text);
   font-size: 12px;
   margin-top: 4px;
+  &:hover {
+    color: var(--primary-color);
+  }
 }

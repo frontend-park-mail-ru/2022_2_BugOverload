@@ -37,7 +37,7 @@ export class FilmView extends View {
         }
 
         if (!this.state.film) {
-            store.dispatch(actionGetFilmData(321));
+            store.dispatch(actionGetFilmData({ filmID: 321 }));
             return;
         }
 

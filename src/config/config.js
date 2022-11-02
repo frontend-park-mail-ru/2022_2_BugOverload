@@ -24,9 +24,12 @@ export const API = {
     popular_films: `http://${DOMAIN}/v1/popular_films`,
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
     film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
+    metaFilm(id) { return `http://${DOMAIN}/v1/film/${id}/metadata`; },
 
     rate: `http://${DOMAIN}/v1/rate`,
     delrate: `http://${DOMAIN}/v1/delrate`,
+
+    sendreview: `http://${DOMAIN}/v1/sendreview`,
 
     testApiConfig,
 };
@@ -48,6 +51,7 @@ function testApiConfig() {
     console.log(API.in_cinema);
     console.log(API.popular_films);
     console.log(API.recommendation_film);
+    console.log(API.metaFilm(225));
 }
 
 export const ROOT = document.getElementById('root');

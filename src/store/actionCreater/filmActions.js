@@ -13,6 +13,10 @@ export const actionDeleteRate = (ratingData) => ({
     value: ratingData,
 });
 
+export const actionGetMetaDataFilm = (filmID) => ({
+    type: 'getMetaDataFilm',
+    value: filmID,
+});
 // export const actionGetListColls = (filmId) => ({
 //     type: 'getListColls',
 //     value: filmId,
