@@ -53,6 +53,9 @@ export class InputReview extends Component {
         this.validate();
 
         store.dispatch(actionSendReview(review));
+
+        document.body.classList.remove('body_hide_y_scroll');
+        document.body.querySelector('.modal__background').remove();
     }
 
     componentDidMount() {
@@ -83,11 +86,13 @@ export class InputReview extends Component {
             input.setAttribute('value', item.dataset.value);
         }));
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.input-review__select')) {
-                head.removeAttribute('open');
-                list.setAttribute('hidden', '');
-            }
-        });
+        document.addEventListener('click', this.closeWindow.bind(this));
+    }
+
+    closeWindow(e) {
+        if (!e.target.closest('.input-review__select')) {
+            head.removeAttribute('open');
+            list.setAttribute('hidden', '');
+        }
     }
 }
