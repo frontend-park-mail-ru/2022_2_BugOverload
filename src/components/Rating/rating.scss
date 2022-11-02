@@ -99,6 +99,7 @@
     height: 50px;
     margin-top: 22px;
     display: grid;
+
     // padding: 8px 36px;
     grid-template-columns: 3fr 1fr;
     grid-gap: 6px 17px;
@@ -121,6 +122,7 @@
     font-size: 24px;
     font-weight: bold;
   }
+
   &-icon-star {
     width: 22px;
     height: 26px;

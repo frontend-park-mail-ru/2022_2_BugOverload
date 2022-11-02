@@ -5,8 +5,10 @@ import { store } from '@store/Store.js';
 export class SaveToCollectionMenu extends Component {
     constructor(collections = [
         { coll_name: 'Буду смотреть' },
-        { coll_name: 'Избранное',
-            isUsed: 'true' }]) {
+        {
+            coll_name: 'Избранное',
+            isUsed: 'true',
+        }]) {
         super();
         this.state.collections = collections;
         this.placeholder = document.querySelector('.js-place-save-to-collection');
@@ -16,7 +18,7 @@ export class SaveToCollectionMenu extends Component {
             }
         });
         store.subscribe('listCollections', () => {
-            //TODO обработку данных под формат шаблона
+            // TODO обработку данных под формат шаблона
 
             this.state.collections = store.getState('listCollections');
         });

@@ -30,6 +30,7 @@
   font-size: 15px;
   color: var(--main-color-text);
   flex-wrap: nowrap;
+
   &:hover {
     color: var(--primary-color);
     cursor: pointer;
@@ -105,6 +106,7 @@
   color: var(--main-color-text);
   font-size: 15px;
   margin-top: 8px;
+
   &:hover {
     color: var(--primary-color);
   }
@@ -114,6 +116,7 @@
   color: var(--secondary-color-text);
   font-size: 12px;
   margin-top: 4px;
+
   &:hover {
     color: var(--primary-color);
   }

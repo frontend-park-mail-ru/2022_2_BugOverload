@@ -42,13 +42,16 @@ export class Rating extends Component {
         // Object.assign(this.information, this.state.statusRating, this.state.rating);
         // console.log(`Render ${JSON.stringify(this.information)}`);
         this.location.innerHTML = '';
-        this.location.insertAdjacentHTML('afterbegin', template(Object.assign({}, this.information, this.state.statusRating, this.state.rating)));
+        this.location.insertAdjacentHTML('afterbegin', template({ ...this.information, ...this.state.statusRating, ...this.state.rating }));
         this.componentDidMount();
         if (this.state.rating === null) {
             return;
         }
         // debugger;
-        const selectedStar = this.location.querySelector(`[value="${this.state.rating?.rate}"]`);
+        if (!this.state.rating) {
+            return;
+        }
+        const selectedStar = this.location.querySelector(`[value="${this.state.rating.rate}"]`);
         if (!selectedStar) {
             return;
         }
