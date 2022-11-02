@@ -1,5 +1,6 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
+import { store } from '@store/Store.js';
 
 class ReducerFilm {
     async getFilmData(data) {
@@ -49,6 +50,7 @@ class ReducerFilm {
             return {
                 listCollections: response.body.listCollections,
                 rating: response.body.rating,
+                countReviews: response.body.countReviews,
             };
         }
         return { statusMetaData: response.status };
@@ -80,13 +82,12 @@ class ReducerFilm {
 
         if (response.status === 200) {
             console.log(`GETTED sendReview: ${JSON.stringify(response.body)}`);
-            // return {
-            //     listCollections: response.body.listCollections,
-            //     rating: response.body.rating,
-            // };
+            return {
+                countReviews: store.getState('countReviews') + 1,
+            };
             // store.dispatch();
         }
-        // return { statusMetaData: response.status };
+        return { statusSendReview: response.status };
     }
 }
 

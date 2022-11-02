@@ -1122,20 +1122,15 @@ app.post('/v1/sendreview', (req, res) => {
 		day = '0' + day;
 
 	const newReview = {
-		author: {
-			avatar: DEFAULT_AVATAR,
-			count_reviews: 433,
-			id: 541,
-			nickname: email,
-		},
-		id: reviewsStorage[filmID].length,
+		author: email,
+		id: 12,
 		type: type,
-		name: title,
-		body: text,
-		time: [day,month,year].join('.'),
+		title: title,
+		text: text,
+		date: [day,month,year].join('.'),
 	}
 
-	reviewsStorage[email][filmID].push(newReview);
+	reviewsStorage[filmID].push(newReview);
 	++reviewsUsersMetaStorage[email].countReviews;
 
 	res.status(200).json(newReview);

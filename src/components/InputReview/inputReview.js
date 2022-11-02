@@ -1,15 +1,20 @@
 import template from '@components/InputReview/inputReview.handlebars';
 import { Modal } from '@components/Modal/modal.js';
 import { Component } from '@components/Component.js';
+import { actionSendReview } from '@actions/filmActions.js';
+import { store } from '@store/Store.js';
 
 export class InputReview extends Component {
     constructor(data) {
         super();
-        this.data = data;
-    }
+        this.state = {
+            countReviews: null,
+        };
 
-    getTemplate() {
-        return template(this.data);
+        this.data = data;
+        store.subscribe('countReviews', () => {
+            this.state.countReviews = store.getState('countReviews');
+        });
     }
 
     render() {
@@ -24,17 +29,42 @@ export class InputReview extends Component {
         // const inputReview = new InputReview(user);
 
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
-        modalWindow.insertAdjacentHTML('afterbegin', this.getTemplate());
+        modalWindow.insertAdjacentHTML('afterbegin', template({ count_reviews: store.getState('countReviews'), nickname: store.getState('user').nickname }));
         this.componentDidMount();
     }
 
+    validate() {}
+
+    handlerSubmit(e) {
+        e.preventDefault();
+        const review = {};
+        const form = this.rootNode.querySelector('.js-input-review__form');
+
+        const typeInput = form.querySelector('.js-input-review__select-input');
+        const titleInput = form.querySelector('input[name=review-title]');
+        const textInput = form.querySelector('textarea[name=review-text]');
+
+        review.type = typeInput.value;
+        review.title = titleInput.value;
+        review.text = textInput.value;
+        review.filmID = store.getState('film').id;
+        review.email = store.getState('user').email;
+
+        this.validate();
+
+        store.dispatch(actionSendReview(review));
+    }
+
     componentDidMount() {
-        const select = document.querySelector('.input-review__select');
+        const select = this.rootNode.querySelector('.input-review__select');
         const input = select.querySelector('.js-input-review__select-input');
         const head = select.querySelector('.input-review__select-head');
         const headText = head.querySelector('.input-review__select-head-text');
         const list = select.querySelector('.input-review__select-list');
         const items = select.querySelectorAll('.input-review__select-item');
+
+        const form = this.rootNode.querySelector('.js-input-review__form');
+        form.addEventListener('submit', this.handlerSubmit.bind(this));
 
         head.addEventListener('click', () => {
             if (head.hasAttribute('open')) {

@@ -5,10 +5,10 @@
             <div class="input-review__user-avatar" style="background-image: url('assets/img/users/invisibleMan.jpeg');"></div>
             <div class="input-review__info-user-container">
                 <div class="input-review__username">{{nickname}}</div>
-                <div class="input-review__user-counter-reviews">1337 рецензий</div>
+                <div class="input-review__user-counter-reviews">{{count_reviews}} рецензий</div>
             </div>
         </div>
-        <form class="input-review__form">
+        <form class="input-review__form js-input-review__form">
             {{!-- <input class="input-review__input-title" type="radio">
             --}}
             <div class="input-review__select">
@@ -31,9 +31,9 @@
                         Отрицательная</li>
                 </ul>
             </div>
-            <input class="input-review__input-title" type="text" placeholder="Заголовок">
-            <textarea placeholder="Текст рецензии" class="input-review__input-text" name="review" cols="40" rows="3"></textarea>
-            <button type="submit" class="modal__input__button-review primary-btn-big">Опубликовать рецензию</button>
+            <input class="input-review__input-title" type="text" name="review-title" placeholder="Заголовок">
+            <textarea placeholder="Текст рецензии" class="input-review__input-text" name="review-text" cols="40" rows="3"></textarea>
+            <button type="submit" class="modal__input__button-review primary-btn-big {{!-- js-send-review-btn --}}">Опубликовать рецензию</button>
         </form>
     </div>
 </div>
