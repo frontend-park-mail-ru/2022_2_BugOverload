@@ -8,7 +8,10 @@ export class ReviewStatistic extends Component {
         this.state = {
             infoReviews: null,
         };
-        this.location = this.rootNode.querySelector('.js-reviews-statistic')
+        this.location = this.rootNode.querySelector('.js-reviews-statistic');
+    }
+
+    componentDidMount() {
         store.subscribe('infoReviews', () => {
             this.state.infoReviews = store.getState('infoReviews');
             this.render();

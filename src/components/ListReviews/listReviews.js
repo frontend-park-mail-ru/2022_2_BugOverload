@@ -78,7 +78,6 @@ export class ListReviews extends Component {
         e.preventDefault();
         store.dispatch(actionGetDataReviews({ filmID: store.getState('film').id, delimeter: this.delimeter += this.step, count: this.step }));
 
-
         // ShowErrorMessage('Н');
 
         // store.dispatch(...); //TODO

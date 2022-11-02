@@ -56,7 +56,6 @@ export class FilmView extends View {
         ]).then((responses) => {
             const aboutFilm = new AboutFilm(responses[0].about);
 
-
             // const inputReview = new InputReview();
 
             ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
@@ -82,6 +81,7 @@ export class FilmView extends View {
 
             });
             const reviewStatistic = new ReviewStatistic();
+            reviewStatistic.componentDidMount();
             const listReviews = new ListReviews();
 
             menuInfoFilm.render();
