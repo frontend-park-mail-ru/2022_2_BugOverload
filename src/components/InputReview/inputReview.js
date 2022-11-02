@@ -1,6 +1,7 @@
 import template from '@components/InputReview/inputReview.handlebars';
 import { Modal } from '@components/Modal/modal.js';
 import { Component } from '@components/Component.js';
+import { actionAuth } from '@store/actionCreater/userActions.js';
 
 export class InputReview extends Component {
     constructor(data) {

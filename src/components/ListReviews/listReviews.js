@@ -4,6 +4,7 @@ import template from '@components/ListReviews/listReviews.handlebars';
 import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 import { InputReview } from '@components/InputReview/inputReview.js';
+import { actionGetDataReviews } from '@actions/filmActions.js';
 
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
@@ -14,6 +15,22 @@ export class ListReviews extends Component {
     constructor(data) {
         super();
         this.data = data;
+        this.location = this.rootNode.querySelector('.js-reviews-list');
+        this.state = {
+            reviews: null,
+        };
+
+        this.isMounted = false;
+        this.step = 2;
+        this.delimeter = -this.step;
+
+        store.subscribe('reviews', () => {
+            this.state.reviews = store.getState('reviews');
+            this.componentDidMount();
+            this.render();
+        });
+
+        store.dispatch(actionGetDataReviews({ filmID: store.getState('film').id, delimeter: this.delimeter += this.step, count: this.step }));
     }
 
     /**
@@ -22,10 +39,21 @@ export class ListReviews extends Component {
     * @param {data Object} data - объект данных коллекции
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
-    getTemplate() {
-        const reviews = this.data.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
+    render() {
+        if (!this.state.reviews) {
+            return;
+        }
+        // debugger;
+        const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
+        if (reviews === '') {
+            this.componentDidUnmount();
+            return;
+        }
+        this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
 
-        return template({ reviews });
+        // return template({ reviews });
+
+        // this.componentDidMount();
     }
 
     /**
@@ -46,13 +74,38 @@ export class ListReviews extends Component {
         // inputReview.componentDidMount();
     }
 
+    handlerShowMore(e) {
+        e.preventDefault();
+        store.dispatch(actionGetDataReviews({ filmID: store.getState('film').id, delimeter: this.delimeter += this.step, count: this.step }));
+
+
+        // ShowErrorMessage('Н');
+
+        // store.dispatch(...); //TODO
+    }
+
     componentDidMount() {
+        // debugger;
+        if (this.isMounted) {
+            return;
+        }
+
+        this.location.insertAdjacentHTML('afterbegin', template());
+
         const btn = document.querySelector('.js-list-reviews__btn-write-review');
         btn.addEventListener('click', this.handler.bind(this));
+
+        const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
+        btnShowMore.addEventListener('click', this.handlerShowMore.bind(this));
+        this.isMounted = true;
     }
 
     componentDidUnmount() {
         const btn = document.querySelector('.js-list-reviews__btn-write-review');
         btn.removeEventListener('click', this.handler.bind(this));
+
+        const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
+        btnShowMore.removeEventListener('click', this.handlerShowMore.bind(this));
+        btnShowMore.remove();
     }
 }

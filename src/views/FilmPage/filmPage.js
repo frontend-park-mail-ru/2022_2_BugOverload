@@ -55,15 +55,14 @@ export class FilmView extends View {
             Collection.getRequestData(API.in_cinema),
         ]).then((responses) => {
             const aboutFilm = new AboutFilm(responses[0].about);
-            const listReviews = new ListReviews(responses[0].reviews);
-            const reviewStatistic = new ReviewStatistic(responses[0].reviewInfo);
+
 
             // const inputReview = new InputReview();
 
             ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
                 about: aboutFilm.getTemplate(responses[0].about),
-                reviews: listReviews.getTemplate(),
-                reviewInfo: reviewStatistic.getTemplate(),
+                // reviews: listReviews.getTemplate(),
+                // reviewInfo: reviewStatistic.getTemplate(),
                 // inputReview: inputReview.getTemplate(),
                 collectionLikely: likelyFilms.getTemplate(responses[1]),
                 collectionDirector: directorFilms.getTemplate(responses[2]),
@@ -82,9 +81,14 @@ export class FilmView extends View {
                 rating: responses[0].about.rating,
 
             });
+            const reviewStatistic = new ReviewStatistic();
+            const listReviews = new ListReviews();
 
             menuInfoFilm.render();
             menuInfoFilm.componentDidMount();
+
+            // listReviews.render();
+            // listReviews.componentDidMount();
             // menuInfoFilm.addHandlers();
             Collection.addHandlers();
             // InputReview.addHandlers();

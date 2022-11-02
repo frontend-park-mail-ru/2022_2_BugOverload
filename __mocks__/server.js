@@ -864,7 +864,6 @@ app.get('/v1/film/321',  (req, res) => {
 
 	}
 
-	console.log('wefwegwegbweRECEIVED');
 
 	res.status(200).json(info);
 });
@@ -940,12 +939,35 @@ const reviewsStorage = {
 			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
 			date: '11.11.20q7',
 		},
+		{
+			author: 'qweql.ru',
+			id: 4,
+			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			date: '11.11.1117',
+		},
+		{
+			author: 'Dqwewevw33.ru',
+			id: 5,
+			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечwewзии. Не Очень умно написано.',
+			date: '01.21.1107',
+		},
+		{
+			author: 'wwwwwwwil.ru',
+			id: 6,
+			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			title: 'Какой-то заголовок',
+			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			date: '10.11.3350',
+		},
 	]
 };
 
 app.get('/v1/film/:id/metadata',  (req, res) => {
 	if (Object.keys(req.cookies).length == 0) {
-		console.log(JSON.stringify(req.cookies) + 'cc');
 		res.status(401).json({});
 		return;
 	}
@@ -953,7 +975,6 @@ app.get('/v1/film/:id/metadata',  (req, res) => {
 	const email = 'Dop123@mail.ru' // Аналог куки
 
 	const filmID = req.params.id; // Получен из url-параметра
-	console.log(filmID + 'wegwegweg\n');
 	let collList = [];
 	for (const list in filmUsersMetaStorage[email].listCollections) {
 
@@ -980,7 +1001,6 @@ app.get('/v1/film/:id/metadata',  (req, res) => {
 			});
 		}
 
-	console.log(JSON.stringify(meta));
 	res.status(200).json(meta);
 });
 
@@ -988,9 +1008,6 @@ app.post('/v1/rate', (req, res) => {
 	const rate = req.body.rate;
 	const email = req.body.email;
 	const filmID = req.body.filmID;
-	console.log(rate);
-	console.log(email);
-	console.log(filmID);
 
 	if ( !rate || !email || !filmID) {
 		return res.status(400).json({error: 'Не валидный запрос'});
@@ -1015,7 +1032,6 @@ app.post('/v1/rate', (req, res) => {
 		rate: rate,
 		date: [day,month,year].join('.'),
 	}
-	console.log(filmRateStorage[email][filmID]);
 	res.status(200).json({
 		rate: filmRateStorage[email][filmID].rate,
 		date: filmRateStorage[email][filmID].date,
@@ -1026,8 +1042,6 @@ app.post('/v1/rate', (req, res) => {
 app.post('/v1/delrate', (req, res) => {
 	const email = req.body.email;
 	const filmID = req.body.filmID;
-	console.log(email);
-	console.log(filmID);
 
 	if (!email || !filmID) {
 		return res.status(400).json({error: 'Не валидный запрос'});
@@ -1037,15 +1051,17 @@ app.post('/v1/delrate', (req, res) => {
 	}
 
 	delete filmRateStorage[email][filmID];
-	console.log(filmRateStorage[email]);
 	res.status(200).json({});
 });
 
 app.get('/v1/film/:id/reviews',  (req, res) => {
 	const filmID = req.params.id; // Получен из url-параметра, но должен из get-параметров (по АПИ)
+	const { id, count, delimeter } = req.query;
+	console.log(`count ${count}, delimeter ${delimeter} `);
 
 	let reviewsList = [];
-	for (const review of reviewsStorage[filmID]) {
+	for (let i = delimeter; reviewsList.length < count && i < reviewsStorage[filmID].length; ++i) {
+		let review = reviewsStorage[filmID][i];
 		reviewsList.push({
 			author: {
 				avatar: DEFAULT_AVATAR,
@@ -1064,8 +1080,8 @@ app.get('/v1/film/:id/reviews',  (req, res) => {
 		});
 	}
 
-	console.log(JSON.stringify(reviewsList));
-	res.status(200).json(reviewsList);
+	console.log(JSON.stringify(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]})));
+	res.status(200).json(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]}));
 });
 
 app.post('/v1/sendreview', (req, res) => {

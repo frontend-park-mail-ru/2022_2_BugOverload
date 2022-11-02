@@ -54,29 +54,40 @@ class ReducerFilm {
         return { statusMetaData: response.status };
     }
 
-    // async openDescription() {
-    //     return {
-    //         descriptionIsActive: true,
-    //         ratingIsActive: true,
-    //         detailsIsActive: false,
-    //     };
-    // }
+    async getDataReviews(data) {
+        const response = await Ajax.get(API.reviews(data.filmID, data.count, data.delimeter));
+        if (response.status === 200) {
+            // debugger;
+            console.log(`getDataReviews: ${JSON.stringify(response.body)}`);
+            if (data.delimeter === 0) {
+                return {
+                    infoReviews: response.body.infoReviews,
+                    reviews: response.body.reviews,
+                };
+            }
+            return {
+                reviews: response.body.reviews,
+            };
+        }
+        return { statusReviews: response.status };
+    }
 
-    // async openDetails() {
-    //     return {
-    //         descriptionIsActive: false,
-    //         ratingIsActive: false,
-    //         detailsIsActive: true,
-    //     };
-    // }
+    async sendReview(reviewData) {
+        const response = await Ajax.post({
+            url: API.sendreview,
+            body: reviewData,
+        });
 
-    // async closeDescription() {
-    //     return { descriptionIsActive: false };
-    // }
-
-    // async closeDetails() {
-    //     return { detailsIsActive: false };
-    // }
+        if (response.status === 200) {
+            console.log(`GETTED sendReview: ${JSON.stringify(response.body)}`);
+            // return {
+            //     listCollections: response.body.listCollections,
+            //     rating: response.body.rating,
+            // };
+            // store.dispatch();
+        }
+        // return { statusMetaData: response.status };
+    }
 }
 
 export const reducerFilm = new ReducerFilm();

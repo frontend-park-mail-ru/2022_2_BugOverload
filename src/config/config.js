@@ -29,6 +29,9 @@ export const API = {
     rate: `http://${DOMAIN}/v1/rate`,
     delrate: `http://${DOMAIN}/v1/delrate`,
 
+    reviews(id, count, delimeter) {
+        return `http://${DOMAIN}/v1/film/${id}/reviews?id=${id}&count=${count}&delimeter=${delimeter}`;
+    },
     sendreview: `http://${DOMAIN}/v1/sendreview`,
 
     testApiConfig,
