@@ -109,6 +109,7 @@ class Router {
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
+            console.log(this.lastView)
             if(this.lastView !== '/login/' && this.lastView !== '/signup/')  {
                 this.root.replaceChildren();
             } else {
