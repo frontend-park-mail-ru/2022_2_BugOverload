@@ -109,19 +109,17 @@ class Router {
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            console.log(this.lastView)
-            if(this.lastView !== '/login/' && this.lastView !== '/signup/')  {
+            const loginView = this.mapViews.get('/login/');
+            const signupView = this.mapViews.get('/signup/');
+            if (this.lastView !== loginView && this.lastView !== signupView) {
                 this.root.replaceChildren();
             } else {
-                this.root.querySelector('.modal__background').remove();
                 this.navigate(stateObject, pushState);
                 return;
             }
-        } else {
-            if(!this.lastView)  {
-                const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-                currentView.render(window.history.state);
-            }
+        } else if (!this.lastView) {
+            const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
+            currentView.render(window.history.state);
         }
 
         if (
