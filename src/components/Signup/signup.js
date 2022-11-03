@@ -6,7 +6,6 @@ import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
-import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
@@ -46,11 +45,7 @@ export class Signup extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                window.history.pushState(
-                    null,
-                    '',
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
+                dispatchExitSignup();
             }
 
             return;
@@ -147,14 +142,7 @@ export class Signup extends Component {
     deleteSignup(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            const redirectMain = new Event(
-                'click',
-                {
-                    bubbles: true,
-                    cancelable: true,
-                },
-            );
-            document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+            dispatchExitSignup();
         }
     }
 
@@ -197,3 +185,14 @@ export class Signup extends Component {
         }
     }
 }
+
+const dispatchExitSignup = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+    document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+};

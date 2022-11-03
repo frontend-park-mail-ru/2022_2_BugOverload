@@ -6,7 +6,6 @@ import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
-import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
@@ -58,11 +57,7 @@ export class Login extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                window.history.pushState(
-                    null,
-                    '',
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
+                dispatchExitLogin();
             }
 
             return;
@@ -128,14 +123,7 @@ export class Login extends Component {
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            const redirectMain = new Event(
-                'click',
-                {
-                    bubbles: true,
-                    cancelable: true,
-                },
-            );
-            document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+            dispatchExitLogin();
         }
     }
 
@@ -180,3 +168,14 @@ export class Login extends Component {
         }
     }
 }
+
+const dispatchExitLogin = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+    document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+};
