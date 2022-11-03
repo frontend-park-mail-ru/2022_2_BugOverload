@@ -11,7 +11,7 @@ class ReducerUser {
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 statusLogin: null,
             };
         }
@@ -27,7 +27,7 @@ class ReducerUser {
         const response = await responsePromise;
         if (response.status === responsStatuses.Created) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 statusSignup: null,
             };
         }
@@ -40,7 +40,7 @@ class ReducerUser {
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 authStatus: null,
             };
         }
@@ -105,3 +105,13 @@ class ReducerUser {
 }
 
 export const reducerUser = new ReducerUser();
+
+const handlerUrlObject = (object, nameObject) => {
+    if (nameObject === 'avatar') {
+        const newUrl = `http://movie-gate.online:8088/v1/image?object=avatar&key=${nameObject}`;
+        if (object[nameObject] !== newUrl) {
+            object[nameObject] = newUrl;
+        }
+    }
+    return object;
+};

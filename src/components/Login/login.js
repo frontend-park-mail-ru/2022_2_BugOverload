@@ -101,10 +101,10 @@ export class Login extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 removeError(form, key);
-                continue;
+                return;
             }
             if (key === 'email') {
                 if (!checkEmail(form, user[key])) {
@@ -116,7 +116,7 @@ export class Login extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         if (flag) {
             return user;

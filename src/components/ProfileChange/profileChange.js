@@ -19,23 +19,13 @@ export class ProfileChange extends Component {
             user: props.user,
             statusChangeSettings: null,
         };
-    }
 
-    handlerStatusPut() {
-        if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
-            const wrapper = this.rootNode.querySelector('.profile__wrapper__old__password');
-            renderError(wrapper, 'password', 'Неправильный пароль');
-        }
-    }
+        this.handlerUserChangeForm = () => {
+            const subscribeFunc = () => {
+                this.state.statusChangeSettings = store.getState('statusChangeSettings');
+                this.handlerStatusPut();
+            };
 
-    componentDidMount() {
-        const subscribeFunc = () => {
-            this.state.statusChangeSettings = store.getState('statusChangeSettings');
-            this.handlerStatusPut();
-        };
-
-        const changeButton = this.rootNode.querySelector('.profile__change__svg');
-        changeButton.addEventListener('click', () => {
             const profileElement = this.rootNode.querySelector('.profile');
             if (profileElement) {
                 profileElement.remove();
@@ -61,7 +51,24 @@ export class ProfileChange extends Component {
                         store.unsubscribe('statusChangeSettings', subscribeFunc);
                     });
             }
-        });
+        };
+    }
+
+    handlerStatusPut() {
+        if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
+            const wrapper = this.rootNode.querySelector('.profile__wrapper__old__password');
+            renderError(wrapper, 'password', 'Неправильный пароль');
+        }
+    }
+
+    componentDidMount() {
+        const changeButton = this.rootNode.querySelector('.profile__change__svg');
+        changeButton.addEventListener('click', this.handlerUserChangeForm);
+    }
+
+    componentWillUnmount() {
+        const changeButton = this.rootNode.querySelector('.profile__change__svg');
+        changeButton.removeEventListener('click', this.handlerUserChangeForm);
     }
 
     addValidate() {
@@ -69,7 +76,7 @@ export class ProfileChange extends Component {
         forms.formNick = this.rootNode.querySelector('.profile__form__nick');
         forms.formPassword = this.rootNode.querySelector('.profile__form__password');
 
-        for (const key of Object.keys(forms)) {
+        Object.keys(forms).forEach((key) => {
             let validate;
             if (key === 'formNick') {
                 validate = this.validateNick;
@@ -91,7 +98,7 @@ export class ProfileChange extends Component {
 
                 store.dispatch(actionPutSettings(user));
             });
-        }
+        });
     }
 
     /**
@@ -139,7 +146,7 @@ export class ProfileChange extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 if (key === 'oldPassword') {
                     removeError(oldPassword.parentElement, 'password');
@@ -148,7 +155,7 @@ export class ProfileChange extends Component {
                     removeError(confirmInput.parentElement, 'password');
                 }
 
-                continue;
+                return;
             }
 
             if (key === 'password' || key === 'confirmPassword') {
@@ -168,7 +175,7 @@ export class ProfileChange extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         if (flag) {
             return {

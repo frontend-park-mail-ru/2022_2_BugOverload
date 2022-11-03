@@ -93,14 +93,14 @@ export class Signup extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 if (key === 'nickname') {
                     removeError(form, 'text');
                 } else {
                     removeError(form, key);
                 }
-                continue;
+                return;
             }
 
             if (key === 'email') {
@@ -124,7 +124,7 @@ export class Signup extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         const confirm = document.getElementById('confirm');
 
