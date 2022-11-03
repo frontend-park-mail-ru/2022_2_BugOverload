@@ -109,7 +109,7 @@ class Router {
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            if(this.lastView !== '/login/' && !this.lastView !== '/signup/')  {
+            if(this.lastView !== '/login/' && this.lastView !== '/signup/')  {
                 this.root.replaceChildren();
             } else {
                 this.root.querySelector('.modal__background').remove();
