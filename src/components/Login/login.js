@@ -177,5 +177,11 @@ const dispatchExitLogin = () => {
             cancelable: true,
         },
     );
-    document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+    const dispathHref = document.createElement('a');
+    dispathHref.dataset.section = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.replace(hrefRegExp.host, '')
+        : window.location.href.replace(hrefRegExp.localhost, '');
+    
+    dispathHref.dataset.section.replace(hrefRegExp.auth, '');
+    dispathHref.dispatchEvent(redirectMain);
 };
