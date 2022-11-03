@@ -109,10 +109,14 @@ class Router {
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            this.root.replaceChildren();
+            if(this.lastView !== '/login/' || !this.lastView !== '/signup/')  {
+                this.root.replaceChildren();
+            }
         } else {
-            const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-            currentView.render(window.history.state);
+            if(!this.lastView)  {
+                const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
+                currentView.render(window.history.state);
+            }
         }
 
         if (
