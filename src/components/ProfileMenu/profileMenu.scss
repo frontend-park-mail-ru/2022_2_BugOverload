@@ -1,3 +1,6 @@
+$color-menu-max: rgba(23 23 23 /100%);
+$color-menu-min: rgba(23 23 23 /0%);
+
 @mixin column__flex {
     display: flex;
     flex-direction: column;
@@ -8,20 +11,20 @@
 
 .profile__menu{
     margin-top: 95px;
-    background: linear-gradient(to top, rgba(23 23 23 /100%), rgba(23 23 23 /0%));
+    background: linear-gradient(to top, $color-menu-max, $color-menu-min);
 }
 
 .profile__gradient{
     height: 100%;
     width: 307px;
-    background: linear-gradient(to bottom, rgba(23 23 23 /100%), rgba(23 23 23 /0%));
+    background: linear-gradient(to bottom, $color-menu-max, $color-menu-min);
 }
 
 .profile__menu__flex {
     @include column__flex;
     height: 470px;
     width: 307px;
-    color: aliceblue;
+    color:  var(--main-color-text);
 }
 
 .profile__menu__column{
@@ -32,19 +35,19 @@
 .profile__menu__links{
     cursor: pointer;
     font-size: 20px;
-    color: #fff;
+    color: var(--main-color-text);
     margin-left: 52px;
     margin-bottom: 30px;
 }
 
 .profile__menu__links:hover {
-    color:#FEBA2B;
+    color:var(--primary-color);
     transition: 0.08s linear;
 }
 
 .profile__menu__header{
     font-size: 36px;
-    color: #fff;
+    color: var(--main-color-text);
     margin-left: 52px;
     margin-bottom: 45px;
 }

@@ -26,6 +26,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
 body, html {
+    --error-color:rgb(150 0 0);
     --backgr-color: #121212;
     --primary-color: #FEBA2B;
     --primary-color-hover: #CD9826;
