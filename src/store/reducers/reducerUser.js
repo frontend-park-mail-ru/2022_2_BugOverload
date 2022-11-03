@@ -74,7 +74,7 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/user/setting`,
+            url: `http://${DOMAIN}/v1/user/settings`,
             body: user,
         });
 
