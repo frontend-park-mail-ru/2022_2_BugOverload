@@ -108,7 +108,7 @@ export const reducerUser = new ReducerUser();
 
 const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
-        const newUrl = `http://movie-gate.online:8088/v1/image?object=avatar&key=${nameObject}`;
+        const newUrl = `http://movie-gate.online:8088/v1/image?object=user_avatar&key=${nameObject}`;
         if (object[nameObject] !== newUrl) {
             object[nameObject] = newUrl;
         }
