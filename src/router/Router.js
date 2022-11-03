@@ -115,6 +115,7 @@ class Router {
                 this.root.replaceChildren();
             } else {
                 this.navigate(stateObject, pushState);
+                this.lastView = this.mapViews.get(stateObject.path);
                 return;
             }
         } else if (!this.lastView) {
