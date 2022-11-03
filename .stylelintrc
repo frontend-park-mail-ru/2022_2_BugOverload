@@ -21,7 +21,9 @@
     "font-family-no-missing-generic-family-keyword": null,
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
-    "scss/dollar-variable-pattern": "^foo",
+    "scss/at-mixin-pattern": null,
+    "scss/dollar-variable-pattern": null,
+    "scss/at-import-no-partial-leading-underscore": null,
     "scss/selector-no-redundant-nesting-selector": true,
     "declaration-empty-line-before": "never"
   }
