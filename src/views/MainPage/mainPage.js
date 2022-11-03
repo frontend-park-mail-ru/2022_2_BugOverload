@@ -2,7 +2,7 @@ import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
 import { Collection, COLLECTION_TYPE } from '@components/Collection/collection.js';
 import { ROOT, API } from '@config/config.js';
 import { View } from '@views/View.js';
-import template from '@views/MainPage/mainPage.handlebars';
+import template from '@views/MainPage/MainPage.handlebars';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
