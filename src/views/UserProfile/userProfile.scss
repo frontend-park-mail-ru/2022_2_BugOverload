@@ -1,3 +1,5 @@
+$userinfo-color: #A3A3A3;
+
 @mixin flex__row{
     display: flex;
     flex-direction: row;
@@ -56,7 +58,7 @@
 }
 
 .profile__avatar__button:hover{
-    background-color: #736D6D;
+    background-color: var(--secondary-color-hover);
     transition: 0.1s linear;
     cursor: pointer;
 }
@@ -72,7 +74,7 @@
     align-items: flex-start;
     margin-top: 95px + 54px;
     margin-left: 49px;
-    color:#FFF;
+    color: var(--main-color-text);
 }
 
 .profile__username{
@@ -111,7 +113,7 @@
 
 .profile__info__field{
     font-size: 20px;
-    color: #A3A3A3;
+    color: $userinfo-color;
     margin-bottom: 35px;
 }
 
