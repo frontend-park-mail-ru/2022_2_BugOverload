@@ -1,0 +1,68 @@
+name: Build and Delivery
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  check:
+      runs-on: ubuntu-20.04
+    steps:
+     - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name:  Install deps
+        run: npm install
+        
+      - name: Lint
+        run: npm run lint
+
+      - name: Stylelint
+        run: npm run stylelint
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name:  Install deps
+        run: npm install
+
+      - name: Build
+        run: npm run prod
+
+      - name: Upload build result
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: ./dist
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v1
+        with:
+          name: dist
+
+      - name: Transfer build files to server
+        uses: appleboy/scp-action@v0.0.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "dist/*"
+          target: "/home/webapps/movie-gate.online/frontend/2022_2_BugOverload/dist"
+          strip_components: 1

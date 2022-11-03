@@ -10,7 +10,11 @@ const cors = require('cors');
 
 app.use(morgan('dev'));
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/',express.static(path.resolve(__dirname, 'images')));
+app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
+
 app.use(body.json());
 app.use(cors({
 	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
@@ -22,10 +26,10 @@ const users = {
 		'nickname': 'StepByyyy',
 		'email': 'Dop123@mail.ru',
 		'password': 'Dop123@mail.ru',
-		'avatar': 'assets/img/invisibleMan.jpeg'
+		'avatar': 'assets/img/users/invisibleMan.jpeg'
 	},
 };
-const DEFAULT_AVATAR = 'assets/img/invisibleMan.jpeg'
+const DEFAULT_AVATAR = 'assets/img/users/invisibleMan.jpeg'
 const ids = {};
 
 app.post('/v1/auth/login',  (req, res) => {
@@ -48,9 +52,32 @@ app.post('/v1/auth/login',  (req, res) => {
 	res.status(200).json({nickname: users[email].nickname ,email: users[email].email,avatar: users[email].avatar});
 });
 
+let i = 0;
 app.get('/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(404).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+
+	const variants = [200, 404];
+
+	res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	if(i == 0) {
+		i = 1;
+	} else {
+		i = 0;	
+	}
+});
+
+app.put('/v1/user/setting',  (req, res) => {
+	res.sendStatus(403);
+});
+
+app.put('/v1/image', (req, res) => {
+	console.log(req.body)
+	res.sendStatus(204);
+});
+
+app.get('/v1/user/settings',  (req, res) => {
+	const email = 'Dop123@mail.ru'
+	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
 });
 
 app.get('/v1/auth/logout',  (req, res) => {
@@ -695,7 +722,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/space_odyssey_hor.jpg",
+		poster_hor: "assets/img/previews/space_odyssey_hor.jpg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -710,7 +737,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/dune.jpg",
+		poster_hor: "assets/img/previews/dune.jpg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -723,7 +750,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		year_prod: 2019,
 		ageLimit: "18+",
 		duration: "2:10",
-		poster_hor: "assets/img/joker_hor.jpg",
+		poster_hor: "assets/img/previews/joker_hor.jpg",
 		ratio: 7.1,
 	}
 
@@ -741,7 +768,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 		prodCountry: "",
 		ageLimit: "",
 		duration: "",
-		poster_hor: "assets/img/StarWars.jpeg",
+		poster_hor: "assets/img/previews/StarWars.jpeg",
 		ratio: 7.1,
 		genres: ["Фентези", "Приключения"]
 	}
@@ -760,6 +787,206 @@ app.get('/v1/recommendation_film', (req, res) => {
 	}
 
 	res.status(200).json(previewDune)
+});
+
+app.get('/v1/film/321',  (req, res) => {
+	const info = {
+		id: 321,
+		about: {
+			poster_hor: 'assets/img/films_hor/trueDetective.jpg',
+			film_name: 'Настоящий Детектив',
+			original_name: 'True detective',
+			rating: '8.7',
+			year_prod: '2014-2019',
+			duration: '60',
+			type_serial: 'true',
+			count_seasons: '3',
+			age_limit: '18',
+			short_description: 'Кто стоит за необычайно жестокими и запутанными убийствами? Суперзвезды в главном детективном сериале 2010-х',
+			directors: ['Кэри Дзёдзи Фукунага', 'ещё чел'],
+			roles: ['Мэттью МакКонахи', 'Колин Фаррелл', 'Вуди Харрельсон'],
+		},
+
+		descriptionText: `Первый сезон. В Луизиане в 1995 году происходит странное убийство девушки. В 2012 году дело об убийстве 1995 года повторно открывают, так как произошло похожее убийство. Чтобы продвинуться в расследовании, полиция решает допросить бывших детективов, которые работали над тем делом.
+
+		Второй сезон. В калифорнийском городе Винчи в преддверии презентации новой линии железной дороги, которая улучшит финансовое положение города, пропадает глава администрации города. Позже его труп находят на шоссе. К расследованию подключают детектива из полиции Винчи и детектива из департамента шерифа округа Вентура.
+
+		Третий сезон. Известняковое плато Озарк, расположенное одновременно в нескольких штатах. Детектив Уэйн Хейз совместно со следователем из Арканзаса Роландом Уэстом пытаются разобраться в загадочном преступлении, растянувшемся на три десятилетия.`,
+
+		details: {
+			// type_serial: 'true',
+			// year_prod: this.about.year_prod,
+			contry_prod: 'США, Канада',
+			genres: ['Триллер', 'Криминал', 'Мухтар'],
+			// directors: this.about.directors,
+			producers: ['первый', 'второй'],
+			scenario: ['Ник Пиццолатто', 'Scott Lasser', 'Грэм Горди'],
+			dues: '300',
+			// age_limit: this.about.age_limit,
+			// duration: this.about.	duration,
+
+			actors: [
+				{
+					name: '11111',
+					role: '22222',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '33333',
+					role: '44444',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '55555',
+					role: '66666',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '77777',
+					role: '88888',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '99999',
+					role: '00000',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				},
+				{
+					name: '12121',
+					role: '23232',
+					photo: 'assets/img/actor_photos/KBeil.png'
+				}
+			],
+		},
+
+		reviews: [
+			{
+				avatar: DEFAULT_AVATAR,
+				username: "Azazin",
+				userCountReviews: 13,
+				date: "11.09.2001",
+				title: "Ребята, не затягивайте, РК близко....",
+				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+			},
+			{
+				avatar: DEFAULT_AVATAR,
+				username: "A124gr",
+				userCountReviews: 1312,
+				date: "11.09.2001",
+				title: "Ребята, не затягивайте, РК близко....",
+				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+			}
+		],
+
+		reviewInfo: {
+			total: 2224,
+			positive: 244,
+			neutral: 122,
+			negotive: 1999,
+		}
+
+	}
+
+	console.log('wefwegwegbweRECEIVED');
+
+	res.status(200).json(info);
+});
+
+
+const filmRateStorage = {
+	'Dop123@mail.ru': {
+			'321': {
+				'rate': 7,
+				'date': '11.11.2007',
+			},
+		},
+};
+
+app.post('/v1/rate', (req, res) => {
+	const rate = req.body.rate;
+	const email = req.body.email;
+	const filmID = req.body.filmID;
+	console.log(rate);
+	console.log(email);
+	console.log(filmID);
+
+	if ( !rate || !email || !filmID) {
+		return res.status(400).json({error: 'Не валидный запрос'});
+	}
+	if (filmRateStorage[email][filmID]) {
+		return res.status(403).json({error: 'Оценка уже стоит'});
+	}
+
+	let d = new Date(),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+
+	if (month.length < 2)
+		month = '0' + month;
+	if (day.length < 2)
+		day = '0' + day;
+
+
+	filmRateStorage[email][filmID] = {
+		rate: rate,
+		date: [year, month, day].join('-'),
+	}
+	console.log(filmRateStorage[email][filmID].filmID = filmID);
+	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
+});
+
+// app.get('/v1/rate', (req, res) => {
+// 	const rate = 3;
+// 	const email = "qwg@dg.q";
+// 	const filmID = 321;
+// 	console.log(rate);
+// 	console.log(email);
+// 	console.log(filmID);
+
+// 	if ( !rate || !email || !filmID) {
+// 		return res.status(400).json({error: 'Не валидный запрос'});
+// 	}
+// 	if (filmRateStorage[email][filmID]) {
+// 		return res.status(403).json({error: 'Оценка уже стоит'});
+// 	}
+
+// 	let d = new Date(),
+// 	month = '' + (d.getMonth() + 1),
+// 	day = '' + d.getDate(),
+// 	year = d.getFullYear();
+
+// 	if (month.length < 2)
+// 		month = '0' + month;
+// 	if (day.length < 2)
+// 		day = '0' + day;
+
+
+// 	filmRateStorage[email][filmID] = {
+// 		rate: rate,
+// 		date: [year, month, day].join('-'),
+// 	}
+// 	console.log(filmRateStorage[email][filmID].filmID = filmID);
+// 	res.status(200).json(filmRateStorage[email][filmID].filmID = filmID);
+// });
+
+app.post('/v1/delrate', (req, res) => {
+	const email = req.body.email;
+	const filmID = req.body.filmID;
+	console.log(rate);
+	console.log(email);
+	console.log(filmID);
+
+	if (!email || !filmID) {
+		return res.status(400).json({error: 'Не валидный запрос'});
+	}
+	if (!filmRateStorage[email][filmID]) {
+		return res.status(403).json({error: 'Оценка не стоит'});
+	}
+
+	delete filmRateStorage[email][filmID];
+	console.log(filmRateStorage[email]);
+	res.status(200).json({});
 });
 
 const default_port = 80;

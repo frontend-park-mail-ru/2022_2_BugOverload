@@ -4,13 +4,18 @@
     justify-content: center;
     align-content: stretch;
     align-items: center;
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     background: rgb(0 0 0 / 50%);
+    overflow-y: hidden;
+}
+
+.body_hide_y_scroll {
+    overflow-y: hidden;
 }
 
 .modal__window {
@@ -29,6 +34,12 @@
     font-weight: normal;
 }
 
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
 .modal__cross {
     width: 15px;
     height: 15px;
@@ -41,7 +52,7 @@
 
 .modal__header {
     margin-bottom: 33px;
-    color: #fff;
+    color: var(--main-color-text);
     font-size: 26px;
 }
 
@@ -58,17 +69,17 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: center;
-    width: 270px;
+    align-items: flex-start;
+    width: 310px;
     height: 55px;
     margin-bottom: 17px;
 }
 
 .modal__input {
-    width: 290px;
-    height: 28px;
-    border-radius: 21px;
-    color: #fff;
+    width: 289px;
+    height: 29px;
+    border-radius: 4px;
+    color: var(--main-color-text);
     background: #27292E;
     opacity: .8;
     border: 2px solid #333;
@@ -81,22 +92,16 @@
 }
 
 .modal__input__error {
-    width: 300px;
+    width: auto;
     height: 18px;
     margin-top: 5px;
     color: #E72D2D;
     font-size: 12px;
 }
 
-.modal__input__button {
-    font-size: 15px;
-    font-family: 'Mail Sans Roman Med';
-    text-decoration: none;
+.modal__input__button-auth {
     width: 310px;
-    height: 30px;
-    border-radius: 21px;
-    margin-top: 4px;
-    cursor: pointer;
+    height: 35px;
 }
 
 .modal__text__alternative__page{
@@ -104,28 +109,24 @@
     margin-top: 25px;
     margin-right: 20px;
     font-size: 13px;
-    color: #fff;
+    color: var(--main-color-text);
     text-decoration: none;
     cursor: pointer;
+    z-index: 1;
 }
 
-.modal__login__signup__btn {
+.modal__login__switch__btn {
     white-space: nowrap;
     margin-top: 25px;
     margin-right: 45px;
-    color: #000;
-    font-size: 15px;
-    font-family: 'Mail Sans Roman Med';
-    text-decoration: none;
     height: 30px;
     width: 150px;
-    border-radius: 21px;
+    z-index: 1;
 }
 
 .modal__flex__center__div {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
-    align-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
 }

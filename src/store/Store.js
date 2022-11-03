@@ -17,24 +17,36 @@ class Store {
         this.mapActionHandlers.set(type, methodStore);
     }
 
-    subscribe(type, activeFunc) {
+    subscribe(type, callback) {
         const arraySubsribes = this.mapSubscribers.get(type);
         if (arraySubsribes) {
-            arraySubsribes.push(activeFunc);
+            arraySubsribes.push(callback);
         } else {
-            this.mapSubscribers.set(type, [activeFunc]);
+            this.mapSubscribers.set(type, [callback]);
+        }
+    }
+
+    unsubscribe(type, activeFunc) {
+        const arraySubsribes = this.mapSubscribers.get(type);
+        if (arraySubsribes) {
+            this.mapSubscribers.set(
+                type,
+                arraySubsribes.filter(
+                    (item) => item.name !== activeFunc.name,
+                ),
+            );
         }
     }
 
     setState(newState) {
-        let subsribers;
+        let subscribers;
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
-            subsribers = this.mapSubscribers.get(key);
+            subscribers = this.mapSubscribers.get(key);
 
-            if (subsribers) {
-                subsribers.forEach((subscriber) => subscriber());
-            }   
+            if (subscribers) {
+                subscribers.forEach((subscriber) => subscriber());
+            }
         });
     }
 
@@ -57,10 +69,10 @@ class Store {
         }
     }
 
-    getSate(nameObject) {
-        if(Object.hasOwnProperty.call(this.state ,nameObject)) {
+    getState(nameObject) {
+        if (Object.hasOwnProperty.call(this.state, nameObject)) {
             return this.state[nameObject];
-        } 
+        }
         return null;
     }
 }

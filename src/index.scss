@@ -1,0 +1,55 @@
+@import "@components/Header/header";
+@import "@components/Login/login";
+@import "@components/Modal/modal";
+@import "@components/Signup/signup";
+@import "@components/Userbar/userbar";
+@import "@components/Collection/collection";
+@import "@components/Film/film";
+@import "@components/PreviewFilm/previewFilm";
+@import "@components/ErrorMessage/errorMessage";
+@import "@components/ProfileMenu/profileMenu";
+@import "@components/ProfileChange/profileChange";
+@import "@views/UserProfile/userProfile";
+
+@import "@components/Components";
+
+@import "@fonts/fonts.css";
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type="radio"] { all: unset; }
+
+body, html {
+    --error-color:rgb(150 0 0);
+    --backgr-color: #121212;
+    --primary-color: #FEBA2B;
+    --primary-color-hover: #CD9826;
+    --secondary-color: rgb(86 86 86 / 50%);
+    --secondary-color-hover: rgb(177 177 177 / 35%);
+    --main-color-text: #fff;
+    --secondary-color-text: #BEBEBE;
+    --standart-margin: 52px;
+    font-family: 'Mail Sans Roman';
+    background-color: var(--backgr-color);
+    margin: 0;
+    padding: 0;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 740px){
+    .header__form{display:none}
+};
+
+.active {
+    font-weight: bold;
+}

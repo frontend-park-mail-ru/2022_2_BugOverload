@@ -1,7 +1,7 @@
 import { Ajax } from '@utils/ajax.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-
+import { API, responsStatuses } from '@config/config.js';
 /**
 * Ходит за данными на бэкенд.
 * Рендерит HTML-шаблон превью фильма на главной
@@ -17,12 +17,13 @@ export class PreviewFilm {
     * @return {null} В случае ошибочного статуса
     */
     async getRequestData() {
-        const response = await Ajax.get(`http://${DOMAIN}/v1/recommendation_film`);
-        if (response.status === 200) {
-            return response.body;
+        const response = await Ajax.get(API.recommendation_film);
+        if (response.status === responsStatuses.OK) {
+            this.data = response.body;
+            return null;
         }
 
-        if (response.status >= 500) {
+        if (response.status >= responsStatuses.InternalServerError) {
             ShowErrorMessage();
             return null;
         }
@@ -31,7 +32,7 @@ export class PreviewFilm {
         return null;
     }
 
-    renderTemplate(data) {
-        return template(data);
+    getTemplate() {
+        return template(this.data);
     }
 }

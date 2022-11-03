@@ -6,6 +6,8 @@ import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
+import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -20,23 +22,16 @@ export class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusSignup: null,
         };
         store.subscribe('statusSignup', () => {
-            this.state.statusSignup = store.getSate('statusSignup');
+            this.state.statusSignup = store.getState('statusSignup');
             this.render();
         });
     }
 
-    /**
-     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
-     * @param {Object} user - провалидированный пользовательский ввод
-     * @param {string} user.nickname - введённый ник
-     * @param {string} user.email - введённая почта
-     * @param {string} user.password - введённый пароль
-     */
     handlerStatus() {
-        if (user.status === 400) {
+        if (this.state.statusSignup === responsStatuses.BadRequest) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
         }
@@ -46,26 +41,33 @@ export class Signup extends Component {
      * Рендерит логин
      */
     render() {
-        if (this.rootNode.querySelector('.modal__window') === null) {
+        if (store.getState('user')) {
+            const background = document.body.querySelector('.modal__background');
+            if (background) {
+                background.remove();
+                document.body.classList.remove('body_hide_y_scroll');
+                exitFromSignup();
+            }
+
+            return;
+        }
+
+        if (this.state.statusSignup) {
+            this.handlerStatus(this.state.statusSignup);
+            return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
             const modal = new Modal(this.rootNode);
             modal.render();
         }
 
-        if(store.getSate('user')) {
-            document.body
-                .querySelector('.modal__background')
-                .remove();
-
-            return;
-        }
-        
-        if (this.state.statusSignup) {
-            this.handlerStatus(userStatus);
-            return;
-        }
-
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
+        this.componentDidMount();
     }
 
     /**
@@ -87,14 +89,14 @@ export class Signup extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 if (key === 'nickname') {
                     removeError(form, 'text');
                 } else {
                     removeError(form, key);
                 }
-                continue;
+                return;
             }
 
             if (key === 'email') {
@@ -118,7 +120,7 @@ export class Signup extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         const confirm = document.getElementById('confirm');
 
@@ -138,10 +140,17 @@ export class Signup extends Component {
         return null;
     }
 
+    deleteSignup(e) {
+        const { target } = e;
+        if (target.classList.contains('modal__background')) {
+            exitFromSignup();
+        }
+    }
+
     /**
      * Навешивает обработчики на валидацию
      */
-     componentDidMount() {
+    componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
         const validate = this.validateSignup;
         let user;
@@ -161,5 +170,49 @@ export class Signup extends Component {
 
             store.dispatch(actionRegister(user));
         });
+
+        const { deleteSignup } = this;
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', deleteSignup);
+    }
+
+    componentWillUnmount() {
+        const modalBackground = document.body
+            .querySelector('.modal__background');
+        const { deleteSignup } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteSignup);
+        }
     }
 }
+
+const exitFromSignup = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+
+    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.replace(hrefRegExp.host, '')
+        : window.location.href.replace(hrefRegExp.localhost, '');
+
+    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
+
+    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
+        || document.body.querySelector('a');
+
+    const oldDatasetSection = dispatchElement.dataset.section;
+    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
+        dispatchElement.dataset.section = newDatasetSection;
+    }
+
+    dispatchElement.dispatchEvent(redirectMain);
+
+    if (dispatchElement) {
+        dispatchElement.dataset.section = oldDatasetSection;
+    }
+};
