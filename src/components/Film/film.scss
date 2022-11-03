@@ -27,8 +27,7 @@
     top: 9px;
     left: 0;
     border-radius: 4px;
-    color: #fff;
-    background-color: var(--rating-color, #12B77C);
+    color: var(--main-color-text);
 }
 
 [data-value-rating='positive'] {
@@ -66,7 +65,7 @@
 
 .film__title {
     font-size: 15px;
-    color: #fff;
+    color: var(--main-color-text);
     width: 210px;
     margin-top: 13px;
 }

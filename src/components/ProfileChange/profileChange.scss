@@ -1,0 +1,75 @@
+$height_wrapper:80px;
+$width_wrapper: 410px;
+
+$margin_top_input: 30px;
+$padding_input: 19px;
+
+$margin_top_button: 35px;
+
+$margin_bottom_error: 5px;
+
+@mixin profile__form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.profile__form__nick{
+    @include profile__form;
+}
+
+.profile__form__password{
+    @include profile__form;
+}
+
+.profile__wrapper__nick{
+    height: $height_wrapper;
+    width: $width_wrapper;
+    margin-top: $margin_top_input;
+}
+
+.profile__wrapper__old__password{
+    height: $height_wrapper;
+    width: $width_wrapper;
+}
+
+.profile__wrapper__password{
+    height: $height_wrapper;
+    width: $width_wrapper;
+    margin-top: $margin_top_input;
+}
+
+@mixin input{
+    font-size: 15px;
+    height: 42px;
+    width: $width_wrapper - $padding_input;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding-left: $padding_input;
+    background-color: #27292E;
+    color: #9C9C9C;
+}
+
+.profile__input{
+    @include input;
+    margin-bottom: $margin_bottom_error;
+}
+
+.profile__old__input {
+    @include input;
+    margin-bottom: $margin_bottom_error;
+}
+
+.profile__confirm__input{
+    @include input;
+    margin-bottom: $margin_bottom_error;
+}
+
+.profile__input__button{
+    height: 42px;
+    border: 0;
+    width: 210px;
+    margin-bottom: $margin_top_button;
+}

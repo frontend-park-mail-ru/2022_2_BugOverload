@@ -11,20 +11,6 @@ import { actionLogout } from '@store/actionCreater/userActions.js';
 */
 export class Userbar extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
-     */
-    constructor(props) {
-        super(props);
-        store.subscribe('user', () => {
-            if (!store.getSate('user')) {
-                this.rootNode.querySelector('.header').remove();
-                this.rootNode.insertAdjacentHTML('afterbegin', templateHeader());
-            }
-        });
-    }
-
-    /**
      * Навешивает обработчики на меню для обработки logout
      */
     addLogoutHandler() {
@@ -49,7 +35,7 @@ export class Userbar extends Component {
      */
     componentDidMount(user) {
         let isOpened = false;
-        const rootNode = this.rootNode;
+        const { rootNode } = this;
 
         const logout = this.addLogoutHandler;
 
@@ -70,6 +56,15 @@ export class Userbar extends Component {
             rootNode.querySelector('.header__userbar-substrate').classList.add('userbar-on');
 
             isOpened = true;
+
+            const userbarSubscribe = () => {
+                if (!store.getState('user')) {
+                    rootNode.querySelector('.header').remove();
+                    rootNode.insertAdjacentHTML('afterbegin', templateHeader());
+                    store.unsubscribe('user', userbarSubscribe);
+                }
+            };
+            store.subscribe('user', userbarSubscribe);
 
             logout();
 

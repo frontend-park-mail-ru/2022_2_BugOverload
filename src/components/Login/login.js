@@ -5,7 +5,9 @@ import {
 import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
-import { actionLogin } from '@store/actionCreater/userActions.js'
+import { actionLogin } from '@store/actionCreater/userActions.js';
+import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает логин.
@@ -20,10 +22,10 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            statusLogin: null,
         };
         store.subscribe('statusLogin', () => {
-            this.state.statusLogin = store.getSate('statusLogin');
+            this.state.statusLogin = store.getState('statusLogin');
             this.render();
         });
     }
@@ -36,13 +38,13 @@ export class Login extends Component {
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === 400) {
+        if (userStatus === responsStatuses.BadRequest) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === 401) {
+        if (userStatus === responsStatuses.Forbidden) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }
@@ -51,27 +53,34 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        if (!this.rootNode.querySelector('.modal__window')) {
-            const modal = new Modal(this.rootNode);
-            modal.render();
-        }
-
-        if(store.getSate('user')) {
-            document.body
-                .querySelector('.modal__background')
-                .remove();
+        if (store.getState('user')) {
+            const background = document.body.querySelector('.modal__background');
+            if (background) {
+                background.remove();
+                document.body.classList.remove('body_hide_y_scroll');
+                exitFromLogin();
+            }
 
             return;
         }
 
         if (this.state.statusLogin) {
-            this.handlerStatus(userStatus);
+            this.handlerStatus(this.state.statusLogin);
             return;
+        }
+
+        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        if (windowModal) {
+            windowModal.replaceChildren();
+        } else {
+            const modal = new Modal(this.rootNode);
+            modal.render();
         }
 
         const modalWindow = this.rootNode.querySelector('.modal__window__flex');
 
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
+        this.componentDidMount();
     }
 
     /**
@@ -88,10 +97,10 @@ export class Login extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 removeError(form, key);
-                continue;
+                return;
             }
             if (key === 'email') {
                 if (!checkEmail(form, user[key])) {
@@ -103,7 +112,7 @@ export class Login extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         if (flag) {
             return user;
@@ -112,8 +121,15 @@ export class Login extends Component {
         return null;
     }
 
+    deleteLogin(e) {
+        const { target } = e;
+        if (target.classList.contains('modal__background')) {
+            exitFromLogin();
+        }
+    }
+
     /**
-     * Навешивает обработчики на валидацию
+     * Навешивает обработчики на валидацию и на смену url при выходе
      */
     componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
@@ -137,5 +153,49 @@ export class Login extends Component {
 
             store.dispatch(actionLogin(user));
         });
+
+        const { deleteLogin } = this;
+        document.body
+            .querySelector('.modal__background')
+            .addEventListener('click', deleteLogin);
+    }
+
+    componentWillUnmount() {
+        const modalBackground = document.body
+            .querySelector('.modal__background');
+        const { deleteLogin } = this;
+        if (modalBackground) {
+            modalBackground.removeEventListener('click', deleteLogin);
+        }
     }
 }
+
+const exitFromLogin = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+
+    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.replace(hrefRegExp.host, '')
+        : window.location.href.replace(hrefRegExp.localhost, '');
+
+    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
+
+    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
+        || document.body.querySelector('a');
+
+    const oldDatasetSection = dispatchElement.dataset.section;
+    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
+        dispatchElement.dataset.section = newDatasetSection;
+    }
+
+    dispatchElement.dispatchEvent(redirectMain);
+
+    if (dispatchElement) {
+        dispatchElement.dataset.section = oldDatasetSection;
+    }
+};

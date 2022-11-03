@@ -1,4 +1,4 @@
-export const setUser = (user) => ({
+export const setUser = (user) => ({ // не используется
     type: 'setUser',
     value: user,
 });
@@ -19,4 +19,18 @@ export const actionLogin = (user) => ({
 export const actionRegister = (user) => ({
     type: 'signup',
     value: user,
+});
+
+export const actionGetSettings = () => ({
+    type: 'getSettings',
+});
+
+export const actionPutSettings = (user) => ({
+    type: 'putSettings',
+    value: user,
+});
+
+export const actionPutAvatar = (formDataAvatar) => ({
+    type: 'putAvatar',
+    value: formDataAvatar,
 });

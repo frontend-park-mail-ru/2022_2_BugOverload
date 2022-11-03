@@ -2,6 +2,7 @@ import { Ajax } from '@utils/ajax.js';
 import { Film } from '@components/Film/film.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import template from '@components/Collection/collection.handlebars';
+import { responsStatuses } from '@config/config.js';
 
 export const COLLECTION_TYPE = {
     popular: 'popular',
@@ -26,25 +27,19 @@ export class Collection {
     * @return {Object} Объект с данными о коллекции
     * @return {null} В случае ошибочного статуса
     */
-    async getRequestData() {
-        let href;
-        if (this._type === 'todayInCinema') {
-            href = 'in_cinema';
-        } else {
-            href = 'popular_films';
-        }
-        const response = await Ajax.get(`http://${DOMAIN}/v1/${href}`);
+    static async getRequestData(url) {
+        const response = await Ajax.get(url);
 
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return response.body;
         }
 
-        if (response.status === 404) {
+        if (response.status === responsStatuses.NotFound) {
             ShowErrorMessage('Данная коллекция не найдена');
             return null;
         }
 
-        if (response.status >= 500) {
+        if (response.status >= responsStatuses.InternalServerError) {
             ShowErrorMessage('Произошла ошибка сервера');
             return null;
         }
@@ -59,7 +54,7 @@ export class Collection {
     * @param {data Object} data - объект данных коллекции
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
-    renderTemplate(data) {
+    getTemplate(data) {
         const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         return template({ title: data.title, films });
