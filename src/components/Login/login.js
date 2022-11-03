@@ -6,6 +6,7 @@ import { Component } from '@components/Component.js';
 import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
+import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
@@ -57,7 +58,7 @@ export class Login extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                dispatchExitLogin();
+                exitFromLogin();
             }
 
             return;
@@ -123,7 +124,7 @@ export class Login extends Component {
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            dispatchExitLogin();
+            exitFromLogin();
         }
     }
 
@@ -169,7 +170,7 @@ export class Login extends Component {
     }
 }
 
-const dispatchExitLogin = () => {
+const exitFromLogin = () => {
     const redirectMain = new Event(
         'click',
         {
@@ -177,11 +178,24 @@ const dispatchExitLogin = () => {
             cancelable: true,
         },
     );
-    const dispathHref = document.createElement('a');
-    dispathHref.dataset.section = (window.location.href.match(hrefRegExp.host))
+
+    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
         ? window.location.href.replace(hrefRegExp.host, '')
         : window.location.href.replace(hrefRegExp.localhost, '');
-    
-    dispathHref.dataset.section.replace(hrefRegExp.auth, '');
-    dispathHref.dispatchEvent(redirectMain);
+
+    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
+
+    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
+        || document.body.querySelector('a');
+
+    const oldDatasetSection = dispatchElement.dataset.section;
+    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
+        dispatchElement.dataset.section = newDatasetSection;
+    }
+
+    dispatchElement.dispatchEvent(redirectMain);
+
+    if (dispatchElement) {
+        dispatchElement.dataset.section = oldDatasetSection;
+    }
 };
