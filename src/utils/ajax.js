@@ -50,16 +50,26 @@ export class Ajax {
         return { status: response.status, body: result };
     }
 
-    static async put({ url, body }) {
-        const response = await fetch(url, {
-            method: 'PUT',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-        });
+    static async put({ url, body }, uploadFile = false) {
+        let response;
+        if (uploadFile) {
+            response = await fetch(url, {
+                method: 'PUT',
+                mode: 'cors',
+                credentials: 'include',
+                body,
+            });
+        } else {
+            response = await fetch(url, {
+                method: 'PUT',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+        }
 
         let result = await response.text();
 

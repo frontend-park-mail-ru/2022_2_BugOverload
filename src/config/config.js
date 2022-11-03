@@ -1,8 +1,8 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-import { filmView } from '@views/FilmPage/filmPage.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
+import { filmPage } from '@views/FilmPage/filmPage.js';
 
 export const API = {
     img: {
@@ -37,6 +37,16 @@ export const API = {
     testApiConfig,
 };
 
+export const responsStatuses = {
+    OK: 200,
+    Created: 201,
+    NoContent: 204,
+    BadRequest: 400,
+    Forbidden: 403,
+    NotFound: 404,
+    InternalServerError: 500,
+};
+
 // удалим перед релизом
 function testApiConfig() {
     console.log(API.img.poster_hor(12));
@@ -67,5 +77,6 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
-    { path: '/film/321/', view: filmView },
+    { path: '/film/321/', view: filmPage },
+
 ];

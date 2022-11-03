@@ -23,6 +23,7 @@ const handlers = [
 
     { type: 'getSettings', methodStore: reducerUser.getSettings.bind(reducerUser) },
     { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },
+    { type: 'putAvatar', methodStore: reducerUser.putAvatar.bind(reducerUser) },
 
 ];
 

@@ -2,7 +2,6 @@ import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-
 /**
 * Ходит за данными на бэкенд.
 * Рендерит HTML-шаблон превью фильма на главной

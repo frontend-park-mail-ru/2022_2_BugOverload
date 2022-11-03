@@ -44,9 +44,9 @@ class Router {
             this.register(rout);
         }
 
-        this.root.addEventListener('click', (e) => {
+        document.addEventListener('click', (e) => {
             const { target } = e;
-            if (target instanceof HTMLAnchorElement || target instanceof HTMLImageElement) {
+            if (target.dataset.section) {
                 if (this.mapViews.get(target.dataset.section)) {
                     e.preventDefault();
                     this.go({ path: target.dataset.section }, true);
@@ -109,8 +109,16 @@ class Router {
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            this.root.replaceChildren();
-        } else {
+            const loginView = this.mapViews.get('/login/');
+            const signupView = this.mapViews.get('/signup/');
+            if (this.lastView !== loginView && this.lastView !== signupView) {
+                this.root.replaceChildren();
+            } else {
+                this.navigate(stateObject, pushState);
+                this.lastView = this.mapViews.get(stateObject.path);
+                return;
+            }
+        } else if (!this.lastView) {
             const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
             currentView.render(window.history.state);
         }

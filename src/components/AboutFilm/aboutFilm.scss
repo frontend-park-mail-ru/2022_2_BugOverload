@@ -22,7 +22,6 @@
   position: absolute;
   left: 0;
   bottom: 0;
-
   background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
 }
 
@@ -30,9 +29,7 @@
   display: flex;
   position: relative;
   width: 100%;
-
   z-index: 1;
-
   flex-direction: column;
   margin-left: var(--standart-margin);
   margin-top: 305px;

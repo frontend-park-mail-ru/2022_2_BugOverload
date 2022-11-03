@@ -14,7 +14,7 @@ import { View } from '@views/View.js';
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
 *
 */
-export class FilmView extends View {
+export class FilmPage extends View {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,4 +65,4 @@ export class FilmView extends View {
     }
 }
 
-export const filmView = new FilmView({ rootNode: document.getElementById('root') });
+export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

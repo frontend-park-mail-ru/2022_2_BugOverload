@@ -4,11 +4,6 @@ import { store } from '@store/Store.js';
 import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
 import template from '@components/Collection/collection.handlebars';
 
-export const COLLECTION_TYPE = {
-    popular: 'popular',
-    todayInCinema: 'todayInCinema',
-};
-
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
 * Добавляет обработчики событий на кнопки слайдера

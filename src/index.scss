@@ -1,3 +1,5 @@
+
+
 @import "@components/Header/header";
 @import "@components/Login/login";
 @import "@components/Modal/modal";
@@ -20,7 +22,7 @@
 @import "@components/ProfileMenu/profileMenu";
 @import "@components/ProfileChange/profileChange";
 @import "@views/UserProfile/userProfile";
-@import "@components/Components";
+@import "@components/_Components";
 @import "@views/FilmPage/filmPage";
 @import "@fonts/fonts.css";
 
@@ -45,8 +47,8 @@ body, html {
   --main-color-text: #fff;
   --secondary-color-text: #bebebe;
   --standart-margin: 52px;
-
-  font-family: "Mail Sans Roman";
+  --error-color:rgb(150 0 0);
+  font-family: 'Mail Sans Roman';
   background-color: var(--backgr-color);
   margin: 0;
   padding: 0;

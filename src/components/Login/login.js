@@ -7,6 +7,7 @@ import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает логин.
@@ -37,13 +38,13 @@ export class Login extends Component {
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === 400) {
+        if (userStatus === responsStatuses.BadRequest) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === 403) {
+        if (userStatus === responsStatuses.Forbidden) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }
@@ -57,11 +58,7 @@ export class Login extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                window.history.pushState(
-                    null,
-                    '',
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
+                exitFromLogin();
             }
 
             return;
@@ -100,10 +97,10 @@ export class Login extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 removeError(form, key);
-                continue;
+                return;
             }
             if (key === 'email') {
                 if (!checkEmail(form, user[key])) {
@@ -115,7 +112,7 @@ export class Login extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         if (flag) {
             return user;
@@ -127,14 +124,7 @@ export class Login extends Component {
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            const redirectMain = new Event(
-                'click',
-                {
-                    bubbles: true,
-                    cancelable: true,
-                },
-            );
-            document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+            exitFromLogin();
         }
     }
 
@@ -179,3 +169,33 @@ export class Login extends Component {
         }
     }
 }
+
+const exitFromLogin = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+
+    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.replace(hrefRegExp.host, '')
+        : window.location.href.replace(hrefRegExp.localhost, '');
+
+    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
+
+    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
+        || document.body.querySelector('a');
+
+    const oldDatasetSection = dispatchElement.dataset.section;
+    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
+        dispatchElement.dataset.section = newDatasetSection;
+    }
+
+    dispatchElement.dispatchEvent(redirectMain);
+
+    if (dispatchElement) {
+        dispatchElement.dataset.section = oldDatasetSection;
+    }
+};

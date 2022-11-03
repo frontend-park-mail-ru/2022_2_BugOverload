@@ -7,6 +7,7 @@ import { Modal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -30,7 +31,7 @@ export class Signup extends Component {
     }
 
     handlerStatus() {
-        if (this.state.statusSignup === 400) {
+        if (this.state.statusSignup === responsStatuses.BadRequest) {
             const wrapper = document.getElementById('signup_email');
             renderError(wrapper, 'email', 'Пользователь с таким email уже зарегистрирован');
         }
@@ -45,11 +46,7 @@ export class Signup extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                window.history.pushState(
-                    null,
-                    '',
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
+                exitFromSignup();
             }
 
             return;
@@ -92,14 +89,14 @@ export class Signup extends Component {
 
         let flag = true;
 
-        for (const key of Object.keys(user)) {
+        Object.keys(user).forEach((key) => {
             if (keyup && !user[key]) {
                 if (key === 'nickname') {
                     removeError(form, 'text');
                 } else {
                     removeError(form, key);
                 }
-                continue;
+                return;
             }
 
             if (key === 'email') {
@@ -123,7 +120,7 @@ export class Signup extends Component {
                     flag = false;
                 }
             }
-        }
+        });
 
         const confirm = document.getElementById('confirm');
 
@@ -146,14 +143,7 @@ export class Signup extends Component {
     deleteSignup(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            const redirectMain = new Event(
-                'click',
-                {
-                    bubbles: true,
-                    cancelable: true,
-                },
-            );
-            document.body.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+            exitFromSignup();
         }
     }
 
@@ -196,3 +186,33 @@ export class Signup extends Component {
         }
     }
 }
+
+const exitFromSignup = () => {
+    const redirectMain = new Event(
+        'click',
+        {
+            bubbles: true,
+            cancelable: true,
+        },
+    );
+
+    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.replace(hrefRegExp.host, '')
+        : window.location.href.replace(hrefRegExp.localhost, '');
+
+    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
+
+    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
+        || document.body.querySelector('a');
+
+    const oldDatasetSection = dispatchElement.dataset.section;
+    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
+        dispatchElement.dataset.section = newDatasetSection;
+    }
+
+    dispatchElement.dispatchEvent(redirectMain);
+
+    if (dispatchElement) {
+        dispatchElement.dataset.section = oldDatasetSection;
+    }
+};

@@ -86,7 +86,6 @@ export class ListReviews extends Component {
         }));
     }).bind(this);
 
-
     componentDidMount() {
         if (this.isMounted) {
             return;

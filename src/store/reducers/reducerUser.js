@@ -1,5 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
-import { API } from '@config/config.js';
+import { API, responsStatuses } from '@config/config.js';
 
 class ReducerUser {
     async login(user) {
@@ -9,9 +9,9 @@ class ReducerUser {
         });
 
         const response = await responsePromise;
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 statusLogin: null,
             };
         }
@@ -25,9 +25,9 @@ class ReducerUser {
         });
 
         const response = await responsePromise;
-        if (response.status === 201) {
+        if (response.status === responsStatuses.Created) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 statusSignup: null,
             };
         }
@@ -38,9 +38,9 @@ class ReducerUser {
         const responsePromise = Ajax.get(API.auth);
 
         const response = await responsePromise;
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return {
-                user: response.body,
+                user: handlerUrlObject(response.body, 'avatar'),
                 authStatus: null,
             };
         }
@@ -51,10 +51,10 @@ class ReducerUser {
         const responsePromise = Ajax.get(API.logout);
 
         const response = await responsePromise;
-        if (response.status === 204) {
+        if (response.status === responsStatuses.NoContent) {
             return {
                 user: null,
-                logoutStatus: 204,
+                logoutStatus: responsStatuses.NoContent,
             };
         }
         return null;
@@ -64,7 +64,7 @@ class ReducerUser {
         const responsePromise = Ajax.get(`http://${DOMAIN}/v1/user/settings`);
 
         const response = await responsePromise;
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return {
                 userInfo: response.body,
             };
@@ -74,18 +74,44 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/user/setting`,
+            url: `http://${DOMAIN}/v1/user/settings`,
             body: user,
         });
 
         const response = await responsePromise;
-        if (response.status !== 204) {
+        if (response.status !== responsStatuses.NoContent) {
             return {
                 statusChangeSettings: response.status,
             };
         }
         return { statusChangeSettings: null };
     }
+
+    async putAvatar(formDataAvatar) {
+        formDataAvatar.append('key', 'user_avatar');
+        const responsePromise = Ajax.put({
+            url: `http://${DOMAIN}/v1/image?key=session`,
+            body: formDataAvatar,
+        }, true);
+
+        const response = await responsePromise;
+        if (response.status === responsStatuses.NoContent) {
+            return {
+                statusChangeAvatar: response.status,
+            };
+        }
+        return { statusChangeAvatar: null };
+    }
 }
 
 export const reducerUser = new ReducerUser();
+
+const handlerUrlObject = (object, nameObject) => {
+    if (nameObject === 'avatar') {
+        const newUrl = `http://movie-gate.online:8088/v1/image?object=user_avatar&key=${nameObject}`;
+        if (object[nameObject] !== newUrl) {
+            object[nameObject] = newUrl;
+        }
+    }
+    return object;
+};
