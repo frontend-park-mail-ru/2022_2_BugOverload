@@ -1,6 +1,7 @@
-import { Ajax } from '@utils/ajax.js';
 import { Film } from '@components/Film/film.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
+import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
 import template from '@components/Collection/collection.handlebars';
 
 export const COLLECTION_TYPE = {
@@ -13,38 +14,32 @@ export const COLLECTION_TYPE = {
 * Добавляет обработчики событий на кнопки слайдера
 *
 */
-export class Collection {
-    constructor(type) {
-        this._type = type;
+export class Collection extends Component {
+    constructor(nameLocation) {
+        super();
+        this.state = {
+            collection: null,
+        };
+        this.nameLocation = nameLocation;
+        this.location = this.rootNode.querySelector(`.${nameLocation}`);
+        store.subscribe(`collection-${nameLocation}`, () => {
+            this.state.collection = store.getState(`collection-${nameLocation}`);
+            this.render();
+        });
     }
 
-    /**
-    * Получает данные с бэкенда.
-    * Обрабатывает статусы ответа.
-    * В случае ошибочного статуса добавляет собщение об ошибке в root в index.html
-    *
-    * @return {Object} Объект с данными о коллекции
-    * @return {null} В случае ошибочного статуса
-    */
-    static async getRequestData(url) {
-        const response = await Ajax.get(url);
+    init() {
+        store.dispatch(
+            actionGetCollectionData({
+                tag: this.getTagFromName(this.nameLocation),
+                name: this.nameLocation,
+            }),
+        );
+    }
 
-        if (response.status === 200) {
-            return response.body;
-        }
-
-        if (response.status === 404) {
-            ShowErrorMessage('Данная коллекция не найдена');
-            return null;
-        }
-
-        if (response.status >= 500) {
-            ShowErrorMessage('Произошла ошибка сервера');
-            return null;
-        }
-
-        ShowErrorMessage();
-        return null;
+    getTagFromName(name) {
+        const words = name.split('-');
+        return words[words.length - 1];
     }
 
     /**
@@ -53,19 +48,21 @@ export class Collection {
     * @param {data Object} data - объект данных коллекции
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
-    getTemplate(data) {
-        const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
+    render() {
+        this.location.innerHTML = '';
+        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        return template({ title: data.title, films });
+        this.location.insertAdjacentHTML('afterbegin', template({ title: this.state.collection.title, films }));
+        this.componentDidMount();
     }
 
     /**
     * Служит для добавления обработчиков на все отрендеренные на странице коллекции
     *
     */
-    static addHandlers() {
-        const sliders = document.querySelectorAll('.collection__container');
-        sliders.forEach((slider) => Collection.addHandlerSlider(slider));
+    componentDidMount() {
+        const slider = this.location.querySelector('.collection__container');
+        this.addHandlerSlider(slider);
     }
 
     /**
@@ -74,7 +71,7 @@ export class Collection {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    static addHandlerSlider(slider) {
+    addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
 

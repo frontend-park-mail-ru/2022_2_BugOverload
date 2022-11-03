@@ -3,9 +3,10 @@ import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js'
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
 
 export class MenuInfoFilm extends Component {
-    constructor(filmData) {
+    constructor() {
         super();
         this.menuState = {
             description: 1,
@@ -13,10 +14,19 @@ export class MenuInfoFilm extends Component {
         };
 
         this.location = document.querySelector('.js-film-page__menu');
+        this.filmData = store.getState('film');
 
-        this.description = new DescriptionFilm(filmData.description);
+        this.description = new DescriptionFilm(this.filmData.descriptionText);
         this.rating = new Rating();
-        this.details = new DetailsFilm(filmData.details);
+
+        const fullDetails = this.filmData.details;
+        fullDetails.type_serial = this.filmData.about.type_serial;
+        fullDetails.year_prod = this.filmData.about.year_prod;
+        fullDetails.directors = this.filmData.about.directors;
+        fullDetails.age_limit = this.filmData.about.age_limit;
+        fullDetails.duration = this.filmData.about.duration;
+
+        this.details = new DetailsFilm(fullDetails);
 
         this.state = this.menuState.description;
     }
@@ -28,36 +38,22 @@ export class MenuInfoFilm extends Component {
 
         this.location.insertAdjacentHTML('afterbegin', template());
 
-        // this.description = this.description ? this.description
-        //     : new DescriptionFilm(this.filmData.description);
-
-        // this.details = this.details ? this.details : new DetailsFilm(this.filmData.details);
-        // this.rating = this.rating ? this.rating : new Rating();
-
         this.switchState(state);
-        // store.dispatch(actionOpenDescription());
     }
 
     switchState(state) {
         switch (state) {
         case this.menuState.description:
-            // if (this.description.isActive) {
-            //     break;
-            // }
             this.details.remove();
             delete this.location.querySelector('.js-menu-info-film__item-details').dataset.menuInfoFilmItemActive;
 
             this.description.render();
-            // debugger;
             this.rating.render();
             this.rating.componentDidMount();
             this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive = 'true';
             this.state = this.menuState.description;
             break;
         case this.menuState.details:
-            // if (this.details.isActive) {
-            //     break;
-            // }
             this.description.remove();
             this.rating.componentDidUnmount();
             this.rating.remove();
@@ -81,21 +77,16 @@ export class MenuInfoFilm extends Component {
                 return;
             }
             this.switchState(this.menuState.description);
-
-            // store.dispatch(actionOpenDescription());
         };
         btnDesciption.addEventListener('click', switchToDesription);
 
         const btnDetails = document.querySelector('.js-menu-info-film__item-details');
         const switchToDetails = (event) => {
             event.preventDefault();
-            // this.switchState(this.menuState.details);
-            // debugger;
             if (this.location.querySelector('.js-menu-info-film__item-details').dataset.menuInfoFilmItemActive) {
                 return;
             }
             this.switchState(this.menuState.details);
-            // store.dispatch(actionOpenDetails());
         };
         btnDetails.addEventListener('click', switchToDetails);
     }

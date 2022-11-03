@@ -20,8 +20,8 @@ export const API = {
     signup: `http://${DOMAIN}/v1/auth/signup`,
     logout: `http://${DOMAIN}/v1/auth/logout`,
 
-    in_cinema: `http://${DOMAIN}/v1/in_cinema`,
-    popular_films: `http://${DOMAIN}/v1/popular_films`,
+    collection(tag) { return `http://${DOMAIN}/v1/collection/${tag}`; },
+
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
     film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
     metaFilm(id) { return `http://${DOMAIN}/v1/film/${id}/metadata`; },
@@ -52,7 +52,7 @@ function testApiConfig() {
     console.log(API.logout);
 
     console.log(API.in_cinema);
-    console.log(API.popular_films);
+    console.log(API.popular);
     console.log(API.recommendation_film);
     console.log(API.metaFilm(225));
 }

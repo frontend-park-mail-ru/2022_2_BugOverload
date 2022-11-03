@@ -11,7 +11,7 @@ export class ReviewStatistic extends Component {
         this.location = this.rootNode.querySelector('.js-reviews-statistic');
     }
 
-    componentDidMount() {
+    init() {
         store.subscribe('infoReviews', () => {
             this.state.infoReviews = store.getState('infoReviews');
             this.render();

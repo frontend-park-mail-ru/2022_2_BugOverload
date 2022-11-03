@@ -5,9 +5,9 @@ import { store } from '@store/Store.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 
 export class AboutFilm extends Component {
-    constructor(data) {
+    constructor() {
         super();
-        this.data = data;
+        this.data = store.getState('film').about;
     }
 
     getTemplate() {
@@ -21,18 +21,6 @@ export class AboutFilm extends Component {
         }
 
         const menu = new SaveToCollectionMenu();
-        //     [
-        //     {
-        //         coll_name: 'Избранное',
-        //     },
-        //     {
-        //         coll_name: 'Топчик',
-        //         isUsed: 'true',
-        //     },
-        //     {
-        //         coll_name: 'Друг посоветовал',
-        //     },
-        // ]
 
         buttonPlus.addEventListener('click', (e) => {
             e.preventDefault();

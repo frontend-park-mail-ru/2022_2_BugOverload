@@ -77,8 +77,6 @@
 .header__form__input:focus + .header__form__icon-search {
   filter: invert(56%) sepia(71%) saturate(495%) hue-rotate(3deg) brightness(125%) contrast(100%);
   transition: 0.08s linear;
-
-  // content: url("@assets/icons/icon-active-search.png");
 }
 
 .header__login__btn {

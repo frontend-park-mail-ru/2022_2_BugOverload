@@ -6,21 +6,6 @@ export class DescriptionFilm extends Component {
         super();
         this.text = text;
         this.location = document.querySelector('.js-film-page__description');
-        // this.state = {
-        //     descriptionIsActive: null,
-        // };
-        // store.subscribe('descriptionIsActive', () => {
-        //     debugger;
-        //     if (store.getState('descriptionIsActive')) {
-        //         // this.rootNode.querySelector('.header').remove();
-        //         this.location.insertAdjacentHTML('afterbegin', template({ text: this.text }));
-        //     } else {
-        //         this.location.innerHTML = ''; //TODO
-        //     }
-        // });
-        // debugger;
-        // console.log(store.mapActionHandlers);
-        // console.log(store.mapSubscribers);
     }
 
     render() {

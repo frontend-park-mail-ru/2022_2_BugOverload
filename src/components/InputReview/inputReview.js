@@ -26,14 +26,12 @@ export class InputReview extends Component {
         const modal = new Modal(this.rootNode);
         modal.render();
 
-        // const inputReview = new InputReview(user);
-
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', template({ count_reviews: store.getState('countReviews'), nickname: store.getState('user').nickname }));
         this.componentDidMount();
     }
 
-    validate() {}
+    validate() {} // TODO
 
     handlerSubmit(e) {
         e.preventDefault();
@@ -85,14 +83,5 @@ export class InputReview extends Component {
             headText.innerHTML = item.textContent;
             input.setAttribute('value', item.dataset.value);
         }));
-
-        document.addEventListener('click', this.closeWindow.bind(this));
-    }
-
-    closeWindow(e) {
-        if (!e.target.closest('.input-review__select')) {
-            head.removeAttribute('open');
-            list.setAttribute('hidden', '');
-        }
     }
 }
