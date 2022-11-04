@@ -43,7 +43,7 @@ export class Login extends Component {
         }
         const wrapper = document.getElementById('login_password');
 
-        if (userStatus === responsStatuses.Forbidden) {
+        if (userStatus === responsStatuses.Unauthorizeted) {
             renderError(wrapper, 'password', 'Неверный пароль');
         }
     }

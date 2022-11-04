@@ -37,6 +37,7 @@ export const responsStatuses = {
     Created: 201,
     NoContent: 204,
     BadRequest: 400,
+    Unauthorizeted: 401,
     Forbidden: 403,
     NotFound: 404,
     InternalServerError: 500,
