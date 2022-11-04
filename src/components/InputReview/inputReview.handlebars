@@ -10,28 +10,30 @@
             </div>
         </div>
         <form class="input-review__form js-input-review__form">
-            <div class="input-review__select">
-                <input class="input-review__select-input js-input-review__select-input" type="hidden" name="">
-                <div class="input-review__select-head">
-                    <div class="input-review__select-head-text">
-                        Выберите тип рецензии
+            <div class="input-review__select__wrapper">
+                <div class="input-review__select">
+                    <input class="input-review__select-input js-input-review__select-input" type="hidden" name="">
+                    <div class="input-review__select-head">
+                        <div class="input-review__select-head-text">
+                            Выберите тип рецензии
+                        </div>
+                        <div class="input-review__select-head-icon"></div>
                     </div>
-                    <div class="input-review__select-head-icon"></div>
+                    <ul class="input-review__select-list" hidden>
+                        <li class="input-review__select-item" data-value="1">
+                            <div class="input-review__select-icon-positive"></div>
+                            Положительная
+                        </li>
+                        <li class="input-review__select-item" data-value="0">
+                            <div class="input-review__select-icon-neutral"></div>
+                            Нейтральная
+                        </li>
+                        <li class="input-review__select-item" data-value="-1">
+                            <div class="input-review__select-icon-negative"></div>
+                            Отрицательная
+                        </li>
+                    </ul>
                 </div>
-                <ul class="input-review__select-list" hidden>
-                    <li class="input-review__select-item" data-value="positive">
-                        <div class="input-review__select-icon-positive"></div>
-                        Положительная
-                    </li>
-                    <li class="input-review__select-item" data-value="0">
-                        <div class="input-review__select-icon-neutral"></div>
-                        Нейтральная
-                    </li>
-                    <li class="input-review__select-item" data-value="-1">
-                        <div class="input-review__select-icon-negative"></div>
-                        Отрицательная
-                    </li>
-                </ul>
             </div>
             <div class="input-title__wrapper">
                 <input class="input-review__input-title" type="text" name="review-title" placeholder="Заголовок">

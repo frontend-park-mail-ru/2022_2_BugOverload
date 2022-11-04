@@ -35,20 +35,24 @@ export class InputReview extends Component {
         this.componentDidMount();
     }
 
-    validate(titleInputWrapper, textInputWrapper, typeInput) {
+    validate(reviewType, titleInputWrapper, textInputWrapper) {
         let flag = true;
-        if (!typeInput.value) { // самое быстрое решение // TODO
+
+        if (!reviewType) {
+            const reviewWrapper = this.rootNode.querySelector('.input-review__select__wrapper');
             renderError(
-                titleInputWrapper,
-                'text',
+                reviewWrapper,
+                'input-review__select',
                 'Укажите тип рецензии',
+                false,
             );
             flag = false;
 
-            typeInput.addEventListener('change', () => {
+            reviewWrapper.children[0].addEventListener('click', () => {
                 removeError(
-                    titleInputWrapper,
-                    'text',
+                    reviewWrapper,
+                    'input-review__select',
+                    false,
                 );
             }, { once: true });
         }
@@ -68,6 +72,7 @@ export class InputReview extends Component {
                 );
             }, { once: true });
         }
+
         if (!textInputWrapper.children[0].value) {
             renderError(
                 textInputWrapper,
@@ -102,7 +107,7 @@ export class InputReview extends Component {
         review.body = textInputWrapper.children[0].value;
         review.filmID = store.getState('film').id;
 
-        if (!this.validate(titleInputWrapper, textInputWrapper, typeInput)) {
+        if (!this.validate(review.type, titleInputWrapper, textInputWrapper)) {
             return;
         }
 
