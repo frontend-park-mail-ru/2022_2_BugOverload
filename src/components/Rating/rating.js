@@ -10,6 +10,7 @@ export class Rating extends Component {
         super();
         this.information = information;
         this.location = document.querySelector('.js-film-page__rating');
+        this.filmData = store.getState('film');
 
         this.state = {
             rating: null,
@@ -24,7 +25,7 @@ export class Rating extends Component {
         });
 
         if (store.getState('user')) {
-            store.dispatch(actionGetMetaDataFilm({ filmID: store.getState('film').id }));
+            store.dispatch(actionGetMetaDataFilm({ filmID: this.filmData.id }));
         }
     }
 
@@ -33,7 +34,13 @@ export class Rating extends Component {
             return;
         }
         this.location.innerHTML = '';
-        this.location.insertAdjacentHTML('afterbegin', template({ ...this.information, ...this.state.statusRating, ...this.state.rating }));
+        this.location.insertAdjacentHTML('afterbegin', template({
+            ...this.information,
+            ...this.state.statusRating,
+            ...this.state.rating,
+            [`type_${this.filmData.type}`]: true,
+            filmRating: this.filmData.rating,
+        }));
         this.componentDidMount();
         if (this.state.rating === null) {
             return;

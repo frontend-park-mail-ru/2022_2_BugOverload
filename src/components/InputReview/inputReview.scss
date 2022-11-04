@@ -27,8 +27,6 @@
   width: 48px;
   height: 48px;
   background-size: cover;
-
-  /* background-position-x: -24px; */
 }
 
 .input-review__info-user-container {
@@ -139,21 +137,8 @@
   cursor: pointer;
 }
 
-/* .input-review__select-list::-webkit-scrollbar {
-    width: 7px;
-    background-color: #F8F9FA;
-    padding: 12px 0;
-} */
-
-/* .input-review__select-list::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #D9D9D9;
-} */
-
 .input-review__select-list .input-review__select-item {
   position: relative;
-
-  /* border-top: 1px solid rgb(224 229 231 / 50%); */
   padding: 10px 15px;
   cursor: pointer;
   list-style-type: none;

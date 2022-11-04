@@ -38,16 +38,11 @@ export class FilmPage extends View {
             return;
         }
 
+        ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
         const aboutFilm = new AboutFilm();
-
-        ROOT.insertAdjacentHTML('beforeend', templateFilmPage({
-            about: aboutFilm.getTemplate(),
-        }));
-
-        aboutFilm.componentDidMount();
+        aboutFilm.render();
 
         const menuInfoFilm = new MenuInfoFilm();
-
         menuInfoFilm.render();
         menuInfoFilm.componentDidMount();
 
