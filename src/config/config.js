@@ -24,15 +24,15 @@ export const API = {
 
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
     film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
-    metaFilm(id) { return `http://${DOMAIN}/v1/film/${id}/metadata`; },
+    metaFilm(id) { return `http://${DOMAIN}/v1/film/${id}/user_activities`; },
 
-    rate: `http://${DOMAIN}/v1/rate`,
-    delrate: `http://${DOMAIN}/v1/delrate`,
+    rate(id) { return `http://${DOMAIN}/v1/film/${id}/rate`; },
+    del_rate(id) { return `http://${DOMAIN}/v1/film/${id}/rate/drop`; },
 
     reviews(id, count, delimeter) {
-        return `http://${DOMAIN}/v1/film/${id}/reviews?id=${id}&count=${count}&delimeter=${delimeter}`;
+        return `http://${DOMAIN}/v1/film/${id}/reviews?count=${count}&delimeter=${delimeter}`;
     },
-    sendreview: `http://${DOMAIN}/v1/sendreview`,
+    send_review(id) { return `http://${DOMAIN}/v1/film/${id}/review/new`; },
 
     testApiConfig,
 };

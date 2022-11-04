@@ -43,10 +43,9 @@ export class InputReview extends Component {
         const textInput = form.querySelector('textarea[name=review-text]');
 
         review.type = typeInput.value;
-        review.title = titleInput.value;
-        review.text = textInput.value;
+        review.name = titleInput.value;
+        review.body = textInput.value;
         review.filmID = store.getState('film').id;
-        review.email = store.getState('user').email;
 
         this.validate();
 

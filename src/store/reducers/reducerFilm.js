@@ -14,11 +14,11 @@ class ReducerFilm {
 
     async rate(ratingData) {
         const response = await Ajax.post({
-            url: API.rate,
-            body: ratingData,
+            url: API.rate(ratingData.filmID),
+            body: { rate: ratingData.rate },
         });
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return {
                 rating: response.body,
                 statusRating: null,
@@ -27,12 +27,12 @@ class ReducerFilm {
         return { statusRating: response.status };
     }
 
-    async deleteRate(ratingData) {
+    async deleteRate({ filmID }) {
         const response = await Ajax.post({
-            url: API.delrate,
-            body: ratingData,
+            url: API.del_rate(filmID),
+            // body: ratingData,
         });
-        if (response.status === 200) {
+        if (response.status === 204) {
             return {
                 rating: null,
                 statusRating: null,
@@ -71,11 +71,11 @@ class ReducerFilm {
 
     async sendReview(reviewData) {
         const response = await Ajax.post({
-            url: API.sendreview,
+            url: API.send_review(reviewData.filmID),
             body: reviewData,
         });
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return {
                 countReviews: store.getState('countReviews') + 1,
             };

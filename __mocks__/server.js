@@ -779,7 +779,7 @@ app.get('/v1/recommendation_film', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-app.get('/v1/film/321',  (req, res) => {
+app.get('/v1/film/:id',  (req, res) => {
 	const info = {
 		id: 321,
 		about: {
@@ -844,24 +844,24 @@ app.get('/v1/film/321',  (req, res) => {
 			],
 		},
 
-		reviews: [
-			{
-				avatar: DEFAULT_AVATAR,
-				username: "Azazin",
-				userCountReviews: 13,
-				date: "11.09.2001",
-				title: "Ребята, не затягивайте, РК близко....",
-				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
-			},
-			{
-				avatar: DEFAULT_AVATAR,
-				username: "A124gr",
-				userCountReviews: 1312,
-				date: "11.09.2001",
-				title: "Ребята, не затягивайте, РК близко....",
-				text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
-			}
-		],
+		// reviews: [
+		// 	{
+		// 		avatar: DEFAULT_AVATAR,
+		// 		username: "Azazin",
+		// 		userCountReviews: 13,
+		// 		date: "11.09.2001",
+		// 		title: "Ребята, не затягивайте, РК близко....",
+		// 		text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+		// 	},
+		// 	{
+		// 		avatar: DEFAULT_AVATAR,
+		// 		username: "A124gr",
+		// 		userCountReviews: 1312,
+		// 		date: "11.09.2001",
+		// 		title: "Ребята, не затягивайте, РК близко....",
+		// 		text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
+		// 	}
+		// ],
 
 		reviewInfo: {
 			total: 2224,
@@ -881,7 +881,7 @@ const filmRateStorage = {
 	'Dop123@mail.ru': {
 			'321': {
 				'rate': 7,
-				'date': '11.11.2007',
+				'time': '11.11.2007',
 			},
 		},
 };
@@ -919,62 +919,62 @@ const reviewsStorage = {
 			author: 'Dop123@mail.ru',
 			id: 0,
 			type: -1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
-			date: '11.11.2007',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			time: '11.11.2007',
 		},
 		{
 			author: 'Doqp123@mail.ru',
 			id: 1,
 			type: 1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
-			date: '11.11.2107',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			time: '11.11.2107',
 		},
 		{
 			author: 'Doqwep123@mail.ru',
 			id: 2,
 			type: 0, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Очень умно написано.',
-			date: '11.11.2027',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
+			time: '11.11.2027',
 		},
 		{
 			author: 'Dop123@mail.ru',
 			id: 3,
 			type: 1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
-			date: '11.11.20q7',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			time: '11.11.20q7',
 		},
 		{
 			author: 'qweql.ru',
 			id: 4,
 			type: 1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
-			date: '11.11.1117',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			time: '11.11.1117',
 		},
 		{
 			author: 'Dqwewevw33.ru',
 			id: 5,
 			type: 1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечwewзии. Не Очень умно написано.',
-			date: '01.21.1107',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечwewзии. Не Очень умно написано.',
+			time: '01.21.1107',
 		},
 		{
 			author: 'wwwwwwwil.ru',
 			id: 6,
 			type: 1, // -1, 0, 1 // отриц, нейтр, положит
-			title: 'Какой-то заголовок',
-			text: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
-			date: '10.11.3350',
+			name: 'Какой-то заголовок',
+			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
+			time: '10.11.3350',
 		},
 	]
 };
 
-app.get('/v1/film/:id/metadata',  (req, res) => {
+app.get('/v1/film/:id/user_activities',  (req, res) => {
 	if (Object.keys(req.cookies).length == 0) {
 		res.status(401).json({});
 		return;
@@ -1003,7 +1003,7 @@ app.get('/v1/film/:id/metadata',  (req, res) => {
 		if (filmRateStorage[email][filmID]) {
 			Object.assign(meta, {rating : {
 					rate: filmRateStorage[email][filmID].rate,
-					date: filmRateStorage[email][filmID].date,
+					time: filmRateStorage[email][filmID].time,
 					filmID: filmID,
 				}
 			});
@@ -1012,12 +1012,12 @@ app.get('/v1/film/:id/metadata',  (req, res) => {
 	res.status(200).json(meta);
 });
 
-app.post('/v1/rate', (req, res) => {
+app.post('/v1/film/:id/rate', (req, res) => {
 	const rate = req.body.rate;
-	const email = req.body.email;
-	const filmID = req.body.filmID;
+	const email = 'Dop123@mail.ru';
+	const filmID = req.params.id;
 
-	if ( !rate || !email || !filmID) {
+	if ( !rate || !filmID) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
 	delete filmRateStorage[email][filmID]; //
@@ -1038,20 +1038,20 @@ app.post('/v1/rate', (req, res) => {
 
 	filmRateStorage[email][filmID] = {
 		rate: rate,
-		date: [day,month,year].join('.'),
+		time: [day,month,year].join('.'),
 	}
-	res.status(200).json({
+	res.status(201).json({
 		rate: filmRateStorage[email][filmID].rate,
-		date: filmRateStorage[email][filmID].date,
+		time: filmRateStorage[email][filmID].time,
 		filmID: filmID,
 	});
 });
 
-app.post('/v1/delrate', (req, res) => {
-	const email = req.body.email;
-	const filmID = req.body.filmID;
+app.post('/v1/film/:id/rate/drop', (req, res) => {
+	const email = 'Dop123@mail.ru';
+	const filmID = req.params.id;
 
-	if (!email || !filmID) {
+	if (!filmID) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
 	if (!filmRateStorage[email][filmID]) {
@@ -1059,12 +1059,13 @@ app.post('/v1/delrate', (req, res) => {
 	}
 
 	delete filmRateStorage[email][filmID];
-	res.status(200).json({});
+	res.status(204).json({});
+	// res.sendStatus(200);
 });
 
 app.get('/v1/film/:id/reviews',  (req, res) => {
-	const filmID = req.params.id; // Получен из url-параметра, но должен из get-параметров (по АПИ)
-	const { id, count, delimeter } = req.query;
+	const filmID = req.params.id;
+	const { count, delimeter } = req.query;
 	console.log(`count ${count}, delimeter ${delimeter} `);
 
 	let reviewsList = [];
@@ -1074,16 +1075,13 @@ app.get('/v1/film/:id/reviews',  (req, res) => {
 			author: {
 				avatar: DEFAULT_AVATAR,
 				count_reviews: 42,
-				id: 54521, // Это айди юзера?
+				id: 54521,
 				nickname: review.author,
 			},
-			/* text */
 			id: 1,
-			body: review.text,
-			//title
-			name: review.title,
-			//date
-			time: review.date,
+			body: review.body,
+			name: review.name,
+			time: review.time,
 			type: review.type,
 		});
 	}
@@ -1092,26 +1090,27 @@ app.get('/v1/film/:id/reviews',  (req, res) => {
 	res.status(200).json(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]}));
 });
 
-app.post('/v1/sendreview', (req, res) => {
+app.post('/v1/film/:id/review/new', (req, res) => {
+	console.log(JSON.stringify(req.cookies) + 'zzzz');
 	if (Object.keys(req.cookies).length == 0) {
 		console.log(JSON.stringify(req.cookies) + 'zzzz');
 		res.status(401).json({});
 		return;
 	}
+	const filmID = req.params.id;
 
-	const email = req.body.email;
-	const filmID = req.body.filmID;
-	const title = req.body.title;
-	const text = req.body.text;
+	const email = 'Dop123@mail.ru';
+	const name = req.body.name;
+	const body = req.body.body;
 	const type = req.body.type;
 
 	console.log(email + 'review');
 	console.log(filmID + 'review');
 	console.log(type + 'review');
-	console.log(title + 'review');
-	console.log(text + 'review');
+	console.log(name + 'review');
+	console.log(body + 'review');
 
-	if ( !email || !filmID || !type || !text || !title) {
+	if ( !email || !type || !body || !name) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
 	//Пусть пишут сколько хотят рецензий
@@ -1133,15 +1132,15 @@ app.post('/v1/sendreview', (req, res) => {
 		author: email,
 		id: 12,
 		type: type,
-		title: title,
-		text: text,
-		date: [day,month,year].join('.'),
+		name: name,
+		body: body,
+		time: [day,month,year].join('.'),
 	}
 
 	reviewsStorage[filmID].push(newReview);
 	++reviewsUsersMetaStorage[email].countReviews;
 
-	res.status(200).json(newReview);
+	res.status(201).json(newReview);
 });
 
 const default_port = 80;

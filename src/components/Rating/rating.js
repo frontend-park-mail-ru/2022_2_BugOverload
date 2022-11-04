@@ -93,7 +93,6 @@ export class Rating extends Component {
                 store.dispatch(
                     actionDeleteRate({
                         filmID: filmState.id,
-                        email: user.email,
                     }),
                 );
                 return;
@@ -102,7 +101,6 @@ export class Rating extends Component {
             store.dispatch(
                 actionRate({
                     filmID: filmState.id,
-                    email: user.email,
                     rate: rateValue,
                 }),
             );
