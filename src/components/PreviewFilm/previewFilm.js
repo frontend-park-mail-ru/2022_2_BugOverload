@@ -33,7 +33,6 @@ export class PreviewFilm extends Component {
     render() {
         this.location.innerHTML = '';
         this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
-        // Вот так норм добавлять картинку?
         this.location.querySelector('.preview-film').style.backgroundImage = `url(http://${DOMAIN}/${this.state.preview.poster_hor})`;
     }
 }

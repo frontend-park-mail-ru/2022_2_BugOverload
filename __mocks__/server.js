@@ -781,96 +781,135 @@ app.get('/v1/recommendation_film', (req, res) => {
 
 app.get('/v1/film/:id',  (req, res) => {
 	const info = {
-		id: 321,
-		about: {
-			poster_hor: 'assets/img/films_hor/trueDetective.jpg',
-			film_name: 'Настоящий Детектив',
-			original_name: 'True detective',
-			rating: '8.7',
-			year_prod: '2014-2019',
-			duration: '60',
-			type_serial: 'true',
-			count_seasons: '3',
-			age_limit: '18',
-			short_description: 'Кто стоит за необычайно жестокими и запутанными убийствами? Суперзвезды в главном детективном сериале 2010-х',
-			directors: ['Кэри Дзёдзи Фукунага', 'ещё чел'],
-			roles: ['Мэттью МакКонахи', 'Колин Фаррелл', 'Вуди Харрельсон'],
-		},
+		"actors": [
+		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Тирион Ланистер",
+			"id": 2132,
+			"name": "Питер Динклэйдж"
+		  },
+		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Джофри Ланистер",
+			"id": 2132,
+			"name": "Джуд Лоу"
+		  },
+		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Церцея Ланистер",
+			"id": 2132,
+			"name": "Мила Кунис"
+		  },
+		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Обиван",
+			"id": 2132,
+			"name": "Макгрегор"
+		  },		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Призрак",
+			"id": 2132,
+			"name": "Патрик Суэйзи"
+		  },
+		  {
+			"avatar": 'assets/img/actor_photos/KBeil.png',
+			"character": "Изгой",
+			"id": 2132,
+			"name": "Том Хэнкс"
+		  }
+		],
+		"artists": [
+		  {
+			"id": 123123,
+			"name": "Стивен Спилберг"
+		  }
+		],
+		"directors": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			},
+			{
+				"id": 1213123,
+				"name": "Стивен Сигал"
+			},
+			{
+				"id": 3123,
+				"name": "Тимати Лири"
+			}
+		  ],
+		  "composers": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			}
+		  ],
+		  "operators": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			}
+		  ],
+		  "montage": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			}
+		  ],
+		  "writers": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			}
+		  ],
+		  "producers": [
+			{
+			  "id": 123123,
+			  "name": "Стивен Спилберг"
+			},
+			{
+				"id": 1213123,
+				"name": "Стивен Сигал"
+			},
+			{
+				"id": 3123,
+				"name": "Тимати Лири"
+			}
+		  ],
+		short_description: 'Кто стоит за необычайно жестокими и запутанными убийствами? Суперзвезды в главном детективном сериале 2010-х',
 
-		descriptionText: `Первый сезон. В Луизиане в 1995 году происходит странное убийство девушки. В 2012 году дело об убийстве 1995 года повторно открывают, так как произошло похожее убийство. Чтобы продвинуться в расследовании, полиция решает допросить бывших детективов, которые работали над тем делом.
+		"id": 321,
+		"rating": 9.7,
+		"slogan": "Победа или смерть",
+		"type": "serial", // film
+		"age_limit": 18,
+		"box_office": 60000000,
+		"budget": 18323222,
+		"count_actors": 783,
+		"count_seasons": 11,
+		"currency_budget": "USD",
+		"description": "Британская лингвистка Алетея прилетает из Лондона",
+		"duration": 249,
+		"prod_year": 2011,
+		"end_year": 2019,
+		"name": "Игра престолов",
+		"original_name": "Game of Thrones",
+		"poster_hor": 'assets/img/films_hor/trueDetective.jpg',
 
-		Второй сезон. В калифорнийском городе Винчи в преддверии презентации новой линии железной дороги, которая улучшит финансовое положение города, пропадает глава администрации города. Позже его труп находят на шоссе. К расследованию подключают детектива из полиции Винчи и детектива из департамента шерифа округа Вентура.
-
-		Третий сезон. Известняковое плато Озарк, расположенное одновременно в нескольких штатах. Детектив Уэйн Хейз совместно со следователем из Арканзаса Роландом Уэстом пытаются разобраться в загадочном преступлении, растянувшемся на три десятилетия.`,
-
-		details: {
-			contry_prod: 'США, Канада',
-			genres: ['Триллер', 'Криминал', 'Мухтар'],
-			producers: ['первый', 'второй'],
-			scenario: ['Ник Пиццолатто', 'Scott Lasser', 'Грэм Горди'],
-			dues: '300',
-
-			actors: [
-				{
-					name: '11111',
-					role: '22222',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				},
-				{
-					name: '33333',
-					role: '44444',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				},
-				{
-					name: '55555',
-					role: '66666',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				},
-				{
-					name: '77777',
-					role: '88888',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				},
-				{
-					name: '99999',
-					role: '00000',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				},
-				{
-					name: '12121',
-					role: '23232',
-					photo: 'assets/img/actor_photos/KBeil.png'
-				}
-			],
-		},
-
-		// reviews: [
-		// 	{
-		// 		avatar: DEFAULT_AVATAR,
-		// 		username: "Azazin",
-		// 		userCountReviews: 13,
-		// 		date: "11.09.2001",
-		// 		title: "Ребята, не затягивайте, РК близко....",
-		// 		text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
-		// 	},
-		// 	{
-		// 		avatar: DEFAULT_AVATAR,
-		// 		username: "A124gr",
-		// 		userCountReviews: 1312,
-		// 		date: "11.09.2001",
-		// 		title: "Ребята, не затягивайте, РК близко....",
-		// 		text: "Вы что думаете, это всё шуточки? Хихоньки, да хахоньки?? Чего притихли там? Подумайте, в какой вы сейчас заднице. И сразу станет понятно, что надо шевелиться",
-		// 	}
-		// ],
-
-		reviewInfo: {
-			total: 2224,
-			positive: 244,
-			neutral: 122,
-			negative: 1999,
-		}
-
-	}
+		"genres": [
+			"фантастика",
+			"боевик"
+		  ],
+		"prod_companies": [
+		  "HBO",
+		  "20th FOX",
+		  'Columbia'
+		],
+		"prod_countries": [
+		  "США",
+		  "Великобритания"
+		],
+	};
 
 
 	res.status(200).json(info);
@@ -918,7 +957,7 @@ const reviewsStorage = {
 		{
 			author: 'Dop123@mail.ru',
 			id: 0,
-			type: -1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'negative',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
 			time: '11.11.2007',
@@ -926,7 +965,7 @@ const reviewsStorage = {
 		{
 			author: 'Doqp123@mail.ru',
 			id: 1,
-			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'positive',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
 			time: '11.11.2107',
@@ -934,7 +973,7 @@ const reviewsStorage = {
 		{
 			author: 'Doqwep123@mail.ru',
 			id: 2,
-			type: 0, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'neutral',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Очень умно написано.',
 			time: '11.11.2027',
@@ -942,7 +981,7 @@ const reviewsStorage = {
 		{
 			author: 'Dop123@mail.ru',
 			id: 3,
-			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'positive',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
 			time: '11.11.20q7',
@@ -950,7 +989,7 @@ const reviewsStorage = {
 		{
 			author: 'qweql.ru',
 			id: 4,
-			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'positive',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
 			time: '11.11.1117',
@@ -958,7 +997,7 @@ const reviewsStorage = {
 		{
 			author: 'Dqwewevw33.ru',
 			id: 5,
-			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'positive',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечwewзии. Не Очень умно написано.',
 			time: '01.21.1107',
@@ -966,7 +1005,7 @@ const reviewsStorage = {
 		{
 			author: 'wwwwwwwil.ru',
 			id: 6,
-			type: 1, // -1, 0, 1 // отриц, нейтр, положит
+			type: 'neutral',
 			name: 'Какой-то заголовок',
 			body: 'Какой-то замечательный текст рецензии. Не Очень умно написано.',
 			time: '10.11.3350',
@@ -1043,7 +1082,6 @@ app.post('/v1/film/:id/rate', (req, res) => {
 	res.status(201).json({
 		rate: filmRateStorage[email][filmID].rate,
 		time: filmRateStorage[email][filmID].time,
-		filmID: filmID,
 	});
 });
 
@@ -1059,8 +1097,7 @@ app.post('/v1/film/:id/rate/drop', (req, res) => {
 	}
 
 	delete filmRateStorage[email][filmID];
-	res.status(204).json({});
-	// res.sendStatus(200);
+	res.sendStatus(204);
 });
 
 app.get('/v1/film/:id/reviews',  (req, res) => {
@@ -1074,7 +1111,7 @@ app.get('/v1/film/:id/reviews',  (req, res) => {
 		reviewsList.push({
 			author: {
 				avatar: DEFAULT_AVATAR,
-				count_reviews: 42,
+				count_reviews: 66,
 				id: 54521,
 				nickname: review.author,
 			},
@@ -1113,10 +1150,6 @@ app.post('/v1/film/:id/review/new', (req, res) => {
 	if ( !email || !type || !body || !name) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
-	//Пусть пишут сколько хотят рецензий
-	// if (reviewsStorage[email][filmID]) {
-	// 	return res.status(403).json({error: 'Рецензия уже написана'});
-	// }
 
 	let d = new Date(),
 	month = '' + (d.getMonth() + 1),

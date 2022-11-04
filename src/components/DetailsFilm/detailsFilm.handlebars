@@ -10,52 +10,107 @@
             {{/if}}
         </div>
 
-        {{#if year_prod}}
+        {{#if prod_year}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Год производства</div>
-            <div class="details-film__info-item-value-info">{{year_prod}}</div>
+            <div class="details-film__info-item-value-info">
+                {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
+            </div>
         </div>
         {{/if}}
 
-        {{#if contry_prod}}
+        {{#if prod_countries}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Страна</div>
-            <div class="details-film__info-item-value-info">{{contry_prod}}</div>
+            {{#each prod_countries}}
+            <div class="details-film__info-item-value-info">{{this}}&nbsp</div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if prod_companies}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Компания</div>
+            {{#each prod_companies}}
+            <a {{!-- href="/company/СписокФильмовКомпании" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
+            {{/each}}
         </div>
         {{/if}}
 
         {{#if genres}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Жанр</div>
-            <div class="details-film__info-item-value">{{genres}}</div>
+            {{#each genres}}
+            <a {{!-- href="/collection/genre/{{this.name}}" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
+            {{/each}}
         </div>
         {{/if}}
 
         {{#if directors}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Режиссёр</div>
-            <div class="details-film__info-item-value">{{directors}}</div>
+            {{#each directors}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
         </div>
         {{/if}}
 
         {{#if producers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Продюссер</div>
-            <a><div class="details-film__info-item-value">{{producers}}</div></a>
+            {{#each producers}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
         </div>
         {{/if}}
 
-        {{#if scenario}}
+        {{#if writers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Сценарий</div>
-            <div class="details-film__info-item-value">{{scenario}}</div>
+            {{#each writers}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
         </div>
         {{/if}}
 
-        {{#if dues}}
+        {{#if operators}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Оператор</div>
+            {{#each operators}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if montage}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Монтаж</div>
+            {{#each montage}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if composers}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Композитор</div>
+            {{#each composers}}
+            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if budget}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Бюджет</div>
+            <div class="details-film__info-item-value-info">$&nbsp{{budget}}</div>
+        </div>
+        {{/if}}
+
+        {{#if box_office}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Сборы</div>
-            <div class="details-film__info-item-value-info">{{dues}}</div>
+            <div class="details-film__info-item-value-info">$&nbsp{{box_office}}</div>
         </div>
         {{/if}}
 
@@ -73,6 +128,13 @@
         </div>
         {{/if}}
 
+        {{#if slogan}}
+        <div class="details-film__info-pair">
+            <div class="details-film__info-item-key">Слоган</div>
+            <div class="details-film__info-item-value-info">"{{slogan}}"</div>
+        </div>
+        {{/if}}
+
     </div>
     <div class="details-film__list-actors-container">
         <div class="details-film__list-actors-title">В главных ролях</div>
@@ -80,13 +142,13 @@
             {{#each actors}}
             <div class="details-film__actor">
                 <div class="details-film__actor__container">
-                    <a href="/">
+                    <a href="/person/{{this.id}}">
                         <div class="details-film__actor__blackout"></div>
-                        <div class="details-film__actor__photo" style="background-image: url('{{this.photo}}');"></div>
+                        <div class="details-film__actor__photo" style="background-image: url('{{this.avatar}}');"></div>
                     </a>
                     <div class="details-film__actor__info-container">
-                        <a href="/"><div class="details-film__actor__name">{{this.name}}</div></a>
-                        <a href="/"><div class="details-film__actor__role">{{role}}</div></a>
+                        <a href="/person/{{this.id}}"><div class="details-film__actor__name">{{this.name}}</div></a>
+                        <a {{!-- href="/character/СкороБудет" --}}><div class="details-film__actor__role">{{this.character}}</div></a>
                     </div>
                 </div>
             </div>
