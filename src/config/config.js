@@ -2,7 +2,6 @@ import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
-import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
 export const API = {
     img: {
@@ -72,5 +71,4 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
-    { path: '/actor/', view: actorPage },
 ];
