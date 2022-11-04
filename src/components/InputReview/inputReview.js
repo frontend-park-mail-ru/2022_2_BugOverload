@@ -3,6 +3,7 @@ import { Modal } from '@components/Modal/modal.js';
 import { Component } from '@components/Component.js';
 import { actionSendReview } from '@actions/filmActions.js';
 import { store } from '@store/Store.js';
+import { decoreCountReviews } from '@utils/decorationData.js';
 
 export class InputReview extends Component {
     constructor(data) {
@@ -27,7 +28,7 @@ export class InputReview extends Component {
         modal.render();
 
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
-        modalWindow.insertAdjacentHTML('afterbegin', template({ count_reviews: store.getState('countReviews'), nickname: store.getState('user').nickname }));
+        modalWindow.insertAdjacentHTML('afterbegin', template({ count_reviews: decoreCountReviews(store.getState('countReviews')), nickname: store.getState('user').nickname }));
         this.componentDidMount();
     }
 

@@ -75,3 +75,28 @@
     cursor: pointer;
   }
 }
+
+[data-value-rating="positive"] {
+  background-color: #12b77c;
+}
+
+[data-value-rating="neutral"] {
+  background-color: #858585;
+}
+
+[data-value-rating="negative"] {
+  background-color: #ff4350;
+}
+
+
+[data-type-review="positive"] {
+  background-color: rgba(#12b77c, 20%);
+}
+
+[data-type-review="neutral"] {
+  background-color:  rgba(#858585, 20%);
+}
+
+[data-type-review="negative"] {
+  background-color:  rgba(#ff4350, 20%);
+}

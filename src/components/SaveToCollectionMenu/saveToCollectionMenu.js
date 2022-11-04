@@ -18,8 +18,6 @@ export class SaveToCollectionMenu extends Component {
             }
         });
         store.subscribe('listCollections', () => {
-            // TODO обработку данных под формат шаблона
-
             this.state.collections = store.getState('listCollections');
         });
     }

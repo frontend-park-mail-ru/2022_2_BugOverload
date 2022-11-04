@@ -43,9 +43,6 @@
   flex-wrap: nowrap;
 }
 
-/* .details-film__actor {
-    height: 520px;
-} */
 .details-film__list-actors-container {
   display: flex;
   flex-direction: column;
@@ -60,7 +57,7 @@
 
 .details-film__list-actors {
   display: flex;
-  height: 550px;
+  height: 688px;
   width: 666px;
   flex-flow: column wrap;
   margin-top: 37px;
