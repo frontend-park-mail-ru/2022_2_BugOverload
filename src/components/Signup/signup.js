@@ -23,11 +23,10 @@ export class Signup extends Component {
         super(props);
         this.state = {
             statusSignup: null,
+            isSubscribed: false,
         };
-        store.subscribe('statusSignup', () => {
-            this.state.statusSignup = store.getState('statusSignup');
-            this.render();
-        });
+
+        this.subscribeSignupStatus = this.subscribeSignupStatus.bind(this);
     }
 
     handlerStatus() {
@@ -48,7 +47,6 @@ export class Signup extends Component {
                 document.body.classList.remove('body_hide_y_scroll');
                 exitFromSignup();
             }
-
             return;
         }
 
@@ -169,6 +167,10 @@ export class Signup extends Component {
             }
 
             store.dispatch(actionRegister(user));
+            if (!this.state.isSubscribed) {
+                store.subscribe('statusSignup', this.subscribeSignupStatus);
+                this.state.isSubscribed = true;
+            }
         });
 
         const { deleteSignup } = this;
@@ -184,6 +186,16 @@ export class Signup extends Component {
         if (modalBackground) {
             modalBackground.removeEventListener('click', deleteSignup);
         }
+        if (this.state.isSubscribed) {
+            store.unsubscribe('statusSignup', this.subscribeSignupStatus);
+            this.state.statusSignup = null;
+            this.state.isSubscribed = false;
+        }
+    }
+
+    subscribeSignupStatus() {
+        this.state.statusSignup = store.getState('statusSignup');
+        this.render();
     }
 }
 
