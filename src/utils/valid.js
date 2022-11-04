@@ -155,9 +155,7 @@ export const removeError = (form, type, input = true) => {
         errorElement.remove();
     }
 
-    form
-        .querySelector(`input[type=${type}]`)
-        .classList.remove('modal__input_red_border');
+    errorInput.classList.remove('modal__input_red_border');
 };
 
 /**
