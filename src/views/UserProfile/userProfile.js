@@ -5,7 +5,17 @@ import { store } from '@store/Store.js';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
 
+/**
+* Страница пользователя, получает пользователя из store
+* Дополнительно прокидыват actions в store для получения
+* пользовательских данных и их изменения
+*
+*/
 class UserProfile extends View {
+    /**
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +28,9 @@ class UserProfile extends View {
         };
     }
 
+    /**
+     * Рендерит профиль
+     */
     render() {
         super.render();
 
@@ -95,6 +108,9 @@ class UserProfile extends View {
         profileChange.componentDidMount();
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);

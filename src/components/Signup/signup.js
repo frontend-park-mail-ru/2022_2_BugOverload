@@ -11,13 +11,15 @@ import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает регистрацию.
-* Обращается к бэкенду для проверки пользователя при регистрации
+* Прокидывает actions в стору для логина
+* Также подписывается на изменения статуса регистрации, 
+* для корректного рендера ошибки
 *
 */
 export class Signup extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
      */
     constructor(props) {
         super(props);
@@ -29,6 +31,9 @@ export class Signup extends Component {
         this.subscribeSignupStatus = this.subscribeSignupStatus.bind(this);
     }
 
+    /**
+     * Обрабатывает статус ответа
+     */
     handlerStatus() {
         if (this.state.statusSignup === responsStatuses.BadRequest) {
             const wrapper = document.getElementById('signup_email');
@@ -37,7 +42,7 @@ export class Signup extends Component {
     }
 
     /**
-     * Рендерит логин
+     * Рендерит регистрацию
      */
     render() {
         if (store.getState('user')) {
@@ -138,6 +143,9 @@ export class Signup extends Component {
         return null;
     }
 
+    /**
+     * Обёртка над функции, вызываемой при событии выхода из регистрации
+     */
     deleteSignup(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
@@ -146,7 +154,7 @@ export class Signup extends Component {
     }
 
     /**
-     * Навешивает обработчики на валидацию
+     * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
@@ -179,6 +187,9 @@ export class Signup extends Component {
             .addEventListener('click', deleteSignup);
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         const modalBackground = document.body
             .querySelector('.modal__background');
@@ -193,12 +204,18 @@ export class Signup extends Component {
         }
     }
 
+    /**
+     * Функция, вызываемая при изменении statusSignup в store
+     */
     subscribeSignupStatus() {
         this.state.statusSignup = store.getState('statusSignup');
         this.render();
     }
 }
 
+/**
+* Функция полного выхода из регистрации
+*/
 const exitFromSignup = () => {
     const redirectMain = new Event(
         'click',
