@@ -20,13 +20,19 @@ export const API = {
     signup: `http://${DOMAIN}/v1/auth/signup`,
     logout: `http://${DOMAIN}/v1/auth/logout`,
 
-    in_cinema: `http://${DOMAIN}/v1/in_cinema`,
-    popular_films: `http://${DOMAIN}/v1/popular_films`,
+    collection(tag) { return `http://${DOMAIN}/v1/collection/${tag}`; },
+
     recommendation_film: `http://${DOMAIN}/v1/recommendation_film`,
     film(id) { return `http://${DOMAIN}/v1/film/${id}`; },
+    metaFilm(id) { return `http://${DOMAIN}/v1/film/${id}/user_activities`; },
 
-    rate: `http://${DOMAIN}/v1/rate`,
-    delrate: `http://${DOMAIN}/v1/delrate`,
+    rate(id) { return `http://${DOMAIN}/v1/film/${id}/rate`; },
+    del_rate(id) { return `http://${DOMAIN}/v1/film/${id}/rate/drop`; },
+
+    reviews(id, count, delimeter) {
+        return `http://${DOMAIN}/v1/film/${id}/reviews?count=${count}&delimeter=${delimeter}`;
+    },
+    send_review(id) { return `http://${DOMAIN}/v1/film/${id}/review/new`; },
 
     person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?actor_photos=${numberPhotos}`; },
 
@@ -58,8 +64,9 @@ function testApiConfig() {
     console.log(API.logout);
 
     console.log(API.in_cinema);
-    console.log(API.popular_films);
+    console.log(API.popular);
     console.log(API.recommendation_film);
+    console.log(API.metaFilm(225));
 }
 
 export const ROOT = document.getElementById('root');

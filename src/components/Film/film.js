@@ -72,6 +72,6 @@ export class Film {
             return;
         }
 
-        filmRating.dataset.valueRating = 'negotive';
+        filmRating.dataset.valueRating = 'negative';
     }
 }

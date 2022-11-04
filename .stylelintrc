@@ -1,13 +1,30 @@
 {
+  "plugins": [
+    "stylelint-scss"
+  ],
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-prettier"
+    "stylelint-config-prettier",
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.{js}"],
+      "customSyntax": "postcss-scss"
+    }
   ],
   "rules": {
     "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]+$",
     "selector-id-pattern": "^[a-z][a-zA-Z0-9_-]+$",
+    "no-descending-specificity": null,
     "font-family-no-missing-generic-family-keyword": null,
     "at-rule-no-unknown": null,
-    "declaration-empty-line-before": "never",
+    "scss/at-rule-no-unknown": true,
+    "scss/at-mixin-pattern": null,
+    "scss/dollar-variable-pattern": null,
+    "scss/at-import-no-partial-leading-underscore": null,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "declaration-empty-line-before": "never"
   }
 }

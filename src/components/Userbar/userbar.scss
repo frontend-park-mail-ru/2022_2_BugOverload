@@ -1,92 +1,90 @@
-
 .header__userbar {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    width: 220px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  width: 220px;
 }
 
 .userbar__nick__email {
-    display: inline-flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-left: 12px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  margin-left: 12px;
 }
 
-
 .header__userbar-substrate {
-    z-index: 5;
-    width: 209px;
-    height: auto;
-    margin-right: var(--standart-margin);
-    padding: 16px 0 0 16px;
-    display: flex;
-    color: #fff;
-    flex-flow: column nowrap;
-    align-self: flex-start;
-    margin-top: 14px;
-    border-radius: 15px;
+  z-index: 5;
+  width: 209px;
+  height: auto;
+  margin-right: var(--standart-margin);
+  padding: 16px 0 0 16px;
+  display: flex;
+  color: #fff;
+  flex-flow: column nowrap;
+  align-self: flex-start;
+  margin-top: 14px;
+  border-radius: 15px;
 }
 
 .header__userbar-user-info-container {
-    display: flex;
+  display: flex;
 }
 
 .header__userbar-name-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 12px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 12px;
+  overflow: hidden;
 }
 
 .header__userbar-name {
-    font-size: 15px;
-    color: var(--main-color-text);
+  font-size: 15px;
+  color: var(--main-color-text);
 }
 
 .header__userbar-email {
-    font-size: 12px;
-    color: var(--primary-color);
-    opacity: 0.75;
+  font-size: 12px;
+  color: var(--primary-color);
+  opacity: 0.75;
 }
 
 .header__userbar-items-container {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    flex-flow: column nowrap;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  flex-flow: column nowrap;
 }
 
 .header__userbar-item {
-    margin-top: 12px;
-    font-size: 15px;
-    text-decoration: none;
-    color: var(--main-color-text);
-    cursor: pointer;
+  margin-top: 12px;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--main-color-text);
+  cursor: pointer;
 }
 
 .header__userbar-item:hover {
-    color: var(--primary-color);
-    transition: 0.08s linear;
+  color: var(--primary-color);
+  transition: 0.08s linear;
 }
 
 .header__userbar-item-out {
-    color: #AFAFAF;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    text-decoration: none;
+  color: #afafaf;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  text-decoration: none;
 }
 
-.userbar-on{
-    background-color: rgb(15 15 15 / 80%);
-    cursor: pointer;
+.userbar-on {
+  background-color: rgb(15 15 15 / 80%);
+  cursor: pointer;
 }
 
-.userbar-off{
-    background-color: rgb(15 15 15 / 0%);
+.userbar-off {
+  background-color: rgb(15 15 15 / 0%);
 }

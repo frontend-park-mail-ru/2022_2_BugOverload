@@ -1,38 +1,39 @@
-import { Ajax } from '@utils/ajax.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
+import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-import { API, responsStatuses } from '@config/config.js';
 /**
 * Ходит за данными на бэкенд.
 * Рендерит HTML-шаблон превью фильма на главной
 *
 */
-export class PreviewFilm {
-    /**
-    * Получает данные с бэкенда.
-    * Обрабатывает статусы ответа
-    * В случае ошибочного статуса добавляет собщение об ошибке в root в index.html
-    *
-    * @return {Object} Объект с данными о превью
-    * @return {null} В случае ошибочного статуса
-    */
-    async getRequestData() {
-        const response = await Ajax.get(API.recommendation_film);
-        if (response.status === responsStatuses.OK) {
-            this.data = response.body;
-            return null;
-        }
+export class PreviewFilm extends Component {
+    constructor(nameLocation) {
+        super();
+        this.state = {
+            preview: null,
+        };
+        this.nameLocation = nameLocation;
+        this.location = this.rootNode.querySelector(`.${nameLocation}`);
 
-        if (response.status >= responsStatuses.InternalServerError) {
-            ShowErrorMessage();
-            return null;
-        }
-
-        ShowErrorMessage();
-        return null;
+        store.subscribe(`preview-${nameLocation}`, () => {
+            this.state.preview = store.getState(`preview-${nameLocation}`);
+            this.render();
+        });
     }
 
-    getTemplate() {
-        return template(this.data);
+    init() {
+        store.dispatch(
+            actionGetPreviewData({
+                name: this.nameLocation,
+            }),
+        );
+    }
+
+    render() {
+        this.location.innerHTML = '';
+        this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
+        // Вот так норм добавлять картинку?
+        this.location.querySelector('.preview-film').style.backgroundImage = `url(http://${DOMAIN}/${this.state.preview.poster_hor})`;
     }
 }

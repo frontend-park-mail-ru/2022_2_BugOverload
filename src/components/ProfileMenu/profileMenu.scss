@@ -27,9 +27,9 @@ $color-menu-min: rgba(23 23 23 /0%);
     color:  var(--main-color-text);
 }
 
-.profile__menu__column{
-    @include column__flex;
-    height: 100%;
+.profile__menu__column {
+  @include column__flex;
+  height: 100%;
 }
 
 .profile__menu__links{
