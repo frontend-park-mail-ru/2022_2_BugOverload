@@ -24,10 +24,17 @@ class Router {
         if (newHref !== '/') {
             newHref = href.replace(hrefRegExp.endSlash, '');
         }
-        const reg = new RegExp(`^${newHref.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
-        const matchHref = newHref.match(reg);
+        let reg = new RegExp(`^${newHref.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
+
+        let matchHref = newHref.match(reg);
+
         if (matchHref) {
-            matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
+            if (matchHref[1]) {
+                matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
+            } else {
+                reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
+                matchHref = href.match(reg);
+            }
         }
         return matchHref;
     }
