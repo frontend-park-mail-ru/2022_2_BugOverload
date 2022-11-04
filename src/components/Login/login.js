@@ -11,30 +11,29 @@ import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает логин.
-* Обращается к бэкенду для проверки пользователя при логине
+* Прокидывает actions в стору для логина
+* Также подписывается на изменения статуса логина, 
+* для корректного рендера ошибки
 *
 */
 export class Login extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
      */
     constructor(props) {
         super(props);
         this.state = {
             statusLogin: null,
+            isSubscribed: false,
         };
-        store.subscribe('statusLogin', () => {
-            this.state.statusLogin = store.getState('statusLogin');
-            this.render();
-        });
+
+        this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
     }
 
     /**
-     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
-     * @param {Object} user - провалидированный пользовательский ввод
-     * @param {string} user.email - введённая почта
-     * @param {string} user.password - введённый пароль
+     * Обрабатывает статус ответа
+     * @param {number} userStatus - статус логина
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
@@ -60,7 +59,6 @@ export class Login extends Component {
                 document.body.classList.remove('body_hide_y_scroll');
                 exitFromLogin();
             }
-
             return;
         }
 
@@ -121,6 +119,9 @@ export class Login extends Component {
         return null;
     }
 
+    /**
+     * Обёртка над функции, вызываемой при событии выхода из логина
+     */
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
@@ -129,7 +130,7 @@ export class Login extends Component {
     }
 
     /**
-     * Навешивает обработчики на валидацию и на смену url при выходе
+     * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
         const form = this.rootNode.querySelector('.modal__form');
@@ -152,6 +153,10 @@ export class Login extends Component {
             }
 
             store.dispatch(actionLogin(user));
+            if (!this.state.isSubscribed) {
+                store.subscribe('statusLogin', this.subscribeLoginpStatus);
+                this.state.isSubscribed = true;
+            }
         });
 
         const { deleteLogin } = this;
@@ -160,6 +165,9 @@ export class Login extends Component {
             .addEventListener('click', deleteLogin);
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         const modalBackground = document.body
             .querySelector('.modal__background');
@@ -167,9 +175,25 @@ export class Login extends Component {
         if (modalBackground) {
             modalBackground.removeEventListener('click', deleteLogin);
         }
+        if (this.state.isSubscribed) {
+            store.subscribe('statusLogin', this.subscribeLoginpStatus);
+            this.state.statusLogin = null;
+            this.state.isSubscribed = false;
+        }
+    }
+
+    /**
+     * Функция, вызываемая при изменении statusLogin в store
+     */
+    subscribeLoginpStatus() {
+        this.state.statusLogin = store.getState('statusLogin');
+        this.render();
     }
 }
 
+/**
+* Функция полного выхода из логина
+*/
 const exitFromLogin = () => {
     const redirectMain = new Event(
         'click',
