@@ -13,4 +13,5 @@ export const hrefRegExp = {
     auth: /\w+\/$/i,
     idFilms: /\d+$/,
     filmProps: '(\\w+)',
+    endSlash: /\/$/,
 };

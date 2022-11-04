@@ -1,0 +1,55 @@
+<div class="actor-profile">
+    <div class="actor-profile__content">
+    <div class="actor-profile__primary">
+        <div class="actor-profile__image" style="background-image: url('{{profileImage}}')"></div>
+        <div class="actor-profile__information">
+            <div class="actor-profile__name">{{name}}</div>
+            <div class="actor-profile__original-name">{{originalName}}</div>
+            <div class="actor-profile__about">
+                О персоне
+            </div>
+            <div class="actor-profile__about-item">
+                <div class="actor-profile__about-item-key">
+                    Карьера:
+                </div>
+                <div class="actor-profile__about-item-value">
+                    {{career}}
+                </div>
+            </div>
+            <div class="actor-profile__about-item">
+                <div class="actor-profile__about-item-key">
+                    Дата рождения:
+                </div>
+                <div class="actor-profile__about-item-value">
+                    {{birthday}}
+                </div>
+            </div>
+            <div class="actor-profile__about-item">
+                <div class="actor-profile__about-item-key">
+                    Рост:
+                </div>
+                <div class="actor-profile__about-item-value">
+                    {{growth}}
+                </div>
+            </div>
+            <div class="actor-profile__about-item">
+                <div class="actor-profile__about-item-key">
+                    Всего фильмов:
+                </div>
+                <div class="actor-profile__about-item-value">
+                    {{filmsCount}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if photo}}
+    <div class="actor-profile__gallery">
+        <div class="actor-profile__gallery__container">
+            {{#each photo}}
+                <div class="actor-profile__gallery-item" style="background-image: url('{{this}}')"></div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+    </div>
+</div>

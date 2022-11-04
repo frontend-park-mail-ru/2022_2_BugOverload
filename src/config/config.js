@@ -2,6 +2,7 @@ import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
+import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
 export const API = {
     img: {
@@ -26,6 +27,8 @@ export const API = {
 
     rate: `http://${DOMAIN}/v1/rate`,
     delrate: `http://${DOMAIN}/v1/delrate`,
+
+    person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?actor_photos=${numberPhotos}`; },
 
     testApiConfig,
 };
@@ -69,4 +72,5 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
+    { path: '/actor/', view: actorPage },
 ];
