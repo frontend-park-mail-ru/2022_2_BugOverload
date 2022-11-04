@@ -1,57 +1,63 @@
-import { ActorProfile } from '@components/ActorProfile/actorProfile.js';
+import { View } from '@views/View.js';
 import { Collection, COLLECTION_TYPE } from '@components/Collection/collection.js';
-import { Header } from '@components/Header/header.js';
-import { ROOT } from '@config/config.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
+import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
+import { store } from '@store/Store.js';
+import { actionGetActor } from '@store/actionCreater/actorActions.js';
 
 /**
  * Отрисовывает страницу актера, добавляя HTML-шаблон в root в index.html
  *
  */
-export function renderActorProfilePage() {
-    const header = new Header({ rootNode: ROOT });
-    header.render();
+class ActorPage extends View {
+    constructor(props) {
+        super(props);
+        this.state = {
+            actor: null,
+            id: null,
+            isSubscribed: false,
+        };
+    }
 
-    const actorProfile = new ActorProfile();
-    const collectionBestFilms = new Collection(COLLECTION_TYPE.popular);
+    render(id = null) {
+        if (id) {
+            this.id = id;
+        }
+        if (!this.id) {
+            return;
+        }
 
-    Promise.all([
-        actorProfile.getRequestData(),
-        collectionBestFilms.getRequestData(),
-    ]).then((responses) => {
-        ROOT.insertAdjacentHTML('beforeend', template({
-            actorProfile: actorProfile.renderTemplate(responses[0]),
-            collectionBestFilms: collectionBestFilms.renderTemplate(responses[1]),
+        if (!this.actor) {
+            store.subscribe(`actor${this.id}`, subscribeActorPage);
+            this.isSubscribed = true;
+            store.dispatch(actionGetActor(this.id));
+            return;
+        }
+
+        if (this.isSubscribed) {
+            store.unsubscribe(`actor${this.id}`, subscribeActorPage);
+            this.isSubscribed = false;
+        }
+
+        super.render();
+        const collectionBestFilms = new Collection(COLLECTION_TYPE.popular);
+
+        const bestActorFilms = {
+            films: this.actor.best_films,
+            title: 'Лучшие фильмы',
+        };
+
+        this.rootNode.insertAdjacentHTML('beforeend', template({
+            actorProfile: templateProfile(this.actor),
+            collectionBestFilms: collectionBestFilms.getTemplate(bestActorFilms),
         }));
-
         Collection.addHandlers();
-        addHandlersToDevelopmentLinks();
-    });
+    }
 }
 
-/**
- * Добавляет обработчики на те ссылки, функционал которых ещё разрабатывается
- *
- */
-function addHandlersToDevelopmentLinks() {
-    let elems = document.querySelectorAll('.header__navlink');
-    elems.forEach((elem) => errLink(elem));
+export const actorPage = new ActorPage({ rootNode: document.getElementById('root') });
 
-    elems = document.querySelectorAll('.preview-film__button');
-    elems.forEach((elem) => errLink(elem));
-
-    elems = document.querySelectorAll('.film__link');
-    elems.forEach((elem) => errLink(elem));
-}
-
-/**
- * Добавляет обработчик на объект, на клик по которому вызывает отрисовку сообщения об ошибке
- * @param {elem DOMElement} elem - DOM-элемент, на который будет добавлен обработчик
- */
-function errLink(elem) {
-    elem.addEventListener('click', (e) => {
-        e.preventDefault();
-        ShowErrorMessage('Данная страница на стадии разработки');
-    });
-}
+const subscribeActorPage = () => {
+    actorPage.actor = store.getState(`actor${actorPage.id}`);
+    actorPage.render();
+};

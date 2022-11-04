@@ -4,6 +4,7 @@
     flex-flow: column wrap;
     margin-left: 52px;
     margin-bottom: 80px;
+    padding-top: 95px;
 }
 
 .actor-profile__content {
@@ -11,7 +12,7 @@
     justify-content: space-between;
     flex-flow: row nowrap;
     height: 80%;
-    margin-top: 100px;
+    margin-top: 65px;
 }
 
 .actor-profile__primary {
@@ -19,7 +20,8 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 40%;
-    min-width: 760px;
+    min-width: 430px;
+    margin-right: 186px;
 }
 
 .actor-profile__gallery {
@@ -40,15 +42,16 @@
 
 .actor-profile__gallery-item {
     display: flex;
-    width: 33%;
-    height: 33%;
+    width: 30%;
+    height: 30%;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .actor-profile__image {
-    width: 40%;
+    width: 300px;
     height: 400px;
     background-size: cover;
     background-repeat: no-repeat;

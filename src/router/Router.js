@@ -20,9 +20,15 @@ class Router {
      * @param {String} href - ccылка без домена и id
      */
     matchHref(href) {
-        const reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
-        const matchHref = href.match(reg);
-        matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
+        let newHref = href;
+        if (newHref !== '/') {
+            newHref = href.replace(hrefRegExp.endSlash, '');
+        }
+        const reg = new RegExp(`^${newHref.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
+        const matchHref = newHref.match(reg);
+        if (matchHref) {
+            matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
+        }
         return matchHref;
     }
 
@@ -47,14 +53,15 @@ class Router {
         document.addEventListener('click', (e) => {
             const { target } = e;
             if (target.dataset.section) {
-                if (this.mapViews.get(target.dataset.section)) {
+                const matchedHref = this.matchHref(target.dataset.section);
+                if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
-                    this.go({ path: target.dataset.section }, true);
+                    this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
                 }
             }
         });
 
-        window.addEventListener('popstate', ({ state }) => setTimeout(() => {
+        window.addEventListener('popstate', () => setTimeout(() => {
             let matchedHref = [];
             matchedHref[0] = (window.location.href.match(hrefRegExp.host))
                 ? window.location.href.replace(hrefRegExp.host, '')
@@ -64,7 +71,7 @@ class Router {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
 
-            this.go({ path: matchedHref[0], props: state });
+            this.go({ path: matchedHref[0], props: matchedHref[1] });
         }, 0));
         this.refresh();
     }
@@ -89,8 +96,7 @@ class Router {
         if (location !== '/') {
             matchedHref = this.matchHref(location);
         }
-
-        if (this.mapViews.get(location)) {
+        if (this.mapViews.get(matchedHref[0])) {
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -148,7 +154,11 @@ class Router {
             : window.location.href.match(hrefRegExp.localhost, '')[0];
 
         if (pushState) {
-            window.history.pushState(props, null, location + path);
+            if (props) {
+                window.history.pushState(props, null, `${location + path}/${props}`);
+            } else {
+                window.history.pushState(props, null, location + path);
+            }
         }
     }
 }

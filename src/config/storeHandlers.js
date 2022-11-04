@@ -1,4 +1,5 @@
 import { reducerUser } from '@store/reducers/reducerUser.js';
+import { reducerActor } from '@store/reducers/reducerActor.js';
 
 /**
 * Устанавливает соответствие между типом Action'а и методом редьюсера
@@ -12,6 +13,7 @@ const handlers = [
     { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },
     { type: 'putAvatar', methodStore: reducerUser.putAvatar.bind(reducerUser) },
 
+    { type: 'getActor', methodStore: reducerActor.getActor.bind(reducerActor) },
 ];
 
 export { handlers };
