@@ -66,7 +66,7 @@ export class Collection extends Component {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    addHandlerSlider(slider) {
+    static addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
 

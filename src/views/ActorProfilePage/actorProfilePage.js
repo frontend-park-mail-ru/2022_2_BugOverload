@@ -1,7 +1,9 @@
 import { View } from '@views/View.js';
 import { Collection } from '@components/Collection/collection.js';
+import { Film } from '@components/Film/film.js';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
+import templateCollection from '@components/Collection/collection.handlebars';
 import { store } from '@store/Store.js';
 import { actionGetActor } from '@store/actionCreater/actorActions.js';
 
@@ -47,18 +49,19 @@ class ActorPage extends View {
         }
 
         super.render();
-        const collectionBestFilms = new Collection(COLLECTION_TYPE.popular);
 
-        const bestActorFilms = {
-            films: this.actor.best_films,
-            title: 'Лучшие фильмы',
-        };
+        const films = this.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile(this.actor),
-            collectionBestFilms: collectionBestFilms.getTemplate(bestActorFilms),
+            collectionBestFilms: templateCollection({
+                films,
+                title: 'Лучшие фильмы',
+            }),
         }));
-        Collection.addHandlers();
+        Collection.addHandlerSlider(
+            this.rootNode.querySelector('.collection__container')
+        );
     }
 }
 
