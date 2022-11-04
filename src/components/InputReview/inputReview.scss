@@ -48,24 +48,31 @@
   font-size: 12px;
 }
 
+.input-title__wrapper{
+  margin-top: 35px;
+  height: 46px + 35px;
+}
+
 .input-review__input-title {
   width: 804px;
   border: 0;
   height: 46px;
   border-radius: 4px;
-  margin-top: 25px;
   padding: 0 24px;
   box-sizing: border-box;
   font-size: 15px;
 }
 
-.input-review__input-text {
+.input-text__wrapper{
+  height: 221px + 35px;
+}
+
+.js-input-review__input-text {
   width: 804px;
   border: 0;
   height: 221px;
   resize: none;
   border-radius: 4px;
-  margin-top: 25px;
   padding: 16px 24px;
   box-sizing: border-box;
   font-size: 12px;

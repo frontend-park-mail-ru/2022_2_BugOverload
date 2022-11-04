@@ -3,6 +3,9 @@ import { Modal } from '@components/Modal/modal.js';
 import { Component } from '@components/Component.js';
 import { actionSendReview } from '@actions/filmActions.js';
 import { store } from '@store/Store.js';
+import {
+    renderError, removeError,
+} from '@utils/valid.js';
 
 export class InputReview extends Component {
     constructor(data) {
@@ -31,7 +34,42 @@ export class InputReview extends Component {
         this.componentDidMount();
     }
 
-    validate() {} // TODO
+    validate(titleInputWrapper, textInputWrapper) {
+        let flag = true;
+        if (!titleInputWrapper.children[0].value) {
+            renderError(
+                titleInputWrapper,
+                'text',
+                'Введите заголовок',
+            );
+            flag = false;
+
+            titleInputWrapper.children[0].addEventListener('keyup', () => {
+                removeError(
+                    titleInputWrapper,
+                    'text',
+                );
+            }, { once: true });
+        }
+        if (!textInputWrapper.children[0].value) {
+            renderError(
+                textInputWrapper,
+                'js-input-review__input-text',
+                'Напишите рецензию',
+                false,
+            );
+            flag = false;
+
+            textInputWrapper.children[0].addEventListener('keyup', () => {
+                removeError(
+                    textInputWrapper,
+                    'js-input-review__input-text',
+                    false,
+                );
+            }, { once: true });
+        }
+        return flag;
+    }
 
     handlerSubmit(e) {
         e.preventDefault();
@@ -39,15 +77,17 @@ export class InputReview extends Component {
         const form = this.rootNode.querySelector('.js-input-review__form');
 
         const typeInput = form.querySelector('.js-input-review__select-input');
-        const titleInput = form.querySelector('input[name=review-title]');
-        const textInput = form.querySelector('textarea[name=review-text]');
+        const titleInputWrapper = form.querySelector('.input-title__wrapper');
+        const textInputWrapper = form.querySelector('.input-text__wrapper');
 
         review.type = typeInput.value;
-        review.name = titleInput.value;
-        review.body = textInput.value;
+        review.name = titleInputWrapper.children[0].value;
+        review.body = textInputWrapper.children[0].value;
         review.filmID = store.getState('film').id;
 
-        this.validate();
+        if (!this.validate(titleInputWrapper, textInputWrapper)) {
+            return;
+        }
 
         store.dispatch(actionSendReview(review));
 
