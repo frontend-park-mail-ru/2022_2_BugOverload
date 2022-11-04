@@ -10,6 +10,10 @@ import { actionGetActor } from '@store/actionCreater/actorActions.js';
  *
  */
 class ActorPage extends View {
+    /**
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +23,9 @@ class ActorPage extends View {
         };
     }
 
+    /**
+     * Рендерит страницу актёра
+     */
     render(id = null) {
         if (id) {
             this.id = id;
@@ -57,6 +64,9 @@ class ActorPage extends View {
 
 export const actorPage = new ActorPage({ rootNode: document.getElementById('root') });
 
+/**
+* Функция, вызываемая при изменении актёра в store
+*/
 const subscribeActorPage = () => {
     actorPage.actor = store.getState(`actor${actorPage.id}`);
     actorPage.render();

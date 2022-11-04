@@ -122,15 +122,24 @@ class UserProfile extends View {
 
 export const profile = new UserProfile({ rootNode: document.getElementById('root') });
 
+/**
+* Функция, вызываемая при изменении пользователя в store если кмпонент подписан
+*/
 const userProfileOnSubscribe = () => {
     profile.render();
 };
 
+/**
+* Функция, вызываемая при изменении authStatus в store
+*/
 const setAuthStatus = () => {
     profile.state.authStatus = store.getState('authStatus');
     profile.render();
 };
 
+/**
+* Функция, вызываемая при изменении statusChangeAvatar в store
+*/
 const setProfileAvatar = () => {
     profile.state.putAvatarStatus = store.getState('statusChangeAvatar');
     store.dispatch(actionAuth());
