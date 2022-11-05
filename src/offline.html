@@ -5,31 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
-
   body {
     width: 100%;
     min-height: 100vh;
     display: relative;
     margin: 0;
     padding: 0;
-    background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+    background-color: #121212;
   }
   .wrapper {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 45%;
+    left: 45%;
     align-items: center;
     justify-content: center;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
     text-align: center;
   }
   h1 {
     color: white;
-    font-family: arial;
+    font-family: 'Arial, Helvetica, sans-serif';
     font-weight: bold;
     font-size: 50px;
     letter-spacing: 5px;
@@ -38,21 +32,21 @@
   }
   h4 {
     color: #f1f1f1;
-    font-family: arial;
+    font-family: 'Arial, Helvetica, sans-serif';
     font-weight: 300;
     font-size: 16px;
   }
-  .button {
+  .offline-button {
     display: block;
     margin: 20px 0 0;
     padding: 15px 30px;
-    background: #22254C;
-    color: white;
-    font-family: arial;
+    background: #FEBA2B;
+    color: #000;
+    font-family: 'Arial, Helvetica, sans-serif';
     letter-spacing: 5px;
-    border-radius: .4rem;
+    border-radius: 6px;
     text-decoration: none;
-    box-shadow: 0 0 15px #22254C;
+    box-shadow: 0 0 15px #121212;
   }
   </style>
   <title>Document</title>
@@ -60,9 +54,9 @@
 <body>
   <div class="wrapper">
     <h1>OFFLINE</h1>
-    <h4>Please check your internet connection</h4>
+    <h4>Проверьте ваше Интернет-соединение</h4>
 
-    <a href="." class="button">RETRY</a>
+    <a href="/" class="offline-button">RETRY</a>
   </div>
 </body>
 </html>
