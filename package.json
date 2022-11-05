@@ -5,10 +5,11 @@
   "main": "index.js",
   "browserslist": "> 0.25%, not dead",
   "scripts": {
-    "start": "npm run stand",
+    "prestart": "node buildSWpath.js",
+    "start": "npm run watch",
     "back": "node __mocks__/server.js",
-    "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
-    "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode production",
+    "dev": "cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
+    "prod": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode production",
     "stand": "npm run dev && npm run back 3000",
     "deploy": "npm run prod && npm run back 80",
     "dev-deploy": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development && npm run back 80",
@@ -73,5 +74,9 @@
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "glob": "^8.0.3"
   }
 }
