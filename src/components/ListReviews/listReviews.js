@@ -32,6 +32,8 @@ export class ListReviews extends Component {
             this.state.reviews = store.getState('reviews');
             this.render();
         });
+
+        this.handler = this.handler.bind(this);
     }
 
     init() {
@@ -71,10 +73,14 @@ export class ListReviews extends Component {
         const user = store.getState('user');
         if (!user) {
             ShowErrorMessage('Вы должны быть авторизованы'); // TODO
-            return;
+            return; 
         }
 
-        const inputReview = new InputReview(user);
+        const inputReview = new InputReview({
+            film: this.state.film,
+            data: user,
+            rootNode: this.rootNode,
+        });
         inputReview.render();
     });
 

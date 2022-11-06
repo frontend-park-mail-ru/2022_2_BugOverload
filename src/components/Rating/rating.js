@@ -10,7 +10,7 @@ export class Rating extends Component {
         super(props);
         this.information = props.information;
         this.location = document.querySelector('.js-film-page__rating');
-        this.filmData = props.film;
+        this.filmData = props.film; 
 
         this.state = {
             rating: null,
@@ -70,7 +70,11 @@ export class Rating extends Component {
             return;
         }
 
-        const inputReview = new InputReview(user);
+        const inputReview = new InputReview({
+            film: this.state.film,
+            data: user,
+            rootNode: this.rootNode,
+        });
         inputReview.render();
     }
 
