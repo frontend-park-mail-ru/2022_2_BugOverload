@@ -1,17 +1,17 @@
-@import "@components/Header/header";
-@import "@components/Login/login";
-@import "@components/Modal/modal";
-@import "@components/Signup/signup";
-@import "@components/Userbar/userbar";
-@import "@components/Collection/collection";
-@import "@components/Film/film";
-@import "@components/PreviewFilm/previewFilm";
-@import "@components/ErrorMessage/errorMessage";
-@import "@components/ProfileMenu/profileMenu";
-@import "@components/ProfileChange/profileChange";
-@import "@views/UserProfile/userProfile";
+@import "@components/Header/header.scss";
+@import "@components/Login/login.scss";
+@import "@components/Modal/modal.scss";
+@import "@components/Signup/signup.scss";
+@import "@components/Userbar/userbar.scss";
+@import "@components/Collection/collection.scss";
+@import "@components/Film/film.scss";
+@import "@components/PreviewFilm/previewFilm.scss";
+@import "@components/ErrorMessage/errorMessage.scss";
+@import "@components/ProfileMenu/profileMenu.scss";
+@import "@components/ProfileChange/profileChange.scss";
+@import "@views/UserProfile/userProfile.scss";
 
-@import "@components/Components";
+@import "@components/Components.scss";
 
 @import "@fonts/fonts.css";
 
