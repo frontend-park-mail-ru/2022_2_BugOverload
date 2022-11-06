@@ -2,6 +2,7 @@ import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
+import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
 export const API = {
     img: {
@@ -42,7 +43,6 @@ export const responsStatuses = {
     Created: 201,
     NoContent: 204,
     BadRequest: 400,
-    Unauthorizeted: 401,
     Forbidden: 403,
     NotFound: 404,
     InternalServerError: 500,
