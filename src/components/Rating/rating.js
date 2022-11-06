@@ -6,11 +6,11 @@ import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
 export class Rating extends Component {
-    constructor(information = {}) {
-        super();
-        this.information = information;
+    constructor(props) { // information = {} в props.information для ivan
+        super(props);
+        this.information = props.information;
         this.location = document.querySelector('.js-film-page__rating');
-        this.filmData = store.getState('film');
+        this.filmData = props.film;
 
         this.state = {
             rating: null,

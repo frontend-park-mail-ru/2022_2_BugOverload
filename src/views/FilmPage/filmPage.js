@@ -18,7 +18,9 @@ export class FilmPage extends View {
     constructor(props) {
         super(props);
         this.state = {
+            id: null,
             film: null,
+            isSubscribed: false,
         };
 
         store.subscribe('film', () => {
@@ -27,22 +29,45 @@ export class FilmPage extends View {
         });
     }
 
-    render() {
+    render(id = null) {
         if (this.rootNode.querySelector('.js-film-page')) {
             return;
         }
-        super.render();
 
-        if (!this.state.film) {
-            store.dispatch(actionGetFilmData({ filmID: 321 }));
+        if (id) {
+            this.state.id = id;
+        }
+        if (!this.state.id) {
             return;
         }
 
+        if (!this.state.film) {
+            if (!this.state.isSubscribed) {
+                store.subscribe(`film${this.state.id}`, subscribeFilmPage);
+                this.state.isSubscribed = true;
+                store.dispatch(actionGetFilmData(this.state.id));
+            }
+            return;
+        }
+
+        if (this.state.isSubscribed) {
+            store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
+            this.state.isSubscribed = false;
+        }
+
+        super.render();
+
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
-        const aboutFilm = new AboutFilm();
+        const aboutFilm = new AboutFilm({
+            rootNode: this.rootNode,
+            film: this.state.film,
+        });
         aboutFilm.render();
 
-        const menuInfoFilm = new MenuInfoFilm();
+        const menuInfoFilm = new MenuInfoFilm({
+            rootNode: this.rootNode,
+            film: this.state.film,
+        });
         menuInfoFilm.render();
         menuInfoFilm.componentDidMount();
 
@@ -52,12 +77,25 @@ export class FilmPage extends View {
         const directorFilms = new Collection('js-film-page-collection-in_cinema');
         directorFilms.init();
 
-        const reviewStatistic = new ReviewStatistic();
+        const reviewStatistic = new ReviewStatistic({
+            rootNode: this.rootNode,
+        });
         reviewStatistic.init();
 
-        const listReviews = new ListReviews();
+        const listReviews = new ListReviews({
+            rootNode: this.rootNode,
+            film: this.state.film,
+        });
         listReviews.init();
     }
 }
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });
+
+/**
+* Функция, вызываемая при изменении фильмв в store
+*/
+const subscribeFilmPage = () => {
+    filmPage.state.film = store.getState(`film${filmPage.state.id}`);
+    filmPage.render();
+};
