@@ -14,7 +14,7 @@ export class AboutFilm extends Component {
         this.location = this.rootNode.querySelector('.js-film-page__about');
 
         this.about = {
-            poster_hor: this.data.poster_hor, // Напомнить
+            poster_hor: this.data.poster_hor,
             name: this.data.name,
             original_name: this.data.original_name,
             rating: this.data.rating,
@@ -24,7 +24,7 @@ export class AboutFilm extends Component {
             duration: decoreDuration(this.data.duration, 'short'),
             count_seasons: decoreCountSeasons(this.data.count_seasons),
             age_limit: this.data.age_limit,
-            short_description: this.data.short_description, // Напомнить
+            short_description: this.data.short_description,
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
         };
