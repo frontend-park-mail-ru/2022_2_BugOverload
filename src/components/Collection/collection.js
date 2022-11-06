@@ -10,19 +10,17 @@ import template from '@components/Collection/collection.handlebars';
 *
 */
 export class Collection extends Component {
-    constructor(nameLocation = null) {
+    constructor(nameLocation) {
         super();
         this.state = {
             collection: null,
         };
-        if (nameLocation) {
-            this.nameLocation = nameLocation;
-            this.location = this.rootNode.querySelector(`.${nameLocation}`);
-            store.subscribe(`collection-${nameLocation}`, () => {
-                this.state.collection = store.getState(`collection-${nameLocation}`);
-                this.render();
-            });
-        }
+        this.nameLocation = nameLocation;
+        this.location = this.rootNode.querySelector(`.${nameLocation}`);
+        store.subscribe(`collection-${nameLocation}`, () => {
+            this.state.collection = store.getState(`collection-${nameLocation}`);
+            this.render();
+        });
     }
 
     init() {

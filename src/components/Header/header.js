@@ -6,14 +6,14 @@ import { actionAuth } from '@store/actionCreater/userActions.js';
 
 /**
 * Отрисовывает хедер.
-* Прокидывает actions в стору для авторизации
-* также подписывается на изменения user,
+* Обращается к бэкенду для авторизации пользователя или проверки его авторизации.
+* Добавляет обработчики событий.
 *
 */
 export class Header extends Component {
     /**
-     * Cохраняет props, подписывает на изменение user
-     * @param {Object} props - параметры компонента
+     * Cохраняет rootNode.
+     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export class Header extends Component {
     }
 
     /**
-     * Рендерит стандартный хэдер в зависимости от this.state.user
+     * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
         const header = this.rootNode.querySelector('.header');

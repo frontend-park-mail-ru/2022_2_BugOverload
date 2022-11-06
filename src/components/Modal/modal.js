@@ -44,10 +44,10 @@ export class Modal {
 export const exitFromModal = () => {
     document.body.classList.remove('body_hide_y_scroll');
     const modalBackground = document.body.querySelector('.modal__background');
-    if(modalBackground) {
+    if (modalBackground) {
         modalBackground.remove();
     }
-}
+};
 
 /**
 * Функция полного выхода из модального окна, со сменой url

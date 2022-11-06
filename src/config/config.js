@@ -2,6 +2,7 @@ import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
 import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
+import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
 export const API = {
@@ -35,7 +36,6 @@ export const API = {
     send_review(id) { return `http://${DOMAIN}/v1/film/${id}/review/new`; },
 
     person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?actor_photos=${numberPhotos}`; },
-
 };
 
 export const responsStatuses = {
@@ -58,5 +58,6 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
+    { path: '/film/', view: filmPage },
     { path: '/person/', view: actorPage },
 ];
