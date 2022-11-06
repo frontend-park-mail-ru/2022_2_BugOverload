@@ -10,7 +10,7 @@ export class Rating extends Component {
         super(props);
         this.information = props.information;
         this.location = document.querySelector('.js-film-page__rating');
-        this.filmData = props.film; 
+        this.filmData = props.film;
 
         this.state = {
             rating: null,
@@ -19,6 +19,7 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
+            // console.log(this.state.rating);
             this.state.statusRating = store.getState('statusRating');
 
             this.render();
@@ -33,7 +34,7 @@ export class Rating extends Component {
         if (!this.location) {
             return;
         }
-        this.location.innerHTML = '';
+        this.location.innerHTML = ''; // didUnmount
         this.location.insertAdjacentHTML('afterbegin', template({
             ...this.information,
             ...this.state.statusRating,
@@ -95,15 +96,15 @@ export class Rating extends Component {
                 return;
             }
 
-            const filmState = store.getState('film');
-            if (!filmState) {
+            // const filmState = store.getState('film');
+            if (!this.filmData) {
                 return;
             }
 
             if (rateValue === 'delete') {
                 store.dispatch(
                     actionDeleteRate({
-                        filmID: filmState.id,
+                        filmID: this.filmData.id,
                     }),
                 );
                 return;
@@ -111,7 +112,7 @@ export class Rating extends Component {
 
             store.dispatch(
                 actionRate({
-                    filmID: filmState.id,
+                    filmID: this.filmData.id,
                     rate: rateValue,
                 }),
             );

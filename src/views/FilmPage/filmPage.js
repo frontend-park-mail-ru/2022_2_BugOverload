@@ -40,6 +40,7 @@ export class FilmPage extends View {
         if (!this.state.id) {
             return;
         }
+        super.render();
 
         if (!this.state.film) {
             if (!this.state.isSubscribed) {
@@ -54,8 +55,6 @@ export class FilmPage extends View {
             store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
             this.state.isSubscribed = false;
         }
-
-        super.render();
 
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
         const aboutFilm = new AboutFilm({

@@ -41,6 +41,7 @@ class ReducerFilm {
     }
 
     async getMetaDataFilm(data) {
+        debugger;
         const response = await Ajax.get(API.metaFilm(data.filmID));
         if (response.status === 200) {
             return {
