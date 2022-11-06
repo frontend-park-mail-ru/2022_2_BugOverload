@@ -81,7 +81,7 @@ export class Ajax {
         }
 
         let result = await response.text();
-console.log(result)
+
         if (result && result !== 'Forbidden') {
             result = JSON.parse(result);
         } else {
