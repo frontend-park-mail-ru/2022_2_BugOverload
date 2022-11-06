@@ -15,7 +15,7 @@ export class Collection extends Component {
         this.state = {
             collection: null,
         };
-        if(nameLocation) {
+        if (nameLocation) {
             this.nameLocation = nameLocation;
             this.location = this.rootNode.querySelector(`.${nameLocation}`);
             store.subscribe(`collection-${nameLocation}`, () => {

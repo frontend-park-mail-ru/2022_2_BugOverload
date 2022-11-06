@@ -1,6 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
-import { store } from '@store/Store.js';
 
 class ReducerFilm {
     async getFilmData(data) {

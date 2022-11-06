@@ -7,7 +7,7 @@ import { actionAuth } from '@store/actionCreater/userActions.js';
 /**
 * Отрисовывает хедер.
 * Прокидывает actions в стору для авторизации
-* также подписывается на изменения user, 
+* также подписывается на изменения user,
 *
 */
 export class Header extends Component {
