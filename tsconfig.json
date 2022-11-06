@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@utils/*":  ["src/utils/*"],
+      "@components/*":  ["src/components/*"],
+      "@config/*":  ["src/config/*"],
+      "@views/*":  ["src/views/*"],
+      "@assets/*":  ["src/assets/*"],
+      "@icons/*":  ["src/assets/icons/*"],
+      "@fonts/*":  ["src/assets/fonts/*"],
+      "@favicons/*":  ["src/assets/favicons/*"],
+      "@router/*":  ["src/router/*"],
+      "@store/*":  ["src/store/*"],
+      "@reducers/*":  ["src/store/reducers/*"],
+      "@actions/*":  ["src/store/actionCreater/*"],
+    },
+    "module": "es6",
+    "target": "es6",
+    "allowJs": true,
+    "noEmit": true,
+    // "include" : ["src"],
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    // "declaration": true,
+    // "emitDeclarationOnly": true,
+    "isolatedModules": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+}
