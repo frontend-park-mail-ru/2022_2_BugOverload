@@ -30,31 +30,33 @@ class ActorPage extends View {
      */
     render(id = null) {
         if (id) {
-            this.id = id;
+            this.state.id = id;
         }
-        if (!this.id) {
+        if (!this.state.id) {
             return;
         }
 
-        if (!this.actor) {
-            store.subscribe(`actor${this.id}`, subscribeActorPage);
-            this.isSubscribed = true;
-            store.dispatch(actionGetActor(this.id));
+        if (!this.state.actor) {
+            if (!this.state.isSubscribed) {
+                store.subscribe(`actor${this.state.id}`, subscribeActorPage);
+                this.state.isSubscribed = true;
+                store.dispatch(actionGetActor(this.state.id));
+            }
             return;
         }
 
-        if (this.isSubscribed) {
-            store.unsubscribe(`actor${this.id}`, subscribeActorPage);
-            this.isSubscribed = false;
+        if (this.state.isSubscribed) {
+            store.unsubscribe(`actor${this.state.id}`, subscribeActorPage);
+            this.state.isSubscribed = false;
         }
 
         super.render();
 
-        const films = this.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
+        const films = this.state.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
         const collection = new Collection();
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
-            actorProfile: templateProfile(this.actor),
+            actorProfile: templateProfile(this.state.actor),
             collectionBestFilms: templateCollection({
                 films,
                 title: 'Лучшие фильмы',
@@ -72,6 +74,6 @@ export const actorPage = new ActorPage({ rootNode: document.getElementById('root
 * Функция, вызываемая при изменении актёра в store
 */
 const subscribeActorPage = () => {
-    actorPage.actor = store.getState(`actor${actorPage.id}`);
+    actorPage.state.actor = store.getState(`actor${actorPage.state.id}`);
     actorPage.render();
 };
