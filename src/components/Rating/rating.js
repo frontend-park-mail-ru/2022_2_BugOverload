@@ -19,7 +19,6 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
-            // console.log(this.state.rating);
             this.state.statusRating = store.getState('statusRating');
 
             this.render();
@@ -34,7 +33,7 @@ export class Rating extends Component {
         if (!this.location) {
             return;
         }
-        this.location.innerHTML = ''; // didUnmount
+        this.location.innerHTML = ''; // didUnmount TODO
         this.location.insertAdjacentHTML('afterbegin', template({
             ...this.information,
             ...this.state.statusRating,
