@@ -3,10 +3,10 @@ import { API } from '@config/config.js';
 import { store } from '@store/Store.js';
 
 class ReducerFilm {
-    async getFilmData(data) {
-        const response = await Ajax.get(API.film(data.filmID));
+    async getFilmData({ id }) {
+        const response = await Ajax.get(API.film(id));
         if (response.status === 200) {
-            return { film: response.body };
+            return { [`film${id}`]: response.body };
         }
 
         return { filmStatus: response.status };

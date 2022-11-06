@@ -1,6 +1,8 @@
-export const actionGetFilmData = (filmId) => ({
+export const actionGetFilmData = (id) => ({
     type: 'getFilmData',
-    value: filmId,
+    value: {
+        id,
+    },
 });
 
 export const actionRate = (ratingData) => ({
