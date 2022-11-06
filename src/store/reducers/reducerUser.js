@@ -44,7 +44,7 @@ class ReducerUser {
                 return {
                     user: mockUserData,
                     authStatus: null,
-                }
+                };
             }
         }
 
@@ -81,9 +81,18 @@ class ReducerUser {
     }
 
     async getSettings() {
-        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/user/settings`);
+        let response;
+        try {
+            response = await Ajax.get(`http://${DOMAIN}/v1/user/settings`);
+        } catch (e) {
+            console.log('logout getSettings!');
+            if (!navigator.onLine && !response) {
+                return {
+                    userInfo: mockSettings,
+                };
+            }
+        }
 
-        const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
                 userInfo: response.body,
@@ -140,4 +149,12 @@ const mockUserData = {
     avatar: 'assets/img/users/defaultAvatar.png',
     email: 'example@domain.ru',
     nickname: 'example',
-}
+};
+
+const mockSettings = {
+    count_collections: 0,
+    count_ratings: 0,
+    count_reviews: 0,
+    count_views_films: 0,
+    joined_date: '2000-00-00',
+};
