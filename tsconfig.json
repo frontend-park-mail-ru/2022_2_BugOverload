@@ -20,13 +20,9 @@
     "target": "es6",
     "allowJs": true,
     "noEmit": true,
-    // "include" : ["src"],
     "moduleResolution": "node",
     "skipLibCheck": true,
-    // "declaration": true,
-    // "emitDeclarationOnly": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*"],
   "exclude": ["node_modules"],
 }
