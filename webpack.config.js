@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -61,7 +60,6 @@ const addPlugins = () => {
         new webpack.DefinePlugin({
             DOMAIN: JSON.stringify(process.env.DOMAIN_DEPLOY),
         }),
-        // new ForkTsCheckerWebpackPlugin(),
     ];
 
     if (isAnalysed) {
@@ -75,6 +73,7 @@ module.exports = {
     entry: {
         app: ['./src/index.ts'],
     },
+
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -83,6 +82,7 @@ module.exports = {
         extensions: ['.js', '.json', '.ts'],
         plugins: [new TsconfigPathsPlugin()],
     },
+    devtool: 'source-map',
     optimization: optimization(),
     module: {
         rules: [
@@ -121,16 +121,6 @@ module.exports = {
                     },
                 },
             },
-            // {
-            //     test: /\.ts$/,
-            //     exclude: /node_modules/,
-            //     use: {
-            //         loader: 'babel-loader',
-            //         options: {
-            //             presets: ['@babel/preset-env', '@babel/preset-typescript'],
-            //         },
-            //     },
-            // },
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
