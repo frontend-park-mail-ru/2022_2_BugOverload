@@ -1,5 +1,5 @@
 import { routes, ROOT } from '@config/config.js';
-import { exit } from '@components/Modal/modal.js';
+import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -129,7 +129,7 @@ class Router {
             } else {
                 this.navigate(stateObject, pushState);
                 this.lastView = this.mapViews.get(stateObject.path);
-                exit();
+                exitFromModal();
                 return;
             }
         } else if (!this.lastView) {
