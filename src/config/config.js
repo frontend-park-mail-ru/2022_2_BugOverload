@@ -36,7 +36,6 @@ export const API = {
 
     person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?actor_photos=${numberPhotos}`; },
 
-    testApiConfig,
 };
 
 export const responsStatuses = {

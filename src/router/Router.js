@@ -1,4 +1,5 @@
 import { routes, ROOT } from '@config/config.js';
+import { exit } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -77,7 +78,6 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
-
             this.go({ path: matchedHref[0], props: matchedHref[1] });
         }, 0));
         this.refresh();
@@ -129,6 +129,7 @@ class Router {
             } else {
                 this.navigate(stateObject, pushState);
                 this.lastView = this.mapViews.get(stateObject.path);
+                exit();
                 return;
             }
         } else if (!this.lastView) {
