@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isAnalysed = process.env.STATS === 'stats';
@@ -31,7 +32,7 @@ const optimization = () => {
 const addPlugins = () => {
     const base = [
         new HTMLWebpackPlugin({
-            template: './index.html',
+            template: './src/index.html',
             minify: {
                 collapseWhitespace: isProd,
             },
@@ -69,32 +70,19 @@ const addPlugins = () => {
 };
 
 module.exports = {
-    context: path.resolve(__dirname, 'src'),
     entry: {
-        app: ['@babel/polyfill', './index.js'],
+        app: ['./src/index.ts'],
     },
+
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.js', '.json'],
-        alias: {
-            '@': path.resolve(__dirname, 'src'),
-            '@utils': path.resolve(__dirname, 'src/utils'),
-            '@components': path.resolve(__dirname, 'src/components'),
-            '@config': path.resolve(__dirname, 'src/config'),
-            '@views': path.resolve(__dirname, 'src/views'),
-            '@assets': path.resolve(__dirname, 'src/assets'),
-            '@icons': path.resolve(__dirname, 'src/assets/icons'),
-            '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
-            '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
-            '@router': path.resolve(__dirname, 'src/router'),
-            '@store': path.resolve(__dirname, 'src/store'),
-            '@reducers': path.resolve(__dirname, 'src/store/reducers'),
-            '@actions': path.resolve(__dirname, 'src/store/actionCreater'),
-        },
+        extensions: ['.js', '.json', '.ts'],
+        plugins: [new TsconfigPathsPlugin()],
     },
+    devtool: 'source-map',
     optimization: optimization(),
     module: {
         rules: [
@@ -136,12 +124,7 @@ module.exports = {
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
-                    },
-                },
+                use: ['babel-loader', 'ts-loader'],
             },
         ],
     },
