@@ -8,9 +8,9 @@ import {
 } from '@utils/decorationData.js';
 
 export class AboutFilm extends Component {
-    constructor() {
-        super();
-        this.data = store.getState('film');
+    constructor(props) {
+        super(props);
+        this.data = props.film;
         this.location = this.rootNode.querySelector('.js-film-page__about');
 
         this.about = {

@@ -5,6 +5,7 @@ import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { actionGetDataReviews } from '@actions/filmActions.js';
+import { createModuleResolutionCache } from 'typescript';
 
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
@@ -12,13 +13,16 @@ import { actionGetDataReviews } from '@actions/filmActions.js';
 *
 */
 export class ListReviews extends Component {
-    constructor(data) {
-        super();
-        this.data = data;
+    constructor(props) {
+        super(props);
         this.location = this.rootNode.querySelector('.js-reviews-list');
         this.state = {
             reviews: null,
+            film: null,
         };
+
+        this.data = props.data;
+        this.state.film = props.film;
 
         this.isMounted = false;
         this.step = 3;
@@ -28,13 +32,15 @@ export class ListReviews extends Component {
             this.state.reviews = store.getState('reviews');
             this.render();
         });
+
+        this.handler = this.handler.bind(this);
     }
 
     init() {
         this.componentDidMount();
 
         store.dispatch(actionGetDataReviews({
-            filmID: store.getState('film').id,
+            filmID: this.state.film.id,
             delimeter: this.delimeter += this.step,
             count: this.step,
         }));
@@ -67,10 +73,14 @@ export class ListReviews extends Component {
         const user = store.getState('user');
         if (!user) {
             ShowErrorMessage('Вы должны быть авторизованы'); // TODO
-            return;
+            return; 
         }
 
-        const inputReview = new InputReview(user);
+        const inputReview = new InputReview({
+            film: this.state.film,
+            data: user,
+            rootNode: this.rootNode,
+        });
         inputReview.render();
     });
 
@@ -80,7 +90,7 @@ export class ListReviews extends Component {
         }
 
         store.dispatch(actionGetDataReviews({
-            filmID: store.getState('film').id,
+            filmID: this.state.film.id,
             delimeter: this.delimeter += this.step,
             count: this.step,
         }));

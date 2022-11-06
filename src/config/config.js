@@ -56,5 +56,10 @@ export const routes = [
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
     { path: '/profile/', view: profile },
+<<<<<<< HEAD
     { path: '/film/321/', view: filmPage },
+=======
+    { path: '/film/', view: filmPage },
+
+>>>>>>> origin/TP-e16-filmpage
 ];

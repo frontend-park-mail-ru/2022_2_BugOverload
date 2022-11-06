@@ -3,22 +3,21 @@ import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js'
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
 import { decoreDuration, decoreListPersons, decoreListItems } from '@utils/decorationData.js';
 
 export class MenuInfoFilm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.menuState = {
             description: 1,
             details: 2,
         };
 
         this.location = document.querySelector('.js-film-page__menu');
-        this.filmData = store.getState('film');
+        this.filmData = props.film;
 
         this.description = new DescriptionFilm(this.filmData.description);
-        this.rating = new Rating();
+        this.rating = new Rating(props);
 
         const fullDetails = {
             [`type_${this.filmData.type}`]: true,

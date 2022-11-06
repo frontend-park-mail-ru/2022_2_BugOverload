@@ -9,13 +9,15 @@ import {
 import { decoreCountReviews } from '@utils/decorationData.js';
 
 export class InputReview extends Component {
-    constructor(data) {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             countReviews: null,
+            film: null,
         };
 
-        this.data = data;
+        this.data = props.data;
+        this.state.film = props.film;
         store.subscribe('countReviews', () => {
             this.state.countReviews = store.getState('countReviews');
         });
@@ -105,7 +107,7 @@ export class InputReview extends Component {
         review.type = typeInput.value;
         review.name = titleInputWrapper.children[0].value;
         review.body = textInputWrapper.children[0].value;
-        review.filmID = store.getState('film').id;
+        review.filmID = this.state.film.id;
 
         if (!this.validate(review.type, titleInputWrapper, textInputWrapper)) {
             return;
