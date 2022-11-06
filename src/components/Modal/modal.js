@@ -32,17 +32,25 @@ export class Modal {
                 const { target } = e;
 
                 if (target.classList.contains('modal__background')) {
-                    document.body.classList.remove('body_hide_y_scroll');
-                    document.body
-                        .querySelector('.modal__background')
-                        .remove();
+                    exitFromModal();
                 }
             });
     }
 }
 
 /**
-* Функция полного выхода из регистрации
+* Функция закрытия модального окна
+*/
+export const exitFromModal = () => {
+    document.body.classList.remove('body_hide_y_scroll');
+    const modalBackground = document.body.querySelector('.modal__background');
+    if(modalBackground) {
+        modalBackground.remove();
+    }
+}
+
+/**
+* Функция полного выхода из модального окна, со сменой url
 */
 export const exit = () => {
     const redirect = new Event(
