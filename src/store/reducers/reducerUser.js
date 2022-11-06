@@ -35,9 +35,19 @@ class ReducerUser {
     }
 
     async auth() {
-        const responsePromise = Ajax.get(API.auth);
+        let response;
+        try {
+            response = await Ajax.get(API.auth);
+        } catch (e) {
+            console.log('catch auth!');
+            if (!navigator.onLine && !response) {
+                return {
+                    user: mockUserData,
+                    authStatus: null,
+                }
+            }
+        }
 
-        const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
@@ -48,9 +58,19 @@ class ReducerUser {
     }
 
     async logout() {
-        const responsePromise = Ajax.get(API.logout);
+        let response;
+        try {
+            response = await Ajax.get(API.logout);
+        } catch (e) {
+            console.log('logout catch!');
+            if (!navigator.onLine && !response) {
+                return {
+                    user: null,
+                    authStatus: responsStatuses.NoContent,
+                };
+            }
+        }
 
-        const response = await responsePromise;
         if (response.status === responsStatuses.NoContent) {
             return {
                 user: null,
@@ -115,3 +135,9 @@ const handlerUrlObject = (object, nameObject) => {
     }
     return object;
 };
+
+const mockUserData = {
+    avatar: 'assets/img/users/defaultAvatar.png',
+    email: 'example@domain.ru',
+    nickname: 'example',
+}

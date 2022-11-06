@@ -26,6 +26,8 @@ this.addEventListener('fetch', (event) => {
         }
 
         const response = await caches.match(request);
-        return response || caches.match('/offline.html');
+
+        // undefined или данные из кэша
+        return response;
     })());
 });
