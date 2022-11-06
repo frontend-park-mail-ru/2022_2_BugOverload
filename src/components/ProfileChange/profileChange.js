@@ -13,7 +13,7 @@ import { responsStatuses } from '@config/config.js';
 /**
 * Отрисовывает форму изменения пользовательских данных.
 * Прокидывает actions в стору для отправки новых данных,
-* также, после успеш подписывается на статус запроса, для правильного рендера ошибки 
+* также, после успеш подписывается на статус запроса, для правильного рендера ошибки
 *
 */
 export class ProfileChange extends Component {
@@ -30,7 +30,7 @@ export class ProfileChange extends Component {
             statusChangeSettings: null,
         };
 
-       /**
+        /**
         * Сохраняет обработчик формы
         * для последующей передачи в EventListener
         */
