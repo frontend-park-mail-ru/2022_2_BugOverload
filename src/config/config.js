@@ -49,26 +49,6 @@ export const responsStatuses = {
     InternalServerError: 500,
 };
 
-// удалим перед релизом
-function testApiConfig() {
-    console.log(API.img.poster_hor(12));
-    console.log(API.img.poster_ver(13));
-
-    console.log(API.img.avatar_default);
-    console.log(API.img.auth_login);
-    console.log(API.img.auth_signup);
-
-    console.log(API.auth);
-    console.log(API.login);
-    console.log(API.signup);
-    console.log(API.logout);
-
-    console.log(API.in_cinema);
-    console.log(API.popular);
-    console.log(API.recommendation_film);
-    console.log(API.metaFilm(225));
-}
-
 export const ROOT = document.getElementById('root');
 
 const login = new Login({ rootNode: ROOT });
