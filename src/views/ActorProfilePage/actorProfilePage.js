@@ -51,6 +51,7 @@ class ActorPage extends View {
         super.render();
 
         const films = this.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
+        const collection = new Collection(); 
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile(this.actor),
@@ -59,7 +60,7 @@ class ActorPage extends View {
                 title: 'Лучшие фильмы',
             }),
         }));
-        Collection.addHandlerSlider(
+        collection.addHandlerSlider(
             this.rootNode.querySelector('.collection__container')
         );
     }

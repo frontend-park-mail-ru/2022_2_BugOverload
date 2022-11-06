@@ -3,10 +3,9 @@ import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal } from '@components/Modal/modal.js';
+import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
-import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
@@ -57,7 +56,7 @@ export class Login extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                exitFromLogin();
+                exit();
             }
             return;
         }
@@ -125,7 +124,7 @@ export class Login extends Component {
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            exitFromLogin();
+            exit();
         }
     }
 
@@ -190,36 +189,3 @@ export class Login extends Component {
         this.render();
     }
 }
-
-/**
-* Функция полного выхода из логина
-*/
-const exitFromLogin = () => {
-    const redirectMain = new Event(
-        'click',
-        {
-            bubbles: true,
-            cancelable: true,
-        },
-    );
-
-    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
-        ? window.location.href.replace(hrefRegExp.host, '')
-        : window.location.href.replace(hrefRegExp.localhost, '');
-
-    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
-
-    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
-        || document.body.querySelector('a');
-
-    const oldDatasetSection = dispatchElement.dataset.section;
-    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
-        dispatchElement.dataset.section = newDatasetSection;
-    }
-
-    dispatchElement.dispatchEvent(redirectMain);
-
-    if (dispatchElement) {
-        dispatchElement.dataset.section = oldDatasetSection;
-    }
-};

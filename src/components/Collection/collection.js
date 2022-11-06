@@ -10,17 +10,19 @@ import template from '@components/Collection/collection.handlebars';
 *
 */
 export class Collection extends Component {
-    constructor(nameLocation) {
+    constructor(nameLocation = null) {
         super();
         this.state = {
             collection: null,
         };
-        this.nameLocation = nameLocation;
-        this.location = this.rootNode.querySelector(`.${nameLocation}`);
-        store.subscribe(`collection-${nameLocation}`, () => {
-            this.state.collection = store.getState(`collection-${nameLocation}`);
-            this.render();
-        });
+        if(nameLocation) {
+            this.nameLocation = nameLocation;
+            this.location = this.rootNode.querySelector(`.${nameLocation}`);
+            store.subscribe(`collection-${nameLocation}`, () => {
+                this.state.collection = store.getState(`collection-${nameLocation}`);
+                this.render();
+            });
+        }
     }
 
     init() {
@@ -66,7 +68,7 @@ export class Collection extends Component {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    static addHandlerSlider(slider) {
+    addHandlerSlider(slider) {
         const btnRight = slider.querySelector('.collection__slider-button_right');
         const btnLeft = slider.querySelector('.collection__slider-button_left');
 

@@ -2,11 +2,13 @@
     <div class="about-film__blackout-left"></div>
     <div class="about-film__container">
 
-        <div class="about-film__title">{{film_name}}</div>
+        <div class="about-film__title">{{name}}</div>
         <div class="about-film__original-title">{{original_name}}</div>
         <div class="about-film__base-info">
-            <div class="about-film__rating">{{rating}}</div>
-            <div class="about-film__year">{{year_prod}}</div>
+            <div class="about-film__rating js-about-film__rating">{{rating}}</div>
+            <div class="about-film__year">
+            {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
+            </div>
             <div class="about-film__duration">{{duration}}</div>
             {{#if type_serial}}
             <div class="about-film__count-seasons">{{count_seasons}}</div>
@@ -16,16 +18,14 @@
         <div class="about-film__short-description">{{short_description}}</div>
         <div class="about-film__directors">
             <div class="about-film__label-director">Режиссёр:</div>
-
             {{#each directors}}
-            <a href="/" class="about-film__director">{{this}}&nbsp</a>
+            <a href="/person/{{this.id}}" class="about-film__director">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         <div class="about-film__roles">
             <div class="about-film__label-role">В ролях:</div>
-
-            {{#each roles}}
-            <a href="/" class="about-film__role">{{this}}&nbsp</a>
+            {{#each actors}}
+            <a href="/person/{{this.id}}" class="about-film__role">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         <div class="about-film__buttons-container">
