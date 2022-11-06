@@ -16,7 +16,7 @@ app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/actor/:id/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
