@@ -30,18 +30,6 @@ export class AboutFilm extends Component {
         };
     }
 
-    decoreListPersons = (list, maxCount) => {
-        const newList = [];
-        let i = 0;
-        for (; i < maxCount - 1 && i < list.length - 1; ++i) {
-            newList.push({ ...list[i] });
-            newList[i].name += ',';
-        }
-        newList.push(list[i]);
-
-        return newList;
-    };
-
     render() {
         this.location.insertAdjacentHTML('afterbegin', template(this.about));
         decoreColorRating(this.location, '.js-about-film__rating', this.data.rating);
@@ -56,36 +44,63 @@ export class AboutFilm extends Component {
         }
 
         const menu = new SaveToCollectionMenu();
-
-        buttonPlus.addEventListener('click', (e) => {
+        this.handlerOpenMenu = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowErrorMessage('Вы должны быть авторизованы');
                 return;
             }
-            menu.open.apply(menu);
-        });
+            menu.open();
+        };
+
+        buttonPlus.addEventListener('click', this.handlerOpenMenu);
 
         const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
         if (!buttonBookmark) {
             return;
         }
-        buttonBookmark.addEventListener('click', (e) => {
+
+        this.handlerBookmark = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowErrorMessage('Вы должны быть авторизованы');
                 return;
             }
-            ShowErrorMessage('Сохранение в Избранное пока не доступно'); // TODO
-        });
+            ShowErrorMessage('Сохранение в Избранное пока не доступно');
+        };
+
+        buttonBookmark.addEventListener('click', this.handlerBookmark);
 
         const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
         if (!buttonBookmark) {
             return;
         }
-        buttonTrailer.addEventListener('click', (e) => {
+
+        this.handlerTrailer = function (e) {
             e.preventDefault();
-            ShowErrorMessage('Просмотр трейлера пока не доступен'); // TODO
-        });
+            ShowErrorMessage('Просмотр трейлера пока не доступен');
+        };
+
+        buttonTrailer.addEventListener('click', this.handlerTrailer);
+    }
+
+    componentWillUnmount() {
+        const buttonPlus = document.querySelector('.js-btn-save-to-coll');
+        if (!buttonPlus) {
+            return;
+        }
+        buttonPlus.removeEventListener('click', this.handlerOpenMenu);
+
+        const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
+        if (!buttonBookmark) {
+            return;
+        }
+        buttonBookmark.removeEventListener('click', this.handlerBookmark);
+
+        const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
+        if (!buttonBookmark) {
+            return;
+        }
+        buttonTrailer.removeEventListener('click', this.handlerTrailer);
     }
 }

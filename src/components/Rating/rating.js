@@ -6,13 +6,12 @@ import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
 export class Rating extends Component {
-    constructor(props) { // information = {} в props.information для ivan
+    constructor(props) {
         super(props);
-        this.information = props.information;
         this.location = document.querySelector('.js-film-page__rating');
-        this.filmData = props.film;
 
         this.state = {
+            film: props.film,
             rating: null,
             statusRating: null,
         };
@@ -25,26 +24,20 @@ export class Rating extends Component {
         });
 
         if (store.getState('user')) {
-            store.dispatch(actionGetMetaDataFilm({ filmID: this.filmData.id }));
+            store.dispatch(actionGetMetaDataFilm({ filmID: this.state.film.id }));
         }
     }
 
     render() {
-        if (!this.location) {
-            return;
-        }
-        this.location.innerHTML = ''; // didUnmount TODO
+        this.remove();
+
         this.location.insertAdjacentHTML('afterbegin', template({
-            ...this.information,
             ...this.state.statusRating,
             ...this.state.rating,
-            [`type_${this.filmData.type}`]: true,
-            filmRating: this.filmData.rating,
+            [`type_${this.state.film.type}`]: true,
+            filmRating: this.state.film.rating,
         }));
         this.componentDidMount();
-        if (this.state.rating === null) {
-            return;
-        }
         if (!this.state.rating) {
             return;
         }
@@ -59,14 +52,16 @@ export class Rating extends Component {
         if (!this.location) {
             return;
         }
+
+        this.componentWillUnmount();
         this.location.innerHTML = '';
     }
 
-    handlerReview(e) {
+    handlerReview = (function (e) {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы'); // TODO
+            ShowErrorMessage('Вы должны быть авторизованы');
             return;
         }
 
@@ -76,52 +71,65 @@ export class Rating extends Component {
             rootNode: this.rootNode,
         });
         inputReview.render();
-    }
+    }).bind(this);
+
+    handlerSubmit = (function (e) {
+        e.preventDefault();
+
+        const rateValue = e.submitter.value;
+
+        const user = store.getState('user');
+        if (!user) {
+            ShowErrorMessage('Вы должны быть авторизованы');
+            return;
+        }
+
+        if (!this.state.film) {
+            return;
+        }
+
+        if (rateValue === 'delete') {
+            store.dispatch(
+                actionDeleteRate({
+                    filmID: this.state.film.id,
+                }),
+            );
+            return;
+        }
+
+        store.dispatch(
+            actionRate({
+                filmID: this.state.film.id,
+                rate: rateValue,
+            }),
+        );
+    }).bind(this);
 
     componentDidMount() {
         const btn = this.location.querySelector('.rating__button-write-review');
-        btn.addEventListener('click', this.handlerReview.bind(this));
-
-        const form = this.rootNode.querySelector('.js-rating-form');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const rateValue = e.submitter.value;
-
-            const user = store.getState('user');
-            if (!user) {
-                ShowErrorMessage('Вы должны быть авторизованы');
-                return;
-            }
-
-            if (!this.filmData) {
-                return;
-            }
-
-            if (rateValue === 'delete') {
-                store.dispatch(
-                    actionDeleteRate({
-                        filmID: this.filmData.id,
-                    }),
-                );
-                return;
-            }
-
-            store.dispatch(
-                actionRate({
-                    filmID: this.filmData.id,
-                    rate: rateValue,
-                }),
-            );
-        });
-    }
-
-    componentDidUnmount() {
-        const btn = document.querySelector('.rating__button-write-review');
         if (!btn) {
             return;
         }
-        btn.removeEventListener('click', this.handlerReview.bind(this));
+        btn.addEventListener('click', this.handlerReview);
+
+        const form = this.location.querySelector('.js-rating-form');
+        if (!form) {
+            return;
+        }
+        form.addEventListener('submit', this.handlerSubmit);
+    }
+
+    componentWillUnmount() {
+        const btn = this.location.querySelector('.rating__button-write-review');
+        if (!btn) {
+            return;
+        }
+        btn.removeEventListener('click', this.handlerReview);
+
+        const form = this.location.querySelector('.js-rating-form');
+        if (!form) {
+            return;
+        }
+        form.removeEventListener('submit', this.handlerSubmit);
     }
 }

@@ -72,7 +72,7 @@ export class MenuInfoFilm extends Component {
             break;
         case this.menuState.details:
             this.description.remove();
-            this.rating.componentDidUnmount();
+            this.rating.componentWillUnmount();
             this.rating.remove();
 
             delete this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive;
@@ -88,23 +88,43 @@ export class MenuInfoFilm extends Component {
 
     componentDidMount() {
         const btnDesciption = document.querySelector('.js-menu-info-film__item-description');
-        const switchToDesription = (event) => {
+        if (!btnDesciption) {
+            return;
+        }
+        this.handlerSwitchToDesription = (function (event) {
             event.preventDefault();
             if (this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive) {
                 return;
             }
             this.switchState(this.menuState.description);
-        };
-        btnDesciption.addEventListener('click', switchToDesription);
+        }).bind(this);
+        btnDesciption.addEventListener('click', this.handlerSwitchToDesription);
 
         const btnDetails = document.querySelector('.js-menu-info-film__item-details');
-        const switchToDetails = (event) => {
+        if (!btnDetails) {
+            return;
+        }
+        this.handlerSwitchToDetails = (function (event) {
             event.preventDefault();
             if (this.location.querySelector('.js-menu-info-film__item-details').dataset.menuInfoFilmItemActive) {
                 return;
             }
             this.switchState(this.menuState.details);
-        };
-        btnDetails.addEventListener('click', switchToDetails);
+        }).bind(this);
+        btnDetails.addEventListener('click', this.handlerSwitchToDetails);
+    }
+
+    componentWillUnmount() {
+        const btnDesciption = document.querySelector('.js-menu-info-film__item-description');
+        if (!btnDesciption) {
+            return;
+        }
+        btnDesciption.removeEventListener('click', this.handlerSwitchToDesription);
+
+        const btnDetails = document.querySelector('.js-menu-info-film__item-details');
+        if (!btnDetails) {
+            return;
+        }
+        btnDetails.removeEventListener('click', this.handlerSwitchToDetails);
     }
 }

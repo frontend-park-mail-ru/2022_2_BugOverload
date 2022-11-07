@@ -5,7 +5,6 @@ import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { actionGetDataReviews } from '@actions/filmActions.js';
-import { createModuleResolutionCache } from 'typescript';
 
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
@@ -72,8 +71,8 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы'); // TODO
-            return; 
+            ShowErrorMessage('Вы должны быть авторизованы');
+            return;
         }
 
         const inputReview = new InputReview({

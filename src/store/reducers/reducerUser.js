@@ -61,7 +61,7 @@ class ReducerUser {
     }
 
     async getSettings() {
-        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/user/settings`);
+        const responsePromise = Ajax.get(API.settings);
 
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
@@ -74,7 +74,7 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/user/settings`,
+            url: API.settings,
             body: user,
         });
 

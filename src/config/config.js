@@ -33,6 +33,7 @@ export const API = {
         return `http://${DOMAIN}/v1/film/${id}/reviews?count=${count}&delimeter=${delimeter}`;
     },
     send_review(id) { return `http://${DOMAIN}/v1/film/${id}/review/new`; },
+    settings: `http://${DOMAIN}/v1/user/settings`,
 
 };
 

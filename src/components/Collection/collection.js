@@ -44,7 +44,6 @@ export class Collection extends Component {
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
     render() {
-        this.location.innerHTML = '';
         const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         this.location.insertAdjacentHTML('afterbegin', template({ title: this.state.collection.title, films }));
@@ -56,8 +55,16 @@ export class Collection extends Component {
     *
     */
     componentDidMount() {
-        const slider = this.location.querySelector('.collection__container');
+        const slider = this.location.querySelector('.js-collection__container');
+        if (!slider) {
+            return;
+        }
         this.addHandlerSlider(slider);
+    }
+
+    componentWillUnmount() {
+        const slider = this.location.querySelector('.js-collection__container');
+        slider.removeEventListener('click', this.handlerSlider);
     }
 
     /**
@@ -67,32 +74,37 @@ export class Collection extends Component {
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
     addHandlerSlider(slider) {
-        const btnRight = slider.querySelector('.collection__slider-button_right');
-        const btnLeft = slider.querySelector('.collection__slider-button_left');
+        const btnRight = slider.querySelector('.js-collection__slider-button_right');
+        const btnLeft = slider.querySelector('.js-collection__slider-button_left');
+        const body = slider.querySelector('.js-collection__slider');
 
-        const count = slider.querySelectorAll('.film').length;
+        const count = slider.querySelectorAll('.js-film').length;
 
-        if (document.documentElement.clientWidth - 2 * 52 > count * 260 - 30) {
+        const boundMargin = 52;
+        const spaceBetweenFilms = 30;
+        const widthFilm = 260;
+        if (document.documentElement.clientWidth - 2 * boundMargin
+                > count * widthFilm - spaceBetweenFilms) {
             btnRight.style.display = 'none';
         }
         btnLeft.style.display = 'none';
 
         let offset = 0;
-        const widthFilm = 260;
+        const boundMarginForBtn = 64;
         const maxLength = widthFilm * count;
         const windowLen = document.documentElement.clientWidth;
-        const maxOffset = maxLength - windowLen + 52 + 12;
+        const maxOffset = maxLength - windowLen + boundMarginForBtn;
         const countOnPage = Math.trunc(windowLen / widthFilm);
         const pageOffset = countOnPage * widthFilm;
 
         let isHiddenRight = false;
         let isHiddenLeft = true;
 
-        slider.addEventListener('click', (event) => {
+        this.handlerSlider = function (event) {
             if (event.target === btnRight.querySelector('img')) {
                 event.preventDefault();
                 if (isHiddenLeft) {
-                    slider.querySelector('.collection__slider-button_left').style.display = '';
+                    btnLeft.style.display = '';
                     isHiddenLeft = false;
                 }
 
@@ -101,9 +113,9 @@ export class Collection extends Component {
                     offset = maxOffset;
                 }
 
-                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
+                body.style.left = `${-offset}px`;
                 if (offset >= maxOffset) {
-                    slider.querySelector('.collection__slider-button_right').style.display = 'none';
+                    btnRight.style.display = 'none';
                     isHiddenRight = true;
                 }
 
@@ -113,7 +125,7 @@ export class Collection extends Component {
             if (event.target === btnLeft.querySelector('img')) {
                 event.preventDefault();
                 if (isHiddenRight) {
-                    slider.querySelector('.collection__slider-button_right').style.display = '';
+                    btnRight.style.display = '';
                     isHiddenRight = false;
                 }
                 offset -= pageOffset;
@@ -121,12 +133,14 @@ export class Collection extends Component {
                     offset = 0;
                 }
 
-                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
+                body.style.left = `${-offset}px`;
                 if (offset <= 0) {
-                    slider.querySelector('.collection__slider-button_left').style.display = 'none';
+                    btnLeft.style.display = 'none';
                     isHiddenLeft = true;
                 }
             }
-        });
+        };
+
+        slider.addEventListener('click', this.handlerSlider);
     }
 }
