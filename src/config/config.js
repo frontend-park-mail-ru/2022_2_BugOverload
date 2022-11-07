@@ -34,7 +34,7 @@ export const API = {
     },
     send_review(id) { return `http://${DOMAIN}/api/v1/film/${id}/review/new`; },
 
-    person(id, numberPhotos) { return `http://${DOMAIN}/api/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
+    person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
 };
 
