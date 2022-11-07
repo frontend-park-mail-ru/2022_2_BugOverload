@@ -14,6 +14,7 @@ class ReducerActor {
                     [
                         'avatar',
                         'images',
+                        'professions',
                     ]
                 ),
             };
@@ -40,6 +41,10 @@ const handlerPropertiesPerson = (id, object, nameProperties) => {
                     object[key][index] = newUrl;
                 }
             });
+        }
+        if (key === 'professions') {
+            object[key] = object[key].split(',').join(' ');
+            console.log( object[key].split(','), object[key].split(',').join(', ') , object[key])
         }
     });
 

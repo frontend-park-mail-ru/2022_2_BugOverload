@@ -72,6 +72,7 @@
     font-size: 36px;
     line-height: 42px;
     color: #FFF;
+    white-space: nowrap;
 }
 
 .actor-profile__original-name {
@@ -96,7 +97,6 @@
     flex-flow: row nowrap;
     align-items: flex-start;
     margin-top: 30px;
-    white-space: nowrap;
 }
 
 .actor-profile__about-item-key {
