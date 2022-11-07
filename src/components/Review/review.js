@@ -11,6 +11,7 @@ export class Review {
         return template({
             ...this.data,
             user_avatar: API.img.user_avatar(this.data.author.avatar),
+            date: this.data.create_time.split(' ')[0].split('.').reverse().join('.'),
         });
     }
 
@@ -19,6 +20,7 @@ export class Review {
         return template({
             ...data,
             user_avatar: API.img.user_avatar(data.author.avatar),
+            date: data.create_time.split(' ')[0].split('.').reverse().join('.'),
         });
     }
 }

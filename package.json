@@ -15,7 +15,7 @@
     "stats": "cross-env STATS=stats webpack --mode development --json > stats.json && webpack-bundle-analyzer stats.json",
     "check": "npm run lint && npm run stylelint",
     "lint": "eslint --cache --ext .js src --fix",
-    "stylelint": "stylelint '**/*{.css,.scss}' --fix --allow-empty-input",
+    "stylelint": "stylelint '**/*{.css,.scss}' --allow-empty-input",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },
   "repository": {
