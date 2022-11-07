@@ -95,7 +95,6 @@ export class Rating extends Component {
                 return;
             }
 
-            // const filmState = store.getState('film');
             if (!this.filmData) {
                 return;
             }
