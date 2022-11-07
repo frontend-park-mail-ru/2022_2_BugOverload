@@ -43,8 +43,7 @@ const handlerPropertiesPerson = (id, object, nameProperties) => {
             });
         }
         if (key === 'professions') {
-            object[key] = object[key].split(',').join(' ');
-            console.log( object[key].split(','), object[key].split(',').join(', ') , object[key])
+            object[key] = object[key].split(',').join(', ');
         }
     });
 
