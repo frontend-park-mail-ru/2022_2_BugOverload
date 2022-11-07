@@ -36,7 +36,7 @@ export class Login extends Component {
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === responsStatuses.BadRequest) {
+        if (userStatus === responsStatuses.NotFound) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
