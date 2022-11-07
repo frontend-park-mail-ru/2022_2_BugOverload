@@ -1,10 +1,10 @@
 <div class="actor-profile">
     <div class="actor-profile__content">
     <div class="actor-profile__primary">
-        <div class="actor-profile__image" style="background-image: url('{{profileImage}}')"></div>
+        <div class="actor-profile__image" style="background-image: url('{{avatar}}')"></div>
         <div class="actor-profile__information">
             <div class="actor-profile__name">{{name}}</div>
-            <div class="actor-profile__original-name">{{originalName}}</div>
+            <div class="actor-profile__original-name">{{original_name}}</div>
             <div class="actor-profile__about">
                 О персоне
             </div>
@@ -13,7 +13,7 @@
                     Карьера:
                 </div>
                 <div class="actor-profile__about-item-value">
-                    {{career}}
+                    {{professions}}
                 </div>
             </div>
             <div class="actor-profile__about-item">
@@ -37,15 +37,15 @@
                     Всего фильмов:
                 </div>
                 <div class="actor-profile__about-item-value">
-                    {{filmsCount}}
+                    {{count_films}}
                 </div>
             </div>
         </div>
     </div>
-    {{#if photo}}
+    {{#if images}}
     <div class="actor-profile__gallery">
         <div class="actor-profile__gallery__container">
-            {{#each photo}}
+            {{#each images}}
                 <div class="actor-profile__gallery-item" style="background-image: url('{{this}}')"></div>
             {{/each}}
         </div>

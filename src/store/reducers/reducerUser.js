@@ -61,7 +61,7 @@ class ReducerUser {
     }
 
     async getSettings() {
-        const responsePromise = Ajax.get(`http://${DOMAIN}/v1/user/settings`);
+        const responsePromise = Ajax.get(`http://${DOMAIN}/api/v1/user/settings`);
 
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
@@ -74,7 +74,7 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/user/settings`,
+            url: `http://${DOMAIN}/api/v1/user/settings`,
             body: user,
         });
 
@@ -90,7 +90,7 @@ class ReducerUser {
     async putAvatar(formDataAvatar) {
         formDataAvatar.append('key', 'user_avatar');
         const responsePromise = Ajax.put({
-            url: `http://${DOMAIN}/v1/image?key=session`,
+            url: `http://${DOMAIN}/api/v1/image?key=session`,
             body: formDataAvatar,
         }, true);
 
@@ -108,7 +108,7 @@ export const reducerUser = new ReducerUser();
 
 const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
-        const newUrl = `http://movie-gate.online:8088/v1/image?object=user_avatar&key=${nameObject}`;
+        const newUrl = `http://movie-gate.online:8088/api/v1/image?object=user_avatar&key=${object[nameObject]}`;
         if (object[nameObject] !== newUrl) {
             object[nameObject] = newUrl;
         }
