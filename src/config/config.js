@@ -30,7 +30,7 @@ export const API = {
     signup: `http://${DOMAIN}/api/v1/auth/signup`,
     logout: `http://${DOMAIN}/api/v1/auth/logout`,
 
-    collection(tag, countFilms = 15, delimiter = 0) {
+    collection(tag, countFilms = 15, delimiter = 10) {
         return `http://${DOMAIN}/api/v1/collection/${tag}?count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
