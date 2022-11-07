@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-between;
     flex-flow: row nowrap;
-    height: 80%;
     margin-top: 65px;
+    height: 400px;
 }
 
 .actor-profile__primary {
@@ -20,36 +20,28 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 40%;
-    min-width: 430px;
-    margin-right: 186px;
+    min-width: 660px;
+    max-height: 400px;
 }
 
 .actor-profile__gallery {
-    display: flex;
-    justify-content: flex-start;
-    margin-right: 52px;
-    flex-flow: row nowrap;
-}
-
-.actor-profile__gallery__container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(223px, 1fr));
+    gap: 5px;
+    margin: 0 auto;
+    max-width: 700px;
 }
 
 .actor-profile__gallery-item {
-    display: flex;
-    width: 223px;
-    height: 114px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    min-height: 153px;
     border-radius: 5px;
-    padding: 5px;
+    margin: 5px;
+    background: center/cover;
 }
 
 .actor-profile__image {
-    width: 300px;
-    height: 400px;
+    min-width: 300px;
+    min-height: 400px;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 8px;
