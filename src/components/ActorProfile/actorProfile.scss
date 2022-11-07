@@ -27,9 +27,7 @@
 .actor-profile__gallery {
     display: flex;
     justify-content: flex-start;
-    width: 50%;
-    min-width: 760px;
-    height: 450px;
+    margin-right: 52px;
     flex-flow: row nowrap;
 }
 
@@ -37,13 +35,12 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    width: 60%;
 }
 
 .actor-profile__gallery-item {
     display: flex;
-    width: 30%;
-    height: 30%;
+    width: 223px;
+    height: 114px;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;
