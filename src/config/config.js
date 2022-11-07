@@ -4,7 +4,6 @@ import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
-import { filmPage } from '@views/FilmPage/filmPage.js';
 
 export const API = {
     img: {
