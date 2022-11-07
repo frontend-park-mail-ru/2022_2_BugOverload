@@ -117,25 +117,7 @@ app.post('/api/v1/auth/signup', (req, res) => {
 	res.status(201).json(users[email]);
 });
 
-// {
-// 	"films": [
-// 	  {
-// 		"end_year": 2013,
-// 		"genres": [
-// 		  "фэнтези",
-// 		  "приключения"
-// 		],
-// 		"id": 23,
-// 		"name": "Game of Thrones",
-// 		"poster_ver": "{{key}}",
-// 		"prod_year": 2014,
-// 		"rating": 7.9
-// 	  }
-// 	],
-// 	"name": "Сейчас в кино"
-//   }
-
-app.get('/v1/collection/:tag', (req, res) => {
+app.get('/api/v1/collection/:tag', (req, res) => {
 	console.log('GET: popular CinemaTodayData')
 	const tag = req.params.tag;
 	switch (tag) {
@@ -908,7 +890,7 @@ app.get('/api/v1/person/1', (req, res) => {
 // 	"rating": 8.8,
 // 	"short_description": "Идет борьба сопротивления людей против машин"
 //   }
-app.get('/v1/recommendation', (req, res) => {
+app.get('/api/v1/recommendation', (req, res) => {
 	console.log('GET: recommendation')
 	const previewSpace = {
 		id: 0,
@@ -1308,22 +1290,7 @@ app.post('/api/v1/film/:id/rate/drop', (req, res) => {
 	res.sendStatus(204);
 });
 
-// [
-// 	{
-// 	  "author": {
-// 		"avatar": "54521",
-// 		"count_reviews": 42,
-// 		"id": 54521,
-// 		"nickname": "Инокентий"
-// 	  },
-// 	  "body": "Столько крови и убийств нет ни в одном из сериалов, из 730 персонажей больше половины полегло",
-// 	  "count_likes": 142,
-// 	  "create_time": "2022-10-30 14:48:48.712860",
-// 	  "name": "Почему Игра престолов всего лишь одно насилие?",
-// 	  "type": "negative"
-// 	}
-//   ]
-app.get('/v1/film/:id/reviews',  (req, res) => {
+app.get('/api/v1/film/:id/reviews',  (req, res) => {
 	const filmID = req.params.id;
 	const { count, offset } = req.query;
 	console.log(`count ${count}, offset ${offset} `);
