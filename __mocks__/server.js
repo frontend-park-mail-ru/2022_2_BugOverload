@@ -704,7 +704,10 @@ app.get('/api/v1/person/1', (req, res) => {
 	const actor = {
 		name: 'Кристиан Бэйл',
 		original_name: 'Christian Bale',
-		professions: 'Актер, Продюссер',
+		professions: [
+			'актер', 
+			'продюссер',
+		],
 		birthday: '09.10.2022, 48 лет',
 		growth: '1.83 м',
 		count_films: '130',
@@ -714,11 +717,10 @@ app.get('/api/v1/person/1', (req, res) => {
 			"2",
 			"3",
 			"4",
-			"5",
-			"6",
-			"7",
-			"8",
-			"9",
+			"1",
+			"2",
+			"3",
+			"4",
 		],
 		best_films:[
 			{
