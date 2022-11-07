@@ -25,7 +25,7 @@ export class ListReviews extends Component {
 
         this.isMounted = false;
         this.step = 3;
-        this.delimeter = -this.step;
+        this.offset = -this.step;
 
         store.subscribe('reviews', () => {
             this.state.reviews = store.getState('reviews');
@@ -40,7 +40,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            delimeter: this.delimeter += this.step,
+            offset: this.offset += this.step,
             count: this.step,
         }));
     }
@@ -90,7 +90,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            delimeter: this.delimeter += this.step,
+            offset: this.offset += this.step,
             count: this.step,
         }));
     }).bind(this);

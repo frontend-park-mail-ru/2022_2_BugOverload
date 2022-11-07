@@ -16,7 +16,8 @@
   height: 100%;
   background-size: 460px;
   background-repeat: no-repeat;
-  background-image: url("@assets/img/auth/login.png");
+  // background-image: url("@assets/img/auth/login.png");
+  background-image: url("http://movie-gate.online:8088/v1/image?object=default&key=login");
 }
 
 .modal__login__img::before {

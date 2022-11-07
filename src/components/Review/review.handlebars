@@ -2,14 +2,14 @@
     <div class="review__container js-review__background " data-type-review="{{type}}">
         <div class="review__meta-info-container">
             <div class="review__user-container">
-                <div class="review__user-avatar" style="background-image: url('{{author.avatar}}');">
+                <div class="review__user-avatar" style="background-image: url('{{user_avatar}}');">
                 </div>
                 <div class="review__info-user-container">
                     <div class="review__username">{{author.nickname}}</div>
                     <div class="review__user-counter-reviews">{{author.count_reviews}}</div>
                 </div>
             </div>
-            <div class="review__date">{{time}}</div>
+            <div class="review__date">{{create_time}}</div>
         </div>
 
         <div class="review__title">{{name}}</div>

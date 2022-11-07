@@ -7,17 +7,18 @@ import {
     renderError, removeError,
 } from '@utils/valid.js';
 import { decoreCountReviews } from '@utils/decorationData.js';
+import { API } from '@config/config.js';
 
 export class InputReview extends Component {
     constructor(props) {
         super(props);
         this.state = {
             countReviews: null,
-            film: null,
+            film: props.film,
+            user: store.getState('user'),
         };
 
         this.data = props.data;
-        this.state.film = props.film;
         store.subscribe('countReviews', () => {
             this.state.countReviews = store.getState('countReviews');
         });
@@ -34,8 +35,9 @@ export class InputReview extends Component {
 
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', template({
-            count_reviews: decoreCountReviews(store.getState('countReviews')),
-            nickname: store.getState('user').nickname,
+            count_reviews: decoreCountReviews(store.getState('countReviews')), // TODO
+            nickname: this.state.user.nickname,
+            user_avatar: API.img.user_avatar(this.state.user.avatar),
         }));
         this.componentDidMount();
     }

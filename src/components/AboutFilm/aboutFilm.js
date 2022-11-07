@@ -6,6 +6,7 @@ import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
 } from '@utils/decorationData.js';
+import { API } from '@config/config.js';
 
 export class AboutFilm extends Component {
     constructor(props) {
@@ -32,6 +33,7 @@ export class AboutFilm extends Component {
 
     render() {
         this.location.insertAdjacentHTML('afterbegin', template(this.about));
+        this.location.querySelector('.js-about-film').style.backgroundImage = `url('${API.img.poster_hor(this.data.poster_hor)}')`;
         decoreColorRating(this.location, '.js-about-film__rating', this.data.rating);
 
         this.componentDidMount();
