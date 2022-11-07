@@ -2,6 +2,8 @@ import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
+import { API } from '@config/config.js';
+
 /**
 * Ходит за данными на бэкенд.
 * Рендерит HTML-шаблон превью фильма на главной
@@ -33,6 +35,6 @@ export class PreviewFilm extends Component {
     render() {
         this.location.innerHTML = '';
         this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
-        this.location.querySelector('.preview-film').style.backgroundImage = `url(http://${DOMAIN}/${this.state.preview.poster_hor})`;
+        this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
     }
 }

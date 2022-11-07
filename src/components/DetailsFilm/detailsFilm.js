@@ -1,8 +1,13 @@
 import template from '@components/DetailsFilm/detailsFilm.handlebars';
+import { API } from '@config/config.js';
 
 export class DetailsFilm {
     constructor(information = {}) {
         this.information = information;
+        if (this.information.actors) {
+            this.information.actors
+                .forEach((person) => { person.avatar = API.img.person_avatar(person.avatar); });
+        }
         this.location = document.querySelector('.js-film-page__details');
     }
 

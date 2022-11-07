@@ -11,7 +11,9 @@ export class SaveToCollectionMenu extends Component {
         }]) {
         super();
         this.state.collections = collections;
-        this.placeholder = document.querySelector('.js-place-save-to-collection');
+        this.placeholder = this.rootNode.querySelector('.js-place-save-to-collection');
+
+        // Навешиваем обработчик на выход по клику вне области меню
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.js-place-save-to-collection')) {
                 this.close();

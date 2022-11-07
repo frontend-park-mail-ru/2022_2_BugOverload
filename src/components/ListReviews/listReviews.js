@@ -5,7 +5,6 @@ import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { actionGetDataReviews } from '@actions/filmActions.js';
-import { createModuleResolutionCache } from 'typescript';
 
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
@@ -26,7 +25,7 @@ export class ListReviews extends Component {
 
         this.isMounted = false;
         this.step = 3;
-        this.delimeter = -this.step;
+        this.offset = -this.step;
 
         store.subscribe('reviews', () => {
             this.state.reviews = store.getState('reviews');
@@ -41,7 +40,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            delimeter: this.delimeter += this.step,
+            offset: this.offset += this.step,
             count: this.step,
         }));
     }
@@ -72,7 +71,7 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы'); // TODO
+            ShowErrorMessage('Вы должны быть авторизованы');
             return;
         }
 
@@ -91,7 +90,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            delimeter: this.delimeter += this.step,
+            offset: this.offset += this.step,
             count: this.step,
         }));
     }).bind(this);

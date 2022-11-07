@@ -70,7 +70,7 @@ export class Login extends Component {
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
-            const modal = new Modal(this.rootNode);
+            const modal = new Modal(this.rootNode, this.componentWillUnmount);
             modal.render();
         }
 

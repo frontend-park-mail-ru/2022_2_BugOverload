@@ -20,7 +20,7 @@ export class Film {
         const div = document.createElement('div');
         div.insertAdjacentHTML('afterbegin', film);
 
-        decoreColorRating(div, '.js-film-rating', filmData.ratio);
+        decoreColorRating(div, '.js-film-rating', filmData.rating);
 
         return div.innerHTML;
     }
