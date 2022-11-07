@@ -15,7 +15,7 @@ class ReducerActor {
                         'avatar',
                         'images',
                         'professions',
-                    ]
+                    ],
                 ),
             };
         }
@@ -26,7 +26,7 @@ class ReducerActor {
 export const reducerActor = new ReducerActor();
 
 const handlerPropertiesPerson = (id, object, nameProperties) => {
-    nameProperties.forEach(key => {
+    nameProperties.forEach((key) => {
         if (key === 'avatar') {
             const newUrl = `http://movie-gate.online:8088/api/v1/image?object=person_avatar&key=${object[key]}`;
             if (object[key] !== newUrl) {
@@ -43,11 +43,9 @@ const handlerPropertiesPerson = (id, object, nameProperties) => {
             });
         }
         if (key === 'professions') {
-            console.log(object[key])
             object[key] = object[key].join(', ');
         }
     });
 
     return object;
 };
-
