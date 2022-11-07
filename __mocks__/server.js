@@ -892,8 +892,8 @@ app.get('/api/v1/person/:id', (req, res) => {
 // 	"rating": 8.8,
 // 	"short_description": "Идет борьба сопротивления людей против машин"
 //   }
-app.get('/api/v1/recommendation', (req, res) => {
-	console.log('GET: recommendation')
+app.get('/api/v1/film/recommendation', (req, res) => {
+	console.log('GET: film/recommendation')
 	const previewSpace = {
 		id: 0,
 		name: "2001 год: Космическая одиссея",
