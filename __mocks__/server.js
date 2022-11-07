@@ -16,6 +16,7 @@ app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
@@ -34,7 +35,7 @@ const users = {
 const DEFAULT_AVATAR = 'assets/img/users/default_user.jpg'
 const ids = {};
 
-app.post('/v1/auth/login',  (req, res) => {
+app.post('/api/v1/auth/login',  (req, res) => {
 	console.log(req);
 	console.log(req.body);
 
@@ -55,7 +56,7 @@ app.post('/v1/auth/login',  (req, res) => {
 });
 
 let i = 0;
-app.get('/v1/auth',  (req, res) => {
+app.get('/api/v1/auth',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 
 	const variants = [200, 404];
@@ -73,26 +74,26 @@ app.get('/v1/auth',  (req, res) => {
 	}
 });
 
-app.put('/v1/user/setting',  (req, res) => {
+app.put('/api/v1/user/setting',  (req, res) => {
 	res.sendStatus(403);
 });
 
-app.put('/v1/image', (req, res) => {
+app.put('/api/v1/image', (req, res) => {
 	console.log(req.body)
 	res.sendStatus(204);
 });
 
-app.get('/v1/user/settings',  (req, res) => {
+app.get('/api/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
 });
 
-app.get('/v1/auth/logout',  (req, res) => {
+app.get('/api/v1/auth/logout',  (req, res) => {
 	res.sendStatus(204);
 });
 
 
-app.post('/v1/auth/signup', (req, res) => {
+app.post('/api/v1/auth/signup', (req, res) => {
 	const password = req.body.password;
 	const email = req.body.email;
 	const nickname = req.body.nickname;
@@ -717,6 +718,183 @@ app.get('/v1/collection/:tag', (req, res) => {
 });
 
 
+
+app.get('/api/v1/person/1', (req, res) => {
+	const actor = {
+		name: 'Кристиан Бэйл',
+		original_name: 'Christian Bale',
+		professions: 'Актер, Продюссер',
+		birthday: '09.10.2022, 48 лет',
+		growth: '1.83 м',
+		count_films: '130',
+		avatar: "1",
+		images: [
+			"1",
+			"2",
+			"3",
+			"4",
+			"1",
+			"2",
+			"3",
+			"4",
+		],
+		best_films:[
+			{
+				film_id: 0,
+				film_name: "Дюна",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/dune_poster.jpg",
+				ratio: 5.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 8,
+				film_name: "Убить Билла",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/8.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id:9,
+				film_name: "Головокружение",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/9.png",
+				ratio: 4.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id:5,
+				film_name: "Доказательство смерти",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/5.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 7,
+				film_name: "Чунгингский экспресс",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/7.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 6,
+				film_name: "Девушка с татуировой дракона",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/6.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 1,
+				film_name: "Человек",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/1.png",
+				ratio: 7.1,
+				genres: ["Документальный", "Смотрю и плачу"],
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+			{
+				film_id: 3,
+				film_name: "Властелин колец. Братство кольца",
+				description: "",
+				type: "",
+				year_prod: 2021,
+				prodCompany: "",
+				prodCountry: "",
+				ageLimit: "",
+				duration: "",
+				posterHuge: "",
+				poster_ver: "assets/img/posters/3.png",
+				ratio: 7.1,
+				genres: ["Фентези", "Приключения"],
+			},
+		],
+	}
+
+	res.status(200).json(actor);
+})
+
 // {
 // 	"end_year": 2013,
 // 	"genres": [
@@ -809,7 +987,7 @@ app.get('/v1/recommendation', (req, res) => {
 	res.status(200).json(previewDune)
 });
 
-app.get('/v1/film/:id',  (req, res) => {
+app.get('/api/v1/film/:id',  (req, res) => {
 	const info = {
 		"actors": [
 		  {
@@ -1043,7 +1221,7 @@ const reviewsStorage = {
 	]
 };
 
-app.get('/v1/film/:id/user_activities',  (req, res) => {
+app.get('/api/v1/film/:id/user_activities',  (req, res) => {
 	if (Object.keys(req.cookies).length == 0) {
 		res.status(401).json({});
 		return;
@@ -1081,7 +1259,7 @@ app.get('/v1/film/:id/user_activities',  (req, res) => {
 	res.status(200).json(meta);
 });
 
-app.post('/v1/film/:id/rate', (req, res) => {
+app.post('/api/v1/film/:id/rate', (req, res) => {
 	const rate = req.body.rate;
 	const email = 'Dop123@mail.ru';
 	const filmID = req.params.id;
@@ -1115,7 +1293,7 @@ app.post('/v1/film/:id/rate', (req, res) => {
 	});
 });
 
-app.post('/v1/film/:id/rate/drop', (req, res) => {
+app.post('/api/v1/film/:id/rate/drop', (req, res) => {
 	const email = 'Dop123@mail.ru';
 	const filmID = req.params.id;
 
@@ -1172,7 +1350,7 @@ app.get('/v1/film/:id/reviews',  (req, res) => {
 	res.status(200).json(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]}));
 });
 
-app.post('/v1/film/:id/review/new', (req, res) => {
+app.post('/api/v1/film/:id/review/new', (req, res) => {
 	console.log(JSON.stringify(req.cookies) + 'zzzz');
 	if (Object.keys(req.cookies).length == 0) {
 		console.log(JSON.stringify(req.cookies) + 'zzzz');

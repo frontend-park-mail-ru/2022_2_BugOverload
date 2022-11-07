@@ -11,17 +11,19 @@ import { API } from '@config/config.js';
 *
 */
 export class Collection extends Component {
-    constructor(nameLocation) {
+    constructor(nameLocation = null) {
         super();
         this.state = {
             collection: null,
         };
-        this.nameLocation = nameLocation;
-        this.location = this.rootNode.querySelector(`.${nameLocation}`);
-        store.subscribe(`collection-${nameLocation}`, () => {
-            this.state.collection = store.getState(`collection-${nameLocation}`);
-            this.render();
-        });
+        if (nameLocation) {
+            this.nameLocation = nameLocation;
+            this.location = this.rootNode.querySelector(`.${nameLocation}`);
+            store.subscribe(`collection-${nameLocation}`, () => {
+                this.state.collection = store.getState(`collection-${nameLocation}`);
+                this.render();
+            });
+        }
     }
 
     init() {

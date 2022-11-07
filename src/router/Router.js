@@ -162,7 +162,7 @@ class Router {
 
         if (pushState) {
             if (props) {
-                window.history.pushState(props, null, `${location + path}${props}/`);
+                window.history.pushState(props, null, `${location + path}/${props}`);
             } else {
                 window.history.pushState(props, null, location + path);
             }

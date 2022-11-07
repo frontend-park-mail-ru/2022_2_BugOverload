@@ -26,6 +26,7 @@ export class Ajax {
     * Выполняет запрос с методом POST на бэкенд
     *
     * @param {url string} url - url запроса на бэкенд
+    * @param {Object} body - объект для отправки
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async post({ url, body }) {
@@ -50,6 +51,14 @@ export class Ajax {
         return { status: response.status, body: result };
     }
 
+    /**
+    * Выполняет запрос с методом PUT на бэкенд
+    *
+    * @param {url string} url - url запроса на бэкенд
+    * @param {Object} body - объект для отправки
+    * @param {Bool} uploadFile - флаг отправки файла
+    * @return {Object} статус ответа и тело ответа в виде JSON
+    */
     static async put({ url, body }, uploadFile = false) {
         let response;
         if (uploadFile) {
