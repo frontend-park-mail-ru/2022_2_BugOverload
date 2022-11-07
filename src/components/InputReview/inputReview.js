@@ -35,7 +35,7 @@ export class InputReview extends Component {
 
         modalWindow = this.rootNode.querySelector('.modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', template({
-            count_reviews: decoreCountReviews(store.getState('countReviews')), // TODO
+            count_reviews: decoreCountReviews(store.getState('countReviews')),
             nickname: this.state.user.nickname,
             user_avatar: API.img.user_avatar(this.state.user.avatar),
         }));
