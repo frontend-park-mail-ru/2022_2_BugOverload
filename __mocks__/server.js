@@ -700,7 +700,7 @@ app.get('/api/v1/collection/:tag', (req, res) => {
 });
 
 
-app.get('/api/v1/person/:id', (req, res) => {
+app.get('person/:id', (req, res) => {
 	const actor = {
 		name: 'Кристиан Бэйл',
 		original_name: 'Christian Bale',

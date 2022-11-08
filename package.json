@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npm run watch",
     "back": "node __mocks__/server.js",
-    "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
-    "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode production",
+    "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development && node buildSWpath.js",
+    "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode production && node buildSWpath.js",
     "prod-debug": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development",
     "prod-debug-w": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development --watch",
     "stand": "npm run dev && npm run back 3000",
