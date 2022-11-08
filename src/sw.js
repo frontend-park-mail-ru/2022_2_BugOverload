@@ -1,34 +1,34 @@
-const CACHE_NAME = 'moviegate-v-3';
-const DYNAMIC_CACHE_NAME = 'd-moviegate-v-3';
+const CACHE_NAME = 'moviegate-v-1';
+const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 
 const assetUrls = [];
 
-self.addEventListener('install', async () => {
+this.addEventListener('install', async () => {
     const cache = await caches.open(CACHE_NAME);
     await cache.addAll(assetUrls);
 });
 
-self.addEventListener('fetch', event => {
+this.addEventListener('fetch', (event) => {
     const { request } = event;
     if (request.method !== 'GET') {
         return (
             async () => {
-            await fetch(request);
-        })();
+                await fetch(request);
+            })();
     }
 
     const url = new URL(request.url);
-    if (url.origin === location.origin) {
+    if (url.origin === window.location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
     }
-})
-
+    return null;
+});
 
 async function cacheFirst(request) {
     const cached = await caches.match(request);
-    return cached ?? await fetch(request);
+    return cached || fetch(request);
 }
 
 async function networkFirst(request) {
@@ -39,6 +39,6 @@ async function networkFirst(request) {
         return response;
     } catch (e) {
         const cached = await cache.match(request);
-        return cached ?? await caches.match('/offline.html');
+        return cached;
     }
 }
