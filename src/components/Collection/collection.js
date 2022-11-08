@@ -5,9 +5,8 @@ import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
 import template from '@components/Collection/collection.handlebars';
 
 /**
-* Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
-* Добавляет обработчики событий на кнопки слайдера
-*
+* Отрисовывает список фильмов в виде коллекции.
+* Перерисовывается при изменении state 'collection'
 */
 export class Collection extends Component {
     constructor(nameLocation) {
