@@ -18,7 +18,7 @@ this.addEventListener('fetch', (event) => {
     }
 
     const url = new URL(request.url);
-    if (url.origin === window.location.origin) {
+    if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
