@@ -3,7 +3,6 @@ import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
 import template from '@components/Collection/collection.handlebars';
-import { API } from '@config/config.js';
 
 /**
 * Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
@@ -45,12 +44,7 @@ export class Collection extends Component {
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
     render() {
-        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(
-            {
-                ...filmData,
-                poster_ver: API.img.poster_ver(filmData.poster_ver),
-            },
-        ), '');
+        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
         this.location.insertAdjacentHTML('afterbegin', template({ title: this.state.collection.title, films }));
         this.componentDidMount();

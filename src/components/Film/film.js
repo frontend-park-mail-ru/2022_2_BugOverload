@@ -1,3 +1,4 @@
+import { API } from '@config/config.js';
 import template from '@components/Film/film.handlebars';
 import { decoreColorRating } from '@utils/decorationData.js';
 
@@ -15,7 +16,10 @@ export class Film {
     static createFilm(filmData) {
         Film.decoreFilmInfo(filmData);
 
-        const film = template(filmData);
+        const film = template({
+            ...filmData,
+            poster_ver: API.img.poster_ver(filmData.poster_ver),
+        });
 
         const div = document.createElement('div');
         div.insertAdjacentHTML('afterbegin', film);

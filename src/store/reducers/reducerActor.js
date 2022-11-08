@@ -28,7 +28,7 @@ export const reducerActor = new ReducerActor();
 const handlerPropertiesPerson = (id, object, nameProperties) => {
     nameProperties.forEach((key) => {
         if (key === 'avatar') {
-            const newUrl = `http://movie-gate.online:8088/api/v1/image?object=person_avatar&key=${object[key]}`;
+            const newUrl = API.img.person_avatar(object[key]);
             if (object[key] !== newUrl) {
                 object[key] = newUrl;
             }
@@ -36,7 +36,7 @@ const handlerPropertiesPerson = (id, object, nameProperties) => {
         if (key === 'images') {
             const images = object[key];
             images.forEach((image, index) => {
-                const newUrl = `http://movie-gate.online:8088/api/v1/image?object=person_image&key=${id}/${image}`;
+                const newUrl = API.img.person_image(id, image);
                 if (image !== newUrl) {
                     object[key][index] = newUrl;
                 }

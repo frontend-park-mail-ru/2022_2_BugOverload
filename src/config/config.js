@@ -19,6 +19,9 @@ export const API = {
         person_avatar(key) {
             return `http://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
         },
+        person_image(id, image) {
+            return `http://${DOMAIN}/api/v1/image?object=person_image&key=${id}/${image}`;
+        },
 
         avatar_default: `http://${DOMAIN}/api/v1/image?object=default&key=avatar_avatar`,
         auth_login: `http://${DOMAIN}/api/v1/image?object=default&key=login`,
