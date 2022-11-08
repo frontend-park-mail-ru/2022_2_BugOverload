@@ -1,3 +1,4 @@
+import { API } from '@config/config.js';
 import template from '@components/Film/film.handlebars';
 import { decoreColorRating } from '@utils/decorationData.js';
 
@@ -15,12 +16,15 @@ export class Film {
     static createFilm(filmData) {
         Film.decoreFilmInfo(filmData);
 
-        const film = template(filmData);
+        const film = template({
+            ...filmData,
+            poster_ver: API.img.poster_ver(filmData.poster_ver),
+        });
 
         const div = document.createElement('div');
         div.insertAdjacentHTML('afterbegin', film);
 
-        decoreColorRating(div, '.js-film-rating', filmData.ratio);
+        decoreColorRating(div, '.js-film-rating', filmData.rating);
 
         return div.innerHTML;
     }
@@ -32,6 +36,8 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     */
     static decoreFilmInfo(filmData) {
+        filmData.rating = Math.round(filmData.rating * 10) / 10;
+
         const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;
         const maxLenGenre = maxLength - lenYear;

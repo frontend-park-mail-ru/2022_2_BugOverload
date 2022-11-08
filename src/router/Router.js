@@ -28,7 +28,6 @@ class Router {
         let reg = new RegExp(`^${newHref.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
 
         let matchHref = newHref.match(reg);
-
         if (matchHref) {
             if (matchHref[1]) {
                 matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
@@ -163,7 +162,7 @@ class Router {
 
         if (pushState) {
             if (props) {
-                window.history.pushState(props, null, `${location + path}/${props}`);
+                window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
             }

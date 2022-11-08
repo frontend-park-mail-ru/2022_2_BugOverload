@@ -1,0 +1,48 @@
+<div class="input-review">
+    <div class="input-review__container">
+        <div class="input-review__head">Новая рецензия</div>
+        <div class="input-review__user-container">
+            <div class="input-review__user-avatar" style="background-image: url('{{user_avatar}}');">
+            </div>
+            <div class="input-review__info-user-container">
+                <div class="input-review__username">{{nickname}}</div>
+                <div class="input-review__user-counter-reviews">{{count_reviews}}</div>
+            </div>
+        </div>
+        <form class="input-review__form js-input-review__form">
+            <div class="input-review__select__wrapper">
+                <div class="input-review__select">
+                    <input class="input-review__select-input js-input-review__select-input" type="hidden" name="">
+                    <div class="input-review__select-head">
+                        <div class="input-review__select-head-text">
+                            Выберите тип рецензии
+                        </div>
+                        <div class="input-review__select-head-icon"></div>
+                    </div>
+                    <ul class="input-review__select-list" hidden>
+                        <li class="input-review__select-item" data-value="positive">
+                            <div class="input-review__select-icon-positive"></div>
+                            Положительная
+                        </li>
+                        <li class="input-review__select-item" data-value="neutral">
+                            <div class="input-review__select-icon-neutral"></div>
+                            Нейтральная
+                        </li>
+                        <li class="input-review__select-item" data-value="negative">
+                            <div class="input-review__select-icon-negative"></div>
+                            Отрицательная
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="input-title__wrapper">
+                <input class="input-review__input-title" type="text" name="review-title" placeholder="Заголовок">
+            </div>
+            <div class="input-text__wrapper">
+                <textarea placeholder="Текст рецензии" class="js-input-review__input-text" name="review-text" cols="40"
+                    rows="3"></textarea>
+            </div>
+            <button type="submit" class="modal__input__button-review primary-btn-big">Опубликовать рецензию</button>
+        </form>
+    </div>
+</div>

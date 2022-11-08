@@ -1,0 +1,13 @@
+.description-film {
+  margin-left: var(--standart-margin);
+  margin-top: 36px;
+  width: 900px;
+  height: auto;
+
+  &__content {
+    color: var(--main-color-text);
+    font-size: 15px;
+  }
+}
+
+

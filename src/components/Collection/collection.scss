@@ -1,69 +1,65 @@
+@mixin w-h-btn-slides {
+  width: 43px;
+  height: 43px;
+}
+
 .collection {
   margin-left: var(--standart-margin);
-}
+  margin-top: 110px;
 
-.collection__container {
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 38px;
-  position: relative;
-  overflow-x: hidden;
-}
+  &__container {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 38px;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-.collection__container a {
-  text-decoration: none;
-}
+  &__title {
+    font-size: 28px;
+    color: var(--main-color-text);
+  }
 
-.collection__title {
-  font-size: 28px;
-  color: var(--main-color-text);
-}
+  &__slider {
+    display: flex;
+    position: relative;
+    left: 0;
+    transition: all cubic-bezier(0.62, 0, 0.35, 1) 0.5s;
+  }
 
-.collection__slider {
-  display: flex;
-  position: relative;
-  left: 0;
-  transition: all cubic-bezier(0.62, 0, 0.35, 1) 0.5s;
-}
+  &__slider-button_right {
+    position: absolute;
+    right: var(--standart-margin);
+    top: calc(50% - 80px);
+    @include w-h-btn-slides;
+  }
 
-.collection__slider-button_right {
-  position: absolute;
-  right: var(--standart-margin);
-  top: calc(50% - 80px);
-  width: 43px;
-  height: 43px;
-}
+  &__slider-button_left {
+    @include w-h-btn-slides;
+    position: absolute;
+    left: 0;
+    top: 128px;
+  }
 
-.collection__slider-button_left {
-  position: absolute;
-  left: 0;
-  top: 128px;
-  width: 43px;
-  height: 43px;
-}
+  &__slider-button_right img {
+    @include w-h-btn-slides;
+    opacity: 0.4;
+  }
 
-.collection__slider-button_right img {
-  width: 43px;
-  height: 43px;
-  opacity: 0.4;
-}
+  &__slider-button_left img {
+    @include w-h-btn-slides;
+    opacity: 0.4;
+  }
 
-.collection__slider-button_left img {
-  width: 43px;
-  height: 43px;
-  opacity: 0.4;
-}
+  &__slider-button_right img:hover {
+    @include w-h-btn-slides;
+    opacity: 0.8;
+    cursor: pointer;
+  }
 
-.collection__slider-button_right img:hover {
-  width: 43px;
-  height: 43px;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.collection__slider-button_left img:hover {
-  width: 43px;
-  height: 43px;
-  opacity: 0.8;
-  cursor: pointer;
+  &__slider-button_left img:hover {
+    @include w-h-btn-slides;
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }

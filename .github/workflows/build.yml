@@ -41,7 +41,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run prod
+        run: npm run prod-debug
 
       - name: Upload build result
         uses: actions/upload-artifact@v1

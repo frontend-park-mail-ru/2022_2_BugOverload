@@ -1,10 +1,10 @@
-<div class="film">
-    <a href="/film/321{{!-- {{film_id}} --}}" class="film__link">
+<div class="film js-film">
+    <a class="film__link">
         <div class="film__container">
-            <div class="film__blackout"></div>
+            <div data-section="/film/{{id}}/" class="film__blackout"></div>
             <div class="film__poster" style="background-image: url('{{poster_ver}}');"></div>
-            <div class="film__rating js-film-rating">{{ratio}}</div>
-            <div class="film__title">{{film_name}}</div>
+            <div class="film__rating js-film-rating">{{rating}}</div>
+            <div class="film__title">{{name}}</div>
             <div class="film__info-container">
                 <div class="film__genres">
                     {{#each genres}}
@@ -12,7 +12,7 @@
                     {{/each}}
                 </div>
                 <div class="film__decore-circle"></div>
-                <div class="film__year">{{year_prod}}</div>
+                <div class="film__year">{{prod_year}}{{#if end_year}}-{{end_year}}{{/if}} </div>
             </div>
         </div>
     </a>

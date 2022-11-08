@@ -7,6 +7,7 @@ import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает логин.
@@ -36,7 +37,7 @@ export class Login extends Component {
      */
     handlerStatus(userStatus) {
         const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === responsStatuses.NotFound) { 
+        if (userStatus === responsStatuses.NotFound) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
@@ -56,7 +57,7 @@ export class Login extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                exit();
+                history.replaceState(null, null, window.location.href.replace(hrefRegExp.auth, ''));
             }
             return;
         }
@@ -70,7 +71,7 @@ export class Login extends Component {
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
-            const modal = new Modal(this.rootNode);
+            const modal = new Modal(this.rootNode, this.componentWillUnmount);
             modal.render();
         }
 

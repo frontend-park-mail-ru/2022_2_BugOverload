@@ -1,0 +1,174 @@
+@mixin dropped-items {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 3px;
+  margin-left: 49px;
+  margin-right: 8px;
+}
+
+.input-review__container {
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  box-sizing: border-box;
+  background-color: rgb(43 43 46 / 80%);
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  width: 900px;
+  height: auto;
+
+  &__head {
+    color: var(--main-color-text);
+    font-size: 36px;
+    width: 400px;
+  }
+
+  &__user-container {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  &__user-avatar {
+    border-radius: 30px;
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+  }
+
+  &__info-user-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 7px;
+  }
+
+  &__username {
+    color: var(--main-color-text);
+    font-size: 15px;
+  }
+
+  &__user-counter-reviews {
+    color: var(--secondary-color-text);
+    font-size: 12px;
+  }
+
+  .input-title__wrapper{
+    height: 46px + 35px;
+  }
+
+  &__input-title {
+    width: 804px;
+    border: 0;
+    height: 46px;
+    border-radius: 4px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  .input-text__wrapper{
+    height: 221px + 35px;
+  }
+
+  .js-input-review__input-text {
+    width: 804px;
+    border: 0;
+    height: 221px;
+    resize: none;
+    border-radius: 4px;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+
+  .modal__input__button-review {
+    width: 804px;
+    height: 46px;
+    margin-top: 25px;
+  }
+
+  &__select__wrapper {
+    height: 46px + 35px;
+  }
+
+  &__select {
+    position: relative;
+    display: block;
+    min-width: 220px;
+    width: 804px;
+    height: 46px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+
+  &__select-head-text {
+    font-size: 20px;
+    color: #191a1d;
+  }
+
+  &__select-head {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+    padding: 10px 24px;
+  }
+
+  &__select-head-icon {
+    width: 22px;
+    height: 13px;
+    background-image: url("@icons/arrow-drop.png");
+    background-repeat: no-repeat;
+  }
+
+  &__select-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #e2e2e2;
+    box-shadow: 0 4px 16px rgb(var(--main-shadow-color) / 40%);
+    border-radius: 4px;
+    margin-top: 7px;
+    max-height: 205px;
+    z-index: 1;
+    padding: 12px 0;
+    font-size: 14px;
+    scrollbar-color: dark;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    cursor: pointer;
+  }
+
+  &__select-list &__select-item {
+    position: relative;
+    padding: 10px 15px;
+    cursor: pointer;
+    list-style-type: none;
+  }
+
+  &__select-list &__select-item:hover {
+    background-color: var(--backgr-select-item);
+  }
+
+  &__select-icon-positive {
+    background-color: var(--rating-color-positive);
+    @include dropped-items;
+  }
+
+  &__select-icon-neutral {
+    background-color: var(--rating-color-neutral);
+    @include dropped-items;
+  }
+
+  &__select-icon-negative {
+    background-color: var(--rating-color-negative);
+    @include dropped-items;
+  }
+}

@@ -70,19 +70,19 @@ export const decoreCountReviews = (count) => {
     return `${count} рецензий`;
 };
 
-export const decoreColorRating = (location, className, ratio) => {
+export const decoreColorRating = (location, className, rating) => {
     const filmRating = location.querySelector(className);
-    if (!ratio) {
+    if (!rating) {
         filmRating.remove();
         return;
     }
 
-    if (ratio > 7.49) {
+    if (rating > 7.49) {
         filmRating.dataset.valueRating = 'positive';
         return;
     }
 
-    if (ratio > 5.19) {
+    if (rating > 5.19) {
         filmRating.dataset.valueRating = 'neutral';
         return;
     }

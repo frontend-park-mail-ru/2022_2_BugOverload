@@ -9,8 +9,9 @@ export class Modal {
      * Cохраняет root.
      * @param {Element} root - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
+    constructor(root, componentUnmountMethod = null) {
         this.root = root;
+        this.componentUnmountMethod = componentUnmountMethod;
     }
 
     /**
@@ -32,6 +33,9 @@ export class Modal {
                 const { target } = e;
 
                 if (target.classList.contains('modal__background')) {
+                    if (this.componentUnmountMethod) {
+                        this.componentUnmountMethod();
+                    }
                     exitFromModal();
                 }
             });
@@ -44,10 +48,10 @@ export class Modal {
 export const exitFromModal = () => {
     document.body.classList.remove('body_hide_y_scroll');
     const modalBackground = document.body.querySelector('.modal__background');
-    if(modalBackground) {
+    if (modalBackground) {
         modalBackground.remove();
     }
-}
+};
 
 /**
 * Функция полного выхода из модального окна, со сменой url

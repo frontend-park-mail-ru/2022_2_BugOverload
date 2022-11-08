@@ -1,34 +1,42 @@
-@import "@components/Header/header";
-@import "@components/Login/login";
-@import "@components/Modal/modal";
-@import "@components/Signup/signup";
-@import "@components/Userbar/userbar";
-@import "@components/Collection/collection";
-@import "@components/Film/film";
-@import "@components/PreviewFilm/previewFilm";
-@import "@components/ErrorMessage/errorMessage";
-@import "@components/AboutFilm/aboutFilm";
-@import "@components/ProfileMenu/profileMenu";
-@import "@components/ProfileChange/profileChange";
-@import "@views/UserProfile/userProfile";
-@import '@components/ActorProfile/actorProfile';
-
-@import "@components/Components";
-
+@import "@components/Header/header.scss";
+@import "@components/Login/login.scss";
+@import "@components/Modal/modal.scss";
+@import "@components/Signup/signup.scss";
+@import "@components/Userbar/userbar.scss";
+@import "@components/Collection/collection.scss";
+@import "@components/Film/film.scss";
+@import "@components/PreviewFilm/previewFilm.scss";
+@import "@components/ErrorMessage/errorMessage.scss";
+@import "@components/AboutFilm/aboutFilm.scss";
+@import "@components/MenuInfoFilm/menuInfoFilm.scss";
+@import "@components/DescriptionFilm/descriptionFilm.scss";
+@import "@components/DetailsFilm/detailsFilm.scss";
+@import "@components/Rating/rating.scss";
+@import "@components/InputReview/inputReview.scss";
+@import "@components/ReviewStatistic/reviewStatistic.scss";
+@import "@components/ListReviews/listReviews.scss";
+@import "@components/Review/review.scss";
+@import "@components/SaveToCollectionMenu/saveToCollectionMenu.scss";
+@import "@components/ProfileMenu/profileMenu.scss";
+@import "@components/ProfileChange/profileChange.scss";
+@import "@views/UserProfile/userProfile.scss";
+@import "@components/_Components.scss";
+@import "@views/FilmPage/filmPage.scss";
+@import "components/ActorProfile/actorProfile.scss";
 @import "@fonts/fonts.css";
 
 ::-webkit-scrollbar { /* Webkit */
-    width      : 0;  /* ширина scrollbar'a */
-    background : transparent  /* опционально */
+  width      : 0;  /* ширина scrollbar'a */
+  background : transparent  /* опционально */
 }
 
 html {
-    -ms-overflow-style : none;  /* IE 10+ */
-    scrollbar-width    : none /* Firefox */
+  -ms-overflow-style : none;  /* IE 10+ */
+  scrollbar-width    : none /* Firefox */
 }
 
 input:focus, textarea:focus, select:focus {
-    outline: none;
+  outline: none;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -37,7 +45,10 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
+
 body, html {
+  --main-shadow-color: #000;
+  --blackout-color: #000;
   --backgr-color: #121212;
   --primary-color: #feba2b;
   --primary-color-hover: #cd9826;
@@ -47,6 +58,10 @@ body, html {
   --secondary-color-text: #bebebe;
   --standart-margin: 52px;
   --error-color:rgb(150 0 0);
+  --rating-color-neutral: #858585;
+  --rating-color-positive: #12b77c;
+  --rating-color-negative: #ff4350;
+  --backgr-select-item: #656565;
   font-family: 'Mail Sans Roman';
   background-color: var(--backgr-color);
   margin: 0;
