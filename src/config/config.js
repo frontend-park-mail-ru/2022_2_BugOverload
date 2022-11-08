@@ -35,7 +35,7 @@ export const API = {
     },
 
     recommendation: `http://${DOMAIN}/api/v1/film/recommendation`,
-    film(id) { return `http://${DOMAIN}/api/v1/film/${id}`; },
+    film(id, countImages = 10) { return `http://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
     metaFilm(id) { return `http://${DOMAIN}/api/v1/film/${id}/user_activities`; },
 
     rate(id) { return `http://${DOMAIN}/api/v1/film/${id}/rate`; },

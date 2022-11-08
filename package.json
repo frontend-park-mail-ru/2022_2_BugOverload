@@ -9,6 +9,7 @@
     "dev": "cross-env NODE_ENV=development cross-env DOMAIN_DEPLOY=localhost:3000 webpack --mode development",
     "prod": "cross-env NODE_ENV=production cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode production",
     "prod-debug": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development",
+    "prod-debug-w": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development --watch",
     "stand": "npm run dev && npm run back 3000",
     "deploy": "npm run prod && npm run back 80",
     "dev-deploy": "cross-env DOMAIN_DEPLOY=movie-gate.online:8088 webpack --mode development && npm run back 80",
