@@ -45,10 +45,12 @@ export class Collection extends Component {
     * @return {string} отрендеренный HTML-шаблон коллеции
     */
     render() {
-        const films = this.state.collection.films.reduce((res, filmData) => {
-            filmData.poster_ver = API.img.poster_ver(filmData.poster_ver);
-            return res + Film.createFilm(filmData);
-        }, '');
+        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(
+            {
+                ...filmData,
+                poster_ver: API.img.poster_ver(filmData.poster_ver),
+            },
+        ), '');
 
         this.location.insertAdjacentHTML('afterbegin', template({ title: this.state.collection.title, films }));
         this.componentDidMount();
