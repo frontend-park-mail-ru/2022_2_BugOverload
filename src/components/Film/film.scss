@@ -37,7 +37,8 @@
   &__blackout {
     width: 210px;
     height: 300px;
-    background-color: rgb(var(--blackout-color)/ 0%);
+    background-color: var(--blackout-color);
+    opacity: 0;
     position: absolute;
     top: 0;
     transition: 0.12s linear;
@@ -89,6 +90,7 @@
     width: 210px;
     height: 300px;
     background-color: rgb(var(--blackout-color)/ 30%);
+    opacity: 0.3;
     position: absolute;
     top: 0;
     cursor: pointer;

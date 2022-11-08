@@ -8,12 +8,17 @@
   margin-right: 8px;
 }
 
+@mixin icon-arrow-drop {
+  background-image: url("@icons/arrow-drop.png");
+  background-repeat: no-repeat;
+}
+
 .input-review__container {
   display: flex;
   flex-direction: column;
   padding: 48px;
   box-sizing: border-box;
-  background-color: rgb(43 43 46 / 80%);
+  background-color: var(--backgr-modal-review);
   backdrop-filter: blur(30px);
   border-radius: 20px;
   width: 900px;
@@ -100,13 +105,13 @@
     min-width: 220px;
     width: 804px;
     height: 46px;
-    background-color: #fff;
+    background-color: var(--backgr-select);
     border-radius: 4px;
   }
 
   &__select-head-text {
     font-size: 20px;
-    color: #191a1d;
+    color: var(--main-modal-color);
   }
 
   &__select-head {
@@ -115,7 +120,7 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 4px var(--main-shadow-color-light);
     border-radius: 4px;
     padding: 10px 24px;
   }
@@ -123,8 +128,7 @@
   &__select-head-icon {
     width: 22px;
     height: 13px;
-    background-image: url("@icons/arrow-drop.png");
-    background-repeat: no-repeat;
+    @include icon-arrow-drop;
   }
 
   &__select-list {
@@ -132,8 +136,8 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #e2e2e2;
-    box-shadow: 0 4px 16px rgb(var(--main-shadow-color) / 40%);
+    background: var(--backgr-select-list);
+    box-shadow: 0 4px 16px var(--main-shadow-color-strong);
     border-radius: 4px;
     margin-top: 7px;
     max-height: 205px;

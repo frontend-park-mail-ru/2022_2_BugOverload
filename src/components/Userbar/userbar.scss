@@ -5,86 +5,89 @@
   align-content: flex-start;
   align-items: flex-start;
   width: 220px;
+
+  &-substrate {
+    z-index: 5;
+    width: 209px;
+    height: auto;
+    margin-right: var(--standart-margin);
+    padding: 16px 0 0 16px;
+    display: flex;
+    color: #fff;
+    flex-flow: column nowrap;
+    align-self: flex-start;
+    margin-top: 14px;
+    border-radius: 15px;
+  }
+
+  &-user-info-container {
+    display: flex;
+  }
+
+  &-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 12px;
+    overflow: hidden;
+  }
+
+  &-name {
+    font-size: 15px;
+    color: var(--main-color-text);
+  }
+
+  &-email {
+    font-size: 12px;
+    color: var(--primary-color);
+    opacity: 0.75;
+  }
+
+  &-items-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-flow: column nowrap;
+  }
+
+  &-item {
+    margin-top: 12px;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--main-color-text);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-color);
+      transition: 0.08s linear;
+    }
+  }
+
+  &-item-out {
+    color: #afafaf;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    text-decoration: none;
+  }
 }
 
-.userbar__nick__email {
-  display: inline-flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  align-items: flex-start;
-  margin-left: 12px;
-}
+.userbar {
+  &__nick__email {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-left: 12px;
+  }
 
-.header__userbar-substrate {
-  z-index: 5;
-  width: 209px;
-  height: auto;
-  margin-right: var(--standart-margin);
-  padding: 16px 0 0 16px;
-  display: flex;
-  color: #fff;
-  flex-flow: column nowrap;
-  align-self: flex-start;
-  margin-top: 14px;
-  border-radius: 15px;
-}
+  &-on {
+    background-color: var(--backgr-userbar-color-on);
+    cursor: pointer;
+  }
 
-.header__userbar-user-info-container {
-  display: flex;
-}
+  &-off {
+    background-color: var(--backgr-userbar-color-off);
+  }
 
-.header__userbar-name-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 12px;
-  overflow: hidden;
-}
-
-.header__userbar-name {
-  font-size: 15px;
-  color: var(--main-color-text);
-}
-
-.header__userbar-email {
-  font-size: 12px;
-  color: var(--primary-color);
-  opacity: 0.75;
-}
-
-.header__userbar-items-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  flex-flow: column nowrap;
-}
-
-.header__userbar-item {
-  margin-top: 12px;
-  font-size: 15px;
-  text-decoration: none;
-  color: var(--main-color-text);
-  cursor: pointer;
-}
-
-.header__userbar-item:hover {
-  color: var(--primary-color);
-  transition: 0.08s linear;
-}
-
-.header__userbar-item-out {
-  color: #afafaf;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  text-decoration: none;
-}
-
-.userbar-on {
-  background-color: rgb(15 15 15 / 80%);
-  cursor: pointer;
-}
-
-.userbar-off {
-  background-color: rgb(15 15 15 / 0%);
 }

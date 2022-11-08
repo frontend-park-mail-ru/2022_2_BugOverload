@@ -1,38 +1,5 @@
-.modal__background {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-content: stretch;
-  align-items: center;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgb(0 0 0 / 50%);
-  overflow-y: hidden;
-}
-
 .body_hide_y_scroll {
   overflow-y: hidden;
-}
-
-.modal__window {
-  width: 920px;
-  height: 550px;
-  min-height: 250px;
-}
-
-.modal__window__flex {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-content: stretch;
-  align-items: center;
-  height: 100%;
-  font-weight: normal;
-  animation: 0.5s show ease;
 }
 
 @keyframes show {
@@ -40,93 +7,128 @@
   to { opacity: 1; }
 }
 
-.modal__cross {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: 45px;
-  right: 87px;
-  fill: #444;
-  cursor: pointer;
-}
+.modal {
+  &__background {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(var(--blackout-color), 50%);
+    overflow-y: hidden;
+  }
 
-.modal__header {
-  margin-bottom: 33px;
-  color: var(--main-color-text);
-  font-size: 26px;
-}
+  &__window {
+    width: 920px;
+    height: 550px;
+    min-height: 250px;
+  }
 
-.modal__form {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-content: stretch;
-  align-items: center;
-}
+  &__window__flex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    height: 100%;
+    font-weight: normal;
+    animation: 0.5s show ease;
+  }
 
-.modal__wrapper__input {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  align-items: center;
-  width: 270px;
-  height: 55px;
-  margin-bottom: 17px;
-}
+  &__cross {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 45px;
+    right: 87px;
+    fill: #444;
+    cursor: pointer;
+  }
 
-.modal__input {
-  width: 289px;
-  height: 29px;
-  border-radius: 4px;
-  color: var(--main-color-text);
-  background: #27292e;
-  opacity: 0.8;
-  border: 2px solid #333;
-  font-size: 12px;
-  padding-left: 15px;
-}
+  &__header {
+    margin-bottom: 33px;
+    color: var(--main-color-text);
+    font-size: 26px;
+  }
 
-.modal__input_red_border {
-  border: 2px solid #e72d2d;
-}
+  &__form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+  }
 
-.modal__input__error {
-  width: 300px;
-  height: 18px;
-  margin-top: 5px;
-  color: #e72d2d;
-  font-size: 12px;
-}
+  &__wrapper__input {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+    width: 270px;
+    height: 55px;
+    margin-bottom: 17px;
+  }
 
-.modal__input__button-auth {
-  width: 310px;
-  height: 35px;
-}
+  &__input {
+    width: 289px;
+    height: 29px;
+    border-radius: 4px;
+    color: var(--main-color-text);
+    background: #27292e;
+    opacity: 0.8;
+    border: 2px solid #333;
+    font-size: 12px;
+    padding-left: 15px;
+  }
 
-.modal__text__alternative__page {
-  white-space: nowrap;
-  margin-top: 25px;
-  margin-right: 20px;
-  font-size: 13px;
-  color: var(--main-color-text);
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 1;
-}
+  &__input_red_border {
+    border: 2px solid var(--text-danger);
+  }
 
-.modal__login__switch__btn {
-  white-space: nowrap;
-  margin-top: 25px;
-  margin-right: 45px;
-  height: 30px;
-  width: 150px;
-  z-index: 1;
-}
+  &__input__error {
+    width: 300px;
+    height: 18px;
+    margin-top: 5px;
+    color: var(--text-danger);
+    font-size: 12px;
+  }
 
-.modal__flex__center__div {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
-  align-items: center;
+  &__input__button-auth {
+    width: 310px;
+    height: 35px;
+  }
+
+  &__text__alternative__page {
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 20px;
+    font-size: 13px;
+    color: var(--main-color-text);
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  &__login__switch__btn {
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-right: 45px;
+    height: 30px;
+    width: 150px;
+    z-index: 1;
+  }
+
+  &__flex__center__div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }

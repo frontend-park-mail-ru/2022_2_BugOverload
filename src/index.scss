@@ -47,21 +47,39 @@ input[type="radio"] { all: unset; }
 
 
 body, html {
-  --main-shadow-color: #000;
-  --blackout-color: #000;
+  --main-shadow-color-light: rgba(0, 0, 0, 0.2);
+  --main-shadow-color-strong: rgba(0, 0, 0, 0.4);
+  --blackout-color: 0,0,0;
   --backgr-color: #121212;
   --primary-color: #feba2b;
   --primary-color-hover: #cd9826;
   --secondary-color: rgb(86 86 86 / 50%);
   --secondary-color-hover: rgb(177 177 177 / 35%);
   --main-color-text: #fff;
+  --text-color-on-primary: #000;
+  --text-color-on-secondary: #fff;
   --secondary-color-text: #bebebe;
+  --text-danger: #e72d2d;
   --standart-margin: 52px;
   --error-color:rgb(150 0 0);
   --rating-color-neutral: #858585;
-  --rating-color-positive: #12b77c;
+  --rating-color-neutral-opac: rgba(133, 133, 133, 0.2);
+  --rating-color-positive: #12B77C;
+  --rating-color-positive-opac: rgba(18, 183, 124, 0.2);
   --rating-color-negative: #ff4350;
+  --rating-color-negative-opac: rgba(255, 67, 80, 0.2);
   --backgr-select-item: #656565;
+  --backgr-modal-review: rgb(43 43 46 / 80%);
+  --main-modal-color: #191a1d;
+  --backgr-inputs-color: #27292E;
+  --backgr-select: #fff;
+  --backgr-select-list: #e2e2e2;
+  --border-input-color: #333;
+  --blackout-bottom-content: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
+  --backgr-userbar-color-on: rgb(15 15 15 / 0.8);
+  --backgr-userbar-color-off: rgb(15 15 15 / 0);
+  --backgr-menu-save: rgb(86 86 86 / 50%);
+
   font-family: 'Mail Sans Roman';
   background-color: var(--backgr-color);
   margin: 0;
