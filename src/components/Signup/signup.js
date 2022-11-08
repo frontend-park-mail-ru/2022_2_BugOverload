@@ -45,12 +45,7 @@ export class Signup extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.modal__background');
-            if (background) {
-                background.remove();
-                document.body.classList.remove('body_hide_y_scroll');
-                exit();
-            }
+            exit();
             return;
         }
 
