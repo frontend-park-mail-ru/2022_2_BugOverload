@@ -25,7 +25,7 @@ export class FilmPage extends View {
 
         store.subscribe('film', () => {
             this.state.film = store.getState('film');
-            this.state.film.rating = Math.round10(this.state.film.rating, -1);
+            this.state.film.rating = Math.round(this.state.film.rating * 10) / 10;
 
             this.render();
         });
