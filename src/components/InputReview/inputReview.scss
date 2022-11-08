@@ -1,3 +1,13 @@
+@mixin dropped-items {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 3px;
+  margin-left: 49px;
+  margin-right: 8px;
+}
+
 .input-review__container {
   display: flex;
   flex-direction: column;
@@ -8,175 +18,157 @@
   border-radius: 20px;
   width: 900px;
   height: auto;
-}
 
-.input-review__head {
-  color: var(--main-color-text);
-  font-size: 36px;
-  width: 400px;
-}
+  &__head {
+    color: var(--main-color-text);
+    font-size: 36px;
+    width: 400px;
+  }
 
-.input-review__user-container {
-  display: flex;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
+  &__user-container {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 
-.input-review__user-avatar {
-  border-radius: 30px;
-  width: 48px;
-  height: 48px;
-  background-size: cover;
-}
+  &__user-avatar {
+    border-radius: 30px;
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+  }
 
-.input-review__info-user-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  margin-top: 7px;
-}
+  &__info-user-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 7px;
+  }
 
-.input-review__username {
-  color: var(--main-color-text);
-  font-size: 15px;
-}
+  &__username {
+    color: var(--main-color-text);
+    font-size: 15px;
+  }
 
-.input-review__user-counter-reviews {
-  color: var(--secondary-color-text);
-  font-size: 12px;
-}
+  &__user-counter-reviews {
+    color: var(--secondary-color-text);
+    font-size: 12px;
+  }
 
-.input-title__wrapper{
-  height: 46px + 35px;
-}
+  .input-title__wrapper{
+    height: 46px + 35px;
+  }
 
-.input-review__input-title {
-  width: 804px;
-  border: 0;
-  height: 46px;
-  border-radius: 4px;
-  padding: 0 24px;
-  box-sizing: border-box;
-  font-size: 15px;
-}
+  &__input-title {
+    width: 804px;
+    border: 0;
+    height: 46px;
+    border-radius: 4px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
 
-.input-text__wrapper{
-  height: 221px + 35px;
-}
+  .input-text__wrapper{
+    height: 221px + 35px;
+  }
 
-.js-input-review__input-text {
-  width: 804px;
-  border: 0;
-  height: 221px;
-  resize: none;
-  border-radius: 4px;
-  padding: 16px 24px;
-  box-sizing: border-box;
-  font-size: 12px;
-}
+  .js-input-review__input-text {
+    width: 804px;
+    border: 0;
+    height: 221px;
+    resize: none;
+    border-radius: 4px;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    font-size: 12px;
+  }
 
-.modal__input__button-review {
-  width: 804px;
-  height: 46px;
-  margin-top: 25px;
-}
+  .modal__input__button-review {
+    width: 804px;
+    height: 46px;
+    margin-top: 25px;
+  }
 
-.input-review__select__wrapper {
-  height: 46px + 35px;
-}
+  &__select__wrapper {
+    height: 46px + 35px;
+  }
 
-.input-review__select {
-  position: relative;
-  display: block;
-  min-width: 220px;
-  width: 804px;
-  height: 46px;
-  background-color: #fff;
-  border-radius: 4px;
-}
+  &__select {
+    position: relative;
+    display: block;
+    min-width: 220px;
+    width: 804px;
+    height: 46px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
 
-.input-review__select-head-text {
-  font-size: 20px;
-  color: #191a1d;
-}
+  &__select-head-text {
+    font-size: 20px;
+    color: #191a1d;
+  }
 
-.input-review__select-head {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  box-shadow: 0 0 4px rgb(0 0 0 / 20%);
-  border-radius: 4px;
-  padding: 10px 24px;
-}
+  &__select-head {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+    padding: 10px 24px;
+  }
 
-.input-review__select-head-icon {
-  width: 22px;
-  height: 13px;
-  background-image: url("@icons/arrow-drop.png");
-  background-repeat: no-repeat;
-}
+  &__select-head-icon {
+    width: 22px;
+    height: 13px;
+    background-image: url("@icons/arrow-drop.png");
+    background-repeat: no-repeat;
+  }
 
-.input-review__select-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #e2e2e2;
-  box-shadow: 0 4px 16px rgb(0 0 0 / 40%);
-  border-radius: 4px;
-  margin-top: 7px;
-  max-height: 205px;
-  z-index: 1;
-  padding: 12px 0;
-  font-size: 14px;
-  scrollbar-color: dark;
-  scrollbar-width: thin;
-  overscroll-behavior: contain;
-  cursor: pointer;
-}
+  &__select-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #e2e2e2;
+    box-shadow: 0 4px 16px rgb(var(--main-shadow-color) / 40%);
+    border-radius: 4px;
+    margin-top: 7px;
+    max-height: 205px;
+    z-index: 1;
+    padding: 12px 0;
+    font-size: 14px;
+    scrollbar-color: dark;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    cursor: pointer;
+  }
 
-.input-review__select-list .input-review__select-item {
-  position: relative;
-  padding: 10px 15px;
-  cursor: pointer;
-  list-style-type: none;
-}
+  &__select-list &__select-item {
+    position: relative;
+    padding: 10px 15px;
+    cursor: pointer;
+    list-style-type: none;
+  }
 
-.input-review__select-list .input-review__select-item:hover {
-  background-color: #656565;
-}
+  &__select-list &__select-item:hover {
+    background-color: var(--backgr-select-item);
+  }
 
-.input-review__select-icon-positive {
-  background-color: #12b77c;
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  display: inline-block;
-  margin-bottom: 3px;
-  margin-left: 49px;
-  margin-right: 8px;
-}
+  &__select-icon-positive {
+    background-color: var(--rating-color-positive);
+    @include dropped-items;
+  }
 
-.input-review__select-icon-neutral {
-  background-color: #858585;
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  display: inline-block;
-  margin-bottom: 3px;
-  margin-left: 49px;
-  margin-right: 8px;
-}
+  &__select-icon-neutral {
+    background-color: var(--rating-color-neutral);
+    @include dropped-items;
+  }
 
-.input-review__select-icon-negative {
-  background-color: #ff4350;
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  display: inline-block;
-  margin-bottom: 3px;
-  margin-left: 49px;
-  margin-right: 8px;
+  &__select-icon-negative {
+    background-color: var(--rating-color-negative);
+    @include dropped-items;
+  }
 }

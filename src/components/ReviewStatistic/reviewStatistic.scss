@@ -27,16 +27,16 @@
 }
 
 .review-statistic__value_positive {
-  color: #12b77c;
+  color: var(--rating-color-positive);
   font-size: 36px;
 }
 
 .review-statistic__value_neutral {
-  color: #858585;
+  color: var(--rating-color-neutral);
   font-size: 36px;
 }
 
 .review-statistic__value_negative {
-  color: #ff4350;
+  color: var(--rating-color-negative);
   font-size: 36px;
 }

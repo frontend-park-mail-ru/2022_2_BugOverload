@@ -5,166 +5,157 @@
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-}
 
-.about-film__blackout-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 900px;
-  height: 100vh;
-  background: linear-gradient(90deg, rgb(18 18 18 / 100%) 14%, rgb(18 18 18 / 64.3%) 48%, rgb(18 18 18 / 0%) 100%);
-}
+  &__blackout-bottom {
+    width: 100%;
+    height: 237px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
+  }
 
-.about-film__blackout-bottom {
-  width: 100%;
-  height: 237px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
-}
+  &__container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    flex-direction: column;
+    margin-left: var(--standart-margin);
+    margin-top: 305px;
+  }
 
-.about-film__container {
-  display: flex;
-  position: relative;
-  width: 100%;
-  z-index: 1;
-  flex-direction: column;
-  margin-left: var(--standart-margin);
-  margin-top: 305px;
-}
+  &__title {
+    color: var(--main-color-text);
+    font-size: 40px;
+    font-weight: bolder;
+  }
 
-.about-film__title {
-  color: var(--main-color-text);
-  font-size: 40px;
-  font-weight: bolder;
-}
+  &__original-title {
+    color: var(--secondary-color-text);
+    font-size: 20px;
+    margin-top: 3px;
+  }
 
-.about-film__original-title {
-  color: #959595;
-  font-size: 20px;
-  margin-top: 3px;
-}
+  &__base-info {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 19px;
+  }
 
-.about-film__base-info {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-top: 19px;
-}
+  &__rating {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 15px;
+    padding: 1px 6px 0;
+    width: 32px;
+    height: 20px;
+    top: 9px;
+    left: 0;
+    border-radius: 4px;
+    color: var(--main-color-text);
+    margin-right: 23px;
+  }
 
-.about-film__rating {
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  font-size: 15px;
-  padding: 1px 6px 0;
-  width: 32px;
-  height: 20px;
-  top: 9px;
-  left: 0;
-  border-radius: 4px;
-  color: var(--main-color-text);
-  margin-right: 23px;
-}
+  &__year {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-right: 23px;
+  }
 
-.about-film__year {
-  color: var(--main-color-text);
-  font-size: 15px;
-  margin-right: 23px;
-}
+  &__duration {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-right: 23px;
+  }
 
-.about-film__duration {
-  color: var(--main-color-text);
-  font-size: 15px;
-  margin-right: 23px;
-}
+  &__count-seasons {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-right: 23px;
 
-.about-film__count-seasons {
-  color: var(--main-color-text);
-  font-size: 15px;
-  margin-right: 23px;
+  }
 
-}
+  &__age-limit {
+    color: var(--main-color-text);
+    font-size: 15px;
+  }
 
-.about-film__age-limit {
-  color: var(--main-color-text);
-  font-size: 15px;
-}
+  &__short-description {
+    color: var(--main-color-text);
+    margin-top: 21px;
+    width: 540px;
+  }
 
-.about-film__short-description {
-  color: var(--main-color-text);
-  margin-top: 21px;
-  width: 540px;
-}
+  &__directors {
+    display: flex;
+    color: var(--secondary-color-text);
+    margin-top: 24px;
+    width: 540px;
+  }
 
-.about-film__directors {
-  display: flex;
-  color: #959595;
-  margin-top: 24px;
-  width: 540px;
-}
+  &__label-director {
+    width: 94px;
+  }
 
-.about-film__label-director {
-  width: 94px;
-}
+  &__director {
+    color: var(--main-color-text);
+    margin-left: 2px;
+    flex-wrap: nowrap;
+  }
 
-.about-film__director {
-  color: var(--main-color-text);
-  margin-left: 2px;
-  flex-wrap: nowrap;
-}
+  &__director:hover {
+    color: var(--primary-color);
+    transition: 0.08s linear;
+  }
 
-.about-film__director:hover {
-  color: var(--primary-color);
-  transition: 0.08s linear;
-}
+  &__roles {
+    display: flex;
+    color: var(--secondary-color-text);
+    margin-top: 24px;
+    width: 540px;
+  }
 
-.about-film__roles {
-  display: flex;
-  color: #959595;
-  margin-top: 24px;
-  width: 540px;
-}
+  &__label-role {
+    width: 94px;
+  }
 
-.about-film__label-role {
-  width: 94px;
-}
+  &__role {
+    color: var(--main-color-text);
+    margin-left: 2px;
+    flex-wrap: nowrap;
+  }
 
-.about-film__role {
-  color: var(--main-color-text);
-  margin-left: 2px;
-  flex-wrap: nowrap;
-}
+  &__role:hover {
+    color: var(--primary-color);
+    transition: 0.08s linear;
+  }
 
-.about-film__role:hover {
-  color: var(--primary-color);
-  transition: 0.08s linear;
-}
+  &__buttons-container {
+    display: flex;
+    margin-top: 38px;
+  }
 
-.about-film__buttons-container {
-  display: flex;
-  margin-top: 38px;
-}
+  &__button-trailer {
+    width: 180px;
+    height: 46px;
+  }
 
-.about-film__button-trailer {
-  width: 180px;
-  height: 46px;
-}
+  &__button-bookmark {
+    width: 48px;
+    height: 48px;
+    margin-left: 14px;
+  }
 
-.about-film__button-bookmark {
-  width: 48px;
-  height: 48px;
-  margin-left: 14px;
-}
+  &__button-plus {
+    width: 48px;
+    height: 48px;
+    margin-left: 14px;
+  }
 
-.about-film__button-plus {
-  width: 48px;
-  height: 48px;
-  margin-left: 14px;
-}
-
-.about-film__save-to-collection {
-  display: flex;
-  flex-direction: column;
+  &__save-to-collection {
+    display: flex;
+    flex-direction: column;
+  }
 }

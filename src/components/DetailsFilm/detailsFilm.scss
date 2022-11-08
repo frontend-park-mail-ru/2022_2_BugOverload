@@ -2,119 +2,120 @@
   display: flex;
   justify-content: space-between;
   margin-left: var(--standart-margin);
-}
 
-.details-film__info-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 34px;
-}
 
-.details-film__list-info-title {
-  font-size: 22px;
-  color: var(--main-color-text);
-}
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 34px;
+  }
 
-.details-film__info-pair {
-  display: flex;
-  margin-top: 37px;
-}
+  &__list-info-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+  }
 
-.details-film__info-item-key {
-  font-size: 15px;
-  color: var(--secondary-color-text);
-  width: 270px;
-}
+  &__info-pair {
+    display: flex;
+    margin-top: 37px;
+  }
 
-.details-film__info-item-value {
-  font-size: 15px;
-  color: var(--main-color-text);
-  flex-wrap: nowrap;
+  &__info-item-key {
+    font-size: 15px;
+    color: var(--secondary-color-text);
+    width: 270px;
+  }
 
-  &:hover {
-    color: var(--primary-color);
+  &__info-item-value {
+    font-size: 15px;
+    color: var(--main-color-text);
+    flex-wrap: nowrap;
+
+    &:hover {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+  }
+
+  &__info-item-value-info {
+    font-size: 15px;
+    color: var(--main-color-text);
+    flex-wrap: nowrap;
+  }
+
+  &__list-actors-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--standart-margin);
+  }
+
+  &__actor__container {
+    display: flex;
+    position: relative;
+    margin-bottom: 29px;
+  }
+
+  &__list-actors {
+    display: flex;
+    height: 688px;
+    width: 666px;
+    flex-flow: column wrap;
+    margin-top: 37px;
+  }
+
+  &__list-actors-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+    margin-top: 37px;
+  }
+
+  &__actor__blackout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 81px;
+    height: 108px;
+    background-color: var(--blackout-color);
+    opacity: 0;
+    z-index: 2;
+    transition: 0.1s linear;
+  }
+
+  &__actor__blackout:hover {
+    opacity: 0.3;
+    transition: 0.1s linear;
+    border-radius: 4px;
     cursor: pointer;
   }
-}
 
-.details-film__info-item-value-info {
-  font-size: 15px;
-  color: var(--main-color-text);
-  flex-wrap: nowrap;
-}
-
-.details-film__list-actors-container {
-  display: flex;
-  flex-direction: column;
-  margin-right: var(--standart-margin);
-}
-
-.details-film__actor__container {
-  display: flex;
-  position: relative;
-  margin-bottom: 29px;
-}
-
-.details-film__list-actors {
-  display: flex;
-  height: 688px;
-  width: 666px;
-  flex-flow: column wrap;
-  margin-top: 37px;
-}
-
-.details-film__list-actors-title {
-  font-size: 22px;
-  color: var(--main-color-text);
-  margin-top: 37px;
-}
-
-.details-film__actor__blackout {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 81px;
-  height: 108px;
-  background-color: #000;
-  opacity: 0;
-  z-index: 2;
-  transition: 0.1s linear;
-}
-
-.details-film__actor__blackout:hover {
-  opacity: 0.3;
-  transition: 0.1s linear;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.details-film__actor__photo {
-  width: 81px;
-  height: 108px;
-}
-
-.details-film__actor__info-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 18px;
-}
-
-.details-film__actor__name {
-  color: var(--main-color-text);
-  font-size: 15px;
-  margin-top: 8px;
-
-  &:hover {
-    color: var(--primary-color);
+  &__actor__photo {
+    width: 81px;
+    height: 108px;
   }
-}
 
-.details-film__actor__role {
-  color: var(--secondary-color-text);
-  font-size: 12px;
-  margin-top: 4px;
+  &__actor__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+  }
 
-  &:hover {
-    color: var(--primary-color);
+  &__actor__name {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-top: 8px;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &__actor__role {
+    color: var(--secondary-color-text);
+    font-size: 12px;
+    margin-top: 4px;
+
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }

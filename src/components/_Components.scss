@@ -5,7 +5,7 @@
   background-color: var(--primary-color);
   border-radius: 6px;
   box-sizing: border-box;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  box-shadow: 0 4px 20px rgb(var(--main-shadow-color) / 25%);
   font-family: "Mail Sans Roman Med";
   font-size: 20px;
   color: #000;
@@ -25,7 +25,7 @@
     background-color: var(--primary-color);
     border-radius: 4px;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+    box-shadow: 0 4px 20px rgb(var(--main-shadow-color) / 25%);
     font-family: "Mail Sans Roman Med";
     font-size: 15px;
     color: #000;
@@ -45,7 +45,7 @@
     background-color: var(--secondary-color);
     border-radius: 6px;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+    box-shadow: 0 4px 20px rgb(var(--main-shadow-color) / 25%);
     font-family: "Mail Sans Roman Med";
     font-size: 20px;
     color: #fff;
@@ -64,7 +64,7 @@
     background-color: var(--secondary-color);
     border-radius: 6px;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+    box-shadow: 0 4px 20px rgb(var(--main-shadow-color) / 25%);
     font-size: 15px;
     font-family: 'Mail Sans Roman';
     color: #fff;
@@ -77,26 +77,25 @@
 }
 
 [data-value-rating="positive"] {
-  background-color: #12b77c;
+  background-color: var(--rating-color-positive);
 }
 
 [data-value-rating="neutral"] {
-  background-color: #858585;
+  background-color: var(--rating-color-neutral);
 }
 
 [data-value-rating="negative"] {
-  background-color: #ff4350;
+  background-color: var(--rating-color-negative);
 }
-
 
 [data-type-review="positive"] {
   background-color: rgba(#12b77c, 20%);
 }
 
 [data-type-review="neutral"] {
-  background-color:  rgba(#858585, 20%);
+  background-color:  rgba(#ff4350, 20%);
 }
 
 [data-type-review="negative"] {
-  background-color:  rgba(#ff4350, 20%);
+  background-color:  rgba(#858585, 20%);
 }

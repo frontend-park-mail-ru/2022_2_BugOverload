@@ -3,9 +3,11 @@
   margin-top: 36px;
   width: 900px;
   height: auto;
+
+  &__content {
+    color: var(--main-color-text);
+    font-size: 15px;
+  }
 }
 
-.description-film__content {
-  color: var(--main-color-text);
-  font-size: 15px;
-}
+

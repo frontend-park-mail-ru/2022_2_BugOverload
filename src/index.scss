@@ -37,7 +37,10 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
+
 body, html {
+  --main-shadow-color: #000;
+  --blackout-color: #000;
   --backgr-color: #121212;
   --primary-color: #feba2b;
   --primary-color-hover: #cd9826;
@@ -47,6 +50,10 @@ body, html {
   --secondary-color-text: #bebebe;
   --standart-margin: 52px;
   --error-color:rgb(150 0 0);
+  --rating-color-neutral: #858585;
+  --rating-color-positive: #12b77c;
+  --rating-color-negative: #ff4350;
+  --backgr-select-item: #656565;
   font-family: 'Mail Sans Roman';
   background-color: var(--backgr-color);
   margin: 0;
