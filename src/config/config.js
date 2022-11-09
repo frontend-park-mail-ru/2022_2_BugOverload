@@ -8,18 +8,33 @@ import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 export const API = {
     img: {
         poster_hor(key) {
+            if (!navigator.onLine) {
+                return `http://${DOMAIN}/assets/img/default/noFilmHor.webp`;
+            }
             return `http://${DOMAIN}/api/v1/image?object=film_poster_hor&key=${key}`;
         },
         poster_ver(key) {
+            if (!navigator.onLine) {
+                return `http://${DOMAIN}/assets/img/default/noFilm.webp`;
+            }
             return `http://${DOMAIN}/api/v1/image?object=film_poster_ver&key=${key}`;
         },
         user_avatar(key) {
+            if (!navigator.onLine) {
+                return `http://${DOMAIN}/assets/img/default/noUser.webp`;
+            }
             return `http://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}`;
         },
         person_avatar(key) {
+            if (!navigator.onLine) {
+                return `http://${DOMAIN}/assets/img/default/noPerson.webp`;
+            }
             return `http://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
         },
         person_image(id, image) {
+            if (!navigator.onLine) {
+                return `http://${DOMAIN}/assets/img/default/noPersonImg.webp`;
+            }
             return `http://${DOMAIN}/api/v1/image?object=person_image&key=${id}/${image}`;
         },
 
@@ -50,6 +65,8 @@ export const API = {
     send_review(id) { return `http://${DOMAIN}/api/v1/film/${id}/review/new`; },
     settings: `http://${DOMAIN}/api/v1/user/settings`,
     person(id, numberPhotos) { return `http://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
+
+    put_avatar: `http://${DOMAIN}/api/v1/image?key=session`,
 
 };
 
