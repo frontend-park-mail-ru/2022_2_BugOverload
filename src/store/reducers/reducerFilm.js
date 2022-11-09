@@ -1,11 +1,17 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
 import { store } from '@store/Store.js';
-import { wrapperAsync } from '@router/Page404/page404.js';
+import { render404 } from '@router/Page404/page404.js';
 
 class ReducerFilm {
     async getFilmData({ id }) {
-        const response = wrapperAsync(await Ajax.get(API.film(id)));
+        let response;
+        try{
+        response = await Ajax.get(API.film(id));
+        } catch(e) {
+            render404();
+            return null;
+        }
         if (response.status === 200) {
             return { [`film${id}`]: response.body };
         }

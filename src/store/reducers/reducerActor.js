@@ -1,12 +1,17 @@
 import { Ajax } from '@utils/ajax.js';
 import { API, responsStatuses } from '@config/config.js';
-import { wrapperAsync } from '@router/Page404/page404.js';
+import { render404 } from '@router/Page404/page404.js';
 
 class ReducerActor {
     async getActor({ id, numberPhotos }) {
-        const responsePromise = await Ajax.get(API.person(id, numberPhotos));
-
-        const response = wrapperAsync(responsePromise);
+        let response;
+        try{
+            response = await Ajax.get(API.person(id, numberPhotos));
+        } catch(e) {
+            render404();
+            return null;
+        }
+        
         if (response.status === responsStatuses.OK) {
             return {
                 [`actor${id}`]: handlerPropertiesPerson(

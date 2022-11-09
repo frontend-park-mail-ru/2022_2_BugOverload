@@ -1,10 +1,16 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
-import { wrapperAsync } from '@router/Page404/page404.js';
+import { render404 } from '@router/Page404/page404.js';
 
 class ReducerCommonComponents {
     async getCollectionData(params) {
-        const response = wrapperAsync(await Ajax.get(API.collection(params.tag)));
+        let response;
+        try{
+            response = await Ajax.get(API.collection(params.tag));
+        } catch(e) {
+            render404();
+            return null;
+        }
         if (response.status === 200) {
             return { [`collection-${params.name}`]: response.body };
         }
