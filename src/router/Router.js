@@ -1,6 +1,8 @@
 import { routes, ROOT } from '@config/config.js';
 import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
+import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { render404 } from '@router/Page404/page404.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
 *
@@ -57,6 +59,10 @@ class Router {
             this.register(rout);
         }
 
+        window.addEventListener('error', () => {
+            render404();
+        });
+
         document.addEventListener('click', (e) => {
             const { target } = e;
             if (target.dataset.section) {
@@ -103,6 +109,7 @@ class Router {
             matchedHref = this.matchHref(location);
         }
         if (this.mapViews.get(matchedHref[0])) {
+            this.cache();
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -161,11 +168,27 @@ class Router {
             : window.location.href.match(hrefRegExp.localhost, '')[0];
 
         if (pushState) {
+            if (path !== '/') {
+                this.cache(`.${path}${props}/`);
+            } else {
+                this.cache();
+            }
+
             if (props) {
                 window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
             }
+        }
+    }
+
+    cache(url = './') {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js', { scope: url });
+
+            window.addEventListener('offline', () => {
+                ShowErrorMessage('Проблемы с интернет соединением');
+            });
         }
     }
 }

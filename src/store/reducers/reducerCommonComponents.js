@@ -1,9 +1,10 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
+import { wrapperAsync } from '@router/Page404/page404.js';
 
 class ReducerCommonComponents {
     async getCollectionData(params) {
-        const response = await Ajax.get(API.collection(params.tag));
+        const response = wrapperAsync(await Ajax.get(API.collection(params.tag)));
         if (response.status === 200) {
             return { [`collection-${params.name}`]: response.body };
         }
@@ -12,7 +13,7 @@ class ReducerCommonComponents {
     }
 
     async getPreviewData(params) {
-        const response = await Ajax.get(API.recommendation);
+        const response = wrapperAsync(await Ajax.get(API.recommendation));
         if (response.status === 200) {
             return { [`preview-${params.name}`]: response.body };
         }

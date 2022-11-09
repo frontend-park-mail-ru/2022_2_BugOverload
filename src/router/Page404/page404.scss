@@ -1,0 +1,21 @@
+.wrapper-404 {
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    background: #242424;
+
+    &__header {
+        font-size: 16rem;
+        color: rgba(0, 0, 0, 0.3);
+        filter: blur(3px);
+        margin: 0;
+        padding: 0;
+    }
+
+    &__text {
+        font-size: 2rem;
+        color: rgba(0, 0, 0, 0.6);
+        margin: 0;
+        padding: 0;
+    } 
+}

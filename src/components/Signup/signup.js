@@ -50,7 +50,7 @@ export class Signup extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                history.replaceState(null, null, window.location.href.replace(hrefRegExp.auth, ''));
+                window.history.replaceState(null, null, window.location.href.replace(hrefRegExp.auth, ''));
             }
             return;
         }
