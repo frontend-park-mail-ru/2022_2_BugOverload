@@ -18,7 +18,7 @@ export const decoreDuration = (minutes, mode = 'full') => {
 
 export const decoreListPersons = (list, maxCount, sep = ',') => {
     if (!list) {
-        return;
+        return null;
     }
     const newList = [];
     let i = 0;
@@ -32,6 +32,10 @@ export const decoreListPersons = (list, maxCount, sep = ',') => {
 };
 
 export const decoreListItems = (list, maxCount) => {
+    if (!list) {
+        return null;
+    }
+
     const newList = [];
     let i = 0;
     for (; i < maxCount - 1 && i < list.length - 1; ++i) {
@@ -74,6 +78,9 @@ export const decoreCountReviews = (count) => {
 };
 
 export const decoreColorRating = (location, className, rating) => {
+    if (!location) {
+        return;
+    }
     const filmRating = location.querySelector(className);
     if (!rating) {
         filmRating.remove();
