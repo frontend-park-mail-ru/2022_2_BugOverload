@@ -5,13 +5,13 @@ import { render404 } from '@router/Page404/page404.js';
 class ReducerActor {
     async getActor({ id, numberPhotos }) {
         let response;
-        try{
+        try {
             response = await Ajax.get(API.person(id, numberPhotos));
-        } catch(e) {
+        } catch (e) {
             render404();
             return null;
         }
-        
+
         if (response.status === responsStatuses.OK) {
             return {
                 [`actor${id}`]: handlerPropertiesPerson(

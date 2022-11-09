@@ -6,9 +6,9 @@ import { render404 } from '@router/Page404/page404.js';
 class ReducerFilm {
     async getFilmData({ id }) {
         let response;
-        try{
-        response = await Ajax.get(API.film(id));
-        } catch(e) {
+        try {
+            response = await Ajax.get(API.film(id));
+        } catch (e) {
             render404();
             return null;
         }

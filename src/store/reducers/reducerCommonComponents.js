@@ -5,9 +5,9 @@ import { render404 } from '@router/Page404/page404.js';
 class ReducerCommonComponents {
     async getCollectionData(params) {
         let response;
-        try{
+        try {
             response = await Ajax.get(API.collection(params.tag));
-        } catch(e) {
+        } catch (e) {
             render404();
             return null;
         }

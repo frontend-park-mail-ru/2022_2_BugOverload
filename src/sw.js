@@ -1,4 +1,4 @@
-/*const CACHE_NAME = 'moviegate-v-1';
+/* const CACHE_NAME = 'moviegate-v-1';
 const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 
 const assetUrls = [];
@@ -33,7 +33,7 @@ this.addEventListener('fetch', (event) => {
                         }));
             }),
     );
-});*/
+}); */
 const CACHE_NAME = 'moviegate-v-3';
 
 const assetUrls = [];
