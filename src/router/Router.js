@@ -60,7 +60,7 @@ class Router {
         }
 
         window.addEventListener('error', () => {
-            render404();
+            // render404();
         });
 
         document.addEventListener('click', (e) => {

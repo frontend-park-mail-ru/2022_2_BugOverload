@@ -71,7 +71,7 @@ export class Login extends Component {
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
-            const modal = new Modal(this.rootNode, this.componentWillUnmount);
+            const modal = new Modal(this.rootNode, this.componentWillUnmount.bind(this));
             modal.render();
         }
 
@@ -176,6 +176,7 @@ export class Login extends Component {
             modalBackground.removeEventListener('click', deleteLogin);
         }
         if (this.state.isSubscribed) {
+            debugger;
             store.subscribe('statusLogin', this.subscribeLoginpStatus);
             this.state.statusLogin = null;
             this.state.isSubscribed = false;
