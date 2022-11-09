@@ -18,6 +18,23 @@ const mockFilms = () => {
     ];
 }
 
+export const mockPrewiew = () => {
+	return 	{
+		id: 0,
+		name: "Название",
+		origin_name: "",
+		short_description: "Неблоьшое описание",
+		type: "",
+		prod_year: 1968,
+		prodCompany: "",
+		prodCountry: "",
+		ageLimit: "",
+		poster_hor: "assets/default/noFilmHor.webp",
+		rating: 7.1,
+		genres: ["Жанры"]
+	}
+}
+
 export const mockFilm = () => {
     return {
 		"actors": [

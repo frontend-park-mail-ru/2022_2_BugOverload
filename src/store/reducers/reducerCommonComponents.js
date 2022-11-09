@@ -1,6 +1,6 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
-import { mockCollection } from '@store/reducers/mockData.js';
+import { mockCollection, mockPrewiew } from '@store/reducers/mockData.js';
 
 class ReducerCommonComponents {
     async getCollectionData(params) {
@@ -18,7 +18,13 @@ class ReducerCommonComponents {
     }
 
     async getPreviewData(params) {
-        const response = /* wrapperAsync( */await Ajax.get(API.recommendation)/* ) */;
+        let response;
+        try{
+            response = await Ajax.get(API.recommendation);
+        } catch (e) {
+            return { [`preview-${params.name}`]: mockPrewiew() };
+        }
+
         if (response.status === 200) {
             return { [`preview-${params.name}`]: response.body };
         }

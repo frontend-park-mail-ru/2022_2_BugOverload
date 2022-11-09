@@ -169,17 +169,13 @@ class Router {
             : window.location.href.match(hrefRegExp.localhost, '')[0];
 
         if (pushState) {
-            if (path !== '/') {
-                this.cache(`.${path}${props}/`);
-            } else {
-                this.cache();
-            }
-
             if (props) {
                 window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
             }
+
+            this.cache();
         }
     }
 
