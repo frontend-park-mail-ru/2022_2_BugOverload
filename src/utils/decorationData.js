@@ -17,6 +17,9 @@ export const decoreDuration = (minutes, mode = 'full') => {
 };
 
 export const decoreListPersons = (list, maxCount, sep = ',') => {
+    if (!list) {
+        return;
+    }
     const newList = [];
     let i = 0;
     for (; i < maxCount - 1 && i < list.length - 1; ++i) {
