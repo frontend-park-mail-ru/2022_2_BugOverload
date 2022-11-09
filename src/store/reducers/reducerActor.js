@@ -10,7 +10,7 @@ class ReducerActor {
         } catch (e) {
             return {
                 [`actor${id}`]: mockPerson(),
-            }
+            };
         }
 
         if (response.status === responsStatuses.OK) {

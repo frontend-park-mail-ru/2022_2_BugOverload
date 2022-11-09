@@ -38,11 +38,11 @@ this.addEventListener('fetch', (event) => {
     );
 });
 
-this.addEventListener('fetch', event => {
+this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
-    if (url.origin === location.origin) {
+    if (url.origin === window.location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
@@ -51,7 +51,11 @@ this.addEventListener('fetch', event => {
 
 async function cacheFirst(request) {
     const cached = await caches.match(request);
-    return cached ?? await fetch(request);
+    if (cached) {
+        return cached;
+    }
+    const response = await fetch(request);
+    return response;
 }
 
 async function networkFirst(request) {
@@ -103,4 +107,4 @@ const CACHE_NAME = 'moviegate-v-1';
        // undefined или данные из кэша
        return response;
    })());
-});*/
+}); */

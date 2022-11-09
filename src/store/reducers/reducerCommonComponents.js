@@ -19,7 +19,7 @@ class ReducerCommonComponents {
 
     async getPreviewData(params) {
         let response;
-        try{
+        try {
             response = await Ajax.get(API.recommendation);
         } catch (e) {
             return { [`preview-${params.name}`]: mockPrewiew() };

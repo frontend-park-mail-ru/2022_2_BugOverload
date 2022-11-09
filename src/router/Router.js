@@ -59,15 +59,10 @@ class Router {
             this.register(rout);
         }
 
-        /*window.addEventListener('error', () => {
-            render404();
-        });*/
-
         document.addEventListener('click', (e) => {
             const { target } = e;
             if (target.dataset.section) {
                 const matchedHref = this.matchHref(target.dataset.section);
-                console.log(target.dataset.section , matchedHref)
                 if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
                     this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
@@ -100,9 +95,6 @@ class Router {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
-        
-        console.log(window.location.href, location
-        )
 
         if (window.history.length <= 2 && (location === '/login/' || location === '/signup/')) {
             this.go({ path: '/' });
@@ -123,7 +115,7 @@ class Router {
                 props: matchedHref[1],
             });
         } else {
-            // TODO рендер 404 страницы
+            render404();
         }
     }
 

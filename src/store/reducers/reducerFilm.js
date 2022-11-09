@@ -9,8 +9,6 @@ class ReducerFilm {
         try {
             response = await Ajax.get(API.film(id));
         } catch (e) {
-            console.log(e)
-            console.log(mockFilm())
             return { [`film${id}`]: mockFilm() };
         }
         if (response.status === 200) {
