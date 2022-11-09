@@ -22,26 +22,17 @@ export class FilmPage extends View {
             film: null,
             isSubscribed: false,
         };
-
-        store.subscribe('film', () => {
-            this.state.film = store.getState('film');
-            this.state.film.rating = Math.round(this.state.film.rating * 10) / 10;
-
-            this.render();
-        });
     }
 
     render(id = null) {
-        // if (this.rootNode.querySelector('.js-film-page')) {
-        //     return;
-        // }
-
         if (id) {
             this.state.id = id;
         }
-        // if (!this.state.id) {
-        //     return;
-        // }
+
+        if (!this.state.id) {
+            return;
+        }
+
         super.render();
 
         if (!this.state.film) {
@@ -89,14 +80,23 @@ export class FilmPage extends View {
         });
         listReviews.init();
     }
-}
 
-export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });
+    componentWillUnmount() {
+        store.unsubscribe('film', setAuthStatus);
+        this.isSubscribed = false;
+        this.state.id = null;
+        this.state.film = null;
+    }
+}
 
 /**
 * Функция, вызываемая при изменении фильмов в store
 */
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
+    this.state.film.rating = Math.round(this.state.film.rating * 10) / 10;
+    console.log(`subscribeFilmPage state: film${filmPage.state.id}`);
     filmPage.render();
 };
+
+export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

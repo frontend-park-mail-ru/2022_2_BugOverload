@@ -28,7 +28,7 @@ this.addEventListener('fetch', (event) => {
                 return fetch(event.request)
                     .then((res) => caches.open(DYNAMIC_CACHE_NAME)
                         .then((cache) => {
-                            cache.put(event.request.url, res.clone());
+                            event.waitUntil(cache.put(event.request.url, res.clone()));
                             return res;
                         }));
             }),
