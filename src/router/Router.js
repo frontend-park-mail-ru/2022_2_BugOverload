@@ -59,9 +59,9 @@ class Router {
             this.register(rout);
         }
 
-        window.addEventListener('error', () => {
-            // render404();
-        });
+        /*window.addEventListener('error', () => {
+            render404();
+        });*/
 
         document.addEventListener('click', (e) => {
             const { target } = e;
