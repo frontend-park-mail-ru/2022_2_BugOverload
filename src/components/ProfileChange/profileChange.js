@@ -179,8 +179,8 @@ export class ProfileChange extends Component {
 
         if (flag) {
             return {
-                password: user.password,
-                oldPassword: user.oldPassword,
+                new_password: user.password,
+                cur_password: user.oldPassword,
             };
         }
 
