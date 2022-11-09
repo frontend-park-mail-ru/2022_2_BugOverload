@@ -1,5 +1,5 @@
-const CACHE_NAME = 'moviegate-v-1';
-const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
+const CACHE_NAME = 'moviegate-v-2';
+const DYNAMIC_CACHE_NAME = 'd-moviegate-v-2';
 
 const assetUrls = [];
 
@@ -30,7 +30,10 @@ this.addEventListener('fetch', (event) => {
                         .then((cache) => {
                             cache.put(event.request.url, res.clone());
                             return res;
-                        }));
+                        }))
+                    .catch((e) => {
+                        throw e;
+                    });
             }),
     );
 });

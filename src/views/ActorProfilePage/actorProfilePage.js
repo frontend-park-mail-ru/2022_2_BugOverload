@@ -68,6 +68,7 @@ class ActorPage extends View {
     }
 
     componentWillUnmount() {
+        this.state.id = null;
         this.state.actor = null;
     }
 }

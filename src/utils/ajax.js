@@ -10,10 +10,16 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async get(url) {
-        const response = await fetch(url, {
-            mode: 'cors',
-            credentials: 'include',
-        });
+        let response;
+        try{
+            response = await fetch(url, {
+                mode: 'cors',
+                credentials: 'include',
+            });
+        } catch(e) {
+            throw e;
+        }
+
 
         let result = await response.text();
 

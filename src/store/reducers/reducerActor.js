@@ -1,6 +1,6 @@
 import { Ajax } from '@utils/ajax.js';
 import { API, responsStatuses } from '@config/config.js';
-import { render404 } from '@router/Page404/page404.js';
+import { mockPerson } from '@store/reducers/mockData.js';
 
 class ReducerActor {
     async getActor({ id, numberPhotos }) {
@@ -8,8 +8,9 @@ class ReducerActor {
         try {
             response = await Ajax.get(API.person(id, numberPhotos));
         } catch (e) {
-            render404();
-            return null;
+            return {
+                [`actor${id}`]: mockPerson(),
+            }
         }
 
         if (response.status === responsStatuses.OK) {

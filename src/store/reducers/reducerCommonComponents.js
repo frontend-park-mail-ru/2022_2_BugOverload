@@ -1,6 +1,6 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
-import { render404 } from '@router/Page404/page404.js';
+import { mockCollection } from '@store/reducers/mockData.js';
 
 class ReducerCommonComponents {
     async getCollectionData(params) {
@@ -8,8 +8,7 @@ class ReducerCommonComponents {
         try {
             response = await Ajax.get(API.collection(params.tag));
         } catch (e) {
-            render404();
-            return null;
+            return { [`collection-${params.name}`]: mockCollection() };
         }
         if (response.status === 200) {
             return { [`collection-${params.name}`]: response.body };

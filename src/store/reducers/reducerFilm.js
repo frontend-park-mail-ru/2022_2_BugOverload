@@ -1,7 +1,7 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
 import { store } from '@store/Store.js';
-import { render404 } from '@router/Page404/page404.js';
+import { mockFilm } from '@store/reducers/mockData.js';
 
 class ReducerFilm {
     async getFilmData({ id }) {
@@ -9,8 +9,9 @@ class ReducerFilm {
         try {
             response = await Ajax.get(API.film(id));
         } catch (e) {
-            render404();
-            return null;
+            console.log(e)
+            console.log(mockFilm())
+            return { [`film${id}`]: mockFilm() };
         }
         if (response.status === 200) {
             return { [`film${id}`]: response.body };
