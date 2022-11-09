@@ -66,6 +66,10 @@ class ActorPage extends View {
             this.rootNode.querySelector('.collection__container'),
         );
     }
+
+    componentWillUnmount() {
+        this.state.actor = null;
+    }
 }
 
 export const actorPage = new ActorPage({ rootNode: document.getElementById('root') });
