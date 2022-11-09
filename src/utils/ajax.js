@@ -3,6 +3,8 @@
 *
 */
 export class Ajax {
+    static #csrfToken;
+
     /**
     * Выполняет запрос с методом GET на бэкенд
     *
@@ -14,7 +16,10 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
         });
-
+        const csrf = response.headers.get('X-Csrf-Token');
+        if (csrf) {
+            Ajax.#csrfToken = csrf;
+        }
         let result = await response.text();
 
         result = result ? result = JSON.parse(result) : {};
@@ -34,7 +39,10 @@ export class Ajax {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
-            headers: {
+            headers: this.#csrfToken ? {
+                'Content-Type': 'application/json',
+                'X-Csrf-Token': this.#csrfToken,
+            } : {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
