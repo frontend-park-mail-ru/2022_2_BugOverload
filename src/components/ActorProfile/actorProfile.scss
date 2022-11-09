@@ -23,18 +23,21 @@
     }
 
     &__gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(223px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
         gap: 5px;
         margin: 0 auto;
         max-width: 700px;
+        max-height: 500x;
     }
 
     &__gallery-item {
         min-height: 153px;
-        border-radius: 5px;
-        margin: 5px;
-        background: 50% 25%/cover;
+        margin: 189px;
+        max-height: 145px;
+        object-fit: contain;
+        border-radius: 8px;
     }
 
     &__image {

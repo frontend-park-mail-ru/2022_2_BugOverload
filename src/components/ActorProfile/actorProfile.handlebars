@@ -1,7 +1,7 @@
 <div class="actor-profile">
     <div class="actor-profile__content">
         <div class="actor-profile__primary">
-            <div class="actor-profile__image" style="background-image: url('{{avatar}}')"></div>
+            <img class="actor-profile__image" src="{{{avatar}}}">
             <div class="actor-profile__information">
                 <div class="actor-profile__name">{{name}}</div>
                 <div class="actor-profile__original-name">{{original_name}}</div>
@@ -45,7 +45,7 @@
         {{#if images}}
         <div class="actor-profile__gallery">
             {{#each images}}
-            <div class="actor-profile__gallery-item" style="background-image: url('{{this}}')"></div>
+            <img class="actor-profile__gallery-item" src="{{{this}}}">
             {{/each}}
         </div>
         {{/if}}
