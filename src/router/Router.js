@@ -59,14 +59,15 @@ class Router {
             this.register(rout);
         }
 
-        /*window.addEventListener('error', () => {
+        window.addEventListener('error', () => {
             render404();
-        });*/
+        });
 
         document.addEventListener('click', (e) => {
             const { target } = e;
             if (target.dataset.section) {
                 const matchedHref = this.matchHref(target.dataset.section);
+                console.log(target.dataset.section , matchedHref)
                 if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
                     this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
@@ -110,7 +111,6 @@ class Router {
         }
         if (this.mapViews.get(matchedHref[0])) {
             this.cache();
-
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -169,11 +169,11 @@ class Router {
             : window.location.href.match(hrefRegExp.localhost, '')[0];
 
         if (pushState) {
-            /*if (path !== '/') {
+            if (path !== '/') {
                 this.cache(`.${path}${props}/`);
             } else {
                 this.cache();
-            }*/
+            }
 
             if (props) {
                 window.history.pushState(props, null, `${location + path}${props}/`);

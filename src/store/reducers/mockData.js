@@ -1,7 +1,7 @@
 const mockFilms = () => {
     return [
         {
-            id: -1,
+            id: 0,
             name: "Фильм",
             description: "",
             type: "",
@@ -23,68 +23,68 @@ export const mockFilm = () => {
 		"actors": [
 		  {
 			"character": "Персонаж",
-            "id": -1,
+            "id": 0,
 			"name": "Актёр"
 		  },
           {
 			"character": "Персонаж",
-            "id": -1,
+            "id": 0,
 			"name": "Актёр"
 		  },
           {
 			"character": "Персонаж",
-            "id": -1,
+            "id": 0,
 			"name": "Актёр"
 		  },
           {
 			"character": "Персонаж",
-            "id": -1,
+            "id": 0,
 			"name": "Актёр"
 		  },
 		],
 		"directors": [
 			{
-              "id": -1,
+              "id": 0,
 			  "name": "Режиссёр"
 			},
             {
-                "id": -1,
+                "id": 0,
                 "name": "Режиссёр"
             },
 		  ],
 		  "composers": [
 			{
-              "id": -1,
+              "id": 0,
 			  "name": "Композитор"
 			}
 		  ],
 		  "operators": [
 			{
-              "id": -1,
+              "id": 0,
 			  "name": "Оператор"
 			}
 		  ],
 		  "montage": [
 			{
-              "id": -1,
+              "id": 0,
 			  "name": "Монтажёр"
 			}
 		  ],
 		  "writers": [
 			{
-              "id": -1,
+              "id": 0,
 			  "name": "Сценарист"
 			}
 		  ],
 		  "producers": [
 			{
-               "id": -1,
+               "id": 0,
 			  "name": "Продюссер"
 			}
 		  ],
 		short_description: 'Краткое описание',
 
-        "id": -1,
+        "id": 0,
 		"rating": 10,
 		"slogan": "Слоган",
 		"type": "film", 
