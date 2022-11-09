@@ -15,6 +15,15 @@
     background: var(--blackout-bottom-content);
   }
 
+  &__blackout-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 900px;
+    height: 100vh;
+    background: var(--blackout-left-content);
+  }
+
   &__container {
     display: flex;
     position: relative;
