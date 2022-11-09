@@ -49,6 +49,17 @@ class UserProfile extends View {
             this.subscribeedOnUser = true;
         }
 
+        this.state.userInfo = store.getState('userInfo');
+        const subscribeFunc = () => {
+            this.render();
+        };
+        if (!this.state.userInfo) {
+            store.subscribe('userInfo', subscribeFunc);
+            store.dispatch(actionGetSettings());
+        } else {
+            store.unsubscribe('userInfo', subscribeFunc);
+        }
+
         const profile = this.rootNode.querySelector('.profile');
         if (profile) {
             profile.remove();
@@ -60,17 +71,6 @@ class UserProfile extends View {
                 ...this.state.userInfo,
             },
         ));
-
-        this.state.userInfo = store.getState('userInfo');
-        const subscribeFunc = () => {
-            this.render();
-        };
-        if (!this.state.userInfo) {
-            store.subscribe('userInfo', subscribeFunc);
-            store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
-        }
 
         // обработчик загрузки авы
         if (this.state.putAvatarStatus) {
