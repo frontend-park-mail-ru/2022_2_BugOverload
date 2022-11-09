@@ -1,11 +1,11 @@
 @mixin star-fill {
   background-repeat: no-repeat;
-  background-image: url("@icons/star-fill.png");
+  background-image: url("https://movie-gate.online/star-fill.png");
 }
 
 @mixin star-empty {
   background-repeat: no-repeat;
-  background-image: url("@icons/star-empty.png");
+  background-image: url("https://movie-gate.online/star-empty.png");
 }
 
 .rating {
