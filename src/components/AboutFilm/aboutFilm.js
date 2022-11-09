@@ -8,7 +8,15 @@ import {
 } from '@utils/decorationData.js';
 import { API } from '@config/config.js';
 
+/**
+* Отрисовывает стилизованную общую информацию о фильме.
+* Создаёт компонент выпадающего меню для сохранения в коллекции
+*/
 export class AboutFilm extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * @param {Object} - сохраняемые начальные параметры
+     */
     constructor(props) {
         super(props);
         this.data = props.film;
@@ -31,6 +39,10 @@ export class AboutFilm extends Component {
         };
     }
 
+    /**
+     * Отрисовывает компонент, используя location и hbs-template.
+     * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
+     */
     render() {
         this.location.insertAdjacentHTML('afterbegin', template(this.about));
         this.location.querySelector('.js-about-film').style.backgroundImage = `url('${API.img.poster_hor(this.data.poster_hor)}')`;
@@ -39,6 +51,11 @@ export class AboutFilm extends Component {
         this.componentDidMount();
     }
 
+    /**
+     * Создаёт выпадающее меню.
+     * Навешивает обработчики на выпадающее меню,
+     * кнопки сохранения в Избранное, кнопку просмотра трейлера
+     */
     componentDidMount() {
         const buttonPlus = document.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
@@ -86,6 +103,10 @@ export class AboutFilm extends Component {
         buttonTrailer.addEventListener('click', this.handlerTrailer);
     }
 
+    /**
+     * Используется для освобождения ресурсов.
+     * Удаляет обработчики, установленные в ComponentDidMount
+     */
     componentWillUnmount() {
         const buttonPlus = document.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
