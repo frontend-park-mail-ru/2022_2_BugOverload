@@ -32,16 +32,16 @@ export class FilmPage extends View {
     }
 
     render(id = null) {
-        if (this.rootNode.querySelector('.js-film-page')) {
-            return;
-        }
+        // if (this.rootNode.querySelector('.js-film-page')) {
+        //     return;
+        // }
 
         if (id) {
             this.state.id = id;
         }
-        if (!this.state.id) {
-            return;
-        }
+        // if (!this.state.id) {
+        //     return;
+        // }
         super.render();
 
         if (!this.state.film) {
@@ -94,7 +94,7 @@ export class FilmPage extends View {
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });
 
 /**
-* Функция, вызываемая при изменении фильмв в store
+* Функция, вызываемая при изменении фильмов в store
 */
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);

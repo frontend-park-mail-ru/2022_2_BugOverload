@@ -19,7 +19,7 @@ class ReducerCommonComponents {
     }
 
     async getPreviewData(params) {
-        const response = wrapperAsync(await Ajax.get(API.recommendation));
+        const response = /* wrapperAsync( */await Ajax.get(API.recommendation)/* ) */;
         if (response.status === 200) {
             return { [`preview-${params.name}`]: response.body };
         }

@@ -6,7 +6,7 @@
 
     &__header {
         font-size: 16rem;
-        color: rgba(0, 0, 0, 0.3);
+        color: rgb(0 0 0 / 30%);
         filter: blur(3px);
         margin: 0;
         padding: 0;
@@ -14,7 +14,7 @@
 
     &__text {
         font-size: 2rem;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgb(0 0 0 / 60%);
         margin: 0;
         padding: 0;
     } 

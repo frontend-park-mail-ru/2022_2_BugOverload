@@ -18,7 +18,7 @@
     "check": "npm run lint && npm run stylelint",
     "lint": "eslint --cache --ext .js src --fix",
     "stylelint": "stylelint '**/*{.css,.scss}' --allow-empty-input",
-    "stylelint:fix": "stylelint '**/*{.css,.scss}'"
+    "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },
   "repository": {
     "type": "git",

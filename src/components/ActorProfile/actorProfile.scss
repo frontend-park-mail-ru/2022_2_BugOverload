@@ -24,12 +24,11 @@
 
     &__gallery {
         display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
+        flex-flow: row wrap;
         gap: 5px;
         margin: 0 auto;
         max-width: 700px;
-        max-height: 500x;
+        max-height: 500px;
     }
 
     &__gallery-item {
