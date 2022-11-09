@@ -96,6 +96,9 @@ class Router {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
+        
+        console.log(window.location.href, location
+        )
 
         if (window.history.length <= 2 && (location === '/login/' || location === '/signup/')) {
             this.go({ path: '/' });
@@ -180,13 +183,14 @@ class Router {
     }
 
     cache(url = './') {
+        /*
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js', { scope: url });
 
             window.addEventListener('offline', () => {
                 ShowErrorMessage('Проблемы с интернет соединением');
             });
-        }
+        }*/
     }
 }
 
