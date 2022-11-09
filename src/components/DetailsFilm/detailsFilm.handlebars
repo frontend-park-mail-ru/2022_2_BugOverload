@@ -143,12 +143,12 @@
             <div class="details-film__actor">
                 <div class="details-film__actor__container">
                     <a data-section="/person/{{this.id}}/">
-                        <div class="details-film__actor__blackout"></div>
-                        <div class="details-film__actor__photo" style="background-image: url('{{this.avatar}}');"></div>
+                        <div data-section="/person/{{this.id}}/" class="details-film__actor__blackout"></div>
+                        <div data-section="/person/{{this.id}}/" class="details-film__actor__photo" style="background-image: url('{{this.avatar}}');"></div>
                     </a>
                     <div class="details-film__actor__info-container">
-                        <a data-section="/person/{{this.id}}"><div class="details-film__actor__name">{{this.name}}</div></a>
-                        <a {{!-- href="/character/СкороБудет" --}}><div class="details-film__actor__role">{{this.character}}</div></a>
+                        <a data-section="/person/{{this.id}}"><div data-section="/person/{{this.id}}" class="details-film__actor__name">{{this.name}}</div></a>
+                        <a {{!-- data-section="/character/СкороБудет" --}}><div class="details-film__actor__role">{{this.character}}</div></a>
                     </div>
                 </div>
             </div>
