@@ -7,7 +7,6 @@ import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
-import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -50,7 +49,7 @@ export class Signup extends Component {
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
-                window.history.replaceState(null, null, window.location.href.replace(hrefRegExp.auth, ''));
+                exit();
             }
             return;
         }
@@ -64,7 +63,7 @@ export class Signup extends Component {
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
-            const modal = new Modal(this.rootNode, this.componentWillUnmount.bind(this));
+            const modal = new Modal(this.rootNode);
             modal.render();
         }
 
