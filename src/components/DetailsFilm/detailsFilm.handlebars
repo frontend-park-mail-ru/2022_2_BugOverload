@@ -50,7 +50,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Режиссёр</div>
             {{#each directors}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -59,7 +59,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Продюссер</div>
             {{#each producers}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -68,7 +68,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Сценарий</div>
             {{#each writers}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -77,7 +77,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Оператор</div>
             {{#each operators}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -86,7 +86,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Монтаж</div>
             {{#each montage}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -95,7 +95,7 @@
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Композитор</div>
             {{#each composers}}
-            <a href="/person/{{this.id}}" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
             {{/each}}
         </div>
         {{/if}}
@@ -142,12 +142,12 @@
             {{#each actors}}
             <div class="details-film__actor">
                 <div class="details-film__actor__container">
-                    <a href="/person/{{this.id}}">
+                    <a data-section="/person/{{this.id}}/">
                         <div class="details-film__actor__blackout"></div>
                         <div class="details-film__actor__photo" style="background-image: url('{{this.avatar}}');"></div>
                     </a>
                     <div class="details-film__actor__info-container">
-                        <a href="/person/{{this.id}}"><div class="details-film__actor__name">{{this.name}}</div></a>
+                        <a data-section="/person/{{this.id}}"><div class="details-film__actor__name">{{this.name}}</div></a>
                         <a {{!-- href="/character/СкороБудет" --}}><div class="details-film__actor__role">{{this.character}}</div></a>
                     </div>
                 </div>

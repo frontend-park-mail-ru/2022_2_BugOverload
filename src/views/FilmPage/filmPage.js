@@ -82,7 +82,6 @@ export class FilmPage extends View {
     }
 
     componentWillUnmount() {
-        store.unsubscribe('film', setAuthStatus);
         this.isSubscribed = false;
         this.state.id = null;
         this.state.film = null;
@@ -94,7 +93,7 @@ export class FilmPage extends View {
 */
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
-    this.state.film.rating = Math.round(this.state.film.rating * 10) / 10;
+    filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
     console.log(`subscribeFilmPage state: film${filmPage.state.id}`);
     filmPage.render();
 };
