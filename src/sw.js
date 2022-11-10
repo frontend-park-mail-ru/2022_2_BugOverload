@@ -19,26 +19,6 @@ this.addEventListener('activate', async () => {
 });
 
 this.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request)
-                    .then((res) => caches.open(DYNAMIC_CACHE_NAME)
-                        .then((cache) => {
-                            event.waitUntil(cache.put(event.request.url, res.clone()));
-                            return res;
-                        }))
-                    .catch((e) => {
-                        throw e;
-                    });
-            }),
-    );
-});
-
-this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
@@ -62,6 +42,9 @@ async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
         const response = await fetch(request);
+        if (request.method !== 'GET') {
+                return response;
+        }
         await cache.put(request, response.clone());
         return response;
     } catch (e) {
