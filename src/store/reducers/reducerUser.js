@@ -89,7 +89,6 @@ class ReducerUser {
 
     async putAvatar(formDataAvatar) {
         console.log([...formDataAvatar])
-        formDataAvatar.append('key', 'user_avatar');
         const responsePromise = Ajax.put({
             url: API.put_avatar,
             body: formDataAvatar,
