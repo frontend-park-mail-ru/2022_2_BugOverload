@@ -2,16 +2,16 @@
   background-image: url("@icons/check.png");
   background-position-y: -3px;
 }
-
-.menu-save__container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--backgr-menu-save);
-  padding: 12px;
-  border-radius: 6px;
-  box-sizing: border-box;
-  margin-left: 14px;
-  margin-top: 7px;
+.menu-save {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backgr-menu-save);
+    padding: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-left: 14px;
+    margin-top: 7px;
 
   &__items-container {
     display: grid;
@@ -22,7 +22,7 @@
   }
 
   &__title {
-    color: var(--main-color-text);
+    color: var(--text-color-on-secondary);
     font-size: 15px;
     font-weight: bolder;
   }
@@ -36,9 +36,9 @@
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
-  }
 
-  &__item:hover {
-    color: var(--primary-color);
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }
