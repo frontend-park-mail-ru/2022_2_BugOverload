@@ -106,7 +106,7 @@ export class Rating extends Component {
     }).bind(this);
 
     componentDidMount() {
-        const btn = this.location.querySelector('.rating__button-write-review');
+        const btn = this.location.querySelector('.js-rating__button-write-review');
         if (!btn) {
             return;
         }
@@ -120,7 +120,7 @@ export class Rating extends Component {
     }
 
     componentWillUnmount() {
-        const btn = this.location.querySelector('.rating__button-write-review');
+        const btn = this.location.querySelector('.js-rating__button-write-review');
         if (!btn) {
             return;
         }

@@ -63,7 +63,7 @@ class ActorPage extends View {
             }),
         }));
         collection.addHandlerSlider(
-            this.rootNode.querySelector('.collection__container'),
+            this.rootNode.querySelector('.js-collection__container'),
         );
     }
 

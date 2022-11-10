@@ -67,7 +67,7 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
 
     const errorPassword = confirm
         .previousElementSibling
-        .querySelector('.modal__input__error');
+        .querySelector('.js-modal__input__error');
 
     if ((confirmPassword === password) && errorPassword) {
         renderError(confirm, 'password', errorPassword.textContent);
@@ -149,7 +149,7 @@ export const removeError = (form, type, input = true) => {
 
     const errorElement = errorInput
         .parentElement
-        .querySelector('.modal__input__error');
+        .querySelector('.js-modal__input__error');
 
     if (errorElement) {
         errorElement.remove();
@@ -173,14 +173,14 @@ export const renderError = (form, type, text, input = true) => {
     }
 
     target.classList.add('modal__input_red_border');
-    if (target.parentElement.querySelector('.modal__input__error')) {
-        const erorElement = target.parentElement.querySelector('.modal__input__error');
+    if (target.parentElement.querySelector('.js-modal__input__error')) {
+        const erorElement = target.parentElement.querySelector('.js-modal__input__error');
         if (text === erorElement.textContent) {
             return;
         }
 
         erorElement.remove();
     }
-    const insertHtml = `<div class="modal__input__error">${text}</div>`;
+    const insertHtml = `<div class="modal__input__error js-modal__input__error">${text}</div>`;
     target.insertAdjacentHTML('afterend', insertHtml);
 };

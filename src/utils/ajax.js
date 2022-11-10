@@ -98,4 +98,36 @@ export class Ajax {
 
         return { status: response.status, body: result };
     }
+
+    /**
+    * Выполняет запрос с методом DELETE на бэкенд
+    *
+    * @param {url string} url - url запроса на бэкенд
+    * @param {Object} body - объект для отправки
+    * @return {Object} статус ответа и тело ответа в виде JSON
+    */
+    static async delete({ url, body = {} }) {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            mode: 'cors',
+            credentials: 'include',
+            headers: this.#csrfToken ? {
+                'Content-Type': 'application/json',
+                'X-Csrf-Token': this.#csrfToken,
+            } : {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        });
+
+        let result = await response.text();
+
+        if (result && result !== 'Forbidden') {
+            result = JSON.parse(result);
+        } else {
+            result = {};
+        }
+
+        return { status: response.status, body: result };
+    }
 }

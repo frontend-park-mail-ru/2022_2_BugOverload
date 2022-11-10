@@ -45,7 +45,7 @@ export class Signup extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.modal__background');
+            const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
                 document.body.classList.remove('body_hide_y_scroll');
@@ -59,7 +59,7 @@ export class Signup extends Component {
             return;
         }
 
-        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        const windowModal = this.rootNode.querySelector('.js-modal__window__flex');
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
@@ -67,7 +67,7 @@ export class Signup extends Component {
             modal.render();
         }
 
-        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
         this.componentDidMount();
     }
@@ -87,7 +87,7 @@ export class Signup extends Component {
         user.nickname = nickInput.value.trim();
         user.email = emailInput.value.trim();
         user.password = passwordInput.value;
-        const confirmPassword = confirmInput.querySelector('.modal__input').value;
+        const confirmPassword = confirmInput.querySelector('.js-modal__input').value;
 
         let flag = true;
 
@@ -156,7 +156,7 @@ export class Signup extends Component {
      * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
-        const form = this.rootNode.querySelector('.modal__form');
+        const form = this.rootNode.querySelector('.js-modal__form');
         const validate = this.validateSignup;
         let user;
 
@@ -182,7 +182,7 @@ export class Signup extends Component {
 
         const { deleteSignup } = this;
         document.body
-            .querySelector('.modal__background')
+            .querySelector('.js-modal__background')
             .addEventListener('click', deleteSignup);
     }
 
@@ -191,7 +191,7 @@ export class Signup extends Component {
      */
     componentWillUnmount() {
         const modalBackground = document.body
-            .querySelector('.modal__background');
+            .querySelector('.js-modal__background');
         const { deleteSignup } = this;
         if (modalBackground) {
             modalBackground.removeEventListener('click', deleteSignup);

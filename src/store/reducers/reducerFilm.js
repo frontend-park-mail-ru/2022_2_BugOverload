@@ -1,5 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
-import { API } from '@config/config.js';
+import { API, responsStatuses } from '@config/config.js';
 import { store } from '@store/Store.js';
 import { mockFilm } from '@store/reducers/mockData.js';
 
@@ -11,7 +11,7 @@ class ReducerFilm {
         } catch (e) {
             return { [`film${id}`]: mockFilm() };
         }
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return { [`film${id}`]: response.body };
         }
 
@@ -21,7 +21,7 @@ class ReducerFilm {
     async rate(ratingData) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
-            body: { rate: ratingData.rate },
+            body: { score: ratingData.rate },
         });
 
         if (response.status === 201) {
@@ -34,10 +34,10 @@ class ReducerFilm {
     }
 
     async deleteRate({ filmID }) {
-        const response = await Ajax.post({
+        const response = await Ajax.delete({
             url: API.del_rate(filmID),
         });
-        if (response.status === 204) {
+        if (response.status === responsStatuses.NoContent) {
             return {
                 rating: null,
                 statusRating: null,
@@ -48,7 +48,7 @@ class ReducerFilm {
 
     async getMetaDataFilm(data) {
         const response = await Ajax.get(API.metaFilm(data.filmID));
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             return {
                 listCollections: response.body.listCollections,
                 rating: response.body.rating,
@@ -60,7 +60,7 @@ class ReducerFilm {
 
     async getDataReviews(data) {
         const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset));
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             if (data.offset === 0) {
                 return {
                     infoReviews: response.body.infoReviews,
@@ -80,7 +80,7 @@ class ReducerFilm {
             body: reviewData,
         });
 
-        if (response.status === 201) {
+        if (response.status === responsStatuses.Created) {
             return {
                 countReviews: store.getState('countReviews') + 1,
             };

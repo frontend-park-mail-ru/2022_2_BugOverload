@@ -14,7 +14,7 @@ export class Userbar extends Component {
      * Навешивает обработчики на меню для обработки logout
      */
     addLogoutHandler() {
-        const targetHadler = document.querySelector('.header__userbar-item-out');
+        const targetHadler = document.querySelector('.js-header__userbar-item-out');
 
         targetHadler.addEventListener('click', (e) => {
             e.preventDefault();
@@ -44,7 +44,7 @@ export class Userbar extends Component {
                 return;
             }
 
-            document.body.querySelector('.header').remove();
+            document.body.querySelector('.js-header').remove();
 
             const props = {
                 userbar: templateUserbar(),
@@ -53,7 +53,7 @@ export class Userbar extends Component {
 
             rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));
 
-            rootNode.querySelector('.header__userbar-substrate').classList.add('userbar-on');
+            rootNode.querySelector('.js-header__userbar-substrate').classList.add('userbar-on');
 
             isOpened = true;
 
@@ -73,17 +73,17 @@ export class Userbar extends Component {
 
                 rootNode.insertAdjacentHTML('afterbegin', templateHeader(user));
 
-                const newUserbar = document.body.querySelector('.header__userbar-user-info-container');
+                const newUserbar = document.body.querySelector('.js-header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
 
                 isOpened = false;
             }
 
-            const userbar = document.body.querySelector('.header__userbar-substrate');
+            const userbar = document.body.querySelector('.js-header__userbar-substrate');
             userbar.addEventListener('mouseleave', handlerCloseUserbar);
         }
 
-        const target = document.body.querySelector('.header__userbar-user-info-container');
+        const target = document.body.querySelector('.js-header__userbar-user-info-container');
         target.addEventListener('mouseenter', handlerOpenUserbar);
     }
 }

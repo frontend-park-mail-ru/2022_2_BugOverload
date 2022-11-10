@@ -27,7 +27,7 @@ export class Modal {
      */
     handler() {
         document.body
-            .querySelector('.modal__background')
+            .querySelector('.js-modal__background')
             .addEventListener('click', (e) => {
                 const { target } = e;
 
@@ -43,7 +43,7 @@ export class Modal {
 */
 export const exitFromModal = () => {
     document.body.classList.remove('body_hide_y_scroll');
-    const modalBackground = document.body.querySelector('.modal__background');
+    const modalBackground = document.body.querySelector('.js-modal__background');
     if (modalBackground) {
         modalBackground.remove();
     }

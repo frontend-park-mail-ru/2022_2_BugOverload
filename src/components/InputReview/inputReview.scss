@@ -12,17 +12,18 @@
   background-image: url("@icons/arrow-drop.png");
   background-repeat: no-repeat;
 }
-
-.input-review__container {
-  display: flex;
-  flex-direction: column;
-  padding: 48px;
-  box-sizing: border-box;
-  background-color: var(--backgr-modal-review);
-  backdrop-filter: blur(30px);
-  border-radius: 20px;
-  width: 900px;
-  height: auto;
+.input-review {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+    box-sizing: border-box;
+    background-color: var(--backgr-modal-review);
+    backdrop-filter: blur(30px);
+    border-radius: 20px;
+    width: 900px;
+    height: auto;
+  }
 
   &__head {
     color: var(--main-color-text);

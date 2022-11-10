@@ -26,7 +26,7 @@ export class ProfileChange extends Component {
                 this.handlerStatusPut();
             };
 
-            const profileElement = this.rootNode.querySelector('.profile');
+            const profileElement = this.rootNode.querySelector('.js-profile');
             if (profileElement) {
                 profileElement.remove();
             }
@@ -43,7 +43,7 @@ export class ProfileChange extends Component {
                 this.state.isOpen = true;
 
                 this.rootNode
-                    .querySelector('.profile__change__svg')
+                    .querySelector('.js-profile__change__svg')
                     .addEventListener('click', () => {
                         if (this.state.isOpen) {
                             profile.render();
@@ -56,25 +56,25 @@ export class ProfileChange extends Component {
 
     handlerStatusPut() {
         if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
-            const wrapper = this.rootNode.querySelector('.profile__wrapper__old__password');
+            const wrapper = this.rootNode.querySelector('.js-profile__wrapper__old__password');
             renderError(wrapper, 'password', 'Неправильный пароль');
         }
     }
 
     componentDidMount() {
-        const changeButton = this.rootNode.querySelector('.profile__change__svg');
+        const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
         changeButton.addEventListener('click', this.handlerUserChangeForm);
     }
 
     componentWillUnmount() {
-        const changeButton = this.rootNode.querySelector('.profile__change__svg');
+        const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
         changeButton.removeEventListener('click', this.handlerUserChangeForm);
     }
 
     addValidate() {
         const forms = {};
-        forms.formNick = this.rootNode.querySelector('.profile__form__nick');
-        forms.formPassword = this.rootNode.querySelector('.profile__form__password');
+        forms.formNick = this.rootNode.querySelector('.js-profile__form__nick');
+        forms.formPassword = this.rootNode.querySelector('.js-profile__form__password');
 
         Object.keys(forms).forEach((key) => {
             let validate;
@@ -135,9 +135,9 @@ export class ProfileChange extends Component {
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
     validatePassword(form, keyup = false) {
-        const oldPassword = form.querySelector('.profile__wrapper__old__password').childNodes[1];
-        const passwordInput = form.querySelector('.profile__input');
-        const confirmInput = form.querySelector('.profile__wrapper__password').childNodes[1];
+        const oldPassword = form.querySelector('.js-profile__wrapper__old__password').childNodes[1];
+        const passwordInput = form.querySelector('.js-profile__input');
+        const confirmInput = form.querySelector('.js-profile__wrapper__password').childNodes[1];
 
         const user = {};
         user.oldPassword = oldPassword.value;

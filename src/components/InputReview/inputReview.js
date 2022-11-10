@@ -25,7 +25,7 @@ export class InputReview extends Component {
     }
 
     render() {
-        let modalWindow = this.rootNode.querySelector('.modal__window');
+        let modalWindow = this.rootNode.querySelector('.js-modal__window');
         if (modalWindow) {
             return;
         }
@@ -33,7 +33,7 @@ export class InputReview extends Component {
         const modal = new Modal(this.rootNode, this.componentWillUnmount.bind(this));
         modal.render();
 
-        modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', template({
             count_reviews: decoreCountReviews(store.getState('countReviews')),
             nickname: this.state.user.nickname,
@@ -46,7 +46,7 @@ export class InputReview extends Component {
         let flag = true;
 
         if (!reviewType) {
-            const reviewWrapper = this.rootNode.querySelector('.input-review__select__wrapper');
+            const reviewWrapper = this.rootNode.querySelector('.js-input-review__select__wrapper');
             renderError(
                 reviewWrapper,
                 'input-review__select',
@@ -101,12 +101,12 @@ export class InputReview extends Component {
     }
 
     componentDidMount() {
-        const select = this.rootNode.querySelector('.input-review__select');
+        const select = this.rootNode.querySelector('.js-input-review__select');
         const input = select.querySelector('.js-input-review__select-input');
-        const head = select.querySelector('.input-review__select-head');
-        const headText = head.querySelector('.input-review__select-head-text');
-        const list = select.querySelector('.input-review__select-list');
-        const items = select.querySelectorAll('.input-review__select-item');
+        const head = select.querySelector('.js-input-review__select-head');
+        const headText = head.querySelector('.js-input-review__select-head-text');
+        const list = select.querySelector('.js-input-review__select-list');
+        const items = select.querySelectorAll('.js-input-review__select-item');
 
         this.handlerSubmit = (function (e) {
             e.preventDefault();
@@ -114,8 +114,8 @@ export class InputReview extends Component {
             const form = this.rootNode.querySelector('.js-input-review__form');
 
             const typeInput = form.querySelector('.js-input-review__select-input');
-            const titleInputWrapper = form.querySelector('.input-title__wrapper');
-            const textInputWrapper = form.querySelector('.input-text__wrapper');
+            const titleInputWrapper = form.querySelector('.js-input-title__wrapper');
+            const textInputWrapper = form.querySelector('.js-input-text__wrapper');
 
             review.type = typeInput.value;
             review.name = titleInputWrapper.children[0].value;
@@ -129,7 +129,7 @@ export class InputReview extends Component {
             store.dispatch(actionSendReview(review));
 
             document.body.classList.remove('body_hide_y_scroll');
-            document.body.querySelector('.modal__background').remove();
+            document.body.querySelector('.js-modal__background').remove();
         }).bind(this);
 
         const form = this.rootNode.querySelector('.js-input-review__form');
@@ -161,12 +161,12 @@ export class InputReview extends Component {
         const form = this.rootNode.querySelector('.js-input-review__form');
         form.removeEventListener('submit', this.handlerSubmit);
 
-        const select = this.rootNode.querySelector('.input-review__select');
+        const select = this.rootNode.querySelector('.js-input-review__select');
 
-        const head = select.querySelector('.input-review__select-head');
+        const head = select.querySelector('.js-input-review__select-head');
         head.removeEventListener('click', this.doOpenClose);
 
-        const items = select.querySelectorAll('.input-review__select-item');
+        const items = select.querySelectorAll('.js-input-review__select-item');
         items.forEach((item) => item.removeEventListener('click', this.handlerSetValueWrapper(item)));
     }
 }

@@ -30,7 +30,7 @@ export class Header extends Component {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        const header = this.rootNode.querySelector('.header');
+        const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
         }
