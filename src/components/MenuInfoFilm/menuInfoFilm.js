@@ -5,7 +5,15 @@ import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component.js';
 import { decoreDuration, decoreListPersons, decoreListItems } from '@utils/decorationData.js';
 
+/**
+* Отрисовывает меню для переключения описания фильма и полной информацией о нём
+* Отвечает за создание классов Rating, Description и Details
+*/
 export class MenuInfoFilm extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * @param {Object} - сохраняемые начальные параметры
+     */
     constructor(props) {
         super(props);
         this.menuState = {

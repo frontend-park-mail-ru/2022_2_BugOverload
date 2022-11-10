@@ -24,6 +24,12 @@ export class FilmPage extends View {
         };
     }
 
+    /**
+    * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
+    * Подписывается на изменение состояния state film<id>
+    * @param {number} id - уникальный идентификатор фильма.
+    * Используется при первом заходе на страницу
+    */
     render(id = null) {
         if (id) {
             this.state.id = id;
@@ -81,6 +87,9 @@ export class FilmPage extends View {
         listReviews.init();
     }
 
+    /**
+     * Используется для обнуления состояния FilmPage для перехода к новому фильму
+     */
     componentWillUnmount() {
         this.isSubscribed = false;
         this.state.id = null;

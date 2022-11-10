@@ -5,6 +5,11 @@ import { store } from '@store/Store.js';
 import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
+/**
+* Рейтинг фильма.
+* Отрисовывает рейтинг и форму для отправки удаления оценки.
+* Подписывается на измненение state rating
+*/
 export class Rating extends Component {
     constructor(props) {
         super(props);

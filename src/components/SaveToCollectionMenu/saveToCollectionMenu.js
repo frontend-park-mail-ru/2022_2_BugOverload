@@ -2,6 +2,10 @@ import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.hand
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 
+/**
+* Отражает меню со списком имеющихся коллеций у пользователя
+* Подписывается на измнение state listCollections
+*/
 export class SaveToCollectionMenu extends Component {
     constructor(collections = [
         { coll_name: 'Буду смотреть' },
@@ -24,6 +28,9 @@ export class SaveToCollectionMenu extends Component {
         });
     }
 
+    /**
+     * Обработчик открытия меню
+     */
     open() {
         if (!this.placeholder) {
             return;
@@ -38,6 +45,9 @@ export class SaveToCollectionMenu extends Component {
         menu.setAttribute('open', '');
     }
 
+    /**
+     * Обработчик закрытия меню
+     */
     close() {
         if (!this.placeholder) {
             return;
@@ -49,11 +59,10 @@ export class SaveToCollectionMenu extends Component {
         }
     }
 
-    getTemplate() {
-        return template({ collections: this.state.collections });
-    }
-
+    /**
+     * Отрисовывает компонент, используя location и hbs-template.
+     */
     render() {
-        this.placeholder.insertAdjacentHTML('beforeend', this.getTemplate());
+        this.placeholder.insertAdjacentHTML('beforeend', template({ collections: this.state.collections }));
     }
 }

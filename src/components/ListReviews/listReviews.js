@@ -7,11 +7,14 @@ import { InputReview } from '@components/InputReview/inputReview.js';
 import { actionGetDataReviews } from '@actions/filmActions.js';
 
 /**
-* Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
-* Добавляет обработчики событий на кнопки слайдера
-*
+* Выводит список пользовательских рецензий
 */
 export class ListReviews extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент.
+     * Подписывается на изменение state reviews - новопришедшие рецензии с бэкенда.
+     * @param {Object} - сохраняемые начальные параметры
+     */
     constructor(props) {
         super(props);
         this.location = this.rootNode.querySelector('.js-reviews-list');
@@ -31,10 +34,14 @@ export class ListReviews extends Component {
             this.state.reviews = store.getState('reviews');
             this.render();
         });
-
-        this.handler = this.handler.bind(this);
     }
 
+    /**
+    * Инициализация компонента
+    * Навешивается обработчик для динамической подгрузки при скролле
+    * Выбрасывает action для получения данных в state reviews.
+    * Для однозначного определения числа и смещения от начала указывается count и offset.
+    */
     init() {
         this.componentDidMount();
 
@@ -46,28 +53,24 @@ export class ListReviews extends Component {
     }
 
     /**
-    * Создаёт коллекцию из набора данных как HTML-шаблон, полученных с бэкенда
-    *
-    * @param {data Object} data - объект данных коллекции
-    * @return {string} отрендеренный HTML-шаблон коллеции
-    */
+     * Отрисовывает компонент, используя location и hbs-template.
+     */
     render() {
         if (!this.state.reviews) {
             return;
         }
         const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
         if (reviews === '') {
-            this.componentDidUnmount();
+            this.componentWillUnmount();
             return;
         }
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
     }
 
     /**
-    * Служит для добавления обработчиков на все отрендеренные на странице коллекции
-    *
+    * Служит для создания формы написания рецензии
     */
-    handler = (function (e) {
+    handlerOpenFormReview = (function (e) {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
@@ -81,8 +84,11 @@ export class ListReviews extends Component {
             rootNode: this.rootNode,
         });
         inputReview.render();
-    });
+    }).bind(this);
 
+    /**
+    * Выбрасывает action с запросом за новыми рецензиями при прокрутке вниз страницы
+    */
     handlerShowMore = (function () {
         if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
             return;
@@ -95,6 +101,10 @@ export class ListReviews extends Component {
         }));
     }).bind(this);
 
+    /**
+     * Навешивает обработчики на кнопку создания формы написания рецензии,
+     * обработчик запроса новых рецензий при скролле вниз
+     */
     componentDidMount() {
         if (this.isMounted) {
             return;
@@ -103,13 +113,17 @@ export class ListReviews extends Component {
         this.location.insertAdjacentHTML('afterbegin', template());
 
         const btn = this.location.querySelector('.js-list-reviews__btn-write-review');
-        btn.addEventListener('click', this.handler);
+        btn.addEventListener('click', this.handlerOpenFormReview);
 
         document.addEventListener('scroll', this.handlerShowMore);
         this.isMounted = true;
     }
 
-    componentDidUnmount() {
+    /**
+     * Используется для освобождения ресурсов.
+     * Удаляет обработчики, установленные в ComponentDidMount
+     */
+    componentWillUnmount() {
         document.removeEventListener('scroll', this.handlerShowMore);
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
         btnShowMore.remove();

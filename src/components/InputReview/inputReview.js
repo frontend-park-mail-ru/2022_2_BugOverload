@@ -9,7 +9,16 @@ import {
 import { decoreCountReviews } from '@utils/decorationData.js';
 import { API } from '@config/config.js';
 
+/**
+* Отрисовывает форму для написания отзыва в виде модального окна
+* Создаёт компонент выпадающего меню для сохранения в коллекции
+*/
 export class InputReview extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент.
+     * Подписывается на изменение state countReviews - числа отзывов у юзера.
+     * @param {Object} - сохраняемые начальные параметры
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -24,6 +33,11 @@ export class InputReview extends Component {
         });
     }
 
+    /**
+     * Отрисовывает стилизованный компонент, используя location и hbs-template.
+     * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
+     * Создаёт компонент модального окна
+     */
     render() {
         let modalWindow = this.rootNode.querySelector('.js-modal__window');
         if (modalWindow) {
@@ -42,6 +56,13 @@ export class InputReview extends Component {
         this.componentDidMount();
     }
 
+    /**
+     * Валидирует форму и отмечает пустные поля как ошибочные с
+     * сообщением для юзера
+     * @param {string} reviewType - тип рецензии
+     * @param {Element} titleInputWrapper - обёрка для рендера сообщения ошибки названия
+     * @param {Element} textInputWrapper - обёрка для рендера сообщения ошибки текста рецензии
+     */
     validate(reviewType, titleInputWrapper, textInputWrapper) {
         let flag = true;
 
@@ -100,6 +121,10 @@ export class InputReview extends Component {
         return flag;
     }
 
+    /**
+     * Навешивает обработчики на выпадающее меню выбора типа рецензии,
+     * кнопки отправки рецензии
+     */
     componentDidMount() {
         const select = this.rootNode.querySelector('.js-input-review__select');
         const input = select.querySelector('.js-input-review__select-input');
@@ -157,6 +182,10 @@ export class InputReview extends Component {
         items.forEach((item) => item.addEventListener('click', this.handlerSetValueWrapper(item)));
     }
 
+    /**
+     * Используется для освобождения ресурсов.
+     * Удаляет обработчики, установленные в ComponentDidMount
+     */
     componentWillUnmount() {
         const form = this.rootNode.querySelector('.js-input-review__form');
         form.removeEventListener('submit', this.handlerSubmit);

@@ -5,11 +5,15 @@ import template from '@components/PreviewFilm/previewFilm.handlebars';
 import { API } from '@config/config.js';
 
 /**
-* Ходит за данными на бэкенд.
-* Рендерит HTML-шаблон превью фильма на главной
-*
+* Отображает фильм как рекомендацию на главной странице
 */
 export class PreviewFilm extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * Подписывается на изменение state preview-<nameLocation>
+     * @param {string} nameLocation - сохраняет имя элемента,
+     * соответствующее имени класса-контейнера на странице.
+     */
     constructor(nameLocation) {
         super();
         this.state = {
@@ -24,6 +28,10 @@ export class PreviewFilm extends Component {
         });
     }
 
+    /**
+    * Инициализация компонента
+    * Выбрасывает action для получения данных в state preview-<nameLocation>.
+    */
     init() {
         store.dispatch(
             actionGetPreviewData({
@@ -32,6 +40,9 @@ export class PreviewFilm extends Component {
         );
     }
 
+    /**
+     * Отрисовывает компонент, используя location и hbs-template.
+     */
     render() {
         this.location.innerHTML = '';
         this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
