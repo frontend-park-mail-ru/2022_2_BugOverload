@@ -16,14 +16,13 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
-                'x-csrf-token': 'test',
+                'x-csrf-token': this.#csrfToken,
             } : {
-                'x-csrf-token': 'test',
             },
         });
-        const csrf = response.headers.get('x-csrf-token');
+        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
         if (csrf) {
-            this.#csrfToken = csrf;
+          this.#csrfToken = csrf;
         }
         let result = await response.text();
 
@@ -53,9 +52,9 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        const csrf = response.headers.get('x-csrf-token');
+        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
         if (csrf) {
-            this.#csrfToken = csrf;
+          this.#csrfToken = csrf;
         }
 
         let result = await response.text();
@@ -103,11 +102,6 @@ export class Ajax {
                 },
                 body: JSON.stringify(body),
             });
-        }
-
-        const csrf = response.headers.get('x-csrf-token');
-        if (csrf) {
-            this.#csrfToken = csrf;
         }
 
         let result = await response.text();
