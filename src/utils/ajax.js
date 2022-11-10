@@ -20,7 +20,7 @@ export class Ajax {
             } : {
             },
         });
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/)
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).toString();
         console.log(document.cookie)
         if(csrf) {
             csrf = csrf.replace('CSRF-TOKEN=','');
@@ -58,7 +58,7 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/)
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).toString();
         console.log(document.cookie)
         if(csrf) {
             csrf = csrf.replace('CSRF-TOKEN=','');
