@@ -2,6 +2,7 @@
   background-image: url("@icons/check.png");
   background-position-y: -3px;
 }
+
 .menu-save {
   &__container {
     display: flex;
@@ -32,6 +33,10 @@
     @include icon-check;
     width: 20px;
     height: 20px;
+  }
+
+  &__item-link {
+    display: block;
   }
 
   &__item {
