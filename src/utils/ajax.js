@@ -21,14 +21,14 @@ export class Ajax {
             },
         });
         let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
-        console.log(document.cookie)
+
         if(csrf) {
-            csrf = csrf.toString().replace('CSRF-TOKEN=','');
+            csrf = csrf.toString().replace(/CSRF-TOKEN=/,'');
         }
-        console.log(this.#csrfToken)
         if (csrf) {
           this.#csrfToken = csrf;
         }
+        console.log(this.#csrfToken)
         let result = await response.text();
 
         result = result ? result = JSON.parse(result) : {};
@@ -59,10 +59,14 @@ export class Ajax {
         });
 
         let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
-        console.log(document.cookie)
+
         if(csrf) {
-            csrf = csrf.toString().replace('CSRF-TOKEN=','');
+            csrf = csrf.toString().replace(/CSRF-TOKEN=/,'');
         }
+        if (csrf) {
+            this.#csrfToken = csrf;
+          }
+        console.log(this.#csrfToken)
 
         let result = await response.text();
 
