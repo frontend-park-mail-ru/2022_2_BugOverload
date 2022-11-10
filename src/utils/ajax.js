@@ -17,8 +17,9 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
-                'x-csrf-token': this.#csrfToken,
+                'x-csrf-token': 'test',
             }: {
+                'x-csrf-token': 'test',
             },
         });
         const csrf = response.headers.get('x-csrf-token');
