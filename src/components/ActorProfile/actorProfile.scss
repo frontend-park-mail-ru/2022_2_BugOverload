@@ -3,6 +3,7 @@
     justify-content: flex-end;
     flex-flow: column wrap;
     margin-left: 52px;
+    margin-right: 52px;
     margin-bottom: 80px;
     padding-top: 95px;
 
@@ -29,18 +30,18 @@
         margin: 0 auto;
         max-width: 700px;
         max-height: 500px;
+        overflow: hidden
     }
 
     &__gallery-item {
         min-height: 153px;
         margin: 5px;
-        max-height: 145px;
+        max-height: 186px;
         object-fit: contain;
         border-radius: 8px;
     }
 
     &__image {
-        min-width: 300px;
         min-height: 400px;
         background-size: cover;
         background-repeat: no-repeat;
