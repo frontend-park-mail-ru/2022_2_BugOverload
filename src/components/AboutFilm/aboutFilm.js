@@ -28,7 +28,7 @@ export class AboutFilm extends Component {
             original_name: this.data.original_name,
             rating: this.data.rating,
             prod_year: this.data.prod_year,
-            `type_${this.data.type}`: true,
+            [`type_${this.data.type}`]: true,
             end_year: this.data.end_year,
             duration: decoreDuration(this.data.duration, 'short'),
             count_seasons: decoreCountSeasons(this.data.count_seasons),
