@@ -1,7 +1,9 @@
-.list-reviews__container {
-  display: flex;
-  flex-direction: column;
-  margin-left: var(--standart-margin);
+.list-reviews {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--standart-margin);
+  }
 
   &__head-container {
     display: flex;
