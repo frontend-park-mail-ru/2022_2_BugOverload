@@ -20,8 +20,10 @@ export class Ajax {
             } : {
             },
         });
-        let csrf = getCookie('CSRF-TOKEN');
-
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/)
+        if(csrf) {
+            csrf = csrf.replace('CSRF-TOKEN=','');
+        }
         console.log(this.#csrfToken)
         if (csrf) {
           this.#csrfToken = csrf;
@@ -54,11 +56,10 @@ export class Ajax {
             },
             body: JSON.stringify(body),
         });
-        let csrf = getCookie('CSRF-TOKEN');
 
-        console.log(this.#csrfToken)
-        if (csrf) {
-          this.#csrfToken = csrf;
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/)
+        if(csrf) {
+            csrf = csrf.replace('CSRF-TOKEN=','');
         }
 
         let result = await response.text();
@@ -150,15 +151,4 @@ export class Ajax {
 
         return { status: response.status, body: result };
     }
-}
-
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
 }
