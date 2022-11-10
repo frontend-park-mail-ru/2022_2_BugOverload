@@ -23,6 +23,8 @@ export class Ajax {
             },
         });
         const csrf = response.headers.get('x-csrf-token');
+        const csrfhas = response.headers.has('X-CSRF-TOKEN');
+        console.log(csrfhas)
         console.log('getCsrf', csrf, response.headers.get('X-CSRF-TOKEN'),response.headers.forEach(console.log))
         if (csrf) {
             this.#csrfToken = csrf;
