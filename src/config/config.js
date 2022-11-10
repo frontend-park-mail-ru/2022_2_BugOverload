@@ -10,25 +10,25 @@ const PROTOCOL = (DOMAIN === 'movie-gate.online') ? 'https' : 'http';
 export const API = {
     img: {
         poster_hor(key) {
-            if (!navigator.onLine) {
+            if (key === 'default') {
                 return '/assets/img/default/noFilmHor.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=film_poster_hor&key=${key}`;
         },
         poster_ver(key) {
-            if (!navigator.onLine) {
+            if (key === 'default') {
                 return '/assets/img/default/noFilm.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=film_poster_ver&key=${key}`;
         },
         user_avatar(key) {
-            if (!navigator.onLine) {
+            if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}`;
         },
         person_avatar(key) {
-            if (!navigator.onLine) {
+            if (key === 'default') {
                 return '/assets/img/default/noPerson.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;

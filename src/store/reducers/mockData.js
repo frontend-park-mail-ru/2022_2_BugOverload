@@ -10,7 +10,7 @@ const mockFilms = () => [
         ageLimit: '',
         duration: '',
         posterHuge: '',
-        poster_ver: 'assets/default/noFilm.webp',
+        poster_ver: 'default',
         rating: 9.8,
         genres: ['Жанры'],
     },
@@ -25,7 +25,7 @@ const mockFilms = () => [
         ageLimit: '',
         duration: '',
         posterHuge: '',
-        poster_ver: 'assets/default/noFilm.webp',
+        poster_ver: 'default',
         rating: 7.8,
         genres: ['Жанры'],
     },
@@ -40,7 +40,7 @@ const mockFilms = () => [
         ageLimit: '',
         duration: '',
         posterHuge: '',
-        poster_ver: 'assets/default/noFilm.webp',
+        poster_ver: 'default',
         rating: 6.8,
         genres: ['Жанры'],
     },
@@ -56,7 +56,7 @@ export const mockPrewiew = () => ({
     prodCompany: '',
     prodCountry: '',
     ageLimit: '',
-    poster_hor: 'assets/default/noFilmHor.webp',
+    poster_hor: 'default',
     rating: 7.1,
     genres: ['Жанры'],
 });
@@ -67,21 +67,25 @@ export const mockFilm = () => ({
             character: 'Персонаж',
             id: 0,
             name: 'Актёр',
+            avatar: 'default',
         },
         {
             character: 'Персонаж',
             id: 0,
             name: 'Актёр',
+            avatar: 'default',
         },
         {
             character: 'Персонаж',
             id: 0,
             name: 'Актёр',
+            avatar: 'default',
         },
         {
             character: 'Персонаж',
             id: 0,
             name: 'Актёр',
+            avatar: 'default',
         },
     ],
     directors: [
@@ -142,7 +146,7 @@ export const mockFilm = () => ({
     end_year: 2019,
     name: 'Название',
     original_name: 'Оригинальное название',
-    poster_hor: 'assets/img/films_hor/trueDetective.jpg',
+    poster_hor: 'default',
 
     genres: [
         'жанры',
@@ -164,7 +168,7 @@ export const mockPerson = () => ({
     birthday: '09.10.2022, 48 лет',
     growth: '1.83 м',
     count_films: 'Количество фильмов',
-    avatar: '1',
+    avatar: 'default',
     best_films: mockFilms(),
 });
 
