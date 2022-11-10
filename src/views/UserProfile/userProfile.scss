@@ -33,6 +33,7 @@
             border: 0;
             border-radius: 8px;
             font-size: 15px;
+
             &:hover{
                 background-color: var(--secondary-color-hover);
                 transition: 0.1s linear;
@@ -86,7 +87,6 @@
     }
 
     &__info {
-
         &__flex {
             @include flex__row;
             justify-content: flex-start;

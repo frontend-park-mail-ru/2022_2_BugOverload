@@ -34,6 +34,7 @@
         "no-plusplus": 0,
         "no-useless-escape": 0,
         "func-names": 0,
+        "no-restricted-globals": 0,
         "no-restricted-syntax": [
             "error",
             {

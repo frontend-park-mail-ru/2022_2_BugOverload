@@ -22,7 +22,10 @@ this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
-    if (url.origin === window.location.origin) {
+    if (url.origin.match(/auth$/)) {
+        debugger;
+    }
+    if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
@@ -43,7 +46,7 @@ async function networkFirst(request) {
     try {
         const response = await fetch(request);
         if (request.method !== 'GET') {
-                return response;
+            return response;
         }
         await cache.put(request, response.clone());
         return response;

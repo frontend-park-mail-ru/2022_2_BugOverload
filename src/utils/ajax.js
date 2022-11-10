@@ -48,6 +48,11 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
+        const csrf = response.headers.get('x-csrf-token');
+        if (csrf) {
+            Ajax.#csrfToken = csrf;
+        }
+
         let result = await response.text();
 
         if (result && result !== 'Forbidden') {
