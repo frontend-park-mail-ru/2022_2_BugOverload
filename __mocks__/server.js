@@ -1205,7 +1205,7 @@ const reviewsStorage = {
 	]
 };
 
-app.get('/api/v1/film/:id/user_activities',  (req, res) => {
+app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 	if (Object.keys(req.cookies).length == 0) {
 		res.status(401).json({});
 		return;
