@@ -82,7 +82,6 @@ class UserProfile extends View {
             e.preventDefault();
             store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
-            console.log([...formData])
             store.dispatch(actionPutAvatar(formData));
         });
 
