@@ -16,12 +16,15 @@ export class Ajax {
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
-            headers: {
-                'X-Csrf-Token': 'value',
+            headers: this.#csrfToken ? {
+                'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                'X-Csrf-Token': this.#csrfToken,
+            }: {
+                'Access-Control-Allow-Headers': 'X-Csrf-Token',
             },
         });
         const csrf = response.headers.get('x-csrf-token');
-        console.log('getCsrf', csrf, response.headers.get('x-csrf-token'),response.headers)
+        console.log('getCsrf', csrf, response.headers.get('x-csrf-token'),response.headers.forEach(console.log))
         if (csrf) {
             this.#csrfToken = csrf;
         }
@@ -45,9 +48,11 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
+                'Access-Control-Allow-Headers': 'X-Csrf-Token',
                 'Content-Type': 'application/json',
                 'X-Csrf-Token': this.#csrfToken,
             } : {
+                'Access-Control-Allow-Headers': 'X-Csrf-Token',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
@@ -85,8 +90,11 @@ export class Ajax {
                 mode: 'cors',
                 credentials: 'include',
                 headers: this.#csrfToken ? {
+                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
                     'X-Csrf-Token': this.#csrfToken,
-                } : {},
+                } : {
+                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                },
                 body,
             });
         } else {
@@ -95,9 +103,11 @@ export class Ajax {
                 mode: 'cors',
                 credentials: 'include',
                 headers: this.#csrfToken ? {
+                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
                     'Content-Type': 'application/json',
                     'X-Csrf-Token': this.#csrfToken,
                 } : {
+                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body),
