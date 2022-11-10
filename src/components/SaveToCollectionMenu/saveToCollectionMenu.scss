@@ -17,8 +17,8 @@
 
   &__items-container {
     display: grid;
-    grid-template-columns: 10% 1fr;
-    grid-gap: 10px 15px;
+    grid-template-columns: 5% 95%;
+    column-gap: 10px;
     align-items: center;
     margin-top: 10px;
   }
@@ -35,13 +35,15 @@
     height: 20px;
   }
 
-  &__item-link {
-    display: block;
-  }
-
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
+
+    &-btn {
+      display: block;
+      width: auto;
+      height: 20px;
+    }
 
     &:hover {
       color: var(--primary-color);

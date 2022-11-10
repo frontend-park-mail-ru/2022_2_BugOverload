@@ -20,7 +20,7 @@ export class Ajax {
             } : {
             },
         });
-        let csrf = getCookie('CSRF-TOKEN');
+        const csrf = getCookie('CSRF-TOKEN');
 
         if (csrf) {
             this.#csrfToken = csrf;
@@ -53,7 +53,7 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        let csrf = getCookie('CSRF-TOKEN');
+        const csrf = getCookie('CSRF-TOKEN');
 
         if (csrf) {
             this.#csrfToken = csrf;
@@ -151,12 +151,12 @@ export class Ajax {
 }
 
 const getCookie = (name) => {
-    const nameEQ = name + "=";
+    const nameEQ = `${name}=`;
     const ca = document.cookie.split(';');
-    for(let i=0;i < ca.length;i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
-}
+};

@@ -21,10 +21,10 @@ export class ReviewStatistic extends Component {
         this.location.insertAdjacentHTML('afterbegin', template({
             total: this.state.film.count_negative_reviews
                 + this.state.film.count_neutral_reviews
-                + this.state.film.count_positive_reviews,
-            negative: this.state.film.count_negative_reviews,
-            neutral: this.state.film.count_neutral_reviews,
-            positive: this.state.film.count_positive_reviews,
+                + this.state.film.count_positive_reviews || 0,
+            negative: this.state.film.count_negative_reviews || 0,
+            neutral: this.state.film.count_neutral_reviews || 0,
+            positive: this.state.film.count_positive_reviews || 0,
         }));
     }
 }

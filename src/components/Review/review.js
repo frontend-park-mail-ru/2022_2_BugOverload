@@ -1,6 +1,6 @@
 import template from '@components/Review/review.handlebars';
 import { decoreCountReviews } from '@utils/decorationData.js';
-import { API } from '@config/config.js';
+// import { API } from '@config/config.js';
 
 /**
 * Отзыв юзера на фильм.
@@ -19,7 +19,7 @@ export class Review {
         data.author.count_reviews = decoreCountReviews(data.author.count_reviews);
         return template({
             ...data,
-            user_avatar: API.img.user_avatar(data.author.avatar),
+            user_avatar: /* API.img.user_avatar( */data.author.avatar/* ) */,
             date: data.create_time.split(' ')[0].split('.').reverse().join('.'),
         });
     }

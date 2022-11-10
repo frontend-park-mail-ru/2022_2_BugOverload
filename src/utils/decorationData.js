@@ -71,7 +71,7 @@ export const decoreCountSeasons = (count) => {
 
 export const decoreCountReviews = (count) => {
     if (!count) {
-        return null;
+        return '0 рецензий';
     }
 
     if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {

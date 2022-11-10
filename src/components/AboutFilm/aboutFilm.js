@@ -62,7 +62,7 @@ export class AboutFilm extends Component {
             return;
         }
 
-        const menu = new SaveToCollectionMenu();
+        const menu = new SaveToCollectionMenu('js-place-save-to-collection');
         this.handlerOpenMenu = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {

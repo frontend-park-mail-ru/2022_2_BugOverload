@@ -44,6 +44,36 @@ const mockFilms = () => [
         rating: 6.8,
         genres: ['Жанры'],
     },
+    {
+        id: 0,
+        name: 'Фильм',
+        description: '',
+        type: '',
+        prod_year: 2022,
+        prodCompany: '',
+        prodCountry: '',
+        ageLimit: '',
+        duration: '',
+        posterHuge: '',
+        poster_ver: 'default',
+        rating: 6.8,
+        genres: ['Жанры'],
+    },
+    {
+        id: 0,
+        name: 'Фильм',
+        description: '',
+        type: '',
+        prod_year: 2022,
+        prodCompany: '',
+        prodCountry: '',
+        ageLimit: '',
+        duration: '',
+        posterHuge: '',
+        poster_ver: 'default',
+        rating: 6.8,
+        genres: ['Жанры'],
+    },
 ];
 
 export const mockPrewiew = () => ({
@@ -170,6 +200,7 @@ export const mockPerson = () => ({
     count_films: 'Количество фильмов',
     avatar: 'default',
     best_films: mockFilms(),
+    images: ['1', '2', '3', '4', '5'],
 });
 
 export const mockCollection = () => ({

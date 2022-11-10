@@ -7,7 +7,7 @@ import {
     renderError, removeError,
 } from '@utils/valid.js';
 import { decoreCountReviews } from '@utils/decorationData.js';
-import { API } from '@config/config.js';
+// import { API } from '@config/config.js';
 
 /**
 * Отрисовывает форму для написания отзыва в виде модального окна
@@ -51,7 +51,7 @@ export class InputReview extends Component {
         modalWindow.insertAdjacentHTML('afterbegin', template({
             count_reviews: decoreCountReviews(store.getState('countReviews')),
             nickname: this.state.user.nickname,
-            user_avatar: API.img.user_avatar(this.state.user.avatar),
+            user_avatar: /* API.img.user_avatar( */this.state.user.avatar/* ) */,
         }));
         this.componentDidMount();
     }

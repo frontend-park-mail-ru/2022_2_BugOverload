@@ -57,13 +57,11 @@ export class ListReviews extends Component {
      */
     render() {
         if (!this.state.reviews) {
-            return;
-        }
-        const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
-        if (reviews === '') {
             this.componentWillUnmount();
             return;
         }
+
+        const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
     }
 

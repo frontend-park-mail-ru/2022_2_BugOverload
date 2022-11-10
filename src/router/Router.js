@@ -179,14 +179,14 @@ class Router {
         }
     }
 
-    cache(url = './') {
-        /*if (navigator.serviceWorker) {
+    // cache(url = './') {
+    /* if (navigator.serviceWorker) {
             navigator.serviceWorker.register('/sw.js', { scope: url });
             if (!this.cachedUrls.get(url)) {
                 this.cachedUrls.set(url);
             }
-        }*/
-    }
+        } */
+    // }
 }
 
 export const router = new Router(ROOT);

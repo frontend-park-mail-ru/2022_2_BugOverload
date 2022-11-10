@@ -23,8 +23,7 @@ this.addEventListener('fetch', (event) => {
 
     const url = new URL(request.url);
     console.log(url.origin);
-    console.log(url.origin.match(/auth$/))
-
+    console.log(url.origin.match(/auth$/));
 
     if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
@@ -47,7 +46,7 @@ async function networkFirst(request) {
     try {
         const response = await fetch(request);
 
-        if ( request.url.match( '?object=user_avatar' ) ) {
+        if (request.url.match('?object=user_avatar')) {
             return false;
         }
 

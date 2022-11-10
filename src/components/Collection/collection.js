@@ -22,6 +22,7 @@ export class Collection extends Component {
         };
         this.nameLocation = nameLocation;
         this.location = this.rootNode.querySelector(`.${nameLocation}`);
+
         store.subscribe(`collection-${nameLocation}`, () => {
             this.state.collection = store.getState(`collection-${nameLocation}`);
             this.render();
@@ -57,7 +58,7 @@ export class Collection extends Component {
     render() {
         const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        this.location.insertAdjacentHTML('afterbegin', template({ title: this.state.collection.title, films }));
+        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films }));
         this.componentDidMount();
     }
 
@@ -106,10 +107,10 @@ export class Collection extends Component {
         let offset = 0;
         const boundMarginForBtn = 64;
         const maxLength = widthFilm * count;
-        const windowLen = document.documentElement.clientWidth;
-        const maxOffset = maxLength - windowLen + boundMarginForBtn;
-        const countOnPage = Math.trunc(windowLen / widthFilm);
-        const pageOffset = countOnPage * widthFilm;
+        const getMaxOffset = () => maxLength - document.documentElement.clientWidth
+            + boundMarginForBtn;
+        const getOffset = () => Math.trunc(document.documentElement.clientWidth
+            / widthFilm) * widthFilm;
 
         let isHiddenRight = false;
         let isHiddenLeft = true;
@@ -122,13 +123,13 @@ export class Collection extends Component {
                     isHiddenLeft = false;
                 }
 
-                offset += pageOffset;
-                if (offset > maxOffset) {
-                    offset = maxOffset;
+                offset += getOffset();
+                if (offset > getMaxOffset()) {
+                    offset = getMaxOffset();
                 }
 
                 body.style.left = `${-offset}px`;
-                if (offset >= maxOffset) {
+                if (offset >= getMaxOffset()) {
                     btnRight.style.display = 'none';
                     isHiddenRight = true;
                 }
@@ -142,7 +143,7 @@ export class Collection extends Component {
                     btnRight.style.display = '';
                     isHiddenRight = false;
                 }
-                offset -= pageOffset;
+                offset -= getOffset();
                 if (offset <= 0) {
                     offset = 0;
                 }
