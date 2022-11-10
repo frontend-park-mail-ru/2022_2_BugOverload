@@ -20,10 +20,10 @@ export class Ajax {
             } : {
             },
         });
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).toString();
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
         console.log(document.cookie)
         if(csrf) {
-            csrf = csrf.replace('CSRF-TOKEN=','');
+            csrf = csrf.toString().replace('CSRF-TOKEN=','');
         }
         console.log(this.#csrfToken)
         if (csrf) {
@@ -61,7 +61,7 @@ export class Ajax {
         let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).toString();
         console.log(document.cookie)
         if(csrf) {
-            csrf = csrf.replace('CSRF-TOKEN=','');
+            csrf = csrf.toString().replace('CSRF-TOKEN=','');
         }
 
         let result = await response.text();
