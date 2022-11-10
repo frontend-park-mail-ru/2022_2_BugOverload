@@ -22,10 +22,7 @@ this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
-    console.log(JSON.stringify(url));
-    if (url.origin.match(/auth$/)) {
-        debugger;
-    }
+
     if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
