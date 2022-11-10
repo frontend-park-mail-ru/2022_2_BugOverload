@@ -10,7 +10,7 @@ export class ReviewStatistic extends Component {
     constructor() {
         super();
         this.state = {
-            infoReviews: null,
+            film: null,
         };
         this.location = this.rootNode.querySelector('.js-reviews-statistic');
     }
@@ -20,8 +20,8 @@ export class ReviewStatistic extends Component {
     * Подписывается на измнение state infoReviews
     */
     init() {
-        store.subscribe('infoReviews', () => {
-            this.state.infoReviews = store.getState('infoReviews');
+        store.subscribe('film', () => {
+            this.state.film = store.getState('film');
             this.render();
         });
     }
@@ -30,6 +30,13 @@ export class ReviewStatistic extends Component {
      * Отрисовывает компонент, используя location и hbs-template.
      */
     render() {
-        this.location.insertAdjacentHTML('afterbegin', template(this.state.infoReviews));
+        this.location.insertAdjacentHTML('afterbegin', template({
+            total: this.state.film.count_negative_reviews
+                + this.state.film.count_neutral_reviews
+                + this.state.film.count_positive_reviews,
+            negative: this.state.film.count_negative_reviews,
+            neutral: this.state.film.count_neutral_reviews,
+            count_positive_reviews: this.state.film.count_positive_reviews,
+        }));
     }
 }
