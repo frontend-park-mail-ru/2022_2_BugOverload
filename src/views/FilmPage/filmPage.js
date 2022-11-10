@@ -76,10 +76,10 @@ export class FilmPage extends View {
         const directorFilms = new Collection('js-film-page-collection-in_cinema');
         directorFilms.init();
 
-        const reviewStatistic = new ReviewStatistic({
+        const reviewStatistic = new ReviewStatistic(this.state.id, this.state.film, {
             rootNode: this.rootNode,
         });
-        reviewStatistic.init(this.state.id);
+        reviewStatistic.render();
 
         const listReviews = new ListReviews({
             rootNode: this.rootNode,
