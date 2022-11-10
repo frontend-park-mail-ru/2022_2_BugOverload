@@ -12,13 +12,14 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async get(url) {
+        console.log(this.#csrfToken)
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
         });
         const csrf = response.headers.get('x-csrf-token');
         if (csrf) {
-            Ajax.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
         let result = await response.text();
 
