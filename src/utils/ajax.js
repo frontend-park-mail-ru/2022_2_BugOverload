@@ -17,10 +17,10 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
-                'Access-Control-Allow-Headers': 'X-Csrf-Token',
-                'X-Csrf-Token': this.#csrfToken,
+                'Access-Control-Allow-Headers': 'x-csrf-token',
+                'x-csrf-token': this.#csrfToken,
             }: {
-                'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                'Access-Control-Allow-Headers': 'x-csrf-token',
             },
         });
         const csrf = response.headers.get('x-csrf-token');
@@ -48,11 +48,11 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
-                'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                'Access-Control-Allow-Headers': 'x-csrf-token',
                 'Content-Type': 'application/json',
-                'X-Csrf-Token': this.#csrfToken,
+                'x-csrf-token': this.#csrfToken,
             } : {
-                'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                'Access-Control-Allow-Headers': 'x-csrf-token',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
@@ -90,10 +90,10 @@ export class Ajax {
                 mode: 'cors',
                 credentials: 'include',
                 headers: this.#csrfToken ? {
-                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
-                    'X-Csrf-Token': this.#csrfToken,
+                    'Access-Control-Allow-Headers': 'x-csrf-token',
+                    'x-csrf-token': this.#csrfToken,
                 } : {
-                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                    'Access-Control-Allow-Headers': 'x-csrf-token',
                 },
                 body,
             });
@@ -103,11 +103,11 @@ export class Ajax {
                 mode: 'cors',
                 credentials: 'include',
                 headers: this.#csrfToken ? {
-                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                    'Access-Control-Allow-Headers': 'x-csrf-token',
                     'Content-Type': 'application/json',
-                    'X-Csrf-Token': this.#csrfToken,
+                    'x-csrf-token': this.#csrfToken,
                 } : {
-                    'Access-Control-Allow-Headers': 'X-Csrf-Token',
+                    'Access-Control-Allow-Headers': 'x-csrf-token',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body),
@@ -144,7 +144,7 @@ export class Ajax {
             credentials: 'include',
             headers: this.#csrfToken ? {
                 'Content-Type': 'application/json',
-                'X-Csrf-Token': this.#csrfToken,
+                'x-csrf-token': this.#csrfToken,
             } : {
                 'Content-Type': 'application/json',
             },
