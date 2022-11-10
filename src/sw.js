@@ -47,7 +47,7 @@ async function networkFirst(request) {
             return response;
         }
         console.log(request.url)
-        if ( request.url.match( '^.*(?object=user_avatar)' ) ) {
+        if ( request.url.match( '?object=user_avatar)' ) ) {
             return false;
         }
         await cache.put(request, response.clone());
