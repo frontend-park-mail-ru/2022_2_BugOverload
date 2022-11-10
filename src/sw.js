@@ -1,5 +1,5 @@
-const CACHE_NAME = 'moviegate-v-1';
-const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
+const CACHE_NAME = 'moviegate-v-2';
+const DYNAMIC_CACHE_NAME = 'd-moviegate-v-2';
 
 const assetUrls = [];
 
@@ -47,6 +47,9 @@ async function networkFirst(request) {
             return response;
         }
         console.log(request.url)
+        if ( request.url.match( '^.*(?object=user_avatar)' ) ) {
+            return false;
+        }
         await cache.put(request, response.clone());
         return response;
     } catch (e) {
