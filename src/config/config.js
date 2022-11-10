@@ -68,7 +68,7 @@ export const API = {
     settings: `${PROTOCOL}://${DOMAIN}/api/v1/user/settings`,
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
-    put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?key=session`,
+    put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
 };
 
