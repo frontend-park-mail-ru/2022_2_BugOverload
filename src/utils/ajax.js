@@ -58,7 +58,7 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).toString();
+        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
         console.log(document.cookie)
         if(csrf) {
             csrf = csrf.toString().replace('CSRF-TOKEN=','');
