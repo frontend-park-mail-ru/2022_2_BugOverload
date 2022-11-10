@@ -5,7 +5,7 @@ import { profile } from '@views/UserProfile/userProfile.js';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
-const PROTOCOL = (DOMAIN === 'movie-gate.online:8088') ? 'https' : 'http';
+const PROTOCOL = (`${DOMAIN}` === 'movie-gate.online:8088' || `${DOMAIN}` === 'movie-gate.online') ? 'https' : 'hazaza';
 
 export const API = {
     img: {
@@ -34,7 +34,7 @@ export const API = {
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
         },
         person_image(id, image) {
-            if (!navigator.onLine) {
+            if (id === 0) {
                 return '/assets/img/default/noPersonImg.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_image&key=${id}/${image}`;

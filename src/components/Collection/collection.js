@@ -9,6 +9,12 @@ import template from '@components/Collection/collection.handlebars';
 * Перерисовывается при изменении state 'collection'
 */
 export class Collection extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * Подписывается на изменение state collection-<nameLocation>
+     * @param {string} nameLocation - сохраняет имя элемента,
+     * соответствующее имени класса-контейнера на странице.
+     */
     constructor(nameLocation) {
         super();
         this.state = {

@@ -1,7 +1,14 @@
 import template from '@components/DetailsFilm/detailsFilm.handlebars';
 import { API } from '@config/config.js';
 
+/**
+* Отрисовывает подробную информацию о фильме.
+*/
 export class DetailsFilm {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент.
+     * @param {Object} information - информация о фильме.
+     */
     constructor(information = {}) {
         this.information = information;
         if (this.information.actors) {
@@ -11,6 +18,9 @@ export class DetailsFilm {
         this.location = document.querySelector('.js-film-page__details');
     }
 
+    /**
+    * Отрисовывает компонент, используя location и hbs-template.
+    */
     render() {
         if (!this.location) {
             return;
@@ -20,6 +30,9 @@ export class DetailsFilm {
         this.location.insertAdjacentHTML('afterbegin', template(this.information));
     }
 
+    /**
+     * Удаляет элемент со страницы
+     */
     remove() {
         if (!this.location) {
             return;
