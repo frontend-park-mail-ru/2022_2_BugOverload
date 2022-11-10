@@ -55,7 +55,6 @@ export class Login extends Component {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
-                document.body.classList.remove('body_hide_y_scroll');
                 exit();
             }
             return;

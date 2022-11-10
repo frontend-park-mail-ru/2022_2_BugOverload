@@ -153,7 +153,6 @@ export class InputReview extends Component {
 
             store.dispatch(actionSendReview(review));
 
-            document.body.classList.remove('body_hide_y_scroll');
             document.body.querySelector('.js-modal__background').remove();
         }).bind(this);
 

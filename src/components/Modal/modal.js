@@ -18,7 +18,6 @@ export class Modal {
      */
     render() {
         this.root.insertAdjacentHTML('afterbegin', template());
-        document.body.classList.add('body_hide_y_scroll');
         this.handler();
     }
 
@@ -42,7 +41,6 @@ export class Modal {
 * Функция закрытия модального окна
 */
 export const exitFromModal = () => {
-    document.body.classList.remove('body_hide_y_scroll');
     const modalBackground = document.body.querySelector('.js-modal__background');
     if (modalBackground) {
         modalBackground.remove();
