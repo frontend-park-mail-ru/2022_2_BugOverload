@@ -16,6 +16,9 @@ export class Ajax {
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
+            headers: {
+                'X-Csrf-Token': 'value',
+            },
         });
         const csrf = response.headers.get('x-csrf-token');
         console.log('getCsrf', csrf, response.headers.get('x-csrf-token'),response.headers)
