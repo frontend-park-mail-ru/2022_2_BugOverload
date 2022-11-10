@@ -12,13 +12,15 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async get(url) {
+        console.log(this.#csrfToken)
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
         });
         const csrf = response.headers.get('x-csrf-token');
+        console.log('getCsrf', csrf, response.headers.get('x-csrf-token'),response.headers)
         if (csrf) {
-            Ajax.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
         let result = await response.text();
 
@@ -79,6 +81,9 @@ export class Ajax {
                 method: 'PUT',
                 mode: 'cors',
                 credentials: 'include',
+                headers: this.#csrfToken ? {
+                    'X-Csrf-Token': this.#csrfToken,
+                } : {},
                 body,
             });
         } else {
@@ -86,11 +91,19 @@ export class Ajax {
                 method: 'PUT',
                 mode: 'cors',
                 credentials: 'include',
-                headers: {
+                headers: this.#csrfToken ? {
+                    'Content-Type': 'application/json',
+                    'X-Csrf-Token': this.#csrfToken,
+                } : {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body),
             });
+        }
+
+        const csrf = response.headers.get('x-csrf-token');
+        if (csrf) {
+            Ajax.#csrfToken = csrf;
         }
 
         let result = await response.text();
