@@ -1,39 +1,21 @@
 import template from '@components/ReviewStatistic/reviewStatistic.handlebars';
 import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
 
 /**
 * Отражает общую информацию о рецензиях на данный фильм
 * Подписывается на измнение state infoReviews
 */
 export class ReviewStatistic extends Component {
-    constructor(id, film) {
+    constructor(film) {
         super();
         this.state = {
             film,
-            id,
         };
         this.location = this.rootNode.querySelector('.js-reviews-statistic');
     }
 
     /**
-    * Инициализация компонента
-    * Подписывается на измнение state infoReviews
-    */
-    // init(id = null) {
-    //     if (!id) {
-    //         return;
-    //     }
-
-    //     // store.subscribe(`film${id}`, () => {
-    //     //     this.state.film = store.getState(`film${id}`);
-    //     //     this.render();
-    //     // });
-    //     this.render();
-    // }
-
-    /**
-     * Отрисовывает компонент, используя location и hbs-template.
+     * Отрисовывает компонент, используя location и hbs-template и данные фильма
      */
     render() {
         this.location.insertAdjacentHTML('afterbegin', template({

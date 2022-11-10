@@ -22,13 +22,13 @@ export class Ajax {
         });
         let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
 
-        if(csrf) {
-            csrf = csrf.toString().replace(/CSRF-TOKEN=/,'');
+        if (csrf) {
+            csrf = csrf.toString().replace(/CSRF-TOKEN=/, '');
         }
         if (csrf) {
-          this.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
-        console.log(this.#csrfToken)
+        console.log(this.#csrfToken);
         let result = await response.text();
 
         result = result ? result = JSON.parse(result) : {};
@@ -44,7 +44,7 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async post({ url, body }) {
-        console.log(this.#csrfToken)
+        console.log(this.#csrfToken);
         const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
@@ -60,13 +60,13 @@ export class Ajax {
 
         let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
 
-        if(csrf) {
-            csrf = csrf.toString().replace(/CSRF-TOKEN=/,'');
+        if (csrf) {
+            csrf = csrf.toString().replace(/CSRF-TOKEN=/, '');
         }
         if (csrf) {
             this.#csrfToken = csrf;
-          }
-        console.log(this.#csrfToken)
+        }
+        console.log(this.#csrfToken);
 
         let result = await response.text();
 
