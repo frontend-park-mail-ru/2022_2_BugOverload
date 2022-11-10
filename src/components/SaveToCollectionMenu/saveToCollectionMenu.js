@@ -8,10 +8,10 @@ import { store } from '@store/Store.js';
 */
 export class SaveToCollectionMenu extends Component {
     constructor(collections = [
-        { coll_name: 'Буду смотреть' },
+        { name_collection: 'Буду смотреть' },
         {
-            coll_name: 'Избранное',
-            isUsed: 'true',
+            name_collection: 'Избранное',
+            is_used: 'true',
         }]) {
         super();
         this.state.collections = collections;

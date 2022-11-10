@@ -1219,11 +1219,11 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 
 		if (filmUsersMetaStorage[email].listCollections[list].includes(filmID)) {
 			collList.push({
-				coll_name: list,
-				isUsed: true
+				name_collection: list,
+				is_used: true
 			});
 		} else {
-			collList.push({coll_name: list, isUsed: false});
+			collList.push({name_collection: list, is_used: false});
 		}
 	};
 
