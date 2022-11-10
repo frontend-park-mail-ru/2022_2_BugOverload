@@ -79,7 +79,7 @@ export class FilmPage extends View {
         const reviewStatistic = new ReviewStatistic({
             rootNode: this.rootNode,
         });
-        reviewStatistic.init(id);
+        reviewStatistic.init(this.state.id);
 
         const listReviews = new ListReviews({
             rootNode: this.rootNode,

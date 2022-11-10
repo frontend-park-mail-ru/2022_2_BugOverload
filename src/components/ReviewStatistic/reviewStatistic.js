@@ -40,7 +40,7 @@ export class ReviewStatistic extends Component {
                 + this.state.film.count_positive_reviews,
             negative: this.state.film.count_negative_reviews,
             neutral: this.state.film.count_neutral_reviews,
-            count_positive_reviews: this.state.film.count_positive_reviews,
+            positive: this.state.film.count_positive_reviews,
         }));
     }
 }
