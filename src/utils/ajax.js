@@ -20,15 +20,11 @@ export class Ajax {
             } : {
             },
         });
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
+        let csrf = getCookie('CSRF-TOKEN');
 
-        if (csrf) {
-            csrf = csrf.toString().replace(/CSRF-TOKEN=/, '');
-        }
         if (csrf) {
             this.#csrfToken = csrf;
         }
-        console.log(this.#csrfToken);
         let result = await response.text();
 
         result = result ? result = JSON.parse(result) : {};
@@ -44,7 +40,6 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async post({ url, body }) {
-        console.log(this.#csrfToken);
         const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
@@ -58,15 +53,11 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        let csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
+        let csrf = getCookie('CSRF-TOKEN');
 
-        if (csrf) {
-            csrf = csrf.toString().replace(/CSRF-TOKEN=/, '');
-        }
         if (csrf) {
             this.#csrfToken = csrf;
         }
-        console.log(this.#csrfToken);
 
         let result = await response.text();
 
@@ -157,4 +148,15 @@ export class Ajax {
 
         return { status: response.status, body: result };
     }
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
 }
