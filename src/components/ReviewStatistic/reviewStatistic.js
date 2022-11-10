@@ -19,9 +19,13 @@ export class ReviewStatistic extends Component {
     * Инициализация компонента
     * Подписывается на измнение state infoReviews
     */
-    init() {
-        store.subscribe('film', () => {
-            this.state.film = store.getState('film');
+    init(id = null) {
+        if (!id) {
+            return;
+        }
+
+        store.subscribe(`film${id}`, () => {
+            this.state.film = store.getState(`film${id}`);
             this.render();
         });
     }
@@ -36,7 +40,7 @@ export class ReviewStatistic extends Component {
                 + this.state.film.count_positive_reviews,
             negative: this.state.film.count_negative_reviews,
             neutral: this.state.film.count_neutral_reviews,
-            count_positive_reviews: this.state.film.count_positive_reviews,
+            positive: this.state.film.count_positive_reviews,
         }));
     }
 }
