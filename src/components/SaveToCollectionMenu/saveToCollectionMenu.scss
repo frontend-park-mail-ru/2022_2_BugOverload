@@ -35,6 +35,10 @@
     height: 20px;
   }
 
+  &__item-link {
+    display: block;
+  }
+
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
