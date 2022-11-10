@@ -7,10 +7,11 @@ import { store } from '@store/Store.js';
 * Подписывается на измнение state infoReviews
 */
 export class ReviewStatistic extends Component {
-    constructor() {
+    constructor(id, film) {
         super();
         this.state = {
-            film: null,
+            film,
+            id,
         };
         this.location = this.rootNode.querySelector('.js-reviews-statistic');
     }
@@ -19,16 +20,17 @@ export class ReviewStatistic extends Component {
     * Инициализация компонента
     * Подписывается на измнение state infoReviews
     */
-    init(id = null) {
-        if (!id) {
-            return;
-        }
+    // init(id = null) {
+    //     if (!id) {
+    //         return;
+    //     }
 
-        store.subscribe(`film${id}`, () => {
-            this.state.film = store.getState(`film${id}`);
-            this.render();
-        });
-    }
+    //     // store.subscribe(`film${id}`, () => {
+    //     //     this.state.film = store.getState(`film${id}`);
+    //     //     this.render();
+    //     // });
+    //     this.render();
+    // }
 
     /**
      * Отрисовывает компонент, используя location и hbs-template.
