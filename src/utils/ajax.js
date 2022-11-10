@@ -23,7 +23,7 @@ export class Ajax {
         let csrf = getCookie('CSRF-TOKEN');
 
         if (csrf) {
-          this.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
         let result = await response.text();
 
