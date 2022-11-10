@@ -8,7 +8,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
+// const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isAnalysed = process.env.STATS === 'stats';
@@ -41,10 +41,10 @@ const addPlugins = () => {
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
             patterns: [
-                // {
-                //     from: path.resolve(__dirname, 'src/assets/favicons'),
-                //     to: path.resolve(__dirname, 'dist'),
-                // },
+                {
+                    from: path.resolve(__dirname, 'src/assets/favicons'),
+                    to: path.resolve(__dirname, 'dist'),
+                },
                 {
                     from: path.resolve(__dirname, 'src/assets/icons'),
                     to: path.resolve(__dirname, 'dist'),
@@ -65,41 +65,41 @@ const addPlugins = () => {
         new webpack.DefinePlugin({
             DOMAIN: JSON.stringify(process.env.DOMAIN_DEPLOY),
         }),
-        new WebpackPwaManifest({
-            name: 'MovieGate',
-            short_name: 'MovieGate',
-            description: 'Movies to your liking',
-            background_color: '#121212',
-            crossorigin: 'use-credentials',
-            display: 'standalone',
-            icons: [
-                {
-                    src: 'src/assets/favicons/android-chrome-192x192.png',
-                    sizes: '192x192',
-                    type: 'image/png',
-                },
-                {
-                    src: 'src/assets/favicons/android-chrome-512x512.png',
-                    sizes: '512x512',
-                    type: 'image/png',
-                },
-                {
-                    src: 'src/assets/favicons/apple-touch-icon.png',
-                    sizes: '180x180',
-                    type: 'image/png',
-                },
-                {
-                    src: 'src/assets/favicons/favicon-16x16.png',
-                    sizes: '16x16',
-                    type: 'image/png',
-                },
-                {
-                    src: 'src/assets/favicons/favicon-32x32.png',
-                    sizes: '32x32',
-                    type: 'image/png',
-                },
-            ],
-        }),
+        // new WebpackPwaManifest({
+        //     name: 'MovieGate',
+        //     short_name: 'MovieGate',
+        //     description: 'Movies to your liking',
+        //     background_color: '#121212',
+        //     crossorigin: 'use-credentials',
+        //     display: 'standalone',
+        //     icons: [
+        //         {
+        //             src: 'src/assets/favicons/android-chrome-192x192.png',
+        //             sizes: '192x192',
+        //             type: 'image/png',
+        //         },
+        //         {
+        //             src: 'src/assets/favicons/android-chrome-512x512.png',
+        //             sizes: '512x512',
+        //             type: 'image/png',
+        //         },
+        //         {
+        //             src: 'src/assets/favicons/apple-touch-icon.png',
+        //             sizes: '180x180',
+        //             type: 'image/png',
+        //         },
+        //         {
+        //             src: 'src/assets/favicons/favicon-16x16.png',
+        //             sizes: '16x16',
+        //             type: 'image/png',
+        //         },
+        //         {
+        //             src: 'src/assets/favicons/favicon-32x32.png',
+        //             sizes: '32x32',
+        //             type: 'image/png',
+        //         },
+        //     ],
+        // }),
     ];
 
     if (isAnalysed) {
