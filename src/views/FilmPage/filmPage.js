@@ -49,6 +49,7 @@ export class FilmPage extends View {
             }
             return;
         }
+        this.state.film.id = this.state.id;
 
         if (this.state.isSubscribed) {
             store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
