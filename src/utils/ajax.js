@@ -21,7 +21,7 @@ export class Ajax {
             } : {
             },
         });
-        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
+        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).replace('CSRF-TOKEN=','');
         if (csrf) {
           this.#csrfToken = csrf;
         }
@@ -54,7 +54,7 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
+        const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).replace('CSRF-TOKEN=','');
         if (csrf) {
           this.#csrfToken = csrf;
         }
