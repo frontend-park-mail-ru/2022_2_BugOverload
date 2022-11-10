@@ -19,9 +19,13 @@ export class ReviewStatistic extends Component {
     * Инициализация компонента
     * Подписывается на измнение state infoReviews
     */
-    init() {
-        store.subscribe('film', () => {
-            this.state.film = store.getState('film');
+    init(id = null) {
+        if (!id) {
+            return;
+        }
+
+        store.subscribe(`film${id}`, () => {
+            this.state.film = store.getState(`film${id}`);
             this.render();
         });
     }
