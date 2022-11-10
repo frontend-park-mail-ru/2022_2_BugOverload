@@ -16,7 +16,7 @@ export class Ajax {
             mode: 'cors',
             credentials: 'include',
         });
-        const csrf = response.headers.get('X-Csrf-Token');
+        const csrf = response.headers.get('x-csrf-token');
         if (csrf) {
             Ajax.#csrfToken = csrf;
         }
