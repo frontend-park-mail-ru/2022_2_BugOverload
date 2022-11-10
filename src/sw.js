@@ -43,8 +43,10 @@ this.addEventListener('fetch', (event) => {
 
     const url = new URL(request.url);
     if (url.origin === window.location.origin) {
+        console.log('cacheFirst');
         event.respondWith(cacheFirst(request));
     } else {
+        console.log('networkFirst');
         event.respondWith(networkFirst(request));
     }
 });
