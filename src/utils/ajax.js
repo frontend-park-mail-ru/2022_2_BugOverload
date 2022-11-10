@@ -12,11 +12,12 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async get(url) {
+        console.log(this.#csrfToken)
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
-                'x-csrf-token': this.#csrfToken,
+                'X-CSRF-TOKEN': this.#csrfToken,
             } : {
             },
         });
@@ -39,13 +40,14 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async post({ url, body }) {
+        console.log(this.#csrfToken)
         const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
             headers: this.#csrfToken ? {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.#csrfToken,
+                'X-CSRF-TOKEN': this.#csrfToken,
             } : {
                 'Content-Type': 'application/json',
             },
@@ -84,7 +86,7 @@ export class Ajax {
                 mode: 'cors',
                 credentials: 'include',
                 headers: this.#csrfToken ? {
-                    'x-csrf-token': this.#csrfToken,
+                    'X-CSRF-TOKEN': this.#csrfToken,
                 } : {
                 },
                 body,
@@ -96,7 +98,7 @@ export class Ajax {
                 credentials: 'include',
                 headers: this.#csrfToken ? {
                     'Content-Type': 'application/json',
-                    'x-csrf-token': this.#csrfToken,
+                    'X-CSRF-TOKEN': this.#csrfToken,
                 } : {
                     'Content-Type': 'application/json',
                 },
@@ -129,7 +131,7 @@ export class Ajax {
             credentials: 'include',
             headers: this.#csrfToken ? {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.#csrfToken,
+                'X-CSRF-TOKEN': this.#csrfToken,
             } : {
                 'Content-Type': 'application/json',
             },
