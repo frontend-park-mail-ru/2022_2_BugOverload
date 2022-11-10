@@ -12,7 +12,6 @@ export class Ajax {
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
     static async get(url) {
-        console.log(this.#csrfToken)
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
@@ -22,6 +21,7 @@ export class Ajax {
             },
         });
         const csrf = document.cookie.match(/CSRF-TOKEN=([\w-]+)/).replace('CSRF-TOKEN=','');
+        console.log(this.#csrfToken)
         if (csrf) {
           this.#csrfToken = csrf;
         }
