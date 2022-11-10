@@ -182,7 +182,7 @@ class Router {
     cache(url = './') {
         if (navigator.serviceWorker) {
             navigator.serviceWorker.register('/sw.js', { scope: url });
-            if(!this.cachedUrls.get(url)) {
+            if (!this.cachedUrls.get(url)) {
                 this.cachedUrls.set(url);
             }
         }
