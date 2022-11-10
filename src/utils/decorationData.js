@@ -1,4 +1,7 @@
 export const decoreDuration = (minutes, mode = 'full') => {
+    if (!minutes) {
+        return null;
+    }
     const inHour = 60;
     let res = '';
     if (mode === 'full' || minutes <= inHour) {
@@ -48,6 +51,10 @@ export const decoreListItems = (list, maxCount) => {
 };
 
 export const decoreCountSeasons = (count) => {
+    if (!count) {
+        return null;
+    }
+
     if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {
         return `${count} сезонов`;
     }
@@ -63,6 +70,10 @@ export const decoreCountSeasons = (count) => {
 };
 
 export const decoreCountReviews = (count) => {
+    if (!count) {
+        return null;
+    }
+
     if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {
         return `${count} рецензий`;
     }
@@ -78,7 +89,7 @@ export const decoreCountReviews = (count) => {
 };
 
 export const decoreColorRating = (location, className, rating) => {
-    if (!location) {
+    if (!location || !className) {
         return;
     }
     const filmRating = location.querySelector(className);

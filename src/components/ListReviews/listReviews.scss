@@ -35,10 +35,10 @@
     justify-content: flex-end;
     color: var(--main-color-text);
     font-size: 20px;
-  }
 
-  &__btn-show-more:hover {
-    color: var(--primary-color);
-    cursor: pointer;
+    &:hover {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
   }
 }

@@ -22,6 +22,10 @@ export class Collection extends Component {
         });
     }
 
+    /**
+    * Инициализация компонента
+    * Выбрасывает action для получения данных в state collection
+    */
     init() {
         store.dispatch(
             actionGetCollectionData({
@@ -31,17 +35,19 @@ export class Collection extends Component {
         );
     }
 
+    /**
+    * Достаёт из имени класса Dom-элемента тэг
+    * @param {string} - имя класса Dom-элемента
+    */
     getTagFromName(name) {
         const words = name.split('-');
         return words[words.length - 1];
     }
 
     /**
-    * Создаёт коллекцию из набора данных как HTML-шаблон, полученных с бэкенда
-    *
-    * @param {data Object} data - объект данных коллекции
-    * @return {string} отрендеренный HTML-шаблон коллеции
-    */
+     * Отрисовывает компонент, используя location и hbs-template.
+     * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
+     */
     render() {
         const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
@@ -50,9 +56,8 @@ export class Collection extends Component {
     }
 
     /**
-    * Служит для добавления обработчиков на все отрендеренные на странице коллекции
-    *
-    */
+     * Навешивает обработчики на кнопки прокрутки коллекции
+     */
     componentDidMount() {
         const slider = this.location.querySelector('.js-collection__container');
         if (!slider) {
@@ -61,6 +66,10 @@ export class Collection extends Component {
         this.addHandlerSlider(slider);
     }
 
+    /**
+     * Используется для освобождения ресурсов.
+     * Удаляет обработчики, установленные в ComponentDidMount
+     */
     componentWillUnmount() {
         const slider = this.location.querySelector('.js-collection__container');
         slider.removeEventListener('click', this.handlerSlider);

@@ -50,11 +50,11 @@
     width: 180px;
     height: 46px;
     margin-top: 23px;
-  }
 
-  &__button:hover {
-    cursor: pointer;
-    background-color: var(--primary-color-hover);
-    transition: 0.1s linear;
+    &:hover {
+      cursor: pointer;
+      background-color: var(--primary-color-hover);
+      transition: 0.1s linear;
+    }
   }
 }

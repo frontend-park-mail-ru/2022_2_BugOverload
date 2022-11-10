@@ -50,7 +50,7 @@ export const mockPrewiew = () => ({
     id: 0,
     name: 'Название',
     origin_name: '',
-    short_description: 'Неблоьшое описание',
+    short_description: 'Небольшое описание',
     type: '',
     prod_year: 1968,
     prodCompany: '',

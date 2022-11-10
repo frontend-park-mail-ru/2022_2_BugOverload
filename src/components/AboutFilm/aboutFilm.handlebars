@@ -3,17 +3,23 @@
     <div class="about-film__container">
 
         <div class="about-film__title">{{name}}</div>
+        {{#if original_name}}
         <div class="about-film__original-title">{{original_name}}</div>
+        {{/if}}
         <div class="about-film__base-info">
             <div class="about-film__rating js-about-film__rating">{{rating}}</div>
             <div class="about-film__year">
             {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
             </div>
+            {{#if duration}}
             <div class="about-film__duration">{{duration}}</div>
+            {{/if}}
             {{#if type_serial}}
             <div class="about-film__count-seasons">{{count_seasons}}</div>
             {{/if}}
+            {{#if age_limit}}
             <div class="about-film__age-limit">{{age_limit}}+</div>
+            {{/if}}
         </div>
         <div class="about-film__short-description">{{short_description}}</div>
         <div class="about-film__directors">

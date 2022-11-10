@@ -5,7 +5,7 @@ import { profile } from '@views/UserProfile/userProfile.js';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 
-const PROTOCOL = (DOMAIN === 'movie-gate.online') ? 'https' : 'http';
+const PROTOCOL = (DOMAIN === 'movie-gate.online:8088') ? 'https' : 'http';
 
 export const API = {
     img: {
