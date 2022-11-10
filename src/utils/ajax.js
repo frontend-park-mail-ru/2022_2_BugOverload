@@ -52,7 +52,7 @@ export class Ajax {
 
         const csrf = response.headers.get('x-csrf-token');
         if (csrf) {
-            Ajax.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
 
         let result = await response.text();
@@ -103,7 +103,7 @@ export class Ajax {
 
         const csrf = response.headers.get('x-csrf-token');
         if (csrf) {
-            Ajax.#csrfToken = csrf;
+            this.#csrfToken = csrf;
         }
 
         let result = await response.text();
