@@ -46,6 +46,7 @@ async function networkFirst(request) {
         if (request.method !== 'GET') {
             return response;
         }
+        console.log(request.url)
         await cache.put(request, response.clone());
         return response;
     } catch (e) {
