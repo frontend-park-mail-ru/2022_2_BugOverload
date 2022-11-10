@@ -1129,7 +1129,7 @@ const reviewsTotalCountsStorage = {
 
 const filmUsersMetaStorage = {
 	'Dop123@mail.ru': {
-			listCollections: {
+			listCollectionsUser: {
 				'Буду смотреть': ['321', '137', '235'],
 				'Избранное': ['137', '235'],
 				'Друг посоветовал': ['123', '323', '111'],
@@ -1215,9 +1215,9 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 
 	const filmID = req.params.id; // Получен из url-параметра
 	let collList = [];
-	for (const list in filmUsersMetaStorage[email].listCollections) {
+	for (const list in filmUsersMetaStorage[email].listCollectionsUser) {
 
-		if (filmUsersMetaStorage[email].listCollections[list].includes(filmID)) {
+		if (filmUsersMetaStorage[email].listCollectionsUser[list].includes(filmID)) {
 			collList.push({
 				name_collection: list,
 				is_used: true
@@ -1228,7 +1228,7 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 	};
 
 	const meta = Object.assign({},
-		{listCollections: collList},
+		{listCollectionsUser: collList},
 		{countReviews: reviewsUsersMetaStorage[email].countReviews});
 
 		if (filmRateStorage[email][filmID]) {

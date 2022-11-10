@@ -5,17 +5,12 @@ import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
-* Подписывается на измнение state listCollections
+* Подписывается на измнение state listCollectionsUser
 */
 export class SaveToCollectionMenu extends Component {
-    constructor(nameLocation, collections = [
-        { name_collection: 'Буду смотреть' },
-        {
-            name_collection: 'Избранное',
-            is_used: 'true',
-        }]) {
+    constructor(nameLocation) {
         super();
-        this.state.collections = collections;
+        this.state.collections = null;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
 
         // Навешиваем обработчик на выход по клику вне области меню
@@ -24,8 +19,8 @@ export class SaveToCollectionMenu extends Component {
                 this.close();
             }
         });
-        store.subscribe('listCollections', () => {
-            this.state.collections = store.getState('listCollections');
+        store.subscribe('listCollectionsUser', () => {
+            this.state.collections = store.getState('listCollectionsUser');
         });
     }
 

@@ -21,7 +21,7 @@ class ReducerFilm {
     async rate(ratingData) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
-            body: { score: ratingData.rate },
+            body: { score: ratingData.rate * 1.0 },
         });
 
         if (response.status === 201) {
@@ -50,9 +50,10 @@ class ReducerFilm {
         const response = await Ajax.get(API.metaFilm(data.filmID));
         if (response.status === responsStatuses.OK) {
             return {
-                listCollections: response.body.listCollections,
+                listCollectionsUser: response.body.collections,
                 rating: response.body.rating,
-                countReviews: response.body.countReviews,
+                dateRating: response.body.date_rating,
+                countReviews: response.body.count_reviews,
             };
         }
         return { statusMetaData: response.status };
