@@ -22,6 +22,9 @@ this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
+    console.log(url.origin);
+    console.log(url.origin.match(/auth$/))
+
 
     if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
@@ -43,9 +46,7 @@ async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
         const response = await fetch(request);
-        console.log(request.url)
-        console.log(request)
-        console.log(request.url.match( '?object=user_avatar' ))
+
         if ( request.url.match( '?object=user_avatar' ) ) {
             return false;
         }
