@@ -97,7 +97,9 @@ class UserProfile extends View {
     }
 
     setProfileAvatar() {
-        store.dispatch(actionAuth());
+        setTimeout( () => {
+            store.dispatch(actionAuth());
+        }, 1000); 
     }
 
     subscribeInfoFunc() {
