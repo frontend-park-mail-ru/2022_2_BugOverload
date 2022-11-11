@@ -29,7 +29,7 @@ export class ListReviews extends Component {
 
         this.isMounted = false;
         this.step = 3;
-        this.offset = -this.step;
+        this.offset = 0;
 
         store.subscribe('reviews', () => {
             this.state.reviews = store.getState('reviews');

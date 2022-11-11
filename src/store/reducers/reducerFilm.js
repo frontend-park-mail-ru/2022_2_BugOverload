@@ -70,7 +70,8 @@ class ReducerFilm {
             };
         }
 
-        if (response.status === responsStatuses.NotFound) {
+        if (response.status === responsStatuses.NotFound
+                || response.status === responsStatuses.BadRequest) {
             return {
                 reviews: null,
             };
