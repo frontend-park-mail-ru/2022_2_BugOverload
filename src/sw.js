@@ -5,24 +5,22 @@ const whiteDynamicUrls = [
     '/image',
     '/collection',
     '/recommendation',
-]
+];
 
 const cahedOnline = [
     '/recommendation',
-]
+];
 
 const blackSearchUrls = [
     'object=user_avatar',
-]
+];
 
 const assetUrls = [];
 
 this.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(assetUrls);
-        })
-    )
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(assetUrls)),
+    );
 });
 
 this.addEventListener('fetch', (event) => {
@@ -32,32 +30,32 @@ this.addEventListener('fetch', (event) => {
     const url = new URL(request.url);
 
     if (request.method !== 'GET') {
-        const response = event.waitUntil( fetch(request));
+        const response = event.waitUntil(fetch(request));
         return response;
     }
 
     let flag = false;
-    whiteDynamicUrls.forEach( (partUrl) => {
+    whiteDynamicUrls.forEach((partUrl) => {
         if (url.pathname.match(partUrl)) {
             flag = true;
         }
     });
-    blackSearchUrls.forEach( (searchUrl) => {
+    blackSearchUrls.forEach((searchUrl) => {
         if (url.search.match(searchUrl)) {
             flag = false;
         }
     });
     if (!flag) {
-        //здесь некэшируемые Get запросы
+        // здесь некэшируемые Get запросы
         console.log(flag);
 
         event.respondWith(cacheFirst(request));
         return false;
     }
 
-    let exit = cahedOnline.forEach( (partUrl) => {
+    const exit = cahedOnline.forEach((partUrl) => {
         if (url.pathname.match(partUrl)) {
-            if(navigator.onLine) {
+            if (navigator.onLine) {
                 event.respondWith(networkFirst(request));
             } else {
                 event.respondWith(cacheFirst(request));
@@ -67,7 +65,7 @@ this.addEventListener('fetch', (event) => {
         return true;
     });
 
-    if(!exit) {
+    if (!exit) {
         return false;
     }
 
@@ -77,17 +75,17 @@ this.addEventListener('fetch', (event) => {
 async function cacheFirst(request, isCached = false) {
     const cached = await caches.match(request);
     if (cached) {
-        console.log('cahcereturn',cached )
+        console.log('cahcereturn', cached);
         return cached;
     }
 
     const response = await fetch(request);
 
-    if(isCached) {
+    if (isCached) {
         const cache = await caches.open(DYNAMIC_CACHE_NAME);
-        console.log('putCache',isCached,navigator.onLine,)
-        if(navigator.onLine) {
-            console.log('putCache')
+        console.log('putCache', isCached, navigator.onLine);
+        if (navigator.onLine) {
+            console.log('putCache');
             await cache.put(request, response.clone());
         }
     }
@@ -99,9 +97,9 @@ async function networkFirst(request) {
     try {
         const response = await fetch(request);
 
-        if(navigator.onLine) {
+        if (navigator.onLine) {
             await cache.put(request, response.clone());
-            console.log('putCacheNet')
+            console.log('putCacheNet');
         }
 
         return response;
@@ -112,7 +110,7 @@ async function networkFirst(request) {
         } catch {
             return new Response(null, { status: 404, statusText: 'Not Found' });
         }
-        console.log('cahcereturn',cached )
+        console.log('cahcereturn', cached);
         return cached;
     }
 }

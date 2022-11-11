@@ -108,7 +108,7 @@ export const reducerUser = new ReducerUser();
 
 const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
-        const newUrl = API.img.user_avatar(nameObject);
+        const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
             object[nameObject] = newUrl;
         }

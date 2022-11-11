@@ -58,7 +58,7 @@ export class Collection extends Component {
     render() {
         const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        let {name} = this.state.collection;
+        let { name } = this.state.collection;
         if (name) {
             name = name[0].toUpperCase() + name.slice(1);
             this.state.collection.name = name;
