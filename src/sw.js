@@ -33,6 +33,14 @@ this.addEventListener('fetch', (event) => {
     console.log(url.origin);
     console.log(url.origin.match(whiteSubUrls[0]));
 
+    if (!request.url.match(whiteSubUrls[0])) {
+        return false;
+    }
+
+    if (request.method !== 'GET') {
+        return response;
+    }
+
     if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));
     } else {
@@ -53,14 +61,6 @@ async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
         const response = await fetch(request);
-
-        if (request.url.match('?object=user_avatar')) {
-            return false;
-        }
-
-        if (request.method !== 'GET') {
-            return response;
-        }
 
         await cache.put(request, response.clone());
         return response;
