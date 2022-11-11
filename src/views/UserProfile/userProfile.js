@@ -16,14 +16,14 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
-        store.subscribe('user', () => {
-            this.state.user = store.getState('user');
-            this.state.authStatus = store.getState('authStatus');
-            this.subscribeedOnUser = true;
-            this.render();
-        });
-        store.subscribe('logoutStatus', userProfileOnSubscribe);
-        this.subscribeedOnLogout = true;
+        // store.subscribe('user', () => {
+        //     this.state.user = store.getState('user');
+        //     this.state.authStatus = store.getState('authStatus');
+        //     this.subscribeedOnUser = true;
+        //     this.render();
+        // });
+        // store.subscribe('logoutStatus', userProfileOnSubscribe);
+        // this.subscribeedOnLogout = true;
     }
 
     render() {
@@ -92,6 +92,7 @@ class UserProfile extends View {
             store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
+            this.state.putAvatarStatus = true;
         });
 
         const profileChange = new ProfileChange({
