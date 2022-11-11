@@ -16,6 +16,10 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
+        store.subscribe('user', () => {
+            this.state.user = store.getState('user');
+            this.render();
+        });
     }
 
     render() {
