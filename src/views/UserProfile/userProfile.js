@@ -13,6 +13,7 @@ class UserProfile extends View {
             putAvatarStatus: null,
             userInfo: null,
             isAuthSubscribed: false,
+            isDispatchedInfo: false,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
@@ -57,10 +58,16 @@ class UserProfile extends View {
             return;
         }
 
+        if(!this.state.isDispatchedInfo) {
+            store.dispatch(actionGetSettings());
+            this.state.isDispatchedInfo = true;
+        }
+
         const profile = this.rootNode.querySelector('.js-profile');
         if (profile) {
             profile.remove();
         }
+        this.state.userInfo = store.getState('userInfo');
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 profileMenu: templateProfileMenu(),
@@ -103,7 +110,6 @@ class UserProfile extends View {
     }
 
     subscribeInfoFunc() {
-        this.state.userInfo = store.getState('userInfo');
         this.render();
     }
 
@@ -125,6 +131,8 @@ class UserProfile extends View {
             store.unsubscribe('authStatus', this.authProfileOnSubscribe);
             this.state.isAuthSubscribed = false;
         }
+
+        this.state.isDispatchedInfo =  false;
     }
 }
 
