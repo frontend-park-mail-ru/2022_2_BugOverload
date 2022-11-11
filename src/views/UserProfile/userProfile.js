@@ -20,10 +20,10 @@ class UserProfile extends View {
             this.state.user = store.getState('user');
             this.state.authStatus = store.getState('authStatus');
             this.subscribeedOnUser = true;
-            store.subscribe('logoutStatus', userProfileOnSubscribe);
-            this.subscribeedOnLogout = true;
             this.render();
         });
+        store.subscribe('logoutStatus', userProfileOnSubscribe);
+        this.subscribeedOnLogout = true;
     }
 
     render() {
