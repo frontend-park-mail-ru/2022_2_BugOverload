@@ -58,8 +58,7 @@ this.addEventListener('fetch', async (event) => {
         }
     });
     if (flag) {
-        const response = await fetch(request);
-        event.respondWith(response);
+        event.respondWith(networkFirst(request, false));
         return false;
     }
 
@@ -92,12 +91,15 @@ async function cacheFirst(request) {
     return response;
 }
 
-async function networkFirst(request) {
+async function networkFirst(request, cached = true) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
         const response = await fetch(request);
 
-        await cache.put(request, response.clone());
+        if(cached) {
+            await cache.put(request, response.clone());
+        }
+
         return response;
     } catch (e) {
         let cached;
