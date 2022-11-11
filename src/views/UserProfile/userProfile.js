@@ -12,19 +12,16 @@ class UserProfile extends View {
             user: null,
             putAvatarStatus: null,
             userInfo: null,
-            subscribeedOnUser: false,
-            subscribeedOnLogout: false,
-            subscribeedOnAvatar: false,
-            subscribeedOnAuth: false,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
         this.setProfileAvatar = this.setProfileAvatar.bind(this);
         this.subscribeInfoFunc = this.subscribeInfoFunc.bind(this);
+        this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
 
         store.subscribe('logoutStatus', this.userProfileOnSubscribe);
         store.subscribe('user', this.userProfileOnSubscribe);
-        store.subscribe('authStatus', this.userProfileOnSubscribe);
+        store.subscribe('authStatus', this.authProfileOnSubscribe);
         store.subscribe('userInfo', this.subscribeInfoFunc);
         store.subscribe('statusChangeAvatar', this.setProfileAvatar);
     }
@@ -47,7 +44,7 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            store.dispatch(actionAuth());
+            //store.dispatch(actionAuth());
 
             return;
         }
@@ -63,11 +60,6 @@ class UserProfile extends View {
                 ...this.state.userInfo,
             },
         ));
-
-
-        if (!this.state.userInfo) {
-            store.dispatch(actionGetSettings());
-        } 
 
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
@@ -99,7 +91,14 @@ class UserProfile extends View {
         this.state.userInfo = store.getState('userInfo');
         this.render();
     };
-    
+
+    authProfileOnSubscribe() {
+        this.state.user = store.getState('user');
+        if(this.state.user) {
+            store.dispatch(actionGetSettings());
+        }
+        this.render();
+    };
 
     componentWillUnmount() {
         store.unsubscribe('user', this.userProfileOnSubscribe);

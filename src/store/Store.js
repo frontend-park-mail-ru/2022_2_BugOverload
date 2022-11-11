@@ -49,11 +49,6 @@ class Store {
             if (subscribers) {
                 subscribers.forEach((subscriber) => subscriber());
             }
-
-            if(newState.onse && newState.onse.includes[key]) {
-                delete this.state[key];
-                console.log(this.state[key]);
-            }
         });
     }
 
