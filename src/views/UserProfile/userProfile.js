@@ -12,6 +12,7 @@ class UserProfile extends View {
             user: null,
             putAvatarStatus: null,
             userInfo: null,
+            isAuthSubscribed: false,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
@@ -27,10 +28,18 @@ class UserProfile extends View {
     render() {
         super.render();
 
+        if(!this.state.isAuthSubscribed) {
+            store.subscribe('authStatus', this.authProfileOnSubscribe);
+            this.state.isAuthSubscribed = true;
+        }
+
+        console.log('auth')
         this.state.user = store.getState('user');
         if (!this.state.user) {
             const authStatus = store.getState('authStatus');
+            console.log(authStatus)
             const logoutStatus = store.getState('logoutStatus');
+            console.log(logoutStatus)
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const redirectMain = new Event(
@@ -43,9 +52,8 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            store.subscribe('authStatus', this.authProfileOnSubscribe);
             store.subscribe('user', this.userProfileOnSubscribe);
-            store.dispatch(actionAuth());
+            //store.dispatch(actionAuth());
 
             return;
         }
@@ -97,16 +105,20 @@ class UserProfile extends View {
         this.state.user = store.getState('user');
         if(this.state.user) {
             store.dispatch(actionGetSettings());
-            this.render();
         }
+        this.render();
     };
 
     componentWillUnmount() {
         store.unsubscribe('user', this.userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
-        store.subscribe('authStatus', this.authProfileOnSubscribe);
         store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
         store.subscribe('userInfo', this.subscribeInfoFunc);
+
+        if(this.state.isAuthSubscribed) {
+            store.unsubscribe('authStatus', this.authProfileOnSubscribe);
+            this.state.isAuthSubscribed = false;
+        }
     }
 }
 
