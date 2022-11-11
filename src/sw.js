@@ -1,6 +1,14 @@
 const CACHE_NAME = 'moviegate-v-1';
 const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 
+const whiteSubUrls = [
+    '/image?',
+]
+
+const blackSubUrls = [
+    'object=user_avatar',
+]
+
 const assetUrls = [];
 
 this.addEventListener('install', async () => {
@@ -23,7 +31,7 @@ this.addEventListener('fetch', (event) => {
 
     const url = new URL(request.url);
     console.log(url.origin);
-    console.log(url.origin.match(/auth$/));
+    console.log(url.origin.match(whiteSubUrls[0]));
 
     if (url.origin === location.origin) {
         event.respondWith(cacheFirst(request));

@@ -74,7 +74,6 @@ class UserProfile extends View {
             {
                 profileMenu: templateProfileMenu(),
                 ...this.state.user,
-                // ...this.state.userInfo,
                 joined_date: this.state.userInfo.joined_date || this.getDateNow(),
                 count_ratings: this.state.userInfo.count_ratings || 0,
                 count_collections: this.state.userInfo.count_collections || 0,

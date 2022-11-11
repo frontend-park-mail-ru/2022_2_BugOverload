@@ -62,7 +62,7 @@ class ActorPage extends View {
             }),
             collectionBestFilms: templateCollection({
                 films,
-                title: 'Лучшие фильмы',
+                name: 'Лучшие фильмы',
             }),
         }));
         collection.addHandlerSlider(
