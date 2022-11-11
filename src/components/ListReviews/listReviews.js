@@ -88,15 +88,17 @@ export class ListReviews extends Component {
     * Выбрасывает action с запросом за новыми рецензиями при прокрутке вниз страницы
     */
     handlerShowMore = (function () {
-        if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
-            return;
-        }
+        setTimeout(() => {
+            if ((window.innerHeight + window.pageYOffset) + 50 < document.body.offsetHeight) {
+                return;
+            }
 
-        store.dispatch(actionGetDataReviews({
-            filmID: this.state.film.id,
-            offset: this.offset += this.step,
-            count: this.step,
-        }));
+            store.dispatch(actionGetDataReviews({
+                filmID: this.state.film.id,
+                offset: this.offset += this.step,
+                count: this.step,
+            }));
+        }, 0.2);
     }).bind(this);
 
     /**

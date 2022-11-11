@@ -38,7 +38,8 @@ export class Rating extends Component {
 
         this.location.insertAdjacentHTML('afterbegin', template({
             ...this.state.statusRating,
-            rate: this.state.rating,
+            rate: this.state.rating.value,
+            dateRating: this.state.rating.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating,
         }));

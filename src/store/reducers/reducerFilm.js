@@ -1,4 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
+import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 import { store } from '@store/Store.js';
 import { mockFilm } from '@store/reducers/mockData.js';
@@ -26,7 +27,7 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             return {
-                rating: ratingData.rate,
+                rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: null,
             };
         }
