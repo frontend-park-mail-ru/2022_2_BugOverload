@@ -107,7 +107,7 @@ export const reducerUser = new ReducerUser();
 
 const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
-        const newUrl = API.img.user_avatar(nameObject);
+        const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
             object[nameObject] = newUrl;
         }
@@ -122,15 +122,11 @@ const getDateNow = () => {
 
 const handlerUserInfoFields = (userInfo) => {
     if (userInfo) {
-        Object.keys(userInfo).forEach((nameProperty) => {
-            if (!userInfo[nameProperty]) {
-                if (nameProperty === 'joined_date') {
-                    userInfo[nameProperty] = getDateNow();
-                    return;
-                }
-                userInfo[nameProperty] = 0;
-            }
-        });
+        userInfo.joined_date = userInfo?.joined_date
+            ?.split(' ')[0].split('.').reverse().join('.') || getDateNow();
+        userInfo.count_ratings = userInfo.count_ratings || 0;
+        userInfo.count_collections = userInfo.count_collections || 0;
+        userInfo.count_reviews = userInfo.count_reviews || 0;
     }
 
     return userInfo;

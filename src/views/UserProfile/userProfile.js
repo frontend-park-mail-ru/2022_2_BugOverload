@@ -16,6 +16,14 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
+        store.subscribe('user', () => {
+            this.state.user = store.getState('user');
+            this.state.authStatus = store.getState('authStatus');
+            this.subscribeedOnUser = true;
+            this.render();
+        });
+        store.subscribe('logoutStatus', userProfileOnSubscribe);
+        this.subscribeedOnLogout = true;
     }
 
     render() {
@@ -105,6 +113,8 @@ class UserProfile extends View {
     }
 }
 
+export const profile = new UserProfile({ rootNode: document.getElementById('root') });
+
 const userProfileOnSubscribe = () => {
     profile.render();
 };
@@ -118,5 +128,3 @@ const setProfileAvatar = () => {
     profile.state.putAvatarStatus = store.getState('statusChangeAvatar');
     store.dispatch(actionAuth());
 };
-
-export const profile = new UserProfile({ rootNode: document.getElementById('root') });
