@@ -24,12 +24,17 @@ class UserProfile extends View {
 
         if (!this.state.subscribeedOnLogout) {
             store.subscribe('logoutStatus', userProfileOnSubscribe);
-            this.subscribeedOnLogout = true;
+            this.state.subscribeedOnLogout = true;
         }
 
         if (!this.state.subscribeedOnUser) {
             store.subscribe('user', userProfileOnSubscribe);
-            this.subscribeedOnUser = true;
+            this.state.subscribeedOnUser = true;
+        }
+
+        if (!this.state.subscribeedOnAuth) {
+            store.subscribe('authStatus', userProfileOnSubscribe);
+            this.state.subscribeedOnAuth = true;
         }
 
         if (!this.state.user) {
@@ -101,14 +106,13 @@ class UserProfile extends View {
     componentWillUnmount() {
         store.unsubscribe('user', userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', userProfileOnSubscribe);
-
-        if(this.state.subscribeedOnAvatar) {
-            store.unsubscribe('statusChangeAvatar', setProfileAvatar);
-            this.state.subscribeedOnAvatar = false;
-        }
-
-        this.subscribeedOnUser = false;
-        this.subscribeedOnLogout = false;
+        store.unsubscribe('authStatus', userProfileOnSubscribe);
+        store.unsubscribe('statusChangeAvatar', setProfileAvatar);
+        
+        this.state.subscribeedOnAvatar = false;
+        this.state.subscribeedOnUser = false;
+        this.state.subscribeedOnLogout = false;
+        this.state.subscribeedOnAuth = false;
     }
 }
 
