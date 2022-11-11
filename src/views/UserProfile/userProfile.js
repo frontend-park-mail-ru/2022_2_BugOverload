@@ -17,6 +17,7 @@ class UserProfile extends View {
             subscribeedOnLogout: false,
         };
         store.subscribe('userInfo', subscribeFuncInfo);
+        store.subscribe('statusChangeAvatar', setProfileAvatar);
     }
 
     render() {
@@ -58,8 +59,6 @@ class UserProfile extends View {
             },
         ));
 
-        this.state.userInfo = store.getState('userInfo');
-
         if (!this.state.userInfo) {
             store.dispatch(actionGetSettings());
         }
@@ -68,7 +67,6 @@ class UserProfile extends View {
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
-            store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
         });
@@ -110,5 +108,6 @@ const setProfileAvatar = () => {
 };
 
 const subscribeFuncInfo = () => {
+    profile.state.userInfo = store.getState('userInfo');
     profile.render();
 };
