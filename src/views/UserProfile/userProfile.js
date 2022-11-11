@@ -27,6 +27,7 @@ class UserProfile extends View {
     render() {
         super.render();
 
+        this.state.user = store.getState('user');
         if (!this.state.user) {
             const authStatus = store.getState('authStatus');
             const logoutStatus = store.getState('logoutStatus');
