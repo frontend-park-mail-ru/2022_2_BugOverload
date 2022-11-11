@@ -52,8 +52,10 @@ class ReducerFilm {
         if (response.status === responsStatuses.OK) {
             return {
                 listCollectionsUser: response.body.collections,
-                rating: response.body.rating,
-                dateRating: response.body.date_rating,
+                rating: {
+                    value: response.body.rating,
+                    dateRating: response.body.date_rating
+                },
                 countReviews: response.body.count_reviews,
             };
         }
@@ -83,8 +85,22 @@ class ReducerFilm {
         });
 
         if (response.status === responsStatuses.Created) {
+            const { avatar, nickname } = store.getState('user');
+            const { countReviews } = store.getState('countReviews') || 0 + 1;
+            const { body, name, type } = reviewData;
             return {
-                countReviews: store.getState('countReviews') || 0 + 1,
+                countReviews,
+                userReview: {
+                    author: {
+                        avatar,
+                        nickname,
+                        countReviews,
+                    },
+                    body,
+                    name,
+                    type,
+                    create_time: getDateNow(),
+                },
             };
         }
 

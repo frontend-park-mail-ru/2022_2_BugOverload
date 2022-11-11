@@ -20,6 +20,7 @@ export class ListReviews extends Component {
         this.location = this.rootNode.querySelector('.js-reviews-list');
         this.state = {
             reviews: null,
+            userReview: null,
             film: null,
         };
 
@@ -33,6 +34,15 @@ export class ListReviews extends Component {
         store.subscribe('reviews', () => {
             this.state.reviews = store.getState('reviews');
             this.render();
+
+            this.offset += this.step;
+        });
+
+        store.subscribe('userReview', () => {
+            this.state.userReview = store.getState('userReview');
+            this.renderBegin();
+
+            this.offset++;
         });
     }
 
@@ -47,7 +57,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            offset: this.offset += this.step,
+            offset: this.offset,
             count: this.step,
         }));
     }
@@ -63,6 +73,18 @@ export class ListReviews extends Component {
 
         const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
+    }
+
+    /**
+     * Отрисовывает компонент в начале списка, используя location и hbs-template.
+     */
+    renderBegin() {
+        if (!this.state.userReview) {
+            return;
+        }
+
+        this.location.querySelector('.js-list-reviews__content-container')
+            .insertAdjacentHTML('afterbegin', Review.createReview(this.state.userReview));
     }
 
     /**
@@ -95,7 +117,7 @@ export class ListReviews extends Component {
 
             store.dispatch(actionGetDataReviews({
                 filmID: this.state.film.id,
-                offset: this.offset += this.step,
+                offset: this.offset,
                 count: this.step,
             }));
         }, 0.2);

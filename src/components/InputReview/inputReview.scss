@@ -1,4 +1,6 @@
 $textarea-height: 165px;
+$input-height: 46px;
+
 
 @mixin dropped-items {
   display: inline-block;
@@ -68,19 +70,11 @@ $textarea-height: 165px;
   &__input-title {
     width: -webkit-fill-available;
     border: 0;
-    height: 46px;
+    height: $input-height;
     border-radius: 4px;
     padding: 0 24px;
     box-sizing: border-box;
     font-size: 15px;
-
-    &__wrapper{
-      height: 46px + 35px;
-    }
-  }
-
-  &__wrapper{
-    height: $textarea-height + 35px;
   }
 
   &__input-text {
@@ -95,7 +89,7 @@ $textarea-height: 165px;
   }
 
   &__select__wrapper {
-    height: 46px + 35px;
+    height: $input-height + 35px;
   }
 
   &__select {
@@ -103,7 +97,7 @@ $textarea-height: 165px;
     display: block;
     min-width: 220px;
     width: -webkit-fill-available;
-    height: 46px;
+    height: $input-height;
     background-color: var(--backgr-select);
     border-radius: 4px;
   }
@@ -176,7 +170,15 @@ $textarea-height: 165px;
   }
 }
 
+.input-title__wrapper {
+  height: $input-height + 35px;
+}
+
+.input-text__wrapper {
+  height: $textarea-height + 35px;
+}
+
 .modal__input__button-review {
   width: -webkit-fill-available;
-  height: 46px;
+  height: $input-height;
 }
