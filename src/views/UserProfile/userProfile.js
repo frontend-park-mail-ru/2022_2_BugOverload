@@ -99,7 +99,7 @@ class UserProfile extends View {
     setProfileAvatar() {
         setTimeout( () => {
             store.dispatch(actionAuth());
-        }, 1000); 
+        }, 5000); 
     }
 
     subscribeInfoFunc() {
