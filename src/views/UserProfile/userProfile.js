@@ -16,6 +16,7 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
+        store.subscribe('userInfo', subscribeFuncInfo);
     }
 
     render() {
@@ -58,14 +59,9 @@ class UserProfile extends View {
         ));
 
         this.state.userInfo = store.getState('userInfo');
-        const subscribeFunc = () => {
-            this.render();
-        };
+
         if (!this.state.userInfo) {
-            store.subscribe('userInfo', subscribeFunc);
             store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
         }
 
         // обработчик загрузки авы
@@ -91,6 +87,7 @@ class UserProfile extends View {
         store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', userProfileOnSubscribe);
+        store.unsubscribe('statusChangeAvatar', setProfileAvatar);
         this.subscribeedOnUser = false;
         this.subscribeedOnLogout = false;
     }
@@ -110,4 +107,8 @@ const setAuthStatus = () => {
 const setProfileAvatar = () => {
     profile.state.putAvatarStatus = store.getState('statusChangeAvatar');
     store.dispatch(actionAuth());
+};
+
+const subscribeFuncInfo = () => {
+    profile.render();
 };
