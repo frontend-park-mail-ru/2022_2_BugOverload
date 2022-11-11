@@ -68,9 +68,10 @@ class UserProfile extends View {
         if (!this.state.userInfo) {
             store.subscribe('userInfo', subscribeFunc);
             store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
         }
+        // else {
+        //     store.unsubscribe('userInfo', subscribeFunc);
+        // }
 
         // обработчик загрузки авы
         if (this.state.putAvatarStatus) {
@@ -83,7 +84,7 @@ class UserProfile extends View {
             store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
-            this.state.putAvatarStatus = true;
+            // this.state.putAvatarStatus = true;
         });
 
         const profileChange = new ProfileChange({
