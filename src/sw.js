@@ -91,12 +91,12 @@ async function cacheFirst(request) {
     return response;
 }
 
-async function networkFirst(request, cached = true) {
+async function networkFirst(request, cache = true) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
         const response = await fetch(request);
 
-        if(cached) {
+        if(cache) {
             await cache.put(request, response.clone());
         }
 
