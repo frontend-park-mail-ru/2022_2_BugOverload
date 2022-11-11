@@ -88,7 +88,6 @@ class ReducerUser {
     }
 
     async putAvatar(formDataAvatar) {
-        console.log(formDataAvatar);
         const responsePromise = Ajax.put({
             url: API.put_avatar,
             body: formDataAvatar,
@@ -122,13 +121,13 @@ const getDateNow = () => {
 };
 
 const handlerUserInfoFields = (userInfo) => {
-    if(userInfo) {
-        Object.keys(userInfo).forEach( (nameProperty) => {
-            if(!userInfo[nameProperty]) {
-                    if(nameProperty === 'joined_date') {
-                        userInfo[nameProperty] = getDateNow();
-                        return;
-                    }
+    if (userInfo) {
+        Object.keys(userInfo).forEach((nameProperty) => {
+            if (!userInfo[nameProperty]) {
+                if (nameProperty === 'joined_date') {
+                    userInfo[nameProperty] = getDateNow();
+                    return;
+                }
                 userInfo[nameProperty] = 0;
             }
         });
