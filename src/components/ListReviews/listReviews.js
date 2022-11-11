@@ -56,8 +56,9 @@ export class ListReviews extends Component {
      * Отрисовывает компонент, используя location и hbs-template.
      */
     render() {
-        if (!this.state.reviews) {
-            this.componentWillUnmount();
+        if (!this.state.reviews && this.isMounted) {
+            // this.componentWillUnmount();
+            console.log('review this.isMounted');
             return;
         }
 
@@ -111,6 +112,9 @@ export class ListReviews extends Component {
         this.location.insertAdjacentHTML('afterbegin', template());
 
         const btn = this.location.querySelector('.js-list-reviews__btn-write-review');
+        if (!btn) {
+            return;
+        }
         btn.addEventListener('click', this.handlerOpenFormReview);
 
         document.addEventListener('scroll', this.handlerShowMore);
@@ -124,6 +128,9 @@ export class ListReviews extends Component {
     componentWillUnmount() {
         document.removeEventListener('scroll', this.handlerShowMore);
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
+        if (!btnShowMore) {
+            return;
+        }
         btnShowMore.remove();
     }
 }

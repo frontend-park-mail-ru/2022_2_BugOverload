@@ -62,6 +62,7 @@ class ReducerFilm {
     async getDataReviews(data) {
         const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset));
         if (response.status === responsStatuses.OK) {
+            console.log(JSON.stringify(response.body));
             return {
                 reviews: response.body,
             };
