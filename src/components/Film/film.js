@@ -1,4 +1,6 @@
+import { API } from '@config/config.js';
 import template from '@components/Film/film.handlebars';
+import { decoreColorRating } from '@utils/decorationData.js';
 
 /**
 * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
@@ -14,12 +16,15 @@ export class Film {
     static createFilm(filmData) {
         Film.decoreFilmInfo(filmData);
 
-        const film = template(filmData);
+        const film = template({
+            ...filmData,
+            poster_ver: API.img.poster_ver(filmData.poster_ver),
+        });
 
         const div = document.createElement('div');
         div.insertAdjacentHTML('afterbegin', film);
 
-        Film.addColorRating(div, filmData);
+        decoreColorRating(div, '.js-film-rating', filmData.rating);
 
         return div.innerHTML;
     }
@@ -31,8 +36,11 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     */
     static decoreFilmInfo(filmData) {
+        filmData.rating = Math.round(filmData.rating * 10) / 10;
+
+        const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;
-        const maxLenGenre = 31 - lenYear;
+        const maxLenGenre = maxLength - lenYear;
 
         let curLen = 0;
         const newListGenres = [];
@@ -58,20 +66,4 @@ export class Film {
     * @param {film HTMLElement} film - DOM-объект с данными о фильме
     * @param {filmData Object} filmData - объект с данными о фильме
     */
-    static addColorRating(film, filmData) {
-        const filmRating = film.querySelector('.film__rating');
-        const ratingValue = filmData.ratio;
-
-        if (ratingValue > 7.49) {
-            filmRating.dataset.valueRating = 'positive';
-            return;
-        }
-
-        if (ratingValue > 5.19) {
-            filmRating.dataset.valueRating = 'neutral';
-            return;
-        }
-
-        filmRating.dataset.valueRating = 'negotive';
-    }
 }

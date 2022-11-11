@@ -1,55 +1,64 @@
-
 @font-face {
-    font-family: 'Mail Sans Roman Med';
-    src: url('@fonts/MailSansRoman-Medium.eot');
-    src: local('Mail Sans Roman Medium'), local('MailSansRoman-Medium'),
-        url('@fonts/MailSansRoman-Medium.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Mail Sans Roman Med";
+  src: url("@fonts/MailSansRoman-Medium.eot");
+  src:
+    local("Mail Sans Roman Medium"),
+    local("MailSansRoman-Medium"),
+    url("@fonts/MailSansRoman-Medium.woff2") format("woff2"),
+    url("@fonts/MailSansRoman-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Mail Sans Roman DemBd';
-    src: url('@fonts/MailSansRoman-DemiBold.eot');
-    src: local('Mail Sans Roman DemiBold'), local('MailSansRoman-DemiBold'),
-        url('@fonts/MailSansRoman-DemiBold.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-DemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Mail Sans Roman DemBd";
+  src: url("@fonts/MailSansRoman-DemiBold.eot");
+  src:
+    local("Mail Sans Roman DemiBold"),
+    local("MailSansRoman-DemiBold"),
+    url("@fonts/MailSansRoman-DemiBold.woff2") format("woff2"),
+    url("@fonts/MailSansRoman-DemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Bold.eot');
-    src: local('Mail Sans Roman Bold'), local('MailSansRoman-Bold'),
-        url('@fonts/MailSansRoman-Bold.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Mail Sans Roman";
+  src: url("@fonts/MailSansRoman-Bold.eot");
+  src:
+    local("Mail Sans Roman Bold"),
+    local("MailSansRoman-Bold"),
+    url("@fonts/MailSansRoman-Bold.woff2") format("woff2"),
+    url("@fonts/MailSansRoman-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Light.eot');
-    src: local('Mail Sans Roman Light'), local('MailSansRoman-Light'),
-        url('@fonts/MailSansRoman-Light.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Mail Sans Roman";
+  src: url("@fonts/MailSansRoman-Light.eot");
+  src:
+    local("Mail Sans Roman Light"),
+    local("MailSansRoman-Light"),
+    url("@fonts/MailSansRoman-Light.woff2") format("woff2"),
+    url("@fonts/MailSansRoman-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Mail Sans Roman';
-    src: url('@fonts/MailSansRoman-Regular.eot');
-    src: local('Mail Sans Roman Regular'), local('MailSansRoman-Regular'),
-        url('@fonts/MailSansRoman-Regular.woff2') format('woff2'),
-        url('@fonts/MailSansRoman-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Mail Sans Roman";
+  src: url("@fonts/MailSansRoman-Regular.eot");
+  src:
+    local("Mail Sans Roman Regular"),
+    local("MailSansRoman-Regular"),
+    url("@fonts/MailSansRoman-Regular.woff2") format("woff2"),
+    url("@fonts/MailSansRoman-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }

@@ -3,42 +3,40 @@ import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal } from '@components/Modal/modal.js';
+import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
-import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает логин.
-* Обращается к бэкенду для проверки пользователя при логине
+* Прокидывает actions в стору для логина
+* Также подписывается на изменения статуса логина,
+* для корректного рендера ошибки
 *
 */
 export class Login extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
      */
     constructor(props) {
         super(props);
         this.state = {
             statusLogin: null,
+            isSubscribed: false,
         };
-        store.subscribe('statusLogin', () => {
-            this.state.statusLogin = store.getState('statusLogin');
-            this.render();
-        });
+
+        this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
     }
 
     /**
-     * Отсылает пользовательский ввод и обрабатывает ответ бэкенда
-     * @param {Object} user - провалидированный пользовательский ввод
-     * @param {string} user.email - введённая почта
-     * @param {string} user.password - введённый пароль
+     * Обрабатывает статус ответа
+     * @param {number} userStatus - статус логина
      */
     handlerStatus(userStatus) {
-        const form = this.rootNode.querySelector('.modal__wrapper__input');
-        if (userStatus === responsStatuses.BadRequest) {
+        const form = this.rootNode.querySelector('.js-modal__wrapper__input');
+        if (userStatus === responsStatuses.NotFound) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;
         }
@@ -54,13 +52,11 @@ export class Login extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.modal__background');
+            const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
-                document.body.classList.remove('body_hide_y_scroll');
-                exitFromLogin();
+                exit();
             }
-
             return;
         }
 
@@ -69,7 +65,7 @@ export class Login extends Component {
             return;
         }
 
-        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        const windowModal = this.rootNode.querySelector('.js-modal__window__flex');
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
@@ -77,7 +73,7 @@ export class Login extends Component {
             modal.render();
         }
 
-        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
 
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
         this.componentDidMount();
@@ -121,18 +117,21 @@ export class Login extends Component {
         return null;
     }
 
+    /**
+     * Обёртка над функции, вызываемой при событии выхода из логина
+     */
     deleteLogin(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            exitFromLogin();
+            exit();
         }
     }
 
     /**
-     * Навешивает обработчики на валидацию и на смену url при выходе
+     * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
-        const form = this.rootNode.querySelector('.modal__form');
+        const form = this.rootNode.querySelector('.js-modal__form');
 
         const validate = this.validateLogin;
         let user;
@@ -152,50 +151,40 @@ export class Login extends Component {
             }
 
             store.dispatch(actionLogin(user));
+            if (!this.state.isSubscribed) {
+                store.subscribe('statusLogin', this.subscribeLoginpStatus);
+                this.state.isSubscribed = true;
+            }
         });
 
         const { deleteLogin } = this;
         document.body
-            .querySelector('.modal__background')
+            .querySelector('.js-modal__background')
             .addEventListener('click', deleteLogin);
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         const modalBackground = document.body
-            .querySelector('.modal__background');
+            .querySelector('.js-modal__background');
         const { deleteLogin } = this;
         if (modalBackground) {
             modalBackground.removeEventListener('click', deleteLogin);
         }
+        if (this.state.isSubscribed) {
+            store.subscribe('statusLogin', this.subscribeLoginpStatus);
+            this.state.statusLogin = null;
+            this.state.isSubscribed = false;
+        }
+    }
+
+    /**
+     * Функция, вызываемая при изменении statusLogin в store
+     */
+    subscribeLoginpStatus() {
+        this.state.statusLogin = store.getState('statusLogin');
+        this.render();
     }
 }
-
-const exitFromLogin = () => {
-    const redirectMain = new Event(
-        'click',
-        {
-            bubbles: true,
-            cancelable: true,
-        },
-    );
-
-    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
-        ? window.location.href.replace(hrefRegExp.host, '')
-        : window.location.href.replace(hrefRegExp.localhost, '');
-
-    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
-
-    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
-        || document.body.querySelector('a');
-
-    const oldDatasetSection = dispatchElement.dataset.section;
-    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
-        dispatchElement.dataset.section = newDatasetSection;
-    }
-
-    dispatchElement.dispatchEvent(redirectMain);
-
-    if (dispatchElement) {
-        dispatchElement.dataset.section = oldDatasetSection;
-    }
-};

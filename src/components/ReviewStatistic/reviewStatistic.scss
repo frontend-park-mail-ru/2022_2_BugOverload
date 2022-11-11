@@ -1,0 +1,42 @@
+.review-statistic {
+  position: sticky;
+  top: 20px;
+
+  &__container {
+    display: grid;
+    padding: 8px 36px;
+    border-left: 3px solid var(--primary-color);
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 14px 22px;
+    align-items: center;
+    margin-left: 80px;
+    margin-top: 90px;
+    position: sticky;
+    top: 40px;
+  }
+
+  &__name {
+    color: var(--main-color-text);
+    font-size: 20px;
+  }
+
+  &__value {
+    color: var(--main-color-text);
+    font-size: 36px;
+  }
+
+  &__value_positive {
+    color: var(--rating-color-positive);
+    font-size: 36px;
+  }
+
+  &__value_neutral {
+    color: var(--rating-color-neutral);
+    font-size: 36px;
+  }
+
+  &__value_negative {
+    color: var(--rating-color-negative);
+    font-size: 36px;
+  }
+}

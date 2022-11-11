@@ -52,6 +52,10 @@ const addPlugins = () => {
                     from: path.resolve(__dirname, 'src/assets/img'),
                     to: path.resolve(__dirname, 'dist/assets/img'),
                 },
+                {
+                    from: path.resolve(__dirname, 'src/sw.js'),
+                    to: path.resolve(__dirname, 'dist'),
+                },
             ],
         }),
         new MiniCssExtractPlugin({
@@ -77,6 +81,7 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js', '.json', '.ts'],

@@ -7,26 +7,37 @@
 @import "@components/Film/film.scss";
 @import "@components/PreviewFilm/previewFilm.scss";
 @import "@components/ErrorMessage/errorMessage.scss";
+@import "@components/AboutFilm/aboutFilm.scss";
+@import "@components/MenuInfoFilm/menuInfoFilm.scss";
+@import "@components/DescriptionFilm/descriptionFilm.scss";
+@import "@components/DetailsFilm/detailsFilm.scss";
+@import "@components/Rating/rating.scss";
+@import "@components/InputReview/inputReview.scss";
+@import "@components/ReviewStatistic/reviewStatistic.scss";
+@import "@components/ListReviews/listReviews.scss";
+@import "@components/Review/review.scss";
+@import "@components/SaveToCollectionMenu/saveToCollectionMenu.scss";
 @import "@components/ProfileMenu/profileMenu.scss";
 @import "@components/ProfileChange/profileChange.scss";
 @import "@views/UserProfile/userProfile.scss";
-
-@import "@components/Components.scss";
-
+@import "@components/_Components.scss";
+@import "@views/FilmPage/filmPage.scss";
+@import "components/ActorProfile/actorProfile.scss";
 @import "@fonts/fonts.css";
+@import "@router/Page404/page404.scss";
 
 ::-webkit-scrollbar { /* Webkit */
-    width      : 0;  /* ширина scrollbar'a */
-    background : transparent  /* опционально */
+  width      : 0;  /* ширина scrollbar'a */
+  background : transparent  /* опционально */
 }
 
 html {
-    -ms-overflow-style : none;  /* IE 10+ */
-    scrollbar-width    : none /* Firefox */
+  -ms-overflow-style : none;  /* IE 10+ */
+  scrollbar-width    : none /* Firefox */
 }
 
 input:focus, textarea:focus, select:focus {
-    outline: none;
+  outline: none;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -35,31 +46,62 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type="radio"] { all: unset; }
 
+
 body, html {
-    --error-color:rgb(150 0 0);
-    --backgr-color: #121212;
-    --primary-color: #FEBA2B;
-    --primary-color-hover: #CD9826;
-    --secondary-color: rgb(86 86 86 / 50%);
-    --secondary-color-hover: rgb(177 177 177 / 35%);
-    --main-color-text: #fff;
-    --secondary-color-text: #BEBEBE;
-    --standart-margin: 52px;
-    font-family: 'Mail Sans Roman';
-    background-color: var(--backgr-color);
-    margin: 0;
-    padding: 0;
-
+  --main-shadow-color-light: rgb(0 0 0 / 20%);
+  --main-shadow-color-strong: rgb(0 0 0 / 40%);
+  --blackout-color: 0,0,0;
+  --backgr-color: #121212;
+  --primary-color: #feba2b;
+  --primary-color-hover: #cd9826;
+  --secondary-color: rgb(86 86 86 / 50%);
+  --secondary-color-hover: rgb(177 177 177 / 35%);
+  --main-color-text: #fff;
+  --text-color-on-primary: #000;
+  --text-color-on-secondary: #fff;
+  --secondary-color-text: #A5A5A5;
+  --text-danger: #e72d2d;
+  --standart-margin: 52px;
+  --error-color:rgb(150 0 0);
+  --rating-color-neutral: #858585;
+  --rating-color-neutral-opac: rgb(133 133 133 / 20%);
+  --rating-color-positive: #12B77C;
+  --rating-color-positive-opac: rgb(18 183 124 / 20%);
+  --rating-color-negative: #ff4350;
+  --rating-color-negative-opac: rgb(255 67 80 / 20%);
+  --backgr-select-item: #656565;
+  --backgr-modal-review: rgb(43 43 46 / 80%);
+  --main-modal-color: #191a1d;
+  --backgr-inputs-color: #27292E;
+  --backgr-select: #fff;
+  --backgr-select-list: #e2e2e2;
+  --border-input-color: #333;
+  --blackout-bottom-content: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
+  --blackout-left-content: linear-gradient(90deg, rgb(18 18 18 / 100%) 14%, rgb(18 18 18 / 64.3%) 48%, rgb(18 18 18 / 0%) 100%);
+  --backgr-userbar-color-on: rgb(15 15 15 / 80%);
+  --backgr-userbar-color-off: rgb(15 15 15 / 0%);
+  --backgr-menu-save: rgb(86 86 86 / 50%);
+  --color-menu-max: rgba(23 23 23 /100%);
+  --color-menu-min: rgba(23 23 23 /0%);
+  font-family: 'Mail Sans Roman';
+  background-color: var(--backgr-color);
+  margin: 0;
+  padding: 0;
 }
 
-a {
-    text-decoration: none;
+a, button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 740px){
-    .header__form{display:none}
-};
+@media screen and (max-width: 740px) {
+  .header__form { display: none; }
+}
 
 .active {
-    font-weight: bold;
+  font-weight: bold;
 }

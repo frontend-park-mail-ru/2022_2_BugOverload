@@ -1,0 +1,123 @@
+.details-film {
+  display: flex;
+  justify-content: space-between;
+  margin-left: var(--standart-margin);
+
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 34px;
+  }
+
+  &__list-info-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+  }
+
+  &__info-pair {
+    display: flex;
+    margin-top: 37px;
+  }
+
+  &__info-item-key {
+    font-size: 15px;
+    color: var(--secondary-color-text);
+    width: 270px;
+  }
+
+  &__info-item-value {
+    font-size: 15px;
+    color: var(--main-color-text);
+    flex-wrap: nowrap;
+
+    &:hover {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+  }
+
+  &__info-item-value-info {
+    font-size: 15px;
+    color: var(--main-color-text);
+    flex-wrap: nowrap;
+  }
+
+  &__list-actors-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--standart-margin);
+  }
+
+  &__actor__container {
+    display: flex;
+    position: relative;
+    margin-bottom: 29px;
+  }
+
+  &__list-actors {
+    display: flex;
+    height: 688px;
+    width: 666px;
+    flex-flow: column wrap;
+    margin-top: 37px;
+  }
+
+  &__list-actors-title {
+    font-size: 22px;
+    color: var(--main-color-text);
+    margin-top: 37px;
+  }
+
+  &__actor__blackout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 81px;
+    height: 108px;
+    background-color: rgb(var(--blackout-color));
+    opacity: 0;
+    z-index: 2;
+    border-radius: 4px;
+    transition: 0.1s linear;
+
+    &:hover {
+      opacity: 0.3;
+      transition: 0.1s linear;
+      cursor: pointer;
+    }
+  }
+
+  &__actor__photo {
+    width: 81px;
+    height: 108px;
+    border-radius: 4px;
+    background-size: cover;
+  }
+
+  &__actor__info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+  }
+
+  &__actor__name {
+    color: var(--main-color-text);
+    font-size: 15px;
+    margin-top: 8px;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &__actor__role {
+    color: var(--secondary-color-text);
+    font-size: 12px;
+    margin-top: 4px;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

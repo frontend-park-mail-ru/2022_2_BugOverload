@@ -1,38 +1,51 @@
-import { Ajax } from '@utils/ajax.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
+import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-import { API, responsStatuses } from '@config/config.js';
+import { API } from '@config/config.js';
+
 /**
-* Ходит за данными на бэкенд.
-* Рендерит HTML-шаблон превью фильма на главной
-*
+* Отображает фильм как рекомендацию на главной странице
 */
-export class PreviewFilm {
+export class PreviewFilm extends Component {
     /**
-    * Получает данные с бэкенда.
-    * Обрабатывает статусы ответа
-    * В случае ошибочного статуса добавляет собщение об ошибке в root в index.html
-    *
-    * @return {Object} Объект с данными о превью
-    * @return {null} В случае ошибочного статуса
-    */
-    async getRequestData() {
-        const response = await Ajax.get(API.recommendation_film);
-        if (response.status === responsStatuses.OK) {
-            this.data = response.body;
-            return null;
-        }
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * Подписывается на изменение state preview-<nameLocation>
+     * @param {string} nameLocation - сохраняет имя элемента,
+     * соответствующее имени класса-контейнера на странице.
+     */
+    constructor(nameLocation) {
+        super();
+        this.state = {
+            preview: null,
+        };
+        this.nameLocation = nameLocation;
+        this.location = this.rootNode.querySelector(`.${nameLocation}`);
 
-        if (response.status >= responsStatuses.InternalServerError) {
-            ShowErrorMessage();
-            return null;
-        }
-
-        ShowErrorMessage();
-        return null;
+        store.subscribe(`preview-${nameLocation}`, () => {
+            this.state.preview = store.getState(`preview-${nameLocation}`);
+            this.render();
+        });
     }
 
-    getTemplate() {
-        return template(this.data);
+    /**
+    * Инициализация компонента
+    * Выбрасывает action для получения данных в state preview-<nameLocation>.
+    */
+    init() {
+        store.dispatch(
+            actionGetPreviewData({
+                name: this.nameLocation,
+            }),
+        );
+    }
+
+    /**
+     * Отрисовывает компонент, используя location и hbs-template.
+     */
+    render() {
+        this.location.innerHTML = '';
+        this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
+        this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
     }
 }

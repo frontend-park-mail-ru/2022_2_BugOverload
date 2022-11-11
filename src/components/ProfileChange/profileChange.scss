@@ -1,11 +1,8 @@
 $height_wrapper:80px;
 $width_wrapper: 410px;
-
 $margin_top_input: 30px;
 $padding_input: 19px;
-
 $margin_top_button: 35px;
-
 $margin_bottom_error: 5px;
 
 @mixin profile__form{
@@ -45,11 +42,11 @@ $margin_bottom_error: 5px;
     font-size: 15px;
     height: 42px;
     width: $width_wrapper - $padding_input;
-    border: 2px solid #333;
+    border: 2px solid var(--border-input-color);
     border-radius: 8px;
     padding-left: $padding_input;
-    background-color: #27292E;
-    color: #9C9C9C;
+    background-color: var(--backgr-inputs-color);
+    color: var(--secondary-color-text);
 }
 
 .profile__input{

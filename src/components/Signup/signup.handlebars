@@ -1,4 +1,4 @@
-<div class="modal__signup__img" {{!--  style="background-image: url('assets/img/auth/signup.png');" --}}>
+<div class="modal__signup__img">
     <div class="modal__flex__center__div">
         <div class="modal__text__alternative__page">У вас уже есть аккаунт?</div>
         <a class="primary-btn-small modal__login__switch__btn" data-section="/login/">Войти</a>
@@ -8,21 +8,21 @@
 <div class="modal__signup">
     <div class="modal__header">Регистрация</div>
 
-    <form class="modal__form" novalidate>
+    <form class="modal__form js-modal__form" novalidate>
         <div class="modal__wrapper__input">
-            <input type="text" maxlength="45" class="modal__input" placeholder="Введите имя пользователя">
+            <input type="text" maxlength="45" class="modal__input js-modal__input" placeholder="Введите имя пользователя">
         </div>
 
         <div class="modal__wrapper__input" id="signup_email">
-            <input type="email" maxlength="45" class="modal__input" placeholder="Укажите адресс электронной почты">
+            <input type="email" maxlength="45" class="modal__input js-modal__input" placeholder="Укажите адресс электронной почты">
         </div>
 
         <div class="modal__wrapper__input">
-            <input type="password" maxlength="60" class="modal__input" placeholder="Введите пароль">
+            <input type="password" maxlength="60" class="modal__input js-modal__input" placeholder="Введите пароль">
         </div>
 
         <div class="modal__wrapper__input" id="confirm">
-            <input type="password" maxlength="60" class="modal__input" placeholder="Подтвердите пароль">
+            <input type="password" maxlength="60" class="modal__input js-modal__input" placeholder="Подтвердите пароль">
         </div>
 
         <button type="submit" class="modal__input__button-auth primary-btn-small">Зарегистрироваться</button>

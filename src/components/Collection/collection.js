@@ -1,72 +1,91 @@
-import { Ajax } from '@utils/ajax.js';
 import { Film } from '@components/Film/film.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { Component } from '@components/Component.js';
+import { store } from '@store/Store.js';
+import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
 import template from '@components/Collection/collection.handlebars';
-import { responsStatuses } from '@config/config.js';
-
-export const COLLECTION_TYPE = {
-    popular: 'popular',
-    todayInCinema: 'todayInCinema',
-};
 
 /**
-* Помогает в создании отрендеренной коллекции фильмов в HTML для последующей вставки на страницу.
-* Добавляет обработчики событий на кнопки слайдера
-*
+* Отрисовывает список фильмов в виде коллекции.
+* Перерисовывается при изменении state 'collection'
 */
-export class Collection {
-    constructor(type) {
-        this._type = type;
+export class Collection extends Component {
+    /**
+     * Cохраняет переданные параметры props через наследуемый компонент
+     * Подписывается на изменение state collection-<nameLocation>
+     * @param {string} nameLocation - сохраняет имя элемента,
+     * соответствующее имени класса-контейнера на странице.
+     */
+    constructor(nameLocation) {
+        super();
+        this.state = {
+            collection: null,
+        };
+        this.nameLocation = nameLocation;
+        this.location = this.rootNode.querySelector(`.${nameLocation}`);
+
+        store.subscribe(`collection-${nameLocation}`, () => {
+            this.state.collection = store.getState(`collection-${nameLocation}`);
+            this.render();
+        });
     }
 
     /**
-    * Получает данные с бэкенда.
-    * Обрабатывает статусы ответа.
-    * В случае ошибочного статуса добавляет собщение об ошибке в root в index.html
-    *
-    * @return {Object} Объект с данными о коллекции
-    * @return {null} В случае ошибочного статуса
+    * Инициализация компонента
+    * Выбрасывает action для получения данных в state collection
     */
-    static async getRequestData(url) {
-        const response = await Ajax.get(url);
-
-        if (response.status === responsStatuses.OK) {
-            return response.body;
-        }
-
-        if (response.status === responsStatuses.NotFound) {
-            ShowErrorMessage('Данная коллекция не найдена');
-            return null;
-        }
-
-        if (response.status >= responsStatuses.InternalServerError) {
-            ShowErrorMessage('Произошла ошибка сервера');
-            return null;
-        }
-
-        ShowErrorMessage();
-        return null;
+    init() {
+        store.dispatch(
+            actionGetCollectionData({
+                tag: this.getTagFromName(this.nameLocation),
+                name: this.nameLocation,
+            }),
+        );
     }
 
     /**
-    * Создаёт коллекцию из набора данных как HTML-шаблон, полученных с бэкенда
-    *
-    * @param {data Object} data - объект данных коллекции
-    * @return {string} отрендеренный HTML-шаблон коллеции
+    * Достаёт из имени класса Dom-элемента тэг
+    * @param {string} - имя класса Dom-элемента
     */
-    getTemplate(data) {
-        const films = data.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
-
-        return template({ title: data.title, films });
+    getTagFromName(name) {
+        const words = name.split('-');
+        return words[words.length - 1];
     }
 
     /**
-    * Служит для добавления обработчиков на все отрендеренные на странице коллекции
-    *
-    */
-    static addHandlers() {
-        const sliders = document.querySelectorAll('.collection__container');
-        sliders.forEach((slider) => Collection.addHandlerSlider(slider));
+     * Отрисовывает компонент, используя location и hbs-template.
+     * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
+     */
+    render() {
+        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
+
+        let { name } = this.state.collection;
+        if (name) {
+            name = name[0].toUpperCase() + name.slice(1);
+            this.state.collection.name = name;
+        }
+
+        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films }));
+        this.componentDidMount();
+    }
+
+    /**
+     * Навешивает обработчики на кнопки прокрутки коллекции
+     */
+    componentDidMount() {
+        const slider = this.location.querySelector('.js-collection__container');
+        if (!slider) {
+            return;
+        }
+        this.addHandlerSlider(slider);
+    }
+
+    /**
+     * Используется для освобождения ресурсов.
+     * Удаляет обработчики, установленные в ComponentDidMount
+     */
+    componentWillUnmount() {
+        const slider = this.location.querySelector('.js-collection__container');
+        slider.removeEventListener('click', this.handlerSlider);
     }
 
     /**
@@ -75,44 +94,49 @@ export class Collection {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    static addHandlerSlider(slider) {
-        const btnRight = slider.querySelector('.collection__slider-button_right');
-        const btnLeft = slider.querySelector('.collection__slider-button_left');
+    addHandlerSlider(slider) {
+        const btnRight = slider.querySelector('.js-collection__slider-button_right');
+        const btnLeft = slider.querySelector('.js-collection__slider-button_left');
+        const body = slider.querySelector('.js-collection__slider');
 
-        const count = slider.querySelectorAll('.film').length;
+        const count = slider.querySelectorAll('.js-film').length;
 
-        if (document.documentElement.clientWidth - 2 * 52 > count * 260 - 30) {
+        const boundMargin = 52;
+        const spaceBetweenFilms = 30;
+        const widthFilm = 260;
+        if (document.documentElement.clientWidth - 2 * boundMargin
+                > count * widthFilm - spaceBetweenFilms) {
             btnRight.style.display = 'none';
         }
         btnLeft.style.display = 'none';
 
         let offset = 0;
-        const widthFilm = 260;
+        const boundMarginForBtn = 64;
         const maxLength = widthFilm * count;
-        const windowLen = document.documentElement.clientWidth;
-        const maxOffset = maxLength - windowLen + 52 + 12;
-        const countOnPage = Math.trunc(windowLen / widthFilm);
-        const pageOffset = countOnPage * widthFilm;
+        const getMaxOffset = () => maxLength - document.documentElement.clientWidth
+            + boundMarginForBtn;
+        const getOffset = () => Math.trunc(document.documentElement.clientWidth
+            / widthFilm) * widthFilm;
 
         let isHiddenRight = false;
         let isHiddenLeft = true;
 
-        slider.addEventListener('click', (event) => {
+        this.handlerSlider = function (event) {
             if (event.target === btnRight.querySelector('img')) {
                 event.preventDefault();
                 if (isHiddenLeft) {
-                    slider.querySelector('.collection__slider-button_left').style.display = '';
+                    btnLeft.style.display = '';
                     isHiddenLeft = false;
                 }
 
-                offset += pageOffset;
-                if (offset > maxOffset) {
-                    offset = maxOffset;
+                offset += getOffset();
+                if (offset > getMaxOffset()) {
+                    offset = getMaxOffset();
                 }
 
-                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
-                if (offset >= maxOffset) {
-                    slider.querySelector('.collection__slider-button_right').style.display = 'none';
+                body.style.left = `${-offset}px`;
+                if (offset >= getMaxOffset()) {
+                    btnRight.style.display = 'none';
                     isHiddenRight = true;
                 }
 
@@ -122,20 +146,22 @@ export class Collection {
             if (event.target === btnLeft.querySelector('img')) {
                 event.preventDefault();
                 if (isHiddenRight) {
-                    slider.querySelector('.collection__slider-button_right').style.display = '';
+                    btnRight.style.display = '';
                     isHiddenRight = false;
                 }
-                offset -= pageOffset;
+                offset -= getOffset();
                 if (offset <= 0) {
                     offset = 0;
                 }
 
-                slider.querySelector('.collection__slider').style.left = `${-offset}px`;
+                body.style.left = `${-offset}px`;
                 if (offset <= 0) {
-                    slider.querySelector('.collection__slider-button_left').style.display = 'none';
+                    btnLeft.style.display = 'none';
                     isHiddenLeft = true;
                 }
             }
-        });
+        };
+
+        slider.addEventListener('click', this.handlerSlider);
     }
 }

@@ -1,5 +1,11 @@
 {
     "extends":["airbnb/base"],
+    "parserOptions": {
+        "parser": "@babel/eslint-parser",
+        "requireConfigFile": false,
+        "ecmaVersion": 2022,
+        "sourceType": "module"
+    },
     "env": {
         "browser": true,
         "node": true,
@@ -13,6 +19,7 @@
         "eol-last": ["error", "always"],
         "semi": ["error", "always"],
         "no-console": 1,
+        "consistent-return": 1,
         "no-alert": 2,
         "no-debugger": 1,
         "no-use-before-define": 0,
@@ -27,6 +34,8 @@
         "import/no-cycle": 0,
         "no-plusplus": 0,
         "no-useless-escape": 0,
+        "func-names": 0,
+        "no-restricted-globals": 0,
         "no-restricted-syntax": [
             "error",
             {

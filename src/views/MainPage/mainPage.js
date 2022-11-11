@@ -1,6 +1,6 @@
 import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
-import { Collection, COLLECTION_TYPE } from '@components/Collection/collection.js';
-import { ROOT, API } from '@config/config.js';
+import { Collection } from '@components/Collection/collection.js';
+import { ROOT } from '@config/config.js';
 import { View } from '@views/View.js';
 import template from '@views/MainPage/MainPage.handlebars';
 
@@ -10,28 +10,22 @@ import template from '@views/MainPage/MainPage.handlebars';
 */
 class MainPage extends View {
     render() {
-        const mainBody = document.querySelector('.main-page');
+        const mainBody = document.querySelector('.js-main-page');
         if (mainBody) {
             mainBody.remove();
         }
         super.render();
-        const previewFilm = new PreviewFilm();
-        const collectionPopular = new Collection(COLLECTION_TYPE.todayInCinema);
-        const collectionCinemaToday = new Collection(COLLECTION_TYPE.popular);
 
-        Promise.all([
-            previewFilm.getRequestData(),
-            Collection.getRequestData(API.popular_films),
-            Collection.getRequestData(API.in_cinema),
-        ]).then((responses) => {
-            ROOT.insertAdjacentHTML('beforeend', template({
-                previewFilm: previewFilm.getTemplate(),
-                collectionPopular: collectionPopular.getTemplate(responses[1]),
-                collectionTodayInCinema: collectionCinemaToday.getTemplate(responses[2]),
-            }));
+        ROOT.insertAdjacentHTML('beforeend', template());
 
-            Collection.addHandlers();
-        });
+        const previewFilm = new PreviewFilm('js-main-page-preview-film');
+        previewFilm.init();
+
+        const collectionPopular = new Collection('js-main-page-collection-popular');
+        collectionPopular.init();
+
+        const collectionCinemaToday = new Collection('js-main-page-collection-in_cinema');
+        collectionCinemaToday.init();
     }
 }
 

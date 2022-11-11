@@ -1,78 +1,119 @@
-$color-primery: #FEBA2B;
+$font-size-big: 20px;
+$font-size-med: 15px;
+$font-size-small: 15px;
+$border-radius-big: 6px;
+$border-radius-med: 6px;
+$border-radius-small: 4px;
+$font-family-big: "Mail Sans Roman Med";
+$font-family-med: "Mail Sans Roman Med";
+$font-family-small: "Mail Sans Roman";
 
+@mixin primary-animation-hover {
+    background-color: var(--primary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+}
 
+@mixin secondary-animation-hover {
+    background-color: var(--secondary-color-hover);
+    transition: 0.1s linear;
+    cursor: pointer;
+}
 
+@mixin common-btn-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 0;
+  box-shadow: 0 4px 20px var(--main-shadow-color-strong);
+}
 
 .primary-btn-big {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-family: 'Mail Sans Roman Med';
-    font-size: 20px;
-    color: #000;
-    border: 0;
+  @include common-btn-body;
+  background-color: var(--primary-color);
+  border-radius: $border-radius-big;
+  font-family:$font-family-big;
+  font-size: $font-size-big;
+  color: var(--text-color-on-primary);
 
-    &:hover {
-        background-color: var(--primary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    @include primary-animation-hover;
+  }
+}
+
+.primary-btn-med {
+  @include common-btn-body;
+  background-color: var(--primary-color);
+  border-radius: $border-radius-med;
+  font-family:$font-family-med;
+  font-size: $font-size-med;
+  color: var(--text-color-on-primary);
+
+  &:hover {
+    @include primary-animation-hover;
+  }
 }
 
 .primary-btn-small {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include common-btn-body;
     background-color: var(--primary-color);
-    border-radius: 4px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    color: #000;
-    border: 0;
+    border-radius: $border-radius-small;
+    font-family: $font-family-small;
+    font-size: $font-size-small;
+    color: var(--text-color-on-primary);
 
-    &:hover {
-        background-color: var(--primary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    @include primary-animation-hover;
+  }
 }
 
 .secondary-btn-big {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include common-btn-body;
     background-color: var(--secondary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    color: #fff;
+    border-radius: $border-radius-big;
+    font-family: $font-family-big;
+    font-size: $font-size-big;
+    color: var(--text-color-on-secondary);
 
-    &:hover {
-        background-color: var(--secondary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    @include secondary-animation-hover;
+  }
 }
 
 .secondary-btn-med {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include common-btn-body;
     background-color: var(--secondary-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-    font-size: 15px;
-    font-family: 'Mail Sans Roman';
-    color: #fff;
+    border-radius: $border-radius-med;
+    font-size: $font-size-med;
+    font-family: $font-family-med;
+    color: var(--text-color-on-secondary);
 
-    &:hover {
-        background-color: var(--secondary-color-hover);
-        transition: 0.1s linear;
-        cursor: pointer;
-    }
+  &:hover {
+    @include secondary-animation-hover;
+  }
+}
+
+[data-value-rating="positive"] {
+  background-color: var(--rating-color-positive);
+}
+
+[data-value-rating="neutral"] {
+  background-color: var(--rating-color-neutral);
+}
+
+[data-value-rating="negative"] {
+  background-color: var(--rating-color-negative);
+}
+
+[data-type-review="positive"] {
+  background-color: var(--rating-color-positive-opac);
+}
+
+[data-type-review="neutral"] {
+  background-color: var(--rating-color-neutral-opac);
+}
+
+[data-type-review="negative"] {
+  background-color: var(--rating-color-negative-opac);
 }

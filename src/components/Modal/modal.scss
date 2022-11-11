@@ -1,4 +1,15 @@
-.modal__background {
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  &__background {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -12,19 +23,15 @@
     bottom: 0;
     background: rgb(0 0 0 / 50%);
     overflow-y: hidden;
-}
+  }
 
-.body_hide_y_scroll {
-    overflow-y: hidden;
-}
-
-.modal__window {
+  &__window {
     width: 920px;
     height: 550px;
     min-height: 250px;
-}
+  }
 
-.modal__window__flex {
+  &__window__flex {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -32,15 +39,10 @@
     align-items: center;
     height: 100%;
     font-weight: normal;
-}
+    animation: 0.5s show ease;
+  }
 
-@keyframes show {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-
-.modal__cross {
+  &__cross {
     width: 15px;
     height: 15px;
     position: absolute;
@@ -48,63 +50,64 @@
     right: 87px;
     fill: #444;
     cursor: pointer;
-}
+  }
 
-.modal__header {
+  &__header {
     margin-bottom: 33px;
     color: var(--main-color-text);
     font-size: 26px;
-}
+  }
 
-.modal__form {
+  &__form {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-content: stretch;
     align-items: center;
-}
+  }
 
-.modal__wrapper__input{
+  &__wrapper__input {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: flex-start;
-    width: 310px;
+    align-items: center;
+    width: 270px;
     height: 55px;
     margin-bottom: 17px;
-}
+  }
 
-.modal__input {
+  &__input {
     width: 289px;
     height: 29px;
     border-radius: 4px;
     color: var(--main-color-text);
-    background: #27292E;
-    opacity: .8;
+    background: #27292e;
+    opacity: 0.8;
     border: 2px solid #333;
     font-size: 12px;
     padding-left: 15px;
-}
 
-.modal__input_red_border{
-    border: 2px solid #E72D2D;
-}
 
-.modal__input__error {
-    width: auto;
-    height: 18px;
-    margin-top: 5px;
-    color: #E72D2D;
-    font-size: 12px;
-}
+    &_red_border {
+      border: 2px solid #e72d2d;
+    }
 
-.modal__input__button-auth {
-    width: 310px;
-    height: 35px;
-}
+    &__error {
+      width: 300px;
+      height: 18px;
+      margin-top: 5px;
+      color: #e72d2d;
+      font-size: 12px;
+    }
 
-.modal__text__alternative__page{
+    &__button-auth {
+      width: 310px;
+      height: 35px;
+    }
+  }
+
+  &__text__alternative__page {
     white-space: nowrap;
     margin-top: 25px;
     margin-right: 20px;
@@ -113,20 +116,21 @@
     text-decoration: none;
     cursor: pointer;
     z-index: 1;
-}
+  }
 
-.modal__login__switch__btn {
+  &__login__switch__btn {
     white-space: nowrap;
     margin-top: 25px;
     margin-right: 45px;
     height: 30px;
     width: 150px;
     z-index: 1;
-}
+  }
 
-.modal__flex__center__div {
+  &__flex__center__div {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
     align-items: center;
+  }
 }

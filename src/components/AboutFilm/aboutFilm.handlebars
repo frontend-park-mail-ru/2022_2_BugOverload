@@ -1,0 +1,60 @@
+<div class="about-film js-about-film">
+    <div class="about-film__blackout-left"></div>
+    <div class="about-film__container">
+
+        <div class="about-film__title">{{name}}</div>
+        {{#if original_name}}
+        <div class="about-film__original-title">{{original_name}}</div>
+        {{/if}}
+        <div class="about-film__base-info">
+            <div class="about-film__rating js-about-film__rating">{{rating}}</div>
+            <div class="about-film__year">
+            {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
+            </div>
+            {{#if duration}}
+            <div class="about-film__duration">{{duration}}</div>
+            {{/if}}
+            {{#if type_serial}}
+            <div class="about-film__count-seasons">{{count_seasons}}</div>
+            {{/if}}
+            {{#if age_limit}}
+            <div class="about-film__age-limit">{{age_limit}}+</div>
+            {{/if}}
+        </div>
+        <div class="about-film__short-description">{{short_description}}</div>
+        <div class="about-film__directors">
+            <div class="about-film__label-director">Режиссёр:</div>
+            {{#each directors}}
+            <a data-section="/person/{{this.id}}/" class="about-film__director">{{this.name}}&nbsp</a>
+            {{/each}}
+        </div>
+        <div class="about-film__roles">
+            <div class="about-film__label-role">В ролях:</div>
+            {{#each actors}}
+            <a data-section="/person/{{this.id}}/" class="about-film__role">{{this.name}}&nbsp</a>
+            {{/each}}
+        </div>
+        <div class="about-film__buttons-container">
+            <a data-section="/" class="js-btn-watch-trailer">
+                <div class="about-film__button-trailer primary-btn-big">
+                    <img class="about-film__button_play-trailer" src="/play.png" alt="">
+                    Трейлер
+                </div>
+            </a>
+            <a data-section="/" class="js-btn-save-to-bookmark">
+                <div class="about-film__button-bookmark secondary-btn-big">
+                    <img class="about-film__button_bookmark" src="/bookmark.png" alt="">
+                </div>
+            </a>
+            <div class="about-film__save-to-collection js-place-save-to-collection">
+                <a data-section="/" class="js-btn-save-to-coll">
+                    <div class="about-film__button-plus secondary-btn-big" data-section="plus-save">
+                        <img class="about-film__button_plus" src="/plus-save.png" alt="">
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="about-film__blackout-bottom"></div>
+</div>

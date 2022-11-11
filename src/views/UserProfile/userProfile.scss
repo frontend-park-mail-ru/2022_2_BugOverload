@@ -1,5 +1,3 @@
-$userinfo-color: #A3A3A3;
-
 @mixin flex__row{
     display: flex;
     flex-direction: row;
@@ -10,127 +8,129 @@ $userinfo-color: #A3A3A3;
     flex-direction: column;
 }
 
-.profile{
+.profile {
     @include flex__row;
     justify-content: flex-start;
     align-content: center;
     align-items: flex-start;
     height: 100vh;
-}
 
-.profile__avatar__flex{
-    @include column__flex;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-top: 95px + 54px;
-    margin-left: 103px;
-}
+    &__avatar{
+        border: 0;
+        border-radius: 8px;
+        height: 400px;
+        width: 300px;
+        object-fit: cover;
 
-.profile__avatar{
-    border: 0;
-    border-radius: 8px;
-    height: 400px;
-    width: 300px;
-    object-fit: cover;
-}
+        &__button{
+            @include flex__row;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            margin-top: 23px;
+            height: 42px;
+            width: 100%;
+            border: 0;
+            border-radius: 8px;
+            font-size: 15px;
 
-.profile__img__form{
-    width: 100%;
-    height: auto;
-}
+            &:hover{
+                background-color: var(--secondary-color-hover);
+                transition: 0.1s linear;
+                cursor: pointer;
+            }
+        }
 
-.profile__avatar__button{ 
-    @include flex__row;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-top: 23px;
-    height: 42px;
-    width: 100%;
-    border: 0;
-    border-radius: 8px;
-    font-size: 15px;
-}
+        &__button_center {
+            margin-left: 16px;
+        }
 
-.profile__file__input_none{
-    display: none;
-}
+        &__flex{
+            @include column__flex;
+            justify-content: center;
+            align-content: flex-start;
+            align-items: flex-start;
+            margin-top: 95px + 54px;
+            margin-left: 103px;
+        }
+    }
 
-.profile__avatar__button:hover{
-    background-color: var(--secondary-color-hover);
-    transition: 0.1s linear;
-    cursor: pointer;
-}
+    &__img__form{
+        width: 100%;
+        height: auto;
+    }
 
-.profile__avatar__button_center{
-    margin-left: 16px;
-}
+    &__file__input_none{
+        display: none;
+    }
 
-.profile__user__flex{
-    @include column__flex;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-top: 95px + 54px;
-    margin-left: 49px;
-    color: var(--main-color-text);
-}
+    &__user__flex{
+        @include column__flex;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-top: 95px + 54px;
+        margin-left: 49px;
+        color: var(--main-color-text);
+    }
 
-.profile__username{
-    font-family: 'Mail Sans Roman Med';
-    font-size: 36px;
-    margin-bottom: 36px;
-}
+    &__username {
+        font-family: "Mail Sans Roman Med";
+        font-size: 36px;
+        margin-bottom: 36px;
+    }
 
-.profile__email{
-    font-family: 'Mail Sans Roman Med';
-    font-size: 20px;
-    margin-bottom: 53px;
-}
+    &__email {
+        font-family: "Mail Sans Roman Med";
+        font-size: 20px;
+        margin-bottom: 53px;
+    }
 
-.profile__info__flex {
-    @include flex__row;
-    justify-content: flex-start;
-    align-content: center;
-    align-items: flex-start;
-}
+    &__info {
+        &__flex {
+            @include flex__row;
+            justify-content: flex-start;
+            align-content: center;
+            align-items: flex-start;
+        }
 
-.profile__info__wrapper{
-    @include column__flex;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-}
+        &__wrapper {
+            @include column__flex;
+            justify-content: center;
+            align-content: flex-start;
+            align-items: flex-start;
+        }
 
-.profile__info__value__wrapper{
-    @include column__flex;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-left: 27px;
-}
+        &__value__wrapper {
+            @include column__flex;
+            justify-content: center;
+            align-content: flex-start;
+            align-items: flex-start;
+            margin-left: 27px;
+        }
 
-.profile__info__field{
-    font-size: 20px;
-    color: $userinfo-color;
-    margin-bottom: 35px;
-}
+        &__field{
+            font-size: 20px;
+            color: var(--secondary-color-text);
+            margin-bottom: 35px;
+        }
 
-.profile__info__value{
-    font-size: 20px;
-    margin-bottom: 35px;
-}
+        &__value {
+            font-size: 20px;
+            margin-bottom: 35px;
+        }
+    }
 
-.profile__change{
-    @include column__flex;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-top: 95px + 54px;
-    margin-left: 32px;
-}
+    &__change{
+        @include column__flex;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-top: 95px + 54px;
+        margin-left: 32px;
 
-.profile__change__svg{
-    cursor: pointer;
+        &__svg {
+            cursor: pointer;
+        }
+    }
 }

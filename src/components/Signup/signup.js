@@ -3,33 +3,36 @@ import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal } from '@components/Modal/modal.js';
+import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
-import { hrefRegExp } from '@config/regExp.js';
 import { responsStatuses } from '@config/config.js';
 
 /**
 * Отрисовывает регистрацию.
-* Обращается к бэкенду для проверки пользователя при регистрации
+* Прокидывает actions в стору для логина
+* Также подписывается на изменения статуса регистрации,
+* для корректного рендера ошибки
 *
 */
 export class Signup extends Component {
     /**
-     * Cохраняет rootNode.
-     * @param {Element} rootNode - div, через который происходит взаимодействие с html.
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
      */
     constructor(props) {
         super(props);
         this.state = {
             statusSignup: null,
+            isSubscribed: false,
         };
-        store.subscribe('statusSignup', () => {
-            this.state.statusSignup = store.getState('statusSignup');
-            this.render();
-        });
+
+        this.subscribeSignupStatus = this.subscribeSignupStatus.bind(this);
     }
 
+    /**
+     * Обрабатывает статус ответа
+     */
     handlerStatus() {
         if (this.state.statusSignup === responsStatuses.BadRequest) {
             const wrapper = document.getElementById('signup_email');
@@ -38,17 +41,15 @@ export class Signup extends Component {
     }
 
     /**
-     * Рендерит логин
+     * Рендерит регистрацию
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.modal__background');
+            const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
-                document.body.classList.remove('body_hide_y_scroll');
-                exitFromSignup();
+                exit();
             }
-
             return;
         }
 
@@ -57,7 +58,7 @@ export class Signup extends Component {
             return;
         }
 
-        const windowModal = this.rootNode.querySelector('.modal__window__flex');
+        const windowModal = this.rootNode.querySelector('.js-modal__window__flex');
         if (windowModal) {
             windowModal.replaceChildren();
         } else {
@@ -65,7 +66,7 @@ export class Signup extends Component {
             modal.render();
         }
 
-        const modalWindow = this.rootNode.querySelector('.modal__window__flex');
+        const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
         modalWindow.insertAdjacentHTML('afterbegin', templateSignup());
         this.componentDidMount();
     }
@@ -85,7 +86,7 @@ export class Signup extends Component {
         user.nickname = nickInput.value.trim();
         user.email = emailInput.value.trim();
         user.password = passwordInput.value;
-        const confirmPassword = confirmInput.querySelector('.modal__input').value;
+        const confirmPassword = confirmInput.querySelector('.js-modal__input').value;
 
         let flag = true;
 
@@ -140,18 +141,21 @@ export class Signup extends Component {
         return null;
     }
 
+    /**
+     * Обёртка над функции, вызываемой при событии выхода из регистрации
+     */
     deleteSignup(e) {
         const { target } = e;
         if (target.classList.contains('modal__background')) {
-            exitFromSignup();
+            exit();
         }
     }
 
     /**
-     * Навешивает обработчики на валидацию
+     * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
-        const form = this.rootNode.querySelector('.modal__form');
+        const form = this.rootNode.querySelector('.js-modal__form');
         const validate = this.validateSignup;
         let user;
 
@@ -169,50 +173,40 @@ export class Signup extends Component {
             }
 
             store.dispatch(actionRegister(user));
+            if (!this.state.isSubscribed) {
+                store.subscribe('statusSignup', this.subscribeSignupStatus);
+                this.state.isSubscribed = true;
+            }
         });
 
         const { deleteSignup } = this;
         document.body
-            .querySelector('.modal__background')
+            .querySelector('.js-modal__background')
             .addEventListener('click', deleteSignup);
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         const modalBackground = document.body
-            .querySelector('.modal__background');
+            .querySelector('.js-modal__background');
         const { deleteSignup } = this;
         if (modalBackground) {
             modalBackground.removeEventListener('click', deleteSignup);
         }
+        if (this.state.isSubscribed) {
+            store.unsubscribe('statusSignup', this.subscribeSignupStatus);
+            this.state.statusSignup = null;
+            this.state.isSubscribed = false;
+        }
+    }
+
+    /**
+     * Функция, вызываемая при изменении statusSignup в store
+     */
+    subscribeSignupStatus() {
+        this.state.statusSignup = store.getState('statusSignup');
+        this.render();
     }
 }
-
-const exitFromSignup = () => {
-    const redirectMain = new Event(
-        'click',
-        {
-            bubbles: true,
-            cancelable: true,
-        },
-    );
-
-    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
-        ? window.location.href.replace(hrefRegExp.host, '')
-        : window.location.href.replace(hrefRegExp.localhost, '');
-
-    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
-
-    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
-        || document.body.querySelector('a');
-
-    const oldDatasetSection = dispatchElement.dataset.section;
-    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
-        dispatchElement.dataset.section = newDatasetSection;
-    }
-
-    dispatchElement.dispatchEvent(redirectMain);
-
-    if (dispatchElement) {
-        dispatchElement.dataset.section = oldDatasetSection;
-    }
-};

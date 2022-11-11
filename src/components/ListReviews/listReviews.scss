@@ -1,0 +1,46 @@
+.list-reviews {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--standart-margin);
+  }
+
+  &__head-container {
+    display: flex;
+  }
+
+  &__title {
+    font-size: 36px;
+    color: var(--main-color-text);
+  }
+
+  &__btn-write-review {
+    background-image: url("@icons/plus-review.png");
+    margin-left: 18px;
+    width: 46px;
+    height: 46px;
+
+    &:hover {
+      background-color: var(--secondary-color-hover);
+      border-radius: 5px;
+    }
+  }
+
+  &__content-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  &__btn-show-more {
+    display: flex;
+    justify-content: flex-end;
+    color: var(--main-color-text);
+    font-size: 20px;
+
+    &:hover {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+  }
+}

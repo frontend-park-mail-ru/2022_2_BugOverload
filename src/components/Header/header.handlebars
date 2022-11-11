@@ -1,7 +1,7 @@
-<header class="header">
+<header class="header js-header">
 
   <a class="header__navlink" data-section="/">
-    <img class="header__logo" data-section="/" src="LogoMOVIEGATE.png">
+    <img class="header__logo" data-section="/" src="/LogoMOVIEGATE.png">
   </a>
   <a class="header__navlink" data-section="navlink">
     <div class="header__navlink-area">Мои фильмы</div>
@@ -23,8 +23,8 @@
   </form>
 
   {{#if avatar}}
-  <div class="header__userbar-substrate">
-    <div class="header__userbar-user-info-container">
+  <div class="header__userbar-substrate js-header__userbar-substrate">
+    <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
       <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
       {{#if email}}
       <div class="header__userbar-name-container">
@@ -38,7 +38,7 @@
     {{/if}}
   </div>
   {{else}}
-  <a class="primary-btn-small header__login__btn" data-section="/login/">Войти</button>
+  <a class="primary-btn-med header__login__btn" data-section="/login/">Войти</button>
     {{/if}}
 
 </header>

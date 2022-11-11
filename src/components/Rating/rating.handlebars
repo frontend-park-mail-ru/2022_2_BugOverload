@@ -1,0 +1,72 @@
+<form class="rating js-rating-form">
+    <div class="rating__container">
+        <div class="rating__title">
+            {{#if type_serial}}
+            Как вам сериал?
+            {{/if}}
+
+            {{#if type_film}}
+            Как вам фильм?
+            {{/if}}
+        </div>
+        <div class="rating__content-container">
+            <div class="rating__star-list">
+                <button type="submit" class="rating__star js-rating__star" value="10">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="9">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="8">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="7">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="6">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="5">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="4">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="3">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="2">
+                    <div class="rating__star-image"></div>
+                </button>
+                <button type="submit"  class="rating__star js-rating__star" value="1">
+                    <div class="rating__star-image"></div>
+                </button>
+            </div>
+            <div class="rating__rate-value">{{filmRating}}</div>
+        </div>
+
+
+        <div class="rating__text-stars-container">
+            <span class="rating__text-stars">очень плохо</span>
+            <span class="rating__text-stars">отлично</span>
+        </div>
+
+        {{#if rate}}
+        <div class="rating__setted-container">
+            <div class="rating__setted-name">
+                Моя оценка
+            </div>
+            <div class="rating__setted-value-container">
+                <div class="rating__setted-value">{{rate}}</div>
+                <div class="rating__setted-icon-star"></div>
+            </div>
+
+            <div class="rating__setted-date">{{time}}</div>
+            <button type="submit" value="delete" class="rating__setted-delete-btn">удалить</button>
+
+        </div>
+        {{/if}}
+
+        <a data-section="/"> <div class="rating__button-write-review secondary-btn-med js-rating__button-write-review">Написать рецензию</div></a>
+    </div>
+</form>

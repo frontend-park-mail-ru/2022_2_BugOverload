@@ -67,7 +67,7 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
 
     const errorPassword = confirm
         .previousElementSibling
-        .querySelector('.modal__input__error');
+        .querySelector('.js-modal__input__error');
 
     if ((confirmPassword === password) && errorPassword) {
         renderError(confirm, 'password', errorPassword.textContent);
@@ -135,9 +135,13 @@ export const checkPassword = (form, input, validateConfirm = false, confirmPassw
  * @param {Element} form - форма из которой взяты данные
  * @param {String} type - тип input
 */
-export const removeError = (form, type) => {
-    const errorInput = form
-        .querySelector(`input[type=${type}]`);
+export const removeError = (form, type, input = true) => {
+    let errorInput;
+    if (!input) {
+        errorInput = form.querySelector(`.${type}`);
+    } else {
+        errorInput = form.querySelector(`input[type=${type}]`);
+    }
 
     if (!errorInput) {
         return;
@@ -145,15 +149,13 @@ export const removeError = (form, type) => {
 
     const errorElement = errorInput
         .parentElement
-        .querySelector('.modal__input__error');
+        .querySelector('.js-modal__input__error');
 
     if (errorElement) {
         errorElement.remove();
     }
 
-    form
-        .querySelector(`input[type=${type}]`)
-        .classList.remove('modal__input_red_border');
+    errorInput.classList.remove('modal__input_red_border');
 };
 
 /**
@@ -162,17 +164,23 @@ export const removeError = (form, type) => {
  * @param {String} type - тип input
  * @param {String} text - текст ошибки
 */
-export const renderError = (form, type, text) => {
-    const target = form.querySelector(`input[type=${type}]`);
+export const renderError = (form, type, text, input = true) => {
+    let target;
+    if (!input) {
+        target = form.querySelector(`.${type}`);
+    } else {
+        target = form.querySelector(`input[type=${type}]`);
+    }
+
     target.classList.add('modal__input_red_border');
-    if (target.parentElement.querySelector('.modal__input__error')) {
-        const erorElement = target.parentElement.querySelector('.modal__input__error');
+    if (target.parentElement.querySelector('.js-modal__input__error')) {
+        const erorElement = target.parentElement.querySelector('.js-modal__input__error');
         if (text === erorElement.textContent) {
             return;
         }
 
         erorElement.remove();
     }
-    const insertHtml = `<div class="modal__input__error">${text}</div>`;
+    const insertHtml = `<div class="modal__input__error js-modal__input__error">${text}</div>`;
     target.insertAdjacentHTML('afterend', insertHtml);
 };

@@ -49,7 +49,7 @@ class UserProfile extends View {
             this.subscribeedOnUser = true;
         }
 
-        const profile = this.rootNode.querySelector('.profile');
+        const profile = this.rootNode.querySelector('.js-profile');
         if (profile) {
             profile.remove();
         }
@@ -77,7 +77,7 @@ class UserProfile extends View {
             store.unsubscribe('statusChangeAvatar', setProfileAvatar);
             this.state.putAvatarStatus = null;
         }
-        const inputImgForm = this.rootNode.querySelector('.profile__img__form');
+        const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
             store.subscribe('statusChangeAvatar', setProfileAvatar);
