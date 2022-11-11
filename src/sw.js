@@ -32,7 +32,7 @@ this.addEventListener('activate', async () => {
     );
 });
 
-this.addEventListener('fetch', async (event) => {
+this.addEventListener('fetch', (event) => {
     const { request } = event;
     console.log(request.url);
 
@@ -40,7 +40,7 @@ this.addEventListener('fetch', async (event) => {
     console.log(url);
 
     if (request.method !== 'GET') {
-        const response = await fetch(request);
+        const response = fetch(request);
         return response;
     }
 
@@ -60,12 +60,6 @@ this.addEventListener('fetch', async (event) => {
         }
     });
     if (flag) {
-        let cached;
-        event.waitUntil( cached = await caches.match(request));
-        if (cached) {
-            event.respondWith(cached);
-            return false;
-        }
         event.respondWith(networkFirst(request, false));
         return false;
     }
@@ -82,7 +76,7 @@ this.addEventListener('fetch', async (event) => {
         }
     });
 
-    const cached = await caches.match(request);
+    const cached = caches.match(request);
     if (cached) {
         event.respondWith(cached);
         return false;
@@ -102,6 +96,10 @@ async function cacheFirst(request) {
 async function networkFirst(request, isCached = true) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     try {
+        if(!isCached) {
+            const cached = await caches.match(request);
+            return cached;
+        }
         const response = await fetch(request);
 
         if(isCached) {
