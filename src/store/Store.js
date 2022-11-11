@@ -47,6 +47,10 @@ class Store {
             if (subscribers) {
                 subscribers.forEach((subscriber) => subscriber());
             }
+
+            if(newState.onse) {
+                this.state[key] = null;
+            }
         });
     }
 

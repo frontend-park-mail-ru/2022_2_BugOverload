@@ -66,12 +66,13 @@ app.get('/api/v1/auth',  (req, res) => {
 		res.cookie('red', 1, {expires: new Date(Date.now() - 1000 * 60 * 10)});
 	}
 
-	res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	/*res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 	if(i == 0) {
 		i = 1;
 	} else {
 		i = 0;
-	}
+	}*/
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
 });
 
 app.put('/api/v1/user/setting',  (req, res) => {

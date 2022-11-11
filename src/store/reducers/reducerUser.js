@@ -97,6 +97,7 @@ class ReducerUser {
         if (response.status === responsStatuses.NoContent) {
             return {
                 statusChangeAvatar: response.status,
+                onse: true,
             };
         }
         return { statusChangeAvatar: null };
