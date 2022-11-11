@@ -33,6 +33,7 @@ this.addEventListener('activate', async () => {
 
 this.addEventListener('fetch', async (event) => {
     const { request } = event;
+    console.log(request.url);
 
     const url = new URL(request.url);
     console.log(url);
