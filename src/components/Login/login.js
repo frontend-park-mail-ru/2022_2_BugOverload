@@ -53,23 +53,21 @@ export class Login extends Component {
      * Рендерит логин
      */
     render() {
-        console.log(store.getState('user'))
         if (store.getState('user')) {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
                 window.history.replaceState(
-                    null, 
-                    null, 
-                    window.location.href.replace(hrefRegExp.auth, '')
+                    null,
+                    null,
+                    window.location.href.replace(hrefRegExp.auth, ''),
                 );
             }
             return;
-        } else {
-            if(!this.state.isUserSubscriber) {
-                store.subscribe('user', this.subscribeLogin);
-                this.state.isUserSubscriber = true;
-            }
+        }
+        if (!this.state.isUserSubscriber) {
+            store.subscribe('user', this.subscribeLogin);
+            this.state.isUserSubscriber = true;
         }
 
         if (this.state.statusLogin) {
@@ -190,7 +188,7 @@ export class Login extends Component {
             this.state.statusLogin = null;
             this.state.isSubscribed = false;
         }
-        if(this.state.isUserSubscriber) {
+        if (this.state.isUserSubscriber) {
             store.unsubscribe('user', this.subscribeLogin);
             this.state.isUserSubscriber = false;
         }

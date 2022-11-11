@@ -47,23 +47,21 @@ export class Signup extends Component {
      * Рендерит регистрацию
      */
     render() {
-        console.log(store.getState('user'))
         if (store.getState('user')) {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
                 window.history.replaceState(
-                    null, 
-                    null, 
-                    window.location.href.replace(hrefRegExp.auth, '')
+                    null,
+                    null,
+                    window.location.href.replace(hrefRegExp.auth, ''),
                 );
             }
             return;
-        } else {
-            if(!this.state.isUserSubscriber) {
-                store.subscribe('user', this.subscribeSignup);
-                this.state.isUserSubscriber = true;
-            }
+        }
+        if (!this.state.isUserSubscriber) {
+            store.subscribe('user', this.subscribeSignup);
+            this.state.isUserSubscriber = true;
         }
 
         if (this.state.statusSignup) {
@@ -213,7 +211,7 @@ export class Signup extends Component {
             this.state.statusSignup = null;
             this.state.isSubscribed = false;
         }
-        if(this.state.isUserSubscriber) {
+        if (this.state.isUserSubscriber) {
             store.unsubscribe('user', this.subscribeSignup);
             this.state.isUserSubscriber = false;
         }

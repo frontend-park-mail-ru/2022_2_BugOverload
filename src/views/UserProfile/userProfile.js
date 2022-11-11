@@ -34,13 +34,10 @@ class UserProfile extends View {
             this.state.isAuthSubscribed = true;
         }
 
-        console.log('auth');
         this.state.user = store.getState('user');
         if (!this.state.user) {
             const authStatus = store.getState('authStatus');
-            console.log(authStatus);
             const logoutStatus = store.getState('logoutStatus');
-            console.log(logoutStatus);
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const redirectMain = new Event(
@@ -58,7 +55,7 @@ class UserProfile extends View {
             return;
         }
 
-        if(!this.state.isDispatchedInfo) {
+        if (!this.state.isDispatchedInfo) {
             store.dispatch(actionGetSettings());
             this.state.isDispatchedInfo = true;
         }
@@ -104,9 +101,9 @@ class UserProfile extends View {
     }
 
     setProfileAvatar() {
-        setTimeout( () => {
+        setTimeout(() => {
             store.dispatch(actionAuth());
-        }, 5000); 
+        }, 5000);
     }
 
     subscribeInfoFunc() {
@@ -132,7 +129,7 @@ class UserProfile extends View {
             this.state.isAuthSubscribed = false;
         }
 
-        this.state.isDispatchedInfo =  false;
+        this.state.isDispatchedInfo = false;
     }
 }
 
