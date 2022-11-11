@@ -77,6 +77,7 @@ this.addEventListener('fetch', (event) => {
 async function cacheFirst(request, isCached = false) {
     const cached = await caches.match(request);
     if (cached) {
+        console.log('cahcereturn',cached )
         return cached;
     }
 
@@ -111,6 +112,7 @@ async function networkFirst(request) {
         } catch {
             return new Response(null, { status: 404, statusText: 'Not Found' });
         }
+        console.log('cahcereturn',cached )
         return cached;
     }
 }
