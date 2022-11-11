@@ -66,7 +66,7 @@ class UserProfile extends View {
             this.render();
         };
         if (!this.state.userInfo) {
-            store.subscribe('userInfo', subscribeFunc);
+            store.subscribe('userInfo', subscribeFunc.bind(this));
             store.dispatch(actionGetSettings());
         }
         // else {
