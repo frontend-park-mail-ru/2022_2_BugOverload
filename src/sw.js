@@ -62,18 +62,18 @@ this.addEventListener('fetch', async (event) => {
     }
 
     cahedOnline.forEach( (partUrl) => {
-        if(navigator.onLine) {
-            if (url.pathname.match(partUrl)) {
-                flag = true;
+        if (url.pathname.match(partUrl)) {
+            if(navigator.onLine) {
+                event.respondWith(networkFirst(request));
+            } else {
+                event.respondWith(cacheFirst(request));
             }
+            return false;
         }
+
     });
 
-    if (url.origin === location.origin && !flag) {
-        event.respondWith(cacheFirst(request));
-    } else {
-        event.respondWith(networkFirst(request));
-    }
+    event.respondWith(networkFirst(request));
 });
 
 async function cacheFirst(request) {
