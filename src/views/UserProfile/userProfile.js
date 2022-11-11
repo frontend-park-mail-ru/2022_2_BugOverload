@@ -86,6 +86,7 @@ class UserProfile extends View {
         store.unsubscribe('user', userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', userProfileOnSubscribe);
         store.unsubscribe('statusChangeAvatar', setProfileAvatar);
+        store.unsubscribe('userInfo', subscribeFuncInfo);
         this.subscribeedOnUser = false;
         this.subscribeedOnLogout = false;
     }
