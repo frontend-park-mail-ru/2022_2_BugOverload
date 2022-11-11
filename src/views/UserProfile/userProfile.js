@@ -16,14 +16,6 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
-        store.subscribe('user', () => {
-            this.state.user = store.getState('user');
-            this.state.authStatus = store.getState('authStatus');
-            this.subscribeedOnUser = true;
-            this.render();
-        });
-        store.subscribe('logoutStatus', userProfileOnSubscribe);
-        this.subscribeedOnLogout = true;
     }
 
     render() {
@@ -57,6 +49,18 @@ class UserProfile extends View {
             this.subscribeedOnUser = true;
         }
 
+        const profile = this.rootNode.querySelector('.profile');
+        if (profile) {
+            profile.remove();
+        }
+        this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
+            {
+                profileMenu: templateProfileMenu(),
+                ...this.state.user,
+                ...this.state.userInfo,
+            },
+        ));
+
         this.state.userInfo = store.getState('userInfo');
         const subscribeFunc = () => {
             this.render();
@@ -67,19 +71,6 @@ class UserProfile extends View {
         } else {
             store.unsubscribe('userInfo', subscribeFunc);
         }
-
-        const profile = this.rootNode.querySelector('.js-profile');
-        if (profile) {
-            profile.remove();
-        }
-
-        this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
-            {
-                profileMenu: templateProfileMenu(),
-                ...this.state.user,
-                ...this.state.userInfo,
-            },
-        ));
 
         // обработчик загрузки авы
         if (this.state.putAvatarStatus) {

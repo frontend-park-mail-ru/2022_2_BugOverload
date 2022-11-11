@@ -45,11 +45,6 @@ async function cacheFirst(request) {
 
     const response = await fetch(request);
 
-    if (navigator.onLine) {
-        const cache = await caches.open(DYNAMIC_CACHE_NAME);
-        await cache.put(request, response.clone());
-    }
-
     return response;
 }
 
