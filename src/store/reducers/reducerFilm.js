@@ -24,9 +24,9 @@ class ReducerFilm {
             body: { score: ratingData.rate * 1.0 },
         });
 
-        if (response.status === 201) {
+        if (response.status === responsStatuses.NoContent) {
             return {
-                rating: response.body,
+                rating: ratingData.rate,
                 statusRating: null,
             };
         }
@@ -83,7 +83,7 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.Created) {
             return {
-                countReviews: store.getState('countReviews') + 1,
+                countReviews: store.getState('countReviews') || 0 + 1,
             };
         }
 
