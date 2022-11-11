@@ -44,7 +44,7 @@ this.addEventListener('fetch', (event) => {
         return response;
     }
 
-    let flag = flase;
+    let flag = false;
     whiteDynamicUrls.forEach( (partUrl) => {
         console.log(url.pathname.match(partUrl));
         if (url.pathname.match(partUrl)) {
