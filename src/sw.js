@@ -30,10 +30,10 @@ this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
-    console.log(url.origin);
-    console.log(url.origin.match(whiteSubUrls[0]));
+    console.log(url);
+    console.log(url.match(whiteSubUrls[0]));
 
-    if (!request.url.match(whiteSubUrls[0])) {
+    if (!request.url.match(whiteSubUrls[0]) || request.url.match(blackSubUrls[0])) {
         return false;
     }
 
