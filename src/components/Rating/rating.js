@@ -52,6 +52,7 @@ export class Rating extends Component {
             return;
         }
         selectedStar.dataset.settedRate = true;
+        // this.isSetted = true;
     }
 
     remove() {
