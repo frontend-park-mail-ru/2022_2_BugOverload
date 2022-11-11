@@ -36,6 +36,10 @@ html {
   scrollbar-width    : none /* Firefox */
 }
 
+textarea {
+  font-family: 'Mail Sans Roman';
+}
+
 input:focus, textarea:focus, select:focus {
   outline: none;
 }

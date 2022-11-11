@@ -1,4 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
+import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 
 class ReducerUser {
@@ -120,11 +121,6 @@ const handlerUrlObject = (object, nameObject) => {
         }
     }
     return object;
-};
-
-const getDateNow = () => {
-    const d = new Date();
-    return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
 };
 
 const handlerUserInfoFields = (userInfo) => {
