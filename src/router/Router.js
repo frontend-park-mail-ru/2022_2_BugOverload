@@ -110,7 +110,6 @@ class Router {
             matchedHref = this.matchHref(location);
         }
         if (this.mapViews.get(matchedHref[0])) {
-            this.cache();
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -141,7 +140,8 @@ class Router {
             }
         } else if (!this.lastView) {
             const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-            currentView.render(window.history.state);
+            this.cache(currentView, window.history.state);
+            //currentView.render(window.history.state);
         }
 
         if (
@@ -153,7 +153,8 @@ class Router {
         ) {
             this.lastView.componentWillUnmount();
         }
-        view.render(stateObject.props);
+        this.cache(view, stateObject.props);
+        //view.render(stateObject.props);
         this.navigate(stateObject, pushState);
         this.lastView = view;
     }
@@ -174,18 +175,25 @@ class Router {
             } else {
                 window.history.pushState(props, null, location + path);
             }
-
-            this.cache();
         }
     }
 
-    cache( url = './' ) {
-     if (navigator.serviceWorker) {
-            navigator.serviceWorker.register('/sw.js', { scope: url });
-            if (!this.cachedUrls.get(url)) {
-                this.cachedUrls.set(url);
-            }
-        } 
+    cache( view, props ) {
+        /*if (!this.cachedUrls.get(url)) {
+            this.cachedUrls.set(url);
+        } else {
+            return;
+        }*/
+
+        if (navigator.serviceWorker) {
+
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register('/sw.js', { scope: './' })
+                    .then( () => {
+                        view.render(props);
+                    });
+            });
+        }
     }
 }
 

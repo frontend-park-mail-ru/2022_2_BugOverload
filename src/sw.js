@@ -17,19 +17,12 @@ const blackSearchUrls = [
 
 const assetUrls = [];
 
-this.addEventListener('install', async () => {
-    const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(assetUrls);
-});
-
-this.addEventListener('activate', async () => {
-    const cacheNames = await caches.keys();
-    await Promise.all(
-        cacheNames
-            .filter((name) => name !== CACHE_NAME)
-            .filter((name) => name !== DYNAMIC_CACHE_NAME)
-            .map((name) => caches.delete(name)),
-    );
+this.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(assetUrls);
+        })
+    )
 });
 
 this.addEventListener('fetch', (event) => {
@@ -37,7 +30,6 @@ this.addEventListener('fetch', (event) => {
     console.log(request.url);
 
     const url = new URL(request.url);
-    console.log(url);
 
     if (request.method !== 'GET') {
         const response = event.waitUntil( fetch(request));
@@ -46,30 +38,24 @@ this.addEventListener('fetch', (event) => {
 
     let flag = false;
     whiteDynamicUrls.forEach( (partUrl) => {
-        console.log(url.pathname.match(partUrl));
         if (url.pathname.match(partUrl)) {
-            console.log(url.pathname.match(partUrl));
             flag = true;
         }
     });
     blackSearchUrls.forEach( (searchUrl) => {
-        console.log(url.search.match(searchUrl))
         if (url.search.match(searchUrl)) {
-            console.log(url.search.match(searchUrl))
             flag = false;
         }
     });
     if (!flag) {
-        //здесь некешируемые Get запросы
+        //здесь некэшируемые Get запросы
         console.log(flag);
-        console.log(url);
 
         event.respondWith(cacheFirst(request));
         return false;
     }
 
-    cahedOnline.forEach( (partUrl) => {
-        console.log(url.pathname.match(partUrl))
+    let exit = cahedOnline.forEach( (partUrl) => {
         if (url.pathname.match(partUrl)) {
             if(navigator.onLine) {
                 event.respondWith(networkFirst(request));
@@ -78,21 +64,31 @@ this.addEventListener('fetch', (event) => {
             }
             return false;
         }
+        return true;
     });
 
-    event.respondWith(cacheFirst(request));
+    if(!exit) {
+        return false;
+    }
+
+    event.respondWith(cacheFirst(request), true);
 });
 
-async function cacheFirst(request) {
+async function cacheFirst(request, isCached = false) {
     const cached = await caches.match(request);
     if (cached) {
         return cached;
     }
+
     const response = await fetch(request);
 
-    const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    if(navigator.onLine) {
-        await cache.put(request, response.clone());
+    if(isCached) {
+        const cache = await caches.open(DYNAMIC_CACHE_NAME);
+        console.log('putCache',isCached,navigator.onLine,)
+        if(navigator.onLine) {
+            console.log('putCache')
+            await cache.put(request, response.clone());
+        }
     }
     return response;
 }
@@ -104,6 +100,7 @@ async function networkFirst(request) {
 
         if(navigator.onLine) {
             await cache.put(request, response.clone());
+            console.log('putCacheNet')
         }
 
         return response;

@@ -77,7 +77,6 @@ const mockFilms = () => [
 ];
 
 export const mockPrewiew = () => ({
-    id: 0,
     name: 'Название',
     origin_name: '',
     short_description: 'Небольшое описание',
