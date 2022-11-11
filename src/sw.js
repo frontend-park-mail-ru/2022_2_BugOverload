@@ -4,6 +4,7 @@ const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 const whiteDynamicUrls = [
     '/image',
     '/collection',
+    '/recommendation',
 ]
 
 const cahedOnline = [
