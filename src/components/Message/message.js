@@ -1,5 +1,5 @@
 import { ROOT } from '@config/config.js';
-import templateError from '@components/Message/message.handlebars';
+import templateError from '@components/Message/errorMessage.handlebars';
 import templateSuccess from '@components/Message/successMessage.handlebars';
 
 /**
