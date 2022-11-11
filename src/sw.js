@@ -40,7 +40,7 @@ this.addEventListener('fetch', async (event) => {
     console.log(url);
 
     if (request.method !== 'GET') {
-        const response = await fetch(request);
+        const response = event.waitUntil(await fetch(request));
         return response;
     }
 
