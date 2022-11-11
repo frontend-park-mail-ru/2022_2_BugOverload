@@ -26,7 +26,7 @@ this.addEventListener('activate', async () => {
     );
 });
 
-this.addEventListener('fetch', (event) => {
+this.addEventListener('fetch', async (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
@@ -38,6 +38,7 @@ this.addEventListener('fetch', (event) => {
     }
 
     if (request.method !== 'GET') {
+        const response = await fetch(request);
         return response;
     }
 
