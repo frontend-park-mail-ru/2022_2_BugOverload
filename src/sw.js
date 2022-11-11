@@ -60,6 +60,8 @@ this.addEventListener('fetch', (event) => {
         }
     });
     if (flag) {
+        console.log(flag);
+        console.log(url);
         event.respondWith(networkFirst(request, false));
         return false;
     }
