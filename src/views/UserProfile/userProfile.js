@@ -16,8 +16,6 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
         };
-        store.subscribe('userInfo', subscribeFuncInfo);
-        store.subscribe('statusChangeAvatar', setProfileAvatar);
     }
 
     render() {
@@ -44,8 +42,11 @@ class UserProfile extends View {
                 return;
             }
             store.subscribe('authStatus', setAuthStatus);
-            store.dispatch(actionAuth());
             return;
+        }
+        if (!this.subscribeedOnUser) {
+            store.subscribe('user', userProfileOnSubscribe);
+            this.subscribeedOnUser = true;
         }
 
         const profile = this.rootNode.querySelector('.js-profile');
@@ -60,14 +61,26 @@ class UserProfile extends View {
             },
         ));
 
+        this.state.userInfo = store.getState('userInfo');
+        const subscribeFunc = () => {
+            this.render();
+        };
         if (!this.state.userInfo) {
+            store.subscribe('userInfo', subscribeFunc);
             store.dispatch(actionGetSettings());
+        } else {
+            store.unsubscribe('userInfo', subscribeFunc);
         }
 
         // обработчик загрузки авы
+        if (this.state.putAvatarStatus) {
+            store.unsubscribe('statusChangeAvatar', setProfileAvatar);
+            this.state.putAvatarStatus = null;
+        }
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
+            store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
         });
@@ -86,8 +99,6 @@ class UserProfile extends View {
         store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', userProfileOnSubscribe);
-        store.unsubscribe('statusChangeAvatar', setProfileAvatar);
-        store.unsubscribe('userInfo', subscribeFuncInfo);
         this.subscribeedOnUser = false;
         this.subscribeedOnLogout = false;
     }
@@ -107,9 +118,4 @@ const setAuthStatus = () => {
 const setProfileAvatar = () => {
     profile.state.putAvatarStatus = store.getState('statusChangeAvatar');
     store.dispatch(actionAuth());
-};
-
-const subscribeFuncInfo = () => {
-    profile.state.userInfo = store.getState('userInfo');
-    profile.render();
 };
