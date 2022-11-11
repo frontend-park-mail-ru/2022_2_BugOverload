@@ -97,11 +97,11 @@ async function cacheFirst(request) {
 
 async function networkFirst(request, isCached = true) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
+    if(!isCached) {
+        const cached = await caches.match(request);
+        return cached;
+    }
     try {
-        if(!isCached) {
-            const cached = await caches.match(request);
-            return cached;
-        }
         const response = await fetch(request);
 
         if(isCached) {
