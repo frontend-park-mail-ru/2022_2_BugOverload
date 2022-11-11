@@ -7,6 +7,7 @@ import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -25,9 +26,11 @@ export class Signup extends Component {
         this.state = {
             statusSignup: null,
             isSubscribed: false,
+            isUserSubscriber: false,
         };
 
         this.subscribeSignupStatus = this.subscribeSignupStatus.bind(this);
+        this.subscribeSignup = this.subscribeSignup.bind(this);
     }
 
     /**
@@ -44,13 +47,23 @@ export class Signup extends Component {
      * Рендерит регистрацию
      */
     render() {
+        console.log(store.getState('user'))
         if (store.getState('user')) {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
+                window.history.replaceState(
+                    null, 
+                    null, 
+                    window.location.href.replace(hrefRegExp.auth, '')
+                );
             }
-            exit();
             return;
+        } else {
+            if(!this.state.isUserSubscriber) {
+                store.subscribe('user', this.subscribeSignup);
+                this.state.isUserSubscriber = true;
+            }
         }
 
         if (this.state.statusSignup) {
@@ -200,6 +213,10 @@ export class Signup extends Component {
             this.state.statusSignup = null;
             this.state.isSubscribed = false;
         }
+        if(this.state.isUserSubscriber) {
+            store.unsubscribe('user', this.subscribeSignup);
+            this.state.isUserSubscriber = false;
+        }
     }
 
     /**
@@ -207,6 +224,10 @@ export class Signup extends Component {
      */
     subscribeSignupStatus() {
         this.state.statusSignup = store.getState('statusSignup');
+        this.render();
+    }
+
+    subscribeSignup() {
         this.render();
     }
 }
