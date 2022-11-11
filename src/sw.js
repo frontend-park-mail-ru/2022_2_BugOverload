@@ -56,7 +56,7 @@ this.addEventListener('fetch', (event) => {
         console.log(url.search.match(searchUrl))
         if (url.search.match(searchUrl)) {
             console.log(url.search.match(searchUrl))
-            flag = flase;
+            flag = false;
         }
     });
     if (!flag) {
