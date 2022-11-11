@@ -41,8 +41,11 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            store.dispatch(actionAuth());
-            store.subscribe('authStatus', setAuthStatus);
+            //store.subscribe('authStatus', setAuthStatus);
+            //if (!this.state.authStatus) {
+            // store.dispatch(actionAuth());
+            // }
+
             return;
         }
         if (!this.subscribeedOnUser) {
@@ -126,8 +129,4 @@ const setAuthStatus = () => {
 
 const setProfileAvatar = () => {
     store.dispatch(actionAuth());
-    if(!profile.state.subscribeedOnUser) {
-        store.subscribe('user', userProfileOnSubscribe);
-        profile.state.subscribeedOnUser = true;
-    }
 };

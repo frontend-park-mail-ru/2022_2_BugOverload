@@ -55,6 +55,7 @@ class ReducerUser {
             return {
                 user: null,
                 logoutStatus: responsStatuses.NoContent,
+                onse: true,
             };
         }
         return null;
