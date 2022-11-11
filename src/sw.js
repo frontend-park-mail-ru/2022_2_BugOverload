@@ -37,8 +37,6 @@ this.addEventListener('fetch', async (event) => {
 
     const url = new URL(request.url);
     console.log(url);
-    console.log(url.pathname.match(whiteDynamicUrls[0]));
-    console.log(url.search.match(blackSearchUrls[0]))
 
     if (request.method !== 'GET') {
         const response = await fetch(request);
@@ -47,11 +45,13 @@ this.addEventListener('fetch', async (event) => {
 
     let flag = false;
     whiteDynamicUrls.forEach( (partUrl) => {
+        console.log(url.pathname.match(partUrl));
         if (!url.pathname.match(partUrl)) {
             flag = true;
         }
     });
     blackSearchUrls.forEach( (searchUrl) => {
+        console.log(url.search.match(partUrl))
         if (url.search.match(searchUrl)) {
             flag = true;
         }
