@@ -58,7 +58,8 @@ this.addEventListener('fetch', async (event) => {
         }
     });
     if (flag) {
-        event.respondWith(cacheFirst(request));
+        const response = await fetch(request);
+        event.respondWith(response);
         return false;
     }
 
@@ -71,9 +72,13 @@ this.addEventListener('fetch', async (event) => {
             }
             return false;
         }
-
     });
 
+    const cached = await caches.match(request);
+    if (cached) {
+        event.respondWith(cached);
+        return false;
+    }
     event.respondWith(networkFirst(request));
 });
 
