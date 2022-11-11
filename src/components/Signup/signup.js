@@ -48,8 +48,8 @@ export class Signup extends Component {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
-                exit();
             }
+            exit();
             return;
         }
 
