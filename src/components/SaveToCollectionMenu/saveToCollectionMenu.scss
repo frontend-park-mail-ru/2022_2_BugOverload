@@ -29,12 +29,6 @@
     font-weight: bolder;
   }
 
-  [used-in-collection="true"] {
-    @include icon-check;
-    width: 20px;
-    height: 20px;
-  }
-
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
@@ -49,4 +43,10 @@
       color: var(--primary-color);
     }
   }
+}
+
+[used-in-collection="true"] {
+  @include icon-check;
+  width: 20px;
+  height: 20px;
 }

@@ -198,9 +198,13 @@ export const mockPerson = () => ({
     birthday: '09.10.2022, 48 лет',
     growth: '1.83 м',
     count_films: 'Количество фильмов',
-    avatar: 'default',
+    avatar: '/assets/img/default/noPerson.webp',
     best_films: mockFilms(),
-    images: ['1', '2', '3', '4', '5'],
+    images: ['/assets/img/default/noPersonImg.webp',
+        '/assets/img/default/noPersonImg.webp',
+        '/assets/img/default/noPersonImg.webp',
+        '/assets/img/default/noPersonImg.webp',
+        '/assets/img/default/noPersonImg.webp'],
 });
 
 export const mockCollection = () => ({
