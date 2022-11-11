@@ -41,10 +41,13 @@ class ReducerUser {
         if (response.status === responsStatuses.OK) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
-                authStatus: null,
+                authStatus: response.status,
+                onse: [
+                    'authStatus',
+                ],
             };
         }
-        return { authStatus: response.status, onse: true };
+        return { authStatus: response.status};
     }
 
     async logout() {
@@ -98,7 +101,9 @@ class ReducerUser {
         if (response.status === responsStatuses.NoContent) {
             return {
                 statusChangeAvatar: response.status,
-                onse: true,
+                onse: [
+                    'statusChangeAvatar',
+                ],
             };
         }
         return { statusChangeAvatar: null };
