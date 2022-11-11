@@ -44,12 +44,15 @@ class Store {
             this.state[key] = newState[key];
             subscribers = this.mapSubscribers.get(key);
 
+            console.log(newState[key], subscribers)
+
             if (subscribers) {
                 subscribers.forEach((subscriber) => subscriber());
             }
 
             if(newState.onse && newState.onse.includes[key]) {
                 delete this.state[key];
+                console.log(this.state[key]);
             }
         });
     }

@@ -2,7 +2,7 @@ import { Ajax } from '@utils/ajax.js';
 import { API, responsStatuses } from '@config/config.js';
 
 class ReducerUser {
-    async login(user) {
+    async login(user) { 
         const responsePromise = Ajax.post({
             url: API.login,
             body: user,
