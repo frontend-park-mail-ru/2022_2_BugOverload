@@ -1,5 +1,5 @@
 import { Review } from '@components/Review/review.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import template from '@components/ListReviews/listReviews.handlebars';
 import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
@@ -94,7 +94,7 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы');
             return;
         }
 

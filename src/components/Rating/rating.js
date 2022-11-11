@@ -2,7 +2,7 @@ import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
 /**
@@ -68,7 +68,7 @@ export class Rating extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы');
             return;
         }
 
@@ -87,7 +87,7 @@ export class Rating extends Component {
 
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы');
             return;
         }
 

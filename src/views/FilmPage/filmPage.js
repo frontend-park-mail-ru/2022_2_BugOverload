@@ -6,7 +6,7 @@ import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
 import { store } from '@store/Store.js';
 import { actionGetFilmData } from '@actions/filmActions.js';
-
+import { ShowMessage } from '@components/Message/message.js';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View.js';
 
@@ -44,6 +44,7 @@ export class FilmPage extends View {
         if (!this.state.film) {
             if (!this.state.isSubscribed) {
                 store.subscribe(`film${this.state.id}`, subscribeFilmPage);
+                store.subscribe('statusSendReview', sendReviewSuccess);
                 this.state.isSubscribed = true;
                 store.dispatch(actionGetFilmData(this.state.id));
             }
@@ -53,6 +54,7 @@ export class FilmPage extends View {
 
         if (this.state.isSubscribed) {
             store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
+            store.unsubscribe('statusSendReview', sendReviewSuccess);
             this.state.isSubscribed = false;
         }
 
@@ -105,6 +107,10 @@ const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
     filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
     filmPage.render();
+};
+
+const sendReviewSuccess = () => {
+    ShowMessage('Успех!', 'positive');
 };
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

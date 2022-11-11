@@ -1,7 +1,7 @@
 import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.handlebars';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
@@ -73,7 +73,7 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button) => {
             this[`${button.dataset.name}`] = (event) => {
                 event.preventDefault();
-                ShowErrorMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`);
+                ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });
