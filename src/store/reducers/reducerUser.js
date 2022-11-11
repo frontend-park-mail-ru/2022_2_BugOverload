@@ -3,7 +3,7 @@ import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 
 class ReducerUser {
-    async login(user) { 
+    async login(user) {
         const responsePromise = Ajax.post({
             url: API.login,
             body: user,
@@ -45,7 +45,7 @@ class ReducerUser {
                 authStatus: null,
             };
         }
-        return { authStatus: response.status};
+        return { authStatus: response.status };
     }
 
     async logout() {

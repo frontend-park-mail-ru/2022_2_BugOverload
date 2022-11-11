@@ -33,8 +33,8 @@ this.addEventListener('fetch', (event) => {
         return response;
     }
 
-    if(url.pathname.match(/\d+\/$/)) {
-        url.pathname = url.pathname.replace(/\d+\/$/,'');
+    if (url.pathname.match(/\d+\/$/)) {
+        url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
     if (whiteDynamicUrls.includes(url.pathname) && !blackSearchUrls.includes(url.search)) {

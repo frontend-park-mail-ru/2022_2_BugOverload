@@ -28,18 +28,18 @@ class UserProfile extends View {
     render() {
         super.render();
 
-        if(!this.state.isAuthSubscribed) {
+        if (!this.state.isAuthSubscribed) {
             store.subscribe('authStatus', this.authProfileOnSubscribe);
             this.state.isAuthSubscribed = true;
         }
 
-        console.log('auth')
+        console.log('auth');
         this.state.user = store.getState('user');
         if (!this.state.user) {
             const authStatus = store.getState('authStatus');
-            console.log(authStatus)
+            console.log(authStatus);
             const logoutStatus = store.getState('logoutStatus');
-            console.log(logoutStatus)
+            console.log(logoutStatus);
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const redirectMain = new Event(
@@ -48,12 +48,11 @@ class UserProfile extends View {
                         bubbles: true,
                         cancelable: true,
                     },
-                ); 
+                );
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
             store.subscribe('user', this.userProfileOnSubscribe);
-            //store.dispatch(actionAuth());
 
             return;
         }
@@ -75,6 +74,11 @@ class UserProfile extends View {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.rootNode.querySelector('.profile__avatar').src = reader.result;
+            };
+            reader.readAsDataURL(formData.get('object'));
         });
 
         const profileChange = new ProfileChange({
@@ -90,24 +94,24 @@ class UserProfile extends View {
     userProfileOnSubscribe() {
         this.state.user = store.getState('user');
         this.render();
-    };
-    
+    }
+
     setProfileAvatar() {
         store.dispatch(actionAuth());
-    };
+    }
 
     subscribeInfoFunc() {
         this.state.userInfo = store.getState('userInfo');
         this.render();
-    };
+    }
 
     authProfileOnSubscribe() {
         this.state.user = store.getState('user');
-        if(this.state.user) {
+        if (this.state.user) {
             store.dispatch(actionGetSettings());
         }
         this.render();
-    };
+    }
 
     componentWillUnmount() {
         store.unsubscribe('user', this.userProfileOnSubscribe);
@@ -115,7 +119,7 @@ class UserProfile extends View {
         store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
         store.subscribe('userInfo', this.subscribeInfoFunc);
 
-        if(this.state.isAuthSubscribed) {
+        if (this.state.isAuthSubscribed) {
             store.unsubscribe('authStatus', this.authProfileOnSubscribe);
             this.state.isAuthSubscribed = false;
         }
