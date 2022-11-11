@@ -32,7 +32,7 @@ this.addEventListener('activate', async () => {
     );
 });
 
-this.addEventListener('fetch', (event) => {
+this.addEventListener('fetch', async (event) => {
     const { request } = event;
     console.log(request.url);
 
@@ -40,7 +40,7 @@ this.addEventListener('fetch', (event) => {
     console.log(url);
 
     if (request.method !== 'GET') {
-        const response = fetch(request);
+        const response = await fetch(request);
         return response;
     }
 
@@ -78,7 +78,7 @@ this.addEventListener('fetch', (event) => {
         }
     });
 
-    const cached = caches.match(request);
+    const cached = await caches.match(request);
     if (cached) {
         event.respondWith(cached);
         return false;
