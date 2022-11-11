@@ -2,7 +2,7 @@ const CACHE_NAME = 'moviegate-v-1';
 const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 
 const whiteSubUrls = [
-    '/image?',
+    '/image',
 ]
 
 const blackSubUrls = [
@@ -31,9 +31,10 @@ this.addEventListener('fetch', async (event) => {
 
     const url = new URL(request.url);
     console.log(url);
-    console.log(url.match(whiteSubUrls[0]));
+    console.log(url.pathname.match(whiteSubUrls[0]));
+    console.log(url.search.match(blackSubUrls[0]))
 
-    if (!request.url.match(whiteSubUrls[0]) || request.url.match(blackSubUrls[0])) {
+    if (!url.pathname.match(whiteSubUrls[0]) || url.search.match(blackSubUrls[0])) {
         return false;
     }
 
