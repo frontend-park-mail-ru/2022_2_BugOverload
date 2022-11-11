@@ -41,7 +41,7 @@ class ReducerUser {
         if (response.status === responsStatuses.OK) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
-                authStatus: response.status,
+                authStatus: null,
                 onse: [
                     'authStatus',
                 ],

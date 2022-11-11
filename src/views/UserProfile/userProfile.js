@@ -15,25 +15,26 @@ class UserProfile extends View {
             subscribeedOnUser: false,
             subscribeedOnLogout: false,
             subscribeedOnAvatar: false,
+            subscribeedOnAuth: false,
         };
     }
 
     render() {
         super.render();
 
-        if (!this.subscribeedOnLogout) {
+        if (!this.state.subscribeedOnLogout) {
             store.subscribe('logoutStatus', userProfileOnSubscribe);
             this.subscribeedOnLogout = true;
         }
 
-        if (!this.subscribeedOnUser) {
+        if (!this.state.subscribeedOnUser) {
             store.subscribe('user', userProfileOnSubscribe);
             this.subscribeedOnUser = true;
         }
 
         if (!this.state.user) {
-            const logoutStatus = store.getState('logoutStatus');
             const authStatus = store.getState('authStatus');
+            const logoutStatus = store.getState('logoutStatus');
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const redirectMain = new Event(
