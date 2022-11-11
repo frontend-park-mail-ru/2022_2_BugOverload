@@ -48,16 +48,23 @@ this.addEventListener('fetch', async (event) => {
     whiteDynamicUrls.forEach( (partUrl) => {
         console.log(url.pathname.match(partUrl));
         if (!url.pathname.match(partUrl)) {
+            console.log(url.pathname.match(partUrl));
             flag = true;
         }
     });
     blackSearchUrls.forEach( (searchUrl) => {
         console.log(url.search.match(searchUrl))
         if (url.search.match(searchUrl)) {
+            console.log(url.search.match(searchUrl))
             flag = true;
         }
     });
     if (flag) {
+        const cached = await caches.match(request);
+        if (cached) {
+            event.respondWith(cached);
+            return false;
+        }
         event.respondWith(networkFirst(request, false));
         return false;
     }
