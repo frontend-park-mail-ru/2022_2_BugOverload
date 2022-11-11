@@ -34,13 +34,14 @@ this.addEventListener('fetch', async (event) => {
     console.log(url.pathname.match(whiteSubUrls[0]));
     console.log(url.search.match(blackSubUrls[0]))
 
-    if (!url.pathname.match(whiteSubUrls[0]) || url.search.match(blackSubUrls[0])) {
-        return false;
-    }
-
     if (request.method !== 'GET') {
         const response = await fetch(request);
         return response;
+    }
+
+    if (!url.pathname.match(whiteSubUrls[0]) || url.search.match(blackSubUrls[0])) {
+        event.respondWith(cacheFirst(request));
+        return false;
     }
 
     if (url.origin === location.origin) {
