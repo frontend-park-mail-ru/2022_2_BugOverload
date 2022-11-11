@@ -20,8 +20,6 @@ class UserProfile extends View {
         this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
 
         store.subscribe('logoutStatus', this.userProfileOnSubscribe);
-        store.subscribe('user', this.userProfileOnSubscribe);
-        store.subscribe('authStatus', this.authProfileOnSubscribe);
         store.subscribe('userInfo', this.subscribeInfoFunc);
         store.subscribe('statusChangeAvatar', this.setProfileAvatar);
     }
@@ -44,7 +42,9 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            //store.dispatch(actionAuth());
+            store.subscribe('authStatus', this.authProfileOnSubscribe);
+            store.subscribe('user', this.userProfileOnSubscribe);
+            store.dispatch(actionAuth());
 
             return;
         }
