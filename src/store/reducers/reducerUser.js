@@ -44,7 +44,7 @@ class ReducerUser {
                 authStatus: null,
             };
         }
-        return { authStatus: response.status };
+        return { authStatus: response.status, onse: true };
     }
 
     async logout() {
