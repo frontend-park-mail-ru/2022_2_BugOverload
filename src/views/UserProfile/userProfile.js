@@ -44,6 +44,7 @@ class UserProfile extends View {
                 return;
             }
             store.subscribe('authStatus', setAuthStatus);
+            store.dispatch(actionAuth());
             return;
         }
 
