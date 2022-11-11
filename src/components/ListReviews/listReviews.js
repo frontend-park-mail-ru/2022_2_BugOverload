@@ -57,8 +57,7 @@ export class ListReviews extends Component {
      */
     render() {
         if (!this.state.reviews && this.isMounted) {
-            // this.componentWillUnmount();
-            console.log('review this.isMounted');
+            this.componentWillUnmount();
             return;
         }
 

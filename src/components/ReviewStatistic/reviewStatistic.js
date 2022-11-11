@@ -19,9 +19,9 @@ export class ReviewStatistic extends Component {
      */
     render() {
         this.location.insertAdjacentHTML('afterbegin', template({
-            total: this.state.film.count_negative_reviews
-                + this.state.film.count_neutral_reviews
-                + this.state.film.count_positive_reviews || 0,
+            total: (this.state.film.count_negative_reviews || 0)
+                + (this.state.film.count_neutral_reviews || 0)
+                + (this.state.film.count_positive_reviews || 0),
             negative: this.state.film.count_negative_reviews || 0,
             neutral: this.state.film.count_neutral_reviews || 0,
             positive: this.state.film.count_positive_reviews || 0,

@@ -38,15 +38,15 @@ export class Rating extends Component {
 
         this.location.insertAdjacentHTML('afterbegin', template({
             ...this.state.statusRating,
-            ...this.state.rating,
-            [`type_${this.state.film.type}`]: true,
+            rate: this.state.rating,
+            [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating,
         }));
         this.componentDidMount();
         if (!this.state.rating) {
             return;
         }
-        const selectedStar = this.location.querySelector(`[value="${this.state.rating.rate}"]`);
+        const selectedStar = this.location.querySelector(`[value="${this.state.rating}"]`);
         if (!selectedStar) {
             return;
         }
