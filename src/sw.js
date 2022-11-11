@@ -1,11 +1,16 @@
 const CACHE_NAME = 'moviegate-v-1';
 const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 
-const whiteSubUrls = [
+const whiteDynamicUrls = [
     '/image',
+    '/collection',
 ]
 
-const blackSubUrls = [
+const cahedOnline = [
+    '/recommendation',
+]
+
+const blackSearchUrls = [
     'object=user_avatar',
 ]
 
@@ -31,20 +36,39 @@ this.addEventListener('fetch', async (event) => {
 
     const url = new URL(request.url);
     console.log(url);
-    console.log(url.pathname.match(whiteSubUrls[0]));
-    console.log(url.search.match(blackSubUrls[0]))
+    console.log(url.pathname.match(whiteDynamicUrls[0]));
+    console.log(url.search.match(blackSearchUrls[0]))
 
     if (request.method !== 'GET') {
         const response = await fetch(request);
         return response;
     }
 
-    if (!url.pathname.match(whiteSubUrls[0]) || url.search.match(blackSubUrls[0])) {
+    let flage = false;
+    whiteDynamicUrls.forEach( (partUrl) => {
+        if (!url.pathname.match(partUrl)) {
+            flage = true;
+        }
+    });
+    blackSearchUrls.forEach( (searchUrl) => {
+        if (url.search.match(searchUrl)) {
+            flage = true;
+        }
+    });
+    if (flag) {
         event.respondWith(cacheFirst(request));
         return false;
     }
 
-    if (url.origin === location.origin) {
+    cahedOnline.forEach( (partUrl) => {
+        if(navigator.onLine) {
+            if (url.pathname.match(partUrl)) {
+                flage = true;
+            }
+        }
+    });
+
+    if (url.origin === location.origin && !flage) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
