@@ -171,7 +171,7 @@ export class InputReview extends Component {
 
         head.addEventListener('click', this.doOpenClose);
 
-        this.handlerSetValueWrapper = (item) => function () {
+        this.handlerSetValueWrapper = (item) => () => {
             head.removeAttribute('open');
             list.setAttribute('hidden', '');
             headText.innerHTML = item.textContent;
