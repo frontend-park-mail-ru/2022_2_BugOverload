@@ -44,15 +44,15 @@ this.addEventListener('fetch', async (event) => {
         return response;
     }
 
-    let flage = false;
+    let flag = false;
     whiteDynamicUrls.forEach( (partUrl) => {
         if (!url.pathname.match(partUrl)) {
-            flage = true;
+            flag = true;
         }
     });
     blackSearchUrls.forEach( (searchUrl) => {
         if (url.search.match(searchUrl)) {
-            flage = true;
+            flag = true;
         }
     });
     if (flag) {
@@ -63,12 +63,12 @@ this.addEventListener('fetch', async (event) => {
     cahedOnline.forEach( (partUrl) => {
         if(navigator.onLine) {
             if (url.pathname.match(partUrl)) {
-                flage = true;
+                flag = true;
             }
         }
     });
 
-    if (url.origin === location.origin && !flage) {
+    if (url.origin === location.origin && !flag) {
         event.respondWith(cacheFirst(request));
     } else {
         event.respondWith(networkFirst(request));
