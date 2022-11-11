@@ -78,7 +78,7 @@ this.addEventListener('fetch', async (event) => {
         }
     });
 
-    const cached = await caches.match(request);
+    const cached = event.waitUntil(caches.match(request));
     if (cached) {
         event.respondWith(cached);
         return false;
