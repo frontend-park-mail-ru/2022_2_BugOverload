@@ -44,10 +44,10 @@ this.addEventListener('fetch', (event) => {
         return response;
     }
 
-    let flag = false;
+    let flag = flase;
     whiteDynamicUrls.forEach( (partUrl) => {
         console.log(url.pathname.match(partUrl));
-        if (!url.pathname.match(partUrl)) {
+        if (url.pathname.match(partUrl)) {
             console.log(url.pathname.match(partUrl));
             flag = true;
         }
@@ -56,10 +56,10 @@ this.addEventListener('fetch', (event) => {
         console.log(url.search.match(searchUrl))
         if (url.search.match(searchUrl)) {
             console.log(url.search.match(searchUrl))
-            flag = true;
+            flag = flase;
         }
     });
-    if (flag) {
+    if (!flag) {
         console.log(flag);
         console.log(url);
         event.respondWith(networkFirst(request, false));
