@@ -58,9 +58,10 @@ export class Collection extends Component {
     render() {
         const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
 
-        if (this.state.collection.name) {
-            this.state.collection.name = 
-                this.state.collection.name[0].toUpperCase() + this.state.collection.name.slice(1);
+        let {name} = this.state.collection;
+        if (name) {
+            name = name[0].toUpperCase() + name.slice(1);
+            this.state.collection.name = name;
         }
 
         this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films }));
