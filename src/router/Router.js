@@ -1,7 +1,7 @@
 import { routes, ROOT } from '@config/config.js';
 import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import { render404 } from '@router/Page404/page404.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -90,7 +90,7 @@ class Router {
      */
     refresh() {
         window.addEventListener('offline', () => {
-            ShowErrorMessage('Проблемы с интернет соединением');
+            ShowMessage('Проблемы с интернет соединением');
         });
 
         const location = (window.location.href.match(hrefRegExp.host))
