@@ -19,6 +19,7 @@
         "eol-last": ["error", "always"],
         "semi": ["error", "always"],
         "no-console": 1,
+        "consistent-return": 1,
         "no-alert": 2,
         "no-debugger": 1,
         "no-use-before-define": 0,
