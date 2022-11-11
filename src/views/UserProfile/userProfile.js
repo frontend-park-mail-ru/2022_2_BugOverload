@@ -96,8 +96,8 @@ class UserProfile extends View {
         this.state.user = store.getState('user');
         if(this.state.user) {
             store.dispatch(actionGetSettings());
+            this.render();
         }
-        this.render();
     };
 
     componentWillUnmount() {
