@@ -52,7 +52,7 @@ this.addEventListener('fetch', async (event) => {
         }
     });
     blackSearchUrls.forEach( (searchUrl) => {
-        console.log(url.search.match(partUrl))
+        console.log(url.search.match(searchUrl))
         if (url.search.match(searchUrl)) {
             flag = true;
         }
@@ -64,6 +64,7 @@ this.addEventListener('fetch', async (event) => {
     }
 
     cahedOnline.forEach( (partUrl) => {
+        console.log(url.pathname.match(partUrl))
         if (url.pathname.match(partUrl)) {
             if(navigator.onLine) {
                 event.respondWith(networkFirst(request));
