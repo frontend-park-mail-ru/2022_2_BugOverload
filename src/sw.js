@@ -32,7 +32,7 @@ this.addEventListener('activate', async () => {
     );
 });
 
-this.addEventListener('fetch', async (event) => {
+this.addEventListener('fetch', (event) => {
     const { request } = event;
     console.log(request.url);
 
@@ -40,7 +40,7 @@ this.addEventListener('fetch', async (event) => {
     console.log(url);
 
     if (request.method !== 'GET') {
-        const response = event.waitUntil(await fetch(request));
+        const response = event.waitUntil( fetch(request));
         return response;
     }
 
@@ -60,9 +60,11 @@ this.addEventListener('fetch', async (event) => {
         }
     });
     if (!flag) {
+        //здесь некешируемые Get запросы
         console.log(flag);
         console.log(url);
-        event.respondWith(networkFirst(request, false));
+
+        event.respondWith(cacheFirst(request));
         return false;
     }
 
@@ -78,12 +80,7 @@ this.addEventListener('fetch', async (event) => {
         }
     });
 
-    const cached = event.waitUntil(caches.match(request));
-    if (cached) {
-        event.respondWith(cached);
-        return false;
-    }
-    event.respondWith(networkFirst(request));
+    event.respondWith(cacheFirst(request));
 });
 
 async function cacheFirst(request) {
@@ -92,19 +89,20 @@ async function cacheFirst(request) {
         return cached;
     }
     const response = await fetch(request);
+
+    const cache = await caches.open(DYNAMIC_CACHE_NAME);
+    if(navigator.onLine) {
+        await cache.put(request, response.clone());
+    }
     return response;
 }
 
-async function networkFirst(request, isCached = true) {
+async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    if(!isCached) {
-        const cached = await caches.match(request);
-        return cached;
-    }
     try {
         const response = await fetch(request);
 
-        if(isCached) {
+        if(navigator.onLine) {
             await cache.put(request, response.clone());
         }
 
