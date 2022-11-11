@@ -103,7 +103,7 @@ class UserProfile extends View {
     componentWillUnmount() {
         store.unsubscribe('user', this.userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
-        store.unsubscribe('authStatus', this.userProfileOnSubscribe);
+        store.subscribe('authStatus', this.authProfileOnSubscribe);
         store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
         store.subscribe('userInfo', this.subscribeInfoFunc);
     }

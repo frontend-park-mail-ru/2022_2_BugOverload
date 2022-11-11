@@ -72,7 +72,7 @@ app.get('/api/v1/auth',  (req, res) => {
 	} else {
 		i = 0;
 	}*/
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
+	res.status(400).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
 });
 
 app.put('/api/v1/user/setting',  (req, res) => {
