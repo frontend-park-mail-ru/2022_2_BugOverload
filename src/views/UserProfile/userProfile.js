@@ -27,7 +27,6 @@ class UserProfile extends View {
             this.subscribeedOnLogout = true;
         }
 
-        this.state.user = store.getState('user');
         if (!this.state.user) {
             const logoutStatus = store.getState('logoutStatus');
             if (this.state.authStatus || logoutStatus) {
@@ -116,6 +115,7 @@ class UserProfile extends View {
 export const profile = new UserProfile({ rootNode: document.getElementById('root') });
 
 const userProfileOnSubscribe = () => {
+    profile.state.user = store.getState('user');
     profile.render();
 };
 
@@ -126,4 +126,8 @@ const setAuthStatus = () => {
 
 const setProfileAvatar = () => {
     store.dispatch(actionAuth());
+    if(!profile.state.subscribeedOnUser) {
+        store.subscribe('user', userProfileOnSubscribe);
+        profile.state.subscribeedOnUser = true;
+    }
 };
