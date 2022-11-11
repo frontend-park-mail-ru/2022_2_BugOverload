@@ -10,7 +10,6 @@ class UserProfile extends View {
         super(props);
         this.state = {
             user: null,
-            authStatus: null,
             putAvatarStatus: null,
             userInfo: null,
             subscribeedOnUser: false,
@@ -27,9 +26,15 @@ class UserProfile extends View {
             this.subscribeedOnLogout = true;
         }
 
+        if (!this.subscribeedOnUser) {
+            store.subscribe('user', userProfileOnSubscribe);
+            this.subscribeedOnUser = true;
+        }
+
         if (!this.state.user) {
             const logoutStatus = store.getState('logoutStatus');
-            if (this.state.authStatus || logoutStatus) {
+            const authStatus = store.getState('authStatus');
+            if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const redirectMain = new Event(
                     'click',
@@ -41,16 +46,9 @@ class UserProfile extends View {
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
-            store.subscribe('authStatus', setAuthStatus);
-            if (!this.state.authStatus) {
-             store.dispatch(actionAuth());
-            //}
+            store.dispatch(actionAuth());
 
             return;
-        }
-        if (!this.subscribeedOnUser) {
-            store.subscribe('user', userProfileOnSubscribe);
-            this.subscribeedOnUser = true;
         }
 
         const profile = this.rootNode.querySelector('.js-profile');
@@ -101,7 +99,6 @@ class UserProfile extends View {
     }
 
     componentWillUnmount() {
-        store.unsubscribe('authStatus', setAuthStatus);
         store.unsubscribe('user', userProfileOnSubscribe);
         store.unsubscribe('logoutStatus', userProfileOnSubscribe);
 
@@ -119,11 +116,6 @@ export const profile = new UserProfile({ rootNode: document.getElementById('root
 
 const userProfileOnSubscribe = () => {
     profile.state.user = store.getState('user');
-    profile.render();
-};
-
-const setAuthStatus = () => {
-    profile.state.authStatus = store.getState('authStatus');
     profile.render();
 };
 
