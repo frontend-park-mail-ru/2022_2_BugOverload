@@ -66,7 +66,7 @@ class ReducerUser {
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
-                userInfo: response.body,
+                userInfo: handlerUserInfoFields(response.body),
             };
         }
         return null;
@@ -114,4 +114,25 @@ const handlerUrlObject = (object, nameObject) => {
         }
     }
     return object;
+};
+
+const getDateNow = () => {
+    const d = new Date();
+    return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
+};
+
+const handlerUserInfoFields = (userInfo) => {
+    if(userInfo) {
+        Object.keys(userInfo).forEach( (nameProperty) => {
+            if(!userInfo[nameProperty]) {
+                    if(nameProperty === 'joined_date') {
+                        userInfo[nameProperty] = getDateNow();
+                        return;
+                    }
+                userInfo[nameProperty] = 0;
+            }
+        });
+    }
+
+    return userInfo;
 };

@@ -65,19 +65,11 @@ class UserProfile extends View {
             profile.remove();
         }
 
-        this.getDateNow = () => {
-            const d = new Date();
-            return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
-        };
-
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 profileMenu: templateProfileMenu(),
                 ...this.state.user,
-                joined_date: this.state.userInfo.joined_date || this.getDateNow(),
-                count_ratings: this.state.userInfo.count_ratings || 0,
-                count_collections: this.state.userInfo.count_collections || 0,
-                count_reviews: this.state.userInfo.count_reviews || 0,
+                ...this.state.userInfo,
             },
         ));
 
