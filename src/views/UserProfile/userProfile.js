@@ -64,9 +64,10 @@ class UserProfile extends View {
         if (!this.state.userInfo) {
             store.subscribe('userInfo', subscribeFunc);
             store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
         }
+        // else {
+        //     store.unsubscribe('userInfo', subscribeFunc);
+        // }
 
         const profile = this.rootNode.querySelector('.js-profile');
         if (profile) {
@@ -81,18 +82,18 @@ class UserProfile extends View {
             },
         ));
 
-        // обработчик загрузки авы
-        if (this.state.putAvatarStatus) {
-            store.unsubscribe('statusChangeAvatar', setProfileAvatar);
-            this.state.putAvatarStatus = null;
-        }
+        // // обработчик загрузки авы
+        // if (this.state.putAvatarStatus) {
+        //     store.unsubscribe('statusChangeAvatar', setProfileAvatar);
+        //     this.state.putAvatarStatus = null;
+        // }
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
             store.subscribe('statusChangeAvatar', setProfileAvatar);
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
-            this.state.putAvatarStatus = true;
+            // this.state.putAvatarStatus = true;
         });
 
         const profileChange = new ProfileChange({
