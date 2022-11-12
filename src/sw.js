@@ -29,7 +29,7 @@ this.addEventListener('fetch', (event) => {
     const url = new URL(request.url);
 
     if (request.method !== 'GET') {
-        const response = fetch(request);
+        const response = event.waitUntil(fetch(request));
         return response;
     }
 
