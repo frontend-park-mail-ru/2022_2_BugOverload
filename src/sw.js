@@ -38,6 +38,7 @@ this.addEventListener('fetch', async (event) => {
     }
 
     console.log(url.search.match(blackSearchUrls[0]), url);
+    console.log(url.search.match('object=user_avatar'), url.search.match(/object=user_avatar/));
 
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
