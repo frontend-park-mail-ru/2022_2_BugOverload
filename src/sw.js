@@ -37,7 +37,7 @@ this.addEventListener('fetch', (event) => {
         url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
-    if (whiteDynamicUrls.includes(url.pathname) && !blackSearchUrls.includes(url.search)) {
+    if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
     } else {
         event.respondWith(cacheFirst(request));
