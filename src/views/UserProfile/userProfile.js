@@ -4,6 +4,7 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { store } from '@store/Store.js';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
+import { ShowMessage } from '@components/Message/message.js';
 
 class UserProfile extends View {
     constructor(props) {
