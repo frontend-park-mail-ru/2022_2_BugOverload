@@ -39,7 +39,6 @@ function updateInfo() {
 
     this.update = (type) => {
         if (!type) {
-            console.log('no type!');
             return;
         }
         if (type === 'positive') {
