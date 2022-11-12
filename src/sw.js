@@ -40,6 +40,10 @@ this.addEventListener('fetch', (event) => {
     console.log(url.search.match(blackSearchUrls[0]), url);
     console.log(url.search.match('object=user_avatar'), url.search.match(/object=user_avatar/));
 
+    if(url.search.match(blackSearchUrls[0])) {
+        return fetch(request);
+    }
+
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
     } else {
