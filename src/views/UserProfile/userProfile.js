@@ -106,10 +106,10 @@ class UserProfile extends View {
     }
 
     setProfileAvatar() {
-        setTimeout(() => {
+        //setTimeout(() => {
             store.dispatch(actionAuth());
             ShowMessage('Успех!', 'positive');
-        }, 5000);
+        //}, 5000);
     }
 
     subscribeInfoFunc() {
