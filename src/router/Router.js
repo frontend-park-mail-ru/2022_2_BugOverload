@@ -131,7 +131,8 @@ class Router {
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             const loginView = this.mapViews.get('/login/');
             const signupView = this.mapViews.get('/signup/');
-            if (this.lastView !== loginView && this.lastView !== signupView) {
+            const modal = document.body.querySelector('.modal__background');
+            if (!modal || (this.lastView !== loginView && this.lastView !== signupView)) {
                 this.root.replaceChildren();
             } else {
                 this.navigate(stateObject, pushState);
