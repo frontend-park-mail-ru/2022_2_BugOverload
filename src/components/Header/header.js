@@ -3,7 +3,7 @@ import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionAuth } from '@store/actionCreater/userActions.js';
-import { ShowMessage } from '@components/Message/message';
+import { ShowMessage } from '@components/Message/message.js';
 
 /**
 * Отрисовывает хедер.

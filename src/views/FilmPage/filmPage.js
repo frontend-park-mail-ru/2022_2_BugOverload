@@ -113,7 +113,7 @@ const subscribeFilmPage = () => {
 };
 
 const sendReviewSuccess = () => {
-    ShowMessage('Успех!', 'positive');
+    ShowMessage('Спасибо за вашу рецензию', 'positive');
 };
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });
