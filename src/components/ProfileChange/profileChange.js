@@ -9,6 +9,7 @@ import {
 } from '@utils/valid.js';
 import { store } from '@store/Store.js';
 import { responsStatuses } from '@config/config.js';
+import { ShowMessage } from '@components/Message/message.js';
 
 export class ProfileChange extends Component {
     constructor(props) {
@@ -60,6 +61,7 @@ export class ProfileChange extends Component {
             renderError(wrapper, 'password', 'Неправильный пароль');
         } else {
             store.dispatch(actionAuth());
+            ShowMessage('Успех!', 'positive');
         }
     }
 
