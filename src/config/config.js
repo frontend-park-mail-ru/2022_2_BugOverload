@@ -25,14 +25,14 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}`;
+            const rand = randomMy();
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${rand}`;
         },
         person_avatar(key) {
             if (key === 'default') {
                 return '/assets/img/default/noPerson.webp';
             }
-            const rand = randomMy();
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}&rnd=${rand}`;
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
         },
         person_image(id, image) {
             if (id === 0) {
