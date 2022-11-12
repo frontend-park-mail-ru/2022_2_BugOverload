@@ -154,17 +154,23 @@
   &__button-bookmark {
     width: 48px;
     height: 48px;
-    margin-left: 14px;
   }
 
   &__button-plus {
     width: 48px;
     height: 48px;
-    margin-left: 14px;
   }
 
   &__save-to-collection {
     display: flex;
     flex-direction: column;
+  }
+
+  &__btn-save-to-bookmar {
+    margin-left: 14px;
+  }
+
+  &__save-to-collection {
+    margin-left: 14px;
   }
 }
