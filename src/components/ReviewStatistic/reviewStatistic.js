@@ -37,11 +37,15 @@ function updateInfo() {
     this.state.statusSendReview = store.getState('statusSendReview');
     this.location.querySelector('.js-component-review-statistic')?.remove();
 
-    update();
+    update(this.state.statusSendReview?.type);
     this.render();
 }
 
-const update = () => {
+const update = (type) => {
+    if (!type) {
+        console.log('no type!');
+        return;
+    }
     if (type === 'positive') {
         this.state.film.count_positive_reviews = (this.state.film.count_positive_reviews
             || 0) + 1;

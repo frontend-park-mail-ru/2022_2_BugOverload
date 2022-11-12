@@ -120,6 +120,7 @@ export class ListReviews extends Component {
                 isBuzy = true;
 
                 if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
+                    isBuzy = false;
                     return;
                 }
 
