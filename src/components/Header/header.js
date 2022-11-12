@@ -56,26 +56,26 @@ export class Header extends Component {
     componentDidMount() {
         const btnMyFilms = this.rootNode.querySelector('.js-header__navlink-my-films');
         this.handlerOpenMyFilms = () => ShowMessage('\"Мои Фильмы\" в разработке');
-        btnMyFilms.addEventListener('click', handlerOpenMyFilms);
+        btnMyFilms.addEventListener('click', this.handlerOpenMyFilms);
 
         const btnMyColls = this.rootNode.querySelector('.js-header__navlink-my-colls');
         this.handlerOpenColls = () => ShowMessage('\"Коллекции\" в разработке');
-        btnMyColls.addEventListener('click', handlerOpenColls);
+        btnMyColls.addEventListener('click', this.handlerOpenColls);
 
         const btnTop = this.rootNode.querySelector('.js-header__navlink-top-250');
         this.handlerOpenTop = () => ShowMessage('\"Топ-250\" в разработке');
-        btnTop.addEventListener('click', handlerOpenTop);
+        btnTop.addEventListener('click', this.handlerOpenTop);
     }
 
     componentWillUnmount() {
         const btnMyFilms = this.rootNode.querySelector('.js-header__navlink-my-films');
-        btnMyFilms.removeEventListener('click', handlerOpenMyFilms);
+        btnMyFilms.removeEventListener('click', this.handlerOpenMyFilms);
 
         const btnMyColls = this.rootNode.querySelector('.js-header__navlink-my-colls');
-        btnMyColls.removeEventListener('click', handlerOpenColls);
+        btnMyColls.removeEventListener('click', this.handlerOpenColls);
 
         const btnTop = this.rootNode.querySelector('.js-header__navlink-top-250');
-        btnTop.removeEventListener('click', handlerOpenTop);
+        btnTop.removeEventListener('click', this.handlerOpenTop);
     }
 }
 
