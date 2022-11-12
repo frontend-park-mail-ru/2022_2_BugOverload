@@ -43,14 +43,16 @@ this.addEventListener('fetch', async (event) => {
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
     } else {
-        event.respondWith(cacheFirst(request));
+        event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
     }
 });
 
-async function cacheFirst(request) {
-    const cached = await caches.match(request);
-    if (cached) {
-        return cached;
+async function cacheFirst(request, watchCache = false) {
+    if(!watchCache) {
+        const cached = await caches.match(request);
+        if (cached) {
+            return cached;
+        }
     }
 
     const response = await fetch(request);
