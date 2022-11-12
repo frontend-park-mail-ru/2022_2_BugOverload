@@ -23,13 +23,13 @@ this.addEventListener('install', (event) => {
     );
 });
 
-this.addEventListener('fetch', (event) => {
+this.addEventListener('fetch', async (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
 
     if (request.method !== 'GET') {
-        const response = event.waitUntil(fetch(request));
+        const response = fetch(request);
         return response;
     }
 
@@ -37,7 +37,7 @@ this.addEventListener('fetch', (event) => {
         url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
-    console.log(url.search.match(blackSearchUrls[0]), url)
+    console.log(url.search.match(blackSearchUrls[0]), url);
 
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
