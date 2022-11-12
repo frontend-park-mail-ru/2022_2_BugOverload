@@ -53,8 +53,8 @@ class ReducerFilm {
             return {
                 listCollectionsUser: response.body.collections,
                 rating: {
-                    value: response.body.rating,
-                    dateRating: response.body.date_rating.split(' ')[0].split('.').reverse().join('.'),
+                    value: response.body?.rating,
+                    dateRating: response.body?.date_rating.split(' ')[0].split('.').reverse().join('.'),
                 },
                 countReviews: response.body.count_reviews,
             };
