@@ -47,7 +47,7 @@ class UserProfile extends View {
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
                 const removeProfile = this.rootNode.querySelector('.js-profile');
-                if(removeProfile) {
+                if (removeProfile) {
                     removeProfile.remove();
                 }
                 window.history.replaceState(
@@ -95,6 +95,8 @@ class UserProfile extends View {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
+            ShowMessage('Ваш запрос выполняется...', 'posivite');
+
             const reader = new FileReader();
             reader.onload = () => {
                 this.rootNode.querySelector('.profile__avatar').src = reader.result;
