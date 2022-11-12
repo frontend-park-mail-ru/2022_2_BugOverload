@@ -105,7 +105,9 @@ export class FilmPage extends View {
 */
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
-    filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
+    filmPage.state.film.rating = (Number.isInteger(filmPage.state.film.rating))
+        ? filmData.rating = `${filmData.rating}.0`
+        : Math.round(filmPage.state.film.rating * 10) / 10;
     filmPage.render();
 };
 
