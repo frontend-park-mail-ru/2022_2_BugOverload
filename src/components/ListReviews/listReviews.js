@@ -109,26 +109,28 @@ export class ListReviews extends Component {
     /**
     * Выбрасывает action с запросом за новыми рецензиями при прокрутке вниз страницы
     */
-    handlerShowMoreWrapper = () => (function () {
+    handlerShowMoreWrapper = () => {
         let isBuzy = false;
-        setTimeout(() => {
+        return (function () {
             if (isBuzy) {
                 return;
             }
-            isBuzy = true;
+            setTimeout(() => {
+                isBuzy = true;
 
-            if ((window.innerHeight + window.pageYOffset) + 30 < document.body.offsetHeight) {
-                return;
-            }
+                if ((window.innerHeight + window.pageYOffset) + 50 < document.body.offsetHeight) {
+                    return;
+                }
 
-            store.dispatch(actionGetDataReviews({
-                filmID: this.state.film.id,
-                offset: this.offset,
-                count: this.step,
-            }));
-            isBuzy = false;
-        }, 400);
-    }).bind(this);
+                store.dispatch(actionGetDataReviews({
+                    filmID: this.state.film.id,
+                    offset: this.offset,
+                    count: this.step,
+                }));
+                isBuzy = false;
+            }, 400);
+        }).bind(this);
+    };
 
     /**
      * Навешивает обработчики на кнопку создания формы написания рецензии,

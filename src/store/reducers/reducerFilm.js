@@ -28,7 +28,7 @@ class ReducerFilm {
         if (response.status === responsStatuses.NoContent) {
             return {
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
-                statusRating: null,
+                statusRating: response.status,
             };
         }
         return { statusRating: response.status };
