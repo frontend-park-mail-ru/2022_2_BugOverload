@@ -108,7 +108,11 @@ class UserProfile extends View {
     setProfileAvatar() {
         setTimeout(() => {
             store.dispatch(actionAuth());
-            ShowMessage('Успех!', 'positive');
+            if(store.getState('statusChangeAvatar')) {
+                ShowMessage('Успех!', 'positive');
+            } else {
+                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative');
+            }
         }, 4000);
     }
 
