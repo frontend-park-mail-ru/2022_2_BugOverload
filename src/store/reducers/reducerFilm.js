@@ -95,7 +95,7 @@ class ReducerFilm {
                     author: {
                         avatar,
                         nickname,
-                        countReviews,
+                        count_reviews: countReviews,
                     },
                     body,
                     name,

@@ -117,7 +117,7 @@ export class ListReviews extends Component {
             }
             isBuzy = true;
 
-            if ((window.innerHeight + window.pageYOffset) - 50 < document.body.offsetHeight) {
+            if ((window.innerHeight + window.pageYOffset) + 30 < document.body.offsetHeight) {
                 return;
             }
 

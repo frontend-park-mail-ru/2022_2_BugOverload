@@ -15,9 +15,9 @@ export class Review {
      * Создаёт html-шаблон рецензии
      */
     static createReview(data) {
-        data.author.count_reviews = decoreCountReviews(data.author.count_reviews);
         return template({
             ...data,
+            countReviews: decoreCountReviews(data.author.count_reviews),
             user_avatar: data.author.avatar,
             date: data.create_time.split(' ')[0].split('.').reverse().join('.'),
         });
