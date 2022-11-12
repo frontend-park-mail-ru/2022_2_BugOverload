@@ -58,7 +58,7 @@ class ActorPage extends View {
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile({
                 ...this.state.actor,
-                birthday: this.state.actor?.birthday.split(' ')[0].split('.').reverse().join('.'),
+                birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
             }),
             collectionBestFilms: templateCollection({
                 films,

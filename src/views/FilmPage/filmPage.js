@@ -108,7 +108,7 @@ const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
     filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
     if (Number.isInteger(filmPage.state.film.rating)) {
-        filmPage.state.film.rating = `${filmPage.rating}.0`;
+        filmPage.state.film.rating = `${filmPage.state.film.rating}.0`;
     }
     filmPage.render();
 };
