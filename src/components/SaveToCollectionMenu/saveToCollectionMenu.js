@@ -73,7 +73,7 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button) => {
             this[`${button.dataset.name}`] = (event) => {
                 event.preventDefault();
-                ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`);
+                ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });

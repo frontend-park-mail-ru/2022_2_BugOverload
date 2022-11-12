@@ -3,7 +3,7 @@ import templateError from '@components/Message/errorMessage.handlebars';
 import templateSuccess from '@components/Message/successMessage.handlebars';
 
 /**
-* Добавляет в root в index.html сообщение об ошибке, которое изчезает через 2 секунды
+* Добавляет в root в index.html сообщение, которое изчезает через 2 секунды
 *
 */
 export function ShowMessage(text = 'Упс, что-то пошло не так.', type = 'negative') {
@@ -20,6 +20,9 @@ export function ShowMessage(text = 'Упс, что-то пошло не так.'
         });
         break;
     default:
+        content = templateError({
+            text,
+        });
         return;
     }
 

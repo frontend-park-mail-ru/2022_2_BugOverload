@@ -68,7 +68,7 @@ export class Rating extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 
@@ -87,7 +87,7 @@ export class Rating extends Component {
 
         const user = store.getState('user');
         if (!user) {
-            ShowMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 
