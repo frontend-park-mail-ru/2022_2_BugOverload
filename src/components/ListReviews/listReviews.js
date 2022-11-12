@@ -112,11 +112,9 @@ export class ListReviews extends Component {
     handlerShowMoreWrapper = () => {
         let isBuzy = false;
         return (function () {
-            console.log(`isBuzy: ${isBuzy}`);
             if (isBuzy) {
                 return;
             }
-            // setTimeout(() => {
             isBuzy = true;
 
             if ((window.innerHeight + window.pageYOffset + 100) < document.body.offsetHeight) {

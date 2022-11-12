@@ -186,7 +186,7 @@ class Router {
             if (!this.cachedUrls.get(url)) {
                 this.cachedUrls.set(url);
             }
-        } 
+        }
     }
 }
 
