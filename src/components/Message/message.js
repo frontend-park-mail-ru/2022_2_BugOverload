@@ -11,12 +11,15 @@ export function ShowMessage(textMessage = 'Упс, что-то пошло не �
     switch (type) {
     case 'negative':
         content = templateError({ text: textMessage });
+        console.log('negative!');
         break;
     case 'positive':
         content = templateSuccess({ text: textMessage });
+        console.log('positive!');
         break;
     default:
         content = templateError({ text: textMessage });
+        console.log('default!');
     }
 
     const div = document.createElement('div');
