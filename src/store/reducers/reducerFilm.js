@@ -113,8 +113,7 @@ class ReducerFilm {
 export const reducerFilm = new ReducerFilm();
 
 const handlerAvatarReviews = (object) => {
-    object.forEach(element => {
-        console.log(element);
+    object.forEach((element) => {
         element.author.avatar = API.img.user_avatar(element.author.avatar);
     });
     return object;
