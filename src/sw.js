@@ -12,7 +12,7 @@ const whiteDynamicUrls = [
 ];
 
 const blackSearchUrls = [
-    '?object=user_avatar',
+    'object=user_avatar',
 ];
 
 const assetUrls = [];
