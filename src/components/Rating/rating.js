@@ -47,12 +47,11 @@ export class Rating extends Component {
         if (!this.state.rating) {
             return;
         }
-        const selectedStar = this.location.querySelector(`[value="${this.state.rating}"]`);
+        const selectedStar = this.location.querySelector(`[value="${this.state.rating.value}"]`);
         if (!selectedStar) {
             return;
         }
         selectedStar.dataset.settedRate = true;
-        // this.isSetted = true;
     }
 
     remove() {

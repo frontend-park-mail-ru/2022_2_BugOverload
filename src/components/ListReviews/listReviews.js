@@ -120,7 +120,7 @@ export class ListReviews extends Component {
                 offset: this.offset,
                 count: this.step,
             }));
-        }, 100);
+        }, 400);
     }).bind(this);
 
     /**
