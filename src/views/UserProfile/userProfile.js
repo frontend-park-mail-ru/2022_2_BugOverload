@@ -83,11 +83,11 @@ class UserProfile extends View {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
-            /*const reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = () => {
                 this.rootNode.querySelector('.profile__avatar').src = reader.result;
             };
-            reader.readAsDataURL(formData.get('object'));*/
+            reader.readAsDataURL(formData.get('object'));
         });
 
         const profileChange = new ProfileChange({
