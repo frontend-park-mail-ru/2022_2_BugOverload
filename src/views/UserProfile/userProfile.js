@@ -27,7 +27,7 @@ class UserProfile extends View {
     render() {
         super.render();
 
-        if(!this.state.isSubscribed) {
+        if (!this.state.isSubscribed) {
             store.subscribe('logoutStatus', this.userProfileOnSubscribe);
             store.subscribe('userInfo', this.subscribeInfoFunc);
             store.subscribe('statusChangeAvatar', this.setProfileAvatar);
@@ -125,7 +125,7 @@ class UserProfile extends View {
     }
 
     componentWillUnmount() {
-        if(this.state.isSubscribed) {
+        if (this.state.isSubscribed) {
             store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
             store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
             store.unsubscribe('userInfo', this.subscribeInfoFunc);
