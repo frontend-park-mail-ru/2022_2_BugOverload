@@ -31,7 +31,8 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noPerson.webp';
             }
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}&rnd=<?= rand(0, 9999) ?>`;
+            const rand = randomMy();
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}&rnd=${rand}`;
         },
         person_image(id, image) {
             if (id === 0) {
@@ -71,6 +72,16 @@ export const API = {
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
 };
+
+let i = 0;
+const randomMy = () => {
+    if(i === 0) {
+        i = 1;
+    } else {
+        i = 0;
+    }
+    return i;
+}
 
 export const responsStatuses = {
     OK: 200,
