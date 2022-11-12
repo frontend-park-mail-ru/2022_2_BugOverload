@@ -66,7 +66,7 @@ export class AboutFilm extends Component {
         this.handlerOpenMenu = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
-                ShowMessage('Вы должны быть авторизованы');
+                ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
             menu.open();
@@ -82,10 +82,10 @@ export class AboutFilm extends Component {
         this.handlerBookmark = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
-                ShowMessage('Вы должны быть авторизованы');
+                ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
-            ShowMessage('Сохранение в Избранное пока не доступно');
+            ShowMessage('Сохранение в Избранное пока не доступно', 'negative');
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
@@ -97,7 +97,7 @@ export class AboutFilm extends Component {
 
         this.handlerTrailer = function (e) {
             e.preventDefault();
-            ShowMessage('Просмотр трейлера пока не доступен');
+            ShowMessage('Просмотр трейлера пока не доступен', 'negative');
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);

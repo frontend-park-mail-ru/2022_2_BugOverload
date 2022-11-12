@@ -94,7 +94,7 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 

@@ -90,7 +90,7 @@ class Router {
      */
     refresh() {
         window.addEventListener('offline', () => {
-            ShowMessage('Проблемы с интернет соединением');
+            ShowMessage('Проблемы с интернет соединением', 'negative');
         });
 
         const location = (window.location.href.match(hrefRegExp.host))
