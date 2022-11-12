@@ -1,6 +1,5 @@
 import template from '@components/Review/review.handlebars';
 import { decoreCountReviews } from '@utils/decorationData.js';
-import { API } from '@config/config.js';
 
 /**
 * Отзыв юзера на фильм.
