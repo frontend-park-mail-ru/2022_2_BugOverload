@@ -23,7 +23,7 @@ this.addEventListener('install', (event) => {
     );
 });
 
-this.addEventListener('fetch', async (event) => {
+this.addEventListener('fetch', (event) => {
     const { request } = event;
 
     const url = new URL(request.url);
@@ -43,7 +43,8 @@ this.addEventListener('fetch', async (event) => {
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
     } else {
-        event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
+        return fetch(request);
+       // event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
     }
 });
 
