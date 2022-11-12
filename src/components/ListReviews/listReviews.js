@@ -68,6 +68,7 @@ export class ListReviews extends Component {
     render() {
         if (!this.state.reviews && this.isMounted) {
             this.componentWillUnmount();
+            console.log('componentWillUnmount');
             return;
         }
 
@@ -149,14 +150,14 @@ export class ListReviews extends Component {
         }
         btn.addEventListener('click', this.handlerOpenFormReview);
 
-        this.handlerShowMore = this.handlerShowMoreWrapper();
-        document.addEventListener('scroll', this.handlerShowMore.bind(this));
+        this.handlerShowMore = this.handlerShowMoreWrapper().bind(this);
+        document.addEventListener('scroll', this.handlerShowMore);
 
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
         if (!btnShowMore) {
             return;
         }
-        btnShowMore.addEventListener('scroll', this.handlerShowMore.bind(this));
+        btnShowMore.addEventListener('scroll', this.handlerShowMore);
         this.isMounted = true;
     }
 
@@ -165,12 +166,12 @@ export class ListReviews extends Component {
      * Удаляет обработчики, установленные в ComponentDidMount
      */
     componentWillUnmount() {
-        document.removeEventListener('scroll', this.handlerShowMore.bind(this));
+        document.removeEventListener('scroll', this.handlerShowMore);
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
         if (!btnShowMore) {
             return;
         }
-        btnShowMore.removeEventListener('scroll', this.handlerShowMore.bind(this));
+        btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
     }
 }
