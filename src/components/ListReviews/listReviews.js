@@ -112,6 +112,7 @@ export class ListReviews extends Component {
     handlerShowMoreWrapper = () => {
         let isBuzy = false;
         return (function () {
+            console.log(`isBuzy: ${isBuzy}`);
             if (isBuzy) {
                 return;
             }
@@ -150,13 +151,13 @@ export class ListReviews extends Component {
         btn.addEventListener('click', this.handlerOpenFormReview);
 
         this.handlerShowMore = this.handlerShowMoreWrapper();
-        document.addEventListener('scroll', this.handlerShowMore);
+        document.addEventListener('scroll', this.handlerShowMore.bind(this));
 
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
         if (!btnShowMore) {
             return;
         }
-        btnShowMore.addEventListener('scroll', this.handlerShowMore);
+        btnShowMore.addEventListener('scroll', this.handlerShowMore.bind(this));
         this.isMounted = true;
     }
 
