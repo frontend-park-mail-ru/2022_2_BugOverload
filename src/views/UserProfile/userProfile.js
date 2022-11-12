@@ -15,20 +15,24 @@ class UserProfile extends View {
             userInfo: null,
             isAuthSubscribed: false,
             isDispatchedInfo: false,
+            isSubscribed: false,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
         this.setProfileAvatar = this.setProfileAvatar.bind(this);
         this.subscribeInfoFunc = this.subscribeInfoFunc.bind(this);
         this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
-
-        store.subscribe('logoutStatus', this.userProfileOnSubscribe);
-        store.subscribe('userInfo', this.subscribeInfoFunc);
-        store.subscribe('statusChangeAvatar', this.setProfileAvatar);
     }
 
     render() {
         super.render();
+
+        if(!this.state.isSubscribed) {
+            store.subscribe('logoutStatus', this.userProfileOnSubscribe);
+            store.subscribe('userInfo', this.subscribeInfoFunc);
+            store.subscribe('statusChangeAvatar', this.setProfileAvatar);
+            this.state.isSubscribed = true;
+        }
 
         if (!this.state.isAuthSubscribed) {
             store.subscribe('authStatus', this.authProfileOnSubscribe);
@@ -121,10 +125,14 @@ class UserProfile extends View {
     }
 
     componentWillUnmount() {
+        if(this.state.isSubscribed) {
+            store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
+            store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
+            store.unsubscribe('userInfo', this.subscribeInfoFunc);
+            this.state.isSubscribed = false;
+        }
+
         store.unsubscribe('user', this.userProfileOnSubscribe);
-        store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
-        store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
-        store.subscribe('userInfo', this.subscribeInfoFunc);
 
         if (this.state.isAuthSubscribed) {
             store.unsubscribe('authStatus', this.authProfileOnSubscribe);
