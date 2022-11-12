@@ -87,7 +87,7 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.Created) {
             const { avatar, nickname } = store.getState('user');
-            const { countReviews } = (store.getState('countReviews') || 0) + 1;
+            const countReviews = (store.getState('countReviews') || 0) + 1;
             const { body, name, type } = reviewData;
             return {
                 countReviews,
