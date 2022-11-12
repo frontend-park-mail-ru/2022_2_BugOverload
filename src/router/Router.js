@@ -110,9 +110,7 @@ class Router {
             matchedHref = this.matchHref(location);
         }
         if (this.mapViews.get(matchedHref[0])) {
-            if( matchedHref[0] !== '/profile/') {
-                this.cache();
-            }
+            this.cache();
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -178,9 +176,7 @@ class Router {
                 window.history.pushState(props, null, location + path);
             }
 
-            if( path !== '/profile/') {
-                this.cache();
-            }
+            this.cache();
         }
     }
 

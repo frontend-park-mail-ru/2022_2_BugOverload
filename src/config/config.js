@@ -31,7 +31,7 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noPerson.webp';
             }
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}&rnd=<?= rand(0, 9999) ?>`;
         },
         person_image(id, image) {
             if (id === 0) {
