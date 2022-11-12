@@ -95,7 +95,7 @@ class UserProfile extends View {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
-            ShowMessage('Ваш запрос выполняется...', 'posivite');
+            ShowMessage('Ваш запрос выполняется...', 'positive');
 
             const reader = new FileReader();
             reader.onload = () => {
