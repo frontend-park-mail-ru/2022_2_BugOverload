@@ -119,7 +119,7 @@ export class ListReviews extends Component {
             // setTimeout(() => {
             isBuzy = true;
 
-            if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
+            if ((window.innerHeight + window.pageYOffset + 100) < document.body.offsetHeight) {
                 isBuzy = false;
                 return;
             }
@@ -130,7 +130,7 @@ export class ListReviews extends Component {
                     count: this.step,
                 }));
                 isBuzy = false;
-            }, 400);
+            }, 200);
         }).bind(this);
     };
 
