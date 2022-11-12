@@ -118,7 +118,7 @@ export class ListReviews extends Component {
             setTimeout(() => {
                 isBuzy = true;
 
-                if ((window.innerHeight + window.pageYOffset) + 50 < document.body.offsetHeight) {
+                if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
                     return;
                 }
 
@@ -151,6 +151,12 @@ export class ListReviews extends Component {
 
         this.handlerShowMore = this.handlerShowMoreWrapper();
         document.addEventListener('scroll', this.handlerShowMore);
+
+        const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
+        if (!btnShowMore) {
+            return;
+        }
+        btnShowMore.addEventListener('scroll', this.handlerShowMore);
         this.isMounted = true;
     }
 
@@ -164,6 +170,7 @@ export class ListReviews extends Component {
         if (!btnShowMore) {
             return;
         }
+        btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
     }
 }
