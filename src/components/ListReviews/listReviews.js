@@ -116,14 +116,14 @@ export class ListReviews extends Component {
             if (isBuzy) {
                 return;
             }
+            // setTimeout(() => {
+            isBuzy = true;
+
+            if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
+                isBuzy = false;
+                return;
+            }
             setTimeout(() => {
-                isBuzy = true;
-
-                if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
-                    isBuzy = false;
-                    return;
-                }
-
                 store.dispatch(actionGetDataReviews({
                     filmID: this.state.film.id,
                     offset: this.offset,

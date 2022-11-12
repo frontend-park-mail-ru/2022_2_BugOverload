@@ -37,27 +37,27 @@ function updateInfo() {
     this.state.statusSendReview = store.getState('statusSendReview');
     this.location.querySelector('.js-component-review-statistic')?.remove();
 
-    update(this.state.statusSendReview?.type);
+    this.update = (type) => {
+        if (!type) {
+            console.log('no type!');
+            return;
+        }
+        if (type === 'positive') {
+            this.state.film.count_positive_reviews = (this.state.film.count_positive_reviews
+                || 0) + 1;
+            return;
+        }
+        if (type === 'neutral') {
+            this.state.film.count_neutral_reviews = (this.state.film.count_neutral_reviews
+                || 0) + 1;
+            return;
+        }
+        if (type === 'negative') {
+            this.state.film.count_negative_reviews = (this.state.film.count_negative_reviews
+                || 0) + 1;
+        }
+    };
+
+    this.update(this.state.statusSendReview?.type);
     this.render();
 }
-
-const update = (type) => {
-    if (!type) {
-        console.log('no type!');
-        return;
-    }
-    if (type === 'positive') {
-        this.state.film.count_positive_reviews = (this.state.film.count_positive_reviews
-            || 0) + 1;
-        return;
-    }
-    if (type === 'neutral') {
-        this.state.film.count_neutral_reviews = (this.state.film.count_neutral_reviews
-            || 0) + 1;
-        return;
-    }
-    if (type === 'negative') {
-        this.state.film.count_negative_reviews = (this.state.film.count_negative_reviews
-            || 0) + 1;
-    }
-};
