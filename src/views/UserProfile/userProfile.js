@@ -5,6 +5,7 @@ import { store } from '@store/Store.js';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
 import { ShowMessage } from '@components/Message/message.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 class UserProfile extends View {
     constructor(props) {
@@ -25,6 +26,11 @@ class UserProfile extends View {
     }
 
     render() {
+        const profile = this.rootNode.querySelector('.js-profile');
+        if (profile) {
+            profile.remove();
+        }
+
         super.render();
 
         if (!this.state.isSubscribed) {
@@ -45,14 +51,12 @@ class UserProfile extends View {
             const logoutStatus = store.getState('logoutStatus');
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
-                const redirectMain = new Event(
-                    'click',
-                    {
-                        bubbles: true,
-                        cancelable: true,
-                    },
+                profile.remove();
+                window.history.replaceState(
+                    null,
+                    null,
+                    window.location.href.replace(hrefRegExp.auth, ''),
                 );
-                this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
                 return;
             }
             store.subscribe('user', this.userProfileOnSubscribe);
@@ -65,10 +69,6 @@ class UserProfile extends View {
             this.state.isDispatchedInfo = true;
         }
 
-        const profile = this.rootNode.querySelector('.js-profile');
-        if (profile) {
-            profile.remove();
-        }
         this.state.userInfo = store.getState('userInfo');
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
