@@ -74,9 +74,7 @@ export const API = {
 };
 
 let i = 0;
-const randomMy = () => {
-    return i++;
-}
+const randomMy = () => i++;
 
 export const responsStatuses = {
     OK: 200,
