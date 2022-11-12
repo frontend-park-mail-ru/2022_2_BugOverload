@@ -109,7 +109,7 @@ class UserProfile extends View {
         setTimeout(() => {
             store.dispatch(actionAuth());
             ShowMessage('Успех!', 'positive');
-        }, 5000);
+        }, 1000);
     }
 
     subscribeInfoFunc() {
