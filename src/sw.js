@@ -4,6 +4,7 @@ const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
 const whiteDynamicUrls = [
     '/film/',
     '/person/',
+    '/profile/',
     '/api/v1/image',
     '/api/v1/collection/popular',
     '/api/v1/collection/in_cinema',
@@ -34,10 +35,6 @@ this.addEventListener('fetch', (event) => {
 
     if (url.pathname.match(/\d+\/$/)) {
         url.pathname = url.pathname.replace(/\d+\/$/, '');
-    }
-
-    if (url.search.match(blackSearchUrls[0])) {
-        return false;
     }
 
     if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
