@@ -6,7 +6,7 @@ import templateSuccess from '@components/Message/successMessage.handlebars';
 * Добавляет в root в index.html сообщение, которое изчезает через 2 секунды
 *
 */
-export function ShowMessage(textMessage = 'Упс, что-то пошло не так.', type = 'negative') {
+export function ShowMessage(textMessage = 'Упс, что-то пошло не так.', type = 'negative', duration = 2000) {
     let content;
     switch (type) {
     case 'negative':
@@ -25,5 +25,5 @@ export function ShowMessage(textMessage = 'Упс, что-то пошло не �
 
     ROOT.insertAdjacentElement('beforeend', div);
 
-    setTimeout(() => div.remove(), 2000);
+    setTimeout(() => div.remove(), duration);
 }
