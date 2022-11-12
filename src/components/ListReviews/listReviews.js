@@ -109,9 +109,15 @@ export class ListReviews extends Component {
     /**
     * Выбрасывает action с запросом за новыми рецензиями при прокрутке вниз страницы
     */
-    handlerShowMore = (function () {
+    handlerShowMoreWrapper = () => (function () {
+        let isBuzy = false;
         setTimeout(() => {
-            if ((window.innerHeight + window.pageYOffset) + 50 < document.body.offsetHeight) {
+            if (isBuzy) {
+                return;
+            }
+            isBuzy = true;
+
+            if ((window.innerHeight + window.pageYOffset) - 50 < document.body.offsetHeight) {
                 return;
             }
 
@@ -120,6 +126,7 @@ export class ListReviews extends Component {
                 offset: this.offset,
                 count: this.step,
             }));
+            isBuzy = false;
         }, 400);
     }).bind(this);
 
@@ -140,6 +147,7 @@ export class ListReviews extends Component {
         }
         btn.addEventListener('click', this.handlerOpenFormReview);
 
+        this.handlerShowMore = this.handlerShowMoreWrapper();
         document.addEventListener('scroll', this.handlerShowMore);
         this.isMounted = true;
     }

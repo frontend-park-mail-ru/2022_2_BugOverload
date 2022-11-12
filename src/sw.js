@@ -49,7 +49,7 @@ this.addEventListener('fetch', (event) => {
 });
 
 async function cacheFirst(request, watchCache = false) {
-    if(!watchCache) {
+    if (!watchCache) {
         const cached = await caches.match(request);
         if (cached) {
             return cached;

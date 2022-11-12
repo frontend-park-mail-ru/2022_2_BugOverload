@@ -22,6 +22,8 @@ export class FilmPage extends View {
             film: null,
             isSubscribed: false,
         };
+
+        store.subscribe('statusSendReview', sendReviewSuccess);
     }
 
     /**
@@ -44,7 +46,7 @@ export class FilmPage extends View {
         if (!this.state.film) {
             if (!this.state.isSubscribed) {
                 store.subscribe(`film${this.state.id}`, subscribeFilmPage);
-                store.subscribe('statusSendReview', sendReviewSuccess);
+
                 this.state.isSubscribed = true;
                 store.dispatch(actionGetFilmData(this.state.id));
             }
@@ -54,7 +56,6 @@ export class FilmPage extends View {
 
         if (this.state.isSubscribed) {
             store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
-            store.unsubscribe('statusSendReview', sendReviewSuccess);
             this.state.isSubscribed = false;
         }
 
@@ -112,7 +113,7 @@ const subscribeFilmPage = () => {
 };
 
 const sendReviewSuccess = () => {
-    ShowMessage('Успех!', 'positive');
+    ShowMessage('Спасибо за вашу рецензию', 'positive');
 };
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

@@ -23,9 +23,17 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
-            this.state.statusRating = store.getState('statusRating');
 
             this.render();
+        });
+
+        store.subscribe('statusRating', () => {
+            this.state.statusRating = store.getState('statusRating');
+            if (!this.state.statusRating) {
+                ShowMessage('Оценка успешно удалена', 'positive');
+                return;
+            }
+            ShowMessage('Успех!', 'positive');
         });
 
         if (store.getState('user')) {
@@ -37,7 +45,6 @@ export class Rating extends Component {
         this.remove();
 
         this.location.insertAdjacentHTML('afterbegin', template({
-            ...this.state.statusRating,
             rate: this.state.rating?.value,
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
