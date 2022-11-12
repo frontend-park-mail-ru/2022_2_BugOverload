@@ -165,12 +165,12 @@ export class ListReviews extends Component {
      * Удаляет обработчики, установленные в ComponentDidMount
      */
     componentWillUnmount() {
-        document.removeEventListener('scroll', this.handlerShowMore);
+        document.removeEventListener('scroll', this.handlerShowMore.bind(this));
         const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
         if (!btnShowMore) {
             return;
         }
-        btnShowMore.removeEventListener('scroll', this.handlerShowMore);
+        btnShowMore.removeEventListener('scroll', this.handlerShowMore.bind(this));
         btnShowMore.remove();
     }
 }
