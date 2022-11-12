@@ -2,7 +2,7 @@ import { View } from '@views/View.js';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { store } from '@store/Store.js';
-import { actionGetSettings, actionPutAvatar } from '@store/actionCreater/userActions.js';
+import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
 import { ShowMessage } from '@components/Message/message.js';
 
@@ -106,7 +106,10 @@ class UserProfile extends View {
     }
 
     setProfileAvatar() {
-        ShowMessage('Успех!', 'positive');
+        setTimeout(() => {
+            store.dispatch(actionAuth());
+            ShowMessage('Успех!', 'positive');
+        }, 5000);
     }
 
     subscribeInfoFunc() {
