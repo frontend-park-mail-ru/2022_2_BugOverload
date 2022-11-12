@@ -83,7 +83,7 @@ class ReducerFilm {
         const response = await Ajax.post({
             url: API.send_review(reviewData.filmID),
             body: reviewData,
-        });reviews
+        });
 
         if (response.status === responsStatuses.Created) {
             const { avatar, nickname } = store.getState('user');
