@@ -75,12 +75,7 @@ export const API = {
 
 let i = 0;
 const randomMy = () => {
-    if(i === 0) {
-        i = 1;
-    } else {
-        i = 0;
-    }
-    return i;
+    return i++;
 }
 
 export const responsStatuses = {
