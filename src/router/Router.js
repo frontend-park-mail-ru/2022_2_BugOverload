@@ -182,9 +182,9 @@ class Router {
             this.cache();
         } else {
             if (props) {
-                window.location.replace(`${location + path}${props}/`);
+                window.history.replaceState(props, null, `${location + path}${props}/`);
             } else {
-                window.location.replace(location + path);
+                window.history.replaceState(props, null, location + path);
             }
 
             this.cache();
