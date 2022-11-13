@@ -51,6 +51,10 @@ class ActorPage extends View {
         }
 
         super.render();
+        const actorPageElement = this.rootNode.querySelector('.actor-page');
+        if (actorPageElement) {
+            actorPageElement.remove();
+        }
 
         const films = this.state.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
         const collection = new Collection();

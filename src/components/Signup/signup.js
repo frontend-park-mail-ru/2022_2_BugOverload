@@ -3,11 +3,10 @@ import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal, exit } from '@components/Modal/modal.js';
+import { Modal, exit, exitFromModal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
-import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -48,15 +47,9 @@ export class Signup extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.js-modal__background');
-            if (background) {
-                background.remove();
-                window.history.replaceState(
-                    null,
-                    null,
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
-            }
+            exitFromModal();
+            exit();
+            this.componentWillUnmount();
             return;
         }
         if (!this.state.isUserSubscriber) {

@@ -42,6 +42,10 @@ export class FilmPage extends View {
         }
 
         super.render();
+        const filmPageElement = this.rootNode.querySelector('.film-page');
+        if (filmPageElement) {
+            filmPageElement.remove();
+        }
 
         if (!this.state.film) {
             if (!this.state.isSubscribed) {

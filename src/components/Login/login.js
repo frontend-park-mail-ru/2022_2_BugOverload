@@ -3,11 +3,10 @@ import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal, exit } from '@components/Modal/modal.js';
+import { Modal, exit, exitFromModal } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
-import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает логин.
@@ -54,17 +53,12 @@ export class Login extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.js-modal__background');
-            if (background) {
-                background.remove();
-                window.history.replaceState(
-                    null,
-                    null,
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
-            }
+            exitFromModal();
+            exit();
+            this.componentWillUnmount();
             return;
         }
+
         if (!this.state.isUserSubscriber) {
             store.subscribe('user', this.subscribeLogin);
             this.state.isUserSubscriber = true;
@@ -84,7 +78,6 @@ export class Login extends Component {
         }
 
         const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
         this.componentDidMount();
     }
@@ -160,11 +153,11 @@ export class Login extends Component {
                 return;
             }
 
-            store.dispatch(actionLogin(user));
             if (!this.state.isSubscribed) {
                 store.subscribe('statusLogin', this.subscribeLoginpStatus);
                 this.state.isSubscribed = true;
             }
+            store.dispatch(actionLogin(user));
         });
 
         const { deleteLogin } = this;
@@ -184,7 +177,7 @@ export class Login extends Component {
             modalBackground.removeEventListener('click', deleteLogin);
         }
         if (this.state.isSubscribed) {
-            store.subscribe('statusLogin', this.subscribeLoginpStatus);
+            store.unsubscribe('statusLogin', this.subscribeLoginpStatus);
             this.state.statusLogin = null;
             this.state.isSubscribed = false;
         }

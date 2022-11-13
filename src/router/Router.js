@@ -1,5 +1,4 @@
 import { routes, ROOT } from '@config/config.js';
-import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404.js';
@@ -128,21 +127,31 @@ class Router {
      */
     go(stateObject, pushState = false) {
         const view = this.mapViews.get(stateObject.path);
+        const loginView = this.mapViews.get('/login/');
+        const signupView = this.mapViews.get('/signup/');
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            const loginView = this.mapViews.get('/login/');
-            const signupView = this.mapViews.get('/signup/');
-            const modal = document.body.querySelector('.modal__background');
-            if (!modal || (this.lastView !== loginView && this.lastView !== signupView)) {
-                this.root.replaceChildren();
+            this.root.replaceChildren();
+            if (this.lastView !== loginView && this.lastView !== signupView) {
+                this.beforStateObject = stateObject;
             } else {
-                this.navigate(stateObject, pushState);
-                this.lastView = this.mapViews.get(stateObject.path);
-                exitFromModal();
+                if (this.beforStateObject) {
+                    this.navigate(this.beforStateObject, pushState);
+                    this.lastView = this.mapViews.get(stateObject.path);
+                    this.mapViews.get(this.beforStateObject.path)
+                        .render(this.beforStateObject.props);
+                } else {
+                    this.navigate({ path: '/' }, pushState);
+                    this.lastView = this.mapViews.get('/');
+                    this.mapViews.get('/').render();
+                }
+
                 return;
             }
-        } else if (!this.lastView) {
+        } else if (!this.lastView || this.lastView === loginView || this.lastView === signupView) {
             const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
             currentView.render(window.history.state);
+        } else if (this.beforStateObject) {
+            this.mapViews.get(this.beforStateObject.path).render(this.beforStateObject.props);
         }
 
         if (
