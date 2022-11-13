@@ -107,6 +107,25 @@ export const decoreCountActors = (count) => {
     return `${count} aктёров`;
 };
 
+export const decoreCountScores = (count) => {
+    if (!count) {
+        return '0 оценок';
+    }
+
+    if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {
+        return `${count} оценок`;
+    }
+
+    if (count % 10 === 1) {
+        return `${count} оценка`;
+    }
+    if (count % 10 > 1 && count % 10 <= 4) {
+        return `${count} оценки`;
+    }
+
+    return `${count} оценок`;
+};
+
 export const decoreColorRating = (location, className, rating) => {
     if (!location || !className) {
         return;
