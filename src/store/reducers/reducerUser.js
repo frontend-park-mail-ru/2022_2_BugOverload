@@ -109,7 +109,7 @@ class ReducerUser {
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
             return {
-                [`user${id}`]: handlerUserInfoFields(handlerUrlObject(response.body)),
+                [`user${id}`]: handlerUserInfoFields((response.body)),
             };
         }
         return null;
@@ -135,6 +135,9 @@ const handlerUserInfoFields = (userInfo) => {
         userInfo.count_ratings = userInfo.count_ratings || 0;
         userInfo.count_collections = userInfo.count_collections || 0;
         userInfo.count_reviews = userInfo.count_reviews || 0;
+        if (userInfo.avatar) {
+            userInfo.avatar = API.img.user_avatar(userInfo.avatar);
+        }
     }
 
     return userInfo;

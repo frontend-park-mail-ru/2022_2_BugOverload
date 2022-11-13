@@ -3,7 +3,6 @@ import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import { store } from '@store/Store.js';
 import { actionGetPublicProfile } from '@store/actionCreater/userActions.js';
 
-
 /**
 * Публичная страница профиля
 */
