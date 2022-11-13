@@ -4,7 +4,7 @@
     flex-flow: column wrap;
     margin-left: 52px;
     margin-right: 52px;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
     padding-top: 95px;
 
     &__content {
@@ -42,7 +42,7 @@
     }
 
     &__image {
-        min-height: 400px;
+        max-height: 350px;
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 8px;
@@ -109,3 +109,7 @@
         text-overflow: ellipsis;
     }
 }
+
+.actor-page-content {
+    margin-top: -40px;
+} 
