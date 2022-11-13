@@ -1,9 +1,9 @@
-$height_wrapper:80px;
+$height_wrapper: 80px;
 $max__width_wrapper: 410px;
 $min__width_wrapper: 250px;
 $margin_top_input: 30px;
 $padding_input: 19px;
-$margin_top_button: 60px;
+$margin_bottom_button: 38px;
 $margin_bottom_error: 5px;
 
 @mixin profile__form{
@@ -11,7 +11,6 @@ $margin_bottom_error: 5px;
     flex-flow: column nowrap;
     align-content: stretch;
     align-items: flex-start;
-    margin-top: 10px;
 }
 
 .profile__form__nick{
@@ -84,5 +83,5 @@ $margin_bottom_error: 5px;
     height: 42px;
     border: 0;
     width: 210px;
-    margin-bottom: $margin_top_button;
+    margin-bottom: $margin_bottom_button;
 }
