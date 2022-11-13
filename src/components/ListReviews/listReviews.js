@@ -1,5 +1,5 @@
 import { Review } from '@components/Review/review.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import template from '@components/ListReviews/listReviews.handlebars';
 import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
@@ -20,6 +20,7 @@ export class ListReviews extends Component {
         this.location = this.rootNode.querySelector('.js-reviews-list');
         this.state = {
             reviews: null,
+            userReview: null,
             film: null,
         };
 
@@ -28,11 +29,20 @@ export class ListReviews extends Component {
 
         this.isMounted = false;
         this.step = 3;
-        this.offset = -this.step;
+        this.offset = 0;
 
         store.subscribe('reviews', () => {
             this.state.reviews = store.getState('reviews');
             this.render();
+
+            this.offset += this.step;
+        });
+
+        store.subscribe('userReview', () => {
+            this.state.userReview = store.getState('userReview');
+            this.renderBegin();
+
+            this.offset++;
         });
     }
 
@@ -47,7 +57,7 @@ export class ListReviews extends Component {
 
         store.dispatch(actionGetDataReviews({
             filmID: this.state.film.id,
-            offset: this.offset += this.step,
+            offset: this.offset,
             count: this.step,
         }));
     }
@@ -58,11 +68,24 @@ export class ListReviews extends Component {
     render() {
         if (!this.state.reviews && this.isMounted) {
             this.componentWillUnmount();
+            console.log('componentWillUnmount');
             return;
         }
 
         const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
+    }
+
+    /**
+     * Отрисовывает компонент в начале списка, используя location и hbs-template.
+     */
+    renderBegin() {
+        if (!this.state.userReview) {
+            return;
+        }
+
+        this.location.querySelector('.js-list-reviews__content-container')
+            .insertAdjacentHTML('afterbegin', Review.createReview(this.state.userReview));
     }
 
     /**
@@ -72,7 +95,7 @@ export class ListReviews extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 
@@ -87,17 +110,28 @@ export class ListReviews extends Component {
     /**
     * Выбрасывает action с запросом за новыми рецензиями при прокрутке вниз страницы
     */
-    handlerShowMore = (function () {
-        if ((window.innerHeight + window.pageYOffset) < document.body.offsetHeight) {
-            return;
-        }
+    handlerShowMoreWrapper = () => {
+        let isBuzy = false;
+        return (function () {
+            if (isBuzy) {
+                return;
+            }
+            isBuzy = true;
 
-        store.dispatch(actionGetDataReviews({
-            filmID: this.state.film.id,
-            offset: this.offset += this.step,
-            count: this.step,
-        }));
-    }).bind(this);
+            if ((window.innerHeight + window.pageYOffset + 100) < document.body.offsetHeight) {
+                isBuzy = false;
+                return;
+            }
+            setTimeout(() => {
+                store.dispatch(actionGetDataReviews({
+                    filmID: this.state.film.id,
+                    offset: this.offset,
+                    count: this.step,
+                }));
+                isBuzy = false;
+            }, 200);
+        }).bind(this);
+    };
 
     /**
      * Навешивает обработчики на кнопку создания формы написания рецензии,
@@ -116,7 +150,14 @@ export class ListReviews extends Component {
         }
         btn.addEventListener('click', this.handlerOpenFormReview);
 
+        this.handlerShowMore = this.handlerShowMoreWrapper().bind(this);
         document.addEventListener('scroll', this.handlerShowMore);
+
+        const btnShowMore = document.querySelector('.js-btn-show-more-reviews');
+        if (!btnShowMore) {
+            return;
+        }
+        btnShowMore.addEventListener('scroll', this.handlerShowMore);
         this.isMounted = true;
     }
 
@@ -130,6 +171,7 @@ export class ListReviews extends Component {
         if (!btnShowMore) {
             return;
         }
+        btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
     }
 }

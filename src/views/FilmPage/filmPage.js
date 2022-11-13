@@ -6,7 +6,7 @@ import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
 import { store } from '@store/Store.js';
 import { actionGetFilmData } from '@actions/filmActions.js';
-
+import { ShowMessage } from '@components/Message/message.js';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View.js';
 
@@ -22,6 +22,8 @@ export class FilmPage extends View {
             film: null,
             isSubscribed: false,
         };
+
+        store.subscribe('statusSendReview', sendReviewSuccess);
     }
 
     /**
@@ -44,6 +46,7 @@ export class FilmPage extends View {
         if (!this.state.film) {
             if (!this.state.isSubscribed) {
                 store.subscribe(`film${this.state.id}`, subscribeFilmPage);
+
                 this.state.isSubscribed = true;
                 store.dispatch(actionGetFilmData(this.state.id));
             }
@@ -104,7 +107,14 @@ export class FilmPage extends View {
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
     filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
+    if (Number.isInteger(filmPage.state.film.rating)) {
+        filmPage.state.film.rating = `${filmPage.state.film.rating}.0`;
+    }
     filmPage.render();
+};
+
+const sendReviewSuccess = () => {
+    ShowMessage('Спасибо за вашу рецензию', 'positive');
 };
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

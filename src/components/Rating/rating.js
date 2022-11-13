@@ -2,7 +2,7 @@ import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
 
 /**
@@ -23,9 +23,17 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
-            this.state.statusRating = store.getState('statusRating');
 
             this.render();
+        });
+
+        store.subscribe('statusRating', () => {
+            this.state.statusRating = store.getState('statusRating');
+            if (!this.state.statusRating) {
+                ShowMessage('Оценка успешно удалена', 'positive');
+                return;
+            }
+            ShowMessage('Успех!', 'positive');
         });
 
         if (store.getState('user')) {
@@ -37,16 +45,16 @@ export class Rating extends Component {
         this.remove();
 
         this.location.insertAdjacentHTML('afterbegin', template({
-            ...this.state.statusRating,
-            rate: this.state.rating,
+            rate: this.state.rating?.value,
+            dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
-            filmRating: this.state.film.rating,
+            filmRating: this.state.film.rating || '0.0',
         }));
         this.componentDidMount();
         if (!this.state.rating) {
             return;
         }
-        const selectedStar = this.location.querySelector(`[value="${this.state.rating}"]`);
+        const selectedStar = this.location.querySelector(`[value="${this.state.rating.value}"]`);
         if (!selectedStar) {
             return;
         }
@@ -66,7 +74,7 @@ export class Rating extends Component {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 
@@ -85,7 +93,7 @@ export class Rating extends Component {
 
         const user = store.getState('user');
         if (!user) {
-            ShowErrorMessage('Вы должны быть авторизованы');
+            ShowMessage('Вы должны быть авторизованы', 'negative');
             return;
         }
 

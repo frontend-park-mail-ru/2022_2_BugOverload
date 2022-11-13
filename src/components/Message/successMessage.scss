@@ -1,0 +1,18 @@
+.success {
+    position: fixed;
+    bottom: 20px;
+    width: auto;
+    padding: 15px 30px;
+    background-color: var(--success-color);
+    opacity: 0.9;
+    margin-left: var(--standart-margin);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+
+    &__text {
+      color: var(--main-color-text);
+      font-size: 20px;
+    }
+  }

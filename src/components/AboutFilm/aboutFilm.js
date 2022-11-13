@@ -2,7 +2,7 @@ import template from '@components/AboutFilm/aboutFilm.handlebars';
 import { SaveToCollectionMenu } from '@components/SaveToCollectionMenu/saveToCollectionMenu.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
 } from '@utils/decorationData.js';
@@ -66,7 +66,7 @@ export class AboutFilm extends Component {
         this.handlerOpenMenu = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
-                ShowErrorMessage('Вы должны быть авторизованы');
+                ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
             menu.open();
@@ -82,10 +82,10 @@ export class AboutFilm extends Component {
         this.handlerBookmark = function (e) {
             e.preventDefault();
             if (!store.getState('user')) {
-                ShowErrorMessage('Вы должны быть авторизованы');
+                ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
-            ShowErrorMessage('Сохранение в Избранное пока не доступно');
+            ShowMessage('Сохранение в Избранное пока не доступно', 'negative');
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
@@ -97,7 +97,7 @@ export class AboutFilm extends Component {
 
         this.handlerTrailer = function (e) {
             e.preventDefault();
-            ShowErrorMessage('Просмотр трейлера пока не доступен');
+            ShowMessage('Просмотр трейлера пока не доступен', 'negative');
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);

@@ -1,3 +1,7 @@
+$textarea-height: 165px;
+$input-height: 46px;
+
+
 @mixin dropped-items {
   display: inline-block;
   width: 6px;
@@ -13,6 +17,7 @@
   background-repeat: no-repeat;
 }
 
+
 .input-review {
   &__container {
     display: flex;
@@ -22,7 +27,7 @@
     background-color: var(--backgr-modal-review);
     backdrop-filter: blur(30px);
     border-radius: 20px;
-    width: 900px;
+    width: 700px;
     height: auto;
   }
 
@@ -62,51 +67,37 @@
     font-size: 12px;
   }
 
-  .input-title__wrapper{
-    height: 46px + 35px;
-  }
-
   &__input-title {
-    width: 804px;
+    width: -webkit-fill-available;
     border: 0;
-    height: 46px;
+    height: $input-height;
     border-radius: 4px;
     padding: 0 24px;
     box-sizing: border-box;
     font-size: 15px;
   }
 
-  .input-text__wrapper{
-    height: 221px + 35px;
-  }
-
-  .js-input-review__input-text {
-    width: 804px;
+  &__input-text {
+    width: -webkit-fill-available;
     border: 0;
-    height: 221px;
+    height: $textarea-height;
     resize: none;
     border-radius: 4px;
     padding: 16px 24px;
     box-sizing: border-box;
-    font-size: 12px;
-  }
-
-  .modal__input__button-review {
-    width: 804px;
-    height: 46px;
-    margin-top: 25px;
+    font-size: 15px;
   }
 
   &__select__wrapper {
-    height: 46px + 35px;
+    height: $input-height + 35px;
   }
 
   &__select {
     position: relative;
     display: block;
     min-width: 220px;
-    width: 804px;
-    height: 46px;
+    width: -webkit-fill-available;
+    height: $input-height;
     background-color: var(--backgr-select);
     border-radius: 4px;
   }
@@ -177,4 +168,17 @@
     background-color: var(--rating-color-negative);
     @include dropped-items;
   }
+}
+
+.input-title__wrapper {
+  height: $input-height + 35px;
+}
+
+.input-text__wrapper {
+  height: $textarea-height + 35px;
+}
+
+.modal__input__button-review {
+  width: -webkit-fill-available;
+  height: $input-height;
 }

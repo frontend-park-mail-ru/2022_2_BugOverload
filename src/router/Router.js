@@ -1,7 +1,7 @@
 import { routes, ROOT } from '@config/config.js';
 import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
+import { ShowMessage } from '@components/Message/message.js';
 import { render404 } from '@router/Page404/page404.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -90,7 +90,7 @@ class Router {
      */
     refresh() {
         window.addEventListener('offline', () => {
-            ShowErrorMessage('Проблемы с интернет соединением');
+            ShowMessage('Проблемы с интернет соединением', 'negative');
         });
 
         const location = (window.location.href.match(hrefRegExp.host))
@@ -131,7 +131,8 @@ class Router {
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             const loginView = this.mapViews.get('/login/');
             const signupView = this.mapViews.get('/signup/');
-            if (this.lastView !== loginView && this.lastView !== signupView) {
+            const modal = document.body.querySelector('.modal__background');
+            if (!modal || (this.lastView !== loginView && this.lastView !== signupView)) {
                 this.root.replaceChildren();
             } else {
                 this.navigate(stateObject, pushState);
@@ -180,12 +181,12 @@ class Router {
     }
 
     cache(url = './') {
-        /*if (navigator.serviceWorker) {
+        if (navigator.serviceWorker) {
             navigator.serviceWorker.register('/sw.js', { scope: url });
             if (!this.cachedUrls.get(url)) {
                 this.cachedUrls.set(url);
             }
-        }*/
+        }
     }
 }
 

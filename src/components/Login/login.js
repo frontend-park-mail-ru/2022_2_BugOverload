@@ -7,6 +7,7 @@ import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает логин.
@@ -28,6 +29,7 @@ export class Login extends Component {
         };
 
         this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
+        this.subscribeLogin = this.subscribeLogin.bind(this);
     }
 
     /**
@@ -55,9 +57,17 @@ export class Login extends Component {
             const background = document.body.querySelector('.js-modal__background');
             if (background) {
                 background.remove();
-                exit();
+                window.history.replaceState(
+                    null,
+                    null,
+                    window.location.href.replace(hrefRegExp.auth, ''),
+                );
             }
             return;
+        }
+        if (!this.state.isUserSubscriber) {
+            store.subscribe('user', this.subscribeLogin);
+            this.state.isUserSubscriber = true;
         }
 
         if (this.state.statusLogin) {
@@ -178,6 +188,10 @@ export class Login extends Component {
             this.state.statusLogin = null;
             this.state.isSubscribed = false;
         }
+        if (this.state.isUserSubscriber) {
+            store.unsubscribe('user', this.subscribeLogin);
+            this.state.isUserSubscriber = false;
+        }
     }
 
     /**
@@ -185,6 +199,10 @@ export class Login extends Component {
      */
     subscribeLoginpStatus() {
         this.state.statusLogin = store.getState('statusLogin');
+        this.render();
+    }
+
+    subscribeLogin() {
         this.render();
     }
 }

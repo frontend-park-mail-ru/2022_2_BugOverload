@@ -4,6 +4,8 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { store } from '@store/Store.js';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
 import { ProfileChange } from '@components/ProfileChange/profileChange.js';
+import { ShowMessage } from '@components/Message/message.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 class UserProfile extends View {
     constructor(props) {
@@ -12,55 +14,74 @@ class UserProfile extends View {
             user: null,
             putAvatarStatus: null,
             userInfo: null,
-            subscribeedOnUser: false,
-            subscribeedOnLogout: false,
-            subscribeedOnAvatar: false,
-            subscribeedOnAuth: false,
+            isAuthSubscribed: false,
+            isDispatchedInfo: false,
+            isSubscribed: false,
         };
+
+        this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
+        this.setProfileAvatar = this.setProfileAvatar.bind(this);
+        this.subscribeInfoFunc = this.subscribeInfoFunc.bind(this);
+        this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
     }
 
     render() {
         super.render();
 
-        if (!this.state.subscribeedOnLogout) {
-            store.subscribe('logoutStatus', userProfileOnSubscribe);
-            this.state.subscribeedOnLogout = true;
+        if (!this.state.isSubscribed) {
+            store.subscribe('logoutStatus', this.userProfileOnSubscribe);
+            store.subscribe('userInfo', this.subscribeInfoFunc);
+            store.subscribe('statusChangeAvatar', this.setProfileAvatar);
+            this.state.isSubscribed = true;
         }
 
-        if (!this.state.subscribeedOnUser) {
-            store.subscribe('user', userProfileOnSubscribe);
-            this.state.subscribeedOnUser = true;
+        if (!this.state.isAuthSubscribed) {
+            store.subscribe('authStatus', this.authProfileOnSubscribe);
+            this.state.isAuthSubscribed = true;
         }
 
-        if (!this.state.subscribeedOnAuth) {
-            store.subscribe('authStatus', userProfileOnSubscribe);
-            this.state.subscribeedOnAuth = true;
-        }
-
+        this.state.user = store.getState('user');
         if (!this.state.user) {
             const authStatus = store.getState('authStatus');
             const logoutStatus = store.getState('logoutStatus');
             if (authStatus || logoutStatus) {
                 this.componentWillUnmount();
+                const removeProfile = this.rootNode.querySelector('.js-profile');
+                if (removeProfile) {
+                    removeProfile.remove();
+                }
+                window.history.replaceState(
+                    null,
+                    null,
+                    window.location.href.replace(hrefRegExp.auth, ''),
+                );
+
                 const redirectMain = new Event(
                     'click',
                     {
                         bubbles: true,
                         cancelable: true,
                     },
-                ); 
+                );
                 this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
+
                 return;
             }
-            store.dispatch(actionAuth());
+            store.subscribe('user', this.userProfileOnSubscribe);
 
             return;
+        }
+
+        if (!this.state.isDispatchedInfo) {
+            store.dispatch(actionGetSettings());
+            this.state.isDispatchedInfo = true;
         }
 
         const profile = this.rootNode.querySelector('.js-profile');
         if (profile) {
             profile.remove();
         }
+        this.state.userInfo = store.getState('userInfo');
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 profileMenu: templateProfileMenu(),
@@ -69,28 +90,18 @@ class UserProfile extends View {
             },
         ));
 
-        const subscribeFunc = () => {
-            console.log('sub')
-            this.state.userInfo = store.getState('userInfo');
-            this.render();
-        };
-        if (!this.state.userInfo) {
-            store.subscribe('userInfo', subscribeFunc);
-            store.dispatch(actionGetSettings());
-        } else {
-            store.unsubscribe('userInfo', subscribeFunc);
-        }
-
-        if(!this.state.subscribeedOnAvatar) {
-            store.subscribe('statusChangeAvatar', setProfileAvatar);
-            this.state.subscribeedOnAvatar = true;
-        }
-
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
             store.dispatch(actionPutAvatar(formData));
+            ShowMessage('Ваш запрос выполняется...', 'positive', 4000);
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.rootNode.querySelector('.profile__avatar').src = reader.result;
+            };
+            reader.readAsDataURL(formData.get('object'));
         });
 
         const profileChange = new ProfileChange({
@@ -103,26 +114,51 @@ class UserProfile extends View {
         profileChange.componentDidMount();
     }
 
+    userProfileOnSubscribe() {
+        this.state.user = store.getState('user');
+        this.render();
+    }
+
+    setProfileAvatar() {
+        setTimeout(() => {
+            store.dispatch(actionAuth());
+            if (store.getState('statusChangeAvatar')) {
+                ShowMessage('Успех!', 'positive');
+            } else {
+                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative');
+            }
+        }, 4000);
+    }
+
+    subscribeInfoFunc() {
+        this.render();
+    }
+
+    authProfileOnSubscribe() {
+        this.state.user = store.getState('user');
+        if (this.state.user) {
+            store.dispatch(actionGetSettings());
+        }
+        this.render();
+    }
+
     componentWillUnmount() {
-        store.unsubscribe('user', userProfileOnSubscribe);
-        store.unsubscribe('logoutStatus', userProfileOnSubscribe);
-        store.unsubscribe('authStatus', userProfileOnSubscribe);
-        store.unsubscribe('statusChangeAvatar', setProfileAvatar);
-        
-        this.state.subscribeedOnAvatar = false;
-        this.state.subscribeedOnUser = false;
-        this.state.subscribeedOnLogout = false;
-        this.state.subscribeedOnAuth = false;
+        if (this.state.isSubscribed) {
+            store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
+            store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
+            store.unsubscribe('userInfo', this.subscribeInfoFunc);
+            this.state.isSubscribed = false;
+        }
+
+        store.unsubscribe('user', this.userProfileOnSubscribe);
+
+        if (this.state.isAuthSubscribed) {
+            store.unsubscribe('authStatus', this.authProfileOnSubscribe);
+            this.state.isAuthSubscribed = false;
+        }
+
+        this.state.isDispatchedInfo = false;
     }
 }
 
 export const profile = new UserProfile({ rootNode: document.getElementById('root') });
-
-const userProfileOnSubscribe = () => {
-    profile.state.user = store.getState('user');
-    profile.render();
-};
-
-const setProfileAvatar = () => {
-    store.dispatch(actionAuth());
-};

@@ -37,6 +37,9 @@ export class Film {
     */
     static decoreFilmInfo(filmData) {
         filmData.rating = Math.round(filmData.rating * 10) / 10;
+        if (Number.isInteger(filmData.rating)) {
+            filmData.rating = `${filmData.rating}.0`;
+        }
 
         const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;

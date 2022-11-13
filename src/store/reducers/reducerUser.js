@@ -1,4 +1,5 @@
 import { Ajax } from '@utils/ajax.js';
+import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 
 class ReducerUser {
@@ -42,12 +43,9 @@ class ReducerUser {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
                 authStatus: null,
-                onse: [
-                    'authStatus',
-                ],
             };
         }
-        return { authStatus: response.status};
+        return { authStatus: response.status };
     }
 
     async logout() {
@@ -58,7 +56,6 @@ class ReducerUser {
             return {
                 user: null,
                 logoutStatus: responsStatuses.NoContent,
-                onse: true,
             };
         }
         return null;
@@ -101,9 +98,6 @@ class ReducerUser {
         if (response.status === responsStatuses.NoContent) {
             return {
                 statusChangeAvatar: response.status,
-                onse: [
-                    'statusChangeAvatar',
-                ],
             };
         }
         return { statusChangeAvatar: null };
@@ -120,11 +114,6 @@ const handlerUrlObject = (object, nameObject) => {
         }
     }
     return object;
-};
-
-const getDateNow = () => {
-    const d = new Date();
-    return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
 };
 
 const handlerUserInfoFields = (userInfo) => {
