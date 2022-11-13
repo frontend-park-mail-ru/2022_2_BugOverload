@@ -17,6 +17,7 @@ app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
@@ -87,6 +88,11 @@ app.put('/api/v1/image', (req, res) => {
 app.get('/api/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
+});
+
+app.get('/api/v1/user/profile/:id',  (req, res) => {
+	const email = 'Dop123@mail.ru'
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR, count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
 });
 
 app.get('/api/v1/auth/logout',  (req, res) => {

@@ -4,6 +4,7 @@ import { mainPage } from '@views/MainPage/mainPage.js';
 import { profile } from '@views/UserProfile/userProfile.js';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
+import { publicProfile } from '@views/PublicProfile/publicProfile.js';
 
 const PROTOCOL = (`${DOMAIN}` === 'movie-gate.online:8088' || `${DOMAIN}` === 'movie-gate.online') ? 'https' : 'http';
 
@@ -71,6 +72,7 @@ export const API = {
 
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
+    publicProfile(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 };
 
 let i = 0;
@@ -98,4 +100,5 @@ export const routes = [
     { path: '/profile/', view: profile },
     { path: '/film/', view: filmPage },
     { path: '/person/', view: actorPage },
+    { path: '/user/', view: publicProfile },
 ];

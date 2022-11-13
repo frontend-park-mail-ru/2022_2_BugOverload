@@ -102,6 +102,18 @@ class ReducerUser {
         }
         return { statusChangeAvatar: null };
     }
+
+    async getPublicProfile(id) {
+        const responsePromise = Ajax.get(API.publicProfile(id));
+
+        const response = await responsePromise;
+        if (response.status === responsStatuses.OK) {
+            return {
+                [`user${id}`]: handlerUserInfoFields(handlerUrlObject(response.body)),
+            };
+        }
+        return null;
+    }
 }
 
 export const reducerUser = new ReducerUser();
