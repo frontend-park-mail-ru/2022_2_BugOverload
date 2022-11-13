@@ -60,7 +60,7 @@
     &__name {
         height: 42px;
         font-weight: 600;
-        font-size: 36px;
+        font-size: 22px;
         line-height: 42px;
         color: var(--main-color-text);
         white-space: nowrap;
@@ -70,15 +70,15 @@
         white-space: nowrap;
         height: 28px;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 18px;
         line-height: 28px;
         color: var(--secondary-color-text);
     }
 
     &__about {
-        margin-top: 55px;
+        margin-top: 30px;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 18px;
         line-height: 28px;
         color: var(--main-color-text);
     }
@@ -94,14 +94,14 @@
     &__about-item-key {
         width: 200px;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 23px;
         color: var(--secondary-color-text);
     }
 
     &__about-item-value {
         font-weight: 400;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 23px;
         color: var(--main-color-text);
         width: 100%;
