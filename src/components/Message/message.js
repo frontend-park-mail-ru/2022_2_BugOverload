@@ -20,7 +20,7 @@ export function ShowMessage(textMessage = 'Упс, что-то пошло не �
     }
 
     const errorDiv = document.querySelector('.js-errorMessage');
-    if(errorDiv) {
+    if (errorDiv) {
         errorDiv.remove();
     }
 

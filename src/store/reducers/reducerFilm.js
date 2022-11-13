@@ -15,6 +15,9 @@ class ReducerFilm {
         if (response.status === responsStatuses.OK) {
             return { [`film${id}`]: response.body };
         }
+        if (response.status === responsStatuses.NotFound) {
+            return { notFound: true };
+        }
 
         return { filmStatus: response.status };
     }

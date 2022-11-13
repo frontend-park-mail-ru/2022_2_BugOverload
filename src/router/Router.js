@@ -2,7 +2,7 @@ import { routes, ROOT } from '@config/config.js';
 import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
 import { ShowMessage } from '@components/Message/message.js';
-import { render404 } from '@router/Page404/page404.js';
+import { notFoundPage } from '@router/Page404/page404.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
 *
@@ -116,7 +116,7 @@ class Router {
                 props: matchedHref[1],
             });
         } else {
-            render404();
+            notFoundPage.render();
         }
     }
 
