@@ -86,7 +86,7 @@ export class ListReviews extends Component {
 
         div.insertAdjacentHTML('beforeend', 'Здесь пока нет рецензий. Станьте первым!');
 
-        this.location.insertAdjacentElement('afterend', div);
+        this.location.querySelector('.js-list-reviews__content-container').insertAdjacentElement('afterend', div);
     }
 
     /**
