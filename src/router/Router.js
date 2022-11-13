@@ -65,6 +65,8 @@ class Router {
                 const matchedHref = this.matchHref(target.dataset.section);
                 if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
+                    console.log('click', target)
+                    console.log({ path: matchedHref[0], props: matchedHref[1] })
                     this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
                 }
             }
@@ -120,6 +122,8 @@ class Router {
      * @param {string} stateObject.props - состояние приложения
      */
     go(stateObject, pushState = false) {
+        console.log('go',stateObject )
+        console.log('befob',this.beforStateObject )
         const view = this.mapViews.get(stateObject.path);
         const loginView = this.mapViews.get('/login/');
         const signupView = this.mapViews.get('/signup/');
@@ -129,10 +133,11 @@ class Router {
                 this.beforStateObject = stateObject;
             } else {
                 if (this.beforStateObject) {
+                    console.log('tyt')
                     this.navigate(this.beforStateObject);
                     this.lastView = this.mapViews.get(stateObject.path);
-                    this.mapViews.get(this.beforStateObject.path)
-                        .render(this.beforStateObject.props);
+                    this.mapViews.get(this.beforStateObject.path).render(this.beforStateObject.props);
+                    return;
                 } else {
                     this.navigate({ path: '/' });
                     this.lastView = this.mapViews.get('/');

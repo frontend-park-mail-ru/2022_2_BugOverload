@@ -47,10 +47,9 @@ export class Signup extends Component {
      */
     render() {
         if (store.getState('user')) {
+            this.componentWillUnmount();
             exitFromModal();
             exit();
-            this.componentWillUnmount();
-            window.location.replace(window.location.href);
             return;
         }
         if (!this.state.isUserSubscriber) {
