@@ -32,6 +32,15 @@
     margin-top: 40px;
   }
 
+  &__no-content {
+    font-size: 20px;
+    color: var(--secondary-color-text);
+    display: block;
+    width: 900px;
+    margin-top: 40px;
+    padding: 24px;
+  }
+
   &__btn-show-more {
     display: flex;
     justify-content: flex-end;

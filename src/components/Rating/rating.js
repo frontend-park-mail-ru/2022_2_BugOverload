@@ -3,7 +3,9 @@ import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { ShowMessage } from '@components/Message/message.js';
-import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
+import {
+    actionRate, actionDeleteRate, actionGetMetaDataFilm, decoreCountScores,
+} from '@actions/filmActions.js';
 
 /**
 * Рейтинг фильма.
