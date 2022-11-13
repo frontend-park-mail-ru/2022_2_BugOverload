@@ -1,6 +1,7 @@
 import { Ajax } from '@utils/ajax.js';
 import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
+import { decoreDate } from '@utils/decorationData.js';
 
 class ReducerUser {
     async login(user) {
@@ -130,11 +131,10 @@ const handlerUrlObject = (object, nameObject) => {
 
 const handlerUserInfoFields = (userInfo) => {
     if (userInfo) {
-        userInfo.joined_date = userInfo?.joined_date
-            ?.split(' ')[0].split('.').reverse().join('.') || getDateNow();
-        userInfo.count_ratings = userInfo.count_ratings || 0;
-        userInfo.count_collections = userInfo.count_collections || 0;
-        userInfo.count_reviews = userInfo.count_reviews || 0;
+        userInfo.joined_date = decoreDate(userInfo?.joined_date || getDateNow());
+        userInfo.count_ratings = userInfo.count_ratings || 'вы не поставили ни одной оценки';
+        userInfo.count_collections = userInfo.count_collections || 'у вас пока нет коллекций';
+        userInfo.count_reviews = userInfo.count_reviews || 'у вас пока нет рецензий';
         if (userInfo.avatar) {
             userInfo.avatar = API.img.user_avatar(userInfo.avatar);
         }

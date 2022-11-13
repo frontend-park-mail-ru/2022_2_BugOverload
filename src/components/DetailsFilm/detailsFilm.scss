@@ -49,6 +49,13 @@
     margin-right: var(--standart-margin);
   }
 
+  &__count-actors {
+    color: var(--secondary-color-text);
+  }
+  &__total-count-actors {
+    color: var(--secondary-color-text);
+  }
+
   &__actor__container {
     display: flex;
     position: relative;

@@ -88,6 +88,25 @@ export const decoreCountReviews = (count) => {
     return `${count} рецензий`;
 };
 
+export const decoreCountActors = (count) => {
+    if (!count) {
+        return '0 aктёров';
+    }
+
+    if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {
+        return `${count} aктёров`;
+    }
+
+    if (count % 10 === 1) {
+        return `${count} актёр`;
+    }
+    if (count % 10 > 1 && count % 10 <= 4) {
+        return `${count} aктёра`;
+    }
+
+    return `${count} aктёров`;
+};
+
 export const decoreColorRating = (location, className, rating) => {
     if (!location || !className) {
         return;
@@ -109,4 +128,49 @@ export const decoreColorRating = (location, className, rating) => {
     }
 
     filmRating.dataset.valueRating = 'negative';
+};
+
+export const decoreDate = (date) => {
+    if (!date) {
+        return 'нет данных';
+    }
+
+    const newFormatDate = date.split(' ')[0].split('.').reverse();
+    newFormatDate[1] = getMonthName(newFormatDate[1]);
+    return newFormatDate.join(' ');
+};
+
+const getMonthName = (numberMonth) => {
+    if (!numberMonth || !isFinite(numberMonth) || numberMonth > 12 || numberMonth === 0) {
+        return 'января';
+    }
+
+    switch (numberMonth) {
+    case 1:
+        return 'января';
+    case 2:
+        return 'февраля';
+    case 3:
+        return 'марта';
+    case 4:
+        return 'апреля';
+    case 5:
+        return 'мая';
+    case 6:
+        return 'июня';
+    case 7:
+        return 'июля';
+    case 8:
+        return 'августа';
+    case 9:
+        return 'сентября';
+    case 10:
+        return 'октября';
+    case 11:
+        return 'ноября';
+    case 12:
+        return 'декабря';
+    default:
+        return 'января';
+    }
 };
