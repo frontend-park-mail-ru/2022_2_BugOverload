@@ -136,7 +136,8 @@ class Router {
                     console.log('tyt')
                     this.navigate(this.beforStateObject);
                     this.lastView = this.mapViews.get(stateObject.path);
-                    this.mapViews.get(this.beforStateObject.path).render(this.beforStateObject.props);
+                    this.mapViews.get(this.beforStateObject.path)
+                        .render(this.beforStateObject.props);
                     return;
                 } else {
                     this.navigate({ path: '/' });
