@@ -50,6 +50,7 @@ export class Signup extends Component {
             exitFromModal();
             exit();
             this.componentWillUnmount();
+            window.location.replace(window.location.href);
             return;
         }
         if (!this.state.isUserSubscriber) {

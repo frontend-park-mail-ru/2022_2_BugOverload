@@ -27,7 +27,7 @@
         display: flex;
         flex-flow: row wrap;
         gap: 5px;
-        margin: 0 auto;
+        margin-left: 50px;
         max-width: 700px;
         max-height: 500px;
         overflow: hidden
@@ -88,6 +88,7 @@
         flex-flow: row nowrap;
         align-items: flex-start;
         margin-top: 30px;
+        width: 100%;
     }
 
     &__about-item-key {
@@ -103,6 +104,8 @@
         font-size: 20px;
         line-height: 23px;
         color: var(--main-color-text);
-        width: 200px
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

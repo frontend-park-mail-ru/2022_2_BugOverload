@@ -135,12 +135,12 @@ class Router {
                 this.beforStateObject = stateObject;
             } else {
                 if (this.beforStateObject) {
-                    this.navigate(this.beforStateObject, pushState);
+                    this.navigate(this.beforStateObject);
                     this.lastView = this.mapViews.get(stateObject.path);
                     this.mapViews.get(this.beforStateObject.path)
                         .render(this.beforStateObject.props);
                 } else {
-                    this.navigate({ path: '/' }, pushState);
+                    this.navigate({ path: '/' });
                     this.lastView = this.mapViews.get('/');
                     this.mapViews.get('/').render();
                 }
@@ -183,6 +183,14 @@ class Router {
                 window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
+            }
+
+            this.cache();
+        } else {
+            if (props) {
+                window.history.replaceState(props, null, `${location + path}${props}/`);
+            } else {
+                window.history.replaceState(props, null, location + path);
             }
 
             this.cache();
