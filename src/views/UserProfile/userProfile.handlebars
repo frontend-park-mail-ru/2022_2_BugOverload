@@ -4,6 +4,8 @@
     <div class="profile__avatar__flex">
         <img class="profile__avatar" src="{{avatar}}">
 
+        {{#if public}}
+        {{else}}
         <form class="profile__img__form js-profile__img__form" enctype="multipart/form-data" action="">
             <input name="object" accept="image/*" type="file" id="input__file" class="profile__file__input_none"
                 accept=".jpg, .jpeg, .png, .webp, .gif">
@@ -26,10 +28,9 @@
                     </defs>
                 </svg>
                 <div class="profile__avatar__button_center">Выбрать файл</div>
-
             </label>
-
         </form>
+        {{/if}}
     </div>
 
     <div class="profile__user__flex">
@@ -73,6 +74,8 @@
         </div>
     </div>
 
+    {{#if public}}
+    {{else}}
     <div class="profile__change">
         <svg class="profile__change__svg js-profile__change__svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
             xmlns="https://www.w3.org/2000/svg">
@@ -82,4 +85,5 @@
         </svg>
         {{{profileChange}}}
     </div>
+    {{/if}}
 </div>
