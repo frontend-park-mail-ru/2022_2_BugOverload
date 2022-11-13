@@ -54,6 +54,12 @@
     cursor: pointer;
   }
 
+  &__rate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   &__rate-value {
     display: flex;
     justify-content: center;
@@ -61,6 +67,10 @@
     font-size: 64px;
     color: var(--primary-color);
     font-weight: bold;
+  }
+
+  &__count-scores {
+    color: var(--secondary-color-text);
   }
 
   &__star:hover &__star-image {

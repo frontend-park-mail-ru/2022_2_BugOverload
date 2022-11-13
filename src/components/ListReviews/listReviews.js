@@ -68,11 +68,25 @@ export class ListReviews extends Component {
     render() {
         if (!this.state.reviews && this.isMounted) {
             this.componentWillUnmount();
+            if (this.offset === this.step) {
+                this.renderNoContent();
+            }
             return;
         }
 
         const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
+    }
+
+    renderNoContent() {
+        const div = document.createElement('div');
+
+        div.classList.add('js-list-reviews__no-content');
+        div.classList.add('list-reviews__no-content');
+
+        div.insertAdjacentHTML('beforeend', 'Здесь пока нет рецензий. Станьте первым!');
+
+        this.location.insertAdjacentElement('afterend', div);
     }
 
     /**
@@ -81,6 +95,10 @@ export class ListReviews extends Component {
     renderBegin() {
         if (!this.state.userReview) {
             return;
+        }
+        const noContentContainer = this.location.querySelector('.js-list-reviews__no-content');
+        if (noContentContainer) {
+            noContentContainer.remove();
         }
 
         this.location.querySelector('.js-list-reviews__content-container')

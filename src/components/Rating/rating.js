@@ -3,8 +3,13 @@ import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { ShowMessage } from '@components/Message/message.js';
-import { actionRate, actionDeleteRate, actionGetMetaDataFilm } from '@actions/filmActions.js';
+import {
+    actionRate, actionDeleteRate, actionGetMetaDataFilm,
+} from '@actions/filmActions.js';
 
+import {
+    decoreCountScores,
+} from '@utils/decorationData.js';
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.
@@ -19,10 +24,12 @@ export class Rating extends Component {
             film: props.film,
             rating: null,
             statusRating: null,
+            countScores: null,
         };
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
+            this.state.countScores = store.getState('countScores');
 
             this.render();
         });
@@ -49,6 +56,7 @@ export class Rating extends Component {
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating || '0.0',
+            countRates: decoreCountScores(this.state.film.count_scores),
         }));
         this.componentDidMount();
         if (!this.state.rating) {

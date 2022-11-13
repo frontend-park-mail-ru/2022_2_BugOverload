@@ -32,6 +32,7 @@ class ReducerFilm {
             return {
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
+                countScores: response?.body?.count_scores,
             };
         }
         return { statusRating: response.status };
@@ -45,6 +46,7 @@ class ReducerFilm {
             return {
                 rating: null,
                 statusRating: null,
+                countScores: response?.body?.count_scores,
             };
         }
         return { statusRating: response.status };

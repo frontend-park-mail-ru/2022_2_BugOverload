@@ -67,13 +67,13 @@ app.get('/api/v1/auth',  (req, res) => {
 		res.cookie('red', 1, {expires: new Date(Date.now() - 1000 * 60 * 10)});
 	}
 
-	/*res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
+	res.status(variants[i]).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR});
 	if(i == 0) {
 		i = 1;
 	} else {
 		i = 0;
-	}*/
-	res.status(400).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
+	}
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
 });
 
 app.put('/api/v1/user/setting',  (req, res) => {
@@ -87,12 +87,12 @@ app.put('/api/v1/image', (req, res) => {
 
 app.get('/api/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
+	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022.10.12 21312124"});
 });
 
 app.get('/api/v1/user/profile/:id',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR, count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR, count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022.10.12 5343"});
 });
 
 app.get('/api/v1/auth/logout',  (req, res) => {
@@ -1251,11 +1251,11 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 });
 
 app.post('/api/v1/film/:id/rate', (req, res) => {
-	const rate = req.body.rate;
+	const rate = req.body.score;
 	const email = 'Dop123@mail.ru';
 	const filmID = req.params.id;
 
-	if ( !rate || !filmID) {
+	if ( !rate ) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
 	delete filmRateStorage[email][filmID]; //
