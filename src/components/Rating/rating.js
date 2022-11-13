@@ -4,9 +4,12 @@ import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { ShowMessage } from '@components/Message/message.js';
 import {
-    actionRate, actionDeleteRate, actionGetMetaDataFilm, decoreCountScores,
+    actionRate, actionDeleteRate, actionGetMetaDataFilm,
 } from '@actions/filmActions.js';
 
+import {
+    decoreCountScores,
+} from '@utils/decorationData.js';
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.
