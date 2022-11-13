@@ -96,12 +96,6 @@ class Router {
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
 
-        if (window.history.length <= 2 && (location === '/login/' || location === '/signup/')) {
-            this.go({ path: '/' });
-            this.go({ path: location }, true);
-            return;
-        }
-
         let matchedHref = [];
         matchedHref[0] = location;
 
@@ -113,7 +107,7 @@ class Router {
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
-            });
+            }, true);
         } else {
             notFoundPage.render();
         }
@@ -188,9 +182,9 @@ class Router {
             this.cache();
         } else {
             if (props) {
-                window.history.replaceState(props, null, `${location + path}${props}/`);
+                window.location.replace(`${location + path}${props}/`);
             } else {
-                window.history.replaceState(props, null, location + path);
+                window.location.replace(location + path);
             }
 
             this.cache();

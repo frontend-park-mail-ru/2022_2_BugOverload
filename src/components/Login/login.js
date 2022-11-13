@@ -56,7 +56,6 @@ export class Login extends Component {
             exitFromModal();
             exit();
             this.componentWillUnmount();
-            window.location.replace(window.location.href);
             return;
         }
 
