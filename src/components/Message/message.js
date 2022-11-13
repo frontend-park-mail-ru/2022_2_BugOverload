@@ -19,7 +19,14 @@ export function ShowMessage(textMessage = 'Упс, что-то пошло не �
         content = templateError({ text: textMessage });
     }
 
+    const errorDiv = document.querySelector('.js-errorMessage');
+    if(errorDiv) {
+        errorDiv.remove();
+    }
+
     const div = document.createElement('div');
+
+    div.classList.add('js-errorMessage');
 
     div.insertAdjacentHTML('beforeend', content);
 

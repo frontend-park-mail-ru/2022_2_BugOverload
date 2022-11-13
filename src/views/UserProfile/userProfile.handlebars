@@ -35,7 +35,10 @@
 
     <div class="profile__user__flex">
         <div class="profile__username">{{nickname}}</div>
+        {{#if public}}
+        {{else}}
         <div class="profile__email">{{email}}</div>
+        {{/if}}
         <div class="profile__info__flex">
             <div class="profile__info__wrapper">
                 <div class="profile__info__value__wrapper">

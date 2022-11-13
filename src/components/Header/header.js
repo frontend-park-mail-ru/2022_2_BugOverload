@@ -3,7 +3,6 @@ import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component.js';
 import { store } from '@store/Store.js';
 import { actionAuth } from '@store/actionCreater/userActions.js';
-import { ShowMessage } from '@components/Message/message.js';
 
 /**
 * Отрисовывает хедер.
@@ -49,33 +48,6 @@ export class Header extends Component {
         } else {
             store.dispatch(actionAuth());
         }
-
-        this.componentDidMount();
-    }
-
-    componentDidMount() {
-        const btnMyFilms = this.rootNode.querySelector('.js-header__navlink-my-films');
-        this.handlerOpenMyFilms = () => ShowMessage('\"Мои Фильмы\" в разработке');
-        btnMyFilms.addEventListener('click', this.handlerOpenMyFilms);
-
-        const btnMyColls = this.rootNode.querySelector('.js-header__navlink-my-colls');
-        this.handlerOpenColls = () => ShowMessage('\"Коллекции\" в разработке');
-        btnMyColls.addEventListener('click', this.handlerOpenColls);
-
-        const btnTop = this.rootNode.querySelector('.js-header__navlink-top-250');
-        this.handlerOpenTop = () => ShowMessage('\"Топ-250\" в разработке');
-        btnTop.addEventListener('click', this.handlerOpenTop);
-    }
-
-    componentWillUnmount() {
-        const btnMyFilms = this.rootNode.querySelector('.js-header__navlink-my-films');
-        btnMyFilms.removeEventListener('click', this.handlerOpenMyFilms);
-
-        const btnMyColls = this.rootNode.querySelector('.js-header__navlink-my-colls');
-        btnMyColls.removeEventListener('click', this.handlerOpenColls);
-
-        const btnTop = this.rootNode.querySelector('.js-header__navlink-top-250');
-        btnTop.removeEventListener('click', this.handlerOpenTop);
     }
 }
 
