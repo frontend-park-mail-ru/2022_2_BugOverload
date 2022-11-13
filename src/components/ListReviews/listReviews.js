@@ -68,7 +68,7 @@ export class ListReviews extends Component {
     render() {
         if (!this.state.reviews && this.isMounted) {
             this.componentWillUnmount();
-            if (this.offset === this.step) {
+            if (this.offset === 0) {
                 this.renderNoContent();
             }
             return;
