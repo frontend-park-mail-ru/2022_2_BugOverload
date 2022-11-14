@@ -3,10 +3,11 @@ import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal, exit, exitFromModal } from '@components/Modal/modal.js';
+import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionLogin } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает логин.
@@ -54,7 +55,6 @@ export class Login extends Component {
     render() {
         if (store.getState('user')) {
             this.componentWillUnmount();
-            exitFromModal();
             exit();
             return;
         }
@@ -160,22 +160,24 @@ export class Login extends Component {
             store.dispatch(actionLogin(user));
         });
 
-        const { deleteLogin } = this;
+        const location = (window.location.href.match(hrefRegExp.host))
+            ? window.location.href.replace(hrefRegExp.host, '')
+            : window.location.href.replace(hrefRegExp.localhost, '');
+
+        console.log('location', location);
+
+        const pathBeforModal = window.localStorage.getItem('pathBeforModal');
+
         document.body
             .querySelector('.js-modal__background')
-            .addEventListener('click', deleteLogin);
+            .dataset.section = pathBeforModal;
+          
     }
 
     /**
      * Удаляет все подписки
      */
     componentWillUnmount() {
-        const modalBackground = document.body
-            .querySelector('.js-modal__background');
-        const { deleteLogin } = this;
-        if (modalBackground) {
-            modalBackground.removeEventListener('click', deleteLogin);
-        }
         if (this.state.isSubscribed) {
             store.unsubscribe('statusLogin', this.subscribeLoginpStatus);
             this.state.statusLogin = null;

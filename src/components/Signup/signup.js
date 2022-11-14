@@ -3,10 +3,11 @@ import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
 import { Component } from '@components/Component.js';
-import { Modal, exit, exitFromModal } from '@components/Modal/modal.js';
+import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
+import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает регистрацию.
@@ -48,10 +49,10 @@ export class Signup extends Component {
     render() {
         if (store.getState('user')) {
             this.componentWillUnmount();
-            exitFromModal();
             exit();
             return;
         }
+
         if (!this.state.isUserSubscriber) {
             store.subscribe('user', this.subscribeSignup);
             this.state.isUserSubscriber = true;
@@ -146,16 +147,6 @@ export class Signup extends Component {
     }
 
     /**
-     * Обёртка над функции, вызываемой при событии выхода из регистрации
-     */
-    deleteSignup(e) {
-        const { target } = e;
-        if (target.classList.contains('modal__background')) {
-            exit();
-        }
-    }
-
-    /**
      * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
@@ -183,22 +174,23 @@ export class Signup extends Component {
             }
         });
 
-        const { deleteSignup } = this;
+        const location = (window.location.href.match(hrefRegExp.host))
+            ? window.location.href.replace(hrefRegExp.host, '')
+            : window.location.href.replace(hrefRegExp.localhost, '');
+
+        console.log('location', location);
+
+        const pathBeforModal = window.localStorage.getItem('pathBeforModal');
+
         document.body
             .querySelector('.js-modal__background')
-            .addEventListener('click', deleteSignup);
+            .dataset.section = pathBeforModal;
     }
 
     /**
      * Удаляет все подписки
      */
     componentWillUnmount() {
-        const modalBackground = document.body
-            .querySelector('.js-modal__background');
-        const { deleteSignup } = this;
-        if (modalBackground) {
-            modalBackground.removeEventListener('click', deleteSignup);
-        }
         if (this.state.isSubscribed) {
             store.unsubscribe('statusSignup', this.subscribeSignupStatus);
             this.state.statusSignup = null;

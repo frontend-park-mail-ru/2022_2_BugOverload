@@ -67,7 +67,7 @@ class Router {
                     e.preventDefault();
                     console.log('click', target)
                     console.log({ path: matchedHref[0], props: matchedHref[1] })
-                    this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
+                    this.go({ path: matchedHref[0], props: matchedHref[1] }, {pushState: true});
                 }
             }
         });
@@ -81,7 +81,7 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
-            this.go({ path: matchedHref[0], props: matchedHref[1] });
+            this.go({ path: matchedHref[0], props: matchedHref[1] }, {});
         }, 0));
         this.refresh();
     }
@@ -109,7 +109,7 @@ class Router {
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
-            }, true);
+            }, {pushState: true, refresh: true});
         } else {
             notFoundPage.render();
         }
@@ -121,51 +121,58 @@ class Router {
      * @param {string} stateObject.path - относительный url
      * @param {string} stateObject.props - состояние приложения
      */
-    go(stateObject, pushState = false) {
-        console.log('go',stateObject )
-        console.log('befob',this.beforStateObject )
-        const view = this.mapViews.get(stateObject.path);
-        const loginView = this.mapViews.get('/login/');
-        const signupView = this.mapViews.get('/signup/');
-        if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            this.root.replaceChildren();
-            if (this.lastView !== loginView && this.lastView !== signupView) {
-                this.beforStateObject = stateObject;
-            } else {
-                if (this.beforStateObject) {
-                    console.log('tyt')
-                    this.navigate(this.beforStateObject);
-                    this.lastView = this.mapViews.get(stateObject.path);
-                    this.mapViews.get(this.beforStateObject.path)
-                        .render(this.beforStateObject.props);
-                    return;
-                } else {
-                    this.navigate({ path: '/' });
-                    this.lastView = this.mapViews.get('/');
-                    this.mapViews.get('/').render();
-                }
+    go(stateObject, {pushState, refresh}) {
+        console.log('refre', refresh)
+        const location = (window.location.href.match(hrefRegExp.host))
+            ? window.location.href.replace(hrefRegExp.host, '')
+            : window.location.href.replace(hrefRegExp.localhost, '');
 
-                return;
-            }
-        } else if (!this.lastView || this.lastView === loginView || this.lastView === signupView) {
-            const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-            currentView.render(window.history.state);
-        } else if (this.beforStateObject) {
-            this.mapViews.get(this.beforStateObject.path).render(this.beforStateObject.props);
-        }
+            console.log('location', location);
+
+        const prevStateLocation = this.matchHref(location);
+        const prevView = prevStateLocation[0];
 
         if (
-            this.lastView
+            prevView
             && Object.getOwnPropertyNames(
-                Object.getPrototypeOf(this.lastView),
+                Object.getPrototypeOf(prevView),
             )
                 .includes('componentWillUnmount')
         ) {
-            this.lastView.componentWillUnmount();
+            prevView.componentWillUnmount();
         }
+
+        const view = this.mapViews.get(stateObject.path);
+
+        //click login/signup after signup/login
+        if(stateObject.path === '/login/' || stateObject.path === '/signup/') {
+            if(refresh) {
+                this.pathBeforModal = window.localStorage.getItem('pathBeforModal');
+                console.log('getrefre', this.pathBeforModal)
+                if (!this.pathBeforModal) {
+                    window.localStorage.setItem('pathBeforModal', '/');
+                    this.mapViews.get('/').render();
+                } else {
+                    const prevState = this.matchHref(this.pathBeforModal);
+                    const viewBeforModal = this.mapViews.get(prevState[0]);
+                    viewBeforModal.render(prevState[1]);
+                }
+            } else {
+                if(location !== '/login/' && location !== '/signup/') {
+                    window.localStorage.setItem('pathBeforModal', location);
+                    console.log('windowloc', window.localStorage.getItem('pathBeforModal'))
+                }
+            }
+        }
+
+        //click no login/signup after login/signup
+        if(stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
+            this.root.replaceChildren();
+        }
+
         view.render(stateObject.props);
+        console.log('befornav', stateObject)
         this.navigate(stateObject, pushState);
-        this.lastView = view;
     }
 
     /**
@@ -180,21 +187,14 @@ class Router {
 
         if (pushState) {
             if (props) {
+                console.log(props, `${location + path}${props}/`)
                 window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
             }
+        } 
 
-            this.cache();
-        } else {
-            if (props) {
-                window.history.replaceState(props, null, `${location + path}${props}/`);
-            } else {
-                window.history.replaceState(props, null, location + path);
-            }
-
-            this.cache();
-        }
+        this.cache();
     }
 
     cache(url = './') {
