@@ -63,7 +63,7 @@ class ReducerUser {
     }
 
     async getSettings() {
-        const responsePromise = Ajax.get(API.settings);
+        const responsePromise = Ajax.get(API.settings());
 
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
