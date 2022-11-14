@@ -174,10 +174,6 @@ export class Signup extends Component {
             }
         });
 
-        const location = (window.location.href.match(hrefRegExp.host))
-            ? window.location.href.replace(hrefRegExp.host, '')
-            : window.location.href.replace(hrefRegExp.localhost, '');
-
         const pathBeforModal = window.localStorage.getItem('pathBeforModal');
 
         document.body
