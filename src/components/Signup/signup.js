@@ -7,7 +7,6 @@ import { Modal, exit } from '@components/Modal/modal.js';
 import { store } from '@store/Store.js';
 import { actionRegister } from '@store/actionCreater/userActions.js';
 import { responsStatuses } from '@config/config.js';
-import { hrefRegExp } from '@config/regExp.js';
 
 /**
 * Отрисовывает регистрацию.
