@@ -52,7 +52,6 @@ export const exitFromModal = () => {
 */
 export const exit = () => {
     const dispatchElement = document.body.querySelector('.js-modal__background');
-    console.log(dispatchElement)
     if (dispatchElement) {
         const redirect = new Event(
             'click',
@@ -63,11 +62,11 @@ export const exit = () => {
         );
         dispatchElement.dispatchEvent(redirect);
         return;
-    } 
+    }
 
     const location = (window.location.href.match(hrefRegExp.host))
-            ? window.location.href.match(hrefRegExp.host, '')[0]
-            : window.location.href.match(hrefRegExp.localhost, '')[0];
+        ? window.location.href.match(hrefRegExp.host, '')[0]
+        : window.location.href.match(hrefRegExp.localhost, '')[0];
 
     const pathBeforModal = window.localStorage.getItem('pathBeforModal');
     history.replaceState(null, null, `${location + pathBeforModal}`);

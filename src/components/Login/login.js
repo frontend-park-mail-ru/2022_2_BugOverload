@@ -164,14 +164,11 @@ export class Login extends Component {
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
 
-        console.log('location', location);
-
         const pathBeforModal = window.localStorage.getItem('pathBeforModal');
 
         document.body
             .querySelector('.js-modal__background')
             .dataset.section = pathBeforModal;
-          
     }
 
     /**

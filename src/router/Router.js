@@ -65,9 +65,7 @@ class Router {
                 const matchedHref = this.matchHref(target.dataset.section);
                 if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
-                    console.log('click', target)
-                    console.log({ path: matchedHref[0], props: matchedHref[1] })
-                    this.go({ path: matchedHref[0], props: matchedHref[1] }, {pushState: true});
+                    this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true });
                 }
             }
         });
@@ -109,7 +107,7 @@ class Router {
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
-            }, {pushState: true, refresh: true});
+            }, { pushState: true, refresh: true });
         } else {
             notFoundPage.render();
         }
@@ -121,17 +119,13 @@ class Router {
      * @param {string} stateObject.path - относительный url
      * @param {string} stateObject.props - состояние приложения
      */
-    go(stateObject, {pushState, refresh}) {
-        console.log('refre', refresh)
+    go(stateObject, { pushState, refresh }) {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
 
-            console.log('location', location);
-
         const prevStateLocation = this.matchHref(location);
         const prevView = this.mapViews.get(prevStateLocation[0]);
-        console.log(prevView)
 
         if (
             prevView
@@ -140,18 +134,15 @@ class Router {
             )
                 .includes('componentWillUnmount')
         ) {
-
-            console.log('unmount')
             prevView.componentWillUnmount();
         }
 
         const view = this.mapViews.get(stateObject.path);
 
-        //click login/signup after signup/login
-        if(stateObject.path === '/login/' || stateObject.path === '/signup/') {
-            if(refresh) {
+        // click login/signup after signup/login
+        if (stateObject.path === '/login/' || stateObject.path === '/signup/') {
+            if (refresh) {
                 this.pathBeforModal = window.localStorage.getItem('pathBeforModal');
-                console.log('getrefre', this.pathBeforModal)
                 if (!this.pathBeforModal) {
                     window.localStorage.setItem('pathBeforModal', '/');
                     this.mapViews.get('/').render();
@@ -160,21 +151,17 @@ class Router {
                     const viewBeforModal = this.mapViews.get(prevState[0]);
                     viewBeforModal.render(prevState[1]);
                 }
-            } else {
-                if(location !== '/login/' && location !== '/signup/') {
-                    window.localStorage.setItem('pathBeforModal', location);
-                    console.log('windowloc', window.localStorage.getItem('pathBeforModal'))
-                }
+            } else if (location !== '/login/' && location !== '/signup/') {
+                window.localStorage.setItem('pathBeforModal', location);
             }
         }
 
-        //click no login/signup after login/signup
-        if(stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
+        // click no login/signup after login/signup
+        if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             this.root.replaceChildren();
         }
 
         view.render(stateObject.props);
-        console.log('befornav', stateObject)
         this.navigate(stateObject, pushState);
     }
 
@@ -190,12 +177,11 @@ class Router {
 
         if (pushState) {
             if (props) {
-                console.log(props, `${location + path}${props}/`)
                 window.history.pushState(props, null, `${location + path}${props}/`);
             } else {
                 window.history.pushState(props, null, location + path);
             }
-        } 
+        }
 
         this.cache();
     }
