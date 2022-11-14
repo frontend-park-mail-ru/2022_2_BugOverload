@@ -130,7 +130,8 @@ class Router {
             console.log('location', location);
 
         const prevStateLocation = this.matchHref(location);
-        const prevView = prevStateLocation[0];
+        const prevView = this.mapViews.get(prevStateLocation[0]);
+        console.log(prevView)
 
         if (
             prevView
@@ -139,6 +140,8 @@ class Router {
             )
                 .includes('componentWillUnmount')
         ) {
+
+            console.log('unmount')
             prevView.componentWillUnmount();
         }
 
