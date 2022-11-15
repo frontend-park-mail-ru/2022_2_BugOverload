@@ -102,7 +102,9 @@ export class ListReviews extends Component {
         }
 
         this.location.querySelector('.js-list-reviews__content-container')
-            .insertAdjacentHTML('afterbegin', Review.createReview(this.state.userReview));
+            .insertAdjacentHTML('afterbegin', Review.createReview(
+                { id: store.getState('user')?.id, ...this.state.userReview },
+            ));
     }
 
     /**

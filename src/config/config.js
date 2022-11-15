@@ -58,8 +58,8 @@ export const API = {
 
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,
     film(id, countImages = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
-    metaFilm(id) { 
-        return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/user_activity`; 
+    metaFilm(id) {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/user_activity`;
     },
 
     rate(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
