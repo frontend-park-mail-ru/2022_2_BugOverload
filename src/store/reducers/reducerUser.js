@@ -37,7 +37,15 @@ class ReducerUser {
     }
 
     async auth() {
-        const responsePromise = Ajax.get(API.auth);
+        let responsePromise;
+        try {
+            responsePromise = Ajax.get(API.auth);
+        } catch(e) {
+            return {
+                user: null,
+                authStatus: null,
+            };
+        }
 
         const response = await responsePromise;
         if (response.status === responsStatuses.OK) {
