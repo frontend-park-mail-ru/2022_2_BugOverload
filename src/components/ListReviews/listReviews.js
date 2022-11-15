@@ -100,11 +100,11 @@ export class ListReviews extends Component {
         if (noContentContainer) {
             noContentContainer.remove();
         }
+        
+        this.state.userReview.author.id = store.getState('user')?.id;
 
         this.location.querySelector('.js-list-reviews__content-container')
-            .insertAdjacentHTML('afterbegin', Review.createReview(
-                { author: {id: store.getState('user')?.id}, ...this.state.userReview },
-            ));
+            .insertAdjacentHTML('afterbegin', Review.createReview(this.state.userReview));
     }
 
     /**
