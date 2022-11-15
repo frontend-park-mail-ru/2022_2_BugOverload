@@ -6,7 +6,8 @@
 @import "@components/Collection/collection.scss";
 @import "@components/Film/film.scss";
 @import "@components/PreviewFilm/previewFilm.scss";
-@import "@components/ErrorMessage/errorMessage.scss";
+@import "@components/Message/errorMessage.scss";
+@import "@components/Message/successMessage.scss";
 @import "@components/AboutFilm/aboutFilm.scss";
 @import "@components/MenuInfoFilm/menuInfoFilm.scss";
 @import "@components/DescriptionFilm/descriptionFilm.scss";
@@ -36,6 +37,10 @@ html {
   scrollbar-width    : none /* Firefox */
 }
 
+textarea {
+  font-family: 'Mail Sans Roman';
+}
+
 input:focus, textarea:focus, select:focus {
   outline: none;
 }
@@ -63,6 +68,7 @@ body, html {
   --text-danger: #e72d2d;
   --standart-margin: 52px;
   --error-color:rgb(150 0 0);
+  --success-color: rgb(98 167 127);
   --rating-color-neutral: #858585;
   --rating-color-neutral-opac: rgb(133 133 133 / 20%);
   --rating-color-positive: #12B77C;

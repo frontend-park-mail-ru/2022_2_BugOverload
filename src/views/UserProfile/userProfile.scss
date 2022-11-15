@@ -102,22 +102,23 @@
         }
 
         &__value__wrapper {
-            @include column__flex;
-            justify-content: center;
-            align-content: flex-start;
+            @include flex__row;
+            justify-content: space-between;
+            align-content: center;
             align-items: flex-start;
-            margin-left: 27px;
+            width: 100%;
         }
 
         &__field{
             font-size: 20px;
             color: var(--secondary-color-text);
             margin-bottom: 35px;
+            width: 200px;
         }
 
         &__value {
             font-size: 20px;
-            margin-bottom: 35px;
+            width: 200px;
         }
     }
 
@@ -126,8 +127,10 @@
         justify-content: center;
         align-content: flex-start;
         align-items: flex-start;
+        width: 100%;
         margin-top: 95px + 54px;
         margin-left: 32px;
+        margin-right: 52px;
 
         &__svg {
             cursor: pointer;

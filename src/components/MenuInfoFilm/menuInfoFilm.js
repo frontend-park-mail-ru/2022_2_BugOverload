@@ -3,7 +3,9 @@ import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js'
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component.js';
-import { decoreDuration, decoreListPersons, decoreListItems } from '@utils/decorationData.js';
+import {
+    decoreDuration, decoreListPersons, decoreListItems, decoreCountActors,
+} from '@utils/decorationData.js';
 
 /**
 * Отрисовывает меню для переключения описания фильма и полной информацией о нём
@@ -44,11 +46,12 @@ export class MenuInfoFilm extends Component {
             box_office: this.filmData.box_office,
             budget: this.filmData.budget,
             count_seasons: this.filmData.count_seasons,
+            count_main_actors: decoreCountActors(this.filmData.actors?.length),
+            count_actors: decoreCountActors(this.filmData.count_actors),
             duration: decoreDuration(this.filmData.duration),
             genres: decoreListItems(this.filmData.genres, 3),
             prod_companies: decoreListItems(this.filmData.prod_companies, 3),
             prod_countries: decoreListItems(this.filmData.prod_countries, 3),
-
         };
 
         this.details = new DetailsFilm(fullDetails);

@@ -1,8 +1,9 @@
-$height_wrapper:80px;
-$width_wrapper: 410px;
+$height_wrapper: 80px;
+$max__width_wrapper: 410px;
+$min__width_wrapper: 250px;
 $margin_top_input: 30px;
 $padding_input: 19px;
-$margin_top_button: 35px;
+$margin_bottom_button: 38px;
 $margin_bottom_error: 5px;
 
 @mixin profile__form{
@@ -10,38 +11,45 @@ $margin_bottom_error: 5px;
     flex-flow: column nowrap;
     align-content: stretch;
     align-items: flex-start;
-    margin-top: 10px;
 }
 
 .profile__form__nick{
     @include profile__form;
+    width: 100%;
 }
 
 .profile__form__password{
     @include profile__form;
+    width: 100%;
 }
 
 .profile__wrapper__nick{
     height: $height_wrapper;
-    width: $width_wrapper;
+    max-width: $max__width_wrapper;
+    min-width: $min__width_wrapper;
     margin-top: $margin_top_input;
+    width: 100%;
 }
 
 .profile__wrapper__old__password{
     height: $height_wrapper;
-    width: $width_wrapper;
+    max-width: $max__width_wrapper;
+    min-width: $min__width_wrapper;
+    width: 100%;
 }
 
 .profile__wrapper__password{
     height: $height_wrapper;
-    width: $width_wrapper;
+    max-width: $max__width_wrapper;
+    min-width: $min__width_wrapper;
     margin-top: $margin_top_input;
+    width: 100%;
 }
 
 @mixin input{
     font-size: 15px;
     height: 42px;
-    width: $width_wrapper - $padding_input;
+    width: calc(100% - $padding_input);
     border: 2px solid var(--border-input-color);
     border-radius: 8px;
     padding-left: $padding_input;
@@ -52,6 +60,13 @@ $margin_bottom_error: 5px;
 .profile__input{
     @include input;
     margin-bottom: $margin_bottom_error;
+    max-width: $max__width_wrapper;
+}
+
+.profile__nowrapper_input{
+    @include input;
+    margin-bottom: $margin_bottom_error;
+    max-width: $max__width_wrapper - $padding_input;
 }
 
 .profile__old__input {
@@ -68,5 +83,5 @@ $margin_bottom_error: 5px;
     height: 42px;
     border: 0;
     width: 210px;
-    margin-bottom: $margin_top_button;
+    margin-bottom: $margin_bottom_button;
 }

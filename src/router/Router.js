@@ -1,8 +1,7 @@
 import { routes, ROOT } from '@config/config.js';
-import { exitFromModal } from '@components/Modal/modal.js';
 import { hrefRegExp } from '@config/regExp.js';
-import { ShowErrorMessage } from '@components/ErrorMessage/errorMessage.js';
-import { render404 } from '@router/Page404/page404.js';
+import { ShowMessage } from '@components/Message/message.js';
+import { notFoundPage } from '@router/Page404/page404.js';
 /**
 * Осуществляет изменение приложения согласно его состояниям
 *
@@ -66,7 +65,7 @@ class Router {
                 const matchedHref = this.matchHref(target.dataset.section);
                 if (this.mapViews.get(matchedHref[0])) {
                     e.preventDefault();
-                    this.go({ path: matchedHref[0], props: matchedHref[1] }, true);
+                    this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true });
                 }
             }
         });
@@ -80,7 +79,7 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
-            this.go({ path: matchedHref[0], props: matchedHref[1] });
+            this.go({ path: matchedHref[0], props: matchedHref[1] }, {});
         }, 0));
         this.refresh();
     }
@@ -90,18 +89,12 @@ class Router {
      */
     refresh() {
         window.addEventListener('offline', () => {
-            ShowErrorMessage('Проблемы с интернет соединением');
+            ShowMessage('Проблемы с интернет соединением', 'negative');
         });
 
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
-
-        if (window.history.length <= 2 && (location === '/login/' || location === '/signup/')) {
-            this.go({ path: '/' });
-            this.go({ path: location }, true);
-            return;
-        }
 
         let matchedHref = [];
         matchedHref[0] = location;
@@ -114,9 +107,9 @@ class Router {
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
-            });
+            }, { pushState: true, refresh: true });
         } else {
-            render404();
+            notFoundPage.render();
         }
     }
 
@@ -126,36 +119,50 @@ class Router {
      * @param {string} stateObject.path - относительный url
      * @param {string} stateObject.props - состояние приложения
      */
-    go(stateObject, pushState = false) {
-        const view = this.mapViews.get(stateObject.path);
-        if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
-            const loginView = this.mapViews.get('/login/');
-            const signupView = this.mapViews.get('/signup/');
-            if (this.lastView !== loginView && this.lastView !== signupView) {
-                this.root.replaceChildren();
-            } else {
-                this.navigate(stateObject, pushState);
-                this.lastView = this.mapViews.get(stateObject.path);
-                exitFromModal();
-                return;
-            }
-        } else if (!this.lastView) {
-            const currentView = this.mapViews.get(stateObject.path.replace(hrefRegExp.auth, ''));
-            currentView.render(window.history.state);
-        }
+    go(stateObject, { pushState, refresh }) {
+        const location = (window.location.href.match(hrefRegExp.host))
+            ? window.location.href.replace(hrefRegExp.host, '')
+            : window.location.href.replace(hrefRegExp.localhost, '');
+
+        const prevStateLocation = this.matchHref(location);
+        const prevView = this.mapViews.get(prevStateLocation[0]);
 
         if (
-            this.lastView
+            prevView
             && Object.getOwnPropertyNames(
-                Object.getPrototypeOf(this.lastView),
+                Object.getPrototypeOf(prevView),
             )
                 .includes('componentWillUnmount')
         ) {
-            this.lastView.componentWillUnmount();
+            prevView.componentWillUnmount();
         }
+
+        const view = this.mapViews.get(stateObject.path);
+
+        // click login/signup after signup/login
+        if (stateObject.path === '/login/' || stateObject.path === '/signup/') {
+            if (refresh) {
+                this.pathBeforModal = window.localStorage.getItem('pathBeforModal');
+                if (!this.pathBeforModal) {
+                    window.localStorage.setItem('pathBeforModal', '/');
+                    this.mapViews.get('/').render();
+                } else {
+                    const prevState = this.matchHref(this.pathBeforModal);
+                    const viewBeforModal = this.mapViews.get(prevState[0]);
+                    viewBeforModal.render(prevState[1]);
+                }
+            } else if (location !== '/login/' && location !== '/signup/') {
+                window.localStorage.setItem('pathBeforModal', location);
+            }
+        }
+
+        // click no login/signup after login/signup
+        if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
+            this.root.replaceChildren();
+        }
+
         view.render(stateObject.props);
         this.navigate(stateObject, pushState);
-        this.lastView = view;
     }
 
     /**
@@ -174,9 +181,9 @@ class Router {
             } else {
                 window.history.pushState(props, null, location + path);
             }
-
-            this.cache();
         }
+
+        this.cache();
     }
 
     cache(url = './') {

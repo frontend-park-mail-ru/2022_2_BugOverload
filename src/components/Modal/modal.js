@@ -51,31 +51,23 @@ export const exitFromModal = () => {
 * Функция полного выхода из модального окна, со сменой url
 */
 export const exit = () => {
-    const redirect = new Event(
-        'click',
-        {
-            bubbles: true,
-            cancelable: true,
-        },
-    );
-
-    let newDatasetSection = (window.location.href.match(hrefRegExp.host))
-        ? window.location.href.replace(hrefRegExp.host, '')
-        : window.location.href.replace(hrefRegExp.localhost, '');
-
-    newDatasetSection = newDatasetSection.replace(hrefRegExp.auth, '');
-
-    const dispatchElement = document.body.querySelector(`a[data-section="${newDatasetSection}"]`)
-        || document.body.querySelector('a');
-
-    const oldDatasetSection = dispatchElement.dataset.section;
-    if (oldDatasetSection && oldDatasetSection !== newDatasetSection) {
-        dispatchElement.dataset.section = newDatasetSection;
-    }
-
-    dispatchElement.dispatchEvent(redirect);
-
+    const dispatchElement = document.body.querySelector('.js-modal__background');
     if (dispatchElement) {
-        dispatchElement.dataset.section = oldDatasetSection;
+        const redirect = new Event(
+            'click',
+            {
+                bubbles: true,
+                cancelable: true,
+            },
+        );
+        dispatchElement.dispatchEvent(redirect);
+        return;
     }
+
+    const location = (window.location.href.match(hrefRegExp.host))
+        ? window.location.href.match(hrefRegExp.host, '')[0]
+        : window.location.href.match(hrefRegExp.localhost, '')[0];
+
+    const pathBeforModal = window.localStorage.getItem('pathBeforModal');
+    history.replaceState(null, null, `${location + pathBeforModal}`);
 };

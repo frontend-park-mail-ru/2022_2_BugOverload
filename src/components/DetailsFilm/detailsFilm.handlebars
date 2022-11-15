@@ -117,7 +117,7 @@
         {{#if age_limit}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Возраст</div>
-            <div class="details-film__info-item-value-info">{{age_limit}}+</div>
+            <div class="details-film__info-item-value-info">{{age_limit}}</div>
         </div>
         {{/if}}
 
@@ -138,6 +138,7 @@
     </div>
     <div class="details-film__list-actors-container">
         <div class="details-film__list-actors-title">В главных ролях</div>
+        <div class="details-film__count-actors">{{count_main_actors}}</div>
         <div class="details-film__list-actors">
             {{#each actors}}
             <div class="details-film__actor">
@@ -153,6 +154,7 @@
                 </div>
             </div>
             {{/each}}
+            <div class="details-film__total-count-actors">Всего:&nbsp{{count_actors}}</div>
         </div>
     </div>
 </div>

@@ -49,6 +49,14 @@
     margin-right: var(--standart-margin);
   }
 
+  &__count-actors {
+    color: var(--secondary-color-text);
+  }
+
+  &__total-count-actors {
+    color: var(--secondary-color-text);
+  }
+
   &__actor__container {
     display: flex;
     position: relative;
@@ -57,7 +65,7 @@
 
   &__list-actors {
     display: flex;
-    height: 688px;
+    height: 710px;
     width: 666px;
     flex-flow: column wrap;
     margin-top: 37px;

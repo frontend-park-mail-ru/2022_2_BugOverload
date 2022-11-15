@@ -8,6 +8,16 @@
   }
 }
 
+@mixin flex-window{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  height: 100%;
+  font-weight: normal;
+}
+
 .modal {
   &__background {
     display: flex;
@@ -26,20 +36,13 @@
   }
 
   &__window {
-    width: 920px;
     height: 550px;
     min-height: 250px;
   }
 
   &__window__flex {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-content: stretch;
-    align-items: center;
-    height: 100%;
-    font-weight: normal;
-    animation: 0.5s show ease;
+    @include flex-window;
+    animation: 0.15s show ease;
   }
 
   &__cross {
@@ -84,7 +87,7 @@
     color: var(--main-color-text);
     background: #27292e;
     opacity: 0.8;
-    border: 2px solid #333;
+    border: 2px solid #27292e;
     font-size: 12px;
     padding-left: 15px;
 
@@ -133,4 +136,9 @@
     justify-content: flex-end;
     align-items: center;
   }
+}
+
+.auth__wrapper{
+  @include flex-window;
+  width: 910px;
 }

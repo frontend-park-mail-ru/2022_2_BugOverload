@@ -31,7 +31,7 @@
     z-index: 1;
     flex-direction: column;
     margin-left: var(--standart-margin);
-    margin-top: 305px;
+    align-self: center;
   }
 
   &__title {
@@ -150,21 +150,31 @@
     width: 180px;
     height: 46px;
   }
+  
+  &__button_play-trailer {
+    margin-right: 10px;
+  }
 
   &__button-bookmark {
     width: 48px;
     height: 48px;
-    margin-left: 14px;
   }
 
   &__button-plus {
     width: 48px;
     height: 48px;
-    margin-left: 14px;
   }
 
   &__save-to-collection {
     display: flex;
     flex-direction: column;
+  }
+
+  &__btn-save-to-bookmar {
+    margin-left: 14px;
+  }
+
+  &__btn-save-to-collection {
+    margin-left: 14px;
   }
 }

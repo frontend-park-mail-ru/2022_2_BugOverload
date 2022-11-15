@@ -24,12 +24,17 @@ export class Header extends Component {
             this.state.user = store.getState('user');
             this.render();
         });
+
+        this.isMounted = false;
     }
 
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
+        if (this.isMounted) {
+            this.componentWillUnmount();
+        }
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();

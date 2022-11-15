@@ -51,6 +51,10 @@ class ActorPage extends View {
         }
 
         super.render();
+        const actorPageElement = this.rootNode.querySelector('.actor-page');
+        if (actorPageElement) {
+            actorPageElement.remove();
+        }
 
         const films = this.state.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
         const collection = new Collection();
@@ -58,7 +62,7 @@ class ActorPage extends View {
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile({
                 ...this.state.actor,
-                birthday: this.state.actor?.birthday.split(' ')[0].split('.').reverse().join('.'),
+                birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
             }),
             collectionBestFilms: templateCollection({
                 films,

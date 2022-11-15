@@ -8,10 +8,10 @@
 
   &-substrate {
     z-index: 5;
-    width: 209px;
+    width: 230px;
     height: auto;
     margin-right: var(--standart-margin);
-    padding: 16px 0 0 16px;
+    padding: 16px 0 0 20px;
     display: flex;
     color: var(--main-color-text);
     flex-flow: column nowrap;
@@ -56,6 +56,14 @@
     text-decoration: none;
     color: var(--main-color-text);
     cursor: pointer;
+  }
+
+  &-item-profile {
+    margin-top: 12px;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--main-color-text);
+    cursor: pointer;
 
     &:hover {
       color: var(--primary-color);
@@ -68,6 +76,11 @@
     margin-top: 12px;
     margin-bottom: 12px;
     text-decoration: none;
+
+    &:hover {
+      color: var(--primary-color);
+      transition: 0.08s linear;
+    }
   }
 }
 

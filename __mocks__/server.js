@@ -17,10 +17,12 @@ app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
-	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500'],
+	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500',
+	'https://movie-gate.online:8088'],
 	credentials: true,
 }));
 
@@ -72,6 +74,7 @@ app.get('/api/v1/auth',  (req, res) => {
 	} else {
 		i = 0;
 	}
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR})
 });
 
 app.put('/api/v1/user/setting',  (req, res) => {
@@ -85,7 +88,12 @@ app.put('/api/v1/image', (req, res) => {
 
 app.get('/api/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
-	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022-10-12"});
+	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022.10.12 21312124"});
+});
+
+app.get('/api/v1/user/profile/:id',  (req, res) => {
+	const email = 'Dop123@mail.ru'
+	res.status(200).json({nickname: users[email].nickname ,email: users[email].email, avatar: DEFAULT_AVATAR, count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022.10.12 5343"});
 });
 
 app.get('/api/v1/auth/logout',  (req, res) => {
@@ -1244,11 +1252,11 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 });
 
 app.post('/api/v1/film/:id/rate', (req, res) => {
-	const rate = req.body.rate;
+	const rate = req.body.score;
 	const email = 'Dop123@mail.ru';
 	const filmID = req.params.id;
 
-	if ( !rate || !filmID) {
+	if ( !rate ) {
 		return res.status(400).json({error: 'Не валидный запрос'});
 	}
 	delete filmRateStorage[email][filmID]; //

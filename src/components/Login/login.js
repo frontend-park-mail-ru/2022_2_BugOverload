@@ -28,6 +28,7 @@ export class Login extends Component {
         };
 
         this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
+        this.subscribeLogin = this.subscribeLogin.bind(this);
     }
 
     /**
@@ -52,12 +53,14 @@ export class Login extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.js-modal__background');
-            if (background) {
-                background.remove();
-                exit();
-            }
+            this.componentWillUnmount();
+            exit();
             return;
+        }
+
+        if (!this.state.isUserSubscriber) {
+            store.subscribe('user', this.subscribeLogin);
+            this.state.isUserSubscriber = true;
         }
 
         if (this.state.statusLogin) {
@@ -74,7 +77,6 @@ export class Login extends Component {
         }
 
         const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-
         modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
         this.componentDidMount();
     }
@@ -150,33 +152,32 @@ export class Login extends Component {
                 return;
             }
 
-            store.dispatch(actionLogin(user));
             if (!this.state.isSubscribed) {
                 store.subscribe('statusLogin', this.subscribeLoginpStatus);
                 this.state.isSubscribed = true;
             }
+            store.dispatch(actionLogin(user));
         });
 
-        const { deleteLogin } = this;
+        const pathBeforModal = window.localStorage.getItem('pathBeforModal');
+
         document.body
             .querySelector('.js-modal__background')
-            .addEventListener('click', deleteLogin);
+            .dataset.section = pathBeforModal;
     }
 
     /**
      * Удаляет все подписки
      */
     componentWillUnmount() {
-        const modalBackground = document.body
-            .querySelector('.js-modal__background');
-        const { deleteLogin } = this;
-        if (modalBackground) {
-            modalBackground.removeEventListener('click', deleteLogin);
-        }
         if (this.state.isSubscribed) {
-            store.subscribe('statusLogin', this.subscribeLoginpStatus);
+            store.unsubscribe('statusLogin', this.subscribeLoginpStatus);
             this.state.statusLogin = null;
             this.state.isSubscribed = false;
+        }
+        if (this.state.isUserSubscriber) {
+            store.unsubscribe('user', this.subscribeLogin);
+            this.state.isUserSubscriber = false;
         }
     }
 
@@ -185,6 +186,10 @@ export class Login extends Component {
      */
     subscribeLoginpStatus() {
         this.state.statusLogin = store.getState('statusLogin');
+        this.render();
+    }
+
+    subscribeLogin() {
         this.render();
     }
 }

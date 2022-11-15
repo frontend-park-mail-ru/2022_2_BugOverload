@@ -27,6 +27,8 @@ const handlers = [
     { type: 'putAvatar', methodStore: reducerUser.putAvatar.bind(reducerUser) },
 
     { type: 'getActor', methodStore: reducerActor.getActor.bind(reducerActor) },
+
+    { type: 'getPublicProfile', methodStore: reducerUser.getPublicProfile.bind(reducerUser) },
 ];
 
 export { handlers };

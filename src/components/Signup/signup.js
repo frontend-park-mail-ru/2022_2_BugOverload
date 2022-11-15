@@ -25,9 +25,11 @@ export class Signup extends Component {
         this.state = {
             statusSignup: null,
             isSubscribed: false,
+            isUserSubscriber: false,
         };
 
         this.subscribeSignupStatus = this.subscribeSignupStatus.bind(this);
+        this.subscribeSignup = this.subscribeSignup.bind(this);
     }
 
     /**
@@ -45,12 +47,14 @@ export class Signup extends Component {
      */
     render() {
         if (store.getState('user')) {
-            const background = document.body.querySelector('.js-modal__background');
-            if (background) {
-                background.remove();
-                exit();
-            }
+            this.componentWillUnmount();
+            exit();
             return;
+        }
+
+        if (!this.state.isUserSubscriber) {
+            store.subscribe('user', this.subscribeSignup);
+            this.state.isUserSubscriber = true;
         }
 
         if (this.state.statusSignup) {
@@ -142,16 +146,6 @@ export class Signup extends Component {
     }
 
     /**
-     * Обёртка над функции, вызываемой при событии выхода из регистрации
-     */
-    deleteSignup(e) {
-        const { target } = e;
-        if (target.classList.contains('modal__background')) {
-            exit();
-        }
-    }
-
-    /**
      * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
@@ -179,26 +173,25 @@ export class Signup extends Component {
             }
         });
 
-        const { deleteSignup } = this;
+        const pathBeforModal = window.localStorage.getItem('pathBeforModal');
+
         document.body
             .querySelector('.js-modal__background')
-            .addEventListener('click', deleteSignup);
+            .dataset.section = pathBeforModal;
     }
 
     /**
      * Удаляет все подписки
      */
     componentWillUnmount() {
-        const modalBackground = document.body
-            .querySelector('.js-modal__background');
-        const { deleteSignup } = this;
-        if (modalBackground) {
-            modalBackground.removeEventListener('click', deleteSignup);
-        }
         if (this.state.isSubscribed) {
             store.unsubscribe('statusSignup', this.subscribeSignupStatus);
             this.state.statusSignup = null;
             this.state.isSubscribed = false;
+        }
+        if (this.state.isUserSubscriber) {
+            store.unsubscribe('user', this.subscribeSignup);
+            this.state.isUserSubscriber = false;
         }
     }
 
@@ -207,6 +200,10 @@ export class Signup extends Component {
      */
     subscribeSignupStatus() {
         this.state.statusSignup = store.getState('statusSignup');
+        this.render();
+    }
+
+    subscribeSignup() {
         this.render();
     }
 }

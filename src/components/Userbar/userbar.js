@@ -57,15 +57,6 @@ export class Userbar extends Component {
 
             isOpened = true;
 
-            const userbarSubscribe = () => {
-                if (!store.getState('user')) {
-                    rootNode.querySelector('.header').remove();
-                    rootNode.insertAdjacentHTML('afterbegin', templateHeader());
-                    store.unsubscribe('user', userbarSubscribe);
-                }
-            };
-            store.subscribe('user', userbarSubscribe);
-
             logout();
 
             function handlerCloseUserbar() {

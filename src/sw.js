@@ -12,7 +12,7 @@ const whiteDynamicUrls = [
 ];
 
 const blackSearchUrls = [
-    '?object=user_avatar&key=avatar',
+    /object=user_avatar/,
 ];
 
 const assetUrls = [];
@@ -29,25 +29,28 @@ this.addEventListener('fetch', (event) => {
     const url = new URL(request.url);
 
     if (request.method !== 'GET') {
-        const response = event.waitUntil(fetch(request));
-        return response;
+        return false;
     }
 
-    if(url.pathname.match(/\d+\/$/)) {
-        url.pathname = url.pathname.replace(/\d+\/$/,'');
+    if (url.pathname.match(/\d+\/$/)) {
+        url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
-    if (whiteDynamicUrls.includes(url.pathname) && !blackSearchUrls.includes(url.search)) {
+    if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
         event.respondWith(networkFirst(request));
     } else {
-        event.respondWith(cacheFirst(request));
+        event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
     }
+
+    return true;
 });
 
-async function cacheFirst(request) {
-    const cached = await caches.match(request);
-    if (cached) {
-        return cached;
+async function cacheFirst(request, watchCache = false) {
+    if (!watchCache) {
+        const cached = await caches.match(request);
+        if (cached) {
+            return cached;
+        }
     }
 
     const response = await fetch(request);

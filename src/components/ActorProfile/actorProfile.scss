@@ -4,7 +4,7 @@
     flex-flow: column wrap;
     margin-left: 52px;
     margin-right: 52px;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
     padding-top: 95px;
 
     &__content {
@@ -27,7 +27,7 @@
         display: flex;
         flex-flow: row wrap;
         gap: 5px;
-        margin: 0 auto;
+        margin-left: 50px;
         max-width: 700px;
         max-height: 500px;
         overflow: hidden
@@ -42,14 +42,15 @@
     }
 
     &__image {
-        min-height: 400px;
+        max-height: 345px;
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 8px;
     }
 
     &__information {
-        width: 50%;
+        width: 380px;
+        margin-left: 50px;
         font-style: normal;
         display: flex;
         flex-flow: column nowrap;
@@ -59,7 +60,7 @@
     &__name {
         height: 42px;
         font-weight: 600;
-        font-size: 36px;
+        font-size: 22px;
         line-height: 42px;
         color: var(--main-color-text);
         white-space: nowrap;
@@ -69,15 +70,15 @@
         white-space: nowrap;
         height: 28px;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 18px;
         line-height: 28px;
         color: var(--secondary-color-text);
     }
 
     &__about {
-        margin-top: 55px;
+        margin-top: 30px;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 18px;
         line-height: 28px;
         color: var(--main-color-text);
     }
@@ -87,20 +88,28 @@
         flex-flow: row nowrap;
         align-items: flex-start;
         margin-top: 30px;
+        width: 100%;
     }
 
     &__about-item-key {
         width: 200px;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 23px;
         color: var(--secondary-color-text);
     }
 
     &__about-item-value {
         font-weight: 400;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 23px;
         color: var(--main-color-text);
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
+
+.actor-page-content {
+    margin-top: -40px;
+} 

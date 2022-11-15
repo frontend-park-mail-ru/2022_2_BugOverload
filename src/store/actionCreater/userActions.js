@@ -34,3 +34,8 @@ export const actionPutAvatar = (formDataAvatar) => ({
     type: 'putAvatar',
     value: formDataAvatar,
 });
+
+export const actionGetPublicProfile = (userId) => ({
+    type: 'getPublicProfile',
+    value: userId,
+});

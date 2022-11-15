@@ -1,3 +1,5 @@
+$margin-left-login-btn: 72px;
+
 .header {
   display: flex;
   flex-flow: row nowrap;
@@ -6,6 +8,7 @@
   align-items: center;
   font-weight: normal;
   position: absolute;
+  padding-right: var(--right-header);
   height: 95px;
   width: 100%;
   z-index: 5;
@@ -79,11 +82,11 @@
   }
 
   &__login__btn {
-    margin-right: var(--standart-margin);
+    margin-right: calc(var(--standart-margin) + $margin-left-login-btn/3);
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: 25px;
+    margin-left: $margin-left-login-btn - $margin-left-login-btn/3;
   }
 
   &__avatar {
