@@ -67,9 +67,9 @@ export const API = {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
     },
     send_review(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
-    settings() { 
+    settings() {
         const rand = randomMy();
-        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}` ;
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
     },
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 

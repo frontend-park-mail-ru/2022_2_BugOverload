@@ -50,7 +50,7 @@ class ReducerUser {
     }
 
     async logout() {
-        const responsePromise = Ajax.delete(API.logout);
+        const responsePromise = Ajax.delete({ url: API.logout });
 
         const response = await responsePromise;
         if (response.status === responsStatuses.NoContent) {
