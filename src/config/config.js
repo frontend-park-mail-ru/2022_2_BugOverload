@@ -58,7 +58,9 @@ export const API = {
 
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,
     film(id, countImages = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
-    metaFilm(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/user_activity`; },
+    metaFilm(id) {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/user_activity`;
+    },
 
     rate(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
     del_rate(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
@@ -67,9 +69,9 @@ export const API = {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
     },
     send_review(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
-    settings() { 
+    settings() {
         const rand = randomMy();
-        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}` ;
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
     },
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 

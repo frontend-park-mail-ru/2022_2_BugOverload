@@ -28,7 +28,7 @@ class ReducerFilm {
             body: { score: ratingData.rate * 1.0 },
         });
 
-        if (response.status === responsStatuses.NoContent) {
+        if (response.status === responsStatuses.OK) {
             return {
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
@@ -42,7 +42,7 @@ class ReducerFilm {
         const response = await Ajax.delete({
             url: API.del_rate(filmID),
         });
-        if (response.status === responsStatuses.NoContent) {
+        if (response.status === responsStatuses.OK) {
             return {
                 rating: null,
                 statusRating: null,

@@ -58,7 +58,7 @@ class ReducerUser {
     }
 
     async logout() {
-        const responsePromise = Ajax.get(API.logout);
+        const responsePromise = Ajax.delete({ url: API.logout });
 
         const response = await responsePromise;
         if (response.status === responsStatuses.NoContent) {
@@ -131,6 +131,7 @@ const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
         const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
+            object.id = object[nameObject];
             object[nameObject] = newUrl;
         }
     }
