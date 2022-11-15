@@ -41,6 +41,8 @@ this.addEventListener('fetch', (event) => {
     } else {
         event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
     }
+
+    return true;
 });
 
 async function cacheFirst(request, watchCache = false) {
