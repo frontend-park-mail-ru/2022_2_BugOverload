@@ -25,10 +25,10 @@ class ReducerFilm {
     async rate(ratingData) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
-            body: { score: ratingData.rate * 1.0 },
+            body: { score: ratingData.rate },
         });
 
-        if (response.status === responsStatuses.NoContent) {
+        if (response.status === responsStatuses.OK) {
             return {
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
@@ -42,7 +42,7 @@ class ReducerFilm {
         const response = await Ajax.delete({
             url: API.del_rate(filmID),
         });
-        if (response.status === responsStatuses.NoContent) {
+        if (response.status === responsStatuses.OK) {
             return {
                 rating: null,
                 statusRating: null,

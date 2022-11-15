@@ -56,7 +56,7 @@ export class Rating extends Component {
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating || '0.0',
-            countRates: decoreCountScores(this.state.film.count_scores),
+            countRates: decoreCountScores(this.state.film.countScores),
         }));
         this.componentDidMount();
         if (!this.state.rating) {
