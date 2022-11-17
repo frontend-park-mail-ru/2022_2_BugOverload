@@ -29,11 +29,10 @@ class ReducerFilm {
         });
 
         if (response.status === responsStatuses.OK) {
-            console.log(`in Rate ${response.body?.count_ratings}`);
             return {
+                countScores: response.body?.count_ratings,
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
-                countScores: response.body?.count_ratings,
             };
         }
         return { statusRating: response.status };
@@ -44,7 +43,6 @@ class ReducerFilm {
             url: API.del_rate(filmID),
         });
         if (response.status === responsStatuses.OK) {
-            console.log(`in delRate ${response.body?.count_ratings}`);
             return {
                 countScores: response.body?.count_ratings,
                 rating: null,
