@@ -45,6 +45,7 @@ class Store {
             subscribers = this.mapSubscribers.get(key);
 
             if (subscribers) {
+                console.log(`in setState ${subscribers}, ${newState}`);
                 subscribers.forEach((subscriber) => subscriber());
             }
         });
