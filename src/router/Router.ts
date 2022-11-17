@@ -2,6 +2,17 @@ import { routes, ROOT } from '@config/config.js';
 import { hrefRegExp } from '@config/regExp.js';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404.js';
+
+interface Router {
+    root: Element;
+    mapViews: Map<String, Function>;
+    cachedUrls: Array<String>;
+}
+
+interface stateObject {
+    path :String;
+    props :String;
+}
 /**
 * Осуществляет изменение приложения согласно его состояниям
 *
@@ -11,18 +22,17 @@ class Router {
      * Cохраняет root, создаёт Map для сопоставления путей views
      * @param {Element} root - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
+    constructor(root :Element) {
         this.root = root;
-        this.mapViews = new Map();
-        this.lastView = null;
-        this.cachedUrls = new Map();
+        this.mapViews = new Map(); 
+        this.cachedUrls = [];
     }
 
     /**
      * Получает получает путь для обработчика view и динамические параметры
      * @param {String} href - ccылка без домена и id
      */
-    matchHref(href) {
+    matchHref(href :String) {
         let newHref = href;
         if (newHref !== '/') {
             newHref = href.replace(hrefRegExp.endSlash, '');
@@ -46,7 +56,7 @@ class Router {
      * @param {String} path - url
      * @param {Function} view - view
      */
-    register({ path, view }) {
+    register({ path, view } :{path :String, view :any}) {
         this.mapViews.set(path, view);
     }
 
@@ -61,11 +71,13 @@ class Router {
 
         document.addEventListener('click', (e) => {
             const { target } = e;
-            if (target.dataset.section) {
-                const matchedHref = this.matchHref(target.dataset.section);
-                if (this.mapViews.get(matchedHref[0])) {
-                    e.preventDefault();
-                    this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true });
+            if (target instanceof HTMLElement) {
+                if (target.dataset.section) {
+                    const matchedHref = this.matchHref(target.dataset.section);
+                    if (this.mapViews.get(matchedHref[0])) {
+                        e.preventDefault();
+                        this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true, refresh: false  });
+                    }
                 }
             }
         });
@@ -79,7 +91,7 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
-            this.go({ path: matchedHref[0], props: matchedHref[1] }, {});
+            this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: false, refresh: false });
         }, 0));
         this.refresh();
     }
@@ -119,7 +131,7 @@ class Router {
      * @param {string} stateObject.path - относительный url
      * @param {string} stateObject.props - состояние приложения
      */
-    go(stateObject, { pushState, refresh }) {
+    go(stateObject :stateObject, { pushState, refresh } :{ pushState :boolean, refresh: boolean}) {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
@@ -189,8 +201,8 @@ class Router {
     cache(url = './') {
         if (navigator.serviceWorker) {
             navigator.serviceWorker.register('/sw.js', { scope: url });
-            if (!this.cachedUrls.get(url)) {
-                this.cachedUrls.set(url);
+            if (!this.cachedUrls.includes(url)) {
+                this.cachedUrls.push(url);
             }
         }
     }
