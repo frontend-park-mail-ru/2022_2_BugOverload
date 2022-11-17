@@ -40,7 +40,7 @@ this.addEventListener('fetch', (event) => {
     if (
         whiteDynamicUrls.includes(url.pathname) && 
         !url.search.match(blackSearchUrls[0]) && 
-        !blackSearchUrls[1].includes(url.pathname)
+        !url.pathname.match(blackSearchUrls[1])
     ) {
         event.respondWith(networkFirst(request));
     } else {
