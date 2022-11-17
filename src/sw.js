@@ -13,6 +13,7 @@ const whiteDynamicUrls = [
 
 const blackSearchUrls = [
     /object=user_avatar/,
+    /user\/\d+/,
 ];
 
 const assetUrls = [];
@@ -36,7 +37,11 @@ this.addEventListener('fetch', (event) => {
         url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
-    if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
+    if (
+        whiteDynamicUrls.includes(url.pathname) && 
+        !url.search.match(blackSearchUrls[0]) && 
+        !blackSearchUrls[1].includes(url.pathname)
+    ) {
         event.respondWith(networkFirst(request));
     } else {
         event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
