@@ -131,7 +131,6 @@ const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
         const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
-            object.id = object[nameObject];
             object[nameObject] = newUrl;
         }
     }
