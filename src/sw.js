@@ -18,22 +18,18 @@ const blackSearchUrls = [
 
 const assetUrls = [];
 
-this.addEventListener('activate', function(event) {
-    var expectedCacheNames = Object.keys(CACHE_NAME).map(function(key) {
-        return CACHE_NAME[key];
-    });
+this.addEventListener('activate', (event) => {
+    const expectedCacheNames = Object.keys(CACHE_NAME).map((key) => CACHE_NAME[key]);
     // Delete out of date cahes
     event.waitUntil(
-        caches.keys().then(function(cacheNames) {
-            return Promise.all(
-                cacheNames.map(function(cacheName) {
-                    if (expectedCacheNames.indexOf(cacheName) == -1) {
-                        console.log('Deleting out of date cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
+        caches.keys().then((cacheNames) => Promise.all(
+            cacheNames.map((cacheName) => {
+                if (expectedCacheNames.indexOf(cacheName) == -1) {
+                    console.log('Deleting out of date cache:', cacheName);
+                    return caches.delete(cacheName);
+                }
+            }),
+        )),
     );
 });
 
@@ -57,9 +53,9 @@ this.addEventListener('fetch', (event) => {
     }
 
     if (
-        whiteDynamicUrls.includes(url.pathname) && 
-        !url.search.match(blackSearchUrls[0]) && 
-        !url.pathname.match(blackSearchUrls[1])
+        whiteDynamicUrls.includes(url.pathname)
+        && !url.search.match(blackSearchUrls[0])
+        && !url.pathname.match(blackSearchUrls[1])
     ) {
         event.respondWith(networkFirst(request));
     } else {
@@ -81,10 +77,9 @@ async function cacheFirst(request, watchCache = false) {
 
     try {
         response = await fetch(request);
-    } catch(e) {
+    } catch (e) {
         return;
     }
-
 
     return response;
 }

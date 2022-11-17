@@ -29,7 +29,7 @@ export class MenuInfoFilm extends Component {
         this.description = new DescriptionFilm(this.filmData.description);
         this.rating = new Rating(this.filmData);
         console.log(this.filmData);
-        console.log(this.filmData.count_scores);
+        console.log(this.filmData.count_ratings);
 
         const fullDetails = {
             [`type_${this.filmData.type}`]: true,
