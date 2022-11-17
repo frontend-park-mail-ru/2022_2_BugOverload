@@ -24,8 +24,7 @@ this.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => Promise.all(
             cacheNames.map((cacheName) => {
-                if (expectedCacheNames.indexOf(cacheName) == -1) {
-                    console.log('Deleting out of date cache:', cacheName);
+                if (expectedCacheNames.indexOf(cacheName) === -1) {
                     return caches.delete(cacheName);
                 }
             }),
