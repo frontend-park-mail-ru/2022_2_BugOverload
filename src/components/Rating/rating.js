@@ -29,6 +29,7 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
+            console.log(`in subscribe rating getState ${store.getState('countScores')}`);
             this.state.countScores = store.getState('countScores') || props.count_ratings;
             console.log(`in subscribe rating ${this.state.countScores}`);
 
@@ -37,8 +38,8 @@ export class Rating extends Component {
 
         store.subscribe('statusRating', () => {
             this.state.statusRating = store.getState('statusRating');
-            this.state.countScores = store.getState('countScores');
-            console.log(`in subscribe statusRating ${this.state.countScores}`);
+            // this.state.countScores = store.getState('countScores');
+            // console.log(`in subscribe statusRating ${this.state.countScores}`);
 
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
