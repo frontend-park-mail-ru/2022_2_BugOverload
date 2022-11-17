@@ -46,9 +46,9 @@ class ReducerFilm {
         if (response.status === responsStatuses.OK) {
             console.log(`in delRate ${response.body?.count_ratings}`);
             return {
+                countScores: response.body?.count_ratings,
                 rating: null,
                 statusRating: null,
-                countScores: response.body?.count_ratings,
             };
         }
         return { statusRating: response.status };
