@@ -24,18 +24,21 @@ export class Rating extends Component {
             film: props,
             rating: null,
             statusRating: null,
-            countScores: props.count_scores,
+            countScores: props.count_ratings,
         };
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
             this.state.countScores = store.getState('countScores');
+            console.log(`in constr ${this.state.countScores}`);
 
             this.render();
         });
 
         store.subscribe('statusRating', () => {
             this.state.statusRating = store.getState('statusRating');
+            this.state.countScores = store.getState('countScores');
+
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
                 return;
@@ -50,6 +53,7 @@ export class Rating extends Component {
 
     render() {
         this.remove();
+        console.log(`in render ${this.state.countScores}`);
 
         this.location.insertAdjacentHTML('afterbegin', template({
             rate: this.state.rating?.value,

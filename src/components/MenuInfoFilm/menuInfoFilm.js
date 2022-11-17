@@ -28,6 +28,8 @@ export class MenuInfoFilm extends Component {
 
         this.description = new DescriptionFilm(this.filmData.description);
         this.rating = new Rating(this.filmData);
+        console.log(this.filmData);
+        console.log(this.filmData.count_ratings);
 
         const fullDetails = {
             [`type_${this.filmData.type}`]: true,
@@ -46,7 +48,7 @@ export class MenuInfoFilm extends Component {
             box_office: this.filmData.box_office,
             budget: this.filmData.budget,
             count_seasons: this.filmData.count_seasons,
-            count_scores: this.filmData.count_scores,
+            count_ratings: this.filmData.count_ratings,
             count_main_actors: decoreCountActors(this.filmData.actors?.length),
             count_actors: decoreCountActors(this.filmData.count_actors),
             duration: decoreDuration(this.filmData.duration),
