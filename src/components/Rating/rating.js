@@ -24,7 +24,7 @@ export class Rating extends Component {
             film: props,
             rating: null,
             statusRating: null,
-            countScores: props.count_scores,
+            countScores: props.count_ratings,
         };
 
         store.subscribe('rating', () => {
