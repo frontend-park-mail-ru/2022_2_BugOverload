@@ -36,6 +36,8 @@ export class Rating extends Component {
 
         store.subscribe('statusRating', () => {
             this.state.statusRating = store.getState('statusRating');
+            this.state.countScores = store.getState('countScores');
+
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
                 return;
