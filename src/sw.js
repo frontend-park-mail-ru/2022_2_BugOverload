@@ -1,5 +1,5 @@
-const CACHE_NAME = 'moviegate-v-1';
-const DYNAMIC_CACHE_NAME = 'd-moviegate-v-1';
+const CACHE_NAME = 'moviegate-v-2';
+const DYNAMIC_CACHE_NAME = 'd-moviegate-v-2';
 
 const whiteDynamicUrls = [
     '/film/',
@@ -17,6 +17,25 @@ const blackSearchUrls = [
 ];
 
 const assetUrls = [];
+
+this.addEventListener('activate', function(event) {
+    var expectedCacheNames = Object.keys(CACHE_NAME).map(function(key) {
+        return CACHE_NAME[key];
+    });
+    // Delete out of date cahes
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    if (expectedCacheNames.indexOf(cacheName) == -1) {
+                        console.log('Deleting out of date cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
+});
 
 this.addEventListener('install', (event) => {
     event.waitUntil(
@@ -58,7 +77,14 @@ async function cacheFirst(request, watchCache = false) {
         }
     }
 
-    const response = await fetch(request);
+    let response;
+
+    try {
+        response = await fetch(request);
+    } catch(e) {
+        return;
+    }
+
 
     return response;
 }
