@@ -8,6 +8,9 @@ import { publicProfile } from '@views/PublicProfile/publicProfile.js';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
+let i = 0;
+const randomMy = () => i++;
+
 export const API = {
     img: {
         poster_hor(key) {
@@ -27,6 +30,7 @@ export const API = {
                 return '/assets/img/default/noUser.webp';
             }
             const rand = randomMy();
+            console.log(`rand user_avatar: ${rand}`);
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${rand}`;
         },
         person_avatar(key) {
@@ -71,6 +75,7 @@ export const API = {
     send_review(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
     settings() {
         const rand = randomMy();
+        console.log(`rand settings: ${rand}`);
         return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
     },
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
@@ -79,9 +84,6 @@ export const API = {
 
     publicProfile(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 };
-
-let i = 0;
-const randomMy = () => i++;
 
 export const responsStatuses = {
     OK: 200,
