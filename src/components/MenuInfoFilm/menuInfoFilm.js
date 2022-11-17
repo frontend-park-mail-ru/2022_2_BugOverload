@@ -27,7 +27,7 @@ export class MenuInfoFilm extends Component {
         this.filmData = props.film;
 
         this.description = new DescriptionFilm(this.filmData.description);
-        this.rating = new Rating(props);
+        this.rating = new Rating(this.filmData);
 
         const fullDetails = {
             [`type_${this.filmData.type}`]: true,

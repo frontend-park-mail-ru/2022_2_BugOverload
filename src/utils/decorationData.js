@@ -109,7 +109,7 @@ export const decoreCountActors = (count) => {
 
 export const decoreCountScores = (count) => {
     if (!count) {
-        return '0 оценок';
+        return 'нет оценок';
     }
 
     if (count % 10 > 4 || (count % 100 > 10 && count % 100 < 20) || count % 10 === 0) {
