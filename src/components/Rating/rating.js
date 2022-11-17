@@ -24,7 +24,7 @@ export class Rating extends Component {
             film: props.film,
             rating: null,
             statusRating: null,
-            countScores: null,
+            countScores: props.film.count_scores,
         };
 
         store.subscribe('rating', () => {
@@ -56,7 +56,7 @@ export class Rating extends Component {
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating || '0.0',
-            countRates: decoreCountScores(this.state.film.countScores),
+            countRates: decoreCountScores(this.state.countScores),
         }));
         this.componentDidMount();
         if (!this.state.rating) {
