@@ -40,7 +40,7 @@ class ReducerUser {
         let responsePromise;
         try {
             responsePromise = Ajax.get(API.auth);
-        } catch(e) {
+        } catch (e) {
             return {
                 user: null,
                 authStatus: null,
