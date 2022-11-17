@@ -29,9 +29,7 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
-            // console.log(`rand user_avatar: ${randomMy()}`);
-            console.log(`url: ${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${randomMy()}`);
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}`/* &rnd=${randomMy()}` */;
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${randomMy()}`;
         },
         person_avatar(key) {
             if (key === 'default') {
