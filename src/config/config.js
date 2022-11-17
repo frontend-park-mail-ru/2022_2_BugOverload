@@ -76,7 +76,8 @@ export const API = {
     settings() {
         const rand = randomMy();
         console.log(`rand settings: ${rand}`);
-        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
+        console.log(`URL: ${PROTOCOL}://${DOMAIN}/api/v1/user/settings`);
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings`/* ?rnd=${rand} */;
     },
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
