@@ -29,7 +29,7 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${randomMy()}`;
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}`/* &rnd=${randomMy()} */;
         },
         person_avatar(key) {
             if (key === 'default') {
@@ -73,7 +73,7 @@ export const API = {
     send_review(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
     settings() {
         const rand = randomMy();
-        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings`/* ?rnd=${rand}` */;
     },
     person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
