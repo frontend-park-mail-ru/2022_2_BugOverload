@@ -13,7 +13,7 @@
         "@favicons/*":  ["src/assets/favicons/*"],
         "@router/*":  ["src/router/*"],
         "@router/Page404/*":  ["src/router/Page404/*"],
-        "@store/*":  ["src/Store/*"],
+        "@store/*":  ["src/store/*"],
         "@reducers/*":  ["src/Store/reducers/*"],
         "@actions/*":  ["src/Store/actionCreater/*"],
       },
