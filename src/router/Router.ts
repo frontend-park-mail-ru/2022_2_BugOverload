@@ -97,6 +97,12 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
+            
+            const currentView = this.mapViews.get(matchedHref[0]);
+            if(currentView) {
+                currentView?.componentWillUnmount();
+            }
+
             this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: false, refresh: false });
         }, 0));
         this.refresh();
