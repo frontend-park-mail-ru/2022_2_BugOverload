@@ -88,18 +88,7 @@ class Router {
             }
         });
 
-        window.addEventListener('popstate', () => { 
-            let matchedHref = [];
-            matchedHref[0] = (window.location.href.match(hrefRegExp.host))
-            ? window.location.href.replace(hrefRegExp.host, '')
-            : window.location.href.replace(hrefRegExp.localhost, '');
-
-            if (matchedHref[0] !== '/') {
-                matchedHref = this.matchHref(matchedHref[0]);
-            }
-            console.log(matchedHref[0]);
-
-            setTimeout(() => {
+        window.addEventListener('popstate', () => setTimeout(() => {
             let matchedHref = [];
             matchedHref[0] = (window.location.href.match(hrefRegExp.host))
                 ? window.location.href.replace(hrefRegExp.host, '')
@@ -108,15 +97,9 @@ class Router {
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
-            
-            /*const currentView = this.mapViews.get(matchedHref[0]);
-            console.log(currentView)
-            if(currentView) {
-                currentView?.componentWillUnmount();
-            }*/
 
             this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: false, refresh: false });
-        }, 0)});
+        }, 0));
         this.refresh();
     }
 
@@ -165,8 +148,10 @@ class Router {
 
         if (
             prevView
-            && Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
-                   .includes('componentWillUnmount')
+            && Object.getOwnPropertyNames(
+                Object.getPrototypeOf(prevView)
+            )
+                .includes('componentWillUnmount')
         ) {
             prevView.componentWillUnmount();
         }
