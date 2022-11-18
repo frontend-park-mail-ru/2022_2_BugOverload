@@ -1,4 +1,4 @@
-import template from '@router/Page404/page404.handlebars';
+import * as template from '@router/Page404/page404.handlebars';
 import { store } from '@store/Store.js';
 import { Component } from '@components/Component.js';
 
