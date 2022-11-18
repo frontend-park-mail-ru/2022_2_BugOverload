@@ -25,14 +25,14 @@ class ReducerFilm {
     async rate(ratingData) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
-            body: { score: ratingData.rate * 1.0 },
+            body: { score: +ratingData.rate },
         });
 
         if (response.status === responsStatuses.OK) {
             return {
+                countScores: response.body?.count_ratings,
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
-                countScores: response?.body?.count_scores,
             };
         }
         return { statusRating: response.status };
@@ -44,9 +44,9 @@ class ReducerFilm {
         });
         if (response.status === responsStatuses.OK) {
             return {
+                countScores: response.body?.count_ratings,
                 rating: null,
                 statusRating: null,
-                countScores: response?.body?.count_scores,
             };
         }
         return { statusRating: response.status };

@@ -24,18 +24,19 @@ export class Rating extends Component {
             film: props.film,
             rating: null,
             statusRating: null,
-            countScores: null,
+            countScores: props.film.count_ratings,
         };
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
-            this.state.countScores = store.getState('countScores');
+            this.state.countScores = store.getState('countScores') || props.count_ratings;
 
             this.render();
         });
 
         store.subscribe('statusRating', () => {
             this.state.statusRating = store.getState('statusRating');
+
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
                 return;
@@ -56,7 +57,7 @@ export class Rating extends Component {
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating || '0.0',
-            countRates: decoreCountScores(this.state.film.countScores),
+            countRates: decoreCountScores(this.state.countScores),
         }));
         this.componentDidMount();
         if (!this.state.rating) {

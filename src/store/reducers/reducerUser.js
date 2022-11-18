@@ -40,7 +40,7 @@ class ReducerUser {
         let responsePromise;
         try {
             responsePromise = Ajax.get(API.auth);
-        } catch(e) {
+        } catch (e) {
             return {
                 user: null,
                 authStatus: null,
@@ -84,7 +84,7 @@ class ReducerUser {
 
     async putSettings(user) {
         const responsePromise = Ajax.put({
-            url: API.settings,
+            url: API.settings(),
             body: user,
         });
 
@@ -131,7 +131,6 @@ const handlerUrlObject = (object, nameObject) => {
     if (nameObject === 'avatar') {
         const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
-            object.id = object[nameObject];
             object[nameObject] = newUrl;
         }
     }

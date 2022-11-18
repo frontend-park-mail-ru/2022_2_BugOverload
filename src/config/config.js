@@ -6,7 +6,10 @@ import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile.js';
 
-const PROTOCOL = (`${DOMAIN}` === 'movie-gate.online:8088' || `${DOMAIN}` === 'movie-gate.online') ? 'https' : 'http';
+const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+
+let i = 0;
+const randomMy = () => i++;
 
 export const API = {
     img: {
@@ -26,8 +29,7 @@ export const API = {
             if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
-            const rand = randomMy();
-            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${rand}`;
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${randomMy()}`;
         },
         person_avatar(key) {
             if (key === 'default') {
@@ -79,9 +81,6 @@ export const API = {
 
     publicProfile(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 };
-
-let i = 0;
-const randomMy = () => i++;
 
 export const responsStatuses = {
     OK: 200,
