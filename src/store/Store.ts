@@ -1,4 +1,4 @@
-import { handlers } from '@config/StoreHandlers';
+import { handlers } from '@config/storeHandlers';
 
 interface Store {
     state: {[key: string]: any};
