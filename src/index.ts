@@ -1,4 +1,4 @@
-import { router } from '@router/Router.js';
+import { router } from '@router/Router';
 import '@/index.scss';
 import { ShowMessage } from '@components/Message/message.js';
 

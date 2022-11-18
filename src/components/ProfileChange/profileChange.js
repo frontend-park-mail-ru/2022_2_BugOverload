@@ -11,7 +11,17 @@ import { store } from '@store/Store.js';
 import { responsStatuses } from '@config/config.js';
 import { ShowMessage } from '@components/Message/message.js';
 
+/**
+* Отрисовывает форму изменения пользовательских данных.
+* Прокидывает actions в стору для отправки новых данных,
+* также, после успеш подписывается на статус запроса, для правильного рендера ошибки 
+*
+*/
 export class ProfileChange extends Component {
+    /**
+     * Cохраняет props и обработчик статуса запроса
+     * @param {Object} props - параметры компонента
+     */
     constructor(props) {
         super(props);
 
@@ -55,6 +65,9 @@ export class ProfileChange extends Component {
         };
     }
 
+    /**
+     * Обработчик статуса запроса
+     */
     handlerStatusPut() {
         if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
             const wrapper = this.rootNode.querySelector('.js-profile__wrapper__old__password');
@@ -65,16 +78,25 @@ export class ProfileChange extends Component {
         }
     }
 
+    /**
+     * Подписывает компонент
+     */
     componentDidMount() {
         const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
         changeButton.addEventListener('click', this.handlerUserChangeForm);
     }
 
+    /**
+     * Отписывает компонент от всего
+     */
     componentWillUnmount() {
         const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
         changeButton.removeEventListener('click', this.handlerUserChangeForm);
     }
 
+    /**
+     * Навешивает валидацию на форму
+     */
     addValidate() {
         const forms = {};
         forms.formNick = this.rootNode.querySelector('.js-profile__form__nick');

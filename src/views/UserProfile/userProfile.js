@@ -7,7 +7,18 @@ import { ProfileChange } from '@components/ProfileChange/profileChange.js';
 import { ShowMessage } from '@components/Message/message.js';
 import { hrefRegExp } from '@config/regExp.js';
 
+
+/**
+* Страница пользователя, получает пользователя из store
+* Дополнительно прокидыват actions в store для получения
+* пользовательских данных и их изменения
+*
+*/
 class UserProfile extends View {
+    /**
+     * Cохраняет props
+     * @param {Object} props - параметры компонента
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +36,9 @@ class UserProfile extends View {
         this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
     }
 
+    /**
+     * Рендерит профиль
+     */
     render() {
         super.render();
 
@@ -114,11 +128,17 @@ class UserProfile extends View {
         profileChange.componentDidMount();
     }
 
+    /**
+    * Функция, вызываемая при изменении пользователя в store если кмпонент подписан
+    */
     userProfileOnSubscribe() {
         this.state.user = store.getState('user');
         this.render();
     }
 
+    /**
+    * Функция, вызываемая при изменении statusChangeAvatar в store
+    */
     setProfileAvatar() {
         setTimeout(() => {
             store.dispatch(actionAuth());
@@ -142,6 +162,9 @@ class UserProfile extends View {
         this.render();
     }
 
+    /**
+     * Удаляет все подписки
+     */
     componentWillUnmount() {
         if (this.state.isSubscribed) {
             store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);

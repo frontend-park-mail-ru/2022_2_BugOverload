@@ -3,10 +3,16 @@ import { hrefRegExp } from '@config/regExp.js';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404.js';
 
+interface Class {
+    render :Function;
+    componentWillUnmount :Function;
+}
+
 interface Router {
     root: Element;
-    mapViews: Map<String, Function>;
+    mapViews: Map<String, Class>;
     cachedUrls: Array<String>;
+    pathBeforModal: String;
 }
 
 interface stateObject {
@@ -182,10 +188,10 @@ class Router {
      * @param {string} path - относительный url
      * @param {string} props - состояние приложения
      */
-    navigate({ path, props }, pushState = false) {
+    navigate({ path, props } :stateObject, pushState = false) {
         const location = (window.location.href.match(hrefRegExp.host))
-            ? window.location.href.match(hrefRegExp.host, '')[0]
-            : window.location.href.match(hrefRegExp.localhost, '')[0];
+            ? window.location.href.match(hrefRegExp.host)[0]
+            : window.location.href.match(hrefRegExp.localhost)[0];
 
         if (pushState) {
             if (props) {
