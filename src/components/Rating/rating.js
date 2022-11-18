@@ -21,10 +21,10 @@ export class Rating extends Component {
         this.location = document.querySelector('.js-film-page__rating');
 
         this.state = {
-            film: props,
+            film: props.film,
             rating: null,
             statusRating: null,
-            countScores: props.count_ratings,
+            countScores: props.film.count_ratings,
         };
 
         store.subscribe('rating', () => {
