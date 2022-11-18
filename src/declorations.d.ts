@@ -1,4 +1,4 @@
 declare module "*.handlebars" {
-    const _: string;
+    const _: Function;
     export default _;
 }
