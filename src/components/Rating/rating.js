@@ -29,7 +29,7 @@ export class Rating extends Component {
 
         store.subscribe('rating', () => {
             this.state.rating = store.getState('rating');
-            this.state.countScores = store.getState('countScores') || props.count_ratings;
+            this.state.countScores = store.getState('countScores') || this.state.countScores;
 
             this.render();
         });
