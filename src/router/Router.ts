@@ -16,8 +16,8 @@ interface Router {
 }
 
 interface stateObject {
-    path :String;
-    props :String;
+    path :string;
+    props :string;
 }
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -38,7 +38,7 @@ class Router {
      * Получает получает путь для обработчика view и динамические параметры
      * @param {String} href - ccылка без домена и id
      */
-    matchHref(href :String) {
+    matchHref(href :string) {
         let newHref = href;
         if (newHref !== '/') {
             newHref = href.replace(hrefRegExp.endSlash, '');
@@ -62,7 +62,7 @@ class Router {
      * @param {String} path - url
      * @param {Function} view - view
      */
-    register({ path, view } :{path :String, view :any}) {
+    register({ path, view } :{path :string, view :any}) {
         this.mapViews.set(path, view);
     }
 

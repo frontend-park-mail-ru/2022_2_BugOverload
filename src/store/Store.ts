@@ -1,5 +1,11 @@
 import { handlers } from '@config/storeHandlers.js';
 
+interface Store {
+    state: {[key: string]: any};
+    mapActionHandlers: Map<String, Function>;
+    mapSubscribers: Map<String, Array<Function>>;
+}
+
 class Store {
     constructor() {
         this.state = {};
@@ -13,11 +19,11 @@ class Store {
         }
     }
 
-    register({ type, methodStore }) {
+    register({ type, methodStore } :{ type :string, methodStore :Function}) {
         this.mapActionHandlers.set(type, methodStore);
     }
 
-    subscribe(type, callback) {
+    subscribe(type :string, callback :Function) {
         const arraySubsribes = this.mapSubscribers.get(type);
         if (arraySubsribes) {
             arraySubsribes.push(callback);
@@ -26,7 +32,7 @@ class Store {
         }
     }
 
-    unsubscribe(type, activeFunc) {
+    unsubscribe(type :string, activeFunc :Function) {
         const arraySubsribes = this.mapSubscribers.get(type);
         if (arraySubsribes) {
             this.mapSubscribers.set(
@@ -38,7 +44,7 @@ class Store {
         }
     }
 
-    setState(newState) {
+    setState(newState :{[key: string]: any}) {
         let subscribers;
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
@@ -50,7 +56,7 @@ class Store {
         });
     }
 
-    async dispatch(action) {
+    async dispatch(action :{[key: string]: any}) {
         const storeReducer = this.mapActionHandlers.get(action.type);
 
         if (!storeReducer) {
@@ -69,7 +75,7 @@ class Store {
         }
     }
 
-    getState(nameObject) {
+    getState(nameObject :string) {
         if (Object.hasOwnProperty.call(this.state, nameObject)) {
             return this.state[nameObject];
         }
