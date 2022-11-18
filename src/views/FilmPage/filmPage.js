@@ -88,11 +88,11 @@ export class FilmPage extends View {
         });
         reviewStatistic.render();
 
-        const listReviews = new ListReviews({
+        this.listReviews = new ListReviews({
             rootNode: this.rootNode,
             film: this.state.film,
         });
-        listReviews.init();
+        this.listReviews.init();
     }
 
     /**
@@ -103,6 +103,7 @@ export class FilmPage extends View {
         this.state.id = null;
         this.state.film = null;
         this.state.reviews = null;
+        this.listReviews?.componentWillUnmount();
     }
 }
 
