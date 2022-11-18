@@ -1,7 +1,7 @@
-import { reducerUser } from '@store/reducers/reducerUser.js';
-import { reducerFilm } from '@store/reducers/reducerFilm.js';
-import { reducerCommonComponents } from '@store/reducers/reducerCommonComponents.js';
-import { reducerActor } from '@store/reducers/reducerActor.js';
+import { reducerUser } from '@store/reducers/reducerUser';
+import { reducerFilm } from '@store/reducers/reducerFilm';
+import { reducerCommonComponents } from '@store/reducers/reducerCommonComponents';
+import { reducerActor } from '@store/reducers/reducerActor';
 
 /**
 * Устанавливает соответствие между типом Action'а и методом редьюсера

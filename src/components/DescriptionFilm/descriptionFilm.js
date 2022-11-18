@@ -1,5 +1,5 @@
 import template from '@components/DescriptionFilm/descriptionFilm.handlebars';
-import { Component } from '@components/Component.js';
+import { Component } from '@components/Component';
 
 /**
 * Отрисовывает описание фильма.

@@ -1,6 +1,6 @@
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
+import { actionGetPreviewData } from '@actions/commonComponentsActions';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
 import { API } from '@config/config.js';
 

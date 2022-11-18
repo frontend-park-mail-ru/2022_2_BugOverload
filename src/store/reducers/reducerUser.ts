@@ -3,35 +3,45 @@ import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 import { decoreDate } from '@utils/decorationData.js';
 
+interface userResponse{
+    status: number;
+    body: user;
+}
+
+interface userInfoResponse{
+    status: number;
+    body: userInfo;
+}
+
 class ReducerUser {
-    async login(user) {
+    async login(user :anyObject) {
         const responsePromise = Ajax.post({
             url: API.login,
             body: user,
         });
 
-        const response = await responsePromise;
+        const response = await responsePromise as userResponse;
         if (response.status === responsStatuses.OK) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
                 statusLogin: null,
-            };
+            } as anyObject;
         }
         return { statusLogin: response.status };
     }
 
-    async signup(user) {
+    async signup(user :anyObject) {
         const responsePromise = Ajax.post({
             url: API.signup,
             body: user,
         });
 
-        const response = await responsePromise;
+        const response = await responsePromise as userResponse;
         if (response.status === responsStatuses.Created) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
                 statusSignup: null,
-            };
+            } as anyObject;
         }
         return { statusSignup: response.status };
     }
@@ -47,12 +57,12 @@ class ReducerUser {
             };
         }
 
-        const response = await responsePromise;
+        const response = await responsePromise as userResponse;
         if (response.status === responsStatuses.OK) {
             return {
                 user: handlerUrlObject(response.body, 'avatar'),
                 authStatus: null,
-            };
+            } as anyObject;
         }
         return { authStatus: response.status };
     }
@@ -60,12 +70,12 @@ class ReducerUser {
     async logout() {
         const responsePromise = Ajax.delete({ url: API.logout });
 
-        const response = await responsePromise;
+        const response = await responsePromise as Response;
         if (response.status === responsStatuses.NoContent) {
             return {
                 user: null,
                 logoutStatus: responsStatuses.NoContent,
-            };
+            } as anyObject;
         }
         return null;
     }
@@ -73,7 +83,7 @@ class ReducerUser {
     async getSettings() {
         const responsePromise = Ajax.get(API.settings());
 
-        const response = await responsePromise;
+        const response = await responsePromise as userInfoResponse;
         if (response.status === responsStatuses.OK) {
             return {
                 userInfo: handlerUserInfoFields(response.body),
@@ -82,13 +92,13 @@ class ReducerUser {
         return null;
     }
 
-    async putSettings(user) {
+    async putSettings(user :anyObject) {
         const responsePromise = Ajax.put({
             url: API.settings(),
             body: user,
         });
 
-        const response = await responsePromise;
+        const response = await responsePromise as Response;
         if (response.status !== responsStatuses.NoContent) {
             return {
                 statusChangeSettings: response.status,
@@ -97,13 +107,13 @@ class ReducerUser {
         return { statusChangeSettings: null };
     }
 
-    async putAvatar(formDataAvatar) {
+    async putAvatar(formDataAvatar :FormData) {
         const responsePromise = Ajax.put({
             url: API.put_avatar,
             body: formDataAvatar,
         }, true);
 
-        const response = await responsePromise;
+        const response = await responsePromise as Response;
         if (response.status === responsStatuses.NoContent) {
             return {
                 statusChangeAvatar: response.status,
@@ -112,10 +122,10 @@ class ReducerUser {
         return { statusChangeAvatar: null };
     }
 
-    async getPublicProfile(id) {
+    async getPublicProfile(id :number) {
         const responsePromise = Ajax.get(API.publicProfile(id));
 
-        const response = await responsePromise;
+        const response = await responsePromise as Response;
         if (response.status === responsStatuses.OK) {
             return {
                 [`user${id}`]: handlerUserInfoFields((response.body)),
@@ -127,7 +137,7 @@ class ReducerUser {
 
 export const reducerUser = new ReducerUser();
 
-const handlerUrlObject = (object, nameObject) => {
+const handlerUrlObject = (object :user, nameObject :string) => {
     if (nameObject === 'avatar') {
         const newUrl = API.img.user_avatar(object[nameObject]);
         if (object[nameObject] !== newUrl) {
@@ -137,7 +147,7 @@ const handlerUrlObject = (object, nameObject) => {
     return object;
 };
 
-const handlerUserInfoFields = (userInfo) => {
+const handlerUserInfoFields = (userInfo :anyObject) => {
     if (userInfo) {
         userInfo.joined_date = decoreDate(userInfo?.joined_date || getDateNow());
         userInfo.count_ratings = userInfo.count_ratings || 'вы не поставили ни одной оценки';

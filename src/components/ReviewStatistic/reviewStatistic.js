@@ -1,6 +1,6 @@
 import template from '@components/ReviewStatistic/reviewStatistic.handlebars';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
 
 /**
 * Отражает общую информацию о рецензиях на данный фильм

@@ -1,7 +1,7 @@
 import template from '@components/AboutFilm/aboutFilm.handlebars';
 import { SaveToCollectionMenu } from '@components/SaveToCollectionMenu/saveToCollectionMenu.js';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
 import { ShowMessage } from '@components/Message/message.js';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,

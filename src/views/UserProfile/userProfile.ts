@@ -1,12 +1,22 @@
-import { View } from '@views/View.js';
+import { View } from '@views/View';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
-import { store } from '@store/Store.js';
-import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions.js';
-import { ProfileChange } from '@components/ProfileChange/profileChange.js';
+import { store } from '@store/store';
+import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
+import { ProfileChange } from '@components/ProfileChange/profileChange';
 import { ShowMessage } from '@components/Message/message.js';
-import { hrefRegExp } from '@config/regExp.js';
+import { hrefRegExp } from '@config/regExp';
 
+interface UserProfile{
+    state: {
+        user: user,
+        putAvatarStatus: number,
+        userInfo: userInfo,
+        isAuthSubscribed: boolean,
+        isDispatchedInfo: boolean,
+        isSubscribed: boolean,
+    }
+}
 
 /**
 * Страница пользователя, получает пользователя из store
@@ -19,7 +29,7 @@ class UserProfile extends View {
      * Cохраняет props
      * @param {Object} props - параметры компонента
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
         this.state = {
             user: null,
@@ -104,7 +114,7 @@ class UserProfile extends View {
             },
         ));
 
-        const inputImgForm = this.rootNode.querySelector('.js-profile__img__form');
+        const inputImgForm = this.rootNode.querySelector('.js-profile__img__form') as HTMLFormElement;
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
             const formData = new FormData(inputImgForm);
@@ -113,9 +123,11 @@ class UserProfile extends View {
 
             const reader = new FileReader();
             reader.onload = () => {
-                this.rootNode.querySelector('.profile__avatar').src = reader.result;
+                const imgAvatar = this.rootNode.querySelector('.profile__avatar') as HTMLImageElement;
+                imgAvatar.src = reader.result as string;
             };
-            reader.readAsDataURL(formData.get('object'));
+            const blobUrl = formData.get('object') as Blob;
+            reader.readAsDataURL(blobUrl);
         });
 
         const profileChange = new ProfileChange({

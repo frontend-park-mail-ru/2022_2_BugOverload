@@ -1,7 +1,7 @@
 import { Film } from '@components/Film/film.js';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { actionGetCollectionData } from '@actions/commonComponentsActions.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
+import { actionGetCollectionData } from '@actions/commonComponentsActions';
 import template from '@components/Collection/collection.handlebars';
 
 /**

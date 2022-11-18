@@ -1,14 +1,14 @@
 import { Ajax } from '@utils/ajax.js';
 import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
-import { store } from '@store/Store.js';
-import { mockFilm } from '@store/reducers/mockData.js';
+import { store } from '@store/store';
+import { mockFilm } from '@store/reducers/mockData';
 
 class ReducerFilm {
-    async getFilmData({ id }) {
+    async getFilmData({ id } :{id :number}) {
         let response;
         try {
-            response = await Ajax.get(API.film(id));
+            response = await Ajax.get(API.film(id)) as Response;
         } catch (e) {
             return { [`film${id}`]: mockFilm() };
         }
@@ -22,38 +22,38 @@ class ReducerFilm {
         return { filmStatus: response.status };
     }
 
-    async rate(ratingData) {
+    async rate(ratingData :anyObject) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
             body: { score: +ratingData.rate },
-        });
+        }) as anyObject;
 
         if (response.status === responsStatuses.OK) {
             return {
                 countScores: response.body?.count_ratings,
                 rating: { value: ratingData.rate, dateRating: getDateNow() },
                 statusRating: response.status,
-            };
+            } as anyObject;
         }
         return { statusRating: response.status };
     }
 
-    async deleteRate({ filmID }) {
+    async deleteRate({ filmID } :{filmID :number} ) {
         const response = await Ajax.delete({
             url: API.del_rate(filmID),
-        });
+        }) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
                 countScores: response.body?.count_ratings,
                 rating: null,
                 statusRating: null,
-            };
+            } as anyObject;
         }
         return { statusRating: response.status };
     }
 
-    async getMetaDataFilm(data) {
-        const response = await Ajax.get(API.metaFilm(data.filmID));
+    async getMetaDataFilm(data :anyObject) {
+        const response = await Ajax.get(API.metaFilm(data.filmID)) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
                 listCollectionsUser: response.body.collections,
@@ -67,8 +67,8 @@ class ReducerFilm {
         return { statusMetaData: response.status };
     }
 
-    async getDataReviews(data) {
-        const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset));
+    async getDataReviews(data :anyObject) {
+        const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset)) as Response;
         if (response.status === responsStatuses.OK) {
             return {
                 reviews: handlerAvatarReviews(response.body),
@@ -84,11 +84,11 @@ class ReducerFilm {
         return { statusReviews: response.status };
     }
 
-    async sendReview(reviewData) {
+    async sendReview(reviewData :anyObject) {
         const response = await Ajax.post({
             url: API.send_review(reviewData.filmID),
             body: reviewData,
-        });
+        }) as Response;
 
         if (response.status === responsStatuses.Created) {
             const { avatar, nickname } = store.getState('user');
@@ -117,8 +117,8 @@ class ReducerFilm {
 
 export const reducerFilm = new ReducerFilm();
 
-const handlerAvatarReviews = (object) => {
-    object.forEach((element) => {
+const handlerAvatarReviews = (object :anyObject) => {
+    object.forEach((element :any) => {
         element.author.avatar = API.img.user_avatar(element.author.avatar);
     });
     return object;

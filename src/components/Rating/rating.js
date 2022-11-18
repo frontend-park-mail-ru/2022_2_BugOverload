@@ -1,11 +1,11 @@
 import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview.js';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
 import { ShowMessage } from '@components/Message/message.js';
 import {
     actionRate, actionDeleteRate, actionGetMetaDataFilm,
-} from '@actions/filmActions.js';
+} from '@actions/filmActions';
 
 import {
     decoreCountScores,

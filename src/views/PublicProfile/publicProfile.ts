@@ -1,8 +1,15 @@
-import { View } from '@views/View.js';
+import { View } from '@views/View';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
-import { store } from '@store/Store.js';
-import { actionGetPublicProfile } from '@store/actionCreater/userActions.js';
+import { store } from '@store/store';
+import { actionGetPublicProfile } from '@store/actionCreater/userActions';
 
+interface PublicProfile {
+    state: {
+        user: user,
+        id: number,
+        isSubscribed: boolean,
+    }
+}
 /**
 * Публичная страница профиля
 */
@@ -11,7 +18,7 @@ class PublicProfile extends View {
      * Привязывает функцию subscribePublicProfile к текущему this
      * @param {Object} - сохраняемые начальные параметры
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
         this.state = {
             user: null,
@@ -25,10 +32,9 @@ class PublicProfile extends View {
     /**
      * Посылает запрос в Store, если нет информауии о пользователе, и рендерит страницу
      */
-    render(id) {
-        if (id) {
-            this.state.id = id;
-        }
+    render(id = null as number) {
+        super.render(id);
+
         if (!this.state.id) {
             return;
         }
@@ -42,7 +48,6 @@ class PublicProfile extends View {
             return;
         }
 
-        super.render();
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 public: true,

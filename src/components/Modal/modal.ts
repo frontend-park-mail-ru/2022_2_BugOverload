@@ -1,5 +1,9 @@
 import template from '@components/Modal/modal.handlebars';
-import { hrefRegExp } from '@config/regExp.js';
+import { hrefRegExp } from '@config/regExp';
+
+export interface Modal {
+    root: HTMLElement;
+}
 
 /**
 * Отрисовывает модальное окно
@@ -9,7 +13,7 @@ export class Modal {
      * Cохраняет root.
      * @param {Element} root - div, через который происходит взаимодействие с html.
      */
-    constructor(root) {
+    constructor(root :HTMLElement) {
         this.root = root;
     }
 
@@ -28,7 +32,7 @@ export class Modal {
         document.body
             .querySelector('.js-modal__background')
             .addEventListener('click', (e) => {
-                const { target } = e;
+                const target = e.target as HTMLElement;
 
                 if (target.classList.contains('modal__background')) {
                     exitFromModal();
@@ -65,8 +69,8 @@ export const exit = () => {
     }
 
     const location = (window.location.href.match(hrefRegExp.host))
-        ? window.location.href.match(hrefRegExp.host, '')[0]
-        : window.location.href.match(hrefRegExp.localhost, '')[0];
+        ? window.location.href.match(hrefRegExp.host)[0]
+        : window.location.href.match(hrefRegExp.localhost)[0];
 
     const pathBeforModal = window.localStorage.getItem('pathBeforModal');
     history.replaceState(null, null, `${location + pathBeforModal}`);

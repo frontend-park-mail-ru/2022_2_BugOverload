@@ -1,15 +1,23 @@
-import { actionPutSettings, actionAuth } from '@store/actionCreater/userActions.js';
-import { Component } from '@components/Component.js';
+import { actionPutSettings, actionAuth } from '@store/actionCreater/userActions';
+import { Component } from '@components/Component';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
-import { profile } from '@views/UserProfile/userProfile.js';
+import { profile } from '@views/UserProfile/userProfile';
 import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid.js';
-import { store } from '@store/Store.js';
+import { store } from '@store/store';
 import { responsStatuses } from '@config/config.js';
 import { ShowMessage } from '@components/Message/message.js';
+
+export interface ProfileChange {
+    state: {
+        isOpen: boolean,
+        user: user,
+        statusChangeSettings: number,
+    }
+}
 
 /**
 * Отрисовывает форму изменения пользовательских данных.
@@ -22,7 +30,7 @@ export class ProfileChange extends Component {
      * Cохраняет props и обработчик статуса запроса
      * @param {Object} props - параметры компонента
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
 
         this.state = {
@@ -31,39 +39,41 @@ export class ProfileChange extends Component {
             statusChangeSettings: null,
         };
 
-        this.handlerUserChangeForm = () => {
-            const subscribeFunc = () => {
-                this.state.statusChangeSettings = store.getState('statusChangeSettings');
-                this.handlerStatusPut();
-            };
-
-            const profileElement = this.rootNode.querySelector('.js-profile');
-            if (profileElement) {
-                profileElement.remove();
-            }
-            if (!this.state.isOpen) {
-                this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
-                    {
-                        profileMenu: templateProfileMenu(),
-                        profileChange: templateProfileChange(),
-                        ...this.state.user,
-                    },
-                ));
-                this.addValidate();
-                store.subscribe('statusChangeSettings', subscribeFunc);
-                this.state.isOpen = true;
-
-                this.rootNode
-                    .querySelector('.js-profile__change__svg')
-                    .addEventListener('click', () => {
-                        if (this.state.isOpen) {
-                            profile.render();
-                        }
-                        store.unsubscribe('statusChangeSettings', subscribeFunc);
-                    });
-            }
-        };
+        this.handlerUserChangeForm = this.handlerUserChangeForm.bind(this);
     }
+
+    handlerUserChangeForm () {
+        const subscribeFunc = () => {
+            this.state.statusChangeSettings = store.getState('statusChangeSettings');
+            this.handlerStatusPut();
+        };
+
+        const profileElement = this.rootNode.querySelector('.js-profile');
+        if (profileElement) {
+            profileElement.remove();
+        }
+        if (!this.state.isOpen) {
+            this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
+                {
+                    profileMenu: templateProfileMenu(),
+                    profileChange: templateProfileChange(),
+                    ...this.state.user,
+                },
+            ));
+            this.addValidate();
+            store.subscribe('statusChangeSettings', subscribeFunc);
+            this.state.isOpen = true;
+
+            this.rootNode
+                .querySelector('.js-profile__change__svg')
+                .addEventListener('click', () => {
+                    if (this.state.isOpen) {
+                        profile.render();
+                    }
+                    store.unsubscribe('statusChangeSettings', subscribeFunc);
+                });
+        }
+    };
 
     /**
      * Обработчик статуса запроса
@@ -98,24 +108,29 @@ export class ProfileChange extends Component {
      * Навешивает валидацию на форму
      */
     addValidate() {
-        const forms = {};
+        const forms = {
+            formNick: null as HTMLElement,
+            formPassword: null as HTMLElement,
+        } as {
+            [index: string]:any;
+        };
         forms.formNick = this.rootNode.querySelector('.js-profile__form__nick');
         forms.formPassword = this.rootNode.querySelector('.js-profile__form__password');
 
         Object.keys(forms).forEach((key) => {
-            let validate;
+            let validate :Function;
             if (key === 'formNick') {
                 validate = this.validateNick;
             } else {
                 validate = this.validatePassword;
             }
 
-            forms[key].addEventListener('keyup', (e) => {
+            forms[key].addEventListener('keyup', (e :Event) => {
                 e.preventDefault();
                 validate(forms[key], true);
             });
 
-            forms[key].addEventListener('submit', (e) => {
+            forms[key].addEventListener('submit', (e :Event) => {
                 e.preventDefault();
                 const user = validate(forms[key]);
                 if (!user) {
@@ -132,10 +147,10 @@ export class ProfileChange extends Component {
      * @param {Element} form - форма
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
-    validateNick(form, keyup = false) {
-        const nickInput = form.querySelector('input[type=text]');
+    validateNick(form :HTMLElement, keyup = false) {
+        const nickInput = form.querySelector('input[type=text]') as HTMLInputElement;
 
-        const user = {};
+        const user = {} as user;
         user.nickname = nickInput.value.trim();
 
         let flag = true;
@@ -160,12 +175,12 @@ export class ProfileChange extends Component {
      * @param {Element} form - форма
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
-    validatePassword(form, keyup = false) {
-        const oldPassword = form.querySelector('.js-profile__wrapper__old__password').childNodes[1];
-        const passwordInput = form.querySelector('.js-profile__input');
-        const confirmInput = form.querySelector('.js-profile__wrapper__password').childNodes[1];
+    validatePassword(form :HTMLElement, keyup = false) {
+        const oldPassword = form.querySelector('.js-profile__wrapper__old__password').childNodes[1]  as HTMLInputElement;
+        const passwordInput = form.querySelector('.js-profile__input')  as HTMLInputElement;
+        const confirmInput = form.querySelector('.js-profile__wrapper__password').childNodes[1]  as HTMLInputElement;
 
-        const user = {};
+        const user = {} as user;
         user.oldPassword = oldPassword.value;
         user.password = passwordInput.value;
         user.confirmPassword = confirmInput.value;

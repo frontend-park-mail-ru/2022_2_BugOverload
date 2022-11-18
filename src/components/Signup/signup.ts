@@ -2,11 +2,19 @@ import templateSignup from '@components/Signup/signup.handlebars';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
 } from '@utils/valid.js';
-import { Component } from '@components/Component.js';
-import { Modal, exit } from '@components/Modal/modal.js';
-import { store } from '@store/Store.js';
-import { actionRegister } from '@store/actionCreater/userActions.js';
+import { Component } from '@components/Component';
+import { Modal, exit } from '@components/Modal/modal';
+import { store } from '@store/store';
+import { actionRegister } from '@store/actionCreater/userActions';
 import { responsStatuses } from '@config/config.js';
+
+export interface Signup {
+    state: {
+        statusSignup: number,
+        isSubscribed: boolean,
+        isUserSubscriber: boolean,
+    }
+}
 
 /**
 * Отрисовывает регистрацию.
@@ -20,7 +28,7 @@ export class Signup extends Component {
      * Cохраняет props
      * @param {Object} props - параметры компонента
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
         this.state = {
             statusSignup: null,
@@ -58,7 +66,7 @@ export class Signup extends Component {
         }
 
         if (this.state.statusSignup) {
-            this.handlerStatus(this.state.statusSignup);
+            this.handlerStatus();
             return;
         }
 
@@ -80,17 +88,17 @@ export class Signup extends Component {
      * @param {Element} form - форма логина
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
-    validateSignup(form, keyup = false) {
-        const nickInput = form.querySelector('input[type=text]');
-        const emailInput = form.querySelector('input[type=email]');
-        const passwordInput = form.querySelector('input[type=password]');
-        const confirmInput = document.getElementById('confirm');
+    validateSignup(form :HTMLElement, keyup = false) {
+        const nickInput = form.querySelector('input[type=text]') as HTMLInputElement;
+        const emailInput = form.querySelector('input[type=email]') as HTMLInputElement;
+        const passwordInput = form.querySelector('input[type=password]') as HTMLInputElement;
+        const confirmInput = document.getElementById('confirm') as HTMLInputElement;
 
-        const user = {};
+        const user = {} as user;
         user.nickname = nickInput.value.trim();
         user.email = emailInput.value.trim();
         user.password = passwordInput.value;
-        const confirmPassword = confirmInput.querySelector('.js-modal__input').value;
+        const confirmPassword = (confirmInput.querySelector('.js-modal__input') as HTMLInputElement).value;
 
         let flag = true;
 
@@ -149,7 +157,7 @@ export class Signup extends Component {
      * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
-        const form = this.rootNode.querySelector('.js-modal__form');
+        const form = this.rootNode.querySelector('.js-modal__form') as HTMLElement;
         const validate = this.validateSignup;
         let user;
 
@@ -175,9 +183,9 @@ export class Signup extends Component {
 
         const pathBeforModal = window.localStorage.getItem('pathBeforModal');
 
-        document.body
-            .querySelector('.js-modal__background')
-            .dataset.section = pathBeforModal;
+        const jsModalBackground = document.body.querySelector('.js-modal__background') as HTMLElement;
+            
+        jsModalBackground.dataset.section = pathBeforModal;
     }
 
     /**

@@ -1,11 +1,11 @@
-import { handlers } from '@config/storeHandlers.js';
+import { handlers } from '@config/storeHandlers';
 
 interface Store {
     state: {[key: string]: any};
-    mapActionHandlers: Map<String, Function>;
-    mapSubscribers: Map<String, Array<Function>>;
+    mapActionHandlers: Map<string, Function>;
+    mapSubscribers: Map<string, Array<Function>>;
 }
-
+ 
 class Store {
     constructor() {
         this.state = {};

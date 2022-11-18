@@ -1,8 +1,14 @@
-import { Userbar } from '@components/Userbar/userbar.js';
+import { Userbar } from '@components/Userbar/userbar';
 import template from '@components/Header/header.handlebars';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { actionAuth } from '@store/actionCreater/userActions.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
+import { actionAuth } from '@store/actionCreater/userActions';
+
+export interface Header {
+    state: {
+        user: user,
+    }
+}
 
 /**
 * Отрисовывает хедер.
@@ -15,7 +21,7 @@ export class Header extends Component {
      * Cохраняет rootNode.
      * @param {Element} rootNode - div, через который происходит взаимодействие с html.
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
         this.state = {
             user: null,
@@ -24,17 +30,12 @@ export class Header extends Component {
             this.state.user = store.getState('user');
             this.render();
         });
-
-        this.isMounted = false;
     }
 
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render() {
-        if (this.isMounted) {
-            this.componentWillUnmount();
-        }
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();

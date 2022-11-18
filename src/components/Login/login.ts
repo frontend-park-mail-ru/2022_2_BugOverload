@@ -2,11 +2,19 @@ import templateLogin from '@components/Login/login.handlebars';
 import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid.js';
-import { Component } from '@components/Component.js';
-import { Modal, exit } from '@components/Modal/modal.js';
-import { store } from '@store/Store.js';
-import { actionLogin } from '@store/actionCreater/userActions.js';
+import { Component } from '@components/Component';
+import { Modal, exit } from '@components/Modal/modal';
+import { store } from '@store/store';
+import { actionLogin } from '@store/actionCreater/userActions';
 import { responsStatuses } from '@config/config.js';
+
+export interface Login {
+    state: {
+        statusLogin: number,
+        isSubscribed: boolean,
+        isUserSubscriber: boolean,
+    }
+}
 
 /**
 * Отрисовывает логин.
@@ -20,11 +28,12 @@ export class Login extends Component {
      * Cохраняет props
      * @param {Object} props - параметры компонента
      */
-    constructor(props) {
+    constructor(props :componentProps) {
         super(props);
         this.state = {
             statusLogin: null,
             isSubscribed: false,
+            isUserSubscriber: false,
         };
 
         this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
@@ -35,7 +44,7 @@ export class Login extends Component {
      * Обрабатывает статус ответа
      * @param {number} userStatus - статус логина
      */
-    handlerStatus(userStatus) {
+    handlerStatus(userStatus :number) {
         const form = this.rootNode.querySelector('.js-modal__wrapper__input');
         if (userStatus === responsStatuses.NotFound) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
@@ -86,10 +95,10 @@ export class Login extends Component {
      * @param {Element} form - форма логина
      * @param {Bool} keyup - режим проверки полей: true - по одному, false все
      */
-    validateLogin(form, keyup = false) {
-        const user = {};
-        const emailInput = form.querySelector('input[type=email]');
-        const passwordInput = form.querySelector('input[type=password]');
+    validateLogin(form :HTMLElement, keyup = false) {
+        const user = {} as user;
+        const emailInput = form.querySelector('input[type=email]') as HTMLInputElement;
+        const passwordInput = form.querySelector('input[type=password]') as HTMLInputElement;
         user.email = emailInput.value.trim();
         user.password = passwordInput.value;
 
@@ -122,8 +131,8 @@ export class Login extends Component {
     /**
      * Обёртка над функции, вызываемой при событии выхода из логина
      */
-    deleteLogin(e) {
-        const { target } = e;
+    deleteLogin(e :Event) {
+        const target  = e.target as HTMLElement;
         if (target.classList.contains('modal__background')) {
             exit();
         }
@@ -133,7 +142,7 @@ export class Login extends Component {
      * Навешивает обработчики на валидацию и на выход
      */
     componentDidMount() {
-        const form = this.rootNode.querySelector('.js-modal__form');
+        const form = this.rootNode.querySelector('.js-modal__form') as HTMLElement;
 
         const validate = this.validateLogin;
         let user;
@@ -161,9 +170,9 @@ export class Login extends Component {
 
         const pathBeforModal = window.localStorage.getItem('pathBeforModal');
 
-        document.body
-            .querySelector('.js-modal__background')
-            .dataset.section = pathBeforModal;
+        const jsModalBackground = document.body.querySelector('.js-modal__background') as HTMLElement;
+            
+        jsModalBackground.dataset.section = pathBeforModal;
     }
 
     /**

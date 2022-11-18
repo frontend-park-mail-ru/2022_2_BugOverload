@@ -4,11 +4,11 @@ import { ROOT } from '@config/config.js';
 import { Collection } from '@components/Collection/collection.js';
 import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
-import { store } from '@store/Store.js';
-import { actionGetFilmData } from '@actions/filmActions.js';
+import { store } from '@store/store';
+import { actionGetFilmData } from '@actions/filmActions';
 import { ShowMessage } from '@components/Message/message.js';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
-import { View } from '@views/View.js';
+import { View } from '@views/View';
 
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html

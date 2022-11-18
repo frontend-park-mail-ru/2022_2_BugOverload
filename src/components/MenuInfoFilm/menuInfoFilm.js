@@ -2,7 +2,7 @@ import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
 import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js';
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
-import { Component } from '@components/Component.js';
+import { Component } from '@components/Component';
 import {
     decoreDuration, decoreListPersons, decoreListItems, decoreCountActors,
 } from '@utils/decorationData.js';

@@ -1,6 +1,6 @@
 import template from '@router/Page404/page404.handlebars';
-import { store } from '@store/Store.js';
-import { Component } from '@components/Component.js';
+import { store } from '@store/store';
+import { Component } from '@components/Component';
 
 export const render404 = () => {
     const root = document.getElementById('root');
@@ -13,7 +13,7 @@ export interface NotFoundPage {
 }
 
 export class NotFoundPage extends Component {
-    constructor(props :any) {
+    constructor(props :componentProps) {
         super(props);
 
         this.state = {

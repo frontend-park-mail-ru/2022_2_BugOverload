@@ -1,8 +1,8 @@
 import templateHeader from '@components/Header/header.handlebars';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { actionLogout } from '@store/actionCreater/userActions.js';
+import { Component } from '@components/Component';
+import { store } from '@store/store';
+import { actionLogout } from '@store/actionCreater/userActions';
 
 /**
 * Отрисовывает выпадающее меню.
@@ -18,7 +18,7 @@ export class Userbar extends Component {
 
         targetHadler.addEventListener('click', (e) => {
             e.preventDefault();
-            const { target } = e;
+            const target = e.target as HTMLElement;
 
             if (target.dataset.section === 'logout') {
                 store.dispatch(actionLogout());
@@ -33,7 +33,7 @@ export class Userbar extends Component {
      * @param {string} user.email - почта
      * @param {string} user.nickname - ник
      */
-    componentDidMount(user) {
+    componentDidMount(user :user) {
         let isOpened = false;
         const { rootNode } = this;
 

@@ -1,10 +1,10 @@
-import { Login } from '@components/Login/login.js';
-import { Signup } from '@components/Signup/signup.js';
-import { mainPage } from '@views/MainPage/mainPage.js';
-import { profile } from '@views/UserProfile/userProfile.js';
+import { Login } from '@components/Login/login';
+import { Signup } from '@components/Signup/signup';
+import { mainPage } from '@views/MainPage/mainPage';
+import { profile } from '@views/UserProfile/userProfile';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
-import { publicProfile } from '@views/PublicProfile/publicProfile.js';
+import { publicProfile } from '@views/PublicProfile/publicProfile';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 

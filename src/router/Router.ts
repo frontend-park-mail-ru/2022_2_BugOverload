@@ -1,5 +1,5 @@
 import { routes, ROOT } from '@config/config.js';
-import { hrefRegExp } from '@config/regExp.js';
+import { hrefRegExp } from '@config/regExp';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404';
 
@@ -10,9 +10,9 @@ interface Class {
 
 interface Router {
     root: Element;
-    mapViews: Map<String, Class>;
-    cachedUrls: Array<String>;
-    pathBeforModal: String;
+    mapViews: Map<string, Class>;
+    cachedUrls: Array<string>;
+    pathBeforModal: string;
 }
 
 interface stateObject {
@@ -36,7 +36,7 @@ class Router {
 
     /**
      * Получает получает путь для обработчика view и динамические параметры
-     * @param {String} href - ccылка без домена и id
+     * @param {string} href - ccылка без домена и id
      */
     matchHref(href :string) {
         let newHref = href;
@@ -59,7 +59,7 @@ class Router {
 
     /**
      * Соопоставляет url и view
-     * @param {String} path - url
+     * @param {string} path - url
      * @param {Function} view - view
      */
     register({ path, view } :{path :string, view :any}) {

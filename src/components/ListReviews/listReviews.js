@@ -1,10 +1,10 @@
 import { Review } from '@components/Review/review.js';
 import { ShowMessage } from '@components/Message/message.js';
 import template from '@components/ListReviews/listReviews.handlebars';
-import { store } from '@store/Store.js';
-import { Component } from '@components/Component.js';
+import { store } from '@store/store';
+import { Component } from '@components/Component';
 import { InputReview } from '@components/InputReview/inputReview.js';
-import { actionGetDataReviews } from '@actions/filmActions.js';
+import { actionGetDataReviews } from '@actions/filmActions';
 
 /**
 * Выводит список пользовательских рецензий

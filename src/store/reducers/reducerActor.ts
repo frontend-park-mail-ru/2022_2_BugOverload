@@ -1,12 +1,17 @@
 import { Ajax } from '@utils/ajax.js';
 import { API, responsStatuses } from '@config/config.js';
-import { mockPerson } from '@store/reducers/mockData.js';
+import { mockPerson } from '@store/reducers/mockData';
+
+interface personResponse{
+    status: Number;
+    body: person;
+}
 
 class ReducerActor {
-    async getActor({ id, numberPhotos }) {
+    async getActor({ id, numberPhotos } :{ id :number, numberPhotos:number }) {
         let response;
         try {
-            response = await Ajax.get(API.person(id, numberPhotos));
+            response = await Ajax.get(API.person(id, numberPhotos)) as personResponse;
         } catch (e) {
             return {
                 [`actor${id}`]: mockPerson(),
@@ -32,21 +37,17 @@ class ReducerActor {
 
 export const reducerActor = new ReducerActor();
 
-const handlerPropertiesPerson = (id, object, nameProperties) => {
+const handlerPropertiesPerson = (id :number, object :person, nameProperties :Array<string>) => {
     nameProperties.forEach((key) => {
         if (key === 'avatar') {
             const newUrl = API.img.person_avatar(object[key]);
-            if (object[key] !== newUrl) {
-                object[key] = newUrl;
-            }
+            object[key] = newUrl;
         }
         if (key === 'images') {
             const images = object[key];
             images.forEach((image, index) => {
                 const newUrl = API.img.person_image(id, image);
-                if (image !== newUrl) {
-                    object[key][index] = newUrl;
-                }
+                object[key][index] = newUrl;
             });
         }
         if (key === 'professions') {

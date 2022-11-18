@@ -1,7 +1,7 @@
 import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
 import { Collection } from '@components/Collection/collection.js';
 import { ROOT } from '@config/config.js';
-import { View } from '@views/View.js';
+import { View } from '@views/View';
 import template from '@views/MainPage/MainPage.handlebars';
 
 /**

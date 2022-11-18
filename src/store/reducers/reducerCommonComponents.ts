@@ -1,12 +1,12 @@
 import { Ajax } from '@utils/ajax.js';
 import { API } from '@config/config.js';
-import { mockCollection, mockPrewiew } from '@store/reducers/mockData.js';
+import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 
 class ReducerCommonComponents {
-    async getCollectionData(params) {
+    async getCollectionData(params :collectionParams) {
         let response;
         try {
-            response = await Ajax.get(API.collection(params.tag));
+            response = await Ajax.get(API.collection(params.tag)) as Response;
         } catch (e) {
             return { [`collection-${params.name}`]: mockCollection() };
         }
@@ -17,10 +17,10 @@ class ReducerCommonComponents {
         return { [`statusCollection-${params.name}`]: response.status };
     }
 
-    async getPreviewData(params) {
+    async getPreviewData(params :collectionParams) {
         let response;
         try {
-            response = await Ajax.get(API.recommendation);
+            response = await Ajax.get(API.recommendation)  as Response;
         } catch (e) {
             return { [`preview-${params.name}`]: mockPrewiew() };
         }
