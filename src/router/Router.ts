@@ -153,10 +153,8 @@ class Router {
 
         if (
             prevView
-            && Object.getOwnPropertyNames(
-                Object.getPrototypeOf(prevView),
-            )
-                .includes('componentWillUnmount')
+            && Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
+                   .includes('componentWillUnmount')
         ) {
             prevView.componentWillUnmount();
         }
