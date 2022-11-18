@@ -1,6 +1,6 @@
 import { Login } from '@components/Login/login.js';
 import { Signup } from '@components/Signup/signup.js';
-import { mainPage } from '@views/MainPage/mainPage.js';
+import { mainPage } from '@views/MainPage/mainPage.ts';
 import { profile } from '@views/UserProfile/userProfile.js';
 import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';

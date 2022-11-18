@@ -103,7 +103,7 @@ export class FilmPage extends View {
         this.state.id = null;
         this.state.film = null;
         this.state.reviews = null;
-        this.listReviews.componentWillUnmount();
+        this.listReviews?.componentWillUnmount();
     }
 }
 
