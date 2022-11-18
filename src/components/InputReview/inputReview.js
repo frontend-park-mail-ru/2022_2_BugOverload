@@ -5,7 +5,7 @@ import { actionSendReview } from '@actions/filmActions';
 import { store } from '@store/store';
 import {
     renderError, removeError,
-} from '@utils/valid.js';
+} from '@utils/valid';
 import { decoreCountReviews } from '@utils/decorationData.js';
 
 /**

@@ -1,7 +1,7 @@
 import templateLogin from '@components/Login/login.handlebars';
 import {
     checkEmail, checkPassword, renderError, removeError,
-} from '@utils/valid.js';
+} from '@utils/valid';
 import { Component } from '@components/Component';
 import { Modal, exit } from '@components/Modal/modal';
 import { store } from '@store/store';
@@ -45,7 +45,7 @@ export class Login extends Component {
      * @param {number} userStatus - статус логина
      */
     handlerStatus(userStatus :number) {
-        const form = this.rootNode.querySelector('.js-modal__wrapper__input');
+        const form = this.rootNode.querySelector('.js-modal__wrapper__input') as HTMLElement;
         if (userStatus === responsStatuses.NotFound) {
             renderError(form, 'email', 'Такой пользователь не зарегистирован');
             return;

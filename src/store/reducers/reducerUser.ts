@@ -1,4 +1,4 @@
-import { Ajax } from '@utils/ajax.js';
+import { Ajax } from '@utils/ajax';
 import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
 import { decoreDate } from '@utils/decorationData.js';

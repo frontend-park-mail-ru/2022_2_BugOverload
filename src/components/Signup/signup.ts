@@ -1,7 +1,7 @@
 import templateSignup from '@components/Signup/signup.handlebars';
 import {
     checkEmail, checkPassword, checkConfirmPassword, checkNick, renderError, removeError,
-} from '@utils/valid.js';
+} from '@utils/valid';
 import { Component } from '@components/Component';
 import { Modal, exit } from '@components/Modal/modal';
 import { store } from '@store/store';

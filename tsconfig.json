@@ -20,7 +20,7 @@
       "module": "commonjs",
       "noImplicitAny": true,
       "sourceMap": true,
-      "target": "es5",
+      "target": "es2017",
       "allowJs": true,
       "noEmit": false,
       "skipLibCheck": true,

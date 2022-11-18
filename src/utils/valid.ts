@@ -6,7 +6,7 @@ import { regExp } from '@config/regExp';
  * @param {String} input - пользовательский ввод
  * @return {Bool} Прошла ли проверка успешно
 */
-export const checkNick = (form, input) => {
+export const checkNick = (form :HTMLElement, input :string) => {
     if (!input) {
         renderError(form, 'text', 'Вы кое-что забыли! Скажите, как вас зовут');
         return false;
@@ -30,7 +30,7 @@ export const checkNick = (form, input) => {
  * @param {String} input - пользовательский ввод
  * @return {Bool} Прошла ли проверка успешно
 */
-export const checkEmail = (form, input) => {
+export const checkEmail = (form :HTMLElement, input :string) => {
     if (!input) {
         renderError(form, 'email', 'Введите email');
         return false;
@@ -51,7 +51,7 @@ export const checkEmail = (form, input) => {
  * @param {String} confirmPassword - пароль
  * @return {Bool} Прошла ли проверка успешно
 */
-export const checkConfirmPassword = (confirm, confirmPassword, password) => {
+export const checkConfirmPassword = (confirm :HTMLElement, confirmPassword :string, password :string) => {
     if (!confirmPassword) {
         renderError(confirm, 'password', 'Введите пароль');
         return false;
@@ -85,7 +85,7 @@ export const checkConfirmPassword = (confirm, confirmPassword, password) => {
  * @param {String} [confirmPassword = null] - подтверждение пароля
  * @return {Bool} Прошла ли проверка успешно
 */
-export const checkPassword = (form, input, validateConfirm = false, confirmPassword = null) => {
+export const checkPassword = (form :HTMLElement, input :string, validateConfirm = false, confirmPassword = null as string) => {
     const confirm = document.getElementById('confirm');
 
     if (!input) {
@@ -135,7 +135,7 @@ export const checkPassword = (form, input, validateConfirm = false, confirmPassw
  * @param {Element} form - форма из которой взяты данные
  * @param {String} type - тип input
 */
-export const removeError = (form, type, input = true) => {
+export const removeError = (form :HTMLElement, type :string, input = true) => {
     let errorInput;
     if (!input) {
         errorInput = form.querySelector(`.${type}`);
@@ -164,7 +164,7 @@ export const removeError = (form, type, input = true) => {
  * @param {String} type - тип input
  * @param {String} text - текст ошибки
 */
-export const renderError = (form, type, text, input = true) => {
+export const renderError = (form :HTMLElement, type :string, text :string, input = true) => {
     let target;
     if (!input) {
         target = form.querySelector(`.${type}`);

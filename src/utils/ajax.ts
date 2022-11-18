@@ -3,7 +3,7 @@
 *
 */
 export class Ajax {
-    static #csrfToken;
+    static #csrfToken :string;
 
     /**
     * Выполняет запрос с методом GET на бэкенд
@@ -11,7 +11,7 @@ export class Ajax {
     * @param {url string} url - url запроса на бэкенд
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
-    static async get(url) {
+    static async get(url :string) {
         const response = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
@@ -29,7 +29,7 @@ export class Ajax {
 
         result = result ? result = JSON.parse(result) : {};
 
-        return { status: response.status, body: result };
+        return { status: response.status, body: result } as anyObject;
     }
 
     /**
@@ -39,7 +39,7 @@ export class Ajax {
     * @param {Object} body - объект для отправки
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
-    static async post({ url, body }) {
+    static async post({ url, body } :{ url:string, body:anyObject }) {
         const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
@@ -59,7 +59,7 @@ export class Ajax {
             this.#csrfToken = csrf;
         }
 
-        let result = await response.text();
+        let result = await response.text() as any;
 
         if (result && response.ok) {
             result = JSON.parse(result);
@@ -67,7 +67,7 @@ export class Ajax {
             result = {};
         }
 
-        return { status: response.status, body: result };
+        return { status: response.status, body: result } as anyObject;
     }
 
     /**
@@ -78,7 +78,7 @@ export class Ajax {
     * @param {Bool} uploadFile - флаг отправки файла
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
-    static async put({ url, body }, uploadFile = false) {
+    static async put({ url, body } :{ url:string, body:any }, uploadFile = false) {
         let response;
         if (uploadFile) {
             response = await fetch(url, {
@@ -106,7 +106,7 @@ export class Ajax {
             });
         }
 
-        let result = await response.text();
+        let result = await response.text() as any;
 
         if (result && response.ok) {
             result = JSON.parse(result);
@@ -114,7 +114,7 @@ export class Ajax {
             result = {};
         }
 
-        return { status: response.status, body: result };
+        return { status: response.status, body: result } as anyObject;
     }
 
     /**
@@ -124,7 +124,7 @@ export class Ajax {
     * @param {Object} body - объект для отправки
     * @return {Object} статус ответа и тело ответа в виде JSON
     */
-    static async delete({ url, body = {} }) {
+    static async delete({ url , body = {} } :{ url:string, [key: string]: any }) {
         const response = await fetch(url, {
             method: 'DELETE',
             mode: 'cors',
@@ -138,7 +138,7 @@ export class Ajax {
             body: JSON.stringify(body),
         });
 
-        let result = await response.text();
+        let result = await response.text() as any;
 
         if (result && response.ok) {
             result = JSON.parse(result);
@@ -146,11 +146,11 @@ export class Ajax {
             result = {};
         }
 
-        return { status: response.status, body: result };
+        return { status: response.status, body: result } as anyObject;
     }
 }
 
-const getCookie = (name) => {
+const getCookie = (name :string) => {
     const nameEQ = `${name}=`;
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {

@@ -6,7 +6,7 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { profile } from '@views/UserProfile/userProfile';
 import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
-} from '@utils/valid.js';
+} from '@utils/valid';
 import { store } from '@store/store';
 import { responsStatuses } from '@config/config.js';
 import { ShowMessage } from '@components/Message/message.js';
@@ -80,7 +80,7 @@ export class ProfileChange extends Component {
      */
     handlerStatusPut() {
         if (this.state.statusChangeSettings === responsStatuses.Forbidden) {
-            const wrapper = this.rootNode.querySelector('.js-profile__wrapper__old__password');
+            const wrapper = this.rootNode.querySelector('.js-profile__wrapper__old__password') as HTMLElement;
             renderError(wrapper, 'password', 'Неправильный пароль');
         } else {
             store.dispatch(actionAuth());

@@ -1,4 +1,4 @@
-import { Ajax } from '@utils/ajax.js';
+import { Ajax } from '@utils/ajax';
 import { API } from '@config/config.js';
 import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 
