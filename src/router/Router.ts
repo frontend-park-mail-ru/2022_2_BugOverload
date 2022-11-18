@@ -99,6 +99,7 @@ class Router {
             }
             
             const currentView = this.mapViews.get(matchedHref[0]);
+            console.log(currentView)
             if(currentView) {
                 currentView?.componentWillUnmount();
             }
