@@ -1,5 +1,5 @@
 import template from '@router/Page404/page404.handlebars';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { Component } from '@components/Component';
 
 export const render404 = () => {

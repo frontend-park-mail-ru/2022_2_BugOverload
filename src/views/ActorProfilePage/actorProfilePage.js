@@ -4,7 +4,7 @@ import { Film } from '@components/Film/film.js';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
 import templateCollection from '@components/Collection/collection.handlebars';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 
 /**

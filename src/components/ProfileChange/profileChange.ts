@@ -7,7 +7,7 @@ import { profile } from '@views/UserProfile/userProfile';
 import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { responsStatuses } from '@config/config.js';
 import { ShowMessage } from '@components/Message/message.js';
 

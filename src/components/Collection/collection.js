@@ -1,6 +1,6 @@
 import { Film } from '@components/Film/film.js';
 import { Component } from '@components/Component';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonComponentsActions';
 import template from '@components/Collection/collection.handlebars';
 

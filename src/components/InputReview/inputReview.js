@@ -2,7 +2,7 @@ import template from '@components/InputReview/inputReview.handlebars';
 import { Modal } from '@components/Modal/modal';
 import { Component } from '@components/Component';
 import { actionSendReview } from '@actions/filmActions';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import {
     renderError, removeError,
 } from '@utils/valid';

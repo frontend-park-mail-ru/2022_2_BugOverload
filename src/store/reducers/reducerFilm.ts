@@ -1,7 +1,7 @@
 import { Ajax } from '@utils/ajax';
 import { getDateNow } from '@utils/common.js';
 import { API, responsStatuses } from '@config/config.js';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { mockFilm } from '@store/reducers/mockData';
 
 class ReducerFilm {

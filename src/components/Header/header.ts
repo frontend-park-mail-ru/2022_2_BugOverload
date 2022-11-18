@@ -1,7 +1,7 @@
 import { Userbar } from '@components/Userbar/userbar';
 import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionAuth } from '@store/actionCreater/userActions';
 
 export interface Header {

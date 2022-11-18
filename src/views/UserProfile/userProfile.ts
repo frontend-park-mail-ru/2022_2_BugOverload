@@ -1,7 +1,7 @@
 import { View } from '@views/View';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
 import { ProfileChange } from '@components/ProfileChange/profileChange';
 import { ShowMessage } from '@components/Message/message.js';

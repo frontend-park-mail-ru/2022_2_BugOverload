@@ -4,7 +4,7 @@ import {
 } from '@utils/valid';
 import { Component } from '@components/Component';
 import { Modal, exit } from '@components/Modal/modal';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionRegister } from '@store/actionCreater/userActions';
 import { responsStatuses } from '@config/config.js';
 

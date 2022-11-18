@@ -1,6 +1,6 @@
 import { View } from '@views/View';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetPublicProfile } from '@store/actionCreater/userActions';
 
 interface PublicProfile {

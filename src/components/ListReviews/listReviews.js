@@ -1,7 +1,7 @@
 import { Review } from '@components/Review/review.js';
 import { ShowMessage } from '@components/Message/message.js';
 import template from '@components/ListReviews/listReviews.handlebars';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { Component } from '@components/Component';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { actionGetDataReviews } from '@actions/filmActions';

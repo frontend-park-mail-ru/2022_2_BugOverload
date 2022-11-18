@@ -1,5 +1,5 @@
 import { Component } from '@components/Component';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetPreviewData } from '@actions/commonComponentsActions';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
 import { API } from '@config/config.js';

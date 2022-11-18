@@ -1,7 +1,7 @@
 import templateHeader from '@components/Header/header.handlebars';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
 import { Component } from '@components/Component';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionLogout } from '@store/actionCreater/userActions';
 
 /**

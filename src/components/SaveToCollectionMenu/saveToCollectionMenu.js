@@ -1,6 +1,6 @@
 import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.handlebars';
 import { Component } from '@components/Component';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message.js';
 
 /**

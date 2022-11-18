@@ -4,7 +4,7 @@ import { ROOT } from '@config/config.js';
 import { Collection } from '@components/Collection/collection.js';
 import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
-import { store } from '@store/store';
+import { store } from '@store/Store';
 import { actionGetFilmData } from '@actions/filmActions';
 import { ShowMessage } from '@components/Message/message.js';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
