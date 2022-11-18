@@ -12,6 +12,7 @@
         "@fonts/*":  ["src/assets/fonts/*"],
         "@favicons/*":  ["src/assets/favicons/*"],
         "@router/*":  ["src/router/*"],
+        "@router/Page404/*":  ["src/router/Page404/*"],
         "@store/*":  ["src/store/*"],
         "@reducers/*":  ["src/store/reducers/*"],
         "@actions/*":  ["src/store/actionCreater/*"],

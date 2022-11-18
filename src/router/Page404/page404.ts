@@ -8,12 +8,16 @@ export const render404 = () => {
     root.insertAdjacentHTML('afterbegin', template());
 };
 
+export interface NotFoundPage {
+    state :{notFound :string};
+}
+
 export class NotFoundPage extends Component {
-    constructor(props) {
+    constructor(props :any) {
         super(props);
 
         this.state = {
-            notFound: false,
+            notFound: null,
         };
 
         this.notFoundPageSubscribe = this.notFoundPageSubscribe.bind(this);

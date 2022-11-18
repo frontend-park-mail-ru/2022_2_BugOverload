@@ -1,9 +1,9 @@
 import { routes, ROOT } from '@config/config.js';
 import { hrefRegExp } from '@config/regExp.js';
 import { ShowMessage } from '@components/Message/message.js';
-import { notFoundPage } from '@router/Page404/page404.js';
+import { notFoundPage } from '@router/Page404/page404';
 
-interface Class {
+interface Class { 
     render :Function;
     componentWillUnmount :Function;
 }
