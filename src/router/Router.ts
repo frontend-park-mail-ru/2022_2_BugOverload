@@ -3,7 +3,7 @@ import { hrefRegExp } from '@config/regExp';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404';
 
-interface Class { 
+interface Class extends anyObject { 
     render :Function;
     componentWillUnmount :Function;
 }
@@ -13,6 +13,7 @@ interface Router {
     mapViews: Map<string, Class>;
     cachedUrls: Array<string>;
     pathBeforModal: string;
+    prevUrl: string;
 }
 
 interface stateObject {
@@ -98,7 +99,16 @@ class Router {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
 
+            const prevView = this.mapViews.get(this.prevUrl);
+
+            if(prevView && 
+                Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
+                    .includes('componentWillUnmount')) {
+                prevView.componentWillUnmount();
+            }
+
             this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: false, refresh: false });
+            this.prevUrl = matchedHref[0];
         }, 0));
         this.refresh();
     }
@@ -148,10 +158,8 @@ class Router {
 
         if (
             prevView
-            && Object.getOwnPropertyNames(
-                Object.getPrototypeOf(prevView)
-            )
-                .includes('componentWillUnmount')
+            && Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
+                   .includes('componentWillUnmount')
         ) {
             prevView.componentWillUnmount();
         }
@@ -200,6 +208,7 @@ class Router {
             } else {
                 window.history.pushState(props, null, location + path);
             }
+            this.prevUrl = path; 
         }
 
         this.cache();
