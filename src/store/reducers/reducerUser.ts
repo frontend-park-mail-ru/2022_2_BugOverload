@@ -150,9 +150,9 @@ const handlerUrlObject = (object :user, nameObject :string) => {
 const handlerUserInfoFields = (userInfo :anyObject) => {
     if (userInfo) {
         userInfo.joined_date = decoreDate(userInfo?.joined_date || getDateNow());
-        userInfo.count_ratings = userInfo.count_ratings || 'вы не поставили ни одной оценки';
-        userInfo.count_collections = userInfo.count_collections || 'у вас пока нет коллекций';
-        userInfo.count_reviews = userInfo.count_reviews || 'у вас пока нет рецензий';
+        userInfo.count_ratings = userInfo.count_ratings || 'нет оценок';
+        userInfo.count_collections = userInfo.count_collections || 'нет коллекций';
+        userInfo.count_reviews = userInfo.count_reviews || 'нет рецензий';
         if (userInfo.avatar) {
             userInfo.avatar = API.img.user_avatar(userInfo.avatar);
         }
