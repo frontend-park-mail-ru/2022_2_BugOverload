@@ -1,5 +1,7 @@
 <header class="header js-header">
 
+  {{#if mobile}}
+  {{else}}
   <a class="header__navlink" data-section="/">
     <img class="header__logo" data-section="/" src="/LogoMOVIEGATE.png">
   </a>
@@ -12,6 +14,7 @@
   <a class="header__navlink js-header__navlink-top-250" data-section="navlink">
     <div class="header__navlink-area js-showError">Топ-250</div>
   </a>
+  {{/if}}
 
 
   <form class="header__form">

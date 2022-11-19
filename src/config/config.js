@@ -6,7 +6,7 @@ import { filmPage } from '@views/FilmPage/filmPage.js';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 
-const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+const PROTOCOL = 'https';
 
 let i = 0;
 const randomMy = () => i++;
@@ -106,3 +106,5 @@ export const routes = [
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
 ];
+
+export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent);
