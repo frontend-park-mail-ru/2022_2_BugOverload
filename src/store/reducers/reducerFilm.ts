@@ -107,7 +107,11 @@ class ReducerFilm {
                     type,
                     create_time: getDateNow(),
                 },
-                statusSendReview: { status: response.status, type },
+                statusSendReview: {  
+                    author: response.body, 
+                    status: response.status, 
+                    type 
+                },
             };
         }
 
