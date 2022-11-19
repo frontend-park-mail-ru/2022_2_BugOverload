@@ -22,10 +22,12 @@ export class PreviewFilm extends Component {
         this.nameLocation = nameLocation;
         this.location = this.rootNode.querySelector(`.${nameLocation}`);
 
-        store.subscribe(`preview-${nameLocation}`, () => {
+        this.subHandler = () => {
             this.state.preview = store.getState(`preview-${nameLocation}`);
             this.render();
-        });
+        };
+
+        store.subscribe(`preview-${nameLocation}`, this.subHandler);
     }
 
     /**
@@ -47,5 +49,9 @@ export class PreviewFilm extends Component {
         this.location.innerHTML = '';
         this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
         this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
+    }
+
+    componentWillUnmount() {
+        store.unsubscribe(`preview-${nameLocation}`, this.subHandler);
     }
 }

@@ -27,9 +27,12 @@ export class InputReview extends Component {
         };
 
         this.data = props.data;
-        store.subscribe('countReviews', () => {
+
+        this.subHandler = () => {
             this.state.countReviews = store.getState('countReviews');
-        });
+        };
+
+        store.subscribe('countReviews', this.subHandler);
     }
 
     /**
@@ -195,5 +198,7 @@ export class InputReview extends Component {
 
         const items = select.querySelectorAll('.js-input-review__select-item');
         items.forEach((item) => item.removeEventListener('click', this.handlerSetValueWrapper(item)));
+
+        store.unsubscribe('countReviews', this.subHandler);
     }
 }

@@ -27,14 +27,16 @@ export class Rating extends Component {
             countScores: props.film.count_ratings,
         };
 
-        store.subscribe('rating', () => {
+        this.subHandlerRating = () => {
             this.state.rating = store.getState('rating');
             this.state.countScores = store.getState('countScores') || this.state.countScores;
 
             this.render();
-        });
+        };
 
-        store.subscribe('statusRating', () => {
+        store.subscribe('rating', this.subHandlerRating);
+
+        this.subHandlerStatusRating = () => {
             this.state.statusRating = store.getState('statusRating');
 
             if (!this.state.statusRating) {
@@ -42,7 +44,9 @@ export class Rating extends Component {
                 return;
             }
             ShowMessage('Успех!', 'positive');
-        });
+        };
+
+        store.subscribe('statusRating', this.subHandlerStatusRating);
 
         if (store.getState('user')) {
             store.dispatch(actionGetMetaDataFilm({ filmID: this.state.film.id }));
@@ -153,5 +157,8 @@ export class Rating extends Component {
             return;
         }
         form.removeEventListener('submit', this.handlerSubmit);
+
+        store.unsubscribe('rating', this.subHandlerRating);
+        store.unsubscribe('statusRating', this.subHandlerStatusRating);
     }
 }

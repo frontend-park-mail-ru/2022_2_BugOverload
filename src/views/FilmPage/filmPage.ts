@@ -23,7 +23,11 @@ export class FilmPage extends View {
             isSubscribed: false,
         };
 
-        store.subscribe('statusSendReview', sendReviewSuccess);
+        this.sendReviewSuccess = () => {
+            ShowMessage('Спасибо за вашу рецензию', 'positive');
+        };
+
+        store.subscribe('statusSendReview', this.sendReviewSuccess);
     }
 
     /**
@@ -111,6 +115,7 @@ export class FilmPage extends View {
         this.directorFilms?.componentWillUnmount();
         this.reviewStatistic?.componentWillUnmount();
         this.listReviews?.componentWillUnmount();
+        store.unsubscribe('statusSendReview', this.sendReviewSuccess);
     }
 }
 
@@ -124,10 +129,6 @@ const subscribeFilmPage = () => {
         filmPage.state.film.rating = `${filmPage.state.film.rating}.0`;
     }
     filmPage.render();
-};
-
-const sendReviewSuccess = () => {
-    ShowMessage('Спасибо за вашу рецензию', 'positive');
 };
 
 export const filmPage = new FilmPage({ rootNode: document.getElementById('root') });

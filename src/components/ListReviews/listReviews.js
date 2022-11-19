@@ -31,19 +31,23 @@ export class ListReviews extends Component {
         this.step = 3;
         this.offset = 0;
 
-        store.subscribe('reviews', () => {
+        this.subHandlerReviews = () => {
             this.state.reviews = store.getState('reviews');
             this.render();
 
             this.offset += this.step;
-        });
+        };
 
-        store.subscribe('userReview', () => {
+        store.subscribe('reviews', this.subHandlerReviews);
+
+        this.subHandlerUserReview = () => {
             this.state.userReview = store.getState('userReview');
             this.renderBegin();
 
             this.offset++;
-        });
+        };
+
+        store.subscribe('userReview', this.subHandlerUserReview);
     }
 
     /**
@@ -192,5 +196,8 @@ export class ListReviews extends Component {
         }
         btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
+
+        store.unsubscribe('reviews', this.subHandlerReviews);
+        store.unsubscribe('userReview', this.subHandlerUserReview);
     }
 }

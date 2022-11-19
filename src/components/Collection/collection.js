@@ -23,10 +23,12 @@ export class Collection extends Component {
         this.nameLocation = nameLocation;
         this.location = this.rootNode.querySelector(`.${nameLocation}`);
 
-        store.subscribe(`collection-${nameLocation}`, () => {
+        this.subHandler = () => {
             this.state.collection = store.getState(`collection-${nameLocation}`);
             this.render();
-        });
+        };
+
+        store.subscribe(`collection-${nameLocation}`, this.subHandler);
     }
 
     /**
@@ -86,6 +88,7 @@ export class Collection extends Component {
     componentWillUnmount() {
         const slider = this.location.querySelector('.js-collection__container');
         slider.removeEventListener('click', this.handlerSlider);
+        store.unsubscribe(`collection-${nameLocation}`, this.subHandler);
     }
 
     /**
