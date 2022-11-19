@@ -3,6 +3,7 @@ import templateUserbar from '@components/Userbar/userbar.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionLogout } from '@store/actionCreater/userActions';
+import { isMobile } from '@/config/config.js';
 
 /**
 * Отрисовывает выпадающее меню.
@@ -47,6 +48,7 @@ export class Userbar extends Component {
             document.body.querySelector('.js-header').remove();
 
             const props = {
+                isMobile,
                 userbar: templateUserbar(),
                 ...user,
             };
