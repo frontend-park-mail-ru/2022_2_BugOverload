@@ -17,7 +17,7 @@ export class AboutFilm extends Component {
      * Cохраняет переданные параметры props через наследуемый компонент
      * @param {Object} - сохраняемые начальные параметры
      */
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.data = props.film;
         this.location = this.rootNode.querySelector('.js-film-page__about');
@@ -63,7 +63,7 @@ export class AboutFilm extends Component {
         }
 
         const menu = new SaveToCollectionMenu('js-place-save-to-collection');
-        this.handlerOpenMenu = function (e) {
+        this.handlerOpenMenu = function (e: Event) {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowMessage('Вы должны быть авторизованы', 'negative');
@@ -79,7 +79,7 @@ export class AboutFilm extends Component {
             return;
         }
 
-        this.handlerBookmark = function (e) {
+        this.handlerBookmark = function (e: Event) {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowMessage('Вы должны быть авторизованы', 'negative');
@@ -95,7 +95,7 @@ export class AboutFilm extends Component {
             return;
         }
 
-        this.handlerTrailer = function (e) {
+        this.handlerTrailer = function (e: Event) {
             e.preventDefault();
             ShowMessage('Просмотр трейлера пока не доступен', 'negative');
         };

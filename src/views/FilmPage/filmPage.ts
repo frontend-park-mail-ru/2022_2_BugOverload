@@ -1,4 +1,4 @@
-import { AboutFilm } from '@components/AboutFilm/aboutFilm.js';
+import { AboutFilm } from '@components/AboutFilm/aboutFilm';
 import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm.js';
 import { ROOT } from '@config/config';
 import { Collection } from '@components/Collection/collection.js';
@@ -110,7 +110,7 @@ export class FilmPage extends View {
         this.state.reviews = null;
         this.listReviews?.componentWillUnmount();
         this.aboutFilm?.componentWillUnmount();
-        this.menuInfoFilm?.componentWillUnmount();
+        this.menuInfoFilm?.unsubscribe();
         this.likelyFilms?.componentWillUnmount();
         this.directorFilms?.componentWillUnmount();
         this.reviewStatistic?.componentWillUnmount();

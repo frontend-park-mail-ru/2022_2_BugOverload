@@ -4,7 +4,7 @@ import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
 import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component';
 import {
-    decoreDuration, decoreListPersons, decoreListItems, decoreCountActors,
+    decoreDuration, decoreListPersons, decoreListItems, decoreCountActors, decoreBudget,
 } from '@utils/decorationData';
 
 /**
@@ -145,5 +145,11 @@ export class MenuInfoFilm extends Component {
             return;
         }
         btnDetails.removeEventListener('click', this.handlerSwitchToDetails);
+    }
+
+    unsubscribe() {
+        this.componentWillUnmount();
+        // this.description.unsubscribe();
+        this.rating.unsubscribe();
     }
 }

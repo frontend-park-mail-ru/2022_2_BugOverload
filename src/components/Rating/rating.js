@@ -157,7 +157,10 @@ export class Rating extends Component {
             return;
         }
         form.removeEventListener('submit', this.handlerSubmit);
+    }
 
+    unsubscribe() {
+        this.componentWillUnmount();
         store.unsubscribe('rating', this.subHandlerRating);
         store.unsubscribe('statusRating', this.subHandlerStatusRating);
     }

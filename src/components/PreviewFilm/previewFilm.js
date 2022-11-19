@@ -51,7 +51,7 @@ export class PreviewFilm extends Component {
         this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
     }
 
-    componentWillUnmount() {
+    unsubscribe() {
         store.unsubscribe(`preview-${this.nameLocation}`, this.subHandler);
     }
 }
