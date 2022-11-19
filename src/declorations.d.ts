@@ -3,6 +3,8 @@ declare module "*.handlebars" {
     export default _;
 }
 
+declare const DOMAIN: string;
+
 interface anyObject{
     [key: string]: any
 }
@@ -44,10 +46,10 @@ interface ratingData extends anyObject{
 }
 
 interface author extends anyObject{
-    avatar :string;
-    count_reviews :number;
-    id :number;
-    nickname :string;
+    avatar: string;
+    count_reviews: number;
+    id: number;
+    nickname: string;
 }
 
 interface review extends anyObject{
@@ -57,4 +59,11 @@ interface review extends anyObject{
     create_time :string;
     name :string;
     type :string;
+}
+
+interface actor extends anyObject {
+    avatar: string,
+    character: string;
+    id: number;
+    name: string;
 }

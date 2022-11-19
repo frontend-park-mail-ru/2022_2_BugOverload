@@ -9,7 +9,7 @@ import {
 
 import {
     decoreCountScores,
-} from '@utils/decorationData.js';
+} from '@utils/decorationData';
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.

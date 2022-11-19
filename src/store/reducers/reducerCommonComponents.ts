@@ -1,5 +1,5 @@
 import { Ajax } from '@utils/ajax';
-import { API } from '@config/config.js';
+import { API } from '@config/config';
 import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 
 class ReducerCommonComponents {

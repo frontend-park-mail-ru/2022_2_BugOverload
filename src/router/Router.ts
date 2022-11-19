@@ -1,9 +1,9 @@
-import { routes, ROOT } from '@config/config.js';
+import { routes, ROOT } from '@config/config';
 import { hrefRegExp } from '@config/regExp';
 import { ShowMessage } from '@components/Message/message.js';
 import { notFoundPage } from '@router/Page404/page404';
 
-interface Class extends anyObject { 
+interface Class extends anyObject {
     render :Function;
     componentWillUnmount :Function;
 }
@@ -31,7 +31,7 @@ class Router {
      */
     constructor(root :Element) {
         this.root = root;
-        this.mapViews = new Map(); 
+        this.mapViews = new Map();
         this.cachedUrls = [];
     }
 
@@ -101,7 +101,7 @@ class Router {
 
             const prevView = this.mapViews.get(this.prevUrl);
 
-            if(prevView && 
+            if(prevView &&
                 Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
                     .includes('componentWillUnmount')) {
                 prevView.componentWillUnmount();
@@ -208,7 +208,7 @@ class Router {
             } else {
                 window.history.pushState(props, null, location + path);
             }
-            this.prevUrl = path; 
+            this.prevUrl = path;
         }
 
         this.cache();

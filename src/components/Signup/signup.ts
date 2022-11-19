@@ -6,7 +6,7 @@ import { Component } from '@components/Component';
 import { Modal, exit } from '@components/Modal/modal';
 import { store } from '@store/Store';
 import { actionRegister } from '@store/actionCreater/userActions';
-import { responsStatuses } from '@config/config.js';
+import { responsStatuses } from '@config/config';
 
 export interface Signup {
     state: {
@@ -184,7 +184,7 @@ export class Signup extends Component {
         const pathBeforModal = window.localStorage.getItem('pathBeforModal');
 
         const jsModalBackground = document.body.querySelector('.js-modal__background') as HTMLElement;
-            
+
         jsModalBackground.dataset.section = pathBeforModal;
     }
 

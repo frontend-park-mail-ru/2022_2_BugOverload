@@ -7,10 +7,10 @@ import { store } from '@store/Store';
 * Подписывается на измнение state infoReviews
 */
 export class ReviewStatistic extends Component {
-    constructor(film) {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            film,
+            film: props.film,
             statusSendReview: null,
         };
         this.location = this.rootNode.querySelector('.js-reviews-statistic');

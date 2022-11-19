@@ -1,5 +1,5 @@
 import template from '@components/DetailsFilm/detailsFilm.handlebars';
-import { API } from '@config/config.js';
+import { API } from '@config/config';
 
 /**
 * Отрисовывает подробную информацию о фильме.

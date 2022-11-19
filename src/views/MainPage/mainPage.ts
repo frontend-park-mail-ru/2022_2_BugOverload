@@ -1,6 +1,6 @@
 import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
 import { Collection } from '@components/Collection/collection.js';
-import { ROOT } from '@config/config.js';
+import { ROOT } from '@config/config';
 import { View } from '@views/View';
 import template from '@views/MainPage/MainPage.handlebars';
 
@@ -18,14 +18,20 @@ class MainPage extends View {
 
         ROOT.insertAdjacentHTML('beforeend', template());
 
-        const previewFilm = new PreviewFilm('js-main-page-preview-film');
-        previewFilm.init();
+        this.previewFilm = new PreviewFilm('js-main-page-preview-film');
+        this.previewFilm.init();
 
-        const collectionPopular = new Collection('js-main-page-collection-popular');
-        collectionPopular.init();
+        this.collectionPopular = new Collection('js-main-page-collection-popular');
+        this.collectionPopular.init();
 
-        const collectionCinemaToday = new Collection('js-main-page-collection-in_cinema');
-        collectionCinemaToday.init();
+        this.collectionCinemaToday = new Collection('js-main-page-collection-in_cinema');
+        this.collectionCinemaToday.init();
+    }
+
+    componentWillUnmount() {
+        this.previewFilm?.componentWillUnmount();
+        this.collectionPopular?.componentWillUnmount();
+        this.collectionCinemaToday?.componentWillUnmount();
     }
 }
 

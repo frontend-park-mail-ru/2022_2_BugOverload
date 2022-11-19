@@ -1,5 +1,5 @@
 import { Ajax } from '@utils/ajax';
-import { API, responsStatuses } from '@config/config.js';
+import { API, responsStatuses } from '@config/config';
 import { mockPerson } from '@store/reducers/mockData';
 
 interface personResponse{

@@ -86,7 +86,7 @@ $margin-left-login-btn: 72px;
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: $margin-left-login-btn - $margin-left-login-btn/3;
+    margin-left: calc($margin-left-login-btn - $margin-left-login-btn/3);
   }
 
   &__avatar {

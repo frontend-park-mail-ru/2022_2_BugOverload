@@ -2,7 +2,7 @@ import { Login } from '@components/Login/login';
 import { Signup } from '@components/Signup/signup';
 import { mainPage } from '@views/MainPage/mainPage';
 import { profile } from '@views/UserProfile/userProfile';
-import { filmPage } from '@views/FilmPage/filmPage.js';
+import { filmPage } from '@views/FilmPage/filmPage';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 
@@ -13,31 +13,31 @@ const randomMy = () => i++;
 
 export const API = {
     img: {
-        poster_hor(key) {
+        poster_hor(key: string) {
             if (key === 'default') {
                 return '/assets/img/default/noFilmHor.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=film_poster_hor&key=${key}`;
         },
-        poster_ver(key) {
+        poster_ver(key: string) {
             if (key === 'default') {
                 return '/assets/img/default/noFilm.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=film_poster_ver&key=${key}`;
         },
-        user_avatar(key) {
+        user_avatar(key: string) {
             if (key === 'default') {
                 return '/assets/img/default/noUser.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=${key}&rnd=${randomMy()}`;
         },
-        person_avatar(key) {
+        person_avatar(key: string) {
             if (key === 'default') {
                 return '/assets/img/default/noPerson.webp';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_avatar&key=${key}`;
         },
-        person_image(id, image) {
+        person_image(id: number, image: string) {
             if (id === 0) {
                 return '/assets/img/default/noPersonImg.webp';
             }
@@ -54,32 +54,32 @@ export const API = {
     signup: `${PROTOCOL}://${DOMAIN}/api/v1/auth/signup`,
     logout: `${PROTOCOL}://${DOMAIN}/api/v1/auth/logout`,
 
-    collection(tag, countFilms = 15, delimiter = 10) {
+    collection(tag: string, countFilms: number = 15, delimiter: number = 10) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/collection/${tag}?count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,
-    film(id, countImages = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
-    metaFilm(id) {
+    film(id: number, countImages: number = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
+    metaFilm(id: number) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/user_activity`;
     },
 
-    rate(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
-    del_rate(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
+    rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
+    del_rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
 
-    reviews(id, count, offset) {
+    reviews(id: number, count: number, offset: number) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
     },
-    send_review(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
+    send_review(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/review/new`; },
     settings() {
         const rand = randomMy();
         return `${PROTOCOL}://${DOMAIN}/api/v1/user/settings?rnd=${rand}`;
     },
-    person(id, numberPhotos) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
+    person(id: number, numberPhotos: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
-    publicProfile(id) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
+    publicProfile(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 };
 
 export const responsStatuses = {

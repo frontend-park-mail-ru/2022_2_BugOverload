@@ -2,7 +2,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetPreviewData } from '@actions/commonComponentsActions';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-import { API } from '@config/config.js';
+import { API } from '@config/config';
 
 /**
 * Отображает фильм как рекомендацию на главной странице

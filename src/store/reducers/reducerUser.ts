@@ -1,7 +1,7 @@
 import { Ajax } from '@utils/ajax';
-import { getDateNow } from '@utils/common.js';
-import { API, responsStatuses } from '@config/config.js';
-import { decoreDate } from '@utils/decorationData.js';
+import { getDateNow } from '@utils/common';
+import { API, responsStatuses } from '@config/config';
+import { decoreDate } from '@utils/decorationData';
 
 interface userResponse{
     status: number;

@@ -1,6 +1,6 @@
 import { AboutFilm } from '@components/AboutFilm/aboutFilm.js';
 import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm.js';
-import { ROOT } from '@config/config.js';
+import { ROOT } from '@config/config';
 import { Collection } from '@components/Collection/collection.js';
 import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
@@ -15,7 +15,7 @@ import { View } from '@views/View';
 *
 */
 export class FilmPage extends View {
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.state = {
             id: null,
@@ -32,7 +32,7 @@ export class FilmPage extends View {
     * @param {number} id - уникальный идентификатор фильма.
     * Используется при первом заходе на страницу
     */
-    render(id = null) {
+    render(id?:number) {
         if (id) {
             this.state.id = id;
         }
@@ -64,29 +64,30 @@ export class FilmPage extends View {
         }
 
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
-        const aboutFilm = new AboutFilm({
+        this.aboutFilm = new AboutFilm({
             rootNode: this.rootNode,
             film: this.state.film,
         });
-        aboutFilm.render();
+        this.aboutFilm.render();
 
-        const menuInfoFilm = new MenuInfoFilm({
+        this.menuInfoFilm = new MenuInfoFilm({
             rootNode: this.rootNode,
             film: this.state.film,
         });
-        menuInfoFilm.render();
-        menuInfoFilm.componentDidMount();
+        this.menuInfoFilm.render();
+        this.menuInfoFilm.componentDidMount();
 
-        const likelyFilms = new Collection('js-film-page-collection-popular');
-        likelyFilms.init();
+        this.likelyFilms = new Collection('js-film-page-collection-popular');
+        this.likelyFilms.init();
 
-        const directorFilms = new Collection('js-film-page-collection-in_cinema');
-        directorFilms.init();
+        this.directorFilms = new Collection('js-film-page-collection-in_cinema');
+        this.directorFilms.init();
 
-        const reviewStatistic = new ReviewStatistic(this.state.film, {
+        this.reviewStatistic = new ReviewStatistic({
             rootNode: this.rootNode,
+            film: this.state.film,
         });
-        reviewStatistic.render();
+        this.reviewStatistic.render();
 
         this.listReviews = new ListReviews({
             rootNode: this.rootNode,
@@ -103,6 +104,12 @@ export class FilmPage extends View {
         this.state.id = null;
         this.state.film = null;
         this.state.reviews = null;
+        this.listReviews?.componentWillUnmount();
+        this.aboutFilm?.componentWillUnmount();
+        this.menuInfoFilm?.componentWillUnmount();
+        this.likelyFilms?.componentWillUnmount();
+        this.directorFilms?.componentWillUnmount();
+        this.reviewStatistic?.componentWillUnmount();
         this.listReviews?.componentWillUnmount();
     }
 }

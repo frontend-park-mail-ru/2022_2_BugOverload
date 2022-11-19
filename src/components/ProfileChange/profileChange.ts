@@ -8,7 +8,7 @@ import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid';
 import { store } from '@store/Store';
-import { responsStatuses } from '@config/config.js';
+import { responsStatuses } from '@config/config';
 import { ShowMessage } from '@components/Message/message.js';
 
 export interface ProfileChange {
@@ -22,7 +22,7 @@ export interface ProfileChange {
 /**
 * Отрисовывает форму изменения пользовательских данных.
 * Прокидывает actions в стору для отправки новых данных,
-* также, после успеш подписывается на статус запроса, для правильного рендера ошибки 
+* также, после успеш подписывается на статус запроса, для правильного рендера ошибки
 *
 */
 export class ProfileChange extends Component {

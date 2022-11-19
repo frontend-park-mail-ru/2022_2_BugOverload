@@ -5,8 +5,8 @@ import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message.js';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
-} from '@utils/decorationData.js';
-import { API } from '@config/config.js';
+} from '@utils/decorationData';
+import { API } from '@config/config';
 
 /**
 * Отрисовывает стилизованную общую информацию о фильме.

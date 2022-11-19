@@ -5,7 +5,7 @@ import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component';
 import {
     decoreDuration, decoreListPersons, decoreListItems, decoreCountActors,
-} from '@utils/decorationData.js';
+} from '@utils/decorationData';
 
 /**
 * Отрисовывает меню для переключения описания фильма и полной информацией о нём
@@ -43,8 +43,15 @@ export class MenuInfoFilm extends Component {
             rating: this.filmData.rating,
             slogan: this.filmData.slogan,
             age_limit: this.filmData.age_limit,
-            box_office: this.filmData.box_office,
-            budget: this.filmData.budget,
+            box_office: decoreBudget(
+                this.filmData.box_office,
+                this.filmData.currency_budget,
+            ),
+            budget: decoreBudget(
+                this.filmData.budget,
+                this.filmData.currency_budget,
+            ),
+            currency_budget: this.filmData.currency_budget,
             count_seasons: this.filmData.count_seasons,
             count_ratings: this.filmData.count_ratings,
             count_main_actors: decoreCountActors(this.filmData.actors?.length),

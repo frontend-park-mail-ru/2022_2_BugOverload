@@ -6,7 +6,7 @@ import { store } from '@store/Store';
 import {
     renderError, removeError,
 } from '@utils/valid';
-import { decoreCountReviews } from '@utils/decorationData.js';
+import { decoreCountReviews } from '@utils/decorationData';
 
 /**
 * Отрисовывает форму для написания отзыва в виде модального окна

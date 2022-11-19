@@ -1,4 +1,4 @@
-export const decoreDuration = (minutes, mode = 'full') => {
+export const decoreDuration = (minutes: number, mode = 'full') => {
     if (!minutes) {
         return null;
     }
@@ -19,7 +19,7 @@ export const decoreDuration = (minutes, mode = 'full') => {
     return res;
 };
 
-export const decoreListPersons = (list, maxCount, sep = ',') => {
+export const decoreListPersons = (list: Array<actor>, maxCount: number, sep = ',') => {
     if (!list) {
         return null;
     }
@@ -34,7 +34,7 @@ export const decoreListPersons = (list, maxCount, sep = ',') => {
     return newList;
 };
 
-export const decoreListItems = (list, maxCount) => {
+export const decoreListItems = (list: Array<string>, maxCount: number) => {
     if (!list) {
         return null;
     }
@@ -50,7 +50,7 @@ export const decoreListItems = (list, maxCount) => {
     return newList;
 };
 
-export const decoreCountSeasons = (count) => {
+export const decoreCountSeasons = (count: number) => {
     if (!count) {
         return null;
     }
@@ -69,7 +69,7 @@ export const decoreCountSeasons = (count) => {
     return `${count} сезонов`;
 };
 
-export const decoreCountReviews = (count) => {
+export const decoreCountReviews = (count: number) => {
     if (!count) {
         return '0 рецензий';
     }
@@ -88,7 +88,7 @@ export const decoreCountReviews = (count) => {
     return `${count} рецензий`;
 };
 
-export const decoreCountActors = (count) => {
+export const decoreCountActors = (count: number) => {
     if (!count) {
         return '0 aктёров';
     }
@@ -107,7 +107,7 @@ export const decoreCountActors = (count) => {
     return `${count} aктёров`;
 };
 
-export const decoreCountScores = (count) => {
+export const decoreCountScores = (count: number) => {
     if (!count) {
         return 'нет оценок';
     }
@@ -126,11 +126,11 @@ export const decoreCountScores = (count) => {
     return `${count} оценок`;
 };
 
-export const decoreColorRating = (location, className, rating) => {
+export const decoreColorRating = (location: HTMLElement, className: string, rating: number) => {
     if (!location || !className) {
         return;
     }
-    const filmRating = location.querySelector(className);
+    const filmRating: HTMLElement = location.querySelector(className);
     if (!rating) {
         filmRating.remove();
         return;
@@ -149,17 +149,17 @@ export const decoreColorRating = (location, className, rating) => {
     filmRating.dataset.valueRating = 'negative';
 };
 
-export const decoreDate = (date) => {
+export const decoreDate = (date: string) => {
     if (!date) {
         return 'нет данных';
     }
 
     const newFormatDate = date.split(' ')[0].split('.').reverse();
-    newFormatDate[1] = getMonthName(newFormatDate[1]);
+    newFormatDate[1] = getMonthName(+newFormatDate[1]);
     return newFormatDate.join(' ');
 };
 
-const getMonthName = (numberMonth) => {
+const getMonthName = (numberMonth: number) => {
     if (!numberMonth || !isFinite(numberMonth) || numberMonth > 12 || numberMonth === 0) {
         return 'января';
     }
@@ -193,3 +193,21 @@ const getMonthName = (numberMonth) => {
         return 'января';
     }
 };
+
+export const decoreBudget = (budget: number, currency_budget: string = 'USD') => {
+    let newBudget = budget.toString().split("").reverse().join("").match(/.{1,3}/g).reverse().join(" ");
+
+    switch (currency_budget) {
+    case 'USD':
+        newBudget = `$ ${newBudget}`;
+        break;
+    case 'EUR':
+        newBudget = `€ ${newBudget}`;
+        break;
+    case 'RUB':
+        newBudget = `₽ ${newBudget}`;
+        break;
+    }
+
+    return newBudget;
+}

@@ -1,4 +1,4 @@
-import { ROOT } from '@config/config.js';
+import { ROOT } from '@config/config';
 import templateError from '@components/Message/errorMessage.handlebars';
 import templateSuccess from '@components/Message/successMessage.handlebars';
 
