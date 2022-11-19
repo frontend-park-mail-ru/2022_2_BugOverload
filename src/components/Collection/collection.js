@@ -88,7 +88,7 @@ export class Collection extends Component {
     componentWillUnmount() {
         const slider = this.location.querySelector('.js-collection__container');
         slider.removeEventListener('click', this.handlerSlider);
-        store.unsubscribe(`collection-${nameLocation}`, this.subHandler);
+        store.unsubscribe(`collection-${this.nameLocation}`, this.subHandler);
     }
 
     /**

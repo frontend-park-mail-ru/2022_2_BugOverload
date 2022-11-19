@@ -52,6 +52,6 @@ export class PreviewFilm extends Component {
     }
 
     componentWillUnmount() {
-        store.unsubscribe(`preview-${nameLocation}`, this.subHandler);
+        store.unsubscribe(`preview-${this.nameLocation}`, this.subHandler);
     }
 }
