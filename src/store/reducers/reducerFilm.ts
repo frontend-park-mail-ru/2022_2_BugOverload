@@ -95,6 +95,7 @@ class ReducerFilm {
             const countReviews = (store.getState('countReviews') || 0) + 1;
             const { body, name, type } = reviewData;
             return {
+                authorReview: response.body,
                 countReviews,
                 userReview: {
                     author: {
@@ -107,11 +108,7 @@ class ReducerFilm {
                     type,
                     create_time: getDateNow(),
                 },
-                statusSendReview: {  
-                    author: response.body, 
-                    status: response.status, 
-                    type 
-                },
+                statusSendReview: { status: response.status, type },
             };
         }
 

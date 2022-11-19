@@ -101,6 +101,7 @@ export class ListReviews extends Component {
             noContentContainer.remove();
         }
 
+        console.log(store.getState('authorReview'))
         this.state.userReview.author.id = store.getState('author')?.user_id;
 
         this.location.querySelector('.js-list-reviews__content-container')
