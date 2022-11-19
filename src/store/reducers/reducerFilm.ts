@@ -57,6 +57,7 @@ class ReducerFilm {
         if (response.status === responsStatuses.OK) {
             return {
                 listCollectionsUser: response.body.collections,
+                countScores: store.getState('film')?.count_ratings,
                 rating: {
                     value: response.body?.rating,
                     dateRating: response.body?.date_rating?.split(' ')[0].split('.').reverse().join('.'),
