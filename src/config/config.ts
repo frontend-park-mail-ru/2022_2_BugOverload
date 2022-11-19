@@ -108,4 +108,4 @@ export const routes = [
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
-window.navigator.userAgentData?.mobile;
+(window.navigator as any).userAgentData?.mobile;
