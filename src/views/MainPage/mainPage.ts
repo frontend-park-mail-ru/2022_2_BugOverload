@@ -29,10 +29,23 @@ class MainPage extends View {
     }
 
     componentWillUnmount() {
-        this.previewFilm?.componentWillUnmount();
-        this.collectionPopular?.componentWillUnmount();
-        this.collectionCinemaToday?.componentWillUnmount();
+        const components = [
+            this.previewFilm,
+            this.collectionPopular,
+            this.collectionCinemaToday,
+        ];
+
+        components.forEach((component) => {
+            if(component && checkUnmount(component)) {
+                component.componentWillUnmount();
+            }
+        })
     }
 }
 
 export const mainPage = new MainPage({ rootNode: document.getElementById('root') });
+
+const checkUnmount = (component :anyObject) => {
+    return Object.getOwnPropertyNames(Object.getPrototypeOf(component))
+    .includes('componentWillUnmount');
+}
