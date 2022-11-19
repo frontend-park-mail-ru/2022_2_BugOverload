@@ -33,11 +33,14 @@ class PublicProfile extends View {
      * Посылает запрос в Store, если нет информауии о пользователе, и рендерит страницу
      */
     render(id = null as number) {
-        super.render(id);
-
+        if (id) {
+            this.state.id = id;
+        }
         if (!this.state.id) {
             return;
         }
+
+        super.render();
 
         if (!this.state.user) {
             if (!this.state.isSubscribed) {
