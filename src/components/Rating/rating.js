@@ -29,7 +29,7 @@ export class Rating extends Component {
 
         this.subHandlerRating = () => {
             this.state.rating = store.getState('rating');
-            this.state.countScores = store.getState('countScores');
+            this.state.countScores = store.getState('countScores') || props.film.count_ratings;
             console.log(`this.state.countScores: ${this.state.countScores}`);
 
             this.render();
