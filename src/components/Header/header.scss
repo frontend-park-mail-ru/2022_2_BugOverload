@@ -13,6 +13,11 @@ $margin-left-login-btn: 72px;
   width: 100%;
   z-index: 5;
 
+  &__menu-mobile {
+    margin-left: var(--standart-margin);
+    min-width: 35px;
+  }
+
   &__logo {
     white-space: nowrap;
     margin-right: 20px;

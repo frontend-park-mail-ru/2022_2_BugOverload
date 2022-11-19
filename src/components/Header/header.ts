@@ -3,6 +3,7 @@ import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionAuth } from '@store/actionCreater/userActions';
+import { isMobile } from '@/config/config.js';
 
 export interface Header {
     state: {
@@ -41,7 +42,12 @@ export class Header extends Component {
             header.remove();
         }
 
-        this.rootNode.insertAdjacentHTML('afterbegin', template(this.state.user));
+        this.rootNode.insertAdjacentHTML('afterbegin', template(
+            Object.assign(
+                { isMobile },
+                this.state.user,
+            )
+        ));
 
         if (this.state.user) {
             const userbar = new Userbar({ rootNode: this.rootNode });
