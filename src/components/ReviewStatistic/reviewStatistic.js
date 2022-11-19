@@ -31,6 +31,10 @@ export class ReviewStatistic extends Component {
             positive: this.state.film.count_positive_reviews || 0,
         }));
     }
+
+    unsubscribe() {
+        store.unsubscribe('statusSendReview', updateInfo.bind(this));
+    }
 }
 
 function updateInfo() {

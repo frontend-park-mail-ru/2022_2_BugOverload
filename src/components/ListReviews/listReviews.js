@@ -196,7 +196,10 @@ export class ListReviews extends Component {
         }
         btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
+    }
 
+    unsubscribe() {
+        this.componentWillUnmount();
         store.unsubscribe('reviews', this.subHandlerReviews);
         store.unsubscribe('userReview', this.subHandlerUserReview);
     }

@@ -108,13 +108,12 @@ export class FilmPage extends View {
         this.state.id = null;
         this.state.film = null;
         this.state.reviews = null;
-        this.listReviews?.componentWillUnmount();
+        this.listReviews?.unsubscribe();
         this.aboutFilm?.componentWillUnmount();
         this.menuInfoFilm?.unsubscribe();
-        this.likelyFilms?.componentWillUnmount();
-        this.directorFilms?.componentWillUnmount();
-        this.reviewStatistic?.componentWillUnmount();
-        this.listReviews?.componentWillUnmount();
+        this.likelyFilms?.unsubscribe();
+        this.directorFilms?.unsubscribe();
+        this.reviewStatistic?.unsubscribe();
         store.unsubscribe('statusSendReview', this.sendReviewSuccess);
     }
 }

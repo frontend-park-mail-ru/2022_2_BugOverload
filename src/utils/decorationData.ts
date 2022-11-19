@@ -195,6 +195,10 @@ const getMonthName = (numberMonth: number) => {
 };
 
 export const decoreBudget = (budget: number, currency_budget: string = 'USD') => {
+    if (!budget) {
+        return null;
+    }
+
     let newBudget = budget.toString().split("").reverse().join("").match(/.{1,3}/g).reverse().join(" ");
 
     switch (currency_budget) {
