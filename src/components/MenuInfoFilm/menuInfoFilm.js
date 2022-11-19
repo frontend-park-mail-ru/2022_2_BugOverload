@@ -149,7 +149,6 @@ export class MenuInfoFilm extends Component {
 
     unsubscribe() {
         this.componentWillUnmount();
-        // this.description.unsubscribe();
         this.rating.unsubscribe();
     }
 }

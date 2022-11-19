@@ -38,12 +38,6 @@ class MainPage extends View {
         this.previewFilm?.unsubscribe();
         this.collectionPopular?.unsubscribe();
         this.collectionCinemaToday?.unsubscribe();
-        // components.forEach((component) => {
-        //     if(component && checkUnmount(component)) {
-        //         component.componentWillUnmount();
-        //     }
-        // })
-
     }
 }
 
