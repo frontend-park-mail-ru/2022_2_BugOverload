@@ -11,12 +11,12 @@ interface anyObject{
 
 //common types
 interface collectionParams extends anyObject {
-    tag :string;
-    name :string;
+    tag: string;
+    name: string;
 }
 
 interface componentProps extends anyObject {
-    rootNode :HTMLElement;
+    rootNode: HTMLElement;
 }
 
 //user types
@@ -35,30 +35,66 @@ interface userInfo extends anyObject {
 }
 
 //person types
-interface person extends anyObject{
+interface person extends anyObject {
     avatar: string;
     images: Array<string>;
 }
 
 //film types
-interface ratingData extends anyObject{
-    score :number;
+interface film extends anyObject {
+    end_year: number,
+    genres: Array<string>,
+    id: number,
+    name: string,
+    poster_ver: string,
+    prod_year: number,
+    rating: number,
 }
 
-interface author extends anyObject{
+interface fullDetails extends anyObject {
+    prod_year: number,
+    end_year?: number,
+    actors: Array<actor>,
+    directors: Array<actor>,
+    composers?: Array<actor>,
+    operators?: Array<actor>,
+    montage?: Array<actor>,
+    writers?: Array<actor>,
+    producers?: Array<actor>,
+    rating: number,
+    slogan?: string,
+    age_limit?: string,
+    box_office?: string,
+    budget?: string,
+    currency_budget?: string,
+    count_seasons?: string,
+    count_ratings: string,
+    count_main_actors: string,
+    count_actors?: string,
+    duration?: string,
+    genres: Array<string>,
+    prod_companies: Array<string>,
+    prod_countries: Array<string>,
+}
+
+interface ratingData extends anyObject {
+    score: number;
+}
+
+interface author extends anyObject {
     avatar: string;
     count_reviews: number;
     id: number;
     nickname: string;
 }
 
-interface review extends anyObject{
+interface review extends anyObject {
     author :author;
     body: string;
-    count_likes :number;
-    create_time :string;
-    name :string;
-    type :string;
+    count_likes: number;
+    create_time: string;
+    name: string;
+    type: string;
 }
 
 interface actor extends anyObject {

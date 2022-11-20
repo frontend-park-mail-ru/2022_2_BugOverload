@@ -1,5 +1,5 @@
 import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
-import { Collection } from '@components/Collection/collection.js';
+import { Collection } from '@components/Collection/collection';
 import { ROOT } from '@config/config';
 import { View } from '@views/View';
 import template from '@views/MainPage/MainPage.handlebars';

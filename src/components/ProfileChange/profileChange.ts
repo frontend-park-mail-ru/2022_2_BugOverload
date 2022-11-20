@@ -9,7 +9,7 @@ import {
 } from '@utils/valid';
 import { store } from '@store/Store';
 import { responsStatuses } from '@config/config';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 
 export interface ProfileChange {
     state: {

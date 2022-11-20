@@ -2,7 +2,7 @@ import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview.js';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import {
     actionRate, actionDeleteRate, actionGetMetaDataFilm,
 } from '@actions/filmActions';

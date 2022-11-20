@@ -1,5 +1,5 @@
 import { Review } from '@components/Review/review.js';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import template from '@components/ListReviews/listReviews.handlebars';
 import { store } from '@store/Store';
 import { Component } from '@components/Component';

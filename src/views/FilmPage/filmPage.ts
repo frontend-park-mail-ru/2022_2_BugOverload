@@ -1,12 +1,12 @@
 import { AboutFilm } from '@components/AboutFilm/aboutFilm';
-import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm.js';
+import { MenuInfoFilm } from '@components/MenuInfoFilm/menuInfoFilm';
 import { ROOT } from '@config/config';
-import { Collection } from '@components/Collection/collection.js';
+import { Collection } from '@components/Collection/collection';
 import { ListReviews } from '@components/ListReviews/listReviews.js';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic.js';
 import { store } from '@store/Store';
 import { actionGetFilmData } from '@actions/filmActions';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 

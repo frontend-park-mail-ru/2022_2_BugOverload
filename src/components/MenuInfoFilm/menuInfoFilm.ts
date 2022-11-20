@@ -1,6 +1,6 @@
 import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
-import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm.js';
-import { DetailsFilm } from '@components/DetailsFilm/detailsFilm.js';
+import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm';
+import { DetailsFilm } from '@components/DetailsFilm/detailsFilm';
 import { Rating } from '@components/Rating/rating.js';
 import { Component } from '@components/Component';
 import {
@@ -16,7 +16,7 @@ export class MenuInfoFilm extends Component {
      * Cохраняет переданные параметры props через наследуемый компонент
      * @param {Object} - сохраняемые начальные параметры
      */
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.menuState = {
             description: 1,
@@ -29,7 +29,7 @@ export class MenuInfoFilm extends Component {
         this.description = new DescriptionFilm(this.filmData.description);
         this.rating = new Rating(props);
 
-        const fullDetails = {
+        const fullDetails: fullDetails = {
             [`type_${this.filmData.type}`]: true,
             prod_year: this.filmData.prod_year,
             end_year: this.filmData.end_year,
@@ -67,7 +67,7 @@ export class MenuInfoFilm extends Component {
         this.state = this.menuState.description;
     }
 
-    render(state = this.state) {
+    render(state:1|2 = this.state) {
         if (!this.location) {
             return;
         }
@@ -77,7 +77,7 @@ export class MenuInfoFilm extends Component {
         this.switchState(state);
     }
 
-    switchState(state) {
+    switchState(state:1|2) {
         switch (state) {
         case this.menuState.description:
             this.details.remove();
@@ -110,7 +110,7 @@ export class MenuInfoFilm extends Component {
         if (!btnDesciption) {
             return;
         }
-        this.handlerSwitchToDesription = (function (event) {
+        this.handlerSwitchToDesription = (function (event: Event) {
             event.preventDefault();
             if (this.location.querySelector('.js-menu-info-film__item-description').dataset.menuInfoFilmItemActive) {
                 return;
@@ -123,7 +123,7 @@ export class MenuInfoFilm extends Component {
         if (!btnDetails) {
             return;
         }
-        this.handlerSwitchToDetails = (function (event) {
+        this.handlerSwitchToDetails = (function (event: Event) {
             event.preventDefault();
             if (this.location.querySelector('.js-menu-info-film__item-details').dataset.menuInfoFilmItemActive) {
                 return;

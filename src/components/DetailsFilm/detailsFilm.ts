@@ -1,19 +1,21 @@
 import template from '@components/DetailsFilm/detailsFilm.handlebars';
 import { API } from '@config/config';
+import { Component } from '@components/Component';
 
 /**
 * Отрисовывает подробную информацию о фильме.
 */
-export class DetailsFilm {
+export class DetailsFilm extends Component {
     /**
      * Cохраняет переданные параметры props через наследуемый компонент.
      * @param {Object} information - информация о фильме.
      */
-    constructor(information = {}) {
+    constructor(information: fullDetails) {
+        super();
         this.information = information;
         if (this.information.actors) {
             this.information.actors
-                .forEach((person) => { person.avatar = API.img.person_avatar(person.avatar); });
+                .forEach((person: actor) => { person.avatar = API.img.person_avatar(person.avatar); });
         }
         this.location = document.querySelector('.js-film-page__details');
     }

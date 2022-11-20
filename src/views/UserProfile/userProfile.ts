@@ -4,7 +4,7 @@ import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars'
 import { store } from '@store/Store';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
 import { ProfileChange } from '@components/ProfileChange/profileChange';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import { hrefRegExp } from '@config/regExp';
 
 interface UserProfile{

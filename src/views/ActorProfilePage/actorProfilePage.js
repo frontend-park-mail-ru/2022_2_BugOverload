@@ -1,5 +1,5 @@
 import { View } from '@views/View';
-import { Collection } from '@components/Collection/collection.js';
+import { Collection } from '@components/Collection/collection';
 import { Film } from '@components/Film/film.js';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';

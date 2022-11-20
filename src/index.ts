@@ -1,6 +1,6 @@
 import { router } from '@router/Router';
 import '@/index.scss';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 
 router.start();
 

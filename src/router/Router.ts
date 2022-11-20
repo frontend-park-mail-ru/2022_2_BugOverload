@@ -1,6 +1,6 @@
 import { routes, ROOT } from '@config/config';
 import { hrefRegExp } from '@config/regExp';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import { notFoundPage } from '@router/Page404/page404';
 
 interface Class extends anyObject {

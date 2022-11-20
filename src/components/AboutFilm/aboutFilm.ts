@@ -2,7 +2,7 @@ import template from '@components/AboutFilm/aboutFilm.handlebars';
 import { SaveToCollectionMenu } from '@components/SaveToCollectionMenu/saveToCollectionMenu.js';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
 } from '@utils/decorationData';

@@ -15,7 +15,7 @@ export class Collection extends Component {
      * @param {string} nameLocation - сохраняет имя элемента,
      * соответствующее имени класса-контейнера на странице.
      */
-    constructor(nameLocation) {
+    constructor(nameLocation: string) {
         super();
         this.state = {
             collection: null,
@@ -48,7 +48,7 @@ export class Collection extends Component {
     * Достаёт из имени класса Dom-элемента тэг
     * @param {string} - имя класса Dom-элемента
     */
-    getTagFromName(name) {
+    getTagFromName(name: string) {
         const words = name.split('-');
         return words[words.length - 1];
     }
@@ -58,7 +58,7 @@ export class Collection extends Component {
      * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
      */
     render() {
-        const films = this.state.collection.films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
+        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
 
         let { name } = this.state.collection;
         if (name) {
@@ -74,7 +74,7 @@ export class Collection extends Component {
      * Навешивает обработчики на кнопки прокрутки коллекции
      */
     componentDidMount() {
-        const slider = this.location.querySelector('.js-collection__container');
+        const slider: HTMLElement = this.location.querySelector('.js-collection__container');
         if (!slider) {
             return;
         }
@@ -101,10 +101,10 @@ export class Collection extends Component {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    addHandlerSlider(slider) {
-        const btnRight = slider.querySelector('.js-collection__slider-button_right');
-        const btnLeft = slider.querySelector('.js-collection__slider-button_left');
-        const body = slider.querySelector('.js-collection__slider');
+    addHandlerSlider(slider: HTMLElement) {
+        const btnRight: HTMLElement = slider.querySelector('.js-collection__slider-button_right');
+        const btnLeft: HTMLElement = slider.querySelector('.js-collection__slider-button_left');
+        const body: HTMLElement = slider.querySelector('.js-collection__slider');
 
         const count = slider.querySelectorAll('.js-film').length;
 
@@ -128,7 +128,7 @@ export class Collection extends Component {
         let isHiddenRight = false;
         let isHiddenLeft = true;
 
-        this.handlerSlider = function (event) {
+        this.handlerSlider = function (event: Event) {
             if (event.target === btnRight.querySelector('img')) {
                 event.preventDefault();
                 if (isHiddenLeft) {
