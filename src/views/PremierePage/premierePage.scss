@@ -1,0 +1,26 @@
+.premiere-page {
+    // margin-top: 24px + 95px;
+    &__title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 24px + 95px;
+    }
+
+    &__title {
+        color: var(--main-color-text);
+        font-size: 40px;
+    }
+
+    &__title-description {
+        color: var(--secondary-color-text);
+        font-size: 22px;
+        margin-top: 24px;
+    }
+
+    &__content {
+        margin-top: 50px;
+    }
+}

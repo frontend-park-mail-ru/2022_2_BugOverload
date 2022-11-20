@@ -18,6 +18,7 @@ const handlers = [
     { type: 'deleteRate', methodStore: reducerFilm.deleteRate.bind(reducerFilm) },
     { type: 'getDataReviews', methodStore: reducerFilm.getDataReviews.bind(reducerFilm) },
     { type: 'sendReview', methodStore: reducerFilm.sendReview.bind(reducerFilm) },
+    { type: 'getPremieresData', methodStore: reducerFilm.getPremieresData.bind(reducerFilm) },
 
     { type: 'getCollectionData', methodStore: reducerCommonComponents.getCollectionData.bind(reducerCommonComponents) },
     { type: 'getPreviewData', methodStore: reducerCommonComponents.getPreviewData.bind(reducerCommonComponents) },

@@ -46,7 +46,7 @@ export class Collection extends Component {
 
     /**
     * Достаёт из имени класса Dom-элемента тэг
-    * @param {string} - имя класса Dom-элемента
+    * @param {string} name - имя класса Dom-элемента
     */
     getTagFromName(name: string) {
         const words = name.split('-');

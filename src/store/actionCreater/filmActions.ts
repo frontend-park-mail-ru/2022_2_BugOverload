@@ -20,7 +20,7 @@ export const actionGetMetaDataFilm = (filmID :number) => ({
     value: filmID,
 });
 
-export const actionGetDataReviews = (data :Array<review>) => ({
+export const actionGetDataReviews = (data: Array<review>) => ({
     type: 'getDataReviews',
     value: data,
 });
@@ -28,4 +28,8 @@ export const actionGetDataReviews = (data :Array<review>) => ({
 export const actionSendReview = (reviewData :review) => ({
     type: 'sendReview',
     value: reviewData,
+});
+
+export const actionGetPremieresData = () => ({
+    type: 'getPremieresData',
 });

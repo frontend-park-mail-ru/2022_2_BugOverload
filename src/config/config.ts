@@ -5,8 +5,10 @@ import { profile } from '@views/UserProfile/userProfile';
 import { filmPage } from '@views/FilmPage/filmPage';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
+import { premierePage } from '@views/PremierePage/premierePage';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+// const PROTOCOL = 'https';
 
 let i = 0;
 const randomMy = () => i++;
@@ -80,6 +82,8 @@ export const API = {
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
     publicProfile(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
+
+    premieres: `${PROTOCOL}://${DOMAIN}/api/v1/premieres`,
 };
 
 export const responsStatuses = {
@@ -105,6 +109,7 @@ export const routes = [
     { path: '/film/', view: filmPage },
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
+    { path: '/premieres/', view: premierePage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||

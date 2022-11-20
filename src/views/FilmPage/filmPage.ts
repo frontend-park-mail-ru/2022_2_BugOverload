@@ -46,7 +46,7 @@ export class FilmPage extends View {
         }
 
         super.render();
-        const filmPageElement = this.rootNode.querySelector('.film-page');
+        const filmPageElement = this.rootNode.querySelector('.js-film-page');
         if (filmPageElement) {
             filmPageElement.remove();
         }

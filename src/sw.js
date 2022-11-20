@@ -9,6 +9,7 @@ const whiteDynamicUrls = [
     '/api/v1/collection/popular',
     '/api/v1/collection/in_cinema',
     '/api/v1/recommendation',
+    // 'api/v1/premieres',
 ];
 
 const blackSearchUrls = [

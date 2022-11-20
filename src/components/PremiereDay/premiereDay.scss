@@ -1,0 +1,46 @@
+.premiere-day {
+    width: 100%;
+    &__container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-flow: column nowrap;
+        margin-top: 50px;
+
+    }
+
+    &__line {
+        border-bottom: 2px solid var(--secondary-color);
+        width: 100%;
+    }
+
+    &__date {
+        &-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 260px;
+            margin-top: 15px;
+        }
+
+        &-day {
+            color: var(--premier-date-color);
+            font-size: 64px;
+        }
+
+        &-month {
+            color: var(--premier-date-color);
+            font-size: 32px;
+            margin-left: 25px;
+        }
+    }
+
+    &__films-container {
+        margin-top: 35px;
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+

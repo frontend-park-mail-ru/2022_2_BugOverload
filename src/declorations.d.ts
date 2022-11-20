@@ -103,3 +103,17 @@ interface actor extends anyObject {
     id: number;
     name: string;
 }
+
+// premiere types
+interface filmPremiere extends anyObject {
+    id: number,
+    poster_hor: string,
+    name: string,
+    prod_date: string,
+    genres: Array<string>,
+    contry_prod: Array<string>,
+    directors: Array<string>,
+    duration: number,
+    rating: number,
+    description: string,
+}

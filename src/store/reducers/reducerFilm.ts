@@ -115,6 +115,84 @@ class ReducerFilm {
 
         return { statusSendReview: response.status };
     }
+
+    async getPremieresData() {
+        // let response;
+        // try {
+        //     response = await Ajax.get(API.premieres) as Response;
+        // } catch (e) {
+        //     return { premieres: mockPremieres() };
+        // }
+        // if (response.status === responsStatuses.OK) {
+            // return { premieres: response.body.films };
+        // }
+
+        // return { premieres: null };
+        console.log('success retun');
+        return { premieres: [
+            {
+                id: 12,
+                poster_hor: '12',
+                name: 'Дюна',
+                prod_date: '2022.10.23',
+                genres: ['name1', 'name2'],
+                contry_prod: ['name1', 'name2'],
+                directors: ['singleName'],
+                duration: 133,
+                rating: 7.6,
+                description: 'some long text'
+            },
+            {
+                id: 13,
+                poster_hor: '13',
+                name: 'Убить билла',
+                prod_date: '2022.10.23',
+                genres: ['name1', 'name2'],
+                contry_prod: ['name1', 'name2'],
+                directors: ['singleName'],
+                duration: 133,
+                rating: 7.6,
+                description: 'some long text'
+            },
+            {
+                id: 14,
+                poster_hor: '14',
+                name: 'Люцифер',
+                prod_date: '2022.10.25',
+                genres: ['name1', 'name2'],
+                contry_prod: ['name1', 'name2'],
+                directors: ['singleName'],
+                duration: 133,
+                rating: 7.6,
+                description: 'some long text'
+            },
+            {
+                id: 15,
+                poster_hor: '15',
+                name: 'Один дома',
+                prod_date: '2022.10.27',
+                genres: ['name1', 'name2'],
+                contry_prod: ['name1', 'name2'],
+                directors: ['singleName'],
+                duration: 133,
+                rating: 7.6,
+                description: 'some long text'
+            },
+            {
+                id: 16,
+                poster_hor: '16',
+                name: 'Душа',
+                prod_date: '2022.10.27',
+                genres: ['name1', 'name2'],
+                contry_prod: ['name1', 'name2'],
+                directors: ['singleName'],
+                duration: 133,
+                rating: 7.6,
+                description: 'some long text'
+            }
+
+        ]};
+    }
 }
 
 export const reducerFilm = new ReducerFilm();
