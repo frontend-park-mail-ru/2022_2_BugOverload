@@ -30,9 +30,7 @@ export class PremiereList extends Component {
         // Разделяем фильмы по дням. На каждую группу фильмов создаётся компонент
         // PremiereDay, который отрендерит и навесит обработчики на блок фильмов
         this.filmsData.forEach((film: filmPremiere, index: number, filmsData: Array<filmPremiere>) => {
-            console.log(`index ${index}`);
             const createBlock = () => {
-                console.log(`filmsByDay ${JSON.stringify(filmsByDay.slice(0))}`);
                 this.blocksDay.push(new PremiereDay({
                     nameLocation: 'js-premiere-list__container',
                     filmsData: filmsByDay.slice(0), // клонирование массива
@@ -40,7 +38,6 @@ export class PremiereList extends Component {
                 }));
 
                 this.blocksDay[this.blocksDay.length - 1].render();
-                this.blocksDay[this.blocksDay.length - 1].componentDidMount();
 
                 filmsByDay.length = 0; // очищение массива
             }
@@ -68,19 +65,5 @@ export class PremiereList extends Component {
                 createBlock();
             }
         });
-    }
-
-    remove() { //*
-    }
-
-    componentDidMount() {
-    }
-
-    componentWillUnmount() {
-        this.blocksDay.forEach((block: PremiereDay) => block.unsubscribe());
-    }
-
-    unsubscribe() {
-        this.componentWillUnmount();
     }
 }

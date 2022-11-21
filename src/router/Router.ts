@@ -81,10 +81,8 @@ class Router {
             if (target instanceof HTMLElement) {
                 if (target.dataset.section) {
                     const matchedHref = this.matchHref(target.dataset.section);
-                    console.log(`matchedHref: ${matchedHref}`);
                     if (this.mapViews.get(matchedHref[0])) {
                         e.preventDefault();
-                        console.log(`matchedHref[0]: ${matchedHref[0]}`);
                         this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true, refresh: false  });
                     }
                 }

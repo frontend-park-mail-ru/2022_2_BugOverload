@@ -24,7 +24,6 @@ export class PremierePage extends View {
     * Используется при первом заходе на страницу
     */
     render() {
-        console.log('1');
         const premierePageElement = this.rootNode.querySelector('.js-premiere-page');
         if (premierePageElement) {
             premierePageElement.remove();
@@ -46,14 +45,12 @@ export class PremierePage extends View {
             return;
         }
 
-        console.log('2');
         ROOT.insertAdjacentHTML('beforeend', template());
         const premiereList = new PremiereList({
             nameLocation: 'js-premiere-content',
             rootNode: this.rootNode,
             films: this.state.premieres,
         });
-        console.log('3');
 
         premiereList.render();
     }

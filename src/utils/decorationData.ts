@@ -41,12 +41,9 @@ export const decoreListItems = (list: Array<string>, maxCount: number) => {
 
     const newList = [];
     let i = 0;
-    console.log(JSON.stringify(list));
     for (; i < maxCount - 1 && i < list.length - 1; i++) {
-        console.log(`${list[i]}, ${i}--`);
         newList.push(`${list[i]},`);
     }
-    console.log(`${list[i]}, ${i}++`);
     newList.push(list[i]);
 
     return newList;
@@ -151,14 +148,16 @@ export const decoreColorRating = (location: HTMLElement, className: string, rati
     filmRating.dataset.valueRating = 'negative';
 };
 
-export const decoreDate = (date: string) => {
+export const decoreDate = (date: string, sep: string = ' ', decoreMonth = true) => {
     if (!date) {
         return 'нет данных';
     }
 
     const newFormatDate = date.split(' ')[0].split('.').reverse();
-    newFormatDate[1] = getMonthName(+newFormatDate[1]);
-    return newFormatDate.join(' ');
+    if (decoreMonth) {
+        newFormatDate[1] = getMonthName(+newFormatDate[1]);
+    }
+    return newFormatDate.join(sep);
 };
 
 const getMonthName = (numberMonth: number) => {
@@ -224,4 +223,34 @@ export const restrictText = (text: string, maxLength: number) => {
     }
 
     return text;
+}
+
+export const decoreDaysLeft = (date:string) => {
+    if (!date) {
+        return '';
+    }
+    const premiere = new Date(date);
+    const now = new Date();
+
+    const timeDiff = Math.abs(premiere.getTime() - now.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    if (diffDays < 0) {
+        return 'Премьера уже состоялась';
+    }
+    if (diffDays === 0) {
+        return `Премьера состоялась!`;
+    }
+
+    if (diffDays % 10 > 4 || (diffDays % 100 > 10 && diffDays % 100 < 20) || diffDays % 10 === 0) {
+        return `Осталось ${diffDays} дней`;
+    }
+
+    if (diffDays % 10 === 1) {
+        return `Уже завтра!`;
+    }
+    if (diffDays % 10 > 1 && diffDays % 10 <= 4) {
+        return `Осталось ${diffDays} дня`;
+    }
+
+    return `Осталось ${diffDays} дней`;
 }

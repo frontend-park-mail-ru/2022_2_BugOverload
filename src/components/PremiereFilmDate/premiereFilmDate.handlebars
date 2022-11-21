@@ -1,0 +1,10 @@
+<div class="premiere-film-date">
+    <div class="premiere-film-date__container">
+        <div class="premiere-film-date__row-container">
+            <div class="premiere-film-date__rating">{{rating}}</div>
+            <div class="premiere-film-date__icon-star"></div>
+            <div {{#if id}}data-section="/film/{{id}}/"{{/if}} class="premiere-film-date__button primary-btn-med">Купить билет</div>
+        </div>
+        <div class="premiere-film-date__description">{{description}}</div>
+    </div>
+</div>

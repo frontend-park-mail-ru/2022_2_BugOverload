@@ -1,6 +1,106 @@
+@mixin info-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+$poster-width: 120px;
+$poster-height: 170px;
+
 .premiere-film {
     max-width: 630px;
     min-width: 300px;
     width: 100%;
     margin-bottom: 35px;
+
+    &__container {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__poster-container {
+        display: flex;
+        position: relative;
+    }
+
+    &__film-container {
+        display: flex;
+    }
+
+    &__rating {
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        position: absolute;
+        font-size: 15px;
+        padding: 1px 6px 0;
+        width: 32px;
+        height: 20px;
+        top: 9px;
+        left: -9px;
+        border-radius: 4px;
+        color: var(--main-color-text);
+    }
+
+    &__poster {
+        display: block;
+        width: $poster-width;
+        height: $poster-height;
+        border-radius: 5px;
+        background-size: 120px;
+        transition: 0.12s linear;
+    }
+
+    &__blackout {
+        width: $poster-width;
+        height: $poster-height;
+        background-color: rgb(var(--blackout-color));
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: 0.12s linear;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    &__poster-container:hover &__poster {
+        background-size: 128px auto;
+        background-position: -4px -6px;
+        transition: 0.12s linear;
+    }
+
+    &__poster-container:hover &__blackout {
+        width: $poster-width;
+        height: $poster-height;
+        opacity: 0.3;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+    }
+
+    &__information {
+        @include info-flex;
+        margin-left: 25px;
+
+        &-main {
+            @include info-flex;
+            height: 60px;
+        }
+        &-production {
+            @include info-flex;
+            height: 35px;
+        }
+        &-duration {
+            @include info-flex;
+        }
+        &-item {
+            color: var(--secondary-color-text);
+            font-size: 12px;
+        }
+        &-title {
+            color: var(--main-color-text);
+            font-size: 15px;
+        }
+    }
 }
