@@ -111,7 +111,7 @@ interface filmPremiere extends anyObject {
     name: string,
     prod_date: string,
     genres: Array<string>,
-    contry_prod: Array<string>,
+    country_prod: Array<string>,
     directors: Array<string>,
     duration: number,
     rating: number,

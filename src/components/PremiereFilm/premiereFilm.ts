@@ -1,11 +1,11 @@
 import template from '@components/PremiereFilm/premiereFilm.handlebars';
 import { Component } from '@components/Component';
 import { API } from '@config/config';
-
 import {
-    decoreCountScores,
+    decoreListItems, restrictText, decoreDuration,
 } from '@utils/decorationData';
 
+const maxLengthDescription = 170;
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.
@@ -17,6 +17,12 @@ export class PremiereFilm extends Component {
         const film = template({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
+            year_prod: filmData.prod_date.split('.')[0],
+            genres: decoreListItems(filmData.genres, 2),
+            directors: `реж. ${filmData.directors[0]}`,
+            description: restrictText(filmData.description, maxLengthDescription),
+            duration: decoreDuration(filmData.duration),
+            countries: decoreListItems(filmData.country_prod, 2),
         });
 
         const div = document.createElement('div');

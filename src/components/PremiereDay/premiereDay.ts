@@ -1,6 +1,7 @@
 import template from '@components/PremiereDay/premiereDay.handlebars';
 import { Component } from '@components/Component';
 import { PremiereFilm } from '@components/PremiereFilm/premiereFilm';
+import { decoreDate } from '@utils/decorationData';
 
 /**
 * Рейтинг фильма.
@@ -30,7 +31,13 @@ export class PremiereDay extends Component {
         const films = this.filmsData
             .reduce((res: string, filmData: filmPremiere) => res + PremiereFilm.createFilmPremiere(filmData), '');
         console.log(template(films));
-        this.location.insertAdjacentHTML('beforeend', template({films}));
+        const date: Array<string> = decoreDate(this.filmsData[0].prod_date).split(' ');
+        console.log(`date: ${date}`);
+        this.location.insertAdjacentHTML('beforeend', template({
+            films,
+            dateDay: date[0],
+            dateMonth: date[1][0].toUpperCase() + date[1].slice(1),
+        }));
         // this.componentDidMount();
     }
 

@@ -41,10 +41,12 @@ export const decoreListItems = (list: Array<string>, maxCount: number) => {
 
     const newList = [];
     let i = 0;
-    for (; i < maxCount - 1 && i < list.length - 1; ++i) {
-        newList.push(list[i]);
-        newList[i] += ',';
+    console.log(JSON.stringify(list));
+    for (; i < maxCount - 1 && i < list.length - 1; i++) {
+        console.log(`${list[i]}, ${i}--`);
+        newList.push(`${list[i]},`);
     }
+    console.log(`${list[i]}, ${i}++`);
     newList.push(list[i]);
 
     return newList;
@@ -214,4 +216,12 @@ export const decoreBudget = (budget: number, currency_budget: string = 'USD') =>
     }
 
     return newBudget;
+}
+
+export const restrictText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+        return `${text.slice(0, maxLength)} ...`;
+    }
+
+    return text;
 }
