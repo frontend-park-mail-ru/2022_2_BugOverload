@@ -1,11 +1,11 @@
-import { View } from '@views/View.js';
-import { Collection } from '@components/Collection/collection.js';
+import { View } from '@views/View';
+import { Collection } from '@components/Collection/collection';
 import { Film } from '@components/Film/film.js';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
 import templateCollection from '@components/Collection/collection.handlebars';
-import { store } from '@store/Store.js';
-import { actionGetActor } from '@store/actionCreater/actorActions.js';
+import { store } from '@store/Store';
+import { actionGetActor } from '@store/actionCreater/actorActions';
 
 /**
  * Отрисовывает страницу актера, добавляя HTML-шаблон в root в index.html

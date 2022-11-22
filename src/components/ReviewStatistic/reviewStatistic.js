@@ -1,16 +1,16 @@
 import template from '@components/ReviewStatistic/reviewStatistic.handlebars';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
+import { Component } from '@components/Component';
+import { store } from '@store/Store';
 
 /**
 * Отражает общую информацию о рецензиях на данный фильм
 * Подписывается на измнение state infoReviews
 */
 export class ReviewStatistic extends Component {
-    constructor(film) {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            film,
+            film: props.film,
             statusSendReview: null,
         };
         this.location = this.rootNode.querySelector('.js-reviews-statistic');
@@ -30,6 +30,10 @@ export class ReviewStatistic extends Component {
             neutral: this.state.film.count_neutral_reviews || 0,
             positive: this.state.film.count_positive_reviews || 0,
         }));
+    }
+
+    unsubscribe() {
+        store.unsubscribe('statusSendReview', updateInfo.bind(this));
     }
 }
 

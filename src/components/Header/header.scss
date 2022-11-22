@@ -3,15 +3,21 @@ $margin-left-login-btn: 72px;
 .header {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-content: flex-start;
   align-items: center;
   font-weight: normal;
   position: absolute;
-  padding-right: var(--right-header);
+  top: 0;
+  left: 0;
   height: 95px;
   width: 100%;
   z-index: 5;
+
+  &__menu-mobile {
+    margin-left: var(--standart-margin);
+    min-width: 35px;
+  }
 
   &__logo {
     white-space: nowrap;
@@ -86,7 +92,7 @@ $margin-left-login-btn: 72px;
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: $margin-left-login-btn - $margin-left-login-btn/3;
+    margin-left: calc($margin-left-login-btn - $margin-left-login-btn/3);
   }
 
   &__avatar {

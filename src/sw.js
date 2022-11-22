@@ -9,13 +9,29 @@ const whiteDynamicUrls = [
     '/api/v1/collection/popular',
     '/api/v1/collection/in_cinema',
     '/api/v1/recommendation',
+    // 'api/v1/premieres',
 ];
 
 const blackSearchUrls = [
     /object=user_avatar/,
+    /user\/\d+/,
 ];
 
 const assetUrls = [];
+
+this.addEventListener('activate', (event) => {
+    const expectedCacheNames = Object.keys(CACHE_NAME).map((key) => CACHE_NAME[key]);
+    // Delete out of date cahes
+    event.waitUntil(
+        caches.keys().then((cacheNames) => Promise.all(
+            cacheNames.map((cacheName) => {
+                if (expectedCacheNames.indexOf(cacheName) === -1) {
+                    return caches.delete(cacheName);
+                }
+            }),
+        )),
+    );
+});
 
 this.addEventListener('install', (event) => {
     event.waitUntil(
@@ -36,7 +52,11 @@ this.addEventListener('fetch', (event) => {
         url.pathname = url.pathname.replace(/\d+\/$/, '');
     }
 
-    if (whiteDynamicUrls.includes(url.pathname) && !url.search.match(blackSearchUrls[0])) {
+    if (
+        whiteDynamicUrls.includes(url.pathname)
+        && !url.search.match(blackSearchUrls[0])
+        && !url.pathname.match(blackSearchUrls[1])
+    ) {
         event.respondWith(networkFirst(request));
     } else {
         event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
@@ -53,7 +73,13 @@ async function cacheFirst(request, watchCache = false) {
         }
     }
 
-    const response = await fetch(request);
+    let response;
+
+    try {
+        response = await fetch(request);
+    } catch (e) {
+        return;
+    }
 
     return response;
 }

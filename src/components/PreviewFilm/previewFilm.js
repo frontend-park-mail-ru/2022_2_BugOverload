@@ -1,8 +1,8 @@
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { actionGetPreviewData } from '@actions/commonComponentsActions.js';
+import { Component } from '@components/Component';
+import { store } from '@store/Store';
+import { actionGetPreviewData } from '@actions/commonComponentsActions';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
-import { API } from '@config/config.js';
+import { API } from '@config/config';
 
 /**
 * Отображает фильм как рекомендацию на главной странице
@@ -22,10 +22,12 @@ export class PreviewFilm extends Component {
         this.nameLocation = nameLocation;
         this.location = this.rootNode.querySelector(`.${nameLocation}`);
 
-        store.subscribe(`preview-${nameLocation}`, () => {
+        this.subHandler = () => {
             this.state.preview = store.getState(`preview-${nameLocation}`);
             this.render();
-        });
+        };
+
+        store.subscribe(`preview-${nameLocation}`, this.subHandler);
     }
 
     /**
@@ -47,5 +49,9 @@ export class PreviewFilm extends Component {
         this.location.innerHTML = '';
         this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
         this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
+    }
+
+    unsubscribe() {
+        store.unsubscribe(`preview-${this.nameLocation}`, this.subHandler);
     }
 }

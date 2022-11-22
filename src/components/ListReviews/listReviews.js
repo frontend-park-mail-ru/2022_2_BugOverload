@@ -1,10 +1,10 @@
 import { Review } from '@components/Review/review.js';
-import { ShowMessage } from '@components/Message/message.js';
+import { ShowMessage } from '@components/Message/message';
 import template from '@components/ListReviews/listReviews.handlebars';
-import { store } from '@store/Store.js';
-import { Component } from '@components/Component.js';
+import { store } from '@store/Store';
+import { Component } from '@components/Component';
 import { InputReview } from '@components/InputReview/inputReview.js';
-import { actionGetDataReviews } from '@actions/filmActions.js';
+import { actionGetDataReviews } from '@actions/filmActions';
 
 /**
 * Выводит список пользовательских рецензий
@@ -31,19 +31,23 @@ export class ListReviews extends Component {
         this.step = 3;
         this.offset = 0;
 
-        store.subscribe('reviews', () => {
+        this.subHandlerReviews = () => {
             this.state.reviews = store.getState('reviews');
             this.render();
 
             this.offset += this.step;
-        });
+        };
 
-        store.subscribe('userReview', () => {
+        store.subscribe('reviews', this.subHandlerReviews);
+
+        this.subHandlerUserReview = () => {
             this.state.userReview = store.getState('userReview');
             this.renderBegin();
 
             this.offset++;
-        });
+        };
+
+        store.subscribe('userReview', this.subHandlerUserReview);
     }
 
     /**
@@ -100,6 +104,8 @@ export class ListReviews extends Component {
         if (noContentContainer) {
             noContentContainer.remove();
         }
+
+        this.state.userReview.author.id = store.getState('authorReview')?.user_id;
 
         this.location.querySelector('.js-list-reviews__content-container')
             .insertAdjacentHTML('afterbegin', Review.createReview(this.state.userReview));
@@ -190,5 +196,11 @@ export class ListReviews extends Component {
         }
         btnShowMore.removeEventListener('scroll', this.handlerShowMore);
         btnShowMore.remove();
+    }
+
+    unsubscribe() {
+        this.componentWillUnmount();
+        store.unsubscribe('reviews', this.subHandlerReviews);
+        store.unsubscribe('userReview', this.subHandlerUserReview);
     }
 }

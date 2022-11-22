@@ -1,0 +1,34 @@
+<div class="premiere-film js-premiere-film">
+    <div class="premiere-film__container">
+        <div class="premiere-film__film-container">
+            <div class="premiere-film__poster-container">
+                <div {{#if id}}data-section="/film/{{id}}/"{{/if}} class="premiere-film__blackout"></div>
+                <div class="premiere-film__poster" style="background-image: url('assets/img/posters/1.png{{!-- {{poster_ver}} --}}');"></div>
+                <div class="premiere-film__rating js-premiere-film-rating">{{rating}}</div>
+            </div>
+
+            <div class="premiere-film__information">
+                <div class="premiere-film__information-main">
+                    <div class="premiere-film__information-title">{{name}}</div>
+                    <div class="premiere-film__information-item">{{year_prod}}</div>
+                    <div class="premiere-film__information-item">{{genres}}</div>
+
+                </div>
+
+                <div class="premiere-film__information-production">
+                    <div class="premiere-film__information-item">{{countries}}</div>
+
+                    <div class="premiere-film__information-item">{{director}}</div>
+                </div>
+
+                <div class="premiere-film__information-duration">
+                    <div class="premiere-film__information-item">{{duration}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="premiere-film__premiere-date js-premiere-film__premiere-date">
+        </div>
+
+    </div>
+</div>

@@ -1,12 +1,12 @@
 import template from '@components/InputReview/inputReview.handlebars';
-import { Modal } from '@components/Modal/modal.js';
-import { Component } from '@components/Component.js';
-import { actionSendReview } from '@actions/filmActions.js';
-import { store } from '@store/Store.js';
+import { Modal } from '@components/Modal/modal';
+import { Component } from '@components/Component';
+import { actionSendReview } from '@actions/filmActions';
+import { store } from '@store/Store';
 import {
     renderError, removeError,
-} from '@utils/valid.js';
-import { decoreCountReviews } from '@utils/decorationData.js';
+} from '@utils/valid';
+import { decoreCountReviews } from '@utils/decorationData';
 
 /**
 * Отрисовывает форму для написания отзыва в виде модального окна
@@ -27,9 +27,12 @@ export class InputReview extends Component {
         };
 
         this.data = props.data;
-        store.subscribe('countReviews', () => {
+
+        this.subHandler = () => {
             this.state.countReviews = store.getState('countReviews');
-        });
+        };
+
+        store.subscribe('countReviews', this.subHandler);
     }
 
     /**
@@ -195,5 +198,7 @@ export class InputReview extends Component {
 
         const items = select.querySelectorAll('.js-input-review__select-item');
         items.forEach((item) => item.removeEventListener('click', this.handlerSetValueWrapper(item)));
+
+        store.unsubscribe('countReviews', this.subHandler);
     }
 }

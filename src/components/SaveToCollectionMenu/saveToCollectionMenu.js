@@ -1,7 +1,7 @@
 import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.handlebars';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { ShowMessage } from '@components/Message/message.js';
+import { Component } from '@components/Component';
+import { store } from '@store/Store';
+import { ShowMessage } from '@components/Message/message';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
@@ -14,14 +14,18 @@ export class SaveToCollectionMenu extends Component {
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
 
         // Навешиваем обработчик на выход по клику вне области меню
-        document.addEventListener('click', (e) => {
+        this.closeMenuHandler = (e) => {
             if (!e.target.closest(`.${nameLocation}`)) {
                 this.close();
             }
-        });
-        store.subscribe('listCollectionsUser', () => {
+        };
+        document.addEventListener('click', this.closeMenuHandler);
+
+        this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
-        });
+        };
+
+        store.subscribe('listCollectionsUser', this.subHandler);
     }
 
     /**
@@ -87,5 +91,6 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
+        store.unsubscribe('listCollectionsUser', this.subHandler);
     }
 }

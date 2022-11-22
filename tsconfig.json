@@ -12,6 +12,7 @@
         "@fonts/*":  ["src/assets/fonts/*"],
         "@favicons/*":  ["src/assets/favicons/*"],
         "@router/*":  ["src/router/*"],
+        "@router/Page404/*":  ["src/router/Page404/*"],
         "@store/*":  ["src/store/*"],
         "@reducers/*":  ["src/store/reducers/*"],
         "@actions/*":  ["src/store/actionCreater/*"],
@@ -19,11 +20,13 @@
       "module": "commonjs",
       "noImplicitAny": true,
       "sourceMap": true,
-      "target": "es5",
+      "target": "es2017",
       "allowJs": true,
       "noEmit": false,
       "skipLibCheck": true,
-      "isolatedModules": true
+      "isolatedModules": true,
+      "allowSyntheticDefaultImports": true,   
+      "esModuleInterop": true,  
     },
     "exclude": ["node_modules"],
 }

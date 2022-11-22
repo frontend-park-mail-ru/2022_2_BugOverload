@@ -1,6 +1,6 @@
-import { API } from '@config/config.js';
+import { API } from '@config/config';
 import template from '@components/Film/film.handlebars';
-import { decoreColorRating } from '@utils/decorationData.js';
+import { decoreColorRating } from '@utils/decorationData';
 
 /**
 * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу

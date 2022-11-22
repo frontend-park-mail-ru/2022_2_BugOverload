@@ -1,15 +1,15 @@
 import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview.js';
-import { Component } from '@components/Component.js';
-import { store } from '@store/Store.js';
-import { ShowMessage } from '@components/Message/message.js';
+import { Component } from '@components/Component';
+import { store } from '@store/Store';
+import { ShowMessage } from '@components/Message/message';
 import {
     actionRate, actionDeleteRate, actionGetMetaDataFilm,
-} from '@actions/filmActions.js';
+} from '@actions/filmActions';
 
 import {
     decoreCountScores,
-} from '@utils/decorationData.js';
+} from '@utils/decorationData';
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.
@@ -24,24 +24,29 @@ export class Rating extends Component {
             film: props.film,
             rating: null,
             statusRating: null,
-            countScores: null,
+            countScores: props.film.count_ratings,
         };
 
-        store.subscribe('rating', () => {
+        this.subHandlerRating = () => {
             this.state.rating = store.getState('rating');
-            this.state.countScores = store.getState('countScores');
+            this.state.countScores = store.getState('countScores') || props.film.count_ratings;
 
             this.render();
-        });
+        };
 
-        store.subscribe('statusRating', () => {
+        store.subscribe('rating', this.subHandlerRating);
+
+        this.subHandlerStatusRating = () => {
             this.state.statusRating = store.getState('statusRating');
+
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
                 return;
             }
             ShowMessage('Успех!', 'positive');
-        });
+        };
+
+        store.subscribe('statusRating', this.subHandlerStatusRating);
 
         if (store.getState('user')) {
             store.dispatch(actionGetMetaDataFilm({ filmID: this.state.film.id }));
@@ -56,7 +61,7 @@ export class Rating extends Component {
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,
             filmRating: this.state.film.rating || '0.0',
-            countRates: decoreCountScores(this.state.film.countScores),
+            countRates: decoreCountScores(this.state.countScores),
         }));
         this.componentDidMount();
         if (!this.state.rating) {
@@ -152,5 +157,11 @@ export class Rating extends Component {
             return;
         }
         form.removeEventListener('submit', this.handlerSubmit);
+    }
+
+    unsubscribe() {
+        this.componentWillUnmount();
+        store.unsubscribe('rating', this.subHandlerRating);
+        store.unsubscribe('statusRating', this.subHandlerStatusRating);
     }
 }

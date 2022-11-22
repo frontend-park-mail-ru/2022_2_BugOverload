@@ -1,5 +1,5 @@
 import template from '@components/Review/review.handlebars';
-import { decoreCountReviews } from '@utils/decorationData.js';
+import { decoreCountReviews } from '@utils/decorationData';
 
 /**
 * Отзыв юзера на фильм.
