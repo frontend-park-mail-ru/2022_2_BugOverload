@@ -38,11 +38,12 @@ export class Collection extends Component {
     init() {
         store.dispatch(
             actionGetCollectionData({
+                name: this.nameLocation,
                 target: 'tag',
                 key: this.getTagFromName(this.nameLocation),
                 sortParam: 'rating',
                 countFilms: 20,
-                delimiter: 20,
+                delimiter: 0,
             }),
         );
     }

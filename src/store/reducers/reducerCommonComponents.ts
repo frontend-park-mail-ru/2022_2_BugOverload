@@ -3,18 +3,18 @@ import { API } from '@config/config';
 import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 
 class ReducerCommonComponents {
-    async getCollectionData({target, key, sortParam, countFilms, delimiter} :collectionParams) {
+    async getCollectionData({name, target, key, sortParam, countFilms, delimiter} :collectionParams) {
         let response;
         try {
             response = await Ajax.get(API.collection(target, key, sortParam, countFilms, delimiter)) as Response;
         } catch (e) {
-            return { [`collection-${key}`]: mockCollection() };
+            return { [`collection-${name}`]: mockCollection() };
         }
         if (response.status === 200) {
-            return { [`collection-${key}`]: response.body };
+            return { [`collection-${name}`]: response.body };
         }
 
-        return { [`statusCollection-${key}`]: response.status };
+        return { [`statusCollection-${name}`]: response.status };
     }
 
     async getPreviewData({name} :collectionParams) {
