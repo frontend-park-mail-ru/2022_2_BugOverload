@@ -22,7 +22,7 @@ class ReducerFilm {
         return { filmStatus: response.status };
     }
 
-    async rate(ratingData: anyObject) {
+    async rate(ratingData: rateParams) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
             body: { score: +ratingData.rate },

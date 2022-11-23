@@ -65,6 +65,11 @@ interface reviewParams extends anyObject {
     offset: number,
 }
 
+interface rateParams extends anyObject {
+    filmID: number,
+    rate: number,
+}
+
 interface fullDetails extends anyObject {
     prod_year: number,
     end_year?: number,
