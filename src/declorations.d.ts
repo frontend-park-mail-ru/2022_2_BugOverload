@@ -55,6 +55,16 @@ interface film extends anyObject {
     rating: number,
 }
 
+interface metaDateParams extends anyObject {
+    filmID: number,
+}
+
+interface reviewParams extends anyObject {
+    filmID: number,
+    count: number,
+    offset: number,
+}
+
 interface fullDetails extends anyObject {
     prod_year: number,
     end_year?: number,
@@ -120,4 +130,9 @@ interface filmPremiere extends anyObject {
     duration: number,
     rating: number,
     description: string,
+}
+
+interface premiereParams extends anyObject {
+    countFilms: number,
+    delimiter: number,
 }

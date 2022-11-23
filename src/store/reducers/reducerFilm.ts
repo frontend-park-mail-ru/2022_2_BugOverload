@@ -22,7 +22,7 @@ class ReducerFilm {
         return { filmStatus: response.status };
     }
 
-    async rate(ratingData :anyObject) {
+    async rate(ratingData: anyObject) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
             body: { score: +ratingData.rate },
@@ -52,7 +52,7 @@ class ReducerFilm {
         return { statusRating: response.status };
     }
 
-    async getMetaDataFilm({ filmID } :anyObject) {
+    async getMetaDataFilm({ filmID }: metaDateParams) {
         const response = await Ajax.get(API.metaFilm(filmID)) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
@@ -68,7 +68,7 @@ class ReducerFilm {
         return { statusMetaData: response.status };
     }
 
-    async getDataReviews({filmID, count, offset} :anyObject) {
+    async getDataReviews({filmID, count, offset}: reviewParams) {
         const response = await Ajax.get(API.reviews(filmID, count, offset)) as Response;
         if (response.status === responsStatuses.OK) {
             return {
@@ -85,7 +85,7 @@ class ReducerFilm {
         return { statusReviews: response.status };
     }
 
-    async sendReview(reviewData :anyObject) {
+    async sendReview(reviewData: review) {
         const response = await Ajax.post({
             url: API.send_review(reviewData.filmID),
             body: reviewData,
@@ -116,7 +116,7 @@ class ReducerFilm {
         return { statusSendReview: response.status };
     }
 
-    async getPremieresData({countFilms = 0, delimiter = 0}: anyObject) {
+    async getPremieresData({countFilms = 0, delimiter = 0}: premiereParams) {
         // let response;
         // try {
             const response = await Ajax.get(API.premieres(countFilms, delimiter)) as Response;

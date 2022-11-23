@@ -30,7 +30,7 @@ export const actionSendReview = (reviewData: review) => ({
     value: reviewData,
 });
 
-export const actionGetPremieresData = (params) => ({
+export const actionGetPremieresData = (params: premiereParams) => ({
     type: 'getPremieresData',
     value: params,
 });
