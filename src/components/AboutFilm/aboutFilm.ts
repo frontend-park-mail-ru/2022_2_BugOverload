@@ -63,7 +63,7 @@ export class AboutFilm extends Component {
         }
 
         this.menu = new SaveToCollectionMenu('js-place-save-to-collection');
-        this.handlerOpenMenu = function (e: Event) {
+        this.handlerOpenMenu =  (e: Event) => {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowMessage('Вы должны быть авторизованы', 'negative');
