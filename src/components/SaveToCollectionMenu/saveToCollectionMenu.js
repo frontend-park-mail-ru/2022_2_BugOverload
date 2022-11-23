@@ -23,7 +23,6 @@ export class SaveToCollectionMenu extends Component {
 
         this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
-            console.log(this.state.collections);
         };
 
         store.subscribe('listCollectionsUser', this.subHandler);

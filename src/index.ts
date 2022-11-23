@@ -8,7 +8,6 @@ document.addEventListener('click', (e) => {
     const target = e.target as Element;
 
     if (target.classList.contains('js-showError')) {
-        console.log('js-showError');
         ShowMessage('В разработке', 'negative');
     }
 })

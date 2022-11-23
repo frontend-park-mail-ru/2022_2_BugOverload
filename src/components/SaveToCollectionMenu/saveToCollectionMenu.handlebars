@@ -3,10 +3,10 @@
     <div class="menu-save__items-container">
         {{#each collections}}
             <div class="menu-save__used-icon"
-                    {{#if is_used}} used-in-collection="true" {{/if}} {{!-- data-name="{{name_collection}}" --}}></div>
-            <a data-section="/" class="menu-save__item-btn js-menu-save__item-btn" data-name="{{name_collection}}">
+                    {{#if is_used}} used-in-collection="true" {{/if}}></div>
+            <a data-section="/{{!-- {{id}} --}}" class="menu-save__item-btn js-menu-save__item-btn" data-name="{{name}}">
                 <div class="menu-save__item">
-                    {{name_collection}}
+                    {{name}}
                 </div>
             </a>
         {{/each}}
