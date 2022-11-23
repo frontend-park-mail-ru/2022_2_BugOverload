@@ -52,8 +52,8 @@ class ReducerFilm {
         return { statusRating: response.status };
     }
 
-    async getMetaDataFilm(data :anyObject) {
-        const response = await Ajax.get(API.metaFilm(data.filmID)) as anyObject;
+    async getMetaDataFilm({ filmID } :anyObject) {
+        const response = await Ajax.get(API.metaFilm(filmID)) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
                 listCollectionsUser: response.body.collections,
@@ -68,8 +68,8 @@ class ReducerFilm {
         return { statusMetaData: response.status };
     }
 
-    async getDataReviews(data :anyObject) {
-        const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset)) as Response;
+    async getDataReviews({filmID, count, offset} :anyObject) {
+        const response = await Ajax.get(API.reviews(filmID, count, offset)) as Response;
         if (response.status === responsStatuses.OK) {
             return {
                 reviews: handlerAvatarReviews(response.body),
@@ -116,10 +116,10 @@ class ReducerFilm {
         return { statusSendReview: response.status };
     }
 
-    async getPremieresData() {
+    async getPremieresData({countFilms, delimiter}: anyObject) {
         // let response;
         // try {
-            const response = await Ajax.get(API.premieres) as Response;
+            const response = await Ajax.get(API.premieres(countFilms, delimiter)) as Response;
         // } catch (e) {
         //     return { premieres: mockPremieres() };
         // }

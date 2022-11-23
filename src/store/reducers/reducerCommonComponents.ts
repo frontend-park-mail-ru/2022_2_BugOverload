@@ -3,33 +3,33 @@ import { API } from '@config/config';
 import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 
 class ReducerCommonComponents {
-    async getCollectionData(params :collectionParams) {
+    async getCollectionData({name, target, key, sortParam, countFilms, delimiter} :collectionParams) {
         let response;
         try {
-            response = await Ajax.get(API.collection(params.target, params.key, params.sortParam, params.countFilms, params.delimiter)) as Response;
+            response = await Ajax.get(API.collection(target, key, sortParam, countFilms, delimiter)) as Response;
         } catch (e) {
-            return { [`collection-${params.name}`]: mockCollection() };
+            return { [`collection-${name}`]: mockCollection() };
         }
         if (response.status === 200) {
-            return { [`collection-${params.name}`]: response.body };
+            return { [`collection-${name}`]: response.body };
         }
 
-        return { [`statusCollection-${params.name}`]: response.status };
+        return { [`statusCollection-${name}`]: response.status };
     }
 
-    async getPreviewData(params :collectionParams) {
+    async getPreviewData({name} :collectionParams) {
         let response;
         try {
-            response = await Ajax.get(API.recommendation)  as Response;
+            response = await Ajax.get(API.recommendation) as Response;
         } catch (e) {
-            return { [`preview-${params.name}`]: mockPrewiew() };
+            return { [`preview-${name}`]: mockPrewiew() };
         }
 
         if (response.status === 200) {
-            return { [`preview-${params.name}`]: response.body };
+            return { [`preview-${name}`]: response.body };
         }
 
-        return { [`statusPreview-${params.name}`]: response.status };
+        return { [`statusPreview-${name}`]: response.status };
     }
 }
 

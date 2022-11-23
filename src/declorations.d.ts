@@ -16,6 +16,7 @@ interface collectionParams extends anyObject {
     sortParam: 'rating'|'date';
     countFilms: number;
     delimiter: number;
+    name?: string;
 }
 
 interface componentProps extends anyObject {
