@@ -3,7 +3,7 @@
         <div class="premiere-film__film-container">
             <div class="premiere-film__poster-container">
                 <div {{#if id}}data-section="/film/{{id}}/"{{/if}} class="premiere-film__blackout"></div>
-                <div class="premiere-film__poster" style="background-image: url('assets/img/posters/1.png{{!-- {{poster_ver}} --}}');"></div>
+                <div class="premiere-film__poster" style="background-image: url('{{poster_ver}}');"></div>
                 <div class="premiere-film__rating js-premiere-film-rating">{{rating}}</div>
             </div>
 

@@ -5,6 +5,7 @@ import { API } from '@config/config';
 import {
     decoreDuration, decoreColorRating,
 } from '@utils/decorationData';
+import { roundFloat } from '@utils/common';
 
 /**
 * Рейтинг фильма.
@@ -22,6 +23,7 @@ export class PremiereFilm extends Component {
             director: `реж. ${filmData.directors[0].name}`,
             duration: decoreDuration(filmData.duration_minutes),
             countries: filmData.prod_countries.slice(0, 2).join(', '),
+            rating: roundFloat(filmData.rating),
         });
 
         const div = document.createElement('div');

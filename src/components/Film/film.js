@@ -1,6 +1,7 @@
 import { API } from '@config/config';
 import template from '@components/Film/film.handlebars';
 import { decoreColorRating } from '@utils/decorationData';
+import { roundFloat } from '@utils/common';
 
 /**
 * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
@@ -36,10 +37,7 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     */
     static decoreFilmInfo(filmData) {
-        filmData.rating = Math.round(filmData.rating * 10) / 10;
-        if (Number.isInteger(filmData.rating)) {
-            filmData.rating = `${filmData.rating}.0`;
-        }
+        filmData.rating = roundFloat(filmData.rating);
 
         const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;

@@ -9,7 +9,7 @@ import { actionGetFilmData } from '@actions/filmActions';
 import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
-
+import { roundFloat } from '@utils/common';
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
 *
@@ -124,7 +124,7 @@ export class FilmPage extends View {
 */
 const subscribeFilmPage = () => {
     filmPage.state.film = store.getState(`film${filmPage.state.id}`);
-    filmPage.state.film.rating = Math.round(filmPage.state.film.rating * 10) / 10;
+    filmPage.state.film.rating = roundFloat(filmPage.state.film.rating);
     if (Number.isInteger(filmPage.state.film.rating)) {
         filmPage.state.film.rating = `${filmPage.state.film.rating}.0`;
     }
