@@ -42,7 +42,7 @@ export class Collection extends Component {
                 key: this.getTagFromName(this.nameLocation),
                 sortParam: 'rating',
                 countFilms: 20,
-                delimiter: 0,
+                delimiter: 20,
             }),
         );
     }

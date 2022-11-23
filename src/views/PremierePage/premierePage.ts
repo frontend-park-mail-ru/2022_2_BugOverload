@@ -41,7 +41,10 @@ export class PremierePage extends View {
         }
 
         if (!this.state.premieres) {
-            store.dispatch(actionGetPremieresData());
+            store.dispatch(actionGetPremieresData({
+                countFilms: 20,
+                delimiter: 20,
+            }));
             return;
         }
 

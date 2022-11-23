@@ -116,7 +116,7 @@ class ReducerFilm {
         return { statusSendReview: response.status };
     }
 
-    async getPremieresData({countFilms = 20, delimiter = 20}: anyObject) {
+    async getPremieresData({countFilms = 0, delimiter = 0}: anyObject) {
         // let response;
         // try {
             const response = await Ajax.get(API.premieres(countFilms, delimiter)) as Response;
