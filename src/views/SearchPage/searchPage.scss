@@ -1,0 +1,9 @@
+.search-page {
+    &__content-container {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        padding: 0 var(--standart-margin) 0 var(--standart-margin);
+        width: 100%;
+    }
+}
