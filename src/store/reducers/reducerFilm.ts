@@ -56,7 +56,7 @@ class ReducerFilm {
         const response = await Ajax.get(API.metaFilm(filmID)) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
-                listCollectionsUser: response.body.collections,
+                listCollectionsUser: response.body?.collections,
                 countScores: store.getState('film')?.count_ratings,
                 rating: {
                     value: response.body?.rating,

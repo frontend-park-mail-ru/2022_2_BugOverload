@@ -23,6 +23,7 @@ export class SaveToCollectionMenu extends Component {
 
         this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
+            console.log(this.state.collections);
         };
 
         store.subscribe('listCollectionsUser', this.subHandler);
@@ -94,6 +95,10 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
+    }
+
+    unsubscribe() {
+        this.componentWillUnmount();
         store.unsubscribe('listCollectionsUser', this.subHandler);
     }
 }
