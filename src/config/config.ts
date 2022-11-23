@@ -56,8 +56,9 @@ export const API = {
     signup: `${PROTOCOL}://${DOMAIN}/api/v1/auth/signup`,
     logout: `${PROTOCOL}://${DOMAIN}/api/v1/auth/logout`,
 
-    collection(tag: string, countFilms: number = 15, delimiter: number = 10) {
-        return `${PROTOCOL}://${DOMAIN}/api/v1/collection/${tag}?count_films=${countFilms}&delimiter=${delimiter}`;
+    collection(target: 'genre'|'tag', key: string, sortParam: 'rating'|'date', countFilms: number = 20, delimiter: number = 0) {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/collection/ \
+?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,

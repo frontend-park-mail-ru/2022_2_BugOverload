@@ -6,7 +6,7 @@ class ReducerCommonComponents {
     async getCollectionData(params :collectionParams) {
         let response;
         try {
-            response = await Ajax.get(API.collection(params.tag)) as Response;
+            response = await Ajax.get(API.collection(params.target, params.key, params.sortParam, params.countFilms, params.delimiter)) as Response;
         } catch (e) {
             return { [`collection-${params.name}`]: mockCollection() };
         }

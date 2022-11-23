@@ -64,6 +64,7 @@ $poster-height: 170px;
         cursor: pointer;
         border-radius: 4px;
     }
+
     &__poster-container:hover &__poster {
         background-size: 128px auto;
         background-position: -4px -6px;
@@ -87,17 +88,21 @@ $poster-height: 170px;
             @include info-flex;
             height: 60px;
         }
+
         &-production {
             @include info-flex;
             height: 35px;
         }
+
         &-duration {
             @include info-flex;
         }
+
         &-item {
             color: var(--secondary-color-text);
             font-size: 12px;
         }
+
         &-title {
             color: var(--main-color-text);
             font-size: 15px;
