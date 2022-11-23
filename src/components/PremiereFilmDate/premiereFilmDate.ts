@@ -1,9 +1,9 @@
 import template from '@components/PremiereFilmDate/premiereFilmDate.handlebars';
 import { Component } from '@components/Component';
-import { API } from '@config/config';
 import {
-    restrictText, decoreDuration, decoreColorRating,
+    restrictText
 } from '@utils/decorationData';
+import { roundFloat } from '@utils/common';
 
 const maxLengthDescription = 200;
 /**
@@ -21,6 +21,7 @@ export class PremiereFilmDate extends Component {
             ...filmData,
             ticket_link: filmData.id,
             description: restrictText(filmData.description, maxLengthDescription),
+            rating: roundFloat(filmData.rating),
         });
 
         location.insertAdjacentHTML('afterbegin', film);
