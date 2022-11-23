@@ -19,9 +19,9 @@ export class PremiereFilm extends Component {
             poster_ver: API.img.poster_ver(filmData.poster_ver),
             year_prod: filmData.prod_date.split('.')[0],
             genres: filmData.genres.slice(0, 2).join(', '),
-            director: `реж. ${filmData.directors[0]}`,
-            duration: decoreDuration(filmData.duration),
-            countries: filmData.country_prod.slice(0, 2).join(', '),
+            director: `реж. ${filmData.directors[0].name}`,
+            duration: decoreDuration(filmData.duration_minutes),
+            countries: filmData.prod_countries.slice(0, 2).join(', '),
         });
 
         const div = document.createElement('div');
@@ -30,7 +30,7 @@ export class PremiereFilm extends Component {
 
         if (mode === 'addDatePrComp') {
             const location: HTMLElement = div.querySelector('.js-premiere-film__premiere-date');
-            const element = PremiereFilmDate.addPremiereDate(filmData, location);
+            PremiereFilmDate.addPremiereDate(filmData, location);
         }
 
         return div.innerHTML;

@@ -98,8 +98,8 @@ interface review extends anyObject {
 }
 
 interface actor extends anyObject {
-    avatar: string,
-    character: string;
+    avatar?: string,
+    character?: string;
     id: number;
     name: string;
 }
@@ -111,8 +111,8 @@ interface filmPremiere extends anyObject {
     name: string,
     prod_date: string,
     genres: Array<string>,
-    country_prod: Array<string>,
-    directors: Array<string>,
+    prod_countries: Array<string>,
+    directors: Array<actor>,
     duration: number,
     rating: number,
     description: string,

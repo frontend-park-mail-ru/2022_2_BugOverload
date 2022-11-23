@@ -49,7 +49,7 @@ export class PremierePage extends View {
         const premiereList = new PremiereList({
             nameLocation: 'js-premiere-content',
             rootNode: this.rootNode,
-            films: this.state.premieres,
+            films: this.state.premieres.films,
         });
 
         premiereList.render();
