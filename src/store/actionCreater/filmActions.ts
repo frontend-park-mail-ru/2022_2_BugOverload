@@ -25,11 +25,12 @@ export const actionGetDataReviews = (data: Array<review>) => ({
     value: data,
 });
 
-export const actionSendReview = (reviewData :review) => ({
+export const actionSendReview = (reviewData: review) => ({
     type: 'sendReview',
     value: reviewData,
 });
 
-export const actionGetPremieresData = () => ({
+export const actionGetPremieresData = (params: premiereParams) => ({
     type: 'getPremieresData',
+    value: params,
 });

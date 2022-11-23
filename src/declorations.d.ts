@@ -11,8 +11,12 @@ interface anyObject{
 
 //common types
 interface collectionParams extends anyObject {
-    tag: string;
-    name: string;
+    target: 'genre'|'tag';
+    key: string;
+    sortParam: 'rating'|'date';
+    countFilms: number;
+    delimiter: number;
+    name?: string;
 }
 
 interface componentProps extends anyObject {
@@ -49,6 +53,21 @@ interface film extends anyObject {
     poster_ver: string,
     prod_year: number,
     rating: number,
+}
+
+interface metaDateParams extends anyObject {
+    filmID: number,
+}
+
+interface reviewParams extends anyObject {
+    filmID: number,
+    count: number,
+    offset: number,
+}
+
+interface rateParams extends anyObject {
+    filmID: number,
+    rate: number,
 }
 
 interface fullDetails extends anyObject {
@@ -98,8 +117,8 @@ interface review extends anyObject {
 }
 
 interface actor extends anyObject {
-    avatar: string,
-    character: string;
+    avatar?: string,
+    character?: string;
     id: number;
     name: string;
 }
@@ -111,9 +130,14 @@ interface filmPremiere extends anyObject {
     name: string,
     prod_date: string,
     genres: Array<string>,
-    country_prod: Array<string>,
-    directors: Array<string>,
+    prod_countries: Array<string>,
+    directors: Array<actor>,
     duration: number,
     rating: number,
     description: string,
+}
+
+interface premiereParams extends anyObject {
+    countFilms: number,
+    delimiter: number,
 }

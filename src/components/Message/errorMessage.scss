@@ -1,9 +1,10 @@
 .error {
+  position: fixed;
   bottom: 15px;
   width: 200px;
   padding: 10px 15px;
   background-color: var(--error-color);
-  margin-left: 20px;
+  margin-left: var(--standart-margin);
   display: flex;
   justify-content: center;
   align-items: center;

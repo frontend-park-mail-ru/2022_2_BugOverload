@@ -144,3 +144,33 @@ export const mockCollection = () => ({
     name: 'Название коллекции',
     films: mockFilms(),
 });
+
+export const mockPremieres = () => ({
+    'description': 'Здесь вы можете посмотреть новинки кинопроката',
+    'films': [
+      {
+        'description': 'Британская лингвистка Алетея прилетает из Лондона',
+        'directors': [
+          {
+            'id': 123123,
+            'name': 'Стивен Спилберг'
+          }
+        ],
+        'duration_minutes': 55,
+        'genres': [
+          'фэнтези',
+          'приключения'
+        ],
+        'id': 23,
+        'name': 'Game of Thrones',
+        'poster_ver': 'default',
+        'prod_countries': [
+          'США',
+          'Великобритания'
+        ],
+        'prod_date': '2014.01.13',
+        'rating': 9.2
+      }
+    ],
+    'name': 'Сейчас в кино'
+});

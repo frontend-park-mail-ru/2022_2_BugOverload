@@ -101,6 +101,9 @@ export class ProfileChange extends Component {
      */
     componentWillUnmount() {
         const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
+        if (!changeButton) {
+            return;
+        }
         changeButton.removeEventListener('click', this.handlerUserChangeForm);
     }
 

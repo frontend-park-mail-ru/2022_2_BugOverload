@@ -62,14 +62,14 @@ export class AboutFilm extends Component {
             return;
         }
 
-        const menu = new SaveToCollectionMenu('js-place-save-to-collection');
-        this.handlerOpenMenu = function (e: Event) {
+        this.menu = new SaveToCollectionMenu('js-place-save-to-collection');
+        this.handlerOpenMenu =  (e: Event) => {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
-            menu.open();
+            this.menu.open();
         };
 
         buttonPlus.addEventListener('click', this.handlerOpenMenu);
@@ -125,5 +125,10 @@ export class AboutFilm extends Component {
             return;
         }
         buttonTrailer.removeEventListener('click', this.handlerTrailer);
+    }
+
+    unsubscribe() {
+        this.menu.unsubscribe();
+        this.componentWillUnmount();
     }
 }

@@ -2,7 +2,7 @@ import { Ajax } from '@utils/ajax';
 import { getDateNow } from '@utils/common';
 import { API, responsStatuses } from '@config/config';
 import { store } from '@store/Store';
-import { mockFilm } from '@store/reducers/mockData';
+import { mockFilm, mockPremieres } from '@store/reducers/mockData';
 
 class ReducerFilm {
     async getFilmData({ id } :{id :number}) {
@@ -22,7 +22,7 @@ class ReducerFilm {
         return { filmStatus: response.status };
     }
 
-    async rate(ratingData :anyObject) {
+    async rate(ratingData: rateParams) {
         const response = await Ajax.post({
             url: API.rate(ratingData.filmID),
             body: { score: +ratingData.rate },
@@ -52,11 +52,11 @@ class ReducerFilm {
         return { statusRating: response.status };
     }
 
-    async getMetaDataFilm(data :anyObject) {
-        const response = await Ajax.get(API.metaFilm(data.filmID)) as anyObject;
+    async getMetaDataFilm({ filmID }: metaDateParams) {
+        const response = await Ajax.get(API.metaFilm(filmID)) as anyObject;
         if (response.status === responsStatuses.OK) {
             return {
-                listCollectionsUser: response.body.collections,
+                listCollectionsUser: response.body?.collections,
                 countScores: store.getState('film')?.count_ratings,
                 rating: {
                     value: response.body?.rating,
@@ -68,8 +68,8 @@ class ReducerFilm {
         return { statusMetaData: response.status };
     }
 
-    async getDataReviews(data :anyObject) {
-        const response = await Ajax.get(API.reviews(data.filmID, data.count, data.offset)) as Response;
+    async getDataReviews({filmID, count, offset}: reviewParams) {
+        const response = await Ajax.get(API.reviews(filmID, count, offset)) as Response;
         if (response.status === responsStatuses.OK) {
             return {
                 reviews: handlerAvatarReviews(response.body),
@@ -85,7 +85,7 @@ class ReducerFilm {
         return { statusReviews: response.status };
     }
 
-    async sendReview(reviewData :anyObject) {
+    async sendReview(reviewData: review) {
         const response = await Ajax.post({
             url: API.send_review(reviewData.filmID),
             body: reviewData,
@@ -116,93 +116,18 @@ class ReducerFilm {
         return { statusSendReview: response.status };
     }
 
-    async getPremieresData() {
-        // let response;
-        // try {
-        //     response = await Ajax.get(API.premieres) as Response;
-        // } catch (e) {
-        //     return { premieres: mockPremieres() };
-        // }
-        // if (response.status === responsStatuses.OK) {
-            // return { premieres: response.body.films };
-        // }
+    async getPremieresData({countFilms = 0, delimiter = 0}: premiereParams) {
+        let response;
+        try {
+            response = await Ajax.get(API.premieres(countFilms, delimiter)) as Response;
+        } catch (e) {
+            return { premieres: mockPremieres() };
+        }
+        if (response.status === responsStatuses.OK) {
+            return { premieres: response.body };
+        }
 
-        // return { premieres: null };
-        return { premieres: [
-            {
-                id: 12,
-                poster_hor: '12',
-                name: 'Дюна',
-                prod_date: '2022.11.23',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            },
-            {
-                id: 13,
-                poster_hor: '13',
-                name: 'Убить билла',
-                prod_date: '2022.11.23',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            },
-            {
-                id: 14,
-                poster_hor: '14',
-                name: 'Люцифер',
-                prod_date: '2022.11.25',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            },
-            {
-                id: 15,
-                poster_hor: '15',
-                name: 'Один дома',
-                prod_date: '2022.11.27',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            },
-            {
-                id: 16,
-                poster_hor: '16',
-                name: 'Душа',
-                prod_date: '2022.11.27',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            },
-            {
-                id: 17,
-                poster_hor: '17',
-                name: 'Душа',
-                prod_date: '2022.11.27',
-                genres: ['name1', 'name2'],
-                country_prod: ['name1', 'name2'],
-                directors: ['singleName'],
-                duration: 133,
-                rating: 7.6,
-                description: 'Едут в поезде японец, грузин и российский либерал. Тут у японца зазвонил вдруг неплохой сенсорный телефон, он поговорил, закончил разговор и выбросил телефон из окна. Грузин и российский либерал с недоумением смотрят на него. Спрашивают: — Ты зачем это сделал? Японец отвечает: — Да у меня дома этого говна навалом. Грузин подхватывает российского либерала и швыряет его в окно'
-            }
-
-        ]};
+        return { premieres: null };
     }
 }
 

@@ -38,8 +38,12 @@ export class Collection extends Component {
     init() {
         store.dispatch(
             actionGetCollectionData({
-                tag: this.getTagFromName(this.nameLocation),
                 name: this.nameLocation,
+                target: 'tag',
+                key: this.getTagFromName(this.nameLocation),
+                sortParam: 'rating',
+                countFilms: 20,
+                delimiter: 20,
             }),
         );
     }
@@ -87,6 +91,9 @@ export class Collection extends Component {
      */
     componentWillUnmount() {
         const slider = this.location.querySelector('.js-collection__container');
+        if (!slider) {
+            return;
+        }
         slider.removeEventListener('click', this.handlerSlider);
     }
 
