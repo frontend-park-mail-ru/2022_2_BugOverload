@@ -189,14 +189,23 @@ export class InputReview extends Component {
      */
     componentWillUnmount() {
         const form = this.rootNode.querySelector('.js-input-review__form');
+        if (!form) {
+            return;
+        }
         form.removeEventListener('submit', this.handlerSubmit);
 
         const select = this.rootNode.querySelector('.js-input-review__select');
 
         const head = select.querySelector('.js-input-review__select-head');
+        if (!head) {
+            return;
+        }
         head.removeEventListener('click', this.doOpenClose);
 
         const items = select.querySelectorAll('.js-input-review__select-item');
+        if (!items) {
+            return;
+        }
         items.forEach((item) => item.removeEventListener('click', this.handlerSetValueWrapper(item)));
 
         store.unsubscribe('countReviews', this.subHandler);

@@ -88,6 +88,9 @@ export class SaveToCollectionMenu extends Component {
      */
     componentWillUnmount() {
         const btns = this.placeholder.querySelectorAll('.js-menu-save__item-btn');
+        if (!btns) {
+            return;
+        }
         btns.forEach((button) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
