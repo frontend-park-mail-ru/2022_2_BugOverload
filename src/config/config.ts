@@ -8,7 +8,6 @@ import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
-// const PROTOCOL = 'https';
 
 let i = 0;
 const randomMy = () => i++;

@@ -5,10 +5,10 @@ export const getDateNow = () => {
 
 
 export const roundFloat = (rating: number) => {
-    let rounded = Math.round(rating * 10) / 10;
+    const rounded = Math.round(rating * 10) / 10;
     if (Number.isInteger(rounded)) {
-        return `${rating}.0`;
+        return `${rounded}.0`;
     }
 
-    return `${rating}`;
+    return `${rounded}`;
 }

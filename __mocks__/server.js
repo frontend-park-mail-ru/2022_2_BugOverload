@@ -888,19 +888,6 @@ app.get('/api/v1/person/:id', (req, res) => {
 	res.status(200).json(actor);
 })
 
-// {
-// 	"end_year": 2013,
-// 	"genres": [
-// 	  "фантастика",
-// 	  "боевик"
-// 	],
-// 	"id": 23,
-// 	"name": "Терминатор",
-// 	"poster_hor": "{{ключ}}",
-// 	"prod_year": 2008,
-// 	"rating": 8.8,
-// 	"short_description": "Идет борьба сопротивления людей против машин"
-//   }
 app.get('/api/v1/film/recommendation', (req, res) => {
 	console.log('GET: film/recommendation')
 	const previewSpace = {
@@ -1082,7 +1069,7 @@ app.get('/api/v1/film/:id',  (req, res) => {
 		"id": 321,
 		"rating": 9.7,
 		"slogan": "Победа или смерть",
-		"type": "serial", // film
+		"type": "serial",
 		"age_limit": 18,
 		"box_office": 60000000,
 		"budget": 18323222,
@@ -1220,9 +1207,9 @@ app.get('/api/v1/film/:id/user_activity',  (req, res) => {
 		return;
 	}
 
-	const email = 'Dop123@mail.ru' // Аналог куки
+	const email = 'Dop123@mail.ru'
 
-	const filmID = req.params.id; // Получен из url-параметра
+	const filmID = req.params.id;
 	let collList = [];
 	for (const list in filmUsersMetaStorage[email].listCollectionsUser) {
 

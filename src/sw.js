@@ -9,7 +9,7 @@ const whiteDynamicUrls = [
     '/api/v1/collection/popular',
     '/api/v1/collection/in_cinema',
     '/api/v1/recommendation',
-    // 'api/v1/premieres',
+    '/api/v1/premieres',
 ];
 
 const blackSearchUrls = [
@@ -21,6 +21,7 @@ const assetUrls = [];
 
 this.addEventListener('activate', (event) => {
     const expectedCacheNames = Object.keys(CACHE_NAME).map((key) => CACHE_NAME[key]);
+
     // Delete out of date cahes
     event.waitUntil(
         caches.keys().then((cacheNames) => Promise.all(
@@ -28,6 +29,7 @@ this.addEventListener('activate', (event) => {
                 if (expectedCacheNames.indexOf(cacheName) === -1) {
                     return caches.delete(cacheName);
                 }
+                return null;
             }),
         )),
     );
@@ -78,7 +80,7 @@ async function cacheFirst(request, watchCache = false) {
     try {
         response = await fetch(request);
     } catch (e) {
-        return;
+        return null;
     }
 
     return response;
