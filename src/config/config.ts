@@ -6,6 +6,7 @@ import { filmPage } from '@views/FilmPage/filmPage';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
+import { collectionPage } from '@views/CollectionPage/collectionPage';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -109,6 +110,7 @@ export const routes = [
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
     { path: '/premieres/', view: premierePage },
+    { path: '/collection/', view: collectionPage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
