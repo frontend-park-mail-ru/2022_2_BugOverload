@@ -3,6 +3,7 @@ import { Film } from '@components/Film/film.js';
 import template from '@views/CollectionPage/collectionPage.handlebars';
 import { actionGetCollectionData } from '@actions/commonComponentsActions';
 import { store } from '@store/Store';
+import { actionGetActor } from '@store/actionCreater/actorActions';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -40,7 +41,7 @@ class CollectionPage extends View {
         }
         super.render();
 
-        //console.log('path',path, path.match(/\d+/))
+        console.log('path',this.state.typeCollection)
         if(!this.state.typeCollection.match(/\d+/)) {
             this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
             this.state.collection = store.getState(this.state.nameObjectStore);
@@ -68,7 +69,7 @@ class CollectionPage extends View {
             this.state.nameObjectStore = this.state.typeCollection;
             this.state.collection = {
                 name: 'Лучшие фильмы',
-                films: store.getState(this.state.nameObjectStore).best_films,
+                films: store.getState(this.state.nameObjectStore)?.best_films,
             };
 
             if(!this.state.collection.films && !this.state.isDispatched) {
@@ -79,7 +80,8 @@ class CollectionPage extends View {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
                 }
 
-                store.dispatch();
+                console.log(this.state.nameObjectStore.match(/\d+/)[0])
+                store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
                 return;
             }
         }
@@ -99,9 +101,16 @@ class CollectionPage extends View {
     }
 
     componentWillUnmount() {
+        if(this.state.isSubscribedCollection) {
+            this.state.isSubscribedCollection = false;
+            store.unsubscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+        }
+        if(this.state.isSubscribedPerson) {
+            this.state.isSubscribedPerson = false;
+            store.unsubscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+        }
 
-
-        this.state.isSubscribedCollection = false;
+        this.state.isDispatched = false;
     }
 }
 
