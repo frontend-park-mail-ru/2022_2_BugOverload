@@ -70,7 +70,7 @@ export class Collection extends Component {
             this.state.collection.name = name;
         }
 
-        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films }));
+        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films, url:  this.getTagFromName(this.nameLocation)}));
         this.componentDidMount();
     }
 

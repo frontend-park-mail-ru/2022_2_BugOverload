@@ -14,7 +14,7 @@ class MainPage extends View {
         if (mainBody) {
             mainBody.remove();
         }
-        super.render();
+        super.render(); 
 
         ROOT.insertAdjacentHTML('beforeend', template());
 
