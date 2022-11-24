@@ -58,7 +58,7 @@ class CollectionPage extends View {
                 store.dispatch(actionGetCollectionData({ 
                     name: this.state.nameObjectStore,
                     target: params[params.length - 2],
-                    key: params[params.length - 1],
+                    key: params[params.length - 1].split('-').slice(-1),
                     sortParam: 'rating',
                     countFilms: 20,
                     delimiter: 20,
