@@ -11,7 +11,7 @@ interface anyObject{
 
 //common types
 interface collectionParams extends anyObject {
-    target: 'genre'|'tag';
+    target: string;
     key: string;
     sortParam: 'rating'|'date';
     countFilms: number;
