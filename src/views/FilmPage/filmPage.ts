@@ -81,10 +81,10 @@ export class FilmPage extends View {
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
 
-        this.likelyFilms = new Collection('collection-popular');
+        this.likelyFilms = new Collection('collection-tag-popular');
         this.likelyFilms.init();
 
-        this.directorFilms = new Collection('collection-in_cinema');
+        this.directorFilms = new Collection('collection-tag-in_cinema');
         this.directorFilms.init();
 
         this.reviewStatistic = new ReviewStatistic({
