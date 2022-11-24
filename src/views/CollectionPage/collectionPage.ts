@@ -16,40 +16,75 @@ class CollectionPage extends View {
             nameObjectStore: null,
             collection: null,
             isDispatched: false,
-            isSubscribed: false,
+            isSubscribedCollection: false,
+            isSubscribedPerson: false,
+            typeCollection: null,
         }
+
+        this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
     }
 
 
-    render(path :string) {
+    render(typeCollection :string = null) {
+        if(typeCollection) {
+            this.state.typeCollection = typeCollection;
+        } 
+        if(!this.state.typeCollection) {
+            return;
+        }
+
+
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
             pageCollection.remove();
         }
         super.render();
 
-        if(!path.match(/d+/)) {
-            this.state.nameObjectStore = `collection-${path}`;
+        //console.log('path',path, path.match(/\d+/))
+        if(!this.state.typeCollection.match(/\d+/)) {
+            this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
+            this.state.collection = store.getState(this.state.nameObjectStore);
+
+            const params = this.state.typeCollection.split('-');
+            if(!this.state.collection && !this.state.isDispatched) {
+                this.state.isDispatched = true;
+
+                if(!this.state.isSubscribedCollection) {
+                    this.state.isSubscribedCollection = true;
+                    store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+                }
+                
+                store.dispatch(actionGetCollectionData({ 
+                    name: this.state.nameObjectStore,
+                    target: params[params.length - 2],
+                    key: params[params.length - 1],
+                    sortParam: 'rating',
+                    countFilms: 20,
+                    delimiter: 20,
+                }));
+                return;
+            }
         } else {
-            this.state.nameObjectStore = path;
+            this.state.nameObjectStore = this.state.typeCollection;
+            this.state.collection = {
+                name: 'Лучшие фильмы',
+                films: store.getState(this.state.nameObjectStore).best_films,
+            };
+
+            if(!this.state.collection.films && !this.state.isDispatched) {
+                this.state.isDispatched = true;
+
+                if(!this.state.isSubscribedPerson) {
+                    this.state.isSubscribedPerson = true;
+                    store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+                }
+
+                store.dispatch();
+                return;
+            }
         }
 
-        console.log('path', this.state.nameObjectStore, store.getState(this.state.nameObjectStore));
-
-        this.state.collection = store.getState(this.state.nameObjectStore);
-
-        const params = path.split('-');
-        if(!this.state.collection && !this.state.isDispatched) {
-            store.dispatch(actionGetCollectionData({ 
-                name: this.state.nameObjectStore,
-                target: params[params.length - 2],
-                key: params[params.length - 1],
-                sortParam: 'rating',
-                countFilms: 20,
-                delimiter: 20,
-            }))
-        }
-
+        console.log('this.state.typeCollection', this.state.nameObjectStore, this.state.collection);
 
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         this.rootNode.insertAdjacentHTML('beforeend', template({
@@ -59,8 +94,14 @@ class CollectionPage extends View {
         }));
     }
 
+    collectionPageSubscribe() {
+        this.render();
+    }
+
     componentWillUnmount() {
 
+
+        this.state.isSubscribedCollection = false;
     }
 }
 
