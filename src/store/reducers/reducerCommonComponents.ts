@@ -5,13 +5,14 @@ import { mockCollection, mockPrewiew } from '@store/reducers/mockData';
 class ReducerCommonComponents {
     async getCollectionData({name, target, key, sortParam, countFilms, delimiter} :collectionParams) {
         let response;
-        try {
+        try { 
             response = await Ajax.get(API.collection(target, key, sortParam, countFilms, delimiter)) as Response;
         } catch (e) {
-            return { [`collection-${name}`]: mockCollection() };
+            return { [`${name}`]: mockCollection() };
         }
         if (response.status === 200) {
-            return { [`collection-${name}`]: response.body };
+            console.log(`${name}`)
+            return { [`${name}`]: response.body };
         }
 
         return { [`statusCollection-${name}`]: response.status };

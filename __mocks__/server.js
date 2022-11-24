@@ -19,6 +19,7 @@ app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/premieres/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
@@ -131,6 +132,7 @@ app.get('/api/v1/collection', (req, res) => {
 	const tag = req.params.tag;
 	const collectionCinemaTodayData = {
 			name: "Сейчас в кино",
+			description: "Самые популярные фильмы в сообществе",
 			films:[
 			{
 				id: 0,

@@ -56,7 +56,7 @@ export const API = {
     signup: `${PROTOCOL}://${DOMAIN}/api/v1/auth/signup`,
     logout: `${PROTOCOL}://${DOMAIN}/api/v1/auth/logout`,
 
-    collection(target: 'genre'|'tag', key: string, sortParam: 'rating'|'date', countFilms: number = 20, delimiter: number = 0) {
+    collection(target: string, key: string, sortParam: 'rating'|'date', countFilms: number = 20, delimiter: number = 0) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 

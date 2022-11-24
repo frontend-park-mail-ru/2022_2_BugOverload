@@ -5,7 +5,7 @@
 @import "@components/Userbar/userbar.scss";
 @import "@components/Collection/collection.scss";
 @import "@components/Film/film.scss";
-@import "@components/PreviewFilm/previewFilm.scss";
+@import "@components/PreviewFilm/previewFilm.scss"; 
 @import "@components/Message/errorMessage.scss";
 @import "@components/Message/successMessage.scss";
 @import "@components/AboutFilm/aboutFilm.scss";
@@ -31,6 +31,7 @@
 @import "@components/PremiereList/premiereList.scss";
 @import "@components/PremiereFilmDate/premiereFilmDate.scss";
 @import "@views/PremierePage/premierePage.scss";
+@import "@views/CollectionPage/collectionPage.scss";
 
 ::-webkit-scrollbar { /* Webkit */
   width      : 0;  /* ширина scrollbar'a */

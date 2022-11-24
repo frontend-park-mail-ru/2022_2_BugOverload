@@ -21,10 +21,10 @@ class MainPage extends View {
         this.previewFilm = new PreviewFilm('js-main-page-preview-film');
         this.previewFilm.init();
 
-        this.collectionPopular = new Collection('js-main-page-collection-popular');
+        this.collectionPopular = new Collection('collection-tag-popular');
         this.collectionPopular.init();
 
-        this.collectionCinemaToday = new Collection('js-main-page-collection-in_cinema');
+        this.collectionCinemaToday = new Collection('collection-tag-in_cinema');
         this.collectionCinemaToday.init();
     }
 
