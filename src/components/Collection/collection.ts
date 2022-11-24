@@ -40,7 +40,7 @@ export class Collection extends Component {
             actionGetCollectionData({ 
                 name: this.nameLocation,
                 target: 'tag',
-                key: this.getTagFromName(this.nameLocation),
+                key: this.nameLocation.split('-').slice(-1),
                 sortParam: 'rating',
                 countFilms: 20,
                 delimiter: 20,

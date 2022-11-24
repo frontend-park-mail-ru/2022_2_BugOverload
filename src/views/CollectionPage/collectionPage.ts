@@ -41,7 +41,6 @@ class CollectionPage extends View {
         }
         super.render();
 
-        console.log('path',this.state.typeCollection)
         if(!this.state.typeCollection.match(/\d+/)) {
             this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
             this.state.collection = store.getState(this.state.nameObjectStore);
@@ -58,7 +57,7 @@ class CollectionPage extends View {
                 store.dispatch(actionGetCollectionData({ 
                     name: this.state.nameObjectStore,
                     target: params[params.length - 2],
-                    key: params[params.length - 1].split('-').slice(-1),
+                    key: params[params.length - 1],
                     sortParam: 'rating',
                     countFilms: 20,
                     delimiter: 20,
@@ -80,13 +79,10 @@ class CollectionPage extends View {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
                 }
 
-                console.log(this.state.nameObjectStore.match(/\d+/)[0])
                 store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
                 return;
             }
         }
-
-        console.log('this.state.typeCollection', this.state.nameObjectStore, this.state.collection);
 
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         this.rootNode.insertAdjacentHTML('beforeend', template({
