@@ -8,14 +8,14 @@ class ReducerCommon {
         try {
             response = await Ajax.get(API.collection(target, key, sortParam, countFilms, delimiter)) as Response;
         } catch (e) {
-            return { [`collection-${name}`]: mockCollection() };
+            return { [`${name}`]: mockCollection() };
         }
-        if (response.status === responsStatuses.OK) {
-            return { [`collection-${name}`]: response.body };
+        if (response.status === 200) {
+            console.log(`${name}`)
+            return { [`${name}`]: response.body };
         }
-
-        return { [`statusCollection-${name}`]: response.status };
-    }
+      return { [`statusCollection-${name}`]: response.status };
+  }
 
     async getPreviewData({name} :collectionParams) {
         let response;
@@ -39,6 +39,7 @@ class ReducerCommon {
             // return { search: response.body };
 
             // фальшивkа
+          if (request === 'qwe') {
             return { search:
                 {
                     films: [{
@@ -183,6 +184,7 @@ class ReducerCommon {
                     ],
                 }
             }
+          }
         // }
 
         return { search: { error: 'error' } };

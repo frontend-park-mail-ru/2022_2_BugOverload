@@ -1,0 +1,24 @@
+.page__collection {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 95px;
+
+    &__title {
+        margin: 0 var(--standart-margin);
+        font-size: 40px;
+        color: #fff;
+    }
+
+    &__description {
+        margin: 25px var(--standart-margin) 70px;
+        font-size: 22px;
+        color: #b3b3b3;
+    }
+
+    &__body {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 5px;
+        margin-left: 110px;
+    }
+}

@@ -67,6 +67,7 @@ class ActorPage extends View {
             collectionBestFilms: templateCollection({
                 films,
                 name: 'Лучшие фильмы',
+                url: `actor${this.state.id}`,
             }),
         }));
         collection.addHandlerSlider(

@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
 import template from '@components/Collection/collection.handlebars';
-
+ 
 /**
 * Отрисовывает список фильмов в виде коллекции.
 * Перерисовывается при изменении state 'collection'
@@ -21,14 +21,14 @@ export class Collection extends Component {
             collection: null,
         };
         this.nameLocation = nameLocation;
-        this.location = this.rootNode.querySelector(`.${nameLocation}`);
+        this.location = this.rootNode.querySelector(`.js-${nameLocation}`);
 
         this.subHandler = () => {
-            this.state.collection = store.getState(`collection-${nameLocation}`);
+            this.state.collection = store.getState(`${nameLocation}`);
             this.render();
         };
 
-        store.subscribe(`collection-${nameLocation}`, this.subHandler);
+        store.subscribe(`${nameLocation}`, this.subHandler);
     }
 
     /**
@@ -37,10 +37,10 @@ export class Collection extends Component {
     */
     init() {
         store.dispatch(
-            actionGetCollectionData({
+            actionGetCollectionData({ 
                 name: this.nameLocation,
                 target: 'tag',
-                key: this.getTagFromName(this.nameLocation),
+                key: this.nameLocation.split('-').slice(-1),
                 sortParam: 'rating',
                 countFilms: 20,
                 delimiter: 20,
@@ -54,7 +54,7 @@ export class Collection extends Component {
     */
     getTagFromName(name: string) {
         const words = name.split('-');
-        return words[words.length - 1];
+        return words[words.length - 2] + '-' + words[words.length - 1];
     }
 
     /**
@@ -70,7 +70,7 @@ export class Collection extends Component {
             this.state.collection.name = name;
         }
 
-        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films }));
+        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films, url:  this.getTagFromName(this.nameLocation)}));
         this.componentDidMount();
     }
 

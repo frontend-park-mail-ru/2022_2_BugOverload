@@ -7,6 +7,7 @@ import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';
+import { collectionPage } from '@views/CollectionPage/collectionPage';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -56,7 +57,7 @@ export const API = {
     signup: `${PROTOCOL}://${DOMAIN}/api/v1/auth/signup`,
     logout: `${PROTOCOL}://${DOMAIN}/api/v1/auth/logout`,
 
-    collection(target: 'genre'|'tag', key: string, sortParam: 'rating'|'date', countFilms: number = 20, delimiter: number = 0) {
+    collection(target: string, key: string, sortParam: 'rating'|'date', countFilms: number = 20, delimiter: number = 0) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
@@ -113,6 +114,7 @@ export const routes = [
     { path: '/user/', view: publicProfile },
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
+    { path: '/collection/', view: collectionPage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
