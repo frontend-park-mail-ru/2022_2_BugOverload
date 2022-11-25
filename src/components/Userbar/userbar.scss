@@ -15,7 +15,7 @@
     color: var(--main-color-text);
     flex-flow: column nowrap;
     align-self: flex-start;
-    margin-top: 14px;
+    margin-top: 14px; 
     border-radius: 15px;
     margin-right: var(--standart-margin);
   }
@@ -104,5 +104,26 @@
   &-off {
     background-color: var(--backgr-userbar-color-off);
   }
+}
 
+.js-header{
+  &__menu-mobile__area:hover &__mobile-userbar {
+    display: block;
+  }
+
+
+  &__menu-mobile__svg {
+    margin-left: var(--standart-margin);
+    min-width: 35px;
+  }
+
+  &__mobile-userbar {
+    position: absolute;
+    top: 0; left: 0;
+    display: none;
+    z-index: 10;
+    background-color: #c4c4c4;
+    height: 100vh;
+    width: 66vw;
+  }
 }
