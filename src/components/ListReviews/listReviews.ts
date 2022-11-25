@@ -1,9 +1,9 @@
-import { Review } from '@components/Review/review.js';
+import { Review } from '@components/Review/review';
 import { ShowMessage } from '@components/Message/message';
 import template from '@components/ListReviews/listReviews.handlebars';
 import { store } from '@store/Store';
 import { Component } from '@components/Component';
-import { InputReview } from '@components/InputReview/inputReview.js';
+import { InputReview } from '@components/InputReview/inputReview';
 import { actionGetDataReviews } from '@actions/filmActions';
 
 /**
@@ -15,7 +15,7 @@ export class ListReviews extends Component {
      * Подписывается на изменение state reviews - новопришедшие рецензии с бэкенда.
      * @param {Object} - сохраняемые начальные параметры
      */
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.location = this.rootNode.querySelector('.js-reviews-list');
         this.state = {
@@ -78,7 +78,7 @@ export class ListReviews extends Component {
             return;
         }
 
-        const reviews = this.state.reviews.reduce((res, oneReviewData) => res + Review.createReview(oneReviewData), '');
+        const reviews = this.state.reviews.reduce((res: string, oneReviewData: review) => res + Review.createReview(oneReviewData), '');
         this.location.querySelector('.js-list-reviews__content-container').insertAdjacentHTML('beforeend', reviews);
     }
 
@@ -114,7 +114,7 @@ export class ListReviews extends Component {
     /**
     * Служит для создания формы написания рецензии
     */
-    handlerOpenFormReview = (function (e) {
+    handlerOpenFormReview = (function (e: Event) {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {

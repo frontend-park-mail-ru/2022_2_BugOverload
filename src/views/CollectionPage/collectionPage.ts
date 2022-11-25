@@ -1,5 +1,5 @@
 import { View } from '@views/View';
-import { Film } from '@components/Film/film.js';
+import { Film } from '@components/Film/film';
 import template from '@views/CollectionPage/collectionPage.handlebars';
 import { actionGetCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';

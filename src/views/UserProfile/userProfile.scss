@@ -77,7 +77,6 @@
     &__user-container {
         display: flex;
         flex-flow: row wrap;
-        align-items: baseline;
     }
 
     &__username {
@@ -141,6 +140,9 @@
         &__svg {
             cursor: pointer;
             margin-left: 15px;
+            display: flex;
+            align-items: center;
+            height: 50px;
         }
     }
 }

@@ -1,5 +1,5 @@
 import template from '@components/Rating/rating.handlebars';
-import { InputReview } from '@components/InputReview/inputReview.js';
+import { InputReview } from '@components/InputReview/inputReview';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
@@ -16,7 +16,7 @@ import {
 * Подписывается на измненение state rating
 */
 export class Rating extends Component {
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.location = document.querySelector('.js-film-page__rating');
 
@@ -83,7 +83,7 @@ export class Rating extends Component {
         this.location.innerHTML = '';
     }
 
-    handlerReview = (function (e) {
+    handlerReview = (function (e: Event) {
         e.preventDefault();
         const user = store.getState('user');
         if (!user) {
@@ -99,10 +99,10 @@ export class Rating extends Component {
         inputReview.render();
     }).bind(this);
 
-    handlerSubmit = (function (e) {
+    handlerSubmit = (function (e: SubmitEvent) {
         e.preventDefault();
 
-        const rateValue = e.submitter.value;
+        const rateValue = (e.submitter as HTMLInputElement).value;
 
         const user = store.getState('user');
         if (!user) {

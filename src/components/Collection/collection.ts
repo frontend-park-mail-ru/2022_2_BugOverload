@@ -1,9 +1,9 @@
-import { Film } from '@components/Film/film.js';
+import { Film } from '@components/Film/film';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
 import template from '@components/Collection/collection.handlebars';
- 
+
 /**
 * Отрисовывает список фильмов в виде коллекции.
 * Перерисовывается при изменении state 'collection'
@@ -37,7 +37,7 @@ export class Collection extends Component {
     */
     init() {
         store.dispatch(
-            actionGetCollectionData({ 
+            actionGetCollectionData({
                 name: this.nameLocation,
                 target: 'tag',
                 key: this.nameLocation.split('-').slice(-1),

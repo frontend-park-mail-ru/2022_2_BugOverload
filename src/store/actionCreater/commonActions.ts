@@ -3,7 +3,7 @@ export const actionGetCollectionData = (params: collectionParams) => ({
     value: params,
 });
 
-export const actionGetPreviewData = (params: collectionParams) => ({
+export const actionGetPreviewData = (params: previewParams) => ({
     type: 'getPreviewData',
     value: params,
 });

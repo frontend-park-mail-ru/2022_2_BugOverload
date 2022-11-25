@@ -18,7 +18,7 @@ export class InputReview extends Component {
      * Подписывается на изменение state countReviews - числа отзывов у юзера.
      * @param {Object} - сохраняемые начальные параметры
      */
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.state = {
             countReviews: null,
@@ -46,7 +46,7 @@ export class InputReview extends Component {
             return;
         }
 
-        const modal = new Modal(this.rootNode, this.componentWillUnmount.bind(this));
+        const modal = new Modal(this.rootNode, /* this.componentWillUnmount.bind(this) */);
         modal.render();
 
         modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
@@ -65,11 +65,11 @@ export class InputReview extends Component {
      * @param {Element} titleInputWrapper - обёрка для рендера сообщения ошибки названия
      * @param {Element} textInputWrapper - обёрка для рендера сообщения ошибки текста рецензии
      */
-    validate(reviewType, titleInputWrapper, textInputWrapper) {
+    validate(reviewType: HTMLElement, titleInputWrapper: HTMLElement, textInputWrapper: HTMLElement) {
         let flag = true;
 
         if (!reviewType) {
-            const reviewWrapper = this.rootNode.querySelector('.js-input-review__select__wrapper');
+            const reviewWrapper: HTMLElement = this.rootNode.querySelector('.js-input-review__select__wrapper');
             renderError(
                 reviewWrapper,
                 'input-review__select',
@@ -87,7 +87,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!titleInputWrapper.children[0].value) {
+        if (!(titleInputWrapper.children[0] as HTMLInputElement).value) {
             renderError(
                 titleInputWrapper,
                 'text',
@@ -103,7 +103,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!textInputWrapper.children[0].value) {
+        if (!(textInputWrapper.children[0] as HTMLInputElement).value) {
             renderError(
                 textInputWrapper,
                 'js-input-review__input-text',
@@ -135,19 +135,20 @@ export class InputReview extends Component {
         const list = select.querySelector('.js-input-review__select-list');
         const items = select.querySelectorAll('.js-input-review__select-item');
 
-        this.handlerSubmit = (function (e) {
+        this.handlerSubmit = (function (e: Event) {
             e.preventDefault();
-            const review = {};
             const form = this.rootNode.querySelector('.js-input-review__form');
 
             const typeInput = form.querySelector('.js-input-review__select-input');
             const titleInputWrapper = form.querySelector('.js-input-title__wrapper');
             const textInputWrapper = form.querySelector('.js-input-text__wrapper');
 
-            review.type = typeInput.value;
-            review.name = titleInputWrapper.children[0].value;
-            review.body = textInputWrapper.children[0].value;
-            review.filmID = this.state.film.id;
+            const review: review = {
+                type: typeInput.value,
+                name: titleInputWrapper.children[0].value,
+                body: textInputWrapper.children[0].value,
+                filmID: this.state.film.id,
+            }
 
             if (!this.validate(review.type, titleInputWrapper, textInputWrapper)) {
                 return;
@@ -173,7 +174,7 @@ export class InputReview extends Component {
 
         head.addEventListener('click', this.doOpenClose);
 
-        this.handlerSetValueWrapper = (item) => () => {
+        this.handlerSetValueWrapper = (item: HTMLElement) => () => {
             head.removeAttribute('open');
             list.setAttribute('hidden', '');
             headText.innerHTML = item.textContent;

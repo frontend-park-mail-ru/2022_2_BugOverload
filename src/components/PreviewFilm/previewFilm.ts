@@ -14,7 +14,7 @@ export class PreviewFilm extends Component {
      * @param {string} nameLocation - сохраняет имя элемента,
      * соответствующее имени класса-контейнера на странице.
      */
-    constructor(nameLocation) {
+    constructor(nameLocation: string) {
         super();
         this.state = {
             preview: null,

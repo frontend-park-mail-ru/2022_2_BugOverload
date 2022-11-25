@@ -3,7 +3,7 @@ import { Signup } from '@components/Signup/signup';
 import { mainPage } from '@views/MainPage/mainPage';
 import { profile } from '@views/UserProfile/userProfile';
 import { filmPage } from '@views/FilmPage/filmPage';
-import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
+import { actorPage } from '@views/ActorProfilePage/actorProfilePage';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';

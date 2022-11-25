@@ -1,4 +1,4 @@
-import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
+import { PreviewFilm } from '@components/PreviewFilm/previewFilm';
 import { Collection } from '@components/Collection/collection';
 import { ROOT } from '@config/config';
 import { View } from '@views/View';
@@ -14,7 +14,7 @@ class MainPage extends View {
         if (mainBody) {
             mainBody.remove();
         }
-        super.render(); 
+        super.render();
 
         ROOT.insertAdjacentHTML('beforeend', template());
 

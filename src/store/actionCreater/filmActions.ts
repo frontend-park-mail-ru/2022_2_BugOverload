@@ -5,22 +5,22 @@ export const actionGetFilmData = (id :number) => ({
     },
 });
 
-export const actionRate = (ratingData :ratingData) => ({
+export const actionRate = (ratingData: rateParams) => ({
     type: 'rate',
     value: ratingData,
 });
 
-export const actionDeleteRate = (ratingData :ratingData) => ({
+export const actionDeleteRate = (ratingData: rateParams) => ({
     type: 'deleteRate',
     value: ratingData,
 });
 
-export const actionGetMetaDataFilm = (filmID :number) => ({
+export const actionGetMetaDataFilm = (filmID: metaDateParams) => ({
     type: 'getMetaDataFilm',
     value: filmID,
 });
 
-export const actionGetDataReviews = (data: Array<review>) => ({
+export const actionGetDataReviews = (data: reviewParams) => ({
     type: 'getDataReviews',
     value: data,
 });
