@@ -40,56 +40,54 @@ class ReducerCommon {
         // }
 
         // if (response.status === responsStatuses.NotFound) {
-          console.log(`getSearchData: 404, ${request}`)
           if (request === 'q-qwe') {
-            console.log(`getSearchData[NotFound] ${request}`)
             return { search:
                 {
-                    films: [{
-                        description: "Британская лингвистка Алетея прилетает из Лондона",
-                        directors: [
-                          {
-                            id: 123123,
-                            name: "Стивен Спилберг"
-                          }
-                        ],
-                        duration_minutes: 55,
-                        genres: [
-                          "фэнтези",
-                          "приключения"
-                        ],
-                        id: 23,
-                        name: "Game of Thrones s.1",
-                        poster_ver: "23",
-                        prod_countries: [
-                          "США",
-                          "Великобритания"
-                        ],
-                        prod_date: "2014.01.13",
-                        rating: 9.2
-                      }, {
-                        description: "Британская лингвистка Алетея прилетает из Лондона",
-                        directors: [
-                          {
-                            id: 123123,
-                            name: "Стивен Спилберг"
-                          }
-                        ],
-                        duration_minutes: 55,
-                        genres: [
-                          "фэнтези",
-                          "приключения"
-                        ],
-                        id: 24,
-                        name: "Game of Thrones s.2",
-                        poster_ver: "24",
-                        prod_countries: [
-                          "США",
-                          "Великобритания"
-                        ],
-                        prod_date: "2014.01.13",
-                        rating: 9.2
-                      }],
+                    // films: [{
+                    //     description: "Британская лингвистка Алетея прилетает из Лондона",
+                    //     directors: [
+                    //       {
+                    //         id: 123123,
+                    //         name: "Стивен Спилберг"
+                    //       }
+                    //     ],
+                    //     duration_minutes: 55,
+                    //     genres: [
+                    //       "фэнтези",
+                    //       "приключения"
+                    //     ],
+                    //     id: 23,
+                    //     name: "Game of Thrones s.1",
+                    //     poster_ver: "23",
+                    //     prod_countries: [
+                    //       "США",
+                    //       "Великобритания"
+                    //     ],
+                    //     prod_date: "2014.01.13",
+                    //     rating: 9.2
+                    //   }, {
+                    //     description: "Британская лингвистка Алетея прилетает из Лондона",
+                    //     directors: [
+                    //       {
+                    //         id: 123123,
+                    //         name: "Стивен Спилберг"
+                    //       }
+                    //     ],
+                    //     duration_minutes: 55,
+                    //     genres: [
+                    //       "фэнтези",
+                    //       "приключения"
+                    //     ],
+                    //     id: 24,
+                    //     name: "Game of Thrones s.2",
+                    //     poster_ver: "24",
+                    //     prod_countries: [
+                    //       "США",
+                    //       "Великобритания"
+                    //     ],
+                    //     prod_date: "2014.01.13",
+                    //     rating: 9.2
+                    //   }],
                     serials: [{
                         description: "Британская лингвистка Алетея прилетает из Лондона",
                         directors: [

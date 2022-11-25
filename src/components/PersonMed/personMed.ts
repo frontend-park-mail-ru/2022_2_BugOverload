@@ -16,6 +16,7 @@ export class PersonMed extends Component {
 
         const person = template({
             ...personData,
+            avatar: API.img.person_avatar(personData.avatar),
             year: personData.birthday.split('.')[0],
             professions: personData.professions.slice(0, 4).join(', '),
             age: decoreAge(getAge(personData.birthday)),
