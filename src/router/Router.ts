@@ -55,7 +55,6 @@ class Router {
                 matchHref = href.match(reg);
             }
         }
-        // console.log(`matchHref: ${matchHref}, 0: ${matchHref[0]} 1: ${matchHref[1]}`);
         return matchHref;
     }
 

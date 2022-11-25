@@ -96,14 +96,11 @@ class SearchPage extends View {
         }
 
         this.state.search = null;
-        // this.isSubscribed = false;
     }
 
     componentWillUnmount() {
         this.isSubscribed = false;
         this.state.search = null;
-        // store.unsubscribe('search', this.subHandler);
-        // console.log('unsub');
     }
 }
 
