@@ -19,6 +19,7 @@ app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/premieres/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/search/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({

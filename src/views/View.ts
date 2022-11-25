@@ -6,7 +6,7 @@ import { Component } from '@components/Component';
 *
 */
 export class View extends Component {
-    render(id = null as number) {
+    render(/*id = null as number*/) {
         if (!document.body.querySelector('.js-header')) {
             header.render();
         }
