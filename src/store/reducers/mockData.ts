@@ -242,7 +242,8 @@ export const mockSearch = () => ({
         ],
         prod_date: "2014.01.13",
         rating: 9.2
-      }, {
+      },
+      {
         description: "Британская лингвистка Алетея прилетает из Лондона",
         directors: [
           {
