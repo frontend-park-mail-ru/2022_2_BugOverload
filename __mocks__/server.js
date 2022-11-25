@@ -89,6 +89,18 @@ app.put('/api/v1/image', (req, res) => {
 	res.sendStatus(204);
 });
 
+app.get('/api/v1/image', (req, res) => {
+	require("fs").readFile(`${__dirname}/bale.webp`, function (error, data) {
+		if (error) {
+			res.statusCode = 405;
+			res.end('Resourse not found!')
+		} else {
+			res.setHeader("Content-Type", "image/webp");
+			res.end(data)
+		}
+	});
+});
+
 app.get('/api/v1/user/settings',  (req, res) => {
 	const email = 'Dop123@mail.ru'
 	res.status(200).json({count_collections: 3 ,count_ratings: 20, count_reviews: 8, count_views_films: 23, joined_date: "2022.10.12 21312124"});
