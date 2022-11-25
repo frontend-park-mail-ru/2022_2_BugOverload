@@ -116,9 +116,19 @@ a, button {
   .header__form { display: none; }
   body, html {
     --standart-margin: 15px;
-    --margin-left-login-btn: 144px;
+    --margin-left-login-btn: 155px;
   }
 
+  .header{
+    &__login__btn {
+      margin-right: var(--standart-margin);
+      margin-left: var(--margin-left-login-btn);
+    }
+
+    &__userbar-substrate {
+      margin-right: 25px;
+    }
+  }
 }
 
 .active {
