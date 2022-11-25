@@ -40,11 +40,11 @@ class SearchPage extends View {
             this.state.isSubscribed = true;
         }
 
-        if (!this.state.search) {
+        if (!this.state.search && this.state.isSubscribed) {
             store.dispatch(actionGetSearchData({
                 request,
             }));
-            console.log('dispatched');
+            console.log(`dispatched ${request}`);
             return;
         }
 

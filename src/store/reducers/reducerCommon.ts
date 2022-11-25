@@ -34,12 +34,13 @@ class ReducerCommon {
 
     async getSearchData({request}: searchParams) {
         const response = await Ajax.get(API.search(request)) as Response;
-
+        console.log(`responseStatus ${response.status} ${request}`);
         if (response.status === responsStatuses.OK) {
             return { search: response.body };
         }
 
         if (response.status === responsStatuses.NotFound) {
+          console.log(`getSearchData: 404, ${request}`)
           if (request === 'q-qwe') {
             console.log(`getSearchData[NotFound] ${request}`)
             return { search:
