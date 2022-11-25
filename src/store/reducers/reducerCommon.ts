@@ -11,7 +11,6 @@ class ReducerCommon {
             return { [`${name}`]: mockCollection() };
         }
         if (response.status === responsStatuses.OK) {
-            console.log(`${name}`)
             return { [`${name}`]: response.body };
         }
       return { [`statusCollection-${name}`]: response.status };
@@ -42,17 +41,10 @@ class ReducerCommon {
             }
             return { search: { error: 'error' } };
         }
-        console.log(`responseStatus ${response.status} ${request}`);
         if (response.status === responsStatuses.OK) {
             return { search: response.body };
         }
 
-        // if (response.status === responsStatuses.NotFound) {
-          // if (request === 'q-qwe') {
-          //   return { search:}
-          // }
-        // }
-        console.log(`getSearchData : nothing`)
         return { search: { error: 'error' } };
     }
 }

@@ -26,7 +26,6 @@ class SearchPage extends View {
         if (searchBody) {
             searchBody.remove();
         }
-        console.log('first render');
         super.render();
 
         this.subHandler = () => {
@@ -36,7 +35,6 @@ class SearchPage extends View {
 
         if (!this.state.isSubscribed) {
             store.subscribe('search', this.subHandler);
-            console.log('subscribed');
             this.state.isSubscribed = true;
         }
 
@@ -44,12 +42,10 @@ class SearchPage extends View {
             store.dispatch(actionGetSearchData({
                 request,
             }));
-            console.log(`dispatched ${request}`);
             return;
         }
 
         ROOT.insertAdjacentHTML('beforeend', template());
-        console.log('tmpl');
 
         if ('error' in this.state.search) {
             ROOT.querySelector('.js-search-page__content-container')?.insertAdjacentHTML('beforeend', `
@@ -68,7 +64,6 @@ class SearchPage extends View {
                 name: 'Найденные фильмы:',
             });
             this.searchListFilms.render();
-            console.log('films');
         }
 
         if ('serials' in this.state.search) {
@@ -80,7 +75,6 @@ class SearchPage extends View {
                 name: 'Найденные сериалы:',
             });
             this.searchListSerials.render();
-            console.log('sers');
         }
 
         if ('persons' in this.state.search) {
@@ -92,7 +86,6 @@ class SearchPage extends View {
                 name: 'Найденные имена:',
             });
             this.searchListPerson.render();
-            console.log('psns');
         }
 
         this.state.search = null;

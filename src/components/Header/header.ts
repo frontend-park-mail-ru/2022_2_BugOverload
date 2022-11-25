@@ -68,7 +68,6 @@ export class Header extends Component {
         this.submitHadndler = (e: Event) => {
             e.preventDefault();
             const request: string = (form.querySelector('.js-header__form__input') as HTMLInputElement).value;
-            console.log(`request: ${request}`);
             router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
         }
 
