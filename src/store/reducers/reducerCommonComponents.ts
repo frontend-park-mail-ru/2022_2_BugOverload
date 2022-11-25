@@ -11,7 +11,6 @@ class ReducerCommonComponents {
             return { [`${name}`]: mockCollection() };
         }
         if (response.status === 200) {
-            console.log(`${name}`)
             return { [`${name}`]: response.body };
         }
 
