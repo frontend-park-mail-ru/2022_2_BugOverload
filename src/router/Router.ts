@@ -46,9 +46,7 @@ class Router {
         }
         let reg = new RegExp(`^${newHref.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
 
-        console.log('reg',reg)
         let matchHref = newHref.match(reg);
-        console.log('matchHref',matchHref)
         if (matchHref) {
             if (matchHref[1]) {
                 matchHref[0] = matchHref[0].replace(hrefRegExp.idFilms, '');
@@ -57,7 +55,6 @@ class Router {
                 matchHref = href.match(reg);
             }
         }
-        console.log('matchHref',matchHref)
         return matchHref;
     }
 
