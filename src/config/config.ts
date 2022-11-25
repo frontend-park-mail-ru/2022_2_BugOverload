@@ -86,7 +86,7 @@ export const API = {
 
     premieres(countFilms: number = 20, delimiter: number = 0) {return `${PROTOCOL}://${DOMAIN}/api/v1/premieres?count_films=${countFilms}&delimiter=${delimiter}`},
 
-    search(request: string = '') {return `${PROTOCOL}://${DOMAIN}/api/v1/search?q=${request}`}
+    search(request: string = '') {return `${PROTOCOL}://${DOMAIN}/api/v1/search?q=${request.slice(2)}`}
 };
 
 export const responsStatuses = {

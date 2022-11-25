@@ -36,6 +36,7 @@ class SearchPage extends View {
 
         if (!this.state.isSubscribed) {
             store.subscribe('search', this.subHandler);
+            console.log('subscribed');
             this.state.isSubscribed = true;
         }
 
@@ -95,13 +96,14 @@ class SearchPage extends View {
         }
 
         this.state.search = null;
+        // this.isSubscribed = false;
     }
 
     componentWillUnmount() {
         this.isSubscribed = false;
         this.state.search = null;
-        store.unsubscribe('search', this.subHandler);
-        console.log('unsub');
+        // store.unsubscribe('search', this.subHandler);
+        // console.log('unsub');
     }
 }
 

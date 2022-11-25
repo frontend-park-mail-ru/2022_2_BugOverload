@@ -33,14 +33,15 @@ class ReducerCommon {
     }
 
     async getSearchData({request}: searchParams) {
-        // const response = await Ajax.get(API.search(request)) as Response;
+        const response = await Ajax.get(API.search(request)) as Response;
 
-        // if (response.status === responsStatuses.OK) {
-            // return { search: response.body };
+        if (response.status === responsStatuses.OK) {
+            return { search: response.body };
+        }
 
-            // фальшивkа
-          if (request === 'qwe') {
-            console.log(`getSearchData ${request}`)
+        if (response.status === responsStatuses.NotFound) {
+          if (request === 'q-qwe') {
+            console.log(`getSearchData[NotFound] ${request}`)
             return { search:
                 {
                     films: [{
@@ -58,7 +59,7 @@ class ReducerCommon {
                         ],
                         id: 23,
                         name: "Game of Thrones s.1",
-                        poster_ver: "{{key}}",
+                        poster_ver: "23",
                         prod_countries: [
                           "США",
                           "Великобритания"
@@ -78,9 +79,9 @@ class ReducerCommon {
                           "фэнтези",
                           "приключения"
                         ],
-                        id: 23,
+                        id: 24,
                         name: "Game of Thrones s.2",
-                        poster_ver: "{{key}}",
+                        poster_ver: "24",
                         prod_countries: [
                           "США",
                           "Великобритания"
@@ -101,9 +102,9 @@ class ReducerCommon {
                           "фэнтези",
                           "приключения"
                         ],
-                        id: 23,
+                        id: 25,
                         name: "Game of Thrones s.3",
-                        poster_ver: "{{key}}",
+                        poster_ver: "25",
                         prod_countries: [
                           "США",
                           "Великобритания"
@@ -123,9 +124,9 @@ class ReducerCommon {
                           "фэнтези",
                           "приключения"
                         ],
-                        id: 23,
+                        id: 26,
                         name: "Game of Thrones s.4",
-                        poster_ver: "{{key}}",
+                        poster_ver: "26",
                         prod_countries: [
                           "США",
                           "Великобритания"
@@ -135,9 +136,9 @@ class ReducerCommon {
                       }],
                     persons: [
                         {
-                            id: 123,
+                            id: 27,
                             name: 'Василий Петров',
-                            avatar: 'assets/img/actor_photos/KBeil.png',
+                            avatar: '27',
                             birthday: '1978.02.21',
                             professions: [
                                 "актер",
@@ -147,9 +148,9 @@ class ReducerCommon {
                             count_films: 130,
                         },
                         {
-                            id: 124,
+                            id: 30,
                             name: 'Кристина Асмус',
-                            avatar: 'assets/img/actor_photos/KBeil.png',
+                            avatar: '30',
                             birthday: '1986.02.21',
                             professions: [
                                 "актер",
@@ -159,9 +160,9 @@ class ReducerCommon {
                             count_films: 322,
                         },
                         {
-                            id: 125,
+                            id: 12,
                             name: 'Светлана Хотченкова',
-                            avatar: 'assets/img/actor_photos/KBeil.png',
+                            avatar: '12',
                             birthday: '1991.02.21',
                             professions: [
                                 "актер",
@@ -171,9 +172,9 @@ class ReducerCommon {
                             count_films: 112,
                         },
                         {
-                            id: 126,
+                            id: 26,
                             name: 'Фёдор Добронравов',
-                            avatar: 'assets/img/actor_photos/KBeil.png',
+                            avatar: '26',
                             birthday: '1938.02.21',
                             professions: [
                                 "актер",
@@ -186,7 +187,7 @@ class ReducerCommon {
                 }
             }
           }
-        // }
+        }
         console.log(`getSearchData : nothing`)
         return { search: { error: 'error' } };
     }
