@@ -116,7 +116,10 @@ a, button {
 }
 
 @media screen and (max-width: 600px) {
-  .header__form { display: none; }
+  .header__form {
+    display: none;
+  }
+
   body, html {
     --standart-margin: 15px;
     --margin-left-login-btn: 155px;
