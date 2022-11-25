@@ -1,6 +1,6 @@
 import { reducerUser } from '@store/reducers/reducerUser';
 import { reducerFilm } from '@store/reducers/reducerFilm';
-import { reducerCommonComponents } from '@store/reducers/reducerCommonComponents';
+import { reducerCommon } from '@store/reducers/reducerCommon';
 import { reducerActor } from '@store/reducers/reducerActor';
 
 /**
@@ -20,8 +20,9 @@ const handlers = [
     { type: 'sendReview', methodStore: reducerFilm.sendReview.bind(reducerFilm) },
     { type: 'getPremieresData', methodStore: reducerFilm.getPremieresData.bind(reducerFilm) },
 
-    { type: 'getCollectionData', methodStore: reducerCommonComponents.getCollectionData.bind(reducerCommonComponents) },
-    { type: 'getPreviewData', methodStore: reducerCommonComponents.getPreviewData.bind(reducerCommonComponents) },
+    { type: 'getCollectionData', methodStore: reducerCommon.getCollectionData.bind(reducerCommon) },
+    { type: 'getPreviewData', methodStore: reducerCommon.getPreviewData.bind(reducerCommon) },
+    { type: 'getSearchData', methodStore: reducerCommon.getSearchData.bind(reducerCommon) },
 
     { type: 'getSettings', methodStore: reducerUser.getSettings.bind(reducerUser) },
     { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },

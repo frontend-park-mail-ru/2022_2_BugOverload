@@ -6,6 +6,7 @@ import { filmPage } from '@views/FilmPage/filmPage';
 import { actorPage } from '@views/ActorProfilePage/actorProfilePage.js';
 import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
+import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
@@ -84,6 +85,8 @@ export const API = {
     publicProfile(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 
     premieres(countFilms: number = 20, delimiter: number = 0) {return `${PROTOCOL}://${DOMAIN}/api/v1/premieres?count_films=${countFilms}&delimiter=${delimiter}`},
+
+    search(request: string = '') {return `${PROTOCOL}://${DOMAIN}/api/v1/search?q=${request.slice(2)}`}
 };
 
 export const responsStatuses = {
@@ -110,6 +113,7 @@ export const routes = [
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
     { path: '/premieres/', view: premierePage },
+    { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
 ];
 

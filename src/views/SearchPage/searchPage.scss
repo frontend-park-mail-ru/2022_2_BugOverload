@@ -1,0 +1,21 @@
+.search-page {
+    &__content-container {
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 0 var(--standart-margin) 0 var(--standart-margin);
+        width: 100%;
+        margin-top: 95px;
+    }
+
+    &__no-content {
+        margin-top: 40px;
+        color: var(--main-color-text);
+        font-size: 28px;
+
+        &-btn {
+            width: 210px;
+            height: 42px;
+            margin-top: 40px;
+        }
+    }
+}

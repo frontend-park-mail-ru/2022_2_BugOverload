@@ -23,6 +23,16 @@ interface componentProps extends anyObject {
     rootNode: HTMLElement;
 }
 
+interface searchParams extends anyObject {
+    request: string,
+}
+
+interface searchResponse {
+    films: Array<filmPremiere>,
+    serials: Array<filmPremiere>,
+    persons: Array<filmPremiere>,
+}
+
 //user types
 interface user extends anyObject {
     avatar: string;

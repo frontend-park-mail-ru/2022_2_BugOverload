@@ -29,12 +29,6 @@ class MainPage extends View {
     }
 
     componentWillUnmount() {
-        const components = [
-            this.previewFilm,
-            this.collectionPopular,
-            this.collectionCinemaToday,
-        ];
-
         this.previewFilm?.unsubscribe();
         this.collectionPopular?.unsubscribe();
         this.collectionCinemaToday?.unsubscribe();
@@ -42,8 +36,3 @@ class MainPage extends View {
 }
 
 export const mainPage = new MainPage({ rootNode: document.getElementById('root') });
-
-const checkUnmount = (component :anyObject) => {
-    return Object.getOwnPropertyNames(Object.getPrototypeOf(component))
-    .includes('componentWillUnmount');
-}

@@ -2,6 +2,7 @@ import { Userbar } from '@components/Userbar/userbar';
 import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
+import { router } from '@router/Router';
 import { actionAuth } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
 
@@ -55,6 +56,32 @@ export class Header extends Component {
         } else {
             store.dispatch(actionAuth());
         }
+
+        this.componentDidMount();
+    }
+
+    componentDidMount() {
+        const form = this.rootNode.querySelector('.js-header-search');
+        if (!form) {
+            return;
+        }
+        this.submitHadndler = (e: Event) => {
+            e.preventDefault();
+            const request: string = (form.querySelector('.js-header__form__input') as HTMLInputElement).value;
+            console.log(`request: ${request}`);
+            router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
+        }
+
+        form.addEventListener('submit', this.submitHadndler)
+    }
+
+    componentWillUnmount() {
+        const form = this.rootNode.querySelector('.js-header-search');
+        if (!form) {
+            return;
+        }
+
+        form.removeEventListener('submit', this.submitHadndler)
     }
 }
 
