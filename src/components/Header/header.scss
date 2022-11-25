@@ -1,5 +1,3 @@
-$margin-left-login-btn: 72px;
-
 .header {
   display: flex;
   flex-flow: row nowrap;
@@ -88,11 +86,11 @@ $margin-left-login-btn: 72px;
   }
 
   &__login__btn {
-    margin-right: calc(var(--standart-margin) + $margin-left-login-btn/3);
+    margin-right: calc(var(--standart-margin) + var(--margin-left-login-btn)/3);
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: calc($margin-left-login-btn - $margin-left-login-btn/3);
+    margin-left: calc(var(--margin-left-login-btn) - var(--margin-left-login-btn)/3);
   }
 
   &__avatar {

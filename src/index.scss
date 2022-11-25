@@ -73,6 +73,7 @@ body, html {
   --secondary-color-text: #A5A5A5;
   --text-danger: #e72d2d;
   --standart-margin: 52px;
+  --margin-left-login-btn: 72px;
   --error-color:rgb(150 0 0);
   --success-color: rgb(98 167 127);
   --rating-color-neutral: #858585;
@@ -111,8 +112,13 @@ a, button {
   cursor: pointer;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 600px) {
   .header__form { display: none; }
+  body, html {
+    --standart-margin: 15px;
+    --margin-left-login-btn: 144px;
+  }
+
 }
 
 .active {
