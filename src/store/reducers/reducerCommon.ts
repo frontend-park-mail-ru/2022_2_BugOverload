@@ -10,7 +10,7 @@ class ReducerCommon {
         } catch (e) {
             return { [`${name}`]: mockCollection() };
         }
-        if (response.status === 200) {
+        if (response.status === responsStatuses.OK) {
             console.log(`${name}`)
             return { [`${name}`]: response.body };
         }
@@ -40,6 +40,7 @@ class ReducerCommon {
 
             // фальшивkа
           if (request === 'qwe') {
+            console.log(`getSearchData ${request}`)
             return { search:
                 {
                     films: [{
@@ -186,7 +187,7 @@ class ReducerCommon {
             }
           }
         // }
-
+        console.log(`getSearchData : nothing`)
         return { search: { error: 'error' } };
     }
 }

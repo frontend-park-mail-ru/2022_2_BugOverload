@@ -11,9 +11,10 @@ export const hrefRegExp = {
     host: /^\w+:\/\/\w+\-\w+\.\w+/i,
     localhost: /^\w+:\/\/\w+:\d+/i,
     auth: /\w+\/$/i,
-    idFilms: /\w*\-*\w*\d*$/,
-    nameCollection: /\w+\d+$/,
-    filmProps: '(\\w+\\-*\\w*)',
+    // idFilms: /\w*\-*\w*\d*$/,
+    // nameCollection: /\w+\d+$/,
+    // filmProps: '(\\w+\\-*\\w*)',
+    idFilms: /\d+$/,
+    filmProps: '(\\w+)',
     endSlash: /\/$/,
 };
- 

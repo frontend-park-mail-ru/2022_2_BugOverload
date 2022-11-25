@@ -24,7 +24,7 @@ app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({
-	origin: ['http://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500',
+	origin: ['http://localhost:3000', 'https://localhost:3000','http://localhost:8088', 'http://localhost:8080', 'http://127.0.0.1:5500',
 	'https://movie-gate.online:8088'],
 	credentials: true,
 }));

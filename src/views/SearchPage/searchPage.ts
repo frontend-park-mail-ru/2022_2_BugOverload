@@ -93,9 +93,13 @@ class SearchPage extends View {
             this.searchListPerson.render();
             console.log('psns');
         }
+
+        this.state.search = null;
     }
 
     componentWillUnmount() {
+        this.isSubscribed = false;
+        this.state.search = null;
         store.unsubscribe('search', this.subHandler);
         console.log('unsub');
     }
