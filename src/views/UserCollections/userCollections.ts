@@ -21,12 +21,6 @@ class UserCollections extends View {
     }
 
     render() {
-        // if (!store.getState('user')) {
-        //     console.log(`no User ${store.getState('user')}`);
-        //     router.go({ path: '/login/', props: '' }, { pushState: true, refresh: false  });
-        //     return;
-        // }
-
         console.log(`this.state ${JSON.stringify(this.state.userCollections)}`);
         const userCollectionsBody: Element = document.querySelector('.js-user-collections');
         if (userCollectionsBody) {
@@ -77,11 +71,10 @@ class UserCollections extends View {
     }
 
     componentWillUnmount() {
-        this.isSubscribed = false;
-        this.state.userCollections = null;
         store.unsubscribe('userCollections', this.subHandler);
         console.log(`unsubscribe()`);
-
+        this.state.isSubscribed = false;
+        this.state.userCollections = null;
     }
 }
 
