@@ -64,6 +64,16 @@ interface userCollection {
     update_time: string,
 }
 
+interface userCollListItem {
+    id: number,
+    is_used: boolean,
+    name: string,
+}
+
+interface filmToCollParams {
+    idFilm: number,
+    idCollection: number,
+}
 
 //person types
 interface person extends anyObject {

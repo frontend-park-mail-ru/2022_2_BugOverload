@@ -2,6 +2,9 @@ import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.hand
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
+import {
+    actionSaveToCollection,
+} from '@actions/filmActions';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
@@ -77,7 +80,20 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button: HTMLElement) => {
             this[`${button.dataset.name}`] = (event: Event) => {
                 event.preventDefault();
-                ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
+                // ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
+
+                this.state.collections = store.getState('listCollectionsUser');
+                if (!this.state.collections) {
+                    ShowMessage('Ошибочная :(', 'negative');
+                    return;
+                }
+
+                // const collection = this.state.collections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
+                store.dispatch(actionSaveToCollection({
+                    idCollection: +button.dataset.id,
+                    idFilm: store.getState('film').id,
+                }));
+                console.log(`dispatched idCollection: ${button.id}, idFilm: ${store.getState('film').id}`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });

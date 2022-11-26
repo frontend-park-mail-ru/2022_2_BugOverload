@@ -3,6 +3,10 @@ import { SaveToCollectionMenu } from '@components/SaveToCollectionMenu/saveToCol
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
+
+import {
+    actionSaveToCollection,
+} from '@actions/filmActions';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
 } from '@utils/decorationData';
@@ -23,9 +27,11 @@ export class AboutFilm extends Component {
     constructor(props: componentProps) {
         super(props);
         this.data = props.film;
-        // this.rootNode = props.rootNode;
         this.location = this.rootNode.querySelector('.js-film-page__about');
-        console.log(this.location);
+
+        this.state = {
+            listCollections: null,
+        };
 
         this.about = {
             poster_hor: this.data.poster_hor,
@@ -42,6 +48,13 @@ export class AboutFilm extends Component {
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
         };
+
+        // this.subHandler = () => {
+        //     this.state.listCollections = store.getState('listCollectionsUser');
+        //     // this.render();
+        // }
+
+        // store.subscribe('listCollectionsUser', this.subHandler)
     }
 
     /**
@@ -84,13 +97,25 @@ export class AboutFilm extends Component {
             return;
         }
 
-        this.handlerBookmark = function (e: Event) {
+        this.handlerBookmark = (e: Event) => {
             e.preventDefault();
             if (!store.getState('user')) {
                 ShowMessage('Вы должны быть авторизованы', 'negative');
                 return;
             }
-            ShowMessage('Сохранение в Избранное пока не доступно', 'negative');
+
+            this.state.listCollections = store.getState('listCollectionsUser');
+            if (!this.state.listCollections) {
+                ShowMessage('Ошибочное :(', 'negative');
+                return;
+            }
+
+            const willWatch = this.state.listCollections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
+            store.dispatch(actionSaveToCollection({
+                idCollection: willWatch.id,
+                idFilm: store.getState('film').id,
+            }));
+            console.log(`dispatched idCollection: ${willWatch.id}, idFilm: ${store.getState('film').id}`);
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
@@ -102,14 +127,12 @@ export class AboutFilm extends Component {
 
         this.handlerTrailer = (e: Event) => {
             e.preventDefault();
-            // ShowMessage('Просмотр трейлера пока не доступен', 'negative');
             const modal = new Modal(this.rootNode);
             console.log(this.rootNode);
             modal.render();
 
             const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
             modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
-            // this.componentDidMount();
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);
