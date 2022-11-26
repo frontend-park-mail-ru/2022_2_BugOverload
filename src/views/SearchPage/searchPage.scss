@@ -4,7 +4,7 @@
         flex-flow: column nowrap;
         padding: 0 var(--standart-margin) 0 var(--standart-margin);
         width: 100%;
-        margin-top: 95px;
+        margin-top: var(--header-height);
     }
 
     &__no-content {

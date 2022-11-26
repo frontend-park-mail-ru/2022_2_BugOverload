@@ -27,6 +27,7 @@ const handlers = [
     { type: 'getSettings', methodStore: reducerUser.getSettings.bind(reducerUser) },
     { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },
     { type: 'putAvatar', methodStore: reducerUser.putAvatar.bind(reducerUser) },
+    { type: 'getUserCollections', methodStore: reducerUser.getUserCollections.bind(reducerUser) },
 
     { type: 'getActor', methodStore: reducerActor.getActor.bind(reducerActor) },
 

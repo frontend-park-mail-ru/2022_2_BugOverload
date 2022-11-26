@@ -2,6 +2,7 @@ import { Ajax } from '@utils/ajax';
 import { getDateNow } from '@utils/common';
 import { API, responsStatuses } from '@config/config';
 import { decoreDate } from '@utils/decorationData';
+import { mockUserCollections } from '@store/reducers/mockData';
 
 interface userResponse{
     status: number;
@@ -132,6 +133,31 @@ class ReducerUser {
             };
         }
         return null;
+    }
+
+    async getUserCollections({sort_param, count_collections, delimiter}: userCollsParams) {
+        let response;
+        // console.log(`getUserCollections begin`);
+        try {
+            // console.log(`getUserCollections try`);
+            response = await Ajax.get(API.userCollections(sort_param, count_collections, delimiter)) as Response;
+        } catch (e) {
+            // console.log(`getUserCollections catch`);
+            return { userCollections: mockUserCollections() };
+        }
+
+        if (response.status === responsStatuses.OK) {
+            // console.log(`getUserCollections OK`);
+            return { userCollections: response.body };
+        }
+
+        if (response.status === responsStatuses.NotFound) {
+            console.log(`getUserCollections 404`);
+            return { userCollections: mockUserCollections() };
+        }
+
+        // console.log(`getUserCollections Nothing`);
+        return { userCollections: {error: 'error'} };
     }
 }
 

@@ -1,0 +1,105 @@
+$width-coll: 240px;
+$height-coll: 240px;
+
+@mixin animation-prop {
+    opacity: 0;
+    transition: 0.12s linear;
+}
+
+.user-collection {
+    &__container {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        align-items: flex-start;
+        padding-right: 30px;
+        padding-bottom: 70px;
+    }
+
+    &__poster-container {
+        width: $width-coll;
+        padding-bottom: 15px;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    &__poster {
+        width: $width-coll;
+        height: $height-coll;
+        border-radius: 24px;
+        background-size: $width-coll;
+        transition: 0.12s linear;
+    }
+
+    &__blackout {
+        width: $width-coll;
+        height: $height-coll;
+        background-color: rgb(var(--blackout-color));
+        @include animation-prop;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+        border-radius: 24px;
+    }
+
+    &__icon-enter {
+        position: absolute;
+        top: 95px;
+        left: 95px;
+        @include animation-prop;
+    }
+
+    &__statistic {
+        display: flex;
+        flex-flow: row nowrap;
+        position: absolute;
+        bottom: 33px;
+        left: 33px;
+        width: 55px;
+        height: 20px;
+        justify-content: space-between;
+    }
+
+    &__icon-films {
+        @include animation-prop;
+    }
+
+    &__count-films {
+        color: var(--secondary-weak-text);
+        font-size: 15px;
+        font-family: "Mail Sans Roman Med";
+        @include animation-prop;
+        margin-top: 3px;
+    }
+
+    &__title {
+        color: var(--main-color-text);
+        font-size: 20px;
+    }
+
+    &__create-time {
+        color: var(--secondary-color-text);
+        font-size: 15px;
+    }
+
+    &:hover &__blackout {
+        width: $width-coll;
+        height: $height-coll;
+        opacity: 0.3;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+    }
+
+    &:hover &__icon-enter {
+        opacity: 1;
+    }
+
+    &:hover &__icon-films {
+        opacity: 1;
+    }
+
+    &:hover &__count-films {
+        opacity: 1;
+    }
+}

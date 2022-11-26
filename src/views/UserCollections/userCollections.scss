@@ -1,0 +1,14 @@
+.user-collections {
+    &__container {
+        display: flex;
+        width: 100%;
+        flex-flow: row nowrap;
+    }
+
+    &__content-container {
+        display: flex;
+        flex-flow: column wrap;
+        padding-top: calc(var(--header-height) + 65px);
+        padding-right: var(--standart-margin);
+    }
+}

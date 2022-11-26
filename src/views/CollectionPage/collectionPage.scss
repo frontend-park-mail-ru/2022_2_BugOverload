@@ -1,7 +1,7 @@
 .page__collection {
     width: 100vw;
     height: 100vh;
-    padding-top: 95px;
+    padding-top: var(--header-height);
 
     &__title {
         margin: 0 var(--standart-margin);
