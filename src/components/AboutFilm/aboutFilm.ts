@@ -80,7 +80,7 @@ export class AboutFilm extends Component {
             return;
         }
 
-        this.menu = new SaveToCollectionMenu('js-place-save-to-collection');
+        this.menu = new SaveToCollectionMenu('js-place-save-to-collection', this.data.id);
         this.handlerOpenMenu =  (e: Event) => {
             e.preventDefault();
             if (!store.getState('user')) {
@@ -113,7 +113,7 @@ export class AboutFilm extends Component {
             const willWatch = this.state.listCollections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
             store.dispatch(actionSaveToCollection({
                 idCollection: willWatch.id,
-                idFilm: store.getState('film').id,
+                idFilm: this.data.id,
             }));
             console.log(`dispatched idCollection: ${willWatch.id}, idFilm: ${store.getState('film').id}`);
         };

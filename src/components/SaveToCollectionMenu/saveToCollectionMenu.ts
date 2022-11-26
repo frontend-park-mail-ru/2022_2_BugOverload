@@ -11,9 +11,10 @@ import {
 * Подписывается на измнение state listCollectionsUser
 */
 export class SaveToCollectionMenu extends Component {
-    constructor(nameLocation: string) {
+    constructor(nameLocation: string, filmId: number) {
         super();
         this.state.collections = null;
+        this.filmId = filmId;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
 
         // Навешиваем обработчик на выход по клику вне области меню
@@ -91,7 +92,7 @@ export class SaveToCollectionMenu extends Component {
                 // const collection = this.state.collections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
                 store.dispatch(actionSaveToCollection({
                     idCollection: +button.dataset.id,
-                    idFilm: store.getState('film').id,
+                    idFilm: this.filmId,
                 }));
                 console.log(`dispatched idCollection: ${button.id}, idFilm: ${store.getState('film').id}`);
             };

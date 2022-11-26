@@ -133,12 +133,13 @@ a, button {
   body, html {
     --font-size-normal: 13px;
   }
- 
+
   .modal{
     &__header {
       margin-bottom: 20px;
       font-size: 22px;
     }
+
     &__login__switch__btn {
       margin-right: 20px;
     }
