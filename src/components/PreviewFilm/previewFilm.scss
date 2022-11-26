@@ -22,29 +22,29 @@
   &__film-data {
     display: flex;
     flex-direction: column;
-    margin: var(--standart-margin) 0 -116px var(--standart-margin);
     z-index: 1;
-    width: 100vw;
+    margin-left: var(--standart-margin);
+    width: calc(100vw - #{var(--standart-margin)});
   }
 
   &__film-title {
     color: var(--main-color-text);
     font-weight: bold;
-    font-size: 48px;
-    width: 100vw;
+    font-size: var(--font-size-big);
+    width: 100%;
     max-width: 600px;
   }
 
   &__film-decore-line {
     margin: 16px 0 0;
-    width: 100vw;
+    width: 100%;
     max-width: 354px;
   }
 
   &__film-description {
     color: var(--main-color-text);
     font-size: 15px;
-    width: 100vw;
+    width: 100%;
     margin-top: 16px;
   }
 
