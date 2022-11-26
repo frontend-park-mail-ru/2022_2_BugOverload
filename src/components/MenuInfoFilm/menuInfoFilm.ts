@@ -1,7 +1,7 @@
 import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
 import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm';
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm';
-import { Rating } from '@components/Rating/rating.js';
+import { Rating } from '@components/Rating/rating';
 import { Component } from '@components/Component';
 import {
     decoreDuration, decoreListPersons, decoreListItems, decoreCountActors, decoreBudget,

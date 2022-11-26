@@ -74,6 +74,11 @@
         color: var(--main-color-text);
     }
 
+    &__user-container {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
     &__username {
         font-family: "Mail Sans Roman Med";
         font-size: 36px;
@@ -134,6 +139,10 @@
 
         &__svg {
             cursor: pointer;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            height: 50px;
         }
     }
 }

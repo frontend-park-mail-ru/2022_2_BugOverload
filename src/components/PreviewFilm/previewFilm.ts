@@ -1,6 +1,6 @@
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
-import { actionGetPreviewData } from '@actions/commonComponentsActions';
+import { actionGetPreviewData } from '@actions/commonActions';
 import template from '@components/PreviewFilm/previewFilm.handlebars';
 import { API } from '@config/config';
 
@@ -14,7 +14,7 @@ export class PreviewFilm extends Component {
      * @param {string} nameLocation - сохраняет имя элемента,
      * соответствующее имени класса-контейнера на странице.
      */
-    constructor(nameLocation) {
+    constructor(nameLocation: string) {
         super();
         this.state = {
             preview: null,

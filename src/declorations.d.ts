@@ -23,6 +23,16 @@ interface componentProps extends anyObject {
     rootNode: HTMLElement;
 }
 
+interface searchParams extends anyObject {
+    request: string,
+}
+
+interface searchResponse {
+    films: Array<filmPremiere>,
+    serials: Array<filmPremiere>,
+    persons: Array<filmPremiere>,
+}
+
 //user types
 interface user extends anyObject {
     avatar: string;
@@ -59,6 +69,10 @@ interface metaDateParams extends anyObject {
     filmID: number,
 }
 
+interface previewParams extends anyObject {
+    name: string,
+}
+
 interface reviewParams extends anyObject {
     filmID: number,
     count: number,
@@ -67,7 +81,7 @@ interface reviewParams extends anyObject {
 
 interface rateParams extends anyObject {
     filmID: number,
-    rate: number,
+    rate?: string,
 }
 
 interface fullDetails extends anyObject {
@@ -96,7 +110,7 @@ interface fullDetails extends anyObject {
     prod_countries: Array<string>,
 }
 
-interface ratingData extends anyObject {
+interface ratingParams extends anyObject {
     score: number;
 }
 
@@ -108,10 +122,10 @@ interface author extends anyObject {
 }
 
 interface review extends anyObject {
-    author :author;
+    author?: author;
     body: string;
-    count_likes: number;
-    create_time: string;
+    count_likes?: number;
+    create_time?: string;
     name: string;
     type: string;
 }

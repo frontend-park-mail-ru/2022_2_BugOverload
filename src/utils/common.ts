@@ -12,3 +12,17 @@ export const roundFloat = (rating: number) => {
 
     return `${rounded}`;
 }
+
+export const getAge = (bithday: string) => {
+    const premiere = new Date(bithday);
+    const now = new Date();
+
+    const timeDiff = Math.abs(premiere.getTime() - now.getTime());
+    const diffYears = Math.ceil(timeDiff / (1000 * 3600 * 24 * 365));
+
+    if (diffYears < 0) {
+        return 0;
+    }
+
+    return diffYears;
+}

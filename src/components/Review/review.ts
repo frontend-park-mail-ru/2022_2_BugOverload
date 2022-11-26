@@ -6,15 +6,11 @@ import { decoreCountReviews } from '@utils/decorationData';
 * Отрисовывает написанный отзыв.
 */
 export class Review {
-    constructor(data) {
-        this.data = data;
-    }
-
     /**
      * @static
      * Создаёт html-шаблон рецензии
      */
-    static createReview(data) {
+    static createReview(data: review) {
         return template({
             ...data,
             countReviews: decoreCountReviews(data.author.count_reviews),

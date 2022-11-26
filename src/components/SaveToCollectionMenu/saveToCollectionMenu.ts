@@ -8,14 +8,14 @@ import { ShowMessage } from '@components/Message/message';
 * Подписывается на измнение state listCollectionsUser
 */
 export class SaveToCollectionMenu extends Component {
-    constructor(nameLocation) {
+    constructor(nameLocation: string) {
         super();
         this.state.collections = null;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
 
         // Навешиваем обработчик на выход по клику вне области меню
-        this.closeMenuHandler = (e) => {
-            if (!e.target.closest(`.${nameLocation}`)) {
+        this.closeMenuHandler = (e: Event) => {
+            if (!(e.target as HTMLElement).closest(`.${nameLocation}`)) {
                 this.close();
             }
         };
@@ -74,8 +74,8 @@ export class SaveToCollectionMenu extends Component {
      */
     componentDidMount() {
         const btns = this.placeholder.querySelectorAll('.js-menu-save__item-btn');
-        btns.forEach((button) => {
-            this[`${button.dataset.name}`] = (event) => {
+        btns.forEach((button: HTMLElement) => {
+            this[`${button.dataset.name}`] = (event: Event) => {
                 event.preventDefault();
                 ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
             };
@@ -91,7 +91,7 @@ export class SaveToCollectionMenu extends Component {
         if (!btns) {
             return;
         }
-        btns.forEach((button) => {
+        btns.forEach((button: HTMLElement) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
     }

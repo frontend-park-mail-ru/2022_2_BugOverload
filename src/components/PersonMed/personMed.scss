@@ -1,0 +1,72 @@
+@mixin info-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+$poster-width: 120px;
+$poster-height: 170px;
+
+.person-med {
+    max-width: 680px;
+    min-width: 300px;
+    width: 100%;
+    margin-bottom: 35px;
+
+    &__actor {
+        &__container {
+            display: flex;
+            position: relative;
+            margin-bottom: 29px;
+        }
+
+        &__blackout {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: $poster-width;
+            height: $poster-height;
+            background-color: rgb(var(--blackout-color));
+            opacity: 0;
+            border-radius: 4px;
+            transition: 0.1s linear;
+
+            &:hover {
+                opacity: 0.3;
+                transition: 0.1s linear;
+                cursor: pointer;
+            }
+        }
+
+        &__photo {
+            width: $poster-width;
+            height: $poster-height;
+            border-radius: 4px;
+            background-size: cover;
+        }
+
+        &__info-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 25px;
+        }
+
+        &__prof-info {
+            margin-top: 15px;
+        }
+
+        &__common-info {
+            margin-top: 15px;
+        }
+
+        &__info-item {
+            color: var(--secondary-color-text);
+            font-size: 12px;
+        }
+
+        &__name {
+            color: var(--main-color-text);
+            font-size: 15px;
+        }
+    }
+}

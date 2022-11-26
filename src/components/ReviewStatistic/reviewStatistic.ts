@@ -7,7 +7,7 @@ import { store } from '@store/Store';
 * Подписывается на измнение state infoReviews
 */
 export class ReviewStatistic extends Component {
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.state = {
             film: props.film,
@@ -41,7 +41,7 @@ function updateInfo() {
     this.state.statusSendReview = store.getState('statusSendReview');
     this.location.querySelector('.js-component-review-statistic')?.remove();
 
-    this.update = (type) => {
+    this.update = (type: string) => {
         if (!type) {
             return;
         }

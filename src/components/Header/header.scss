@@ -12,17 +12,6 @@
   width: 100%;
   z-index: 5;
 
-  &__menu-mobile__svg {
-    margin-left: var(--standart-margin);
-    min-width: 35px;
-
-    &:hover {
-      .header__menu-mobile {
-        display: contents;
-      }
-    }
-  }
-
   &__logo {
     white-space: nowrap;
     margin-right: 20px;
@@ -115,4 +104,4 @@
     height: 100vh;
     background-color: #6C6966;
   }
-}
+} 

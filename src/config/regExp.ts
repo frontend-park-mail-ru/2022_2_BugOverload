@@ -16,4 +16,3 @@ export const hrefRegExp = {
     filmProps: '(\\w+\\-*\\w*)',
     endSlash: /\/$/,
 };
- 
