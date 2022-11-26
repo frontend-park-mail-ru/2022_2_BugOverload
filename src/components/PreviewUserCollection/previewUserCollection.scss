@@ -47,6 +47,7 @@ $height-coll: 240px;
         top: 95px;
         left: 95px;
         @include animation-prop;
+        cursor: pointer;
     }
 
     &__statistic {
