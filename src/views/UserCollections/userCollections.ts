@@ -1,5 +1,6 @@
 import { ROOT } from '@config/config';
 import { store } from '@store/Store';
+import { router } from '@router/Router';
 import { actionGetUserCollections } from '@actions/userActions';
 import { View } from '@views/View';
 import template from '@views/UserCollections/userCollections.handlebars';
@@ -22,6 +23,7 @@ class UserCollections extends View {
     render() {
         if (!store.getState('user')) {
             console.log(`no User ${store.getState('user')}`);
+            router.go({ path: '/login/', props: '' }, { pushState: true, refresh: false  });
             return;
         }
 
@@ -46,7 +48,7 @@ class UserCollections extends View {
 
         if (!this.state.userCollections && this.state.isSubscribed) {
             store.dispatch(actionGetUserCollections({
-                sort_param: 'date',
+                sort_param: 'create_time',
                 count_collections: 15,
                 delimiter: 'now',
             }));
