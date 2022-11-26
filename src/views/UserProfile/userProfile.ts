@@ -114,6 +114,16 @@ class UserProfile extends View {
             },
         ));
 
+        this.rootNode?.querySelectorAll('.js-profile__menu__links')?.forEach((elem: HTMLElement) => {
+            if (elem.dataset.activeLink === 'true') {
+                elem.dataset.activeLink = 'false';
+            }
+
+            if (elem.classList.contains('js-profile__menu-item-profile')) {
+                elem.dataset.activeLink = 'true';
+            }
+        });
+
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form') as HTMLFormElement;
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();

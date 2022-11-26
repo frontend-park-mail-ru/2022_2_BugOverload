@@ -28,18 +28,26 @@
         height: 100%;
     }
 
-    &__links{
+    &__links {
         cursor: pointer;
         font-size: 20px;
         color: var(--main-color-text);
         margin-left: 52px;
         margin-bottom: 30px;
+
+        &:hover {
+            color: var(--primary-color);
+        }
     }
 
-    &__header{
+    &__header {
         font-size: 36px;
         color: var(--main-color-text);
         margin-left: 52px;
         margin-bottom: 45px;
     }
+}
+
+[data-active-link="true"] {
+    color: var(--primary-color);
 }

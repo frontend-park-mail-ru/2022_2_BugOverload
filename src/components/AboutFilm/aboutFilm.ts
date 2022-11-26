@@ -7,6 +7,9 @@ import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
 } from '@utils/decorationData';
 import { API } from '@config/config';
+import { Modal } from '@components/Modal/modal';
+
+const video = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
 
 /**
 * Отрисовывает стилизованную общую информацию о фильме.
@@ -20,7 +23,9 @@ export class AboutFilm extends Component {
     constructor(props: componentProps) {
         super(props);
         this.data = props.film;
+        // this.rootNode = props.rootNode;
         this.location = this.rootNode.querySelector('.js-film-page__about');
+        console.log(this.location);
 
         this.about = {
             poster_hor: this.data.poster_hor,
@@ -95,9 +100,16 @@ export class AboutFilm extends Component {
             return;
         }
 
-        this.handlerTrailer = function (e: Event) {
+        this.handlerTrailer = (e: Event) => {
             e.preventDefault();
-            ShowMessage('Просмотр трейлера пока не доступен', 'negative');
+            // ShowMessage('Просмотр трейлера пока не доступен', 'negative');
+            const modal = new Modal(this.rootNode);
+            console.log(this.rootNode);
+            modal.render();
+
+            const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
+            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            // this.componentDidMount();
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);

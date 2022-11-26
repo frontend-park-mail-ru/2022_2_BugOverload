@@ -77,6 +77,9 @@ export const API = {
     rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
     del_rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
 
+    saveToColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/save`; },
+    removeFromColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/remove`; },
+
     reviews(id: number, count: number, offset: number) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
     },

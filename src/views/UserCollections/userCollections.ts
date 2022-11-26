@@ -54,13 +54,15 @@ class UserCollections extends View {
             profileMenu: templateProfileMenu(),
         }));
 
-        // if ('error' in this.state.userCollections) {
-        //     ROOT.querySelector('.js-search-page__content-container')?.insertAdjacentHTML('beforeend', `
-        //     <div class="search-page__no-content">
-        //         По вашему запросу ничего не нашлось :(
-        //         <div data-section="/" class="search-page__no-content-btn secondary-btn-med">Перейти на главную</div>
-        //     </div>`);
-        // }
+        this.rootNode?.querySelectorAll('.js-profile__menu__links')?.forEach((elem: HTMLElement) => {
+            if (elem.dataset.activeLink === 'true') {
+                elem.dataset.activeLink = 'false';
+            }
+
+            if (elem.classList.contains('js-profile__menu-item-collections')) {
+                elem.dataset.activeLink = 'true';
+            }
+        });
 
         this.userCollList = new UserCollList({
             nameLocation: 'js-user-collections__content-container',
