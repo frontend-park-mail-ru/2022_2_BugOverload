@@ -1,6 +1,6 @@
 .preview-film {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,16 +22,17 @@
   &__film-data {
     display: flex;
     flex-direction: column;
-    margin: var(--standart-margin) 0 -116px var(--standart-margin);
     z-index: 1;
-    width: 100%;
+    margin-left: var(--standart-margin);
+    width: calc(100vw - #{var(--standart-margin)});
   }
 
   &__film-title {
     color: var(--main-color-text);
     font-weight: bold;
-    font-size: 48px;
+    font-size: var(--font-size-big);
     width: 100%;
+    max-width: 600px;
   }
 
   &__film-decore-line {
