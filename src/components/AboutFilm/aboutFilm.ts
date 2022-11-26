@@ -48,13 +48,6 @@ export class AboutFilm extends Component {
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
         };
-
-        // this.subHandler = () => {
-        //     this.state.listCollections = store.getState('listCollectionsUser');
-        //     // this.render();
-        // }
-
-        // store.subscribe('listCollectionsUser', this.subHandler)
     }
 
     /**
@@ -111,6 +104,8 @@ export class AboutFilm extends Component {
             }
 
             const willWatch = this.state.listCollections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
+            console.log(`dispatched will: ${JSON.stringify(willWatch)}, list: ${JSON.stringify(this.state.listCollections)}`);
+
             store.dispatch(actionSaveToCollection({
                 idCollection: willWatch.id,
                 idFilm: this.data.id,

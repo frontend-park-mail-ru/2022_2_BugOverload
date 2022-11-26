@@ -84,6 +84,8 @@ export class SaveToCollectionMenu extends Component {
                 // ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
 
                 this.state.collections = store.getState('listCollectionsUser');
+                console.log(`dispatched LIST: ${JSON.stringify(this.state.collections)}`);
+
                 if (!this.state.collections) {
                     ShowMessage('Ошибочная :(', 'negative');
                     return;
