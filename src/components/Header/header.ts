@@ -76,15 +76,17 @@ export class Header extends Component {
 
         const collButton = this.rootNode.querySelector('.js-header__navlink-my-colls');
 
-        this.collHandler = function (e: Event) {
-            if (!store.getState('user')) {
-                e.preventDefault();
-                ShowMessage('Вы должны быть авторизованы', 'negative');
-                return;
-            }
-        };
-
-        collButton.addEventListener('click', this.collHandler);
+        if (!isMobile) {
+            this.collHandler = function (e: Event) {
+                if (!store.getState('user')) {
+                    e.preventDefault();
+                    ShowMessage('Вы должны быть авторизованы', 'negative');
+                    return;
+                }
+            };
+    
+            collButton.addEventListener('click', this.collHandler);
+        }
     }
 
     componentWillUnmount() {
