@@ -21,11 +21,11 @@ class UserCollections extends View {
     }
 
     render() {
-        if (!store.getState('user')) {
-            console.log(`no User ${store.getState('user')}`);
-            router.go({ path: '/login/', props: '' }, { pushState: true, refresh: false  });
-            return;
-        }
+        // if (!store.getState('user')) {
+        //     console.log(`no User ${store.getState('user')}`);
+        //     router.go({ path: '/login/', props: '' }, { pushState: true, refresh: false  });
+        //     return;
+        // }
 
         console.log(`this.state ${JSON.stringify(this.state.userCollections)}`);
         const userCollectionsBody: Element = document.querySelector('.js-user-collections');

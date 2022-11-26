@@ -16,13 +16,9 @@ export class PreviewUserCollection extends Component {
             ...collectionData,
             poster: API.img.collection_poster(collectionData.poster),
             create_time: decoreDate(collectionData.create_time),
-            count_films: collectionData.count_films || 0,
+            count_films: collectionData.count_films || '0',
         });
 
-        // const div = document.createElement('div');
-        // div.insertAdjacentHTML('afterbegin', collection);
-
-        // return div.innerHTML;
         return collection;
     }
 }
