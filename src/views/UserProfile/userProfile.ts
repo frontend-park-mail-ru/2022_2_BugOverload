@@ -141,7 +141,7 @@ class UserProfile extends View {
     }
 
     /**
-    * Функция, вызываемая при изменении пользователя в store если кмпонент подписан
+    * Функция, вызываемая при изменении пользователя в store если компонент подписан
     */
     userProfileOnSubscribe() {
         this.state.user = store.getState('user');

@@ -13,12 +13,12 @@
 }
 
 .profile__menu {
-    margin-top: 95px;
+    margin-top: var(--header-height);
     background: linear-gradient(to top, var(--color-menu-max), var(--color-menu-min));
 
     &__flex {
         @include column__flex;
-        height: 470px;
+        height: 425px;
         width: 307px;
         color:  var(--main-color-text);
     }

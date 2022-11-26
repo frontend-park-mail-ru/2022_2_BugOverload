@@ -8,6 +8,7 @@ import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
+import { userCollections } from '@views/UserCollections/userCollections';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -46,6 +47,12 @@ export const API = {
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_image&key=${id}/${image}`;
         },
+        collection_poster(key: string) {
+            if (key === 'default') {
+                return '/assets/img/default/coll.png';
+            }
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=collection_poster&key=${key}`;
+        },
 
         avatar_default: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=default&key=avatar_avatar`,
         auth_login: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=default&key=login`,
@@ -82,6 +89,10 @@ export const API = {
 
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
 
+    userCollections(sort_param: string = 'create_time', count_collections: number = 15, delimiter: string = 'now') {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/collections?sort_param=${sort_param}&count_collections=${count_collections}&delimiter=${delimiter}`;
+    },
+
     publicProfile(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 
     premieres(countFilms: number = 20, delimiter: number = 0) {return `${PROTOCOL}://${DOMAIN}/api/v1/premieres?count_films=${countFilms}&delimiter=${delimiter}`},
@@ -115,6 +126,7 @@ export const routes = [
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
+    { path: '/collections/', view: userCollections },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||

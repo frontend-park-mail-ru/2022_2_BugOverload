@@ -48,6 +48,23 @@ interface userInfo extends anyObject {
     joined_date: string;
 }
 
+interface userCollsParams {
+    sort_param: string,
+    count_collections: number,
+    delimiter: string,
+}
+
+interface userCollection {
+    count_films: number,
+    count_likes: number,
+    create_time: string,
+    id: number,
+    name: string,
+    poster: string,
+    update_time: string,
+}
+
+
 //person types
 interface person extends anyObject {
     avatar: string;
