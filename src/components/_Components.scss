@@ -60,7 +60,7 @@ $font-family-small: "Mail Sans Roman";
     background-color: var(--primary-color);
     border-radius: $border-radius-small;
     font-family: $font-family-small;
-    font-size: $font-size-small;
+    font-size: var(--font-size-normal);
     color: var(--text-color-on-primary);
 
   &:hover {

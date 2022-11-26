@@ -37,8 +37,8 @@
 
   &__window {
     max-height: 550px;
-    height: 75vw;
-    min-height: 500px;
+    height: 65vw;
+    min-height: 475px;
   }
 
   &__window__flex {
@@ -82,7 +82,9 @@
   }
 
   &__input {
-    width: 289px;
+    max-width: 289px;
+    width: 30vw;
+    min-width: 100px;
     height: 29px;
     border-radius: 4px;
     color: var(--main-color-text);
@@ -106,7 +108,9 @@
     }
 
     &__button-auth {
-      width: 310px;
+      max-width: 310px;
+      width: 33vw;
+      min-width: 120px;
       height: 35px;
     }
   }
@@ -144,5 +148,5 @@
   @include flex-window;
   max-width: 910px;
   min-width: 600px;
-  width: 100vw;
+  width: 95vw;
 }
