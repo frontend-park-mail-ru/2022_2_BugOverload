@@ -116,7 +116,7 @@ a, button {
   cursor: pointer;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
   .header__form {
     display: none;
   }
@@ -146,6 +146,32 @@ a, button {
 
   .page__collection__body .film{
     margin-right: 0;
+  }
+
+  .input-review {
+    &__container{
+      padding: 25px 20px;
+    }
+
+    &__head{
+      font-size: 25px;
+    }
+
+    &__select-head-text {
+      font-size: 15px;
+    }
+
+    &__input-title {
+      font-size: 12px;
+    }
+
+    &__input-text {
+      font-size: 12px;
+    }
+
+    &__user-container {
+      margin-top: 15px;
+    }
   }
 }
 

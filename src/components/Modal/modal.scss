@@ -36,8 +36,9 @@
   }
 
   &__window {
-    height: 550px;
-    min-height: 250px;
+    max-height: 550px;
+    height: 75vw;
+    min-height: 500px;
   }
 
   &__window__flex {
@@ -140,5 +141,7 @@
 
 .auth__wrapper{
   @include flex-window;
-  width: 910px;
+  max-width: 910px;
+  min-width: 600px;
+  width: 100vw;
 }
