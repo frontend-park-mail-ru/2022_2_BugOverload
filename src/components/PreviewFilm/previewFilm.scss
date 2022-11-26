@@ -1,6 +1,6 @@
 .preview-film {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
@@ -24,26 +24,27 @@
     flex-direction: column;
     margin: var(--standart-margin) 0 -116px var(--standart-margin);
     z-index: 1;
-    width: 100%;
+    width: 100vw;
   }
 
   &__film-title {
     color: var(--main-color-text);
     font-weight: bold;
     font-size: 48px;
-    width: 100%;
+    width: 100vw;
+    max-width: 600px;
   }
 
   &__film-decore-line {
     margin: 16px 0 0;
-    width: 100%;
+    width: 100vw;
     max-width: 354px;
   }
 
   &__film-description {
     color: var(--main-color-text);
     font-size: 15px;
-    width: 100%;
+    width: 100vw;
     margin-top: 16px;
   }
 
