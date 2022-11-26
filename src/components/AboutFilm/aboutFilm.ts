@@ -115,7 +115,7 @@ export class AboutFilm extends Component {
                 idCollection: willWatch.id,
                 idFilm: this.data.id,
             }));
-            console.log(`dispatched idCollection: ${willWatch.id}, idFilm: ${store.getState('film').id}`);
+            console.log(`dispatched idCollection: ${willWatch.id}, idFilm: ${this.data.id}`);
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);

@@ -94,7 +94,7 @@ export class SaveToCollectionMenu extends Component {
                     idCollection: +button.dataset.id,
                     idFilm: this.filmId,
                 }));
-                console.log(`dispatched idCollection: ${button.id}, idFilm: ${store.getState('film').id}`);
+                console.log(`dispatched idCollection: ${button.id}, idFilm: ${this.filmId}`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });
