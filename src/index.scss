@@ -116,6 +116,12 @@ a, button {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1200px) {
+  .profile__menu__column {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 620px) {
   .header__form {
     display: none;
@@ -171,6 +177,10 @@ a, button {
 
     &__user-container {
       margin-top: 15px;
+    }
+
+    &__select {
+      height: 41px;
     }
   }
 }
