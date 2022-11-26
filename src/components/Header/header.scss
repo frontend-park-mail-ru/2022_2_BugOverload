@@ -109,9 +109,10 @@
   }
 
   &__menu-mobile {
+    position: fixed;
     display: none;
     width: 66vw;
     height: 100vh;
-    background-color: #D9D9D9;
+    background-color: #6C6966;
   }
 }
