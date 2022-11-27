@@ -137,17 +137,13 @@ class ReducerUser {
 
     async getUserCollections({sort_param, count_collections, delimiter}: userCollsParams) {
         let response;
-        // console.log(`getUserCollections begin`);
         try {
-            // console.log(`getUserCollections try`);
             response = await Ajax.get(API.userCollections(sort_param, count_collections, delimiter)) as Response;
         } catch (e) {
-            // console.log(`getUserCollections catch`);
             return { userCollections: mockUserCollections() };
         }
 
         if (response.status === responsStatuses.OK) {
-            // console.log(`getUserCollections OK`);
             return { userCollections: response.body };
         }
 
@@ -156,7 +152,6 @@ class ReducerUser {
             return { userCollections: mockUserCollections() };
         }
 
-        // console.log(`getUserCollections Nothing`);
         return { userCollections: {error: 'error'} };
     }
 }

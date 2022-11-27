@@ -103,8 +103,7 @@ export class AboutFilm extends Component {
                 return;
             }
 
-            const willWatch = this.state.listCollections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
-            console.log(`dispatched will: ${JSON.stringify(willWatch)}, list: ${JSON.stringify(this.state.listCollections)}`);
+            const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')
 
             store.dispatch(actionSaveToCollection({
                 idCollection: willWatch.id,
@@ -123,7 +122,6 @@ export class AboutFilm extends Component {
         this.handlerTrailer = (e: Event) => {
             e.preventDefault();
             const modal = new Modal(this.rootNode);
-            console.log(this.rootNode);
             modal.render();
 
             const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');

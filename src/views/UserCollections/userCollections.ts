@@ -21,7 +21,6 @@ class UserCollections extends View {
     }
 
     render() {
-        console.log(`this.state ${JSON.stringify(this.state.userCollections)}`);
         const userCollectionsBody: Element = document.querySelector('.js-user-collections');
         if (userCollectionsBody) {
             userCollectionsBody.remove();
@@ -30,13 +29,11 @@ class UserCollections extends View {
 
         this.subHandler = () => {
             this.state.userCollections = store.getState('userCollections');
-            console.log(`this.render()`);
             this.render();
         }
 
         if (!this.state.isSubscribed) {
             store.subscribe('userCollections', this.subHandler);
-            console.log(`this.subscribe()`);
             this.state.isSubscribed = true;
         }
 

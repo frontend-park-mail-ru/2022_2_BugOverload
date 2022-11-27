@@ -81,17 +81,14 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button: HTMLElement) => {
             this[`${button.dataset.name}`] = (event: Event) => {
                 event.preventDefault();
-                // ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
 
                 this.state.collections = store.getState('listCollectionsUser');
-                console.log(`dispatched LIST: ${JSON.stringify(this.state.collections)}`);
 
                 if (!this.state.collections) {
                     ShowMessage('Ошибочная :(', 'negative');
                     return;
                 }
 
-                // const collection = this.state.collections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
                 store.dispatch(actionSaveToCollection({
                     idCollection: +button.dataset.idColl,
                     idFilm: this.filmId,
