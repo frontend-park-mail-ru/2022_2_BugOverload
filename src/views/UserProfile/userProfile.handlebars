@@ -37,6 +37,8 @@
         <div class="profile__user__flex">
             <div class="profile__user-container">
                 <div class="profile__username">{{nickname}}</div>
+                {{#if public}}
+                {{else}}
                 <svg class="profile__change__svg js-profile__change__svg" width="32" height="32" viewBox="0 0 32 32"
                     fill="none" xmlns="https://www.w3.org/2000/svg">
                     <path d="M18.6667 2.66675L24 8.00008L9.33333 22.6667H4V17.3334L18.6667 2.66675Z" stroke="white"
@@ -44,6 +46,7 @@
                     <path d="M4 29.3333H28" stroke="white" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
+                {{/if}}
             </div>
             {{#if public}}
             {{else}}

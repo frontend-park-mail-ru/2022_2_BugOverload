@@ -133,6 +133,10 @@ a, button {
     display: none;
   }
 
+  .primary-btn-big {
+    font-size: 15px;
+  }
+
   body, html {
     --standart-margin: 15px;
     --margin-left-login-btn: 155px;
@@ -151,16 +155,10 @@ a, button {
         --font-size-big: 36px;
     }
 
-    .header{
-        &__login__btn {
-            margin-right: var(--standart-margin);
-            margin-left: var(--margin-left-login-btn);
-        }
-
-        &__userbar-substrate {
-            margin-right: 25px;
-        }
+    &__userbar-substrate {
+      margin-right: 25px;
     }
+  }
 
   .page__collection__body .film{
     margin-right: 0;
@@ -196,7 +194,7 @@ a, button {
     }
   }
 }
-}
+
 .active {
     font-weight: bold;
 }

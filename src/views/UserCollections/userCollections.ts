@@ -22,12 +22,10 @@ class UserCollections extends View {
 
     render() {
         if (!store.getState('user')) {
-            console.log(`no User ${store.getState('user')}`);
             router.go({ path: '/login/', props: '' }, { pushState: true, refresh: false  });
             return;
         }
 
-        console.log(`this.state ${JSON.stringify(this.state.userCollections)}`);
         const userCollectionsBody: Element = document.querySelector('.js-user-collections');
         if (userCollectionsBody) {
             userCollectionsBody.remove();
@@ -36,13 +34,11 @@ class UserCollections extends View {
 
         this.subHandler = () => {
             this.state.userCollections = store.getState('userCollections');
-            console.log(`this.render()`);
             this.render();
         }
 
         if (!this.state.isSubscribed) {
             store.subscribe('userCollections', this.subHandler);
-            console.log(`this.subscribe()`);
             this.state.isSubscribed = true;
         }
 
@@ -52,7 +48,6 @@ class UserCollections extends View {
                 count_collections: 15,
                 delimiter: 'now',
             }));
-            console.log(`this.dispatched`);
             return;
         }
 
@@ -80,8 +75,6 @@ class UserCollections extends View {
         this.isSubscribed = false;
         this.state.userCollections = null;
         store.unsubscribe('userCollections', this.subHandler);
-        console.log(`unsubscribe()`);
-
     }
 }
 
