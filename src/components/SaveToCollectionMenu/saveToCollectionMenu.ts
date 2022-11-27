@@ -2,15 +2,19 @@ import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.hand
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
+import {
+    actionSaveToCollection,
+} from '@actions/filmActions';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
 * Подписывается на измнение state listCollectionsUser
 */
 export class SaveToCollectionMenu extends Component {
-    constructor(nameLocation: string) {
+    constructor(nameLocation: string, filmId: number) {
         super();
         this.state.collections = null;
+        this.filmId = filmId;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
 
         // Навешиваем обработчик на выход по клику вне области меню
@@ -77,7 +81,19 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button: HTMLElement) => {
             this[`${button.dataset.name}`] = (event: Event) => {
                 event.preventDefault();
-                ShowMessage(`Коллекция ${button.dataset.name} в данный момент не доступна`, 'negative');
+
+                this.state.collections = store.getState('listCollectionsUser');
+
+                if (!this.state.collections) {
+                    ShowMessage('Ошибочная :(', 'negative');
+                    return;
+                }
+
+                store.dispatch(actionSaveToCollection({
+                    idCollection: +button.dataset.idColl,
+                    idFilm: this.filmId,
+                }));
+                console.log(`dispatched idCollection: ${button.dataset.idColl}, idFilm: ${this.filmId}`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });

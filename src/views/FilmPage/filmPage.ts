@@ -28,6 +28,18 @@ export class FilmPage extends View {
         };
 
         store.subscribe('statusSendReview', this.sendReviewSuccess);
+
+        this.saveToCollStatus = () => {
+            ShowMessage('Сохранено!', 'positive');
+        };
+
+        store.subscribe('saveToCollStatus', this.saveToCollStatus);
+
+        this.removeFromCollStatus = () => {
+            ShowMessage('Фильм удалён из коллекции', 'positive');
+        };
+
+        store.subscribe('removeFromCollStatus', this.removeFromCollStatus);
     }
 
     /**
@@ -116,6 +128,8 @@ export class FilmPage extends View {
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
         store.unsubscribe('statusSendReview', this.sendReviewSuccess);
+        store.unsubscribe('removeFromCollStatus', this.removeFromCollStatus);
+        store.unsubscribe('saveToCollStatus', this.saveToCollStatus);
     }
 }
 

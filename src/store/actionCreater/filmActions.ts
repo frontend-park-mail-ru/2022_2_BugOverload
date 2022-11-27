@@ -34,3 +34,13 @@ export const actionGetPremieresData = (params: premiereParams) => ({
     type: 'getPremieresData',
     value: params,
 });
+
+export const actionSaveToCollection = (params: filmToCollParams) => ({
+    type: 'saveToCollection',
+    value: params,
+});
+
+export const actionRemoveFromCollection = (params: filmToCollParams) => ({
+    type: 'removeFromCollection',
+    value: params,
+});

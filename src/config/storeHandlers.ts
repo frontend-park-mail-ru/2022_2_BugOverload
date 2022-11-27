@@ -19,6 +19,8 @@ const handlers = [
     { type: 'getDataReviews', methodStore: reducerFilm.getDataReviews.bind(reducerFilm) },
     { type: 'sendReview', methodStore: reducerFilm.sendReview.bind(reducerFilm) },
     { type: 'getPremieresData', methodStore: reducerFilm.getPremieresData.bind(reducerFilm) },
+    { type: 'saveToCollection', methodStore: reducerFilm.saveToCollection.bind(reducerFilm) },
+    { type: 'removeFromCollection', methodStore: reducerFilm.removeFromCollection.bind(reducerFilm) },
 
     { type: 'getCollectionData', methodStore: reducerCommon.getCollectionData.bind(reducerCommon) },
     { type: 'getPreviewData', methodStore: reducerCommon.getPreviewData.bind(reducerCommon) },

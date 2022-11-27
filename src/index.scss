@@ -107,6 +107,7 @@ body, html {
     --premier-date-color: #BDBDBD;
     --secondary-weak-text: #E0E0E0;
     --font-size-big: 48px;
+    --font-size-normal: 15px;
     font-family: 'Mail Sans Roman';
     background-color: var(--backgr-color);
     margin: 0;
@@ -126,6 +127,24 @@ a, button {
   .profile__menu__column {
     display: none;
   }
+}
+
+@media screen and (max-width: 800px) {
+  body, html {
+    --font-size-normal: 13px;
+  }
+
+  .modal{
+    &__header {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    &__login__switch__btn {
+      margin-right: 20px;
+    }
+  }
+
 }
 
 @media screen and (max-width: 620px) {

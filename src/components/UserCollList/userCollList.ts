@@ -23,13 +23,9 @@ export class UserCollList extends Component {
 
         const collections = this.collectionsData
             .reduce((res: string, collData: userCollection) => res + PreviewUserCollection.createUserCollection(collData), '');
-        // const date: Array<string> = decoreDate(this.filmsData[0].prod_date).split(' ');
 
         const t = template({
             collections: collections,
-            // dateDay: date[0],
-            // dateMonth: date[1][0].toUpperCase() + date[1].slice(1),
-            // daysLeft: decoreDaysLeft(this.filmsData[0].prod_date),
         });
 
         this.location.insertAdjacentHTML('beforeend', t);
