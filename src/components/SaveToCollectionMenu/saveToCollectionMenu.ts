@@ -93,10 +93,10 @@ export class SaveToCollectionMenu extends Component {
 
                 // const collection = this.state.collections.filter((coll: userCollListItem) => coll.name === 'Буду смотреть')
                 store.dispatch(actionSaveToCollection({
-                    idCollection: +button.dataset.id,
+                    idCollection: +button.dataset.idColl,
                     idFilm: this.filmId,
                 }));
-                console.log(`dispatched idCollection: ${button.id}, idFilm: ${this.filmId}`);
+                console.log(`dispatched idCollection: ${button.dataset.idColl}, idFilm: ${this.filmId}`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });
