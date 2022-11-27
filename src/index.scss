@@ -156,6 +156,12 @@ a, button {
     font-size: 15px;
   }
 
+  .modal {
+    &__input__button-review {
+      height: 35px;
+    }
+  }
+
   body, html {
     --standart-margin: 15px;
     --margin-left-login-btn: 155px;
@@ -185,7 +191,7 @@ a, button {
 
   .input-review {
     &__container{
-      padding: 25px 20px;
+      padding: 25px 30px 35px;
     }
 
     &__head{
