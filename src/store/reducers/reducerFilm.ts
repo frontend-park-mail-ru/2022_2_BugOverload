@@ -138,10 +138,13 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             const oldList = store.getState('listCollectionsUser');
+            console.log(`oldList: ${JSON.stringify(oldList)}`);
             const newList = oldList.map((elem: userCollListItem) => elem.id !== saveToCollParams.idCollection);
+            console.log(`newList: ${JSON.stringify(newList)}`);
             const changedColl = oldList.find((elem: userCollListItem) => elem.id === saveToCollParams.idCollection);
             changedColl.is_used = true;
             newList.push(changedColl);
+            console.log(`newList ITOG: ${JSON.stringify(newList)}`);
 
             return {
                 saveToCollStatus: response.status,

@@ -32,8 +32,12 @@ export class FilmPage extends View {
         store.subscribe('statusSendReview', this.sendReviewSuccess);
 
         this.saveToCollStatus = () => {
-            if (store.getState('saveToCollStatus') == responsStatuses.NoContent) {
+            if (store.getState('saveToCollStatus').saveToCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Сохранено!', 'positive');
+                return;
+            }
+            if (store.getState('saveToCollStatus').saveToCollStatus === responsStatuses.BadRequest) {
+                ShowMessage('Вы уже сохранили этот фильм');
                 return;
             }
             ShowMessage('Ошибка сохранения. Попробуйте ещё раз');
@@ -42,8 +46,12 @@ export class FilmPage extends View {
         store.subscribe('saveToCollStatus', this.saveToCollStatus);
 
         this.removeFromCollStatus = () => {
-            if (store.getState('removeFromCollStatus') == responsStatuses.NoContent) {
+            if (store.getState('removeFromCollStatus').removeFromCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Фильм удалён из коллекции', 'positive');
+                return;
+            }
+            if (store.getState('saveToCollStatus').removeFromCollStatus === responsStatuses.BadRequest) {
+                ShowMessage('Вы уже удалили этот фильм');
                 return;
             }
             ShowMessage('Ошибка удаления. Попробуйте ещё раз');

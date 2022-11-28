@@ -25,7 +25,6 @@
   &__content-container {
     display: flex;
     justify-content: space-between;
-    // width: 655px;
     width: calc(400px + (655 - 400) * ((100vw - 300px) / (1920 - 300)));
     height: calc(40px + (64 - 40) * ((100vw - 300px) / (1920 - 300)));
   }
@@ -34,7 +33,6 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    // width: 500px;
     width: calc(320px + (500 - 320) * ((100vw - 300px) / (1920 - 300)));
   }
 
@@ -74,7 +72,7 @@
 
   &__count-scores {
     color: var(--secondary-color-text);
-    font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1920 - 300)));;
+    font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1920 - 300)));
   }
 
   &__star:hover &__star-image {
@@ -95,7 +93,6 @@
 
   &__text-stars-container {
     display: flex;
-    // width: 490px;
     width: calc(340px + (490 - 340) * ((100vw - 300px) / (1920 - 300)));
     justify-content: space-between;
     margin-top: 7px;
