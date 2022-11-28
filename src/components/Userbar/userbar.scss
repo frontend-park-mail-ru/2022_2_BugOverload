@@ -107,8 +107,17 @@
 }
 
 .js-header{
+  &__menu-mobile__area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+
   &__menu-mobile__area:hover &__mobile-userbar {
-    display: block;
+    display: flex;
   }
 
 
@@ -118,6 +127,10 @@
   }
 
   &__mobile-userbar {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: fixed;
     top: 0; left: 0;
     display: none;
@@ -125,5 +138,24 @@
     background-color: #6C6966;
     height: 100%;
     width: 66vw;
+    padding-top: 10vh;
+
+    &__link {
+      color: #fff;
+      margin-left: 10vw;
+      border-bottom: 2px solid maroon; 
+    }
+  }
+
+  &__mobile-userbar-substrate {
+    z-index: 5;
+    width: auto;
+    height: auto;
+    display: flex;
+    color: var(--main-color-text);
+    flex-flow: column nowrap;
+    align-self: flex-start;
+    border-radius: 15px;
+    margin-right: var(--standart-margin);
   }
 }
