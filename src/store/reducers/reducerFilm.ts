@@ -147,7 +147,7 @@ class ReducerFilm {
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
         const response = await Ajax.post({
             url: API.removeFromColl(removeFromCollParams.idFilm),
-            body: { collection: removeFromCollParams.idCollection },
+            body: { collection_id: removeFromCollParams.idCollection },
         });
 
         if (response.status === responsStatuses.OK) {
