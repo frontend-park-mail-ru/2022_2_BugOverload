@@ -11,6 +11,8 @@
   height: var(--header-height);
   width: 100%;
   z-index: 5;
+  padding-right: var(--standart-margin);
+  box-sizing: border-box;
 
   &__logo {
     white-space: nowrap;

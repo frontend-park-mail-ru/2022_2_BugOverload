@@ -113,6 +113,8 @@ html {
   --color-menu-min: rgba(23 23 23 /0%);
   --premier-date-color: #BDBDBD;
   --secondary-weak-text: #E0E0E0;
+  --line-color-userbar:#858585;
+  --backgr-userbar: #343434;
   --font-size-big: 48px;
   --font-size-normal: 15px;
   --font-size-small: 13px;
@@ -161,7 +163,7 @@ button {
   html {
     --font-size-small: 11px;
   }
-  
+
   .modal {
     &__input {
       height: 25px;
@@ -230,7 +232,7 @@ button {
         height: 25px;
       }
     }
-    
+
     &__wrapper__input {
       margin-bottom: 0;
     }

@@ -1,6 +1,8 @@
 .error {
   position: fixed;
-  bottom: 15px;
+  // top: 70px;
+  bottom: 30vh;
+  left: 0;
   width: 200px;
   padding: 10px 15px;
   background-color: var(--error-color);

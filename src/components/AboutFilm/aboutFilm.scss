@@ -103,6 +103,14 @@
     color: var(--main-color-text);
     margin-top: 21px;
     width: 540px;
+
+    @media screen and (max-width: 1200px) {
+      width: 400px;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 350px;
+    }
   }
 
   &__directors {
@@ -110,6 +118,14 @@
     color: var(--secondary-color-text);
     margin-top: 24px;
     width: 540px;
+
+    @media screen and (max-width: 1200px) {
+      width: 400px;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 350px;
+    }
   }
 
   &__label-director {

@@ -16,12 +16,27 @@
     position: absolute;
   }
 
+  // &__items-container {
+  //   display: grid;
+  //   grid-template-columns: 15% 85%;
+  //   column-gap: 10px;
+  //   align-items: center;
+  //   margin-top: 10px;
+  // }
+  &__used-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+
   &__items-container {
-    display: grid;
-    grid-template-columns: 15% 85%;
-    column-gap: 10px;
-    align-items: center;
-    margin-top: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  &__item-container {
+    display: flex;
+    flex-flow: row nowrap;
   }
 
   &__title {
@@ -51,4 +66,7 @@
   @include icon-check;
   width: 20px;
   height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

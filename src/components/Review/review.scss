@@ -7,6 +7,14 @@
     border-radius: 20px;
     margin-bottom: 48px;
     width: 900px;
+
+    @media screen and (max-width: 1200px) {
+      width: 600px;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 250px;
+    }
   }
 
   &__meta-info-container {

@@ -24,12 +24,17 @@
     font-size: 15px;
     color: var(--secondary-color-text);
     width: 270px;
+
+    @media screen and (max-width: 400px) {
+      width: 160px;
+    }
   }
 
   &__info-item-value {
     font-size: 15px;
     color: var(--main-color-text);
     flex-wrap: nowrap;
+    white-space: nowrap;
 
     &:hover {
       color: var(--primary-color);
@@ -65,8 +70,12 @@
 
   &__list-actors {
     display: flex;
-    height: 710px;
-    width: 666px;
+
+    // height: 710px;
+    // width: 666px;
+
+    height: auto;
+    width: auto;
     flex-flow: column wrap;
     margin-top: 37px;
   }

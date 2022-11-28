@@ -151,6 +151,8 @@ class ReducerFilm {
                 listCollectionsUser: newList,
             };
         }
+
+        console.log(`saveStatus: ${{ saveToCollStatus: response.status }}`)
         return { saveToCollStatus: response.status };
     }
 
@@ -165,6 +167,8 @@ class ReducerFilm {
                 removeFromCollStatus: response.status,
             };
         }
+
+        console.log(`remove: ${{ removeFromCollStatus: response.status }}`)
         return { removeFromCollStatus: response.status };
     };
 }
