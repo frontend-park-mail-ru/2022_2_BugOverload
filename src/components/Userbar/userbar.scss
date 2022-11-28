@@ -109,8 +109,7 @@
 .js-header{
   &__menu-mobile__area {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
@@ -127,8 +126,7 @@
   }
 
   &__mobile-userbar {
-    flex-direction: column;
-    flex-wrap: nowrap;
+    flex-wrap: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
     position: fixed;
