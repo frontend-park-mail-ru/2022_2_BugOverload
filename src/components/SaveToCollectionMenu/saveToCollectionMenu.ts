@@ -16,6 +16,7 @@ export class SaveToCollectionMenu extends Component {
         this.state.collections = null;
         this.filmId = filmId;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
+        this.isOpen = false;
 
         // Навешиваем обработчик на выход по клику вне области меню
         this.closeMenuHandler = (e: Event) => {
@@ -27,9 +28,9 @@ export class SaveToCollectionMenu extends Component {
 
         this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
-            this.render();
-            // this.close();
-            // this.open();
+            if (this.isOpen) {
+                this.render();
+            }
         };
 
         store.subscribe('listCollectionsUser', this.subHandler);
@@ -51,6 +52,7 @@ export class SaveToCollectionMenu extends Component {
         this.render();
         menu = this.placeholder.querySelector('.js-menu-save__container');
         menu.setAttribute('open', '');
+        this.isOpen = true;
     }
 
     /**
@@ -66,6 +68,7 @@ export class SaveToCollectionMenu extends Component {
             this.componentWillUnmount();
             menu.remove();
         }
+        this.isOpen = false;
     }
 
     /**

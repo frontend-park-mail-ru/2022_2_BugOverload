@@ -23,6 +23,8 @@ export class FilmPage extends View {
             id: null,
             film: null,
             isSubscribed: false,
+            saveToCollStatus: null,
+            removeFromCollStatus: null,
         };
 
         this.sendReviewSuccess = () => {
@@ -32,11 +34,14 @@ export class FilmPage extends View {
         store.subscribe('statusSendReview', this.sendReviewSuccess);
 
         this.saveToCollStatus = () => {
-            if (store.getState('saveToCollStatus').saveToCollStatus === responsStatuses.NoContent) {
+            this.state.saveToCollStatus = store.getState('saveToCollStatus');
+            console.log(JSON.stringify(`this.state.saveToCollStatus ${this.state.saveToCollStatus}`));
+
+            if (this.state.saveToCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Сохранено!', 'positive');
                 return;
             }
-            if (store.getState('saveToCollStatus').saveToCollStatus === responsStatuses.BadRequest) {
+            if (this.state.saveToCollStatus === responsStatuses.BadRequest) {
                 ShowMessage('Вы уже сохранили этот фильм');
                 return;
             }
@@ -46,11 +51,14 @@ export class FilmPage extends View {
         store.subscribe('saveToCollStatus', this.saveToCollStatus);
 
         this.removeFromCollStatus = () => {
-            if (store.getState('removeFromCollStatus').removeFromCollStatus === responsStatuses.NoContent) {
+            this.state.removeFromCollStatus = store.getState('removeFromCollStatus');
+            console.log(JSON.stringify(`this.state.removeFromCollStatus ${this.state.removeFromCollStatus}`));
+
+            if (this.state.removeFromCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Фильм удалён из коллекции', 'positive');
                 return;
             }
-            if (store.getState('saveToCollStatus').removeFromCollStatus === responsStatuses.BadRequest) {
+            if (this.state.removeFromCollStatus === responsStatuses.BadRequest) {
                 ShowMessage('Вы уже удалили этот фильм');
                 return;
             }
