@@ -138,18 +138,17 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             const oldList = store.getState('listCollectionsUser');
-            const newList = oldList.map((elem: filmToCollParams) => elem.id !== saveToCollParams.idCollection);
-            const changedColl = oldList.find((elem: filmToCollParams) => elem.id === saveToCollParams.idCollection);
+            const newList = oldList.map((elem: userCollListItem) => elem.id !== saveToCollParams.idCollection);
+            const changedColl = oldList.find((elem: userCollListItem) => elem.id === saveToCollParams.idCollection);
             changedColl.is_used = true;
             newList.push(changedColl);
 
-            oldList[changedColl.name]
             return {
                 saveToCollStatus: response.status,
                 listCollectionsUser: newList, //[saveToCollParams.idCollection]
             };
         }
-        return { saveToCollStatus: null };
+        return { saveToCollStatus: null } as anyObject;
     }
 
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
