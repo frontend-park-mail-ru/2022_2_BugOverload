@@ -148,7 +148,7 @@ class ReducerFilm {
 
             return {
                 saveToCollStatus: response.status,
-                listCollectionsUser: newList, //[saveToCollParams.idCollection]
+                listCollectionsUser: newList,
             };
         }
         return { saveToCollStatus: response.status };
