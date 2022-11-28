@@ -37,8 +37,8 @@
 
   &__window {
     max-height: 550px;
-    height: 65vw;
-    min-height: 475px;
+    height: 73vw;
+    min-height: 420px;
   }
 
   &__window__flex {
@@ -83,8 +83,8 @@
 
   &__input {
     max-width: 289px;
-    width: 30vw;
-    min-width: 160px;
+    width: 40vw;
+    min-width: 170px;
     height: 29px;
     border-radius: 4px;
     color: var(--main-color-text);
@@ -100,17 +100,17 @@
     }
 
     &__error {
-      width: 300px;
+      width: auto;
       height: 18px;
       margin-top: 5px;
       color: #e72d2d;
-      font-size: 12px;
+      font-size: var(--font-size-small);
     }
 
     &__button-auth {
       max-width: 310px;
-      width: 33vw;
-      min-width: 120px;
+      width: 44vw;
+      min-width: 190px;
       height: 35px;
     }
   }
@@ -147,6 +147,6 @@
 .auth__wrapper{
   @include flex-window;
   max-width: 910px;
-  min-width: 600px;
   width: 95vw;
+  min-width: 310px;
 }

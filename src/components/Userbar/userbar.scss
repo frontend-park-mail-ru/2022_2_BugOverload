@@ -107,8 +107,16 @@
 }
 
 .js-header{
-  &__menu-mobile__area:hover &__mobile-userbar {
-    display: block;
+  &__menu-mobile__area {
+    display: flex;
+    flex-wrap: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  &__menu-mobile__target:hover &__mobile-userbar {
+    display: flex;
   }
 
 
@@ -118,6 +126,9 @@
   }
 
   &__mobile-userbar {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: fixed;
     top: 0; left: 0;
     display: none;
@@ -125,5 +136,38 @@
     background-color: #6C6966;
     height: 100%;
     width: 66vw;
+    padding-top: 5vh;
+    border-radius: 0 3%;
+
+    &__header {
+      color: #CCC;
+      padding-left: 5vw;
+      width: 61vw;
+      font-size: x-large;
+      border-bottom: 2px solid #C4C4C4; 
+      height: 7vh;
+    }
+
+    &__link {
+      color: #fff;
+      margin-top: 2vh;
+      padding-left: 10vw;
+      font-size: large;
+      width: 56vw;
+      border-bottom: 2px solid #C4C4C4; 
+      height: 7vh;
+    }
+  }
+
+  &__mobile-userbar-substrate {
+    z-index: 5;
+    width: auto;
+    height: auto;
+    display: flex;
+    color: var(--main-color-text);
+    flex-flow: column nowrap;
+    align-self: flex-start;
+    border-radius: 15px;
+    margin-right: var(--standart-margin);
   }
 }
