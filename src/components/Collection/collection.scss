@@ -19,6 +19,12 @@
     font-size: 28px;
     color: var(--main-color-text);
     cursor: pointer;
+
+    &:hover {
+      color: var(--primary-color-text);
+      transition: 0.1s linear;
+      cursor: pointer;
+    }
   }
 
   &__slider {

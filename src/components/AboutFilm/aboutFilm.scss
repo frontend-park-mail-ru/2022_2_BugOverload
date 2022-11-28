@@ -22,6 +22,14 @@
     width: 900px;
     height: 100vh;
     background: var(--blackout-left-content);
+
+    @media screen and (max-width: 1200px) {
+      width: 600px;
+    }
+
+    @media screen and (max-width: 620px) {
+      width: 250px;
+    }
   }
 
   &__container {

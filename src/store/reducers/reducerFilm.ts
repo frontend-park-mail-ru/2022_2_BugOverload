@@ -133,7 +133,7 @@ class ReducerFilm {
     async saveToCollection(saveToCollParams: filmToCollParams) {
         const response = await Ajax.post({
             url: API.saveToColl(saveToCollParams.idFilm),
-            body: { collection: saveToCollParams.idCollection },
+            body: { collection_id: saveToCollParams.idCollection },
         });
 
         if (response.status === responsStatuses.OK) {

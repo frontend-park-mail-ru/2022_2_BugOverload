@@ -5,6 +5,10 @@
   background-size: cover;
   background-repeat: no-repeat;
 
+  @media screen and (max-width: 1200px) {
+    background-position-x: -50vw;
+  }
+
   &__blackout-bottom {
     width: 100%;
     height: 237px;

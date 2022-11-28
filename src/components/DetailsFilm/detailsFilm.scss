@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-left: var(--standart-margin);
-
+  flex-flow: row wrap;
 
   &__info-container {
     display: flex;
