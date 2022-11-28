@@ -161,13 +161,7 @@ button {
   html {
     --font-size-small: 11px;
   }
-
-  .modal__signup {
-    .modal__flex__center__div {
-      display: flex;
-    }
-  }
-
+  
   .modal {
     &__input {
       height: 25px;
@@ -182,7 +176,7 @@ button {
       margin-bottom: 10px;
     }
 
-    &__login {
+    &__login, &__signup {
       width: 100%;
       border-radius: 30px;
 
