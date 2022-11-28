@@ -136,9 +136,17 @@ class ReducerFilm {
             body: { collection_id: saveToCollParams.idCollection },
         });
 
-        if (response.status === responsStatuses.OK) {
+        if (response.status === responsStatuses.NoContent) {
+            const oldList = store.getState('listCollectionsUser');
+            const newList = oldList.map((elem: filmToCollParams) => elem.id !== saveToCollParams.idCollection);
+            const changedColl = oldList.find((elem: filmToCollParams) => elem.id === saveToCollParams.idCollection);
+            changedColl.is_used = true;
+            newList.push(changedColl);
+
+            oldList[changedColl.name]
             return {
                 saveToCollStatus: response.status,
+                listCollectionsUser: newList, //[saveToCollParams.idCollection]
             };
         }
         return { saveToCollStatus: null };
@@ -150,7 +158,7 @@ class ReducerFilm {
             body: { collection_id: removeFromCollParams.idCollection },
         });
 
-        if (response.status === responsStatuses.OK) {
+        if (response.status === responsStatuses.NoContent) {
             return {
                 removeFromCollStatus: response.status,
             };

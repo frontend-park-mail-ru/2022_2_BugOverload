@@ -10,6 +10,8 @@ import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
+import { responsStatuses } from '@config/config';
+
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
 *
@@ -30,13 +32,22 @@ export class FilmPage extends View {
         store.subscribe('statusSendReview', this.sendReviewSuccess);
 
         this.saveToCollStatus = () => {
-            ShowMessage('Сохранено!', 'positive');
+            if (store.getState('saveToCollStatus') == responsStatuses.NoContent) {
+                ShowMessage('Сохранено!', 'positive');
+                return;
+            }
+            ShowMessage('Ошибка сохранения. Попробуйте ещё раз');
         };
 
         store.subscribe('saveToCollStatus', this.saveToCollStatus);
 
         this.removeFromCollStatus = () => {
-            ShowMessage('Фильм удалён из коллекции', 'positive');
+            if (store.getState('removeFromCollStatus') == responsStatuses.NoContent) {
+                ShowMessage('Фильм удалён из коллекции', 'positive');
+                return;
+            }
+            ShowMessage('Ошибка удаления. Попробуйте ещё раз');
+
         };
 
         store.subscribe('removeFromCollStatus', this.removeFromCollStatus);
