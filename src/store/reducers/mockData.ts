@@ -317,3 +317,106 @@ export const mockSearch = () => ({
         }
     ],
 });
+
+export const mockUserCollections = () => {
+  return [
+      {
+          count_films: 10,
+          count_likes: 1023,
+          create_time: "2012.06.05 01:25:00",
+          id: 12,
+          name: "Избранное",
+          poster: "default",
+          update_time: "2020.12.12 15:15:15"
+      },
+      {
+          count_films: 123,
+          count_likes: 1132,
+          create_time: "2022.01.23 01:15:00",
+          id: 13,
+          name: "Буду смотреть",
+          poster: "default",
+          update_time: "2021.11.11 15:15:15"
+      },
+      {
+        count_films: 123,
+        count_likes: 1132,
+        create_time: "2022.01.23 01:15:00",
+        id: 13,
+        name: "Буду смотреть",
+        poster: "default",
+        update_time: "2021.11.11 15:15:15"
+    },
+    {
+      count_films: 123,
+      count_likes: 1132,
+      create_time: "2022.01.23 01:15:00",
+      id: 13,
+      name: "Буду смотреть",
+      poster: "default",
+      update_time: "2021.11.11 15:15:15"
+  },
+  {
+    count_films: 123,
+    count_likes: 1132,
+    create_time: "2022.01.23 01:15:00",
+    id: 13,
+    name: "Буду смотреть",
+    poster: "default",
+    update_time: "2021.11.11 15:15:15"
+},      {
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+},
+{
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+},
+{
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+},
+{
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+}
+,      {
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+}
+,      {
+  count_films: 123,
+  count_likes: 1132,
+  create_time: "2022.01.23 01:15:00",
+  id: 13,
+  name: "Буду смотреть",
+  poster: "default",
+  update_time: "2021.11.11 15:15:15"
+}
+  ]
+}

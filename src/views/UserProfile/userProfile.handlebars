@@ -33,62 +33,65 @@
         {{/if}}
     </div>
 
-    <div class="profile__user__flex">
-        <div class="profile__user-container">
-            <div class="profile__username">{{nickname}}</div>
-            <svg class="profile__change__svg js-profile__change__svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
-                xmlns="https://www.w3.org/2000/svg">
-                <path d="M18.6667 2.66675L24 8.00008L9.33333 22.6667H4V17.3334L18.6667 2.66675Z" stroke="white"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M4 29.3333H28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </div>
-        {{#if public}}
-        {{else}}
-        <div class="profile__email">{{email}}</div>
-        {{/if}}
-        <div class="profile__info__flex">
-            <div class="profile__info__wrapper">
-                <div class="profile__info__value__wrapper">
-                    <div class="profile__info__field">
-                        Дата регистрации:
+    <div class="profile__user_content">
+        <div class="profile__user__flex">
+            <div class="profile__user-container">
+                <div class="profile__username">{{nickname}}</div>
+                <svg class="profile__change__svg js-profile__change__svg" width="32" height="32" viewBox="0 0 32 32"
+                    fill="none" xmlns="https://www.w3.org/2000/svg">
+                    <path d="M18.6667 2.66675L24 8.00008L9.33333 22.6667H4V17.3334L18.6667 2.66675Z" stroke="white"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 29.3333H28" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            {{#if public}}
+            {{else}}
+            <div class="profile__email">{{email}}</div>
+            {{/if}}
+            <div class="profile__info__flex">
+                <div class="profile__info__wrapper">
+                    <div class="profile__info__value__wrapper">
+                        <div class="profile__info__field">
+                            Дата регистрации:
+                        </div>
+                        <div class="profile__info__value">
+                            {{joined_date}}
+                        </div>
                     </div>
-                    <div class="profile__info__value">
-                        {{joined_date}}
+                    <div class="profile__info__value__wrapper">
+                        <div class="profile__info__field">
+                            Оценок:
+                        </div>
+                        <div class="profile__info__value">
+                            {{count_ratings}}
+                        </div>
                     </div>
-                </div>
-                <div class="profile__info__value__wrapper">
-                    <div class="profile__info__field">
-                        Оценок:
+                    <div class="profile__info__value__wrapper">
+                        <div class="profile__info__field">
+                            Коллекций:
+                        </div>
+                        <div class="profile__info__value">
+                            {{count_collections}}
+                        </div>
                     </div>
-                    <div class="profile__info__value">
-                        {{count_ratings}}
-                    </div>
-                </div>
-                <div class="profile__info__value__wrapper">
-                    <div class="profile__info__field">
-                        Коллекций:
-                    </div>
-                    <div class="profile__info__value">
-                        {{count_collections}}
-                    </div>
-                </div>
-                <div class="profile__info__value__wrapper">
-                    <div class="profile__info__field">
-                        Рецензий:
-                    </div>
-                    <div class="profile__info__value">
-                        {{count_reviews}}
+                    <div class="profile__info__value__wrapper">
+                        <div class="profile__info__field">
+                            Рецензий:
+                        </div>
+                        <div class="profile__info__value">
+                            {{count_reviews}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    {{#if public}}
-    {{else}}
-    <div class="profile__change">
-        {{{profileChange}}}
+        {{#if public}}
+        {{else}}
+        <div class="profile__change">
+            {{{profileChange}}}
+        </div>
+        {{/if}}
     </div>
-    {{/if}}
 </div>

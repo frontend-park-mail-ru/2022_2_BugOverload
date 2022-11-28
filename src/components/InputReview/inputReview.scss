@@ -27,7 +27,8 @@ $input-height: 46px;
     background-color: var(--backgr-modal-review);
     backdrop-filter: blur(30px);
     border-radius: 20px;
-    width: 700px;
+    max-width: 700px;
+    width: 100vw;
     height: auto;
   }
 

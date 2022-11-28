@@ -114,6 +114,16 @@ class UserProfile extends View {
             },
         ));
 
+        this.rootNode?.querySelectorAll('.js-profile__menu__links')?.forEach((elem: HTMLElement) => {
+            if (elem.dataset.activeLink === 'true') {
+                elem.dataset.activeLink = 'false';
+            }
+
+            if (elem.classList.contains('js-profile__menu-item-profile')) {
+                elem.dataset.activeLink = 'true';
+            }
+        });
+
         const inputImgForm = this.rootNode.querySelector('.js-profile__img__form') as HTMLFormElement;
         inputImgForm.addEventListener('change', (e) => {
             e.preventDefault();
@@ -141,7 +151,7 @@ class UserProfile extends View {
     }
 
     /**
-    * Функция, вызываемая при изменении пользователя в store если кмпонент подписан
+    * Функция, вызываемая при изменении пользователя в store если компонент подписан
     */
     userProfileOnSubscribe() {
         this.state.user = store.getState('user');

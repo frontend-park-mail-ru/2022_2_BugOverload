@@ -129,6 +129,34 @@ class ReducerFilm {
 
         return { premieres: null };
     }
+
+    async saveToCollection(saveToCollParams: filmToCollParams) {
+        const response = await Ajax.post({
+            url: API.saveToColl(saveToCollParams.idFilm),
+            body: { collection: saveToCollParams.idCollection },
+        });
+
+        if (response.status === responsStatuses.OK) {
+            return {
+                saveToCollStatus: response.status,
+            };
+        }
+        return { saveToCollStatus: null };
+    }
+
+    async removeFromCollection(removeFromCollParams: filmToCollParams) {
+        const response = await Ajax.post({
+            url: API.removeFromColl(removeFromCollParams.idFilm),
+            body: { collection: removeFromCollParams.idCollection },
+        });
+
+        if (response.status === responsStatuses.OK) {
+            return {
+                removeFromCollStatus: response.status,
+            };
+        }
+        return { removeFromCollStatus: null };
+    };
 }
 
 export const reducerFilm = new ReducerFilm();

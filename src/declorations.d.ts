@@ -10,17 +10,17 @@ interface anyObject{
 }
 
 //common types
-interface collectionParams extends anyObject {
-    target: string;
-    key: string;
-    sortParam: 'rating'|'date';
-    countFilms: number;
-    delimiter: number;
-    name?: string;
+interface collectionParams {
+    target: string,
+    key: string,
+    sortParam: 'rating'|'date',
+    countFilms: number,
+    delimiter: number,
+    name?: string,
 }
 
 interface componentProps extends anyObject {
-    rootNode: HTMLElement;
+    rootNode: HTMLElement,
 }
 
 interface searchParams extends anyObject {
@@ -35,9 +35,12 @@ interface searchResponse {
 
 //user types
 interface user extends anyObject {
-    avatar: string;
-    nickname: string;
-    password: string;
+    avatar: string,
+    nickname: string,
+    password: string,
+    oldPassword?: string,
+    confirmPassword?: string,
+    email?: string,
 }
 
 interface userInfo extends anyObject {
@@ -46,6 +49,33 @@ interface userInfo extends anyObject {
     count_reviews: Number;
     count_views_films: Number;
     joined_date: string;
+}
+
+interface userCollsParams {
+    sort_param: string,
+    count_collections: number,
+    delimiter: string,
+}
+
+interface userCollection {
+    count_films: number,
+    count_likes: number,
+    create_time: string,
+    id: number,
+    name: string,
+    poster: string,
+    update_time: string,
+}
+
+interface userCollListItem {
+    id: number,
+    is_used: boolean,
+    name: string,
+}
+
+interface filmToCollParams {
+    idFilm: number,
+    idCollection: number,
 }
 
 //person types

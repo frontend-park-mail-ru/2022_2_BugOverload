@@ -8,6 +8,7 @@ import { publicProfile } from '@views/PublicProfile/publicProfile';
 import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
+import { userCollections } from '@views/UserCollections/userCollections';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -46,6 +47,12 @@ export const API = {
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=person_image&key=${id}/${image}`;
         },
+        collection_poster(key: string) {
+            if (key === 'default') {
+                return '/assets/img/default/coll.png';
+            }
+            return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=collection_poster&key=${key}`;
+        },
 
         avatar_default: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=default&key=avatar_avatar`,
         auth_login: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=default&key=login`,
@@ -70,6 +77,9 @@ export const API = {
     rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
     del_rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
 
+    saveToColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/save`; },
+    removeFromColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/remove`; },
+
     reviews(id: number, count: number, offset: number) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
     },
@@ -81,6 +91,10 @@ export const API = {
     person(id: number, numberPhotos: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/person/${id}?count_images=${numberPhotos}&count_films=15`; },
 
     put_avatar: `${PROTOCOL}://${DOMAIN}/api/v1/image?object=user_avatar&key=session`,
+
+    userCollections(sort_param: string = 'create_time', count_collections: number = 15, delimiter: string = 'now') {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/user/collections?sort_param=${sort_param}&count_collections=${count_collections}&delimiter=${delimiter}`;
+    },
 
     publicProfile(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/user/profile/${id}`; },
 
@@ -115,6 +129,7 @@ export const routes = [
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
+    { path: '/collections/', view: userCollections },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||

@@ -5,6 +5,7 @@ import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
+import { ShowMessage } from '@components/Message/message';
 
 export interface Header {
     state: {
@@ -71,7 +72,21 @@ export class Header extends Component {
             router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
         }
 
-        form.addEventListener('submit', this.submitHadndler)
+        form.addEventListener('submit', this.submitHadndler);
+
+        const collButton = this.rootNode.querySelector('.js-header__navlink-my-colls');
+
+        if (!isMobile) {
+            this.collHandler = function (e: Event) {
+                if (!store.getState('user')) {
+                    e.preventDefault();
+                    ShowMessage('Вы должны быть авторизованы', 'negative');
+                    return;
+                }
+            };
+    
+            collButton.addEventListener('click', this.collHandler);
+        }
     }
 
     componentWillUnmount() {

@@ -1,0 +1,13 @@
+.user-collection-list {
+    &__container {
+        display: flex;
+        margin-top: 35px;
+        flex-flow: row wrap;
+        width: 100%;
+    }
+
+    &__title {
+        color: var(--main-color-text);
+        font-size: 28px;
+    }
+}

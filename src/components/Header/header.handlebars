@@ -51,7 +51,7 @@
     <div class="header__navlink-area js-showError">Мои фильмы</div>
   </a>
   <a class="header__navlink js-header__navlink-my-colls" data-section="navlink">
-    <div class="header__navlink-area js-showError">Коллекции</div>
+    <div data-section="/collections/" class="header__navlink-area">Коллекции</div>
   </a>
   <a class="header__navlink js-header__navlink-top-250">
     <div class="header__navlink-area" data-section="/premieres/">Премьеры</div>
@@ -72,13 +72,13 @@
     <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
       <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
       {{#if isMobile}}
-      {{else}}  
+      {{else}}
         {{#if email}}
         <div class="header__userbar-name-container">
           <div class="header__userbar-name">{{nickname}}</div>
           <div class="header__userbar-email">{{email}}</div>
         </div>
-        {{/if}}  
+        {{/if}}
     </div>
       {{#if userbar}}
       {{{userbar}}}

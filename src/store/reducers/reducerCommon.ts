@@ -3,7 +3,7 @@ import { API, responsStatuses } from '@config/config';
 import { mockCollection, mockPrewiew, mockSearch } from '@store/reducers/mockData';
 
 class ReducerCommon {
-    async getCollectionData({name, target, key, sortParam, countFilms, delimiter} :collectionParams) {
+    async getCollectionData({name, target, key, sortParam, countFilms, delimiter}: collectionParams) {
         let response;
         try {
             response = await Ajax.get(API.collection(target, key, sortParam, countFilms, delimiter)) as Response;
@@ -14,9 +14,9 @@ class ReducerCommon {
             return { [`${name}`]: response.body };
         }
       return { [`statusCollection-${name}`]: response.status };
-  }
+    }
 
-    async getPreviewData({name} :collectionParams) {
+    async getPreviewData({name}: collectionParams) {
         let response;
         try {
             response = await Ajax.get(API.recommendation) as Response;
