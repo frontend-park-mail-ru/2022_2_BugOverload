@@ -125,6 +125,44 @@ export const decoreCountScores = (count: number) => {
     return `${count} оценок`;
 };
 
+export const decoreAge = (countYears: number) => {
+    if (!countYears) {
+        return 'нет возраста';
+    }
+
+    if (countYears % 10 > 4 || (countYears % 100 > 10 && countYears % 100 < 20) || countYears % 10 === 0) {
+        return `${countYears} лет`;
+    }
+
+    if (countYears % 10 === 1) {
+        return `${countYears} год`;
+    }
+    if (countYears % 10 > 1 && countYears % 10 <= 4) {
+        return `${countYears} года`;
+    }
+
+    return `${countYears} лет`;
+};
+
+export const decoreCountFilms = (countFilms: number) => {
+    if (!countFilms) {
+        return 'нет фильмов';
+    }
+
+    if (countFilms % 10 > 4 || (countFilms % 100 > 10 && countFilms % 100 < 20) || countFilms % 10 === 0) {
+        return `${countFilms} фильмов`;
+    }
+
+    if (countFilms % 10 === 1) {
+        return `${countFilms} фильм`;
+    }
+    if (countFilms % 10 > 1 && countFilms % 10 <= 4) {
+        return `${countFilms} фильма`;
+    }
+
+    return `${countFilms} фильмов`;
+};
+
 export const decoreColorRating = (location: HTMLElement, className: string, rating: number) => {
     if (!location || !className) {
         return;
@@ -240,13 +278,16 @@ export const decoreDaysLeft = (date:string) => {
     if (diffDays === 0) {
         return `Премьера состоялась!`;
     }
+    if (diffDays === 1) {
+        return `Уже завтра!`;
+    }
 
     if (diffDays % 10 > 4 || (diffDays % 100 > 10 && diffDays % 100 < 20) || diffDays % 10 === 0) {
         return `Осталось ${diffDays} дней`;
     }
 
     if (diffDays % 10 === 1) {
-        return `Уже завтра!`;
+        return `Остался ${diffDays} день`;
     }
     if (diffDays % 10 > 1 && diffDays % 10 <= 4) {
         return `Осталось ${diffDays} дня`;

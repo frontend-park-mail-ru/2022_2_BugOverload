@@ -14,7 +14,7 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     * @return {string} HTML созданного фильма
     */
-    static createFilm(filmData) {
+    static createFilm(filmData: film) {
         Film.decoreFilmInfo(filmData);
 
         const film = template({
@@ -36,15 +36,15 @@ export class Film {
     *
     * @param {filmData Object} filmData - объект с данными о фильме
     */
-    static decoreFilmInfo(filmData) {
-        filmData.rating = roundFloat(filmData.rating);
+    static decoreFilmInfo(filmData: film) {
+        filmData.rating = +roundFloat(filmData.rating);
 
         const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;
         const maxLenGenre = maxLength - lenYear;
 
         let curLen = 0;
-        const newListGenres = [];
+        const newListGenres: Array<string> = [];
         filmData.genres.forEach((genre) => {
             curLen += genre.length + 2;
             if (curLen <= maxLenGenre) {

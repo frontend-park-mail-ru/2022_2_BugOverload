@@ -1,7 +1,7 @@
 import { View } from '@views/View';
-import { Film } from '@components/Film/film.js';
+import { Film } from '@components/Film/film';
 import template from '@views/CollectionPage/collectionPage.handlebars';
-import { actionGetCollectionData } from '@actions/commonComponentsActions';
+import { actionGetCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 
@@ -29,7 +29,7 @@ class CollectionPage extends View {
     render(typeCollection :string = null) {
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
-        } 
+        }
         if(!this.state.typeCollection) {
             return;
         }
@@ -53,8 +53,8 @@ class CollectionPage extends View {
                     this.state.isSubscribedCollection = true;
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
                 }
-                
-                store.dispatch(actionGetCollectionData({ 
+
+                store.dispatch(actionGetCollectionData({
                     name: this.state.nameObjectStore,
                     target: params[params.length - 2],
                     key: params[params.length - 1],
@@ -85,8 +85,9 @@ class CollectionPage extends View {
         }
 
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const name = this.state.collection.name;
         this.rootNode.insertAdjacentHTML('beforeend', template({
-            name: this.state.collection.name,
+            name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
         }));

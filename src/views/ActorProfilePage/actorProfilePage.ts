@@ -1,6 +1,6 @@
 import { View } from '@views/View';
 import { Collection } from '@components/Collection/collection';
-import { Film } from '@components/Film/film.js';
+import { Film } from '@components/Film/film';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
 import templateCollection from '@components/Collection/collection.handlebars';
@@ -16,7 +16,7 @@ class ActorPage extends View {
      * Cохраняет props
      * @param {Object} props - параметры компонента
      */
-    constructor(props) {
+    constructor(props: componentProps) {
         super(props);
         this.state = {
             actor: null,
@@ -28,7 +28,7 @@ class ActorPage extends View {
     /**
      * Рендерит страницу актёра
      */
-    render(id = null) {
+    render(id: number|null = null) {
         if (id) {
             this.state.id = id;
         }
@@ -56,8 +56,8 @@ class ActorPage extends View {
             actorPageElement.remove();
         }
 
-        const films = this.state.actor.best_films.reduce((res, filmData) => res + Film.createFilm(filmData), '');
-        const collection = new Collection();
+        const films = this.state.actor.best_films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const collection = new Collection('');
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile({

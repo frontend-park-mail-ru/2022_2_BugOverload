@@ -1,4 +1,4 @@
-import { PreviewFilm } from '@components/PreviewFilm/previewFilm.js';
+import { PreviewFilm } from '@components/PreviewFilm/previewFilm';
 import { Collection } from '@components/Collection/collection';
 import { ROOT } from '@config/config';
 import { View } from '@views/View';
@@ -14,7 +14,7 @@ class MainPage extends View {
         if (mainBody) {
             mainBody.remove();
         }
-        super.render(); 
+        super.render();
 
         ROOT.insertAdjacentHTML('beforeend', template());
 
@@ -29,12 +29,6 @@ class MainPage extends View {
     }
 
     componentWillUnmount() {
-        const components = [
-            this.previewFilm,
-            this.collectionPopular,
-            this.collectionCinemaToday,
-        ];
-
         this.previewFilm?.unsubscribe();
         this.collectionPopular?.unsubscribe();
         this.collectionCinemaToday?.unsubscribe();
@@ -42,8 +36,3 @@ class MainPage extends View {
 }
 
 export const mainPage = new MainPage({ rootNode: document.getElementById('root') });
-
-const checkUnmount = (component :anyObject) => {
-    return Object.getOwnPropertyNames(Object.getPrototypeOf(component))
-    .includes('componentWillUnmount');
-}
