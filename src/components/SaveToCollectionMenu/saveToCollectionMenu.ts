@@ -30,7 +30,7 @@ export class SaveToCollectionMenu extends Component {
             this.state.collections = store.getState('listCollectionsUser');
             if (this.isOpen) {
                 this.close();
-                this.render();
+                this.open();
             }
         };
 
