@@ -39,20 +39,14 @@
 @import "@components/PreviewUserCollection/previewUserCollection.scss";
 @import "@components/UserCollList/userCollList.scss";
 
-
 ::-webkit-scrollbar {
-  /* Webkit */
   width: 0;
-  /* ширина scrollbar'a */
   background: transparent
-    /* опционально */
 }
 
 html {
   -ms-overflow-style: none;
-  /* IE 10+ */
   scrollbar-width: none
-    /* Firefox */
 }
 
 textarea {
@@ -145,7 +139,6 @@ button {
 }
 
 @media screen and (max-width: 800px) {
-
   body,
   html {
     --font-size-normal: 13px;
@@ -164,16 +157,9 @@ button {
 }
 
 @media screen and (max-width: 700px) {
-
   body,
   html {
     --font-size-small: 11px;
-  }
-
-  .modal__login {
-    .modal__flex__center__div {
-      display: flex;
-    }
   }
 
   .modal__signup {
@@ -203,14 +189,9 @@ button {
       &__img {
         display: none;
       }
-    }
 
-    &__signup {
-      width: 100%;
-      border-radius: 30px;
-
-      &__img {
-        display: none;
+      .modal__flex__center__div {
+        display: flex;
       }
     }
   }
@@ -226,7 +207,6 @@ button {
 }
 
 @media screen and (max-width: 620px) {
-
   body,
   html {
     --standart-margin: 15px;
@@ -266,7 +246,7 @@ button {
     }
 
     &__text__alternative__page {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 
