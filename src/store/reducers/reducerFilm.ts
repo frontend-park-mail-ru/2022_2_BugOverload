@@ -151,7 +151,7 @@ class ReducerFilm {
                 listCollectionsUser: newList, //[saveToCollParams.idCollection]
             };
         }
-        return { saveToCollStatus: null } as anyObject;
+        return { saveToCollStatus: response.status };
     }
 
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
@@ -165,7 +165,7 @@ class ReducerFilm {
                 removeFromCollStatus: response.status,
             };
         }
-        return { removeFromCollStatus: null };
+        return { removeFromCollStatus: response.status };
     };
 }
 
