@@ -126,7 +126,7 @@
   }
 
   &__mobile-userbar {
-    flex-wrap: column nowrap;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     position: fixed;
