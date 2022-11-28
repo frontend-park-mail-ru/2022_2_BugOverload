@@ -27,6 +27,9 @@ export class SaveToCollectionMenu extends Component {
 
         this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
+            this.render();
+            // this.close();
+            // this.open();
         };
 
         store.subscribe('listCollectionsUser', this.subHandler);
