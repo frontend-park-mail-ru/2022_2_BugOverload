@@ -13,7 +13,9 @@
     }
 
     @media screen and (max-width: 500px) {
-      width: 250px;
+      width: 95vw;
+      margin-right: var(--standart-margin);
+      box-sizing: border-box;
     }
   }
 
