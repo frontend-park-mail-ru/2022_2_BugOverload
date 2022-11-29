@@ -18,7 +18,7 @@ export class PremiereFilm extends Component {
         const film = template({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
-            year_prod: filmData.prod_date.split('.')[0],
+            year_prod: filmData.prod_year.split('.')[0],
             genres: filmData.genres.slice(0, 2).join(', '),
             director: `реж. ${filmData.directors[0].name}`,
             duration: decoreDuration(filmData.duration_minutes),

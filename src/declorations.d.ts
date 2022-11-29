@@ -172,7 +172,7 @@ interface filmPremiere extends anyObject {
     id: number,
     poster_hor: string,
     name: string,
-    prod_date: string,
+    prod_year: string,
     genres: Array<string>,
     prod_countries: Array<string>,
     directors: Array<actor>,

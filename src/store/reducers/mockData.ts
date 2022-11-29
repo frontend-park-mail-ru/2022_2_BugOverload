@@ -168,7 +168,7 @@ export const mockPremieres = () => ({
           'США',
           'Великобритания'
         ],
-        'prod_date': '2014.01.13',
+        'prod_year': '2014.01.13',
         'rating': 9.2
       }
     ],
@@ -195,7 +195,7 @@ export const mockSearch = () => ({
           "США",
           "Великобритания"
         ],
-        prod_date: "2014.01.13",
+        prod_year: "2014.01.13",
         rating: 9.2
       }, {
         description: "Британская лингвистка Алетея прилетает из Лондона",
@@ -217,7 +217,7 @@ export const mockSearch = () => ({
           "США",
           "Великобритания"
         ],
-        prod_date: "2014.01.13",
+        prod_year: "2014.01.13",
         rating: 9.2
       }],
     serials: [{
@@ -240,7 +240,7 @@ export const mockSearch = () => ({
           "США",
           "Великобритания"
         ],
-        prod_date: "2014.01.13",
+        prod_year: "2014.01.13",
         rating: 9.2
       },
       {
@@ -263,7 +263,7 @@ export const mockSearch = () => ({
           "США",
           "Великобритания"
         ],
-        prod_date: "2014.01.13",
+        prod_year: "2014.01.13",
         rating: 9.2
       }],
     persons: [

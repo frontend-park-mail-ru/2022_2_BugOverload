@@ -9,9 +9,12 @@
 }
 
 .rating {
-  margin-top: 36px;
+  // margin-top: 36px;
   margin-right: var(--standart-margin);
-  margin-left: var(--standart-margin);
+  // margin-left: var(--standart-margin);
+  padding-top: 36px;
+  padding-right: var(--standart-margin);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-height: 300px;
