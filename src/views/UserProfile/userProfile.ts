@@ -44,6 +44,7 @@ class UserProfile extends View {
         this.setProfileAvatar = this.setProfileAvatar.bind(this);
         this.subscribeInfoFunc = this.subscribeInfoFunc.bind(this);
         this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
+        store.subscribe('userInfo', this.subscribeInfoFunc);
     }
 
     /**
@@ -53,7 +54,6 @@ class UserProfile extends View {
         super.render();
 
         if (!this.state.isSubscribed) {
-            store.subscribe('userInfo', this.subscribeInfoFunc);
             store.subscribe('statusChangeAvatar', this.setProfileAvatar);
             this.state.isSubscribed = true;
         }
@@ -162,7 +162,6 @@ class UserProfile extends View {
     componentWillUnmount() {
         if (this.state.isSubscribed) {
             store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
-            store.unsubscribe('userInfo', this.subscribeInfoFunc);
             this.state.isSubscribed = false;
         }
 

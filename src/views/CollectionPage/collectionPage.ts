@@ -106,7 +106,7 @@ class CollectionPage extends View {
             }
         }
 
-        if(!Object.hasOwnProperty.call(this.state.collection, 'films')) {
+        if(this.state.collection && !Object.hasOwnProperty.call(this.state.collection, 'films')) {
             return;
         }
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
