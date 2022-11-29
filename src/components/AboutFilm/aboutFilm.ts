@@ -5,7 +5,7 @@ import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 
 import {
-    actionSaveToCollection,
+    actionSaveToCollection, actionRemoveFromCollection,
 } from '@actions/filmActions';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
@@ -89,6 +89,9 @@ export class AboutFilm extends Component {
         if (!buttonBookmark) {
             return;
         }
+        if ('is_used' in this.state.listCollections.find((elem: userCollListItem) => elem.name === 'Буду смотреть')) {
+            (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
+        }
 
         this.handlerBookmark = (e: Event) => {
             e.preventDefault();
@@ -104,6 +107,15 @@ export class AboutFilm extends Component {
             }
 
             const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')
+
+            if ('is_used' in willWatch) {
+                store.dispatch(actionRemoveFromCollection({
+                    idCollection: willWatch.id,
+                    idFilm: this.data.id,
+                }));
+                (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#fff';
+                return;
+            }
 
             store.dispatch(actionSaveToCollection({
                 idCollection: willWatch.id,

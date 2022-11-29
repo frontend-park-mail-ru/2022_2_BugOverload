@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 import {
-    actionSaveToCollection,
+    actionSaveToCollection, actionRemoveFromCollection
 } from '@actions/filmActions';
 
 /**
@@ -93,6 +93,15 @@ export class SaveToCollectionMenu extends Component {
 
                 if (!this.state.collections) {
                     ShowMessage('Ошибочная :(', 'negative');
+                    return;
+                }
+
+                if ('is_used' in this.state.collections
+                    .find((elem: userCollListItem) => elem.id === +button.dataset.idColl)) {
+                    store.dispatch(actionRemoveFromCollection({
+                        idCollection: +button.dataset.idColl,
+                        idFilm: this.filmId,
+                    }));
                     return;
                 }
 
