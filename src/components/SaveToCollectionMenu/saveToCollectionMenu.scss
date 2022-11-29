@@ -23,20 +23,22 @@
   //   align-items: center;
   //   margin-top: 10px;
   // }
-  &__used-icon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-  }
 
   &__items-container {
     display: flex;
     flex-flow: column nowrap;
+    margin-top: 10px;
   }
 
   &__item-container {
     display: flex;
     flex-flow: row nowrap;
+  }
+
+  &__check-container {
+    width: 20px;
+    height: 20px;
+    position: relative;
   }
 
   &__title {
@@ -48,6 +50,7 @@
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
+    margin-left: 10px;
 
     &-btn {
       display: block;

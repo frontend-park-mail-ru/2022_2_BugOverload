@@ -152,7 +152,7 @@ class ReducerFilm {
             };
         }
 
-        console.log(`saveStatus: ${{ saveToCollStatus: response.status }}`)
+        console.log(`saveStatus: ${JSON.stringify({ saveToCollStatus: response.status })}`)
         return { saveToCollStatus: response.status };
     }
 
