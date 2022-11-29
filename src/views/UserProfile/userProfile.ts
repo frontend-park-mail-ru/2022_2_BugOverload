@@ -64,9 +64,6 @@ class UserProfile extends View {
         }
 
         this.state.user = store.getState('user');
-        if(!this.state.user) {
-            return;
-        }
 
         if (!this.state.isDispatchedInfo) {
             store.dispatch(actionGetSettings());
@@ -112,6 +109,9 @@ class UserProfile extends View {
             reader.readAsDataURL(blobUrl);
         });
 
+        if(!this.state.user) {
+            return;
+        }
         const profileChange = new ProfileChange({
             rootNode: this.rootNode,
             user: Object.assign(
