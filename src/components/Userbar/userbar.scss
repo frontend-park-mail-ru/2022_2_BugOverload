@@ -136,7 +136,8 @@
     left: 0;
     display: none;
     z-index: 10;
-    background-color: #343434;
+    background-color: var(--backgr-userbar);
+    -webkit-backdrop-filter: blur(30px);
     height: 100%;
     width: 35vw;
     padding-top: 5vh;
