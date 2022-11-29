@@ -45,6 +45,7 @@
   &__info-item-value-container {
     display: flex;
     flex-flow: row wrap;
+    width: min-content;
   }
 
   &__info-item-value-info {
