@@ -150,7 +150,6 @@ class ReducerFilm {
             // const changedColl = oldList.find((elem: userCollListItem) => elem.id === saveToCollParams.idCollection);
             // changedColl.is_used = true;
             // newList.push(changedColl);
-            console.log(`newList ITOG: ${JSON.stringify(newList)}`);
 
             return {
                 saveToCollStatus: response.status,
@@ -158,7 +157,6 @@ class ReducerFilm {
             };
         }
 
-        console.log(`saveStatus: ${JSON.stringify({ saveToCollStatus: response.status })}`)
         return { saveToCollStatus: response.status };
     }
 
@@ -174,7 +172,6 @@ class ReducerFilm {
             };
         }
 
-        console.log(`remove: ${{ removeFromCollStatus: response.status }}`)
         return { removeFromCollStatus: response.status };
     };
 }

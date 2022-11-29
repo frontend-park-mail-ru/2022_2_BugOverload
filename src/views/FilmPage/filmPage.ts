@@ -35,7 +35,6 @@ export class FilmPage extends View {
 
         this.saveToCollStatus = () => {
             this.state.saveToCollStatus = store.getState('saveToCollStatus');
-            console.log(JSON.stringify(`this.state.saveToCollStatus ${this.state.saveToCollStatus}`));
 
             if (this.state.saveToCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Сохранено!', 'positive');
@@ -52,7 +51,6 @@ export class FilmPage extends View {
 
         this.removeFromCollStatus = () => {
             this.state.removeFromCollStatus = store.getState('removeFromCollStatus');
-            console.log(JSON.stringify(`this.state.removeFromCollStatus ${this.state.removeFromCollStatus}`));
 
             if (this.state.removeFromCollStatus === responsStatuses.NoContent) {
                 ShowMessage('Фильм удалён из коллекции', 'positive');
@@ -154,7 +152,6 @@ export class FilmPage extends View {
         this.likelyFilms?.unsubscribe();
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
-        console.log(`FiLM unmounted!`);
         // store.unsubscribe('statusSendReview', this.sendReviewSuccess);
         // store.unsubscribe('removeFromCollStatus', this.removeFromCollStatus);
         // store.unsubscribe('saveToCollStatus', this.saveToCollStatus);

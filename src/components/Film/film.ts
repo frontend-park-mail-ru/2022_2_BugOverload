@@ -60,7 +60,6 @@ export class Film {
         //     filmData.genres[i] += ',';
         // }
 
-        console.log(JSON.stringify(newListGenres));
 
         return newListGenres.join(', ');
     }

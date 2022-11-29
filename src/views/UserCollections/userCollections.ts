@@ -73,7 +73,6 @@ class UserCollections extends View {
 
     componentWillUnmount() {
         store.unsubscribe('userCollections', this.subHandler);
-        console.log(`unsubscribe()`);
         this.state.isSubscribed = false;
         this.state.userCollections = null;
     }
