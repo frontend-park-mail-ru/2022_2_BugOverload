@@ -3,6 +3,8 @@ import { Collection } from '@components/Collection/collection';
 import { ROOT } from '@config/config';
 import { View } from '@views/View';
 import template from '@views/MainPage/MainPage.handlebars';
+import templateGenres from '@components/Genre/genre.handlebars';
+import { genres } from '@assets/icons/genre/genres.js';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -26,6 +28,11 @@ class MainPage extends View {
 
         this.collectionCinemaToday = new Collection('collection-tag-in_cinema');
         this.collectionCinemaToday.init();
+        
+        const genresHtml = templateGenres({
+            genres,
+        });
+
     }
 
     componentWillUnmount() {
