@@ -44,8 +44,8 @@ $height-coll: $width-coll;
 
     &__icon-enter {
         position: absolute;
-        top: 80px;
-        left: 75px;
+        top: calc($width-coll/2 - 25px);
+        left: calc($width-coll/2 - 25px);
         @include animation-prop;
         cursor: pointer;
     }
@@ -83,7 +83,7 @@ $height-coll: $width-coll;
         font-size: 15px;
     }
 
-    &:hover &__blackout {
+    &__poster-container:hover &__blackout {
         width: $width-coll;
         height: $height-coll;
         opacity: 0.3;
@@ -92,15 +92,15 @@ $height-coll: $width-coll;
         cursor: pointer;
     }
 
-    &:hover &__icon-enter {
+    &__poster-container:hover &__icon-enter {
         opacity: 1;
     }
 
-    &:hover &__icon-films {
+    &__poster-container:hover &__icon-films {
         opacity: 1;
     }
 
-    &:hover &__count-films {
+    &__poster-container:hover &__count-films {
         opacity: 1;
     }
 }
