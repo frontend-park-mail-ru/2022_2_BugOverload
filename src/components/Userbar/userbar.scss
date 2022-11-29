@@ -135,9 +135,13 @@
     z-index: 10;
     background-color: var(--backgr-userbar);
     height: 100%;
-    width: 66vw;
+    width: 35vw;
     padding-top: 5vh;
     border-radius: 0 3%;
+
+    @media screen and (max-width: 680px) {
+      width: 66vw;
+    }
 
     &__header {
       color: #CCC;
@@ -162,7 +166,8 @@
       height: 9vh;
       width: auto;
       margin-top: 20px;
-      align-self: center;
+      padding-left: 10vw;
+      margin-left: 0;
     }
   }
 

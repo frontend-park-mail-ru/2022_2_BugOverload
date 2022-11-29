@@ -75,6 +75,10 @@
     color: var(--main-color-text);
     opacity: 0.8;
     padding-left: 37px;
+
+    @media screen and (max-width: 680px) {
+      width: 40vw;
+    }
   }
 
   &__form__input:focus + &__form__icon-search {
