@@ -6,6 +6,8 @@ import { View } from '@views/View';
 import template from '@views/UserCollections/userCollections.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { UserCollList } from '@components/UserCollList/userCollList';
+import { responsStatuses } from '@config/config';
+import { ShowMessage } from '@components/Message/message';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -29,6 +31,11 @@ class UserCollections extends View {
 
         this.subHandler = () => {
             this.state.userCollections = store.getState('userCollections');
+            if (!store.getState('user')) {
+                ShowMessage('Вы должны быть авторизованы', 'negative');
+                return;
+            }
+
             this.render();
         }
 

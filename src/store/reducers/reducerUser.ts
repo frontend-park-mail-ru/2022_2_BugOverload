@@ -148,7 +148,7 @@ class ReducerUser {
         }
 
         if (response.status === responsStatuses.NotFound) {
-            return { userCollections: mockUserCollections() };
+            return { userCollections: {status: response.status} };
         }
 
         return { userCollections: {error: 'error'} };
