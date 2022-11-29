@@ -104,9 +104,11 @@ class CollectionPage extends View {
                     return;
                 }
             }
-
         }
 
+        if(!Object.hasOwnProperty.call(this.state.collection, 'films')) {
+            return;
+        }
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const name = this.state.collection.name;
         this.rootNode.insertAdjacentHTML('beforeend', template({
@@ -114,7 +116,6 @@ class CollectionPage extends View {
             description: this.state.collection.description,
             films,
         }));
-        this.state.collection = null;
     }
 
     collectionPageSubscribe() {
