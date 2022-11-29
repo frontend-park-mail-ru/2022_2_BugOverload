@@ -68,6 +68,10 @@ export const API = {
         return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
+    userCollectionData(id :number, sort :string) {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/collections/${id}?sort_param=${sort}`;
+    },
+
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,
     film(id: number, countImages: number = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
     metaFilm(id: number) {
@@ -133,6 +137,7 @@ export const routes = [
 export const privateRoutes = [
     { path: '/profile/', view: profile },
     { path: '/user/collections/', view: userCollections }, 
+    { path: '/user/collection/', view: collectionPage }, 
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||

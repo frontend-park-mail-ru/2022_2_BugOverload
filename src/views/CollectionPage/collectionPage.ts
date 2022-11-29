@@ -1,7 +1,7 @@
 import { View } from '@views/View';
 import { Film } from '@components/Film/film';
 import template from '@views/CollectionPage/collectionPage.handlebars';
-import { actionGetCollectionData } from '@actions/commonActions';
+import { actionGetCollectionData, actionGetUserCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 
@@ -26,12 +26,15 @@ class CollectionPage extends View {
     }
 
 
-    render(typeCollection :string = null) {
+    render(typeCollection :string = null, id :number = null) {
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
         }
         if(!this.state.typeCollection) {
             return;
+        }
+        if(id) {
+            this.state.id = id;
         }
 
 
@@ -41,7 +44,8 @@ class CollectionPage extends View {
         }
         super.render();
 
-        if(!this.state.typeCollection.match(/\d+/)) {
+        if(!this.state.typeCollection.match(/\w+\d+/)) {
+            //tag genre
             this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
             this.state.collection = store.getState(this.state.nameObjectStore);
 
@@ -65,23 +69,45 @@ class CollectionPage extends View {
                 return;
             }
         } else {
-            this.state.nameObjectStore = this.state.typeCollection;
-            this.state.collection = {
-                name: 'Лучшие фильмы',
-                films: store.getState(this.state.nameObjectStore)?.best_films,
-            };
-
-            if(!this.state.collection.films && !this.state.isDispatched) {
-                this.state.isDispatched = true;
-
-                if(!this.state.isSubscribedPerson) {
-                    this.state.isSubscribedPerson = true;
-                    store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+            //actor
+            if(!this.state.typeCollection.match(/\d+/)) {
+                this.state.nameObjectStore = this.state.typeCollection;
+                this.state.collection = {
+                    name: 'Лучшие фильмы',
+                    films: store.getState(this.state.nameObjectStore)?.best_films,
+                };
+    
+                if(!this.state.collection.films && !this.state.isDispatched) {
+                    this.state.isDispatched = true;
+    
+                    if(!this.state.isSubscribedPerson) {
+                        this.state.isSubscribedPerson = true;
+                        store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+                    }
+    
+                    store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
+                    return;
                 }
-
-                store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
-                return;
+            } else {
+                //user
+                this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
+                this.state.collection = store.getState(this.state.nameObjectStore);
+    
+                if(!this.state.collection && !this.state.isDispatched) {
+                    this.state.isDispatched = true;
+    
+                    if(!this.state.isSubscribedCollection) {
+                        this.state.isSubscribedCollection = true;
+                        store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+                    }
+    
+                    store.dispatch(actionGetUserCollectionData({
+                        id: this.state.id,
+                    }));
+                    return;
+                }
             }
+
         }
 
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');

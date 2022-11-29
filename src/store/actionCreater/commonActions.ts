@@ -3,6 +3,11 @@ export const actionGetCollectionData = (params: collectionParams) => ({
     value: params,
 });
 
+export const actionGetUserCollectionData = (params: collectionUserParams) => ({
+    type: 'getUserCollectionData',
+    value: params,
+});
+
 export const actionGetPreviewData = (params: previewParams) => ({
     type: 'getPreviewData',
     value: params,

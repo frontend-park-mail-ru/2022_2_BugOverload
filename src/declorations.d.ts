@@ -24,6 +24,11 @@ interface collectionParams {
     name?: string,
 }
 
+interface collectionUserParams {
+    id: number,
+    sort?: string,
+}
+
 interface componentProps extends anyObject {
     rootNode: HTMLElement,
 }
