@@ -26,6 +26,7 @@ $input-height: 46px;
     box-sizing: border-box;
     background-color: var(--backgr-modal-review);
     -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
     border-radius: 20px;
     max-width: 700px;
     width: 95vw;
