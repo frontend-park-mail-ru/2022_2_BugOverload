@@ -48,6 +48,17 @@ export class AboutFilm extends Component {
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
         };
+
+        this.subHandler = () => {
+            this.state.listCollections = store.getState('listCollectionsUser');
+            if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
+                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
+            } else {
+                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#000';
+            }
+        };
+
+        store.subscribe('listCollectionsUser', this.subHandler);
     }
 
     /**
@@ -59,6 +70,7 @@ export class AboutFilm extends Component {
         this.location.querySelector('.js-about-film').style.backgroundImage = `url('${API.img.poster_hor(this.data.poster_hor)}')`;
         decoreColorRating(this.location, '.js-about-film__rating', this.data.rating);
 
+
         this.componentDidMount();
     }
 
@@ -68,7 +80,7 @@ export class AboutFilm extends Component {
      * кнопки сохранения в Избранное, кнопку просмотра трейлера
      */
     componentDidMount() {
-        const buttonPlus = document.querySelector('.js-btn-save-to-coll');
+        const buttonPlus = this.location.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
             return;
         }
@@ -85,7 +97,7 @@ export class AboutFilm extends Component {
 
         buttonPlus.addEventListener('click', this.handlerOpenMenu);
 
-        const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
+        const buttonBookmark = this.location.querySelector('.js-btn-save-to-bookmark');
         if (!buttonBookmark) {
             return;
         }
@@ -102,13 +114,13 @@ export class AboutFilm extends Component {
                 ShowMessage('Не удалось получить список коллекций :(', 'negative');
                 return;
             }
-            if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
-                (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
-            } else {
-                (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#000';
-            }
+            // if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
+            //     (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#000';
+            // } else {
+            //     (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
+            // }
 
-            const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')
+            const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть');
 
             if ('is_used' in willWatch) {
                 store.dispatch(actionRemoveFromCollection({
@@ -126,7 +138,7 @@ export class AboutFilm extends Component {
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
 
-        const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
+        const buttonTrailer = this.location.querySelector('.js-btn-watch-trailer');
         if (!buttonBookmark) {
             return;
         }
@@ -148,19 +160,19 @@ export class AboutFilm extends Component {
      * Удаляет обработчики, установленные в ComponentDidMount
      */
     componentWillUnmount() {
-        const buttonPlus = document.querySelector('.js-btn-save-to-coll');
+        const buttonPlus = this.location.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
             return;
         }
         buttonPlus.removeEventListener('click', this.handlerOpenMenu);
 
-        const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
+        const buttonBookmark = this.location.querySelector('.js-btn-save-to-bookmark');
         if (!buttonBookmark) {
             return;
         }
         buttonBookmark.removeEventListener('click', this.handlerBookmark);
 
-        const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
+        const buttonTrailer = this.location.querySelector('.js-btn-watch-trailer');
         if (!buttonBookmark) {
             return;
         }
