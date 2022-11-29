@@ -1,6 +1,6 @@
 .details-film {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   margin-left: var(--standart-margin);
   flex-flow: row wrap;
 
@@ -58,6 +58,11 @@
     display: flex;
     flex-direction: column;
     margin-right: var(--standart-margin);
+    margin-left: 100px;
+
+    @media screen and (max-width: 800px) {
+      margin-left: var(--standart-margin);
+    }
   }
 
   &__count-actors {

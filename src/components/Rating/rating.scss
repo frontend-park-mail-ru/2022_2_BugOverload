@@ -9,9 +9,7 @@
 }
 
 .rating {
-  // margin-top: 36px;
-  // margin-right: var(--standart-margin);
-  // margin-left: var(--standart-margin);
+  margin-right: var(--standart-margin);
   width: 100%;
   padding-left: var(--standart-margin);
   padding-top: 36px;
@@ -23,6 +21,7 @@
 
   @media screen and (max-width: 600px) {
     padding-right: 0;
+    margin-right: 0;
   }
 
   &__title {
