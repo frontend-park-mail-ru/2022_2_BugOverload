@@ -26,15 +26,12 @@ class CollectionPage extends View {
     }
 
 
-    render(typeCollection :string = null, id :number = null) {
+    render(typeCollection :string|number = null) {
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
         }
         if(!this.state.typeCollection) {
             return;
-        }
-        if(id) {
-            this.state.id = id;
         }
 
 

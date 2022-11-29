@@ -21,12 +21,12 @@ class ReducerCommon {
         try {
             response = await Ajax.get(API.userCollectionData(id, sort)) as Response;
         } catch (e) {
-            return { [`${name}`]: mockCollection() };
+            return { [`collection-${id}`]: mockCollection() };
         }
         if (response.status === responsStatuses.OK) {
-            return { [`${name}`]: response.body };
+            return { [`collection-${id}`]: response.body };
         }
-      return { [`statusCollection-${name}`]: response.status };
+      return { [`statusCollection-collection-${id}`]: response.status };
     }
 
     async getPreviewData({name}: collectionParams) {
