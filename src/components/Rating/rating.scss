@@ -10,8 +10,10 @@
 
 .rating {
   // margin-top: 36px;
-  margin-right: var(--standart-margin);
+  // margin-right: var(--standart-margin);
   // margin-left: var(--standart-margin);
+  width: 100%;
+  padding-left: var(--standart-margin);
   padding-top: 36px;
   padding-right: var(--standart-margin);
   box-sizing: border-box;
@@ -28,7 +30,7 @@
   &__content-container {
     display: flex;
     justify-content: space-between;
-    width: calc(400px + (655 - 400) * ((100vw - 300px) / (1920 - 300)));
+    width: calc(350px + (655 - 350) * ((100vw - 300px) / (1920 - 300)));
     height: calc(40px + (64 - 40) * ((100vw - 300px) / (1920 - 300)));
   }
 
@@ -96,7 +98,7 @@
 
   &__text-stars-container {
     display: flex;
-    width: calc(340px + (490 - 340) * ((100vw - 300px) / (1920 - 300)));
+    width: calc(290px + (490 - 290) * ((100vw - 300px) / (1920 - 300)));
     justify-content: space-between;
     margin-top: 7px;
   }

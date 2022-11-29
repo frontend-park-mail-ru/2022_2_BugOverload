@@ -6,6 +6,7 @@
         align-items: center;
         width: 100%;
         margin-top: calc(24px + var(--header-height));
+        padding: var(--standart-margin);
     }
 
     &__title {

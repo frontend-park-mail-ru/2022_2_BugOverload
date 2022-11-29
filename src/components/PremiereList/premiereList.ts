@@ -25,7 +25,7 @@ export class PremiereList extends Component {
 
         this.blocksDay = <Array<PremiereDay>>[];
         let filmsByDay: Array<filmPremiere> = [];
-        let currDate = this.filmsData[0].prod_year;
+        let currDate = this.filmsData[0].prod_date;
 
         // Разделяем фильмы по дням. На каждую группу фильмов создаётся компонент
         // PremiereDay, который отрендерит и навесит обработчики на блок фильмов
@@ -42,8 +42,8 @@ export class PremiereList extends Component {
                 filmsByDay.length = 0; // очищение массива
             }
 
-            if (film.prod_year === currDate) {
-                currDate = film.prod_year;
+            if (film.prod_date === currDate) {
+                currDate = film.prod_date;
                 filmsByDay.push(film);
 
                 // для последнего фильма
@@ -53,7 +53,7 @@ export class PremiereList extends Component {
                 return;
             }
 
-            currDate = film.prod_year;
+            currDate = film.prod_date;
             if (filmsByDay.length > 0) {
                 createBlock();
             }

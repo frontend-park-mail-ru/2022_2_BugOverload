@@ -20,12 +20,12 @@ export class PremiereDay extends Component {
     render() {
         const films = this.filmsData
             .reduce((res: string, filmData: filmPremiere) => res + PremiereFilm.createFilmPremiere(filmData, 'addDatePrComp'), '');
-        const date: Array<string> = decoreDate(this.filmsData[0].prod_year).split(' ');
+        const date: Array<string> = decoreDate(this.filmsData[0].prod_date).split(' ');
         this.location.insertAdjacentHTML('beforeend', template({
             films,
             dateDay: date[0],
             dateMonth: date[1][0].toUpperCase() + date[1].slice(1),
-            daysLeft: decoreDaysLeft(this.filmsData[0].prod_year),
+            daysLeft: decoreDaysLeft(this.filmsData[0].prod_date),
         }));
     }
 }
