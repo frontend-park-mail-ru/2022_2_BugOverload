@@ -192,6 +192,7 @@ class Router {
         if(view) {
             if(!store.getState('user')) {
                 if(!this.isDispatchedAuth) {
+                    window.localStorage.setItem('pathBeforModal', location);
                     store.subscribe('authStatus', subscribeRouterAuth);
                     store.dispatch(actionAuth());
                     this.navigate(stateObject, false);
