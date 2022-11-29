@@ -19,6 +19,7 @@ class CollectionPage extends View {
             isDispatched: false,
             isSubscribedCollection: false,
             isSubscribedPerson: false,
+            isSubscribedUserCollection: false,
             typeCollection: null,
         }
 
