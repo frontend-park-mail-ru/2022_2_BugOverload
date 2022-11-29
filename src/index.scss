@@ -164,6 +164,12 @@ button {
     --font-size-small: 11px;
   }
 
+  .profile {
+    &__content-container {
+      flex-wrap: wrap;
+    }
+  }
+
   .modal {
     &__input {
       height: 25px;
