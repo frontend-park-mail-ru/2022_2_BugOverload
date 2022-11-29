@@ -4,6 +4,7 @@ import { ROOT } from '@config/config';
 import { View } from '@views/View';
 import template from '@views/MainPage/MainPage.handlebars';
 import templateGenres from '@components/Genre/genre.handlebars';
+import templateCollection from '@components/Collection/collection.handlebars';
 import { genres } from '@assets/icons/genre/genres.js';
 
 /**
@@ -32,6 +33,16 @@ class MainPage extends View {
         const genresHtml = templateGenres({
             genres,
         });
+        const collectionGenres = new Collection('');
+        const collectionGenreDiv = this.rootNode.querySelector('.js-collection-genre-genres');
+        collectionGenreDiv.insertAdjacentHTML('beforeend', templateCollection({
+            films: genresHtml,
+            name: 'Жанры',
+            url: `genres`,
+        }));
+        collectionGenres.addHandlerSlider(
+            collectionGenreDiv.querySelector('.js-collection__container'),
+        );
 
     }
 

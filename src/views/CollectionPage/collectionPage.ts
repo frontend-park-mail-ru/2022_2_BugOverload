@@ -29,17 +29,12 @@ class CollectionPage extends View {
 
 
     render(typeCollection :string|number = null) {
-        console.log(typeCollection)
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
         }
         if(!this.state.typeCollection) {
             return;
         }
-        console.log('this.state.typeCollection',this.state.typeCollection)
-        console.log('this.state.collection',this.state.collection)
-        console.log('dispatched',this.state.isDispatched)
-
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -93,7 +88,6 @@ class CollectionPage extends View {
                 }
             } else {
                 //user  
-                console.log('dispatched user',this.state.isDispatched)
                 if(!this.state.collection && !this.state.isDispatched) {
                     this.state.isDispatched = true;
     
