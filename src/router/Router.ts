@@ -218,7 +218,10 @@ class Router {
                     this.mapViews.get('/').render();
                 } else {
                     const prevState = this.matchHref(this.pathBeforModal);
-                    const viewBeforModal = this.mapViews.get(prevState[0]);
+                    let viewBeforModal = this.mapViews.get(prevState[0]);
+                    if(!viewBeforModal && this.privateMapViews.get(prevState[0])) {
+                        viewBeforModal =  this.mapViews.get('/');
+                    }
                     viewBeforModal.render(prevState[1]);
                 }
             } else if (location !== '/login/' && location !== '/signup/') {
