@@ -36,6 +36,9 @@ class CollectionPage extends View {
         if(!this.state.typeCollection) {
             return;
         }
+        console.log('this.state.typeCollection',this.state.typeCollection)
+        console.log('this.state.collection',this.state.collection)
+        console.log('dispatched',this.state.isDispatched)
 
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
@@ -90,6 +93,7 @@ class CollectionPage extends View {
                 }
             } else {
                 //user  
+                console.log('dispatched user',this.state.isDispatched)
                 if(!this.state.collection && !this.state.isDispatched) {
                     this.state.isDispatched = true;
     
@@ -97,7 +101,6 @@ class CollectionPage extends View {
                         this.state.isSubscribedUserCollection = true;
                         store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe);
                     }
-    
                     store.dispatch(actionGetUserCollectionData({
                         id: this.state.typeCollection,
                     }));
