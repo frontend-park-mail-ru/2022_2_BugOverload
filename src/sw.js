@@ -1,5 +1,5 @@
-const CACHE_NAME = 'moviegate-v-3';
-const DYNAMIC_CACHE_NAME = 'd-moviegate-v-3';
+const CACHE_NAME = 'moviegate-v-4';
+const DYNAMIC_CACHE_NAME = 'd-moviegate-v-4';
 
 const whiteDynamicUrls = [
     '/film/',

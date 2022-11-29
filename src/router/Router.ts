@@ -194,6 +194,7 @@ class Router {
                 if(!this.isDispatchedAuth) {
                     store.subscribe('authStatus', subscribeRouterAuth);
                     store.dispatch(actionAuth());
+                    this.navigate(stateObject, false);
                     return;
                 } else {
                     this.isDispatchedAuth = false;
@@ -282,7 +283,6 @@ const subscribeRouterAuth = () => {
 const subscribeRouterLogout = () => {
     const matchedHref = router.getCurrentUrlObject();
     if(router.privateMapViews.get(matchedHref[0])) {
-        router.navigate({ path: '/'}, false);
-        router.refresh(true);
+        router.go({ path: '/'},{pushState: true, refresh: false});
     }
 }
