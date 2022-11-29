@@ -53,7 +53,6 @@ class UserProfile extends View {
         super.render();
 
         if (!this.state.isSubscribed) {
-            store.subscribe('logoutStatus', this.userProfileOnSubscribe);
             store.subscribe('userInfo', this.subscribeInfoFunc);
             store.subscribe('statusChangeAvatar', this.setProfileAvatar);
             this.state.isSubscribed = true;
@@ -65,36 +64,6 @@ class UserProfile extends View {
         }
 
         this.state.user = store.getState('user');
-        if (!this.state.user) {
-            const authStatus = store.getState('authStatus');
-            const logoutStatus = store.getState('logoutStatus');
-            if (authStatus || logoutStatus) {
-                this.componentWillUnmount();
-                const removeProfile = this.rootNode.querySelector('.js-profile');
-                if (removeProfile) {
-                    removeProfile.remove();
-                }
-                window.history.replaceState(
-                    null,
-                    null,
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
-
-                const redirectMain = new Event(
-                    'click',
-                    {
-                        bubbles: true,
-                        cancelable: true,
-                    },
-                );
-                this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
-
-                return;
-            }
-            store.subscribe('user', this.userProfileOnSubscribe);
-
-            return;
-        }
 
         if (!this.state.isDispatchedInfo) {
             store.dispatch(actionGetSettings());
@@ -189,7 +158,6 @@ class UserProfile extends View {
      */
     componentWillUnmount() {
         if (this.state.isSubscribed) {
-            store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
             store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
             store.unsubscribe('userInfo', this.subscribeInfoFunc);
             this.state.isSubscribed = false;

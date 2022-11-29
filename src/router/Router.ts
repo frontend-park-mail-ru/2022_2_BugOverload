@@ -18,6 +18,7 @@ interface Router {
     pathBeforModal: string;
     prevUrl: string;
     isDispatchedAuth: boolean;
+    isSubscribedLogout: boolean;
 }
 
 interface stateObject {
@@ -39,8 +40,7 @@ class Router {
         this.privateMapViews = new Map();
         this.cachedUrls = [];
         this.isDispatchedAuth = false;
-
-        store.subscribe('logoutStatus', subscribeRouterLogout);
+        this.isSubscribedLogout = false;
     }
 
     /**
@@ -188,6 +188,11 @@ class Router {
         }
 
         //redirect on login if user don't auth
+        if(!this.isSubscribedLogout) {
+            this.isSubscribedLogout = true;
+            store.subscribe('logoutStatus', subscribeRouterLogout);
+        }
+
         let view = this.privateMapViews.get(stateObject.path);
         if(view) {
             if(!store.getState('user')) {
