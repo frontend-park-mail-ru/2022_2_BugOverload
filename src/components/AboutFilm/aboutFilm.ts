@@ -89,7 +89,7 @@ export class AboutFilm extends Component {
         if (!buttonBookmark) {
             return;
         }
-        if ('is_used' in this.state.listCollections.find((elem: userCollListItem) => elem.name === 'Буду смотреть')) {
+        if (this.state.listCollections && 'is_used' in this.state.listCollections.find((elem: userCollListItem) => elem.name === 'Буду смотреть')) {
             (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
         }
 
