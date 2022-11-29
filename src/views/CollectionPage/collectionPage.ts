@@ -108,6 +108,9 @@ class CollectionPage extends View {
 
         }
 
+        if(!this.state.collection) {
+            return;
+        }
         const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const name = this.state.collection.name;
         this.rootNode.insertAdjacentHTML('beforeend', template({
