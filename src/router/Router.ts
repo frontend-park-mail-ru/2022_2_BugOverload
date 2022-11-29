@@ -114,7 +114,7 @@ class Router {
                 matchedHref = this.matchHref(matchedHref[0]);
             }
 
-            const prevView = this.mapViews.get(this.prevUrl);
+            const prevView = this.mapViews.get(this.prevUrl) || this.privateMapViews.get(this.prevUrl);
 
             if(prevView &&
                 Object.getOwnPropertyNames(Object.getPrototypeOf(prevView))
