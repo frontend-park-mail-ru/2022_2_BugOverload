@@ -52,6 +52,10 @@
         flex-flow: column nowrap;
         align-items: flex-start;
         margin-right: 100px;
+
+        @media screen and (max-width: 500px) {
+            margin-right: 0;
+        }
     }
 
     &__name {
@@ -104,6 +108,10 @@
         width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        @media screen and (max-width: 500px) {
+            width: 150px;
+        }
     }
 }
 
