@@ -192,7 +192,9 @@ class Router {
         if(view) {
             if(!store.getState('user')) {
                 if(!this.isDispatchedAuth) {
-                    window.localStorage.setItem('pathBeforModal', location);
+                    if (!this.privateMapViews.get(this.matchHref(location)[0])) {
+                        window.localStorage.setItem('pathBeforModal', location);
+                    }
                     store.subscribe('authStatus', subscribeRouterAuth);
                     store.dispatch(actionAuth());
                     this.navigate(stateObject, false);
@@ -224,7 +226,11 @@ class Router {
                     }
                     viewBeforModal.render(prevState[1]);
                 }
-            } else if (location !== '/login/' && location !== '/signup/') {
+            } else if (
+                location !== '/login/' && 
+                location !== '/signup/' && 
+                !this.privateMapViews.get(this.matchHref(location)[0])
+            ) {
                 window.localStorage.setItem('pathBeforModal', location);
             }
         }
