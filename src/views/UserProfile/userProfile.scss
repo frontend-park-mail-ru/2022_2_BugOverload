@@ -20,7 +20,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
     &__content-container {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     &__avatar{
@@ -98,10 +98,11 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         align-content: flex-start;
         align-items: flex-start;
         color: var(--main-color-text);
-        width: 100vw;
-        min-width: 400px;
-        max-width: 450px;
-        margin-right: 36px;
+
+        // width: 100vw;
+        // min-width: 400px;
+        // max-width: 450px;
+        // margin-right: 36px;
     }
 
     &__user-container {
@@ -109,7 +110,6 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         flex-flow: row wrap;
         align-items: center;
         margin-bottom: 36px;
-        width: 100vw;
     }
 
     &__username {
@@ -155,7 +155,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
         &__value {
             font-size: 20px;
-            width: 200px;
+            width: 150px;
         }
     }
 
