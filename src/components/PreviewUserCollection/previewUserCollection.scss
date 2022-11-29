@@ -56,7 +56,7 @@ $height-coll: $width-coll;
         position: absolute;
         bottom: 33px;
         left: 33px;
-        width: 55px;
+        width: max-content;
         height: 20px;
         justify-content: space-between;
     }
@@ -71,6 +71,7 @@ $height-coll: $width-coll;
         font-family: "Mail Sans Roman Med";
         @include animation-prop;
         margin-top: 3px;
+        margin-left: 10px;
     }
 
     &__title {

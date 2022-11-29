@@ -65,8 +65,6 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
             @media screen and (max-width: 800px) {
                 margin-left: 0;
-
-                // margin-left: var(--standart-margin);
             }
         }
     }
@@ -103,11 +101,6 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         align-content: flex-start;
         align-items: flex-start;
         color: var(--main-color-text);
-
-        // width: 100vw;
-        // min-width: 400px;
-        // max-width: 450px;
-        // margin-right: 36px;
     }
 
     &__user-container {

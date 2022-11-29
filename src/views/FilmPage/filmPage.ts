@@ -152,9 +152,6 @@ export class FilmPage extends View {
         this.likelyFilms?.unsubscribe();
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
-        // store.unsubscribe('statusSendReview', this.sendReviewSuccess);
-        // store.unsubscribe('removeFromCollStatus', this.removeFromCollStatus);
-        // store.unsubscribe('saveToCollStatus', this.saveToCollStatus);
     }
 }
 

@@ -144,12 +144,6 @@ class ReducerFilm {
                     break;
                 }
             }
-            // console.log(`oldList: ${JSON.stringify(oldList)}`);
-            // const newList = oldList.filter((elem: userCollListItem) => elem.id !== saveToCollParams.idCollection);
-            // console.log(`newList: ${JSON.stringify(newList)}`);
-            // const changedColl = oldList.find((elem: userCollListItem) => elem.id === saveToCollParams.idCollection);
-            // changedColl.is_used = true;
-            // newList.push(changedColl);
 
             return {
                 saveToCollStatus: response.status,
