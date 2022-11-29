@@ -137,7 +137,7 @@
     display: none;
     z-index: 10;
     background-color: var(--backgr-userbar);
-    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     height: 100%;
     width: 35vw;
     padding-top: 5vh;
