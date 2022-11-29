@@ -114,6 +114,7 @@ class CollectionPage extends View {
             description: this.state.collection.description,
             films,
         }));
+        this.state.collection = null;
     }
 
     collectionPageSubscribe() {
