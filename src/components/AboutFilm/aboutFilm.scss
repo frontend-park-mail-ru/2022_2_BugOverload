@@ -5,6 +5,7 @@
   height: calc(100vh + (100 - 75) * ((100vw - 300px) / (1920 - 300)));
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: center;
 
   &__blackout-bottom {
     width: 100%;

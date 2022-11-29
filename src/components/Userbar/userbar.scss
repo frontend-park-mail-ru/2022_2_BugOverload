@@ -106,7 +106,7 @@
   }
 }
 
-.js-header{
+.js-header {
   &__menu-mobile__area {
     display: flex;
     flex-wrap: row nowrap;
@@ -146,10 +146,11 @@
     &__header {
       color: #CCC;
       padding-left: 5vw;
-      width: 61vw;
       font-size: x-large;
       border-bottom: 2px solid var(--line-color-userbar);
       height: 7vh;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     &__link {
@@ -157,7 +158,9 @@
       margin-top: 2vh;
       padding-left: 10vw;
       font-size: large;
-      width: 56vw;
+      // width: 56vw;
+      width: 100%;
+      box-sizing: border-box;
       height: 6vh;
       cursor: pointer;
     }
