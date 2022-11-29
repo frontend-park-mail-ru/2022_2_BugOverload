@@ -7,9 +7,11 @@
             <div class="film__title">{{name}}</div>
             <div class="film__info-container">
                 <div class="film__genres">
-                    {{#each genres}}
+                    {{!-- {{#each genres}}
                     <div class="film__genre">{{this}}&nbsp</div>
-                    {{/each}}
+
+                    {{/each}} --}}
+                    <div class="film__genre">{{genres}}</div>
                 </div>
                 <div class="film__decore-circle"></div>
                 <div class="film__year">{{prod_year}}{{#if end_year}}-{{end_year}}{{/if}} </div>

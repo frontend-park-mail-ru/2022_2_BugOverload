@@ -15,11 +15,13 @@ export class Film {
     * @return {string} HTML созданного фильма
     */
     static createFilm(filmData: film) {
-        Film.decoreFilmInfo(filmData);
+        // Film.decoreFilmInfo(filmData);
 
         const film = template({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
+            rating: roundFloat(filmData.rating),
+            genres: Film.decoreFilmInfo(filmData),
         });
 
         const div = document.createElement('div');
@@ -37,8 +39,6 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     */
     static decoreFilmInfo(filmData: film) {
-        filmData.rating = +roundFloat(filmData.rating);
-
         const maxLength = 31;
         const lenYear = String(filmData.year_prod).length;
         const maxLenGenre = maxLength - lenYear;
@@ -54,11 +54,15 @@ export class Film {
             }
         });
 
-        filmData.genres = newListGenres;
+        // filmData.genres = newListGenres;
 
-        for (let i = 0; i < filmData.genres.length - 1; ++i) {
-            filmData.genres[i] += ',';
-        }
+        // for (let i = 0; i < filmData.genres.length - 1; ++i) {
+        //     filmData.genres[i] += ',';
+        // }
+
+        console.log(JSON.stringify(newListGenres));
+
+        return newListGenres.join(', ');
     }
 
     /**
