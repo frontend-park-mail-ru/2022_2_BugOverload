@@ -1,5 +1,5 @@
-$width-coll: 240px;
-$height-coll: 240px;
+$width-coll: calc(160px + (240 - 160) * ((100vw - 300px) / (1920 - 300)));
+$height-coll: $width-coll;
 
 @mixin animation-prop {
     opacity: 0;
