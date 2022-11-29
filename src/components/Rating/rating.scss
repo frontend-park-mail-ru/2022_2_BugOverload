@@ -33,7 +33,7 @@
   &__content-container {
     display: flex;
     justify-content: space-between;
-    width: calc(350px + (655 - 350) * ((100vw - 300px) / (1920 - 300)));
+    width: calc(320px + (655 - 320) * ((100vw - 300px) / (1920 - 300)));
     height: calc(40px + (64 - 40) * ((100vw - 300px) / (1920 - 300)));
   }
 
@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    width: calc(300px + (500 - 300) * ((100vw - 300px) / (1920 - 300)));
+    width: calc(270px + (500 - 270) * ((100vw - 300px) / (1920 - 300)));
   }
 
   &__star {
