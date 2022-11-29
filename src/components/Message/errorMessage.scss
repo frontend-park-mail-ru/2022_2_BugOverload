@@ -1,7 +1,6 @@
 .error {
   position: fixed;
-  // top: 70px;
-  bottom: 30vh;
+  bottom: 30px;
   left: 0;
   width: 200px;
   padding: 10px 15px;
@@ -11,6 +10,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+
+  @media screen and (max-width: 600px) {
+    bottom: none;
+    left: none;
+    top: 30px;
+    left: 80vw;
+  }
 
   &__text {
     color: var(--main-color-text);

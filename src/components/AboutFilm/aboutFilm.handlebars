@@ -24,15 +24,19 @@
         <div class="about-film__short-description">{{short_description}}</div>
         <div class="about-film__directors">
             <div class="about-film__label-director">Режиссёр:</div>
-            {{#each directors}}
-            <a data-section="/person/{{this.id}}/" class="about-film__director">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="about-film__info-item-value-container">
+                {{#each directors}}
+                <a data-section="/person/{{this.id}}/" class="about-film__director">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         <div class="about-film__roles">
             <div class="about-film__label-role">В ролях:</div>
-            {{#each actors}}
-            <a data-section="/person/{{this.id}}/" class="about-film__role">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="about-film__info-item-value-container">
+                {{#each actors}}
+                <a data-section="/person/{{this.id}}/" class="about-film__role">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         <div class="about-film__buttons-container">
             <a data-section="/" class="js-btn-watch-trailer">

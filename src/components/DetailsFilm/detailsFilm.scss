@@ -42,6 +42,11 @@
     }
   }
 
+  &__info-item-value-container {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
   &__info-item-value-info {
     font-size: 15px;
     color: var(--main-color-text);
