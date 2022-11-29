@@ -29,6 +29,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         height: $profile-height;
         width: $profile-width;
         max-width: 300px;
+        max-height: 400px;
         object-fit: cover;
 
         &__button{
@@ -56,7 +57,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
         &__flex{
             @include column__flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-content: flex-start;
             align-items: flex-start;
             margin-top: calc(var(--header-height) + 54px);
