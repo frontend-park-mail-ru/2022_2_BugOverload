@@ -140,6 +140,7 @@ class CollectionPage extends View {
         }
 
         this.state.isDispatched = false;
+        this.state.collection = null;
     }
 }
 
