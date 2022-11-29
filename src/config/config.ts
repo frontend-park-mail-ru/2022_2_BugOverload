@@ -122,14 +122,17 @@ export const routes = [
     { path: '/', view: mainPage },
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
-    { path: '/profile/', view: profile },
     { path: '/film/', view: filmPage },
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
-    { path: '/collections/', view: userCollections },
+];
+
+export const privateRoutes = [
+    { path: '/profile/', view: profile },
+    { path: '/user/collections/', view: userCollections }, 
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
