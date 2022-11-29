@@ -23,6 +23,7 @@ class CollectionPage extends View {
         }
 
         this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
+        this.userCollectionPageSubscribe = this.userCollectionPageSubscribe.bind(this);
     }
 
 
@@ -87,16 +88,13 @@ class CollectionPage extends View {
                     return;
                 }
             } else {
-                //user
-                this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
-                this.state.collection = store.getState(this.state.nameObjectStore);
-    
+                //user  
                 if(!this.state.collection && !this.state.isDispatched) {
                     this.state.isDispatched = true;
     
-                    if(!this.state.isSubscribedCollection) {
-                        this.state.isSubscribedCollection = true;
-                        store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+                    if(!this.state.isSubscribedUserCollection) {
+                        this.state.isSubscribedUserCollection = true;
+                        store.subscribe(this.state.nameObjectStore, this.userCollectionPageSubscribe);
                     }
     
                     store.dispatch(actionGetUserCollectionData({
@@ -124,6 +122,11 @@ class CollectionPage extends View {
         this.render();
     }
 
+    userCollectionPageSubscribe() {
+        this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
+        this.render();
+    }
+
     componentWillUnmount() {
         if(this.state.isSubscribedCollection) {
             this.state.isSubscribedCollection = false;
@@ -132,6 +135,10 @@ class CollectionPage extends View {
         if(this.state.isSubscribedPerson) {
             this.state.isSubscribedPerson = false;
             store.unsubscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
+        }
+        if(this.state.isSubscribedUserCollection) {
+            this.state.isSubscribedUserCollection = false;
+            store.unsubscribe(this.state.nameObjectStore, this.userCollectionPageSubscribe);
         }
 
         this.state.isDispatched = false;
