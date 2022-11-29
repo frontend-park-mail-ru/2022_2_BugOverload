@@ -21,7 +21,12 @@
         flex-flow: row wrap;
         gap: 5px;
         overflow: hidden;
-        max-width: 85vw;
+        max-width: 45vw;
+
+        @media screen and (max-width: 800px) {
+            margin-top: 35px;
+            max-width: 85vw;
+        }
     }
 
     &__gallery-item {
@@ -37,10 +42,11 @@
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 8px;
+        padding-right: var(--standart-margin);
+        padding-bottom: var(--standart-margin);
     }
 
     &__information {
-        margin-left: var(--standart-margin);
         font-style: normal;
         display: flex;
         flex-flow: column nowrap;
