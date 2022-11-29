@@ -87,7 +87,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!(titleInputWrapper.children[0] as HTMLInputElement).value) {
+        if (!(titleInputWrapper.children[0] as HTMLInputElement).value.trim()) {
             renderError(
                 titleInputWrapper,
                 'text',
@@ -103,7 +103,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!(textInputWrapper.children[0] as HTMLInputElement).value) {
+        if (!(textInputWrapper.children[0] as HTMLInputElement).value.trim()) {
             renderError(
                 textInputWrapper,
                 'js-input-review__input-text',
