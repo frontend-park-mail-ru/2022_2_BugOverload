@@ -21,6 +21,7 @@ $margin_bottom_error: 5px;
 .profile__form__password{
     @include profile__form;
     width: 100%;
+    margin-top: 20px;
 }
 
 .profile__wrapper__nick{

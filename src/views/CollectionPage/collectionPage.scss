@@ -19,6 +19,6 @@
         display: flex;
         flex-flow: row wrap;
         gap: 5px;
-        justify-content: center;
+        padding: var(--standart-margin);
     }
 }

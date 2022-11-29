@@ -1,12 +1,15 @@
 @mixin flex__row{
     display: flex;
-    flex-direction: row;
+    flex-flow: row;
 }
 
 @mixin column__flex {
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
 }
+
+$profile-height: calc(240px + (400 - 240) * ((100vw - 300px) / (1920 - 300)));
+$profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
 .profile {
     @include flex__row;
@@ -15,11 +18,16 @@
     align-items: flex-start;
     height: 100vh;
 
+    &__content-container {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
     &__avatar{
         border: 0;
         border-radius: 8px;
-        height: 400px;
-        width: 300px;
+        height: $profile-height;
+        width: $profile-width;
         object-fit: cover;
 
         &__button{
@@ -51,7 +59,11 @@
             align-content: flex-start;
             align-items: flex-start;
             margin-top: calc(var(--header-height) + 54px);
-            margin-left: 103px;
+            margin-left: 100px;
+
+            @media screen and (max-width: 800px) {
+                margin-left: var(--standart-margin);
+            }
         }
     }
 
@@ -70,6 +82,11 @@
         margin-left: 49px;
         margin-right: 52px;
         flex-wrap: wrap;
+
+        @media screen and (max-width: 800px) {
+            margin-left: var(--standart-margin);
+            margin-top: 54px;
+        }
     }
 
     &__user__flex{

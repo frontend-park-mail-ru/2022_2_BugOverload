@@ -49,7 +49,7 @@ export const API = {
         },
         collection_poster(key: string) {
             if (key === 'default') {
-                return '/assets/img/default/coll.png';
+                return '/assets/img/default/5.jpeg';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=collection_poster&key=${key}`;
         },

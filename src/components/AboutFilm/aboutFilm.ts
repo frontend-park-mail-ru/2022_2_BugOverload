@@ -99,7 +99,7 @@ export class AboutFilm extends Component {
 
             this.state.listCollections = store.getState('listCollectionsUser');
             if (!this.state.listCollections) {
-                ShowMessage('Ошибочное :(', 'negative');
+                ShowMessage('Не удалось получить список коллекций :(', 'negative');
                 return;
             }
 
