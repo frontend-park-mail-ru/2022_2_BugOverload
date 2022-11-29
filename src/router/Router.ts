@@ -177,7 +177,7 @@ class Router {
             : window.location.href.replace(hrefRegExp.localhost, '');
 
         const prevStateLocation = this.matchHref(location);
-        const prevView = this.mapViews.get(prevStateLocation[0]);
+        const prevView = this.mapViews.get(prevStateLocation[0]) || this.privateMapViews.get(prevStateLocation[0]);
 
         if (
             prevView
