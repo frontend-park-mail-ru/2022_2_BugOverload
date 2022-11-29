@@ -31,10 +31,6 @@ class UserCollections extends View {
 
         this.subHandler = () => {
             this.state.userCollections = store.getState('userCollections');
-            if (!store.getState('user')) {
-                ShowMessage('Вы должны быть авторизованы', 'negative');
-                return;
-            }
 
             this.render();
         }

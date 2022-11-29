@@ -1,7 +1,9 @@
-import { routes, ROOT } from '@config/config';
+import { routes, privateRoutes, ROOT } from '@config/config';
 import { hrefRegExp } from '@config/regExp';
 import { ShowMessage } from '@components/Message/message';
 import { notFoundPage } from '@router/Page404/page404';
+import { store } from '@store/Store';
+import { actionAuth } from '@store/actionCreater/userActions';
 
 interface Class extends anyObject {
     render :Function;
@@ -11,14 +13,16 @@ interface Class extends anyObject {
 interface Router {
     root: Element;
     mapViews: Map<string, Class>;
+    privateMapViews: Map<string, Class>;
     cachedUrls: Array<string>;
     pathBeforModal: string;
     prevUrl: string;
+    isDispatchedAuth: boolean;
 }
 
 interface stateObject {
     path :string;
-    props :string;
+    props ?:string;
 }
 /**
 * Осуществляет изменение приложения согласно его состояниям
@@ -32,7 +36,11 @@ class Router {
     constructor(root :Element) {
         this.root = root;
         this.mapViews = new Map();
+        this.privateMapViews = new Map();
         this.cachedUrls = [];
+        this.isDispatchedAuth = false;
+
+        store.subscribe('logoutStatus', subscribeRouterLogout);
     }
 
     /**
@@ -62,9 +70,12 @@ class Router {
      * Соопоставляет url и view
      * @param {string} path - url
      * @param {Function} view - view
+     * @param {Bool} privatePath = false - parameter
      */
-    register({ path, view } :{path :string, view :any}) {
-        this.mapViews.set(path, view);
+    register({ path, view } :{path :string, view :any}, privatePath = false) {
+        privatePath? 
+            this.privateMapViews.set(path, view):
+            this.mapViews.set(path, view);
     }
 
     /**
@@ -76,12 +87,16 @@ class Router {
             this.register(rout);
         }
 
+        for (const rout of privateRoutes) {
+            this.register(rout, true);
+        }
+
         document.addEventListener('click', (e) => {
             const { target } = e;
             if (target instanceof HTMLElement) {
                 if (target.dataset.section) {
                     const matchedHref = this.matchHref(target.dataset.section);
-                    if (this.mapViews.get(matchedHref[0])) {
+                    if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
                         e.preventDefault();
                         this.go({ path: matchedHref[0], props: matchedHref[1] }, { pushState: true, refresh: false  });
                     }
@@ -113,14 +128,7 @@ class Router {
         this.refresh();
     }
 
-    /**
-     * Рендерит страницы при перезагрузке
-     */
-    refresh() {
-        window.addEventListener('offline', () => {
-            ShowMessage('Проблемы с интернет соединением', 'negative');
-        });
-
+    getCurrentUrlObject() {
         const location = (window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
             : window.location.href.replace(hrefRegExp.localhost, '');
@@ -131,12 +139,27 @@ class Router {
         if (location !== '/') {
             matchedHref = this.matchHref(location);
         }
-        if (this.mapViews.get(matchedHref[0])) {
-            this.cache();
+
+        return matchedHref;
+    }
+
+    /**
+     * Рендерит страницы при перезагрузке
+     */
+    refresh(redirect = false) {
+        window.addEventListener('offline', () => {
+            ShowMessage('Проблемы с интернет соединением', 'negative');
+        });
+
+        const matchedHref = this.getCurrentUrlObject();
+        if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
+            if(!redirect) {
+                this.cache();
+            }
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
-            }, { pushState: true, refresh: true });
+            }, { pushState: redirect? false: true, refresh: redirect? false: true });
         } else {
             notFoundPage.render();
         }
@@ -164,7 +187,27 @@ class Router {
             prevView.componentWillUnmount();
         }
 
-        const view = this.mapViews.get(stateObject.path);
+        //redirect on login if user don't auth
+        let view = this.privateMapViews.get(stateObject.path);
+        if(view) {
+            if(!store.getState('user')) {
+                if(!this.isDispatchedAuth) {
+                    window.localStorage.setItem('pathBeforModal', location);
+                    store.subscribe('authStatus', subscribeRouterAuth);
+                    store.dispatch(actionAuth());
+                    this.navigate(stateObject, false);
+                    return;
+                } else {
+                    this.isDispatchedAuth = false;
+                    store.unsubscribe('authStatus', subscribeRouterAuth);
+                    this.navigate({ path: '/login/'}, false);
+                    this.refresh();
+                    return;
+                }
+            } 
+        } else {
+            view = this.mapViews.get(stateObject.path);
+        }
 
         // click login/signup after signup/login
         if (stateObject.path === '/login/' || stateObject.path === '/signup/') {
@@ -175,7 +218,10 @@ class Router {
                     this.mapViews.get('/').render();
                 } else {
                     const prevState = this.matchHref(this.pathBeforModal);
-                    const viewBeforModal = this.mapViews.get(prevState[0]);
+                    let viewBeforModal = this.mapViews.get(prevState[0]);
+                    if(!viewBeforModal && this.privateMapViews.get(prevState[0])) {
+                        viewBeforModal =  this.mapViews.get('/');
+                    }
                     viewBeforModal.render(prevState[1]);
                 }
             } else if (location !== '/login/' && location !== '/signup/') {
@@ -209,6 +255,13 @@ class Router {
                 window.history.pushState(props, null, location + path);
             }
             this.prevUrl = path;
+        } else {
+            if (props) {
+                window.history.replaceState(props, null, `${location + path}${props}/`);
+            } else {
+                window.history.replaceState(props, null, location + path);
+            }
+            this.prevUrl = path;
         }
 
         this.cache();
@@ -225,3 +278,15 @@ class Router {
 }
 
 export const router = new Router(ROOT);
+
+const subscribeRouterAuth = () => {
+    router.isDispatchedAuth = true;
+    router.refresh(true);
+}
+
+const subscribeRouterLogout = () => {
+    const matchedHref = router.getCurrentUrlObject();
+    if(router.privateMapViews.get(matchedHref[0])) {
+        router.go({ path: '/'},{pushState: true, refresh: false});
+    }
+}
