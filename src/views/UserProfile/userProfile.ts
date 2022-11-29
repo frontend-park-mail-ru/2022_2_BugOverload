@@ -64,6 +64,9 @@ class UserProfile extends View {
         }
 
         this.state.user = store.getState('user');
+        if(!this.state.user) {
+            return;
+        }
 
         if (!this.state.isDispatchedInfo) {
             store.dispatch(actionGetSettings());
