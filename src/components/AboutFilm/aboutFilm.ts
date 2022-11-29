@@ -89,9 +89,6 @@ export class AboutFilm extends Component {
         if (!buttonBookmark) {
             return;
         }
-        if (this.state.listCollections && 'is_used' in this.state.listCollections.find((elem: userCollListItem) => elem.name === 'Буду смотреть')) {
-            (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
-        }
 
         this.handlerBookmark = (e: Event) => {
             e.preventDefault();
@@ -121,6 +118,10 @@ export class AboutFilm extends Component {
                 idCollection: willWatch.id,
                 idFilm: this.data.id,
             }));
+
+            if ('is_used' in this.state.listCollections.find((elem: userCollListItem) => elem.name === 'Буду смотреть')) {
+                (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
+            }
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
