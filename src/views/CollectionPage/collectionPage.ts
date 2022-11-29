@@ -27,6 +27,7 @@ class CollectionPage extends View {
 
 
     render(typeCollection :string|number = null) {
+        console.log(typeCollection)
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
         }
@@ -99,7 +100,7 @@ class CollectionPage extends View {
                     }
     
                     store.dispatch(actionGetUserCollectionData({
-                        id: this.state.id,
+                        id: this.state.typeCollection,
                     }));
                     return;
                 }
