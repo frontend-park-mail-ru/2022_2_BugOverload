@@ -51,6 +51,7 @@
         display: flex;
         flex-flow: column nowrap;
         align-items: flex-start;
+        margin-right: 100px;
     }
 
     &__name {
@@ -88,7 +89,7 @@
     }
 
     &__about-item-key {
-        width: 200px;
+        width: 160px;
         font-weight: 400;
         font-size: 15px;
         line-height: 23px;
@@ -100,7 +101,7 @@
         font-size: 15px;
         line-height: 23px;
         color: var(--main-color-text);
-        width: 100%;
+        width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
     }

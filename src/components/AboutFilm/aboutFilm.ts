@@ -54,7 +54,7 @@ export class AboutFilm extends Component {
             if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
                 (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
             } else {
-                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#000';
+                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#fff';
             }
         };
 
@@ -114,11 +114,6 @@ export class AboutFilm extends Component {
                 ShowMessage('Не удалось получить список коллекций :(', 'negative');
                 return;
             }
-            // if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
-            //     (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#000';
-            // } else {
-            //     (buttonBookmark.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
-            // }
 
             const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть');
 
