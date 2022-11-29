@@ -12,17 +12,16 @@
     border-radius: 6px;
     box-sizing: border-box;
     margin-left: 14px;
-    margin-top: 48px + 7px;
+    top: 48px + 7px;
     position: absolute;
-  }
+    width: max-content;
 
-  // &__items-container {
-  //   display: grid;
-  //   grid-template-columns: 15% 85%;
-  //   column-gap: 10px;
-  //   align-items: center;
-  //   margin-top: 10px;
-  // }
+    @media screen and (max-width: 800px) {
+      position:absolute;
+      margin-left: 0;
+      right: 0;
+    }
+  }
 
   &__items-container {
     display: flex;

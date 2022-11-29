@@ -196,6 +196,7 @@
   &__save-to-collection {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   &__btn-save-to-bookmar {
