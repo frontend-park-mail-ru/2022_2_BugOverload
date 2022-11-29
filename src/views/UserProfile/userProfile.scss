@@ -32,7 +32,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         max-height: 400px;
         object-fit: cover;
 
-        &__button{
+        &__button {
             @include flex__row;
             justify-content: center;
             align-content: center;
@@ -44,7 +44,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             border-radius: 8px;
             font-size: 15px;
 
-            &:hover{
+            &:hover {
                 background-color: var(--secondary-color-hover);
                 transition: 0.1s linear;
                 cursor: pointer;
@@ -55,7 +55,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             margin-left: 16px;
         }
 
-        &__flex{
+        &__flex {
             @include column__flex;
             justify-content: flex-start;
             align-content: flex-start;
@@ -64,7 +64,9 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             margin-left: 100px;
 
             @media screen and (max-width: 800px) {
-                margin-left: var(--standart-margin);
+                margin-left: 0;
+
+                // margin-left: var(--standart-margin);
             }
         }
     }
@@ -88,6 +90,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         @media screen and (max-width: 800px) {
             margin-left: var(--standart-margin);
         }
+
         @media screen and (max-width: 700px) {
             margin-top: 20px;
         }
