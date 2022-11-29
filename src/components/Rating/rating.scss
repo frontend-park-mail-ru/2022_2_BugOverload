@@ -21,6 +21,10 @@
   flex-direction: column;
   min-height: 300px;
 
+  @media screen and (max-width: 600px) {
+    padding-right: 0;
+  }
+
   &__title {
     color: var(--main-color-text);
     font-size: 24px;

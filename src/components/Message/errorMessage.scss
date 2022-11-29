@@ -1,6 +1,6 @@
 .error {
   position: fixed;
-  bottom: 30px;
+  top: 88vh;
   left: 0;
   width: 200px;
   padding: 10px 15px;
@@ -12,10 +12,8 @@
   border-radius: 15px;
 
   @media screen and (max-width: 600px) {
-    bottom: none;
-    left: none;
     top: 30px;
-    left: 80vw;
+    left: 0;
   }
 
   &__text {
