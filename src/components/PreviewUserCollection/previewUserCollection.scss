@@ -44,8 +44,8 @@ $height-coll: $width-coll;
 
     &__icon-enter {
         position: absolute;
-        top: 95px;
-        left: 95px;
+        top: 80px;
+        left: 75px;
         @include animation-prop;
         cursor: pointer;
     }

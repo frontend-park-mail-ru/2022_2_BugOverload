@@ -1,9 +1,14 @@
 .genre {
     &__background {
-
+        width: 270px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     &__svg {
-
+        height: 115px;
     }
 }
