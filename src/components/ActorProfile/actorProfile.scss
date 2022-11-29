@@ -3,7 +3,7 @@
     justify-content: flex-end;
     flex-flow: column wrap;
     margin-bottom: 70px;
-    padding-top: var(--header-height) var(--standart-margin) 0 var(--standart-margin);
+    padding: var(--header-height) var(--standart-margin) 0 var(--standart-margin);
 
     &__content {
         display: flex;
@@ -14,6 +14,8 @@
     &__primary {
         display: flex;
         flex-flow: row nowrap;
+
+        // padding-left: var(--standart-margin);
 
         // min-width: 660px;
         // max-height: 400px;
