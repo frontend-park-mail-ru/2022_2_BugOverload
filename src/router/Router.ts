@@ -178,6 +178,7 @@ class Router {
 
         const prevStateLocation = this.matchHref(location);
         const prevView = this.mapViews.get(prevStateLocation[0]) || this.privateMapViews.get(prevStateLocation[0]);
+        console.log(prevView)
 
         if (
             prevView
