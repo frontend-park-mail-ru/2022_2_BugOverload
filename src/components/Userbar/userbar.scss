@@ -109,10 +109,13 @@
 .js-header {
   &__menu-mobile__area {
     display: flex;
-    flex-wrap: row nowrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
+    position: fixed;
+    top: 30px;
+    left: 0;
   }
 
   &__menu-mobile__target:hover &__mobile-userbar {
@@ -158,7 +161,6 @@
       margin-top: 2vh;
       padding-left: 10vw;
       font-size: large;
-      // width: 56vw;
       width: 100%;
       box-sizing: border-box;
       height: 6vh;
