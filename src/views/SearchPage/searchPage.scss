@@ -11,12 +11,11 @@
         font-size: 18px;
         text-decoration: none;
         display: flex;
-        margin-top: var(--header-height);
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         margin-left: var(--standart-margin);
-        margin-bottom: 20px;
+        margin: var(--header-height) 0 20px 0;
 
         &__icon-search {
             height: auto;
