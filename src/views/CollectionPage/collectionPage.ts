@@ -41,7 +41,7 @@ class CollectionPage extends View {
 
         if(!this.state.isSubscribedRemoveCollection) {
             this.state.isSubscribedRemoveCollection = true;
-            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+            store.subscribe('removeFromCollStatus', this.userCollectionPageSubscribe);
         }
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
@@ -130,7 +130,12 @@ class CollectionPage extends View {
                 if( (e.target as SVGElement).dataset.idfilm) {
                     const idFilm = (e.target as SVGElement).dataset.idfilm;
                     console.log('delete')
-                    delete this.state.collection.films;
+                    if (this.state.collection.films.length === 1) {
+                        delete this.state.collection.films;
+                    } else {
+                        this.state.collection = null;
+                    }
+
                     store.dispatch(actionRemoveFromCollection({
                         idFilm,
                         idCollection: this.state.typeCollection,
@@ -164,7 +169,7 @@ class CollectionPage extends View {
         }
         if(this.state.isSubscribedRemoveCollection) {
             this.state.isSubscribedRemoveCollection = false;
-            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
+            store.unsubscribe('removeFromCollStatus', this.userCollectionPageSubscribe);
         }
 
         this.state.isDispatched = false;

@@ -154,6 +154,7 @@ class ReducerFilm {
         return { saveToCollStatus: response.status };
     }
 
+    //удаляет фильм из коллекции
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
         const response = await Ajax.delete({
             url: API.removeFromColl(removeFromCollParams.idFilm),
@@ -161,17 +162,17 @@ class ReducerFilm {
         });
 
         if (response.status === responsStatuses.NoContent) {
-            const newList = store.getState('listCollectionsUser');
-            for (const coll of newList) {
-                if (coll.id === removeFromCollParams.idCollection) {
-                    delete coll.is_used;
+            const newList = store.getState(`collection-${removeFromCollParams.idCollection}`);
+            for (const film of newList) {
+                if (film.id === removeFromCollParams.idCollection) {
+                    delete film.is_used;
                     break;
                 }
             }
 
             return {
                 removeFromCollStatus: response.status,
-                listCollectionsUser: newList,
+                [`collection-${removeFromCollParams.idCollection}`]: newList,
             };
         }
 
