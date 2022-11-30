@@ -141,6 +141,24 @@ button {
   }
 }
 
+@media screen and (max-width: 1150px) {
+  .js-header__navlink-my-films {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .js-header__navlink-my-colls {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .js-header__navlink-top-250 {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 800px) {
   body,
   html {
