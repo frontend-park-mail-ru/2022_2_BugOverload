@@ -1,7 +1,7 @@
 <div class="user-collection">
     <div class="user-collection__container">
         <div class="user-collection__poster-container">
-            <div {{#if id}}data-section="/user/collection/{{id}}/"{{/if}} class="user-collection__blackout"></div>
+            <div  class="user-collection__blackout" {{#if id}}data-section="/user/collection/{{id}}/"{{/if}}></div>
             <div class="user-collection__poster" style="background-image: url('{{poster}}');"></div>
             <div class="user-collection__icon-enter">
                     <svg {{#if id}}data-section="/user/collection/{{id}}/"{{/if}} width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
