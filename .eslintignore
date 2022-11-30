@@ -5,3 +5,4 @@ libs
 __mocks__
 handlebars.runtime-v4.7.7.js
 dist
+assets
