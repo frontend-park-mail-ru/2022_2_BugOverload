@@ -133,7 +133,7 @@ class ReducerFilm {
     async saveToCollection(saveToCollParams: filmToCollParams) {
         const response = await Ajax.post({
             url: API.saveToColl(saveToCollParams.idFilm),
-            body: { idCollection: Number(saveToCollParams.idCollection) },
+            body: { collection_id: saveToCollParams.idCollection },
         });
 
         if (response.status === responsStatuses.NoContent) {
@@ -157,7 +157,7 @@ class ReducerFilm {
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
         const response = await Ajax.delete({
             url: API.removeFromColl(removeFromCollParams.idFilm),
-            body: { collection_id: removeFromCollParams.idCollection },
+            body: { collection_id: Number(removeFromCollParams.idCollection) },
         });
 
         if (response.status === responsStatuses.NoContent) {

@@ -2,9 +2,8 @@
     &__content-container {
         display: flex;
         flex-flow: column nowrap;
-        padding: 0 var(--standart-margin) 0 var(--standart-margin);
-        width: 100%;
-        margin-top: var(--header-height);
+        margin: 0 calc(var(--standart-margin) + 20px) 0 calc(var(--standart-margin) + 20px);
+        width: auto;
     }
 
     &__no-content {
@@ -17,5 +16,12 @@
             height: 42px;
             margin-top: 40px;
         }
+    }
+
+    &__title {
+        margin-top: var(--header-height);
+        color: var(--main-color-text);
+        font-size: 28px;
+        margin-left: var(--standart-margin);
     }
 }
