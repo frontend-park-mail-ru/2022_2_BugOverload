@@ -137,9 +137,9 @@ class UserProfile extends View {
         setTimeout(() => {
             store.dispatch(actionAuth());
             if (store.getState('statusChangeAvatar')) {
-                ShowMessage('Успех!', 'positive', 4000);
+                ShowMessage('Успех!', 'positive', 5000);
             } else {
-                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative', 4000);
+                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative', 5000);
             }
         }, 4000);
     }
