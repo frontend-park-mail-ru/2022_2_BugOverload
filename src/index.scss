@@ -261,10 +261,14 @@ button {
   .modal {
     &__input {
       height: 23px;
-      font-size: 9px;
+      font-size: 11px;
 
       &__button-auth {
         height: 25px;
+      }
+
+      &__error {
+        font-size: 7px;
       }
     }
 
@@ -343,6 +347,8 @@ button {
   }
 }
 
-.active {
-  font-weight: bold;
+@media screen and (max-width: 430px) {
+  .modal__input__error {
+    width: 67%;
+  }
 }

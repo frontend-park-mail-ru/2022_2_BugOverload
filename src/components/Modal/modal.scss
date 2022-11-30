@@ -78,7 +78,7 @@
     align-items: center;
     width: 270px;
     height: 55px;
-    margin-bottom: 17px;
+    margin-bottom: 20px;
   }
 
   &__input {
@@ -100,11 +100,12 @@
     }
 
     &__error {
-      width: auto;
+      width: 42vw;
       height: 18px;
       margin-top: 5px;
       color: #e72d2d;
       font-size: var(--font-size-small);
+      max-width: 300px;
     }
 
     &__button-auth {
