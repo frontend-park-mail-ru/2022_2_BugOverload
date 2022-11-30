@@ -202,6 +202,12 @@ button {
     --font-size-small: 11px;
   }
 
+  .actor-profile__primary {
+    flex-wrap: wrap;
+    max-height: none;
+    justify-content: center;
+  }
+
   .profile {
     &__content-container {
       flex-wrap: wrap;
@@ -258,12 +264,6 @@ button {
     --margin-left-login-btn: 155px;
     --font-size-big: 36px;
     --font-size-small: 9px;
-  }
-
-  .actor-profile__primary {
-    flex-wrap: wrap;
-    max-height: none;
-    justify-content: center;
   }
 
   .header__form {
