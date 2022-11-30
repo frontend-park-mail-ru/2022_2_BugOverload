@@ -77,7 +77,8 @@
     </a>
     {{/if}}
 
-
+    {{#if isMobile}}
+    {{else}}
     <form class="header__form js-header-search">
 
       <input class="header__form__input js-header__form__input" maxlength="100" data-search-input type="text"
@@ -85,6 +86,7 @@
       <img class="header__form__icon-search">
 
     </form>
+    {{/if}}
 
     {{#if avatar}}
     {{#if isMobile}}
