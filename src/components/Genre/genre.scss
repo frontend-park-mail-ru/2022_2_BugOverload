@@ -21,7 +21,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: rgba(19, 15, 12, 0.45);
+        background-color: rgba(19 15 12/45%);
 
         .genre__svg {
             height: 115px;
@@ -31,7 +31,7 @@
     }
 
     &__wrapper:hover &__background {
-        background-color: rgba(19, 15, 12, 0.6);
+        background-color: rgba(19 15 12/60%);
         cursor: pointer;
     }
 
@@ -46,6 +46,7 @@
     .collection__slider-button_right {
         top: calc(50% - 21.5px);
     }
+    
     .collection__slider-button_left {
         top: calc(50% - 21.5px);
     }
