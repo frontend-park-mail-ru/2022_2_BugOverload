@@ -145,6 +145,20 @@ button {
   .js-header__navlink-my-films {
     display: none;
   }
+
+  .actor-profile {
+    &__content {
+      max-height: none;
+      flex-wrap: wrap;
+    }
+
+    &__gallery {
+      max-width: 90vw;
+      &__title {
+          display: flex;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -238,6 +252,11 @@ button {
     --margin-left-login-btn: 155px;
     --font-size-big: 36px;
     --font-size-small: 9px;
+  }
+
+  .actor-profile__primary {
+    flex-wrap: wrap;
+    max-height: none;
   }
 
   .header__form {

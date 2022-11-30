@@ -1,19 +1,20 @@
 .actor-profile {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-flow: column wrap;
     margin-bottom: 70px;
     padding: var(--header-height) var(--standart-margin) 0 var(--standart-margin);
 
     &__content {
         display: flex;
-        flex-flow: row wrap;
+        //flex-flow: row wrap;
         margin-top: 65px;
+        max-height: 400px;
     }
 
     &__primary {
         display: flex;
-        flex-flow: row wrap;
+        max-height: 400px;
     }
 
     &__gallery {
@@ -22,6 +23,17 @@
         gap: 5px;
         overflow: hidden;
         max-width: 45vw;
+
+        &__title {
+            display: none;
+            margin-left: var(--standart-margin);
+            height: 28px;
+            color: #fff;
+            font-size: 28px;
+            width: 100vw;
+            justify-content: flex-start;
+            margin-bottom: var(--standart-margin);
+        }
 
         @media screen and (max-width: 800px) {
             margin-top: 35px;
@@ -38,12 +50,14 @@
     }
 
     &__image {
-        max-height: calc(240px + (345 - 240) * ((100vw - 300px) / (1920 - 300)));
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 8px;
-        padding-right: var(--standart-margin);
-        padding-bottom: var(--standart-margin);
+        margin-right: var(--standart-margin);
+        margin-bottom: var(--standart-margin);
+        max-height: 350px;
+        height: 40vw;
+        max-width: 300px;
     }
 
     &__information {
