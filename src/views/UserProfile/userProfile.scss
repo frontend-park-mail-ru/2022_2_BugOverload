@@ -84,6 +84,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         margin-left: 49px;
         margin-right: 52px;
         flex-wrap: wrap;
+        gap: 20px;
 
         @media screen and (max-width: 800px) {
             margin-left: var(--standart-margin);
