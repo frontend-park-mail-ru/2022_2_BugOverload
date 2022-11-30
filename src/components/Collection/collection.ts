@@ -116,8 +116,8 @@ export class Collection extends Component {
         const count = slider.querySelectorAll(genre?'.genre__background':'.js-film').length;
 
         const boundMargin = 52;
-        const spaceBetweenFilms = 30;
-        const widthFilm = 260;
+        const spaceBetweenFilms = genre?20:30;
+        const widthFilm = genre?290:260;
         if (document.documentElement.clientWidth - 2 * boundMargin
                 > count * widthFilm - spaceBetweenFilms) {
             btnRight.style.display = 'none';
