@@ -14,16 +14,18 @@
         display: flex;
         margin-top: var(--header-height);
         flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
 
         &__icon-search {
-            width: 16px;
             height: auto;
-            position: absolute;
-            top: 10px;
-            z-index: 2;
-            padding-left: 10px
+            width: 26px;
+            border-radius: 18px;
+            border: 0;
+            color: var(--main-color-text);
+            opacity: 0.8;
+            margin-left: 5px;
+            content: url("@icons/icon-search.png");
         }
     }
 
@@ -50,6 +52,14 @@
 .js-search-page {
     &__input {
         width: 90vw;
+        height: 35px;
+        width: 25vw;
+        border-radius: 18px;
+        border: 0;
+        background: #333;
+        color: var(--main-color-text);
+        opacity: 0.8;
+        padding-left: 37px
     }
 
 }

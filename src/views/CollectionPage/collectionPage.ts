@@ -130,7 +130,7 @@ class CollectionPage extends View {
                 if( (e.target as SVGElement).dataset.idfilm) {
                     const idFilm = (e.target as SVGElement).dataset.idfilm;
                     console.log('delete')
-                    this.state.collection.films = null;
+                    delete this.state.collection.films;
                     store.dispatch(actionRemoveFromCollection({
                         idFilm,
                         idCollection: this.state.typeCollection,
