@@ -41,7 +41,7 @@ class CollectionPage extends View {
 
         if(!this.state.isSubscribedRemoveCollection) {
             this.state.isSubscribedRemoveCollection = true;
-            store.subscribe('removeFromCollStatus', this.userCollectionPageSubscribe);
+            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
         }
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
@@ -169,7 +169,7 @@ class CollectionPage extends View {
         }
         if(this.state.isSubscribedRemoveCollection) {
             this.state.isSubscribedRemoveCollection = false;
-            store.unsubscribe('removeFromCollStatus', this.userCollectionPageSubscribe);
+            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
         }
 
         this.state.isDispatched = false;
