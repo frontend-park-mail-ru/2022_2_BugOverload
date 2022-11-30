@@ -118,16 +118,18 @@ class CollectionPage extends View {
             films,
         }));
         if(this.state.isUserCollection) {
-            const pageCollection = this.rootNode.querySelector('.page__collection');
-            pageCollection.addEventListener('click', (e) => {
-                if( (e.target as HTMLElement).classList.contains('.film__delete-svg')) {
-                    const idFilm = (e.target as HTMLElement).dataset.idFilm;
+            const pageUserCollection = this.rootNode.querySelector('.page__collection');
+            pageUserCollection.addEventListener('click', (e) => {
+                console.log((e.target as SVGElement).dataset.idfilm)
+                if( (e.target as SVGElement).dataset.idfilm) {
+                    const idFilm = (e.target as SVGElement).dataset.idfilm;
+                    console.log('delete')
                     store.dispatch(actionRemoveFromCollection({
                         idFilm,
                         idCollection: this.state.typeCollection,
                     }))
                 }
-            }, { once: true})
+            })
         }
     }
 
