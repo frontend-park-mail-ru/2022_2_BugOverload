@@ -92,6 +92,16 @@ class SearchPage extends View {
         }
 
         this.state.search = null;
+
+        /*if(isMobile) {
+            this.submitHadndler = (e: Event) => {
+                e.preventDefault();
+                const request: string = (form.querySelector('.js-header__form__input') as HTMLInputElement).value;
+                router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
+            }
+    
+            form.addEventListener('submit', this.submitHadndler);
+        }*/
     }
 
     componentWillUnmount() {

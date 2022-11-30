@@ -6,6 +6,15 @@
         width: auto;
     }
 
+    &__search {
+        margin-left: auto;
+        margin-right: 30px;
+        font-size: 18px;
+        text-decoration: none;
+        display: flex;
+        margin-top: var(--header-height);
+    }
+
     &__no-content {
         margin-top: 40px;
         color: var(--main-color-text);
