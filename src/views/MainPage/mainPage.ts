@@ -42,6 +42,7 @@ class MainPage extends View {
         }));
         collectionGenres.addHandlerSlider(
             collectionGenreDiv.querySelector('.js-collection__container'),
+            true
         );
 
     }

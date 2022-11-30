@@ -108,12 +108,12 @@ export class Collection extends Component {
     *
     * @param {slider DOMElement} slider - DOM-объекта cайдера на странице
     */
-    addHandlerSlider(slider: HTMLElement) {
+    addHandlerSlider(slider: HTMLElement, genre = false) {
         const btnRight: HTMLElement = slider.querySelector('.js-collection__slider-button_right');
         const btnLeft: HTMLElement = slider.querySelector('.js-collection__slider-button_left');
         const body: HTMLElement = slider.querySelector('.js-collection__slider');
 
-        const count = slider.querySelectorAll('.js-film').length;
+        const count = slider.querySelectorAll(genre?'.genre__background':'.js-film').length;
 
         const boundMargin = 52;
         const spaceBetweenFilms = 30;

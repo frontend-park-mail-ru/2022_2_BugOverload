@@ -1,4 +1,19 @@
 .genre {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    &__title {
+        margin-top: 20px;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
     &__background {
         width: 270px;
         height: 200px;
@@ -6,15 +21,31 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: rgba(19, 15, 12, 0.45);
+
+        .genre__svg {
+            height: 115px;
+            max-width: 115px;
+        }
     }
 
-    &__svg {
-        height: 115px;
+    &__wrapper:hover &__background {
+        background-color: rgba(19, 15, 12, 0.6);
+        cursor: pointer;
+    }
+
+    &__wrapper:hover &__svg {
+        height: 130px;
+        max-width: 130px;
+        transition: 0.12s;
     }
 }
 
 .js-collection-genre-genres {
     .collection__slider-button_right {
-        top: calc(50% + 28px);
+        top: calc(50% - 21.5px);
+    }
+    .collection__slider-button_left {
+        top: calc(50% - 21.5px);
     }
 }

@@ -93,7 +93,7 @@ class Router {
 
         document.addEventListener('click', (e) => {
             const { target } = e;
-            if (target instanceof HTMLElement) {
+            if (target instanceof HTMLElement || target instanceof SVGElement) {
                 if (target.dataset.section) {
                     const matchedHref = this.matchHref(target.dataset.section);
                     if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
