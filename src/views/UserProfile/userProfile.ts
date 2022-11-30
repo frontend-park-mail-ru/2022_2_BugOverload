@@ -5,7 +5,7 @@ import { store } from '@store/Store';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
 import { ProfileChange } from '@components/ProfileChange/profileChange';
 import { ShowMessage } from '@components/Message/message';
-import { hrefRegExp } from '@config/regExp';
+import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
 
 interface UserProfile{
     state: {
@@ -15,6 +15,8 @@ interface UserProfile{
         isAuthSubscribed: boolean,
         isDispatchedInfo: boolean,
         isSubscribed: boolean,
+        isEventSubscribe: boolean,
+        profileChange: any,
     }
 }
 
@@ -38,6 +40,8 @@ class UserProfile extends View {
             isAuthSubscribed: false,
             isDispatchedInfo: false,
             isSubscribed: false,
+            isEventSubscribe: false,
+            profileChange: false,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
@@ -78,6 +82,7 @@ class UserProfile extends View {
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 profileMenu: templateProfileMenu(),
+                profileChange: templateProfileChange(),
                 ...this.state.user,
                 ...this.state.userInfo,
             },
@@ -112,14 +117,21 @@ class UserProfile extends View {
         if(!this.state.user) {
             return;
         }
-        const profileChange = new ProfileChange({
-            rootNode: this.rootNode,
-            user: Object.assign(
-                this.state.user,
-                this.state.userInfo,
-            ),
-        });
-        profileChange.componentDidMount();
+        if(!this.state.profileChange) {
+            this.state.profileChange = new ProfileChange({
+                rootNode: this.rootNode,
+                user: Object.assign(
+                    this.state.user,
+                    this.state.userInfo,
+                ),
+            });
+        }
+
+        console.log(this.state.isEventSubscribe)
+        if(!this.state.isEventSubscribe) {
+            this.state.isEventSubscribe = true;
+            this.state.profileChange.componentDidMount();
+        }
     }
 
     /**
@@ -173,6 +185,10 @@ class UserProfile extends View {
         }
 
         this.state.isDispatchedInfo = false;
+        this.state.isEventSubscribe = false;
+        if(this.state.profileChange) {
+            this.state.profileChange.componentWillUnmount();
+        }
     }
 }
 

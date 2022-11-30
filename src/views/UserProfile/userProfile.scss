@@ -3,11 +3,6 @@
     flex-flow: row;
 }
 
-@mixin column__flex {
-    display: flex;
-    flex-flow: column nowrap;
-}
-
 $profile-height: calc(240px + (400 - 240) * ((100vw - 300px) / (1920 - 300)));
 $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
@@ -159,7 +154,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
     }
 
     &__change{
-        @include column__flex;
+        flex-flow: column nowrap;
         justify-content: center;
         align-content: flex-start;
         align-items: flex-start;
