@@ -20,6 +20,7 @@ app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/premieres/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/search/:q/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/search/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/collections/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/collection/:id/',express.static(path.resolve(__dirname, '../dist')));
