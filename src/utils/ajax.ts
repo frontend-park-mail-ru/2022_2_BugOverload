@@ -81,16 +81,21 @@ export class Ajax {
     static async put({ url, body } :{ url:string, body:any }, uploadFile = false) {
         let response;
         if (uploadFile) {
-            response = await fetch(url, {
-                method: 'PUT',
-                mode: 'cors',
-                credentials: 'include',
-                headers: this.#csrfToken ? {
-                    'X-CSRF-TOKEN': this.#csrfToken,
-                } : {
-                },
-                body,
-            });
+            try {
+                response = await fetch(url, {
+                    method: 'PUT',
+                    mode: 'cors',
+                    credentials: 'include',
+                    headers: this.#csrfToken ? {
+                        'X-CSRF-TOKEN': this.#csrfToken,
+                    } : {
+                    },
+                    body,
+                });
+            } catch(e) {
+                return { status: 404 } as anyObject;
+            }
+
         } else {
             response = await fetch(url, {
                 method: 'PUT',
