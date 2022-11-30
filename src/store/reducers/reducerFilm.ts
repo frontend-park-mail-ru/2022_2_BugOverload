@@ -162,17 +162,8 @@ class ReducerFilm {
         });
 
         if (response.status === responsStatuses.NoContent) {
-            const newList = store.getState(`collection-${removeFromCollParams.idCollection}`);
-            for (const film of newList.films) {
-                if (film.id === removeFromCollParams.idCollection) {
-                    delete film.id;
-                    break;
-                }
-            }
-
             return {
                 removeFromCollStatus: response.status,
-                [`collection-${removeFromCollParams.idCollection}`]: newList,
             };
         }
 
