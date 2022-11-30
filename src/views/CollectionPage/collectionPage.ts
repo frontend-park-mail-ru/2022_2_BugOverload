@@ -4,6 +4,7 @@ import template from '@views/CollectionPage/collectionPage.handlebars';
 import { actionGetCollectionData, actionGetUserCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
+import { actionRemoveFromCollection } from '@store/actionCreater/filmActions';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -21,6 +22,7 @@ class CollectionPage extends View {
             isSubscribedPerson: false,
             isSubscribedUserCollection: false,
             typeCollection: null,
+            isUserCollection: false,
         }
 
         this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
@@ -88,6 +90,7 @@ class CollectionPage extends View {
                 }
             } else {
                 //user  
+                this.state.isUserCollection = true;
                 if(!this.state.collection && !this.state.isDispatched) {
                     this.state.isDispatched = true;
     
@@ -103,16 +106,25 @@ class CollectionPage extends View {
             }
         }
 
-        if(this.state.collection && !Object.hasOwnProperty.call(this.state.collection, 'films')) {
-            return;
-        }
-        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData, this.state.isUserCollection), '');
         const name = this.state.collection.name;
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
         }));
+        if(this.state.isUserCollection) {
+            const pageCollection = this.rootNode.querySelector('.page__collection');
+            pageCollection.addEventListener('click', (e) => {
+                if( (e.target as HTMLElement).classList.contains('.film__delete-svg')) {
+                    const idFilm = (e.target as HTMLElement).dataset.idFilm;
+                    store.dispatch(actionRemoveFromCollection({
+                        idFilm,
+                        idCollection: this.state.typeCollection,
+                    }))
+                }
+            }, { once: true})
+        }
     }
 
     collectionPageSubscribe() {
@@ -140,6 +152,7 @@ class CollectionPage extends View {
 
         this.state.isDispatched = false;
         this.state.collection = null;
+        this.state.isUserCollection = false;
     }
 }
 

@@ -45,7 +45,7 @@ class MainPage extends View {
                 collectionGenreDiv.querySelector('.js-collection__container'),
                 true
             );
-        }, 100);
+        }, 1000);
     }
 
     componentWillUnmount() {

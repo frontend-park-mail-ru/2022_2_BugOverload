@@ -84,7 +84,7 @@ interface userCollListItem {
 }
 
 interface filmToCollParams {
-    idFilm: number,
+    idFilm: number|string,
     idCollection: number,
 }
 

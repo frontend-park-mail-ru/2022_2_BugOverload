@@ -14,12 +14,13 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     * @return {string} HTML созданного фильма
     */
-    static createFilm(filmData: film) {
+    static createFilm(filmData: film, isUserCollection = false) {
         const film = template({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
             rating: roundFloat(filmData.rating),
             genres: Film.decoreFilmInfo(filmData),
+            isUserCollection,
         });
 
         const div = document.createElement('div');
