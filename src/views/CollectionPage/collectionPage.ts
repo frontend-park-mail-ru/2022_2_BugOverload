@@ -106,7 +106,11 @@ class CollectionPage extends View {
             }
         }
 
-        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData, this.state.isUserCollection), '');
+        let films = null;
+        if(this.state.collection && Object.hasOwnProperty.call(this.state.collection, 'films')) {
+            films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData, this.state.isUserCollection), '');
+        }
+
         const name = this.state.collection.name;
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
