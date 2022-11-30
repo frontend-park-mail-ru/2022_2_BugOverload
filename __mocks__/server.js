@@ -23,6 +23,7 @@ app.use('/search/:q/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/collections/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/user/collection/:id/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/collection/genres/',express.static(path.resolve(__dirname, '../dist')));
 
 app.use(body.json());
 app.use(cors({

@@ -9,6 +9,7 @@ import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
 import { userCollections } from '@views/UserCollections/userCollections';
+import { pageGenres } from '@/views/PageGenres/pageGenres';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -132,6 +133,7 @@ export const routes = [
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
+    { path: '/collection/genres/', view: pageGenres },
 ];
 
 export const privateRoutes = [

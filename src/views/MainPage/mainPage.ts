@@ -44,7 +44,6 @@ class MainPage extends View {
             collectionGenreDiv.querySelector('.js-collection__container'),
             true
         );
-
     }
 
     componentWillUnmount() {
