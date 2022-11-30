@@ -163,9 +163,9 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         justify-content: center;
         align-content: flex-start;
         align-items: flex-start;
-        width: 100vw;
-        min-width: 270px;
-        max-width: 320px;
+        width: 82vw;
+        min-width: 255px;
+        max-width: 355px;
 
         &__svg {
             cursor: pointer;
