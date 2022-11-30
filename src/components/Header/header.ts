@@ -37,16 +37,18 @@ export class Header extends Component {
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
-    render() {
+    render( search = '') {
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
         }
+        console.log('search',search)
 
         this.rootNode.insertAdjacentHTML('afterbegin', template(
             Object.assign(
                 { isMobile },
                 this.state.user,
+                { search },
             )
         ));
 

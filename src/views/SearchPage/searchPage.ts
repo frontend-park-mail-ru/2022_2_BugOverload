@@ -27,7 +27,7 @@ class SearchPage extends View {
         if (searchBody) {
             searchBody.remove();
         }
-        super.render();
+        super.render("search");
 
         this.subHandler = () => {
             this.state.search = store.getState('search');

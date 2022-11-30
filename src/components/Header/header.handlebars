@@ -41,72 +41,75 @@
           </clipPath>
         </defs>
       </svg>
-    
-    <div class="js-header__mobile-userbar">
 
-      <div class="js-header__mobile-userbar__header">Меню</div>
-      <div class="js-header__mobile-userbar__link" data-section="/">Главная</div>
-      <div class="js-header__mobile-userbar__link" data-section="/collection/tag-popular/">Популярное</div>
-      <div class="js-header__mobile-userbar__link" data-section="/user/collections/">Коллекции</div>
-      <div class="js-header__mobile-userbar__link" data-section="/premieres/">Премьеры</div>
-      <div class="js-header__mobile-userbar__link" data-section="/profile/">Профиль</div>
-      {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Оценки</div> --}}
-      {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Рецензии</div> --}}
+      <div class="js-header__mobile-userbar">
 
-      <img class="header__logo js-header__mobile-userbar__logo" data-section="/" src="/LogoMOVIEGATE.png">
+        <div class="js-header__mobile-userbar__header">Меню</div>
+        <div class="js-header__mobile-userbar__link" data-section="/">Главная</div>
+        <div class="js-header__mobile-userbar__link" data-section="/collection/tag-popular/">Популярное</div>
+        <div class="js-header__mobile-userbar__link" data-section="/user/collections/">Коллекции</div>
+        <div class="js-header__mobile-userbar__link" data-section="/premieres/">Премьеры</div>
+        <div class="js-header__mobile-userbar__link" data-section="/profile/">Профиль</div>
+        {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Оценки</div> --}}
+        {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Рецензии</div> --}}
+
+        <img class="header__logo js-header__mobile-userbar__logo" data-section="/" src="/LogoMOVIEGATE.png">
+      </div>
     </div>
-  </div>
-  <img data-section="/search/" class="header__form__icon-search   {{#if avatar}} header__form__icon-search-avatar {{/if}}">
-
-
-  {{else}}
-  <a class="header__navlink" data-section="/">
-    <img class="header__logo" data-section="/" src="/LogoMOVIEGATE.png">
-  </a>
-  <a class="header__navlink js-header__navlink-my-films">
-    <div data-section="/collection/tag-popular/" class="header__navlink-area">Популярное</div>
-  </a>
-  <a class="header__navlink js-header__navlink-my-colls" data-section="navlink">
-    <div data-section="/user/collections/" class="header__navlink-area">Коллекции</div>
-  </a>
-  <a class="header__navlink js-header__navlink-top-250">
-    <div class="header__navlink-area" data-section="/premieres/">Премьеры</div>
-  </a>
-  {{/if}}
-
-
-  <form class="header__form js-header-search">
-
-    <input class="header__form__input js-header__form__input" maxlength="100" data-search-input type="text"
-      placeholder="фильмы, передачи, персоны.." aria-label="Search">
-    <img class="header__form__icon-search">
-
-  </form>
-
-  {{#if avatar}}
-  {{#if isMobile}}
-  <div class="js-header__mobile-userbar-substrate">
+    {{#if search}}
     {{else}}
-    <div class="header__userbar-substrate js-header__userbar-substrate">
-      {{/if}}
-      <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
-        <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
-        {{#if isMobile}}
-        {{else}}
-        {{#if email}}
-        <div class="header__userbar-name-container">
-          <div class="header__userbar-name">{{nickname}}</div>
-          <div class="header__userbar-email">{{email}}</div>
+    <img data-section="/search/"
+      class="header__form__icon-search   {{#if avatar}} header__form__icon-search-avatar {{/if}}">
+    {{/if}}
+
+    {{else}}
+    <a class="header__navlink" data-section="/">
+      <img class="header__logo" data-section="/" src="/LogoMOVIEGATE.png">
+    </a>
+    <a class="header__navlink js-header__navlink-my-films">
+      <div data-section="/collection/tag-popular/" class="header__navlink-area">Популярное</div>
+    </a>
+    <a class="header__navlink js-header__navlink-my-colls" data-section="navlink">
+      <div data-section="/user/collections/" class="header__navlink-area">Коллекции</div>
+    </a>
+    <a class="header__navlink js-header__navlink-top-250">
+      <div class="header__navlink-area" data-section="/premieres/">Премьеры</div>
+    </a>
+    {{/if}}
+
+
+    <form class="header__form js-header-search">
+
+      <input class="header__form__input js-header__form__input" maxlength="100" data-search-input type="text"
+        placeholder="фильмы, передачи, персоны.." aria-label="Search">
+      <img class="header__form__icon-search">
+
+    </form>
+
+    {{#if avatar}}
+    {{#if isMobile}}
+    <div class="js-header__mobile-userbar-substrate">
+      {{else}}
+      <div class="header__userbar-substrate js-header__userbar-substrate">
+        {{/if}}
+        <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
+          <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
+          {{#if isMobile}}
+          {{else}}
+          {{#if email}}
+          <div class="header__userbar-name-container">
+            <div class="header__userbar-name">{{nickname}}</div>
+            <div class="header__userbar-email">{{email}}</div>
+          </div>
+          {{/if}}
         </div>
+        {{#if userbar}}
+        {{{userbar}}}
+        {{/if}}
         {{/if}}
       </div>
-      {{#if userbar}}
-      {{{userbar}}}
-      {{/if}}
-      {{/if}}
-    </div>
-    {{else}}
-    <a class="primary-btn-med header__login__btn" data-section="/login/">Войти</button>
-      {{/if}}
+      {{else}}
+      <a class="primary-btn-med header__login__btn" data-section="/login/">Войти</button>
+        {{/if}}
 
 </header>
