@@ -21,6 +21,7 @@ class CollectionPage extends View {
             isSubscribedCollection: false,
             isSubscribedPerson: false,
             isSubscribedUserCollection: false,
+            isSubscribedRemoveCollection: false,
             typeCollection: null,
             isUserCollection: false,
         }
@@ -36,6 +37,11 @@ class CollectionPage extends View {
         }
         if(!this.state.typeCollection) {
             return;
+        }
+
+        if(!this.state.isSubscribedRemoveCollection) {
+            this.state.isSubscribedRemoveCollection = true;
+            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
         }
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
@@ -154,6 +160,10 @@ class CollectionPage extends View {
         if(this.state.isSubscribedUserCollection) {
             this.state.isSubscribedUserCollection = false;
             store.unsubscribe(this.state.nameObjectStore, this.userCollectionPageSubscribe);
+        }
+        if(this.state.isSubscribedRemoveCollection) {
+            this.state.isSubscribedRemoveCollection = false;
+            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
         }
 
         this.state.isDispatched = false;

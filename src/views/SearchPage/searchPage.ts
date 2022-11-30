@@ -6,6 +6,7 @@ import template from '@views/SearchPage/searchPage.handlebars';
 import { PremiereFilm } from '@components/PremiereFilm/premiereFilm';
 import { PersonMed } from '@components/PersonMed/personMed';
 import { SearchList } from '@components/SearchList/searchList';
+import { isMobile } from '@/config/config';
 
 
 /**
@@ -45,7 +46,9 @@ class SearchPage extends View {
             return;
         }
 
-        ROOT.insertAdjacentHTML('beforeend', template());
+        ROOT.insertAdjacentHTML('beforeend', template({
+            isMobile,
+        }));
 
         if ('error' in this.state.search) {
             ROOT.querySelector('.js-search-page__content-container')?.insertAdjacentHTML('beforeend', `

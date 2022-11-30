@@ -5,7 +5,6 @@ import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
-import { ShowMessage } from '@components/Message/message';
 
 export interface Header {
     state: {
