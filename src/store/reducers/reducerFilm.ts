@@ -163,9 +163,9 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             const newList = store.getState(`collection-${removeFromCollParams.idCollection}`);
-            for (const film of newList) {
+            for (const film of newList.films) {
                 if (film.id === removeFromCollParams.idCollection) {
-                    delete film.is_used;
+                    delete film.id;
                     break;
                 }
             }
