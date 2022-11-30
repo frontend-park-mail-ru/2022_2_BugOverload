@@ -46,7 +46,7 @@ export class InputReview extends Component {
             return;
         }
 
-        const modal = new Modal(this.rootNode, /* this.componentWillUnmount.bind(this) */);
+        const modal = new Modal(this.rootNode);
         modal.render();
 
         modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
