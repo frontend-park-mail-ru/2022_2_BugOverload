@@ -373,6 +373,12 @@ button {
   }
 }
 
+@media screen and (max-width: 494px) {
+  .page__collection__body {
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 430px) {
   .modal__input__error {
     width: 67%;
