@@ -1,8 +1,10 @@
 .user-collections {
+    height: 100vh;
     &__container {
         display: flex;
         width: 100%;
         flex-flow: row nowrap;
+        height: 100%;
     }
 
     &__content-container {

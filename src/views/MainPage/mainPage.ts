@@ -35,15 +35,17 @@ class MainPage extends View {
         });
         const collectionGenres = new Collection('');
         const collectionGenreDiv = this.rootNode.querySelector('.js-collection-genre-genres');
-        collectionGenreDiv.insertAdjacentHTML('beforeend', templateCollection({
-            films: genresHtml,
-            name: 'Жанры',
-            url: `genres`,
-        }));
-        collectionGenres.addHandlerSlider(
-            collectionGenreDiv.querySelector('.js-collection__container'),
-            true
-        );
+        setTimeout(() => {
+            collectionGenreDiv.insertAdjacentHTML('beforeend', templateCollection({
+                films: genresHtml,
+                name: 'Жанры',
+                url: `genres`,
+            }));
+            collectionGenres.addHandlerSlider(
+                collectionGenreDiv.querySelector('.js-collection__container'),
+                true
+            );
+        }, 100);
     }
 
     componentWillUnmount() {
