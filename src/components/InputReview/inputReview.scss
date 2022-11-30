@@ -49,7 +49,7 @@ $input-height: 46px;
     border-radius: 30px;
     width: 48px;
     height: 48px;
-    background-size: cover;
+    object-fit: cover;
   }
 
   &__info-user-container {
