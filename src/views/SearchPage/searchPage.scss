@@ -8,7 +8,7 @@
 
     &__search {
         margin-left: auto;
-        margin-right: 30px;
+        margin-right: var(--standart-margin);
         font-size: 18px;
         text-decoration: none;
         display: flex;
@@ -16,16 +16,21 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+        margin-left: var(--standart-margin);
+        margin-bottom: 20px;
 
         &__icon-search {
             height: auto;
-            width: 26px;
+            margin-top: 1px;
+            width: 18px;
             border-radius: 18px;
             border: 0;
             color: var(--main-color-text);
             opacity: 0.8;
-            margin-left: 5px;
+            padding-left: var(--standart-margin);
             content: url("@icons/icon-search.png");
+            position: absolute;
+            z-index: 2;
         }
     }
 
@@ -53,13 +58,13 @@
     &__input {
         width: 90vw;
         height: 35px;
-        width: 25vw;
+        width: 100%;
         border-radius: 18px;
         border: 0;
         background: #333;
         color: var(--main-color-text);
         opacity: 0.8;
-        padding-left: 37px
+        padding-left: 40px
     }
 
 }

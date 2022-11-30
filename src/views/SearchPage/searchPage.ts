@@ -7,7 +7,7 @@ import { PremiereFilm } from '@components/PremiereFilm/premiereFilm';
 import { PersonMed } from '@components/PersonMed/personMed';
 import { SearchList } from '@components/SearchList/searchList';
 import { isMobile } from '@/config/config';
-
+import { router } from '@router/Router';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -93,15 +93,18 @@ class SearchPage extends View {
 
         this.state.search = null;
 
-        /*if(isMobile) {
+        if(isMobile) {
+            this.rootNode.querySelector('.header__form__icon-search').remove();
+
+            const form = this.rootNode.querySelector('.search-page__search');
             this.submitHadndler = (e: Event) => {
                 e.preventDefault();
-                const request: string = (form.querySelector('.js-header__form__input') as HTMLInputElement).value;
+                const request: string = (form.querySelector('.js-search-page__input') as HTMLInputElement).value;
                 router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
             }
     
             form.addEventListener('submit', this.submitHadndler);
-        }*/
+        }
     }
 
     componentWillUnmount() {
