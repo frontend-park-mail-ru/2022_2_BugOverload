@@ -134,6 +134,7 @@ class CollectionPage extends View {
                         delete this.state.collection.films;
                     } else {
                         this.state.collection = null;
+                        this.state.isDispatched = null;
                     }
 
                     store.dispatch(actionRemoveFromCollection({
