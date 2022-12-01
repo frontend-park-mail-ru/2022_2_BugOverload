@@ -126,10 +126,8 @@ class CollectionPage extends View {
         if(this.state.isUserCollection) {
             const pageUserCollection = this.rootNode.querySelector('.page__collection');
             pageUserCollection.addEventListener('click', (e) => {
-                console.log((e.target as SVGElement).dataset.idfilm)
                 if( (e.target as SVGElement).dataset.idfilm) {
                     const idFilm = (e.target as SVGElement).dataset.idfilm;
-                    console.log('delete')
                     if (this.state.collection.films.length === 1) {
                         delete this.state.collection.films;
                     } else {

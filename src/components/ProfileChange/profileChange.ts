@@ -47,11 +47,9 @@ export class ProfileChange extends Component {
     }
 
     handlerUserChangeForm () {
-        console.log('work')
         if (!this.state.isOpen) {
             const changeWrapper = document.querySelector('.profile__change');
 
-            console.log('changeWrapper', changeWrapper.classList.contains('dysplay-none'))
             if(changeWrapper.classList.contains('dysplay-none')) {
                 changeWrapper.classList.remove('dysplay-none');
             }
@@ -94,7 +92,6 @@ export class ProfileChange extends Component {
     componentDidMount() {
         const changeButton = this.rootNode.querySelector('.js-profile__change__svg');
         changeButton.addEventListener('click', this.handlerUserChangeForm);
-        console.log('changeWrapper', changeButton)
     }
 
     /**

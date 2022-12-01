@@ -42,7 +42,6 @@ export class Header extends Component {
         if (header) {
             header.remove();
         }
-        console.log('search',search)
 
         this.rootNode.insertAdjacentHTML('afterbegin', template(
             Object.assign(

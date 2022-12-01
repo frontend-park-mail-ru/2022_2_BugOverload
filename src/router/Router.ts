@@ -106,9 +106,9 @@ class Router {
 
         window.addEventListener('popstate', () => setTimeout(() => {
             let matchedHref = [];
-            matchedHref[0] = (window.location.href.match(hrefRegExp.host))
+            matchedHref[0] = decodeURIComponent((window.location.href.match(hrefRegExp.host))
                 ? window.location.href.replace(hrefRegExp.host, '')
-                : window.location.href.replace(hrefRegExp.localhost, '');
+                : window.location.href.replace(hrefRegExp.localhost, ''));
 
             if (matchedHref[0] !== '/') {
                 matchedHref = this.matchHref(matchedHref[0]);
@@ -129,9 +129,9 @@ class Router {
     }
 
     getCurrentUrlObject() {
-        const location = (window.location.href.match(hrefRegExp.host))
+        const location = decodeURIComponent((window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
-            : window.location.href.replace(hrefRegExp.localhost, '');
+            : window.location.href.replace(hrefRegExp.localhost, ''));
 
         let matchedHref = [];
         matchedHref[0] = location;
@@ -172,9 +172,9 @@ class Router {
      * @param {string} stateObject.props - состояние приложения
      */
     go(stateObject :stateObject, { pushState, refresh } :{ pushState :boolean, refresh: boolean}) {
-        const location = (window.location.href.match(hrefRegExp.host))
+        const location = decodeURIComponent((window.location.href.match(hrefRegExp.host))
             ? window.location.href.replace(hrefRegExp.host, '')
-            : window.location.href.replace(hrefRegExp.localhost, '');
+            : window.location.href.replace(hrefRegExp.localhost, ''));
 
         const prevStateLocation = this.matchHref(location);
         const prevView = this.mapViews.get(prevStateLocation[0]) || this.privateMapViews.get(prevStateLocation[0]);
@@ -255,9 +255,9 @@ class Router {
      * @param {string} props - состояние приложения
      */
     navigate({ path, props } :stateObject, pushState = false) {
-        const location = (window.location.href.match(hrefRegExp.host))
+        const location = decodeURIComponent((window.location.href.match(hrefRegExp.host))
             ? window.location.href.match(hrefRegExp.host)[0]
-            : window.location.href.match(hrefRegExp.localhost)[0];
+            : window.location.href.match(hrefRegExp.localhost)[0]);
 
         if (pushState) {
             if (props) {
