@@ -163,10 +163,12 @@ class ReducerFilm {
 
         console.log('store',store,store.getState('listCollectionsUser'))
         const newList = store.getState('listCollectionsUser');
-        for (const coll of newList) {
-            if (coll.id === removeFromCollParams.idCollection) {
-                delete coll.is_used;
-                break;
+        if(!newList) {
+            for (const coll of newList) {
+                if (coll.id === removeFromCollParams.idCollection) {
+                    delete coll.is_used;
+                    break;
+                }
             }
         }
 
