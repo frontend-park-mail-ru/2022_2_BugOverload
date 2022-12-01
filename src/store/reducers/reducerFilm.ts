@@ -161,7 +161,6 @@ class ReducerFilm {
             body: { collection_id: Number(removeFromCollParams.idCollection) },
         });
 
-        console.log('store',store,store.getState('listCollectionsUser'))
         const newList = store.getState('listCollectionsUser') || {};
         if(!newList) {
             for (const coll of newList) {
