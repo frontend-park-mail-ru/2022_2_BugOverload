@@ -145,6 +145,8 @@ class ReducerFilm {
                 }
             }
 
+            console.log(`saveToCollection new: ${JSON.stringify(newList)}`);
+
             return {
                 saveToCollStatus: response.status,
                 listCollectionsUser: newList,
@@ -170,6 +172,7 @@ class ReducerFilm {
                 }
             }
         }
+        console.log(`removeFromCollection new: ${JSON.stringify(newList)}`);
 
         if (response.status === responsStatuses.NoContent) {
             return {

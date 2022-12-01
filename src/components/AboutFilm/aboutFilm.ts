@@ -51,6 +51,9 @@ export class AboutFilm extends Component {
 
         this.subHandler = () => {
             this.state.listCollections = store.getState('listCollectionsUser');
+            console.log(`In ABOUT new: ${JSON.stringify(this.state.listCollections)}`);
+            console.log(`this.location: ${this.location}`);
+
             if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
                 (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
             } else {

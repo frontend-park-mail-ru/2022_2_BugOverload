@@ -62,6 +62,35 @@ export class Header extends Component {
     }
 
     componentDidMount() {
+        const buttonSearch = this.rootNode.querySelector('.js-mobile-search');
+        if (!buttonSearch) {
+            return;
+        }
+        this.updateHeaderToSearch = (e: Event) => {
+            e.preventDefault();
+            (e.target as HTMLElement).style.display = 'none';
+            const btnLogin: HTMLElement = this.rootNode.querySelector('.js-header__login__btn');
+            if (btnLogin) {
+                btnLogin.style.display = 'none';
+            }
+
+            const btnTarget: HTMLElement = this.rootNode.querySelector('.js-header__menu-mobile__target');
+            if (btnTarget) {
+                btnTarget.style.display = 'none';
+            }
+
+            const searchForm: HTMLElement = this.rootNode.querySelector('.js-header-search');
+            if (searchForm) {
+                searchForm.style.display = 'block';
+                searchForm.children[0].classList.add('header__form__input_full');
+                searchForm.children[1].classList.add('header__form__icon-search_input-full');
+                // searchForm.children[0].classList.remove('header__form__input');
+                searchForm.classList.add('header__form_full');
+            }
+        };
+        buttonSearch.addEventListener('click', this.updateHeaderToSearch);
+
+
         const form = this.rootNode.querySelector('.js-header-search');
         if (!form) {
             return;
@@ -79,12 +108,12 @@ export class Header extends Component {
         if (!isMobile) {
             this.collHandler = function (e: Event) {
                 if (!store.getState('user')) {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     ShowMessage('Вы должны быть авторизованы', 'negative');
                     return;
                 }
             };
-    
+
             collButton.addEventListener('click', this.collHandler);
         }*/
     }

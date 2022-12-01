@@ -12,7 +12,7 @@
     &__description {
         margin: 25px var(--standart-margin) 70px;
         font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1920 - 300)));
-        color: var( --secondary-color);
+        color: var( --secondary-color-text);
     }
 
     &__body {

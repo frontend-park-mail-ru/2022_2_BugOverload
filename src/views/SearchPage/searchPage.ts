@@ -94,7 +94,7 @@ class SearchPage extends View {
         this.state.search = null;
 
         if(isMobile) {
-            this.rootNode.querySelector('.header__form__icon-search').remove();
+            // this.rootNode.querySelector('.header__form__icon-search').remove();
 
             const form = this.rootNode.querySelector('.search-page__search');
             this.submitHadndler = (e: Event) => {
@@ -102,7 +102,7 @@ class SearchPage extends View {
                 const request: string = (form.querySelector('.js-search-page__input') as HTMLInputElement).value;
                 router.go({ path: '/search/', props: `q-${request}` }, { pushState: true, refresh: false  });
             }
-    
+
             form.addEventListener('submit', this.submitHadndler);
         }
     }

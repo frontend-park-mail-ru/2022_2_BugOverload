@@ -281,6 +281,13 @@ button {
     top: 5px;
     width: 25px;
     margin-left: 155px;
+
+    &_input-full {
+      top: 10px;
+      width: 16px;
+      margin-left: 0px;
+      left: var(--standart-margin);
+    }
   }
 
   .primary-btn-big {

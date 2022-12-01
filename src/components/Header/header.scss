@@ -54,6 +54,10 @@
     text-decoration: none;
     display: flex;
     position: relative;
+
+    &_full {
+      width: 90vh;
+    }
   }
 
   &__form__icon-search {
@@ -76,9 +80,17 @@
     opacity: 0.8;
     padding-left: 37px;
 
-    @media screen and (max-width: 680px) {
-      width: 40vw;
+    &_full {
+      width: 100%;
+      box-sizing: border-box;
+      margin-left: var(--standart-margin);
+      margin-right: var(--standart-margin);
+      position: relative;
     }
+
+    // @media screen and (max-width: 680px) {
+    //   width: 40vw;
+    // }
   }
 
   &__form__input:focus + &__form__icon-search {
