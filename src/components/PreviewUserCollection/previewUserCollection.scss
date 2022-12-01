@@ -34,7 +34,7 @@ $height-coll: $width-coll;
     &__blackout {
         width: $width-coll;
         height: $height-coll;
-        background-color: rgb(var(--blackout-color));
+        background-color: var(--blackout-color);
         @include animation-prop;
         position: absolute;
         top: 0;

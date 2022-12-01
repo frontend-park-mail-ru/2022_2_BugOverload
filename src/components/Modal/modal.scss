@@ -96,14 +96,14 @@
 
 
     &_red_border {
-      border: 2px solid #e72d2d;
+      border: 2px solid var(--text-danger);
     }
 
     &__error {
       width: 42vw;
       height: 18px;
       margin-top: 5px;
-      color: #e72d2d;
+      color: var(--text-danger);
       font-size: var(--font-size-small);
       max-width: 300px;
     }

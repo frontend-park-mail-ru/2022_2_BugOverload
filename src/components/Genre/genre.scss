@@ -9,7 +9,7 @@
 
     &__title {
         margin-top: 20px;
-        color: #fff;
+        color: var(--main-color-text);
         font-size: 15px;
         cursor: pointer;
     }
@@ -21,34 +21,36 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: rgba(19 15 12/45%);
-        border-radius: 4px;
+        background-color: var(--blackout-color);
+        border-radius: 12px;
 
         .genre__svg {
             height: 115px;
             max-width: 115px;
             transition: 0.12s;
+            fill: var(--disable-genre-collection);
         }
     }
 
     &__wrapper:hover &__background {
-        background-color: rgba(19 15 12/60%);
         cursor: pointer;
     }
 
     &__wrapper:hover &__svg {
         height: 130px;
         max-width: 130px;
+
+        fill: var(--active-genre-collection);
         transition: 0.12s;
     }
 }
 
 .js-collection-genre-genres {
     .collection__slider-button_right {
-        top: calc(50% - 21.5px);
+        top: calc(50% - 40px);
     }
-    
+
     .collection__slider-button_left {
-        top: calc(50% - 21.5px);
+        top: calc(50% - 40px);
     }
 }

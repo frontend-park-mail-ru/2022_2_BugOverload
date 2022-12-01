@@ -56,7 +56,7 @@ $poster-height: 170px;
     &__blackout {
         width: $poster-width;
         height: $poster-height;
-        background-color: rgb(var(--blackout-color));
+        background-color: var(--blackout-color);
         opacity: 0;
         position: absolute;
         top: 0;

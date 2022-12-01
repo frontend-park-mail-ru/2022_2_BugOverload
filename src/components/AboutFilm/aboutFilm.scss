@@ -45,7 +45,7 @@
 
   &__title {
     color: var(--main-color-text);
-    font-size: 40px;
+    font-size: calc(28px + (40 - 28) * ((100vw - 300px) / (1920 - 300)));
     font-weight: bolder;
   }
 

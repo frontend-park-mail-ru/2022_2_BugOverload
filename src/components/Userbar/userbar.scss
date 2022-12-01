@@ -1,3 +1,13 @@
+@mixin link-mobile-menu {
+  margin-top: 2vh;
+  padding-left: 10vw;
+  font-size: large;
+  width: 100%;
+  box-sizing: border-box;
+  height: 6vh;
+  cursor: pointer;
+}
+
 .header__userbar {
   display: flex;
   flex-flow: row nowrap;
@@ -74,7 +84,7 @@
   }
 
   &-item-out {
-    color: #afafaf;
+    color: var(--secondary-color-text);
     margin-top: 12px;
     margin-bottom: 12px;
     text-decoration: none;
@@ -149,7 +159,7 @@
     }
 
     &__header {
-      color: #CCC;
+      color: var(--menu-title-color);
       padding-left: 5vw;
       font-size: x-large;
       border-bottom: 2px solid var(--line-color-userbar);
@@ -159,14 +169,13 @@
     }
 
     &__link {
-      color: #fff;
-      margin-top: 2vh;
-      padding-left: 10vw;
-      font-size: large;
-      width: 100%;
-      box-sizing: border-box;
-      height: 6vh;
-      cursor: pointer;
+      color: var(--main-color-text);
+      @include link-mobile-menu;
+    }
+
+    &__link-out {
+      color: var(--secondary-color-text);
+      @include link-mobile-menu;
     }
 
     &__logo {

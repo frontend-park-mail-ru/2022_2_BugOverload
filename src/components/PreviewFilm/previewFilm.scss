@@ -31,7 +31,7 @@
   &__film-title {
     color: var(--main-color-text);
     font-weight: bold;
-    font-size: var(--font-size-big);
+    font-size: calc(32px + (48 - 32) * ((100vw - 300px) / (1920 - 300)));
     width: 100%;
     max-width: 600px;
   }

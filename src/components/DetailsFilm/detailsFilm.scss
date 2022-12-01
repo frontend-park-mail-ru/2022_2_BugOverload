@@ -99,7 +99,7 @@
     left: 0;
     width: 81px;
     height: 108px;
-    background-color: rgb(var(--blackout-color));
+    background-color: var(--blackout-color);
     opacity: 0;
     z-index: 2;
     border-radius: 4px;
