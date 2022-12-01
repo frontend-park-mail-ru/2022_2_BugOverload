@@ -267,7 +267,7 @@ export const decoreDaysLeft = (date:string) => {
     if (!date) {
         return '';
     }
-    const premiere = new Date(date);
+    const premiere = new Date(date.split('.').join(', '));
     const now = new Date();
 
     const timeDiff = Math.abs(premiere.getTime() - now.getTime());
