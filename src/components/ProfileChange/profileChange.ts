@@ -55,10 +55,7 @@ export class ProfileChange extends Component {
             }
             changeWrapper.classList.add('dysplay-flex');
 
-            if(!this.state.isAddValidate) {
-                this.state.isAddValidate = true;
-                this.addValidate();
-            }
+            this.addValidate();
 
             store.subscribe('statusChangeSettings', this.subscribeFuncChangeProfile);
             this.state.isOpen = true;
