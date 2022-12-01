@@ -106,6 +106,7 @@
     width: calc(260px + (490 - 260) * ((100vw - 300px) / (1920 - 300)));
     justify-content: space-between;
     margin-top: 7px;
+    max-width: 487px;
   }
 
   &__text-stars {
