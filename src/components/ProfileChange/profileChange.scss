@@ -1,4 +1,4 @@
-$height_wrapper: 80px;
+$height_wrapper: 100px;
 $max__width_wrapper: 410px;
 $min__width_wrapper: 250px;
 $margin_top_input: 30px;
@@ -32,7 +32,7 @@ $margin_bottom_error: 5px;
 }
 
 .profile__wrapper__nick {
-    height: $height_wrapper;
+    height: 80px;
     max-width: $max__width_wrapper;
     min-width: $min__width_wrapper;
     margin-top: $margin_top_input;
