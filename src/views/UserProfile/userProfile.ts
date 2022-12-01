@@ -126,12 +126,12 @@ class UserProfile extends View {
                 ),
             });
         }
+        this.state.profileChange.componentDidMount();
 
-        console.log(this.state.isEventSubscribe)
-        if(!this.state.isEventSubscribe) {
+        /*if(!this.state.isEventSubscribe) {
             this.state.isEventSubscribe = true;
             this.state.profileChange.componentDidMount();
-        }
+        }*/
     }
 
     /**
