@@ -15,7 +15,6 @@ interface UserProfile{
         isAuthSubscribed: boolean,
         isDispatchedInfo: boolean,
         isSubscribed: boolean,
-        isEventSubscribe: boolean,
         profileChange: any,
     }
 }
@@ -40,8 +39,7 @@ class UserProfile extends View {
             isAuthSubscribed: false,
             isDispatchedInfo: false,
             isSubscribed: false,
-            isEventSubscribe: false,
-            profileChange: false,
+            profileChange: null,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
@@ -127,11 +125,6 @@ class UserProfile extends View {
             });
         }
         this.state.profileChange.componentDidMount();
-
-        /*if(!this.state.isEventSubscribe) {
-            this.state.isEventSubscribe = true;
-            this.state.profileChange.componentDidMount();
-        }*/
     }
 
     /**
@@ -185,7 +178,6 @@ class UserProfile extends View {
         }
 
         this.state.isDispatchedInfo = false;
-        this.state.isEventSubscribe = false;
         if(this.state.profileChange) {
             this.state.profileChange.componentWillUnmount();
         }
