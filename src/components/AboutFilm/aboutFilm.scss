@@ -36,7 +36,7 @@
   &__container {
     display: flex;
     position: relative;
-    width: 100%;
+    width: calc(100% - var(--standart-margin));
     z-index: 1;
     flex-direction: column;
     margin-left: var(--standart-margin);

@@ -32,9 +32,10 @@
 
   &__content-container {
     display: flex;
-    justify-content: space-between;
-    width: calc(320px + (655 - 320) * ((100vw - 300px) / (1920 - 300)));
+    justify-content: flex-start;
+    width: 90vw;
     height: calc(40px + (64 - 40) * ((100vw - 300px) / (1920 - 300)));
+    max-width: 605px;
   }
 
   &__star-list {
@@ -67,6 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 20px;
   }
 
   &__rate-value {
