@@ -126,7 +126,7 @@ html {
   background-color: var(--backgr-color);
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: rgba(0 0 0/0%);
+  -webkit-tap-highlight-color: rgba(0 0 0 / 0%);
 }
 
 a,
@@ -364,7 +364,7 @@ button {
 
   .input-review {
     height: 100%;
-    
+
     &__container {
       height: 100%;
       padding: 25px 30px 35px;
