@@ -96,6 +96,10 @@
       box-sizing: border-box;
       position: relative;
     }
+
+    &__mobile {
+      width: 40vw;
+    }
   }
 
   &__form__input:focus + &__form__icon-search {
