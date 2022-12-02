@@ -169,11 +169,15 @@
       padding-left: 5vw;
       font-size: x-large;
       border-bottom: 2px solid var(--line-color-userbar);
-      height: 12vh;
+      height: 7vh;
       width: 100%;
       box-sizing: border-box;
       min-height: 34px;
       margin-bottom: 2vh;
+
+      @media (orientation: landscape) {
+        height: 12vh;
+      }
     }
 
     &__link {
