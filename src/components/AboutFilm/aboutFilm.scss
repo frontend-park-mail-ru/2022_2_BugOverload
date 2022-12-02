@@ -9,6 +9,7 @@
 
   @media (orientation: landscape) {
     padding-top: var(--header-height);
+    width: 100vw;
   }
 
   &__blackout-bottom {
