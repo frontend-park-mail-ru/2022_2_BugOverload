@@ -272,10 +272,12 @@ button {
 
   .input-review__user-container {
     display: none;
+    margin-top: 15px;
   }
 
   .input-review__head {
     margin-bottom: 15px;
+    font-size: 25px;
   }
 
   .js-mobile-search {
@@ -370,10 +372,6 @@ button {
       height: 50%;
     }
 
-    &__head {
-      font-size: 25px;
-    }
-
     &__select-head-text {
       font-size: 15px;
     }
@@ -385,10 +383,6 @@ button {
 
     &__input-text {
       font-size: 12px;
-    }
-
-    &__user-container {
-      margin-top: 15px;
     }
 
     &__select {
