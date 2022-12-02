@@ -9,7 +9,7 @@
   min-height: 510px;
 
   @media (orientation: landscape) {
-    padding-top: calc(#{var(--header-height)} +30px);
+    padding-top: calc(#{var(--header-height)} + 30px);
     width: 100vw;
   }
 
