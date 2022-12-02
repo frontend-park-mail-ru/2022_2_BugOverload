@@ -56,7 +56,11 @@
     position: relative;
 
     &_full {
-      width: 90vh;
+      width: 100%;
+    }
+
+    &__mobile {
+      margin: 0px var(--standart-margin) 0px var(--standart-margin);
     }
   }
 
@@ -67,6 +71,7 @@
     height: auto;
     z-index: 2;
     padding-left: 10px;
+    left: 0px;
     content: url("@icons/icon-search.png");
   }
 
@@ -83,8 +88,6 @@
     &_full {
       width: 100%;
       box-sizing: border-box;
-      margin-left: var(--standart-margin);
-      margin-right: var(--standart-margin);
       position: relative;
     }
   }
@@ -110,4 +113,8 @@
     border-radius: 18px;
     object-fit: cover;
   }
+}
+
+.js-mobile-search {
+  display: none;
 }
