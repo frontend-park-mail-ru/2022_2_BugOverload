@@ -76,7 +76,7 @@ body,
 html {
   --main-shadow-color-light: rgb(0 0 0 / 20%);
   --main-shadow-color-strong: rgb(0 0 0 / 40%);
-  --blackout-color: rgb(0, 0, 0);
+  --blackout-color: rgb(0 0 0);
   --backgr-color: #121212;
   --primary-color: #feba2b;
   --primary-color-hover: #cd9826;
@@ -116,8 +116,8 @@ html {
   --secondary-weak-text: #E0E0E0;
   --line-color-userbar: #858585;
   --backgr-userbar: rgb(#2b2b2b, 0.9);
-  --disable-genre-collection: rgb(110, 110, 110);
-  --active-genre-collection: rgb(221, 221, 221);
+  --disable-genre-collection: rgb(110 110 110);
+  --active-genre-collection: rgb(221 221 221);
   --menu-title-color: #CCC;
   --font-size-big: 48px;
   --font-size-normal: 15px;
@@ -289,8 +289,8 @@ button {
     &_input-full {
       top: 10px;
       width: 16px;
-      margin-left: 0px;
-      left: 0px;
+      margin-left: 0;
+      left: 0;
     }
   }
 
