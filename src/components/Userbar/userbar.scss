@@ -150,12 +150,12 @@
     -webkit-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
     height: 100%;
-    width: 35vw;
+    width: 66vw;
     padding-top: 5vh;
     border-radius: 0 3%;
 
-    @media screen and (max-width: 680px) {
-      width: 66vw;
+    @media (orientation: landscape) {
+      width: 44vw;
     }
 
     &__header {
@@ -166,16 +166,19 @@
       height: 7vh;
       width: 100%;
       box-sizing: border-box;
+      min-height: 34px;
     }
 
     &__link {
       color: var(--main-color-text);
       @include link-mobile-menu;
+      min-height: 29px;
     }
 
     &__link-out {
       color: var(--secondary-color-text);
       @include link-mobile-menu;
+      min-height: 29px;
     }
 
     &__logo {
@@ -184,6 +187,7 @@
       margin-top: 20px;
       padding-left: 10vw;
       margin-left: 0;
+      min-height: 44px;
     }
   }
 
