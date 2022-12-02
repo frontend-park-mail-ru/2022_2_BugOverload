@@ -20,6 +20,7 @@
     display: flex;
     margin-top: 37px;
     width: calc(100vw - 2 * #{var(--standart-margin)});
+    max-width: 470px;
   }
 
   &__info-item-key {
