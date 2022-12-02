@@ -126,12 +126,11 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button: HTMLElement) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
-
-        document.removeEventListener('click', this.closeMenuHandler);
     }
 
     unsubscribe() {
         this.componentWillUnmount();
+        document.removeEventListener('click', this.closeMenuHandler);
         store.unsubscribe('listCollectionsUser', this.subHandler);
     }
 }

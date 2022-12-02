@@ -13,7 +13,7 @@ import { isMobile } from '@/config/config';
 export class Userbar extends Component {
     /**
      * Навешивает обработчики на меню для обработки logout
-     */ 
+     */
     addLogoutHandler() {
         const targetHadler = document.querySelector('.js-header__userbar-item-out');
 
@@ -55,7 +55,7 @@ export class Userbar extends Component {
 
             rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));
 
-            rootNode.querySelector('.js-header__userbar-substrate').classList.add('userbar-on');
+            rootNode.querySelector('.js-header__userbar-substrate')?.classList.add('userbar-on');
 
             isOpened = true;
 
