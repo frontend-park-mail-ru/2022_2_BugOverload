@@ -8,6 +8,12 @@
   cursor: pointer;
 }
 
+@mixin primary-animation-hover {
+  color: var(--primary-color-hover);
+  transition: 0.1s linear;
+  cursor: pointer;
+}
+
 .header__userbar {
   display: flex;
   flex-flow: row nowrap;
@@ -167,18 +173,27 @@
       width: 100%;
       box-sizing: border-box;
       min-height: 34px;
+      margin-bottom: 2vh;
     }
 
     &__link {
       color: var(--main-color-text);
       @include link-mobile-menu;
       min-height: 29px;
+      
+      &:hover {
+        @include primary-animation-hover;
+      }
     }
 
     &__link-out {
       color: var(--secondary-color-text);
       @include link-mobile-menu;
       min-height: 29px;
+
+      &:hover {
+        @include primary-animation-hover;
+      }
     }
 
     &__logo {
