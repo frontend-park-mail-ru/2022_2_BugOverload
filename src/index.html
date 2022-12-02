@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self' *.youtube.com; script-src 'self' 'unsafe-inline'; style-src 'self'">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline';base-uri 'self'; form-action 'self'; font-src 'self'; manifest-src 'self'; upgrade-insecure-requests">
+    <!-- <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self' *.youtube.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"> -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src *;"> -->
     <title>MovieGate</title>
 
