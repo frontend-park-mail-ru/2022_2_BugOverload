@@ -7,7 +7,7 @@
     border-radius: 20px;
     margin-bottom: 48px;
     max-width: 900px;
-    width: calc(100vw - 2 * #{var(--standart-margin)});
+    width: calc(100vw - 2 * #{var(--standart-margin) - 48px});
 
     @media screen and (max-width: 500px) {
       box-sizing: border-box;
