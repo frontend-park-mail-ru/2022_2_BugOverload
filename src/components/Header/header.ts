@@ -5,6 +5,7 @@ import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
+import templateUserbar from '@components/Userbar/userbar.handlebars';
 
 export interface Header {
     state: {
@@ -50,6 +51,7 @@ export class Header extends Component {
                 { isMobile },
                 this.state.user,
                 { search },
+                { userbar: templateUserbar() },
             )
         ));
 
