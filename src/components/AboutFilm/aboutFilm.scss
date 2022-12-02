@@ -6,10 +6,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
-  min-height: 600px;
+  min-height: 510px;
 
   @media (orientation: landscape) {
-    padding-top: var(--header-height);
+    padding-top: calc(#{var(--header-height)} +30px);
     width: 100vw;
   }
 
@@ -27,12 +27,9 @@
     top: 0;
     left: 0;
     width: 900px;
-    height: 100vh;
+    min-height: 510px;
+    height: calc(100vh + (100 - 75) * ((100vw - 300px) / (1920 - 300)));
     background: var(--blackout-left-content);
-
-    @media (orientation: landscape) {
-      height: 110vh;
-    } 
 
     @media screen and (max-width: 1200px) {
       width: 600px;
@@ -51,7 +48,10 @@
     flex-direction: column;
     margin-left: var(--standart-margin);
     align-self: center;
-    margin-top: calc(var(--header-height) + 30px);
+
+    @media screen and (max-height: 600px) {
+      margin-top: 70px;
+    }
   }
 
   &__title {
