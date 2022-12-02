@@ -103,6 +103,7 @@ export class Rating extends Component {
         e.preventDefault();
 
         const rateValue = (e.submitter as HTMLInputElement).value;
+        ShowMessage(`rateValue: ${rateValue}`, 'negative');
 
         const user = store.getState('user');
         if (!user) {
