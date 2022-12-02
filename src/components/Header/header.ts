@@ -53,11 +53,27 @@ export class Header extends Component {
             )
         ));
 
+        const logoutButton = this.rootNode.querySelector('.js-header__mobile-userbar__link-out');
         if (this.state.user) {
+            if(logoutButton) {
+                if(logoutButton.classList.contains('dysplay-none')) {
+                    logoutButton.classList.remove('dysplay-none');
+                }
+                logoutButton.classList.add('dysplay-flex');
+            }
+
             const userbar = new Userbar({ rootNode: this.rootNode });
             userbar.componentDidMount(this.state.user);
-        } else if (auth) {
-            store.dispatch(actionAuth());
+        } else {
+                if(logoutButton) {
+                    if(logoutButton.classList.contains('dysplay-flex')) {
+                        logoutButton.classList.remove('dysplay-flex');
+                    }
+                    logoutButton.classList.add('dysplay-none');
+                }
+                if (auth) {
+                store.dispatch(actionAuth());
+            }
         }
 
         this.componentDidMount();
