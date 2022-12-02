@@ -16,6 +16,9 @@ export class Userbar extends Component {
      */
     addLogoutHandler() {
         const targetHadler = document.querySelector('.js-header__userbar-item-out');
+        if (!targetHadler) {
+            return;
+        }
 
         targetHadler.addEventListener('click', (e) => {
             e.preventDefault();
