@@ -19,7 +19,7 @@
   flex-direction: column;
   min-height: 300px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1509px) {
     padding-right: 0;
     margin-right: 0;
   }
@@ -57,7 +57,7 @@
     top: 0;
     left: 0;
     @include star-empty;
-    background-size: calc(25px + (38 - 25) * ((100vw - 300px) / (1920 - 300)));
+    background-size: contain;
     width: 40px;
     height: 40px;
     padding-right: 10px;

@@ -270,6 +270,14 @@ button {
     --header-height: 75px;
   }
 
+  .input-review__user-container {
+    display: none;
+  }
+
+  .input-review__head {
+    margin-bottom: 15px;
+  }
+
   .js-mobile-search {
     display: flex;
   }
@@ -352,8 +360,14 @@ button {
   }
 
   .input-review {
+    height: 100%;
     &__container {
+      height: 100%;
       padding: 25px 30px 35px;
+    }
+
+    &__form {
+      height: 50%;
     }
 
     &__head {
@@ -366,6 +380,7 @@ button {
 
     &__input-title {
       font-size: 12px;
+      height: 41px;
     }
 
     &__input-text {

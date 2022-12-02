@@ -82,12 +82,13 @@ $input-height: 46px;
   &__input-text {
     width: -webkit-fill-available;
     border: 0;
-    height: $textarea-height;
+    max-height: $textarea-height;
     resize: none;
     border-radius: 4px;
     padding: 16px 24px;
     box-sizing: border-box;
     font-size: 15px;
+    margin-bottom: 35px;
   }
 
   &__select__wrapper {
@@ -178,7 +179,7 @@ $input-height: 46px;
 }
 
 .input-text__wrapper {
-  height: $textarea-height + 35px;
+  max-height: $textarea-height + 35px;
 }
 
 .modal__input__button-review {

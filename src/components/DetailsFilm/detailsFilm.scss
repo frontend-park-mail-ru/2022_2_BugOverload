@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 34px;
+    overflow: hidden;
   }
 
   &__list-info-title {
@@ -18,6 +19,7 @@
   &__info-pair {
     display: flex;
     margin-top: 37px;
+    width: calc(100vw - 2 * #{var(--standart-margin)});
   }
 
   &__info-item-key {

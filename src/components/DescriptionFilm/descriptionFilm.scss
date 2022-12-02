@@ -1,12 +1,11 @@
 .description-film {
-  margin-left: var(--standart-margin);
+  margin: 0 var(--standart-margin) 0 var(--standart-margin);
   margin-top: 36px;
-  width: 800px;
+  width: calc(100vw - 2 * #{var(--standart-margin)});
+  max-width: 800px;
   height: auto;
 
   @media screen and (max-width: 800px) {
-    width: 90%;
-    padding-right: var(--standart-margin);
     box-sizing: border-box;
   }
 
