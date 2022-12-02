@@ -129,22 +129,6 @@ export class Header extends Component {
         }
     }
 
-    addLogoutHandler() {
-        const targetHadler = document.querySelector('.js-header__userbar-item-out');
-        if (!targetHadler) {
-            return;
-        }
-
-        targetHadler.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = e.target as HTMLElement;
-
-            if (target.dataset.section === 'logout') {
-                store.dispatch(actionLogout());
-            }
-        });
-    }
-
     componentWillUnmount() {
         const form = this.rootNode.querySelector('.js-header-search');
         if (!form) {
