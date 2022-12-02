@@ -61,6 +61,10 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             @media screen and (max-width: 800px) {
                 margin-left: var(--standart-margin);
             }
+
+            @media screen and (max-width:620px) {
+                margin-top: calc(var(--header-height) + 18px);
+            }
         }
     }
 
@@ -86,6 +90,10 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         @media screen and (max-width: 800px) {
             margin-left: var(--standart-margin);
             margin-right: 0;
+        }
+
+        @media screen and (max-width:620px) {
+            margin-top: calc(var(--header-height) + 10px);
         }
 
         @media screen and (max-width: 565px) {

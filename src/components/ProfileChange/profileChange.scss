@@ -57,7 +57,7 @@ $margin_bottom_error: 5px;
 @mixin input {
     font-size: 15px;
     height: 42px;
-    width: calc(100% - $padding_input);
+    width: calc(100% - #{var(--standart-margin)});
     border: 2px solid var(--border-input-color);
     border-radius: 8px;
     padding-left: $padding_input;
