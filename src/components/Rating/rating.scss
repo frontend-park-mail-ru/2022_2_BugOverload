@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    width: calc(270px + (500 - 270) * ((100vw - 300px) / (1920 - 300)));
+    width: 71vw;
   }
 
   &__star {
@@ -103,7 +103,7 @@
 
   &__text-stars-container {
     display: flex;
-    width: calc(260px + (490 - 260) * ((100vw - 300px) / (1920 - 300)));
+    width: 71vw;
     justify-content: space-between;
     margin-top: 7px;
     max-width: 495px;

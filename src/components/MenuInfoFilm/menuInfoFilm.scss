@@ -1,13 +1,13 @@
 .menu-info-film {
-  width: auto;
-  padding-left: var(--standart-margin);
-  padding-right: var(--standart-margin);
+  width: 100vw;
+  margin-right: var(--standart-margin);
 
   &__items {
     display: flex;
     border-bottom: 3px;
     border-color: var(--main-modal-color);
     border-bottom-style: solid;
+    margin-left: var(--standart-margin);
   }
 
   &__item-description {
@@ -29,7 +29,7 @@
   &__item-details {
     font-size: 22px;
     color: var(--main-color-text);
-    width: 172px;
+    width: 165px;
     height: 62px;
     display: flex;
     align-items: center;
