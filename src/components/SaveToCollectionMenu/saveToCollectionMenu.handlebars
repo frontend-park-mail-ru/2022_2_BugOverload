@@ -2,13 +2,18 @@
     <div class="menu-save__title">Сохранить в</div>
     <div class="menu-save__items-container">
         {{#each collections}}
-            <div class="menu-save__used-icon"
-                    {{#if is_used}} used-in-collection="true" {{/if}}></div>
-            <a data-section="/{{!-- {{id}} --}}" class="menu-save__item-btn js-menu-save__item-btn" data-id-coll="{{id}}" data-name="{{name}}">
+        <div class="menu-save__item-container">
+            <div class="menu-save__check-container">
+                <div class="menu-save__used-icon"
+                    {{#if is_used}} used-in-collection="true" {{/if}}>
+                </div>
+            </div>
+            <a class="menu-save__item-btn js-menu-save__item-btn" data-id-coll="{{id}}" data-name="{{name}}">
                 <div class="menu-save__item">
                     {{name}}
                 </div>
             </a>
+        </div>
         {{/each}}
     </div>
 </div>

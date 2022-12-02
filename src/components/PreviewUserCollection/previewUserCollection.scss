@@ -1,5 +1,5 @@
-$width-coll: 240px;
-$height-coll: 240px;
+$width-coll: calc(160px + (240 - 160) * ((100vw - 300px) / (1920 - 300)));
+$height-coll: $width-coll;
 
 @mixin animation-prop {
     opacity: 0;
@@ -34,7 +34,7 @@ $height-coll: 240px;
     &__blackout {
         width: $width-coll;
         height: $height-coll;
-        background-color: rgb(var(--blackout-color));
+        background-color: var(--blackout-color);
         @include animation-prop;
         position: absolute;
         top: 0;
@@ -44,8 +44,8 @@ $height-coll: 240px;
 
     &__icon-enter {
         position: absolute;
-        top: 95px;
-        left: 95px;
+        top: calc($width-coll/2 - 25px);
+        left: calc($width-coll/2 - 25px);
         @include animation-prop;
         cursor: pointer;
     }
@@ -56,9 +56,10 @@ $height-coll: 240px;
         position: absolute;
         bottom: 33px;
         left: 33px;
-        width: 55px;
+        width: max-content;
         height: 20px;
         justify-content: space-between;
+        cursor: pointer;
     }
 
     &__icon-films {
@@ -71,6 +72,7 @@ $height-coll: 240px;
         font-family: "Mail Sans Roman Med";
         @include animation-prop;
         margin-top: 3px;
+        margin-left: 10px;
     }
 
     &__title {
@@ -83,7 +85,7 @@ $height-coll: 240px;
         font-size: 15px;
     }
 
-    &:hover &__blackout {
+    &__poster-container:hover &__blackout {
         width: $width-coll;
         height: $height-coll;
         opacity: 0.3;
@@ -92,15 +94,15 @@ $height-coll: 240px;
         cursor: pointer;
     }
 
-    &:hover &__icon-enter {
+    &__poster-container:hover &__icon-enter {
         opacity: 1;
     }
 
-    &:hover &__icon-films {
+    &__poster-container:hover &__icon-films {
         opacity: 1;
     }
 
-    &:hover &__count-films {
+    &__poster-container:hover &__count-films {
         opacity: 1;
     }
 }

@@ -148,8 +148,7 @@ class ReducerUser {
         }
 
         if (response.status === responsStatuses.NotFound) {
-            console.log(`getUserCollections 404`);
-            return { userCollections: mockUserCollections() };
+            return { userCollections: {status: response.status} };
         }
 
         return { userCollections: {error: 'error'} };

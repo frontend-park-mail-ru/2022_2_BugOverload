@@ -11,6 +11,7 @@
   height: var(--header-height);
   width: 100%;
   z-index: 5;
+  box-sizing: border-box;
 
   &__logo {
     white-space: nowrap;
@@ -52,15 +53,32 @@
     font-size: 18px;
     text-decoration: none;
     display: flex;
+    position: relative;
+
+    &_full {
+      width: 100%;
+    }
+
+    &__mobile {
+      margin: 0 var(--standart-margin) 0 var(--standart-margin);
+    }
   }
 
   &__form__icon-search {
     position: absolute;
-    top: 40px;
+    top: 10px;
     width: 16px;
     height: auto;
     z-index: 2;
     padding-left: 10px;
+    content: url("@icons/icon-search.png");
+  }
+
+  &__form__icon-mobile-search {
+    width: 25px;
+    height: auto;
+    margin-left: auto;
+    padding-bottom: 3px;
     content: url("@icons/icon-search.png");
   }
 
@@ -73,6 +91,16 @@
     color: var(--main-color-text);
     opacity: 0.8;
     padding-left: 37px;
+
+    &_full {
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    &__mobile {
+      min-width: 40vw;
+    }
   }
 
   &__form__input:focus + &__form__icon-search {
@@ -81,11 +109,12 @@
   }
 
   &__login__btn {
-    margin-right: calc(var(--standart-margin) + var(--margin-left-login-btn)/3);
+    margin-right: var(--standart-margin);
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: calc(var(--margin-left-login-btn) - var(--margin-left-login-btn)/3);
+    margin-left: 20px;
+    max-width: 20vw;
   }
 
   &__avatar {
@@ -96,4 +125,8 @@
     border-radius: 18px;
     object-fit: cover;
   }
+}
+
+.js-mobile-search {
+  display: none;
 }

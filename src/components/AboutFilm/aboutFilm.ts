@@ -5,7 +5,7 @@ import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 
 import {
-    actionSaveToCollection,
+    actionSaveToCollection, actionRemoveFromCollection,
 } from '@actions/filmActions';
 import {
     decoreDuration, decoreListPersons, decoreCountSeasons, decoreColorRating,
@@ -48,6 +48,20 @@ export class AboutFilm extends Component {
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
         };
+
+        this.subHandler = () => {
+            this.state.listCollections = store.getState('listCollectionsUser');
+            console.log(`In ABOUT new: ${JSON.stringify(this.state.listCollections)}`);
+            console.log(`this.location: ${this.location}`);
+
+            if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
+                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
+            } else {
+                (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#fff';
+            }
+        };
+
+        store.subscribe('listCollectionsUser', this.subHandler);
     }
 
     /**
@@ -59,6 +73,7 @@ export class AboutFilm extends Component {
         this.location.querySelector('.js-about-film').style.backgroundImage = `url('${API.img.poster_hor(this.data.poster_hor)}')`;
         decoreColorRating(this.location, '.js-about-film__rating', this.data.rating);
 
+
         this.componentDidMount();
     }
 
@@ -68,7 +83,7 @@ export class AboutFilm extends Component {
      * кнопки сохранения в Избранное, кнопку просмотра трейлера
      */
     componentDidMount() {
-        const buttonPlus = document.querySelector('.js-btn-save-to-coll');
+        const buttonPlus = this.location.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
             return;
         }
@@ -85,7 +100,7 @@ export class AboutFilm extends Component {
 
         buttonPlus.addEventListener('click', this.handlerOpenMenu);
 
-        const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
+        const buttonBookmark = this.location.querySelector('.js-btn-save-to-bookmark');
         if (!buttonBookmark) {
             return;
         }
@@ -99,22 +114,29 @@ export class AboutFilm extends Component {
 
             this.state.listCollections = store.getState('listCollectionsUser');
             if (!this.state.listCollections) {
-                ShowMessage('Ошибочное :(', 'negative');
+                ShowMessage('Не удалось получить список коллекций :(', 'negative');
                 return;
             }
 
-            const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')
+            const willWatch = this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть');
+
+            if ('is_used' in willWatch) {
+                store.dispatch(actionRemoveFromCollection({
+                    idCollection: willWatch.id,
+                    idFilm: this.data.id,
+                }));
+                return;
+            }
 
             store.dispatch(actionSaveToCollection({
                 idCollection: willWatch.id,
                 idFilm: this.data.id,
             }));
-            console.log(`dispatched idCollection: ${willWatch.id}, idFilm: ${this.data.id}`);
         };
 
         buttonBookmark.addEventListener('click', this.handlerBookmark);
 
-        const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
+        const buttonTrailer = this.location.querySelector('.js-btn-watch-trailer');
         if (!buttonBookmark) {
             return;
         }
@@ -125,7 +147,7 @@ export class AboutFilm extends Component {
             modal.render();
 
             const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${video}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);
@@ -136,19 +158,19 @@ export class AboutFilm extends Component {
      * Удаляет обработчики, установленные в ComponentDidMount
      */
     componentWillUnmount() {
-        const buttonPlus = document.querySelector('.js-btn-save-to-coll');
+        const buttonPlus = this.location.querySelector('.js-btn-save-to-coll');
         if (!buttonPlus) {
             return;
         }
         buttonPlus.removeEventListener('click', this.handlerOpenMenu);
 
-        const buttonBookmark = document.querySelector('.js-btn-save-to-bookmark');
+        const buttonBookmark = this.location.querySelector('.js-btn-save-to-bookmark');
         if (!buttonBookmark) {
             return;
         }
         buttonBookmark.removeEventListener('click', this.handlerBookmark);
 
-        const buttonTrailer = document.querySelector('.js-btn-watch-trailer');
+        const buttonTrailer = this.location.querySelector('.js-btn-watch-trailer');
         if (!buttonBookmark) {
             return;
         }

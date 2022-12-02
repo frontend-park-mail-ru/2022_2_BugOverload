@@ -8,7 +8,11 @@ import { Component } from '@components/Component';
 export class View extends Component {
     render(id = null as any) {
         if (!document.body.querySelector('.js-header')) {
-            header.render();
+            if(id === "search") {
+                header.render(id);
+            } else {
+                header.render();
+            }
         }
     }
 }

@@ -133,29 +133,55 @@ class ReducerFilm {
     async saveToCollection(saveToCollParams: filmToCollParams) {
         const response = await Ajax.post({
             url: API.saveToColl(saveToCollParams.idFilm),
-            body: { collection: saveToCollParams.idCollection },
+            body: { collection_id: saveToCollParams.idCollection },
         });
 
-        if (response.status === responsStatuses.OK) {
+        if (response.status === responsStatuses.NoContent) {
+            const newList = store.getState('listCollectionsUser');
+            for (let coll of newList) {
+                if (coll.id === saveToCollParams.idCollection) {
+                    coll.is_used = true;
+                    break;
+                }
+            }
+
+            console.log(`saveToCollection new: ${JSON.stringify(newList)}`);
+
             return {
                 saveToCollStatus: response.status,
+                listCollectionsUser: newList,
             };
         }
-        return { saveToCollStatus: null };
+
+        return { saveToCollStatus: response.status };
     }
 
+    //удаляет фильм из коллекции
     async removeFromCollection(removeFromCollParams: filmToCollParams) {
-        const response = await Ajax.post({
+        const response = await Ajax.delete({
             url: API.removeFromColl(removeFromCollParams.idFilm),
-            body: { collection: removeFromCollParams.idCollection },
+            body: { collection_id: Number(removeFromCollParams.idCollection) },
         });
 
-        if (response.status === responsStatuses.OK) {
+        const newList = store.getState('listCollectionsUser') || {};
+        if(newList) {
+            for (let coll of newList) {
+                if (coll.id === removeFromCollParams.idCollection) {
+                    delete coll.is_used;
+                    break;
+                }
+            }
+        }
+        console.log(`removeFromCollection new: ${JSON.stringify(newList)}`);
+
+        if (response.status === responsStatuses.NoContent) {
             return {
                 removeFromCollStatus: response.status,
+                listCollectionsUser: newList,
             };
         }
-        return { removeFromCollStatus: null };
+
+        return { removeFromCollStatus: response.status };
     };
 }
 

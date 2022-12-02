@@ -37,8 +37,8 @@
 
   &__window {
     max-height: 550px;
-    height: 65vw;
-    min-height: 475px;
+    height: 73vw;
+    min-height: 420px;
   }
 
   &__window__flex {
@@ -78,13 +78,13 @@
     align-items: center;
     width: 270px;
     height: 55px;
-    margin-bottom: 17px;
+    margin-bottom: 20px;
   }
 
   &__input {
     max-width: 289px;
-    width: 30vw;
-    min-width: 100px;
+    width: 40vw;
+    min-width: 210px;
     height: 29px;
     border-radius: 4px;
     color: var(--main-color-text);
@@ -96,21 +96,22 @@
 
 
     &_red_border {
-      border: 2px solid #e72d2d;
+      border: 2px solid var(--text-danger);
     }
 
     &__error {
-      width: 300px;
+      width: 42vw;
       height: 18px;
       margin-top: 5px;
-      color: #e72d2d;
-      font-size: 12px;
+      color: var(--text-danger);
+      font-size: var(--font-size-small);
+      max-width: 300px;
     }
 
     &__button-auth {
       max-width: 310px;
-      width: 33vw;
-      min-width: 120px;
+      width: 44vw;
+      min-width: 230px;
       height: 35px;
     }
   }
@@ -147,6 +148,6 @@
 .auth__wrapper{
   @include flex-window;
   max-width: 910px;
-  min-width: 600px;
   width: 95vw;
+  min-width: 310px;
 }

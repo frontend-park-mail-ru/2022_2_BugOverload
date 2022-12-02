@@ -16,6 +16,19 @@ class ReducerCommon {
       return { [`statusCollection-${name}`]: response.status };
     }
 
+    async getUserCollectionData({id, sort = "date"}: collectionUserParams) {
+        let response;
+        try {
+            response = await Ajax.get(API.userCollectionData(id, sort)) as Response;
+        } catch (e) {
+            return { [`collection-${id}`]: mockCollection() };
+        }
+        if (response.status === responsStatuses.OK) {
+            return { [`collection-${id}`]: response.body };
+        }
+      return { [`statusCollection-collection-${id}`]: response.status };
+    }
+
     async getPreviewData({name}: collectionParams) {
         let response;
         try {

@@ -9,6 +9,7 @@ import { premierePage } from '@views/PremierePage/premierePage';
 import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
 import { userCollections } from '@views/UserCollections/userCollections';
+import { pageGenres } from '@/views/PageGenres/pageGenres';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -49,7 +50,7 @@ export const API = {
         },
         collection_poster(key: string) {
             if (key === 'default') {
-                return '/assets/img/default/coll.png';
+                return '/assets/img/default/5.jpeg';
             }
             return `${PROTOCOL}://${DOMAIN}/api/v1/image?object=collection_poster&key=${key}`;
         },
@@ -68,6 +69,10 @@ export const API = {
         return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
+    userCollectionData(id :number, sort :string) {
+        return `${PROTOCOL}://${DOMAIN}/api/v1/collections/${id}?sort_param=${sort}`;
+    },
+
     recommendation: `${PROTOCOL}://${DOMAIN}/api/v1/film/recommendation`,
     film(id: number, countImages: number = 10) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}?count_images=${countImages}`; },
     metaFilm(id: number) {
@@ -77,8 +82,8 @@ export const API = {
     rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate`; },
     del_rate(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/rate/drop`; },
 
-    saveToColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/save`; },
-    removeFromColl(id: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/remove`; },
+    saveToColl(id: number|string) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/save`; },
+    removeFromColl(id: number|string) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/remove`; },
 
     reviews(id: number, count: number, offset: number) {
         return `${PROTOCOL}://${DOMAIN}/api/v1/film/${id}/reviews?count_reviews=${count}&offset=${offset}`;
@@ -122,14 +127,19 @@ export const routes = [
     { path: '/', view: mainPage },
     { path: '/login/', view: login },
     { path: '/signup/', view: signup },
-    { path: '/profile/', view: profile },
     { path: '/film/', view: filmPage },
     { path: '/person/', view: actorPage },
     { path: '/user/', view: publicProfile },
     { path: '/premieres/', view: premierePage },
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
-    { path: '/collections/', view: userCollections },
+    { path: '/collection/genres/', view: pageGenres },
+];
+
+export const privateRoutes = [
+    { path: '/profile/', view: profile },
+    { path: '/user/collections/', view: userCollections }, 
+    { path: '/user/collection/', view: collectionPage }, 
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||

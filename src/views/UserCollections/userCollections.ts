@@ -6,6 +6,8 @@ import { View } from '@views/View';
 import template from '@views/UserCollections/userCollections.handlebars';
 import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { UserCollList } from '@components/UserCollList/userCollList';
+import { responsStatuses } from '@config/config';
+import { ShowMessage } from '@components/Message/message';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -29,6 +31,7 @@ class UserCollections extends View {
 
         this.subHandler = () => {
             this.state.userCollections = store.getState('userCollections');
+
             this.render();
         }
 
@@ -43,7 +46,6 @@ class UserCollections extends View {
                 count_collections: 15,
                 delimiter: 'now',
             }));
-            console.log(`this.dispatched`);
             return;
         }
 
@@ -71,7 +73,6 @@ class UserCollections extends View {
 
     componentWillUnmount() {
         store.unsubscribe('userCollections', this.subHandler);
-        console.log(`unsubscribe()`);
         this.state.isSubscribed = false;
         this.state.userCollections = null;
     }

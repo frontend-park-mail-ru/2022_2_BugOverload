@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 import {
-    actionSaveToCollection,
+    actionSaveToCollection, actionRemoveFromCollection
 } from '@actions/filmActions';
 
 /**
@@ -16,10 +16,12 @@ export class SaveToCollectionMenu extends Component {
         this.state.collections = null;
         this.filmId = filmId;
         this.placeholder = this.rootNode.querySelector(`.${nameLocation}`);
+        this.isOpen = false;
 
         // Навешиваем обработчик на выход по клику вне области меню
         this.closeMenuHandler = (e: Event) => {
-            if (!(e.target as HTMLElement).closest(`.${nameLocation}`)) {
+            if (this.isOpen && !(e.target as HTMLElement).closest(`.${nameLocation}`)) {
+                console.log('closeMenuHandler close!');
                 this.close();
             }
         };
@@ -27,6 +29,10 @@ export class SaveToCollectionMenu extends Component {
 
         this.subHandler = () => {
             this.state.collections = store.getState('listCollectionsUser');
+            if (this.isOpen) {
+                this.close();
+                this.open();
+            }
         };
 
         store.subscribe('listCollectionsUser', this.subHandler);
@@ -48,6 +54,7 @@ export class SaveToCollectionMenu extends Component {
         this.render();
         menu = this.placeholder.querySelector('.js-menu-save__container');
         menu.setAttribute('open', '');
+        this.isOpen = true;
     }
 
     /**
@@ -63,6 +70,7 @@ export class SaveToCollectionMenu extends Component {
             this.componentWillUnmount();
             menu.remove();
         }
+        this.isOpen = false;
     }
 
     /**
@@ -89,11 +97,19 @@ export class SaveToCollectionMenu extends Component {
                     return;
                 }
 
+                if ('is_used' in this.state.collections
+                    .find((elem: userCollListItem) => elem.id === +button.dataset.idColl)) {
+                    store.dispatch(actionRemoveFromCollection({
+                        idCollection: +button.dataset.idColl,
+                        idFilm: this.filmId,
+                    }));
+                    return;
+                }
+
                 store.dispatch(actionSaveToCollection({
                     idCollection: +button.dataset.idColl,
                     idFilm: this.filmId,
                 }));
-                console.log(`dispatched idCollection: ${button.dataset.idColl}, idFilm: ${this.filmId}`);
             };
             button.addEventListener('click', this[`${button.dataset.name}`]);
         });
@@ -114,6 +130,7 @@ export class SaveToCollectionMenu extends Component {
 
     unsubscribe() {
         this.componentWillUnmount();
+        document.removeEventListener('click', this.closeMenuHandler);
         store.unsubscribe('listCollectionsUser', this.subHandler);
     }
 }

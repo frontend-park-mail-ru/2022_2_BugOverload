@@ -5,7 +5,7 @@ import { store } from '@store/Store';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
 import { ProfileChange } from '@components/ProfileChange/profileChange';
 import { ShowMessage } from '@components/Message/message';
-import { hrefRegExp } from '@config/regExp';
+import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
 
 interface UserProfile{
     state: {
@@ -15,6 +15,7 @@ interface UserProfile{
         isAuthSubscribed: boolean,
         isDispatchedInfo: boolean,
         isSubscribed: boolean,
+        profileChange: any,
     }
 }
 
@@ -38,12 +39,14 @@ class UserProfile extends View {
             isAuthSubscribed: false,
             isDispatchedInfo: false,
             isSubscribed: false,
+            profileChange: null,
         };
 
         this.userProfileOnSubscribe = this.userProfileOnSubscribe.bind(this);
         this.setProfileAvatar = this.setProfileAvatar.bind(this);
         this.subscribeInfoFunc = this.subscribeInfoFunc.bind(this);
         this.authProfileOnSubscribe = this.authProfileOnSubscribe.bind(this);
+        store.subscribe('userInfo', this.subscribeInfoFunc);
     }
 
     /**
@@ -53,8 +56,6 @@ class UserProfile extends View {
         super.render();
 
         if (!this.state.isSubscribed) {
-            store.subscribe('logoutStatus', this.userProfileOnSubscribe);
-            store.subscribe('userInfo', this.subscribeInfoFunc);
             store.subscribe('statusChangeAvatar', this.setProfileAvatar);
             this.state.isSubscribed = true;
         }
@@ -65,36 +66,6 @@ class UserProfile extends View {
         }
 
         this.state.user = store.getState('user');
-        if (!this.state.user) {
-            const authStatus = store.getState('authStatus');
-            const logoutStatus = store.getState('logoutStatus');
-            if (authStatus || logoutStatus) {
-                this.componentWillUnmount();
-                const removeProfile = this.rootNode.querySelector('.js-profile');
-                if (removeProfile) {
-                    removeProfile.remove();
-                }
-                window.history.replaceState(
-                    null,
-                    null,
-                    window.location.href.replace(hrefRegExp.auth, ''),
-                );
-
-                const redirectMain = new Event(
-                    'click',
-                    {
-                        bubbles: true,
-                        cancelable: true,
-                    },
-                );
-                this.rootNode.querySelector('a[data-section="/"]').dispatchEvent(redirectMain);
-
-                return;
-            }
-            store.subscribe('user', this.userProfileOnSubscribe);
-
-            return;
-        }
 
         if (!this.state.isDispatchedInfo) {
             store.dispatch(actionGetSettings());
@@ -109,6 +80,7 @@ class UserProfile extends View {
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
                 profileMenu: templateProfileMenu(),
+                profileChange: templateProfileChange(),
                 ...this.state.user,
                 ...this.state.userInfo,
             },
@@ -140,14 +112,19 @@ class UserProfile extends View {
             reader.readAsDataURL(blobUrl);
         });
 
-        const profileChange = new ProfileChange({
-            rootNode: this.rootNode,
-            user: Object.assign(
-                this.state.user,
-                this.state.userInfo,
-            ),
-        });
-        profileChange.componentDidMount();
+        if(!this.state.user) {
+            return;
+        }
+        if(!this.state.profileChange) {
+            this.state.profileChange = new ProfileChange({
+                rootNode: this.rootNode,
+                user: Object.assign(
+                    this.state.user,
+                    this.state.userInfo,
+                ),
+            });
+        }
+        this.state.profileChange.componentDidMount();
     }
 
     /**
@@ -165,9 +142,9 @@ class UserProfile extends View {
         setTimeout(() => {
             store.dispatch(actionAuth());
             if (store.getState('statusChangeAvatar')) {
-                ShowMessage('Успех!', 'positive');
+                ShowMessage('Успех!', 'positive', 5000);
             } else {
-                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative');
+                ShowMessage('Поробуйте отправить картинку меньшего размера...', 'negative', 5000);
             }
         }, 4000);
     }
@@ -189,9 +166,7 @@ class UserProfile extends View {
      */
     componentWillUnmount() {
         if (this.state.isSubscribed) {
-            store.unsubscribe('logoutStatus', this.userProfileOnSubscribe);
             store.unsubscribe('statusChangeAvatar', this.setProfileAvatar);
-            store.unsubscribe('userInfo', this.subscribeInfoFunc);
             this.state.isSubscribed = false;
         }
 
@@ -203,6 +178,9 @@ class UserProfile extends View {
         }
 
         this.state.isDispatchedInfo = false;
+        if(this.state.profileChange) {
+            this.state.profileChange.componentWillUnmount();
+        }
     }
 }
 

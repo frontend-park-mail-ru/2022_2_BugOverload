@@ -12,16 +12,32 @@
     border-radius: 6px;
     box-sizing: border-box;
     margin-left: 14px;
-    margin-top: 48px + 7px;
+    top: 48px + 7px;
     position: absolute;
+    width: max-content;
+
+    @media screen and (max-width: 800px) {
+      position:absolute;
+      margin-left: 0;
+      right: 0;
+    }
   }
 
   &__items-container {
-    display: grid;
-    grid-template-columns: 5% 95%;
-    column-gap: 10px;
-    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
     margin-top: 10px;
+  }
+
+  &__item-container {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  &__check-container {
+    width: 20px;
+    height: 20px;
+    position: relative;
   }
 
   &__title {
@@ -33,6 +49,8 @@
   &__item {
     color: var(--main-color-text);
     font-size: 15px;
+    margin-left: 10px;
+    width: max-content;
 
     &-btn {
       display: block;
@@ -51,4 +69,7 @@
   @include icon-check;
   width: 20px;
   height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

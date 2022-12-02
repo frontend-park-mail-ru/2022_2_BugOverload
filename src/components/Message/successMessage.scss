@@ -1,6 +1,7 @@
 .success {
   position: fixed;
-  bottom: 15px;
+  top: 88vh;
+  left: 0;
   width: 200px;
   padding: 10px 15px;
   background-color: var(--success-color);
@@ -9,6 +10,12 @@
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  z-index: 10;
+
+  @media screen and (max-width: 600px) {
+    top: 30px;
+    left: 0;
+  }
 
   &__text {
     color: var(--main-color-text);

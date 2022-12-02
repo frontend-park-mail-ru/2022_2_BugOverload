@@ -5,20 +5,20 @@
 
     &__title {
         margin: 0 var(--standart-margin);
-        font-size: 40px;
-        color: #fff;
+        font-size: calc(28px + (40 - 28) * ((100vw - 300px) / (1920 - 300)));
+        color: var(--main-color-text);
     }
 
     &__description {
         margin: 25px var(--standart-margin) 70px;
-        font-size: 22px;
-        color: #b3b3b3;
+        font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1920 - 300)));
+        color: var( --secondary-color-text);
     }
 
     &__body {
         display: flex;
         flex-flow: row wrap;
         gap: 5px;
-        justify-content: center;
+        padding: var(--standart-margin);
     }
 }

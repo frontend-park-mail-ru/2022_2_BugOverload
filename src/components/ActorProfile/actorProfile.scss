@@ -1,25 +1,18 @@
 .actor-profile {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-flow: column wrap;
-    margin-left: 52px;
-    margin-right: 52px;
     margin-bottom: 70px;
-    padding-top: var(--header-height);
+    padding: var(--header-height) var(--standart-margin) 0 var(--standart-margin);
 
     &__content {
         display: flex;
-        justify-content: space-between;
-        flex-flow: row nowrap;
         margin-top: 65px;
-        height: 400px;
+        max-height: 400px;
     }
 
     &__primary {
         display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        min-width: 660px;
         max-height: 400px;
     }
 
@@ -27,10 +20,24 @@
         display: flex;
         flex-flow: row wrap;
         gap: 5px;
-        margin-left: 50px;
-        max-width: 700px;
-        max-height: 500px;
-        overflow: hidden
+        overflow: hidden;
+        max-width: 45vw;
+
+        &__title {
+            display: none;
+            margin-left: var(--standart-margin);
+            height: 28px;
+            color: var(--main-color-text);
+            font-size: 28px;
+            width: 100vw;
+            justify-content: flex-start;
+            margin-bottom: var(--standart-margin);
+        }
+
+        @media screen and (max-width: 800px) {
+            margin-top: 35px;
+            max-width: 85vw;
+        }
     }
 
     &__gallery-item {
@@ -42,19 +49,26 @@
     }
 
     &__image {
-        max-height: 345px;
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 8px;
+        margin-right: var(--standart-margin);
+        margin-bottom: var(--standart-margin);
+        max-height: 350px;
+        height: 47vh;
+        max-width: 300px;
     }
 
     &__information {
-        width: 380px;
-        margin-left: 50px;
         font-style: normal;
         display: flex;
         flex-flow: column nowrap;
         align-items: flex-start;
+        margin-right: 100px;
+
+        @media screen and (max-width: 500px) {
+            margin-right: 0;
+        }
     }
 
     &__name {
@@ -92,7 +106,7 @@
     }
 
     &__about-item-key {
-        width: 200px;
+        width: 160px;
         font-weight: 400;
         font-size: 15px;
         line-height: 23px;
@@ -104,9 +118,13 @@
         font-size: 15px;
         line-height: 23px;
         color: var(--main-color-text);
-        width: 100%;
+        width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        @media screen and (max-width: 500px) {
+            width: 150px;
+        }
     }
 }
 

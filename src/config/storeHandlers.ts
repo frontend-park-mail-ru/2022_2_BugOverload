@@ -25,6 +25,7 @@ const handlers = [
     { type: 'getCollectionData', methodStore: reducerCommon.getCollectionData.bind(reducerCommon) },
     { type: 'getPreviewData', methodStore: reducerCommon.getPreviewData.bind(reducerCommon) },
     { type: 'getSearchData', methodStore: reducerCommon.getSearchData.bind(reducerCommon) },
+    { type: 'getUserCollectionData', methodStore: reducerCommon.getUserCollectionData.bind(reducerCommon) },
 
     { type: 'getSettings', methodStore: reducerUser.getSettings.bind(reducerUser) },
     { type: 'putSettings', methodStore: reducerUser.putSettings.bind(reducerUser) },

@@ -1,0 +1,10 @@
+{{#each genres}}
+<div class="genre__wrapper">
+    <div data-section="/collection/genre-{{{this.url}}}/" class="genre__background">
+        {{{this.svg}}}
+    </div>
+    <div data-section="/collection/genre-{{{this.url}}}/" class="genre__title">
+        {{{this.name}}}
+    </div>
+</div>
+{{/each}}

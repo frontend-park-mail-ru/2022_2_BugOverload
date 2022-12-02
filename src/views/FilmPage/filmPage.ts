@@ -10,6 +10,8 @@ import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
+import { responsStatuses } from '@config/config';
+
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
 *
@@ -21,6 +23,8 @@ export class FilmPage extends View {
             id: null,
             film: null,
             isSubscribed: false,
+            saveToCollStatus: null,
+            removeFromCollStatus: null,
         };
 
         this.sendReviewSuccess = () => {
@@ -30,13 +34,34 @@ export class FilmPage extends View {
         store.subscribe('statusSendReview', this.sendReviewSuccess);
 
         this.saveToCollStatus = () => {
-            ShowMessage('Сохранено!', 'positive');
+            this.state.saveToCollStatus = store.getState('saveToCollStatus');
+
+            if (this.state.saveToCollStatus === responsStatuses.NoContent) {
+                ShowMessage('Сохранено!', 'positive');
+                return;
+            }
+            if (this.state.saveToCollStatus === responsStatuses.BadRequest) {
+                ShowMessage('Вы уже сохранили этот фильм');
+                return;
+            }
+            ShowMessage('Ошибка сохранения. Попробуйте ещё раз');
         };
 
         store.subscribe('saveToCollStatus', this.saveToCollStatus);
 
         this.removeFromCollStatus = () => {
-            ShowMessage('Фильм удалён из коллекции', 'positive');
+            this.state.removeFromCollStatus = store.getState('removeFromCollStatus');
+
+            if (this.state.removeFromCollStatus === responsStatuses.NoContent) {
+                ShowMessage('Фильм удалён из коллекции', 'positive');
+                return;
+            }
+            if (this.state.removeFromCollStatus === responsStatuses.BadRequest) {
+                ShowMessage('Вы уже удалили этот фильм');
+                return;
+            }
+            ShowMessage('Ошибка удаления. Попробуйте ещё раз');
+
         };
 
         store.subscribe('removeFromCollStatus', this.removeFromCollStatus);
@@ -127,9 +152,6 @@ export class FilmPage extends View {
         this.likelyFilms?.unsubscribe();
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
-        store.unsubscribe('statusSendReview', this.sendReviewSuccess);
-        store.unsubscribe('removeFromCollStatus', this.removeFromCollStatus);
-        store.unsubscribe('saveToCollStatus', this.saveToCollStatus);
     }
 }
 

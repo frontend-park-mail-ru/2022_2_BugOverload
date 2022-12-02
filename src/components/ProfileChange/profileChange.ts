@@ -1,9 +1,5 @@
 import { actionPutSettings, actionAuth } from '@store/actionCreater/userActions';
 import { Component } from '@components/Component';
-import templateProfile from '@views/UserProfile/userProfile.handlebars';
-import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
-import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
-import { profile } from '@views/UserProfile/userProfile';
 import {
     checkPassword, checkConfirmPassword, checkNick, removeError, renderError,
 } from '@utils/valid';
@@ -16,6 +12,7 @@ export interface ProfileChange {
         isOpen: boolean,
         user: user,
         statusChangeSettings: number,
+        isAddValidate: boolean,
     }
 }
 
@@ -37,41 +34,39 @@ export class ProfileChange extends Component {
             isOpen: false,
             user: props.user,
             statusChangeSettings: null,
+            isAddValidate: false,
         };
 
         this.handlerUserChangeForm = this.handlerUserChangeForm.bind(this);
+        this.subscribeFuncChangeProfile = this.subscribeFuncChangeProfile.bind(this);
+    }
+
+    subscribeFuncChangeProfile() {
+        this.state.statusChangeSettings = store.getState('statusChangeSettings');
+        this.handlerStatusPut();
     }
 
     handlerUserChangeForm () {
-        const subscribeFunc = () => {
-            this.state.statusChangeSettings = store.getState('statusChangeSettings');
-            this.handlerStatusPut();
-        };
-
-        const profileElement = this.rootNode.querySelector('.js-profile');
-        if (profileElement) {
-            profileElement.remove();
-        }
         if (!this.state.isOpen) {
-            this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
-                {
-                    profileMenu: templateProfileMenu(),
-                    profileChange: templateProfileChange(),
-                    ...this.state.user,
-                },
-            ));
-            this.addValidate();
-            store.subscribe('statusChangeSettings', subscribeFunc);
-            this.state.isOpen = true;
+            const changeWrapper = document.querySelector('.profile__change');
 
-            this.rootNode
-                .querySelector('.js-profile__change__svg')
-                .addEventListener('click', () => {
-                    if (this.state.isOpen) {
-                        profile.render();
-                    }
-                    store.unsubscribe('statusChangeSettings', subscribeFunc);
-                });
+            if(changeWrapper.classList.contains('dysplay-none')) {
+                changeWrapper.classList.remove('dysplay-none');
+            }
+            changeWrapper.classList.add('dysplay-flex');
+
+            this.addValidate();
+
+            store.subscribe('statusChangeSettings', this.subscribeFuncChangeProfile);
+            this.state.isOpen = true;
+        } else {
+            const changeWrapper = document.querySelector('.profile__change');
+            if(changeWrapper.classList.contains('dysplay-flex')) {
+                changeWrapper.classList.remove('dysplay-flex');
+            }
+            changeWrapper.classList.add('dysplay-none');
+            this.state.isOpen = false;
+            store.unsubscribe('statusChangeSettings', this.subscribeFuncChangeProfile);
         }
     };
 
@@ -105,12 +100,16 @@ export class ProfileChange extends Component {
             return;
         }
         changeButton.removeEventListener('click', this.handlerUserChangeForm);
+        this.state.isAddValidate = false;
     }
 
     /**
      * Навешивает валидацию на форму
      */
     addValidate() {
+        if(this.state.isAddValidate) {
+            return;
+        }
         const forms = {
             formNick: null as HTMLElement,
             formPassword: null as HTMLElement,
@@ -143,6 +142,8 @@ export class ProfileChange extends Component {
                 store.dispatch(actionPutSettings(user));
             });
         });
+
+        this.state.isAddValidate = true;
     }
 
     /**

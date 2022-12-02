@@ -13,9 +13,9 @@
         {{#if prod_year}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Год производства</div>
-            <div class="details-film__info-item-value-info">
-                {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
-            </div>
+                <div class="details-film__info-item-value-info">
+                    {{prod_year}}{{#if type_serial}}-{{end_year}}{{/if}}
+                </div>
         </div>
         {{/if}}
 
@@ -31,72 +31,88 @@
         {{#if prod_companies}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Компания</div>
-            {{#each prod_companies}}
-            <a {{!-- href="/company/СписокФильмовКомпании" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each prod_companies}}
+                <a {{!-- href="/company/СписокФильмовКомпании" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if genres}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Жанр</div>
-            {{#each genres}}
-            <a {{!-- href="/collection/genre/{{this.name}}" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each genres}}
+                <a {{!-- href="/collection/genre/{{this.name}}" --}} class="details-film__info-item-value">{{this}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if directors}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Режиссёр</div>
-            {{#each directors}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each directors}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if producers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Продюссер</div>
-            {{#each producers}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each producers}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if writers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Сценарий</div>
-            {{#each writers}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each writers}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if operators}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Оператор</div>
-            {{#each operators}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each operators}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if montage}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Монтаж</div>
-            {{#each montage}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each montage}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         {{#if composers}}
         <div class="details-film__info-pair">
             <div class="details-film__info-item-key">Композитор</div>
-            {{#each composers}}
-            <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
-            {{/each}}
+            <div class="details-film__info-item-value-container">
+                {{#each composers}}
+                <a data-section="/person/{{this.id}}/" class="details-film__info-item-value">{{this.name}}&nbsp</a>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 

@@ -6,6 +6,10 @@
 .premiere-film-date {
     &__container {
         width: 280px;
+
+        @media screen and (max-width: 680px) {
+            margin-top: 35px;
+        }
     }
 
     &__row-container {

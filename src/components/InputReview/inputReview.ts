@@ -46,7 +46,7 @@ export class InputReview extends Component {
             return;
         }
 
-        const modal = new Modal(this.rootNode, /* this.componentWillUnmount.bind(this) */);
+        const modal = new Modal(this.rootNode);
         modal.render();
 
         modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
@@ -87,7 +87,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!(titleInputWrapper.children[0] as HTMLInputElement).value) {
+        if (!(titleInputWrapper.children[0] as HTMLInputElement).value.trim()) {
             renderError(
                 titleInputWrapper,
                 'text',
@@ -103,7 +103,7 @@ export class InputReview extends Component {
             }, { once: true });
         }
 
-        if (!(textInputWrapper.children[0] as HTMLInputElement).value) {
+        if (!(textInputWrapper.children[0] as HTMLInputElement).value.trim()) {
             renderError(
                 textInputWrapper,
                 'js-input-review__input-text',

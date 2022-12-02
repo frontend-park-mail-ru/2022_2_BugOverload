@@ -1,8 +1,11 @@
 .user-collections {
+    height: 100vh;
+    
     &__container {
         display: flex;
         width: 100%;
         flex-flow: row nowrap;
+        height: 100%;
     }
 
     &__content-container {
@@ -10,5 +13,10 @@
         flex-flow: column wrap;
         padding-top: calc(var(--header-height) + 65px);
         padding-right: var(--standart-margin);
+        margin-left: 100px;
+
+        @media screen and (max-width: 800px) {
+            margin-left: var(--standart-margin);
+        }
     }
 }

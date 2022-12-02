@@ -5,7 +5,9 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        box-sizing: border-box;
         margin-top: calc(24px + var(--header-height));
+        padding: var(--standart-margin);
     }
 
     &__title {

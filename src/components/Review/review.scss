@@ -6,7 +6,12 @@
     background-color: var(--rating-color-neutral-opac);
     border-radius: 20px;
     margin-bottom: 48px;
-    width: 900px;
+    max-width: 900px;
+    width: calc(100vw - 2 * #{var(--standart-margin)});
+
+    @media screen and (max-width: 500px) {
+      box-sizing: border-box;
+    }
   }
 
   &__meta-info-container {
@@ -22,7 +27,7 @@
     border-radius: 30px;
     width: 48px;
     height: 48px;
-    background-size: cover;
+    object-fit: cover;
     cursor: pointer;
   }
 

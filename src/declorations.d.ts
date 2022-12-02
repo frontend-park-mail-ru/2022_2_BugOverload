@@ -3,6 +3,11 @@ declare module "*.handlebars" {
     export default _;
 }
 
+declare module "*.svg" {
+    const content: any;
+    export default content;
+}
+
 declare const DOMAIN: string;
 
 interface anyObject{
@@ -17,6 +22,11 @@ interface collectionParams {
     countFilms: number,
     delimiter: number,
     name?: string,
+}
+
+interface collectionUserParams {
+    id: number,
+    sort?: string,
 }
 
 interface componentProps extends anyObject {
@@ -74,7 +84,7 @@ interface userCollListItem {
 }
 
 interface filmToCollParams {
-    idFilm: number,
+    idFilm: number|string,
     idCollection: number,
 }
 
@@ -172,7 +182,7 @@ interface filmPremiere extends anyObject {
     id: number,
     poster_hor: string,
     name: string,
-    prod_date: string,
+    prod_year: string,
     genres: Array<string>,
     prod_countries: Array<string>,
     directors: Array<actor>,

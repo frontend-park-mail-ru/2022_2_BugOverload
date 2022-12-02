@@ -38,89 +38,105 @@
 @import "@views/UserCollections/userCollections.scss";
 @import "@components/PreviewUserCollection/previewUserCollection.scss";
 @import "@components/UserCollList/userCollList.scss";
+@import "@components/Genre/genre.scss";
 
-
-::-webkit-scrollbar { /* Webkit */
-    width      : 0;  /* ширина scrollbar'a */
-    background : transparent  /* опционально */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent
 }
 
 html {
-    -ms-overflow-style : none;  /* IE 10+ */
-    scrollbar-width    : none /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none
 }
 
 textarea {
-    font-family: 'Mail Sans Roman';
+  font-family: 'Mail Sans Roman';
 }
 
-input:focus, textarea:focus, select:focus {
-    outline: none;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
-input[type="radio"] { all: unset; }
-
-
-body, html {
-    --main-shadow-color-light: rgb(0 0 0 / 20%);
-    --main-shadow-color-strong: rgb(0 0 0 / 40%);
-    --blackout-color: 0,0,0;
-    --backgr-color: #121212;
-    --primary-color: #feba2b;
-    --primary-color-hover: #cd9826;
-    --secondary-color: rgb(86 86 86 / 50%);
-    --secondary-color-hover: rgb(177 177 177 / 35%);
-    --main-color-text: #fff;
-    --text-color-on-primary: #000;
-    --text-color-on-secondary: #fff;
-    --secondary-color-text: #A5A5A5;
-    --text-danger: #e72d2d;
-    --standart-margin: 52px;
-    --header-height: 95px;
-    --margin-left-login-btn: 72px;
-    --error-color:rgb(150 0 0);
-    --success-color: rgb(98 167 127);
-    --rating-color-neutral: #858585;
-    --rating-color-neutral-opac: rgb(133 133 133 / 20%);
-    --rating-color-positive: #12B77C;
-    --rating-color-positive-opac: rgb(18 183 124 / 20%);
-    --rating-color-negative: #ff4350;
-    --rating-color-negative-opac: rgb(255 67 80 / 20%);
-    --backgr-select-item: #656565;
-    --backgr-modal-review: rgb(43 43 46 / 80%);
-    --main-modal-color: #191a1d;
-    --backgr-inputs-color: #27292E;
-    --backgr-select: #fff;
-    --backgr-select-list: #e2e2e2;
-    --border-input-color: #333;
-    --blackout-bottom-content: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
-    --blackout-left-content: linear-gradient(90deg, rgb(18 18 18 / 100%) 14%, rgb(18 18 18 / 64.3%) 48%, rgb(18 18 18 / 0%) 100%);
-    --backgr-userbar-color-on: rgb(15 15 15 / 80%);
-    --backgr-userbar-color-off: rgb(15 15 15 / 0%);
-    --backgr-menu-save: rgb(86 86 86 / 50%);
-    --color-menu-max: rgba(23 23 23 /100%);
-    --color-menu-min: rgba(23 23 23 /0%);
-    --premier-date-color: #BDBDBD;
-    --secondary-weak-text: #E0E0E0;
-    --font-size-big: 48px;
-    --font-size-normal: 15px;
-    font-family: 'Mail Sans Roman';
-    background-color: var(--backgr-color);
-    margin: 0;
-    padding: 0;
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
 }
 
-a, button {
-    border: none;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    background: none;
-    cursor: pointer;
+input[type="radio"] {
+  all: unset;
+}
+
+
+body,
+html {
+  --main-shadow-color-light: rgb(0 0 0 / 20%);
+  --main-shadow-color-strong: rgb(0 0 0 / 40%);
+  --blackout-color: rgb(0 0 0);
+  --backgr-color: #121212;
+  --primary-color: #feba2b;
+  --primary-color-hover: #cd9826;
+  --secondary-color: rgb(86 86 86 / 50%);
+  --secondary-color-hover: rgb(177 177 177 / 35%);
+  --main-color-text: #fff;
+  --text-color-on-primary: #000;
+  --text-color-on-secondary: #fff;
+  --secondary-color-text: #A5A5A5;
+  --text-danger: #e72d2d;
+  --standart-margin: 52px;
+  --header-height: 95px;
+  --margin-left-login-btn: 72px;
+  --error-color: rgb(150 0 0);
+  --success-color: rgb(98 167 127);
+  --rating-color-neutral: #858585;
+  --rating-color-neutral-opac: rgb(133 133 133 / 20%);
+  --rating-color-positive: #12B77C;
+  --rating-color-positive-opac: rgb(18 183 124 / 20%);
+  --rating-color-negative: #ff4350;
+  --rating-color-negative-opac: rgb(255 67 80 / 20%);
+  --backgr-select-item: #fff;
+  --backgr-modal-review: rgb(43 43 46 / 80%);
+  --main-modal-color: #191a1d;
+  --backgr-inputs-color: #27292E;
+  --backgr-select: #fff;
+  --backgr-select-list: #e2e2e2;
+  --border-input-color: #333;
+  --blackout-bottom-content: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(18 18 18 / 100%) 77%);
+  --blackout-left-content: linear-gradient(90deg, rgb(18 18 18 / 100%) 14%, rgb(18 18 18 / 64.3%) 48%, rgb(18 18 18 / 0%) 100%);
+  --backgr-userbar-color-on: rgb(15 15 15 / 80%);
+  --backgr-userbar-color-off: rgb(15 15 15 / 0%);
+  --backgr-menu-save: rgb(86 86 86 / 50%);
+  --color-menu-max: rgba(23 23 23 /100%);
+  --color-menu-min: rgba(23 23 23 /0%);
+  --premier-date-color: #BDBDBD;
+  --secondary-weak-text: #E0E0E0;
+  --line-color-userbar: #858585;
+  --backgr-userbar: rgb(#2b2b2b, 0.9);
+  --disable-genre-collection: rgb(110 110 110);
+  --active-genre-collection: rgb(221 221 221);
+  --menu-title-color: #CCC;
+  --font-size-big: 48px;
+  --font-size-normal: 15px;
+  --font-size-small: 13px;
+  font-family: 'Mail Sans Roman';
+  background-color: var(--backgr-color);
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0 0 0 / 0%);
+}
+
+a,
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
@@ -129,12 +145,50 @@ a, button {
   }
 }
 
+@media screen and (max-width: 1150px) {
+  .js-header__navlink-my-films {
+    display: none;
+  }
+
+  .actor-profile {
+    &__content {
+      max-height: none;
+      flex-wrap: wrap;
+    }
+
+    &__gallery {
+      max-width: 90vw;
+
+      &__title {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .js-header__navlink-my-colls {
+    display: none;
+  }
+
+  .actor-profile__content {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .js-header__navlink-top-250 {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 800px) {
-  body, html {
+  body,
+  html {
     --font-size-normal: 13px;
   }
 
-  .modal{
+  .modal {
     &__header {
       margin-bottom: 20px;
       font-size: 22px;
@@ -144,54 +198,180 @@ a, button {
       margin-right: 20px;
     }
   }
+}
 
+@media screen and (max-width: 700px) {
+  body,
+  html {
+    --font-size-small: 11px;
+  }
+
+  .actor-profile__primary {
+    flex-wrap: wrap;
+    max-height: none;
+    justify-content: center;
+  }
+
+  .profile {
+    &__content-container {
+      flex-wrap: wrap;
+    }
+  }
+
+  .modal {
+    &__input {
+      height: 25px;
+      font-size: 11px;
+
+      &__button-auth {
+        height: 27px;
+      }
+    }
+
+    &__wrapper__input {
+      margin-bottom: 10px;
+    }
+
+    &__login,
+    &__signup {
+      width: 100%;
+      border-radius: 30px;
+
+      &__img {
+        display: none;
+      }
+
+      .modal__flex__center__div {
+        display: flex;
+      }
+    }
+  }
+
+  .modal__login .modal__flex__center__div .modal__login__switch__btn {
+    margin-right: 10px;
+    width: 90px;
+  }
+
+  .auth__wrapper {
+    width: 65vw;
+  }
+
+  .preview-film__blackout-bottom {
+    height: 120px;
+  }
 }
 
 @media screen and (max-width: 620px) {
+  body,
+  html {
+    --standart-margin: 15px;
+    --margin-left-login-btn: 155px;
+    --font-size-big: 36px;
+    --font-size-small: 9px;
+    --header-height: 75px;
+  }
+
+  .input-review__user-container {
+    display: none;
+    margin-top: 15px;
+  }
+
+  .input-review__head {
+    margin-bottom: 15px;
+    font-size: 25px;
+  }
+
+  .js-mobile-search {
+    display: flex;
+  }
+
   .header__form {
     display: none;
   }
 
-  body, html {
-    --standart-margin: 15px;
-    --margin-left-login-btn: 155px;
-    --font-size-big: 36px;
+  .search-page__title {
+    margin-top: 0;
   }
 
-  .header{
-    &__login__btn {
-      margin-right: var(--standart-margin);
-      margin-left: var(--margin-left-login-btn);
+  .header__form__icon-search {
+    top: 5px;
+    width: 25px;
+
+    &_input-full {
+      top: 10px;
+      width: 16px;
+      margin-left: 0;
+      left: 0;
+    }
+  }
+
+  .primary-btn-big {
+    font-size: 15px;
+  }
+
+  .modal {
+    &__input {
+      height: 23px;
+      font-size: 10px;
+
+      &__button-auth {
+        height: 25px;
+      }
+
+      &__error {
+        font-size: 7px;
+      }
     }
 
-    body, html {
-        --standart-margin: 15px;
-        --margin-left-login-btn: 155px;
-        --font-size-big: 36px;
+    &__wrapper__input {
+      margin-bottom: 0;
     }
 
-    .header{
-        &__login__btn {
-            margin-right: var(--standart-margin);
-            margin-left: var(--margin-left-login-btn);
-        }
-
-        &__userbar-substrate {
-            margin-right: 25px;
-        }
+    &__input__button-review {
+      height: 35px;
     }
 
-  .page__collection__body .film{
+    &__flex__center__div {
+      font-size: 8px;
+    }
+
+    &__text__alternative__page {
+      margin-right: 0;
+    }
+  }
+
+  .modal__login .modal__flex__center__div .modal__login__switch__btn {
+    margin-right: 25px;
+    width: 85px;
+  }
+
+  .header {
+    body,
+    html {
+      --standart-margin: 15px;
+      --margin-left-login-btn: 155px;
+      --font-size-big: 36px;
+    }
+
+    &__userbar-substrate {
+      margin-right: 25px;
+    }
+  }
+
+  .page__collection__body .film {
     margin-right: 0;
   }
 
   .input-review {
-    &__container{
-      padding: 25px 20px;
+    height: 100%;
+
+    &__container {
+      height: 100%;
+      padding: 25px 30px 35px;
     }
 
-    &__head{
-      font-size: 25px;
+    &__form {
+      height: 50%;
     }
 
     &__select-head-text {
@@ -200,14 +380,11 @@ a, button {
 
     &__input-title {
       font-size: 12px;
+      height: 41px;
     }
 
     &__input-text {
       font-size: 12px;
-    }
-
-    &__user-container {
-      margin-top: 15px;
     }
 
     &__select {
@@ -215,8 +392,23 @@ a, button {
     }
   }
 }
+
+@media screen and (max-width: 494px) {
+  .page__collection__body {
+    justify-content: center;
+  }
 }
 
-.active {
-    font-weight: bold;
+@media screen and (max-width: 430px) {
+  .modal__input__error {
+    width: 67%;
+  }
+}
+
+.dysplay-none {
+  display: none;
+}
+
+.dysplay-flex {
+  display: flex;
 }

@@ -26,7 +26,7 @@ $poster-height: 170px;
             left: 0;
             width: $poster-width;
             height: $poster-height;
-            background-color: rgb(var(--blackout-color));
+            background-color: var(--blackout-color);
             opacity: 0;
             border-radius: 4px;
             transition: 0.1s linear;

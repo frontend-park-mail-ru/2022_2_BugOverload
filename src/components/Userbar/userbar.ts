@@ -1,9 +1,7 @@
 import templateHeader from '@components/Header/header.handlebars';
-import templateUserbar from '@components/Userbar/userbar.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionLogout } from '@store/actionCreater/userActions';
-import { isMobile } from '@/config/config';
 
 /**
 * Отрисовывает выпадающее меню.
@@ -13,9 +11,12 @@ import { isMobile } from '@/config/config';
 export class Userbar extends Component {
     /**
      * Навешивает обработчики на меню для обработки logout
-     */ 
+     */
     addLogoutHandler() {
         const targetHadler = document.querySelector('.js-header__userbar-item-out');
+        if (!targetHadler) {
+            return;
+        }
 
         targetHadler.addEventListener('click', (e) => {
             e.preventDefault();
@@ -45,7 +46,7 @@ export class Userbar extends Component {
                 return;
             }
 
-            document.body.querySelector('.js-header').remove();
+            /*document.body.querySelector('.js-header').remove();
 
             const props = {
                 isMobile,
@@ -53,21 +54,32 @@ export class Userbar extends Component {
                 ...user,
             };
 
-            rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));
+            rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));*/
+            const userbarArea = rootNode.querySelector('.header__userbar-items-container');
+   
+            if(userbarArea.classList.contains('dysplay-none')) {
+                userbarArea.classList.remove('dysplay-none');
+            }
+            userbarArea.classList.add('dysplay-flex');
 
-            rootNode.querySelector('.js-header__userbar-substrate').classList.add('userbar-on');
+            rootNode.querySelector('.js-header__userbar-substrate')?.classList.add('userbar-on');
 
             isOpened = true;
 
             logout();
 
             function handlerCloseUserbar() {
-                document.body.querySelector('.header').remove();
-
-                rootNode.insertAdjacentHTML('afterbegin', templateHeader(user));
+                const userbarArea = rootNode.querySelector('.header__userbar-items-container');
+   
+                if(userbarArea.classList.contains('dysplay-flex')) {
+                    userbarArea.classList.remove('dysplay-flex');
+                }
+                userbarArea.classList.add('dysplay-none');
 
                 const newUserbar = document.body.querySelector('.js-header__userbar-user-info-container');
                 newUserbar.addEventListener('mouseenter', handlerOpenUserbar);
+
+                rootNode.querySelector('.js-header__userbar-substrate')?.classList.remove('userbar-on');
 
                 isOpened = false;
             }

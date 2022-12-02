@@ -16,9 +16,16 @@
   }
 
   &__title {
-    font-size: 28px;
+    font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1920 - 300)));
     color: var(--main-color-text);
+    width: max-content;
     cursor: pointer;
+
+    &:hover {
+      color: var(--primary-color);
+      transition: 0.1s linear;
+      cursor: pointer;
+    }
   }
 
   &__slider {

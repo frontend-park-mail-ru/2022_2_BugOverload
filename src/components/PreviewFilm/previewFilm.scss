@@ -4,6 +4,11 @@
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: center;
+  
+  @media (orientation: landscape) {
+    height: 110vh;
+  }
 
   &__blackout-bottom {
     width: 100%;
@@ -13,7 +18,7 @@
 
   &__container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -25,12 +30,16 @@
     z-index: 1;
     margin-left: var(--standart-margin);
     width: calc(100vw - #{var(--standart-margin)});
+
+    @media (orientation: landscape) {
+      margin-top: var(--header-height);
+    }
   }
 
   &__film-title {
     color: var(--main-color-text);
     font-weight: bold;
-    font-size: var(--font-size-big);
+    font-size: calc(32px + (48 - 32) * ((100vw - 300px) / (1920 - 300)));
     width: 100%;
     max-width: 600px;
   }

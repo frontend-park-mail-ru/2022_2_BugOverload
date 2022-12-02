@@ -3,6 +3,10 @@
   margin-top: 90px;
   top: 20px;
 
+  @media screen and (max-width: 1360px) {
+    display: none;
+  }
+
   &__container {
     display: grid;
     padding: 8px 36px;
