@@ -21,7 +21,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: var(--blackout-color);
+        background-color: rgba(14 11 8/75%);
         border-radius: 12px;
 
         .genre__svg {
@@ -33,6 +33,7 @@
     }
 
     &__wrapper:hover &__background {
+        background-color: rgb(14 11 8);
         cursor: pointer;
     }
 
