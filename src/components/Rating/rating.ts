@@ -83,66 +83,65 @@ export class Rating extends Component {
         this.location.innerHTML = '';
     }
 
-    handlerReview = (function (e: Event) {
-        e.preventDefault();
-        const user = store.getState('user');
-        if (!user) {
-            ShowMessage('Вы должны быть авторизованы', 'negative');
-            return;
-        }
-
-        const inputReview = new InputReview({
-            film: this.state.film,
-            data: user,
-            rootNode: this.rootNode,
-        });
-        inputReview.render();
-    }).bind(this);
-
-    handlerSubmit = (function (e: SubmitEvent) {
-        e.preventDefault();
-
-        const rateValue = (e.submitter as HTMLInputElement).value;
-        ShowMessage(`rateValue: ${rateValue}`, 'negative');
-
-        const user = store.getState('user');
-        if (!user) {
-            ShowMessage('Вы должны быть авторизованы', 'negative');
-            return;
-        }
-
-        if (!this.state.film) {
-            return;
-        }
-
-        if (rateValue === 'delete') {
-            store.dispatch(
-                actionDeleteRate({
-                    filmID: this.state.film.id,
-                }),
-            );
-            return;
-        }
-
-        store.dispatch(
-            actionRate({
-                filmID: this.state.film.id,
-                rate: rateValue,
-            }),
-        );
-    }).bind(this);
-
     componentDidMount() {
         const btn = this.location.querySelector('.js-rating__button-write-review');
         if (!btn) {
             return;
         }
+
+        this.handlerReview = (e: Event) => {
+            e.preventDefault();
+            const user = store.getState('user');
+            if (!user) {
+                ShowMessage('Вы должны быть авторизованы', 'negative');
+                return;
+            }
+
+            const inputReview = new InputReview({
+                film: this.state.film,
+                data: user,
+                rootNode: this.rootNode,
+            });
+            inputReview.render();
+        };
         btn.addEventListener('click', this.handlerReview);
 
         const form = this.location.querySelector('.js-rating-form');
         if (!form) {
             return;
         }
+
+        this.handlerSubmit = (e: SubmitEvent) => {
+            e.preventDefault();
+
+            const rateValue = (e.submitter as HTMLInputElement).value;
+
+            const user = store.getState('user');
+            if (!user) {
+                ShowMessage('Вы должны быть авторизованы', 'negative');
+                return;
+            }
+
+            if (!this.state.film) {
+                return;
+            }
+
+            if (rateValue === 'delete') {
+                store.dispatch(
+                    actionDeleteRate({
+                        filmID: this.state.film.id,
+                    }),
+                );
+                return;
+            }
+
+            store.dispatch(
+                actionRate({
+                    filmID: this.state.film.id,
+                    rate: rateValue,
+                }),
+            );
+        };
         form.addEventListener('submit', this.handlerSubmit);
     }
 
