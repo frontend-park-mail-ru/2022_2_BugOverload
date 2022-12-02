@@ -7,11 +7,9 @@
     border-radius: 20px;
     margin-bottom: 48px;
     max-width: 900px;
-    width: 84vw;
+    width: calc(100vw - 2 * #{var(--standart-margin)});
 
     @media screen and (max-width: 500px) {
-      width: calc(97vw - 2 * #{var(--standart-margin)});
-      margin-right: var(--standart-margin);
       box-sizing: border-box;
     }
   }

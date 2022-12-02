@@ -2,7 +2,7 @@
   &__container {
     display: flex;
     flex-direction: column;
-    margin-left: var(--standart-margin);
+    margin: 0 var(--standart-margin) 0 var(--standart-margin);
   }
 
   &__head-container {
