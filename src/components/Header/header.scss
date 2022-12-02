@@ -71,7 +71,13 @@
     height: auto;
     z-index: 2;
     padding-left: 10px;
-    left: 0px;
+    content: url("@icons/icon-search.png");
+  }
+
+  &__form__icon-mobile-search {
+    width: 25px;
+    height: auto;
+    margin-left: auto;
     content: url("@icons/icon-search.png");
   }
 
@@ -98,11 +104,12 @@
   }
 
   &__login__btn {
-    margin-right: calc(var(--standart-margin) + var(--margin-left-login-btn)/3);
+    margin-right: var(--standart-margin);
     height: 35px;
     width: 178px;
     min-width: 100px;
-    margin-left: calc(var(--margin-left-login-btn) - var(--margin-left-login-btn)/3);
+    margin-left: 20px;
+    max-width: 20vw;
   }
 
   &__avatar {

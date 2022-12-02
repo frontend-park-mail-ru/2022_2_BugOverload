@@ -57,10 +57,6 @@
         <img class="header__logo js-header__mobile-userbar__logo" data-section="/" src="/LogoMOVIEGATE.png">
       </div>
     </div>
-    {{!-- {{#if search}}
-    {{else}} --}}
-    <img
-      class="header__form__icon-search js-mobile-search  {{#if avatar}} header__form__icon-search-avatar {{/if}}">
 
       <form class="header__form header__form__mobile js-header-search" style="{display: none;}">
         <input class="header__form__input js-header__form__input" maxlength="100" data-search-input type="text"
@@ -99,15 +95,16 @@
 
 
     {{#if avatar}}
-    {{#if isMobile}}
-    <div class="js-header__mobile-userbar-substrate">
+      {{#if isMobile}}
+      <img class="header__form__icon-mobile-search js-mobile-search">
+      <div class="js-header__mobile-userbar-substrate">
       {{else}}
       <div class="header__userbar-substrate js-header__userbar-substrate">
-        {{/if}}
+      {{/if}}
         <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
-          <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
-          {{#if isMobile}}
-          {{else}}
+        <img class="header__avatar" data-section="/profile/" src="{{avatar}}" alt="">
+        {{#if isMobile}}
+        {{else}}
           {{#if email}}
           <div class="header__userbar-name-container">
             <div class="header__userbar-name">{{nickname}}</div>
@@ -115,13 +112,16 @@
           </div>
           {{/if}}
         </div>
-        {{#if userbar}}
-        {{{userbar}}}
+          {{#if userbar}}
+          {{{userbar}}}
+          {{/if}}
         {{/if}}
+        </div>
+        {{else}}
+        {{#if isMobile}}
+          <img class="header__form__icon-mobile-search js-mobile-search">
         {{/if}}
-      </div>
-      {{else}}
-      <a class="primary-btn-med header__login__btn js-header__login__btn" data-section="/login/">Войти</button>
-        {{/if}}
+        <a class="primary-btn-med header__login__btn js-header__login__btn" data-section="/login/">Войти</button>
+      {{/if}}
 
 </header>

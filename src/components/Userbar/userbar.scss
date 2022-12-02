@@ -121,10 +121,10 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     position: fixed;
-    top: 30px;
+    top: var(--header-height)/2;
     left: 0;
   }
 
@@ -197,5 +197,6 @@
     align-self: flex-start;
     border-radius: 15px;
     margin-right: var(--standart-margin);
+    margin-left: 20px;
   }
 }

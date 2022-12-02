@@ -97,6 +97,11 @@ export class Header extends Component {
                     btnTarget.style.display = 'none';
                 }
 
+                const btnAvatar: HTMLElement = this.rootNode.querySelector('.js-header__mobile-userbar-substrate');
+                if (btnAvatar) {
+                    btnAvatar.style.display = 'none';
+                }
+
                 const searchForm: HTMLElement = this.rootNode.querySelector('.js-header-search');
                 if (searchForm) {
                     searchForm.style.display = 'block';

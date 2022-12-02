@@ -267,6 +267,7 @@ button {
     --margin-left-login-btn: 155px;
     --font-size-big: 36px;
     --font-size-small: 9px;
+    --header-height: 75px;
   }
 
   .js-mobile-search {
@@ -284,12 +285,12 @@ button {
   .header__form__icon-search {
     top: 5px;
     width: 25px;
-    margin-left: 155px;
 
     &_input-full {
       top: 10px;
       width: 16px;
       margin-left: 0px;
+      left: 0px;
     }
   }
 
@@ -334,11 +335,6 @@ button {
   }
 
   .header {
-    &__login__btn {
-      margin-right: var(--standart-margin);
-      margin-left: var(--margin-left-login-btn);
-    }
-
     body,
     html {
       --standart-margin: 15px;
