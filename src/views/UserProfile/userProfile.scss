@@ -96,7 +96,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             margin-top: calc(var(--header-height) + 10px);
         }
 
-        @media screen and (max-width: 565px) {
+        @media screen and (max-width: 527px) {
             margin-top: 20px;
             margin-right: 0;
         }
@@ -119,12 +119,20 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
     &__username {
         font-family: "Mail Sans Roman Med";
         font-size: 36px;
+
+        @media screen and (max-width: 700px) {
+            font-size: 28px;
+        }
     }
 
     &__email {
         font-family: "Mail Sans Roman Med";
         font-size: 20px;
         margin-bottom: 53px;
+
+        @media screen and (max-width: 700px) {
+            font-size: 15px;
+        }
     }
 
     &__info {
@@ -155,11 +163,20 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             color: var(--secondary-color-text);
             margin-bottom: 35px;
             width: 200px;
+
+            @media screen and (max-width: 700px) {
+                width: 150px;
+                font-size: 15px;
+            }
         }
 
         &__value {
             font-size: 20px;
             width: 150px;
+
+            @media screen and (max-width: 700px) {
+                font-size: 15px;
+            }
         }
     }
 
