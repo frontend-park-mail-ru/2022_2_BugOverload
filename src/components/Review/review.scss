@@ -10,7 +10,7 @@
     width: 84vw;
 
     @media screen and (max-width: 500px) {
-      width: 90vw;
+      width: calc(97vw - 2 * #{var(--standart-margin)});
       margin-right: var(--standart-margin);
       box-sizing: border-box;
     }
