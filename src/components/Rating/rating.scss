@@ -72,6 +72,10 @@
     align-items: flex-start;
     margin-left: 20px;
     padding-top: 1%;
+
+    @media screen and (max-width: 510px) {
+      padding-top: 0px;
+    }
   }
 
   &__rate-value {
