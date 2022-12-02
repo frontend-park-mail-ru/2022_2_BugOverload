@@ -1,5 +1,5 @@
 .menu-info-film {
-  width: 100vw;
+  width: calc(100vw - #{var(--standart-margin)});
   margin-right: var(--standart-margin);
 
   &__items {
