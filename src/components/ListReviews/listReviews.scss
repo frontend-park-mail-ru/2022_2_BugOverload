@@ -2,7 +2,11 @@
   &__container {
     display: flex;
     flex-direction: column;
-    margin: 0 var(--standart-margin) 0 var(--standart-margin);
+    margin-left: var(--standart-margin);
+
+    @media screen and (max-width: 1000px) {
+      margin-left: var(--standart-margin);
+    }
   }
 
   &__head-container {
