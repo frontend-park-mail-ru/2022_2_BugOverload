@@ -50,7 +50,7 @@
         <div class="js-header__mobile-userbar__link" data-section="/user/collections/">Коллекции</div>
         <div class="js-header__mobile-userbar__link" data-section="/premieres/">Премьеры</div>
         <div class="js-header__mobile-userbar__link" data-section="/profile/">Профиль</div>
-        <a class="js-header__mobile-userbar__link-out" data-section="/logout/">Выйти</a>
+        <a class="js-header__mobile-userbar__link-out" data-section="logout">Выйти</a>
         {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Оценки</div> --}}
         {{!-- <div class="js-header__mobile-userbar__link" data-section="/">Рецензии</div> --}}
 
@@ -67,7 +67,9 @@
           placeholder="фильмы, передачи, персоны.." aria-label="Search">
         <img class="header__form__icon-search js-header__form__icon-search_input-full">
       </form>
-    {{!-- {{/if}} --}}
+    {{#if search}}
+    {{else}}
+    {{/if}}
 
     {{else}}
     <a class="header__navlink" data-section="/">

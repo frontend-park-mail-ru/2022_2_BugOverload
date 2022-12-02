@@ -20,7 +20,8 @@ export class SaveToCollectionMenu extends Component {
 
         // Навешиваем обработчик на выход по клику вне области меню
         this.closeMenuHandler = (e: Event) => {
-            if (!(e.target as HTMLElement).closest(`.${nameLocation}`)) {
+            if (this.isOpen && !(e.target as HTMLElement).closest(`.${nameLocation}`)) {
+                console.log('closeMenuHandler close!');
                 this.close();
             }
         };
@@ -125,6 +126,8 @@ export class SaveToCollectionMenu extends Component {
         btns.forEach((button: HTMLElement) => {
             button.removeEventListener('click', this[`${button.dataset.name}`]);
         });
+
+        document.removeEventListener('click', this.closeMenuHandler);
     }
 
     unsubscribe() {

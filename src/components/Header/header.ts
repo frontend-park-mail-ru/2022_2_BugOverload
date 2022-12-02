@@ -32,12 +32,14 @@ export class Header extends Component {
             this.state.user = store.getState('user');
             this.render();
         });
+
+        this.isOpenSearch = false;
     }
 
     /**
      * Рендерит стандартный хэдер без пользовательских данных
      */
-    render( search = '') {
+    render( search = '', auth = true) {
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
@@ -54,7 +56,7 @@ export class Header extends Component {
         if (this.state.user) {
             const userbar = new Userbar({ rootNode: this.rootNode });
             userbar.componentDidMount(this.state.user);
-        } else {
+        } else if (auth) {
             store.dispatch(actionAuth());
         }
 
@@ -87,8 +89,21 @@ export class Header extends Component {
                 // searchForm.children[0].classList.remove('header__form__input');
                 searchForm.classList.add('header__form_full');
             }
+
+            this.isOpenSearch = true;
+            e.stopPropagation();
         };
         buttonSearch.addEventListener('click', this.updateHeaderToSearch);
+
+        this.comebackHeader = (e: Event) => {
+            if (this.isOpenSearch && !(e.target as HTMLElement).closest('.js-header-search')) {
+                console.log('edned');
+                this.componentWillUnmount();
+                this.render('', false);
+                this.isOpenSearch = false;
+            }
+        };
+        document.addEventListener('click', this.comebackHeader);
 
 
         const form = this.rootNode.querySelector('.js-header-search');

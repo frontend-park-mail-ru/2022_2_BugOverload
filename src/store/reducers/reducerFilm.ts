@@ -138,7 +138,7 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             const newList = store.getState('listCollectionsUser');
-            for (const coll of newList) {
+            for (let coll of newList) {
                 if (coll.id === saveToCollParams.idCollection) {
                     coll.is_used = true;
                     break;
@@ -165,9 +165,13 @@ class ReducerFilm {
 
         const newList = store.getState('listCollectionsUser') || {};
         if(!newList) {
-            for (const coll of newList) {
+            for (let coll of newList) {
                 if (coll.id === removeFromCollParams.idCollection) {
+                    console.log(`befo del: ${JSON.stringify(coll)}`);
                     delete coll.is_used;
+                    console.log(`sed del: ${JSON.stringify(coll)}`);
+                    delete coll['is_used'];
+                    console.log(`afte del: ${JSON.stringify(coll)}`);
                     break;
                 }
             }
