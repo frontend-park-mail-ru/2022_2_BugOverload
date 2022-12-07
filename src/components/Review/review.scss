@@ -8,10 +8,7 @@
     margin-bottom: 48px;
     max-width: 900px;
     width: calc(100vw - 2 * #{var(--standart-margin)});
-
-    @media screen and (max-width: 500px) {
-      box-sizing: border-box;
-    }
+    box-sizing: border-box;
   }
 
   &__meta-info-container {
