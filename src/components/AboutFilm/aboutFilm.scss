@@ -28,7 +28,7 @@
     left: 0;
     width: 900px;
     min-height: 510px;
-    height: calc(100vh + (100 - 75) * ((100vw - 300px) / (1920 - 300)));
+    height: 100%;
     background: var(--blackout-left-content);
 
     @media screen and (max-width: 1200px) {
