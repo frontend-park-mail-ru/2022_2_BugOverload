@@ -99,6 +99,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
         @media screen and (max-width: 527px) {
             margin-top: 20px;
             margin-right: 0;
+            width: 100%;
         }
     }
 
