@@ -56,6 +56,11 @@ const addPlugins = () => {
                     from: path.resolve(__dirname, 'src/sw.js'),
                     to: path.resolve(__dirname, 'dist'),
                 },
+                {
+                    from: path.resolve(__dirname, 'node_modules/moviegate-ui-kit/dist/*.png'),
+                    to: path.resolve(__dirname, 'dist'),
+                    context: 'node_modules/moviegate-ui-kit/dist',
+                },
             ],
         }),
         new MiniCssExtractPlugin({
@@ -104,6 +109,16 @@ module.exports = {
                 test: /\.(png|jpg|jpeg)$/,
                 type: 'asset/resource',
             },
+            // {
+            //     test: /\.(png|jpg|jpeg|gif)$/i,
+            //     use: [
+            //     {
+            //         loader: 'url-loader',
+            //         options: {
+            //             limit: false,
+            //         },
+            //     },
+            // },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
                 type: 'asset/resource',
