@@ -7,6 +7,9 @@ import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
 
+import {Header as HeaderUI} from 'moviegate-ui-kit';
+// const {Header as HeaderUI} = require('moviegate-ui-kit');
+
 export interface Header {
     state: {
         user: user,
@@ -46,14 +49,23 @@ export class Header extends Component {
             header.remove();
         }
 
-        this.rootNode.insertAdjacentHTML('afterbegin', template(
-            Object.assign(
-                { isMobile },
-                this.state.user,
-                { search },
-                { userbar: templateUserbar() },
-            )
-        ));
+        // this.rootNode.insertAdjacentHTML('afterbegin', template(
+        //     Object.assign(
+        //         { isMobile },
+        //         this.state.user,
+        //         { search },
+        //         { userbar: templateUserbar() },
+        //     )
+        // ));
+
+        this.rootNode.insertAdjacentHTML('afterbegin', HeaderUI.render(
+                Object.assign(
+                    { isMobile },
+                    this.state.user,
+                    { search },
+                    { userbar: templateUserbar() },
+                )
+            ));
 
         const logoutButton = this.rootNode.querySelector('.js-header__mobile-userbar__link-out');
         if (this.state.user) {
