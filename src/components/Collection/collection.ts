@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
 import template from '@components/Collection/collection.handlebars';
-import { FilmUI } from 'moviegate-ui-kit';
+
 /**
 * Отрисовывает список фильмов в виде коллекции.
 * Перерисовывается при изменении state 'collection'

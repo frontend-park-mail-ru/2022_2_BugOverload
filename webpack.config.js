@@ -59,7 +59,7 @@ const addPlugins = () => {
                 {
                     from: path.resolve(__dirname, 'node_modules/moviegate-ui-kit/dist/*.png'),
                     to: path.resolve(__dirname, 'dist'),
-                    context: 'node_modules/moviegate-ui-kit/dist',
+                    context: path.resolve(__dirname, 'node_modules/moviegate-ui-kit/dist'),
                 },
             ],
         }),

@@ -1,7 +1,8 @@
 import { API } from '@config/config';
-import template from '@components/Film/film.handlebars';
+// import template from '@components/Film/film.handlebars';
 import { decoreColorRating } from '@utils/decorationData';
 import { roundFloat } from '@utils/common';
+import { FilmUI } from 'moviegate-ui-kit';
 
 /**
 * Помогает в создании отрендеренного фильма в HTML для последующей вставки на страницу
@@ -15,7 +16,14 @@ export class Film {
     * @return {string} HTML созданного фильма
     */
     static createFilm(filmData: film, isUserCollection = false) {
-        const film = template({
+        // const film = template({
+        //     ...filmData,
+        //     poster_ver: API.img.poster_ver(filmData.poster_ver),
+        //     rating: roundFloat(filmData.rating),
+        //     genres: Film.decoreFilmInfo(filmData),
+        //     isUserCollection,
+        // });
+        const film = FilmUI.renderTemplate({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
             rating: roundFloat(filmData.rating),
