@@ -1,111 +1,111 @@
-.film {
-  height: 353px;
-  padding: 0 10px;
-  margin-right: 30px;
-  margin-bottom: 75px;
-  position: relative;
+// .film {
+//   height: 353px;
+//   padding: 0 10px;
+//   margin-right: 30px;
+//   margin-bottom: 75px;
+//   position: relative;
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-  }
+//   &__container {
+//     display: flex;
+//     flex-direction: column;
+//   }
 
-  &__rating {
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-    position: absolute;
-    font-size: 15px;
-    padding: 1px 6px 0;
-    width: 32px;
-    height: 20px;
-    top: 9px;
-    left: 0;
-    border-radius: 4px;
-    color: var(--main-color-text);
-  }
+//   &__rating {
+//     display: flex;
+//     justify-content: center;
+//     box-sizing: border-box;
+//     position: absolute;
+//     font-size: 15px;
+//     padding: 1px 6px 0;
+//     width: 32px;
+//     height: 20px;
+//     top: 9px;
+//     left: 0;
+//     border-radius: 4px;
+//     color: var(--main-color-text);
+//   }
 
-  &__poster {
-    display: block;
-    width: 210px;
-    height: 300px;
-    border-radius: 5px;
-    background-size: 210px;
-    transition: 0.12s linear;
-  }
+//   &__poster {
+//     display: block;
+//     width: 210px;
+//     height: 300px;
+//     border-radius: 5px;
+//     background-size: 210px;
+//     transition: 0.12s linear;
+//   }
 
-  &__blackout {
-    width: 210px;
-    height: 300px;
-    background-color: var(--blackout-color);
-    opacity: 0.2;
-    position: absolute;
-    top: 0;
-    transition: 0.12s linear;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+//   &__blackout {
+//     width: 210px;
+//     height: 300px;
+//     background-color: var(--blackout-color);
+//     opacity: 0.2;
+//     position: absolute;
+//     top: 0;
+//     transition: 0.12s linear;
+//     cursor: pointer;
+//     border-radius: 4px;
+//   }
 
-  &__title {
-    font-size: 15px;
-    color: var(--main-color-text);
-    width: 210px;
-    margin-top: 13px;
-  }
+//   &__title {
+//     font-size: 15px;
+//     color: var(--main-color-text);
+//     width: 210px;
+//     margin-top: 13px;
+//   }
 
-  &__info-container {
-    display: flex;
-    margin-top: 7px;
-  }
+//   &__info-container {
+//     display: flex;
+//     margin-top: 7px;
+//   }
 
-  &__genres {
-    display: flex;
-  }
+//   &__genres {
+//     display: flex;
+//   }
 
-  &__decore-circle {
-    width: 5px;
-    height: 5px;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-    margin: 4px 5px 0;
-  }
+//   &__decore-circle {
+//     width: 5px;
+//     height: 5px;
+//     background-color: var(--secondary-color);
+//     border-radius: 5px;
+//     margin: 4px 5px 0;
+//   }
 
-  &__genre {
-    font-size: 12px;
-    color: var(--secondary-color-text);
-  }
+//   &__genre {
+//     font-size: 12px;
+//     color: var(--secondary-color-text);
+//   }
 
-  &__year {
-    font-size: 12px;
-    color: var(--secondary-color-text);
-  }
+//   &__year {
+//     font-size: 12px;
+//     color: var(--secondary-color-text);
+//   }
 
-  &:hover &__poster {
-    background-size: 224px auto;
-    background-position: -7px -10px;
-    transition: 0.12s linear;
-  }
+//   &:hover &__poster {
+//     background-size: 224px auto;
+//     background-position: -7px -10px;
+//     transition: 0.12s linear;
+//   }
 
-  &:hover &__blackout {
-    width: 210px;
-    height: 300px;
-    opacity: 0.3;
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-  }
+//   &:hover &__blackout {
+//     width: 210px;
+//     height: 300px;
+//     opacity: 0.3;
+//     position: absolute;
+//     top: 0;
+//     cursor: pointer;
+//   }
 
-  &:hover &__delete-svg {
-    opacity: 1;
-    transition: 0.12s linear;
-  }
+//   &:hover &__delete-svg {
+//     opacity: 1;
+//     transition: 0.12s linear;
+//   }
 
-  &__delete-svg {
-    opacity: 0;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-    transition: 0.12s linear;
-  }
-}
+//   &__delete-svg {
+//     opacity: 0;
+//     position: absolute;
+//     top: 10px;
+//     right: 20px;
+//     cursor: pointer;
+//     transition: 0.12s linear;
+//   }
+// }
