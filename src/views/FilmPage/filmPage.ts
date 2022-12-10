@@ -12,6 +12,8 @@ import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
 import { responsStatuses } from '@config/config';
 
+import { CollectionUI } from 'moviegate-ui-kit';
+
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
 *
