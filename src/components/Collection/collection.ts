@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
 import template from '@components/Collection/collection.handlebars';
-
+import { FilmUI } from 'moviegate-ui-kit';
 /**
 * Отрисовывает список фильмов в виде коллекции.
 * Перерисовывается при изменении state 'collection'
@@ -62,7 +62,7 @@ export class Collection extends Component {
      * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
      */
     render() {
-        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const films = this.state.collection.films.reduce((res: string, filmData: film) => res + /* FilmUI */ Film.createFilm(filmData), '');
 
         let { name } = this.state.collection;
         if (name) {

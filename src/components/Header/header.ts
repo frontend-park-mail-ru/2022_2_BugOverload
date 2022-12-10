@@ -1,5 +1,5 @@
 import { Userbar } from '@components/Userbar/userbar';
-import template from '@components/Header/header.handlebars';
+// import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { router } from '@router/Router';
@@ -8,6 +8,7 @@ import { isMobile } from '@/config/config';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
 
 import {Header as HeaderUI} from 'moviegate-ui-kit';
+// import 'moviegate-ui-kit/dist/uikit.css';
 // const {Header as HeaderUI} = require('moviegate-ui-kit');
 
 export interface Header {
@@ -58,7 +59,7 @@ export class Header extends Component {
         //     )
         // ));
 
-        this.rootNode.insertAdjacentHTML('afterbegin', HeaderUI.render(
+        this.rootNode.insertAdjacentHTML('afterbegin', new HeaderUI(this.props).render(
                 Object.assign(
                     { isMobile },
                     this.state.user,
