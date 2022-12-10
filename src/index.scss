@@ -6,7 +6,6 @@
 @import "@components/PreviewFilm/previewFilm.scss";
 @import "@components/Message/errorMessage.scss";
 @import "@components/Message/successMessage.scss";
-@import "@components/AboutFilm/aboutFilm.scss";
 @import "@components/MenuInfoFilm/menuInfoFilm.scss";
 @import "@components/DescriptionFilm/descriptionFilm.scss";
 @import "@components/DetailsFilm/detailsFilm.scss";
@@ -73,7 +72,7 @@ input[type="radio"] {
 body,
 html {
   --main-shadow-color-light: rgb(0 0 0 / 20%);
-  --main-shadow-color-strong: rgb(0 0 0 / 41%);
+  --main-shadow-color-strong: rgb(0 0 0 / 40%);
   --blackout-color: rgb(0 0 0);
   --backgr-color: #121212;
   --primary-color: #feba2b;

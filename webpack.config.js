@@ -109,16 +109,6 @@ module.exports = {
                 test: /\.(png|jpg|jpeg)$/,
                 type: 'asset/resource',
             },
-            // {
-            //     test: /\.(png|jpg|jpeg|gif)$/i,
-            //     use: [
-            //     {
-            //         loader: 'url-loader',
-            //         options: {
-            //             limit: false,
-            //         },
-            //     },
-            // },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
                 type: 'asset/resource',

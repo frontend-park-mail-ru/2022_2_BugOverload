@@ -47,7 +47,7 @@ export class Header extends Component {
             header.remove();
         }
 
-        this.rootNode.insertAdjacentHTML('afterbegin', new HeaderUI(this.props).renderTemplate(
+        this.rootNode.insertAdjacentHTML('afterbegin', HeaderUI.renderTemplate(
                 Object.assign(
                     { isMobile },
                     this.state.user,

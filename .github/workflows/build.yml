@@ -19,7 +19,7 @@ jobs:
       - name:  Install deps
         run: npm install
 
-        
+
       - name: Lint
         run: npm run lint
 
