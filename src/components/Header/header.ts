@@ -7,7 +7,7 @@ import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
 
-import {Header as HeaderUI} from 'moviegate-ui-kit';
+import { HeaderUI } from 'moviegate-ui-kit';
 // import 'moviegate-ui-kit/dist/uikit.css';
 // const {Header as HeaderUI} = require('moviegate-ui-kit');
 
@@ -59,7 +59,7 @@ export class Header extends Component {
         //     )
         // ));
 
-        this.rootNode.insertAdjacentHTML('afterbegin', new HeaderUI(this.props).render(
+        this.rootNode.insertAdjacentHTML('afterbegin', new HeaderUI(this.props).renderTemplate(
                 Object.assign(
                     { isMobile },
                     this.state.user,
