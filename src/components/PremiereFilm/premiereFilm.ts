@@ -1,4 +1,3 @@
-import template from '@components/PremiereFilm/premiereFilm.handlebars';
 import { Component } from '@components/Component';
 import { PremiereFilmDate } from '@components/PremiereFilmDate/premiereFilmDate';
 import { API } from '@config/config';
@@ -6,6 +5,8 @@ import {
     decoreDuration, decoreColorRating,
 } from '@utils/decorationData';
 import { roundFloat } from '@utils/common';
+
+import { PremiereFilmUI } from 'moviegate-ui-kit';
 
 /**
 * Рейтинг фильма.
@@ -15,7 +16,7 @@ import { roundFloat } from '@utils/common';
 export class PremiereFilm extends Component {
     static createFilmPremiere(filmData: filmPremiere, mode = '') {
 
-        const film = template({
+        const film = PremiereFilmUI.renderTemplate({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
             year_prod: filmData.prod_date.split('.')[0],

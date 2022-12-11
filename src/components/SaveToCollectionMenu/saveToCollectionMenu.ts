@@ -1,10 +1,11 @@
-import template from '@components/SaveToCollectionMenu/saveToCollectionMenu.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 import {
     actionSaveToCollection, actionRemoveFromCollection
 } from '@actions/filmActions';
+
+import { SaveToCollectionMenuUI } from 'moviegate-ui-kit';
 
 /**
 * Отражает меню со списком имеющихся коллеций у пользователя
@@ -77,7 +78,7 @@ export class SaveToCollectionMenu extends Component {
      * Отрисовывает компонент, используя location и hbs-template.
      */
     render() {
-        this.placeholder.insertAdjacentHTML('beforeend', template({ collections: this.state.collections }));
+        this.placeholder.insertAdjacentHTML('beforeend', SaveToCollectionMenuUI.renderTemplate({ collections: this.state.collections }));
         this.componentDidMount();
     }
 

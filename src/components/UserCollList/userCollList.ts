@@ -1,6 +1,7 @@
-import template from '@components/UserCollList/userCollList.handlebars';
 import { Component } from '@components/Component';
 import { PreviewUserCollection } from '@components/PreviewUserCollection/previewUserCollection';
+
+import { UserCollListUI } from 'moviegate-ui-kit';
 
 /**
 * Список премьер.
@@ -24,7 +25,7 @@ export class UserCollList extends Component {
         const collections = this.collectionsData
             .reduce((res: string, collData: userCollection) => res + PreviewUserCollection.createUserCollection(collData), '');
 
-        const t = template({
+        const t = UserCollListUI.renderTemplate({
             collections: collections,
         });
 
