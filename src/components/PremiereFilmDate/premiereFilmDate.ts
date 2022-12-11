@@ -1,9 +1,10 @@
-import template from '@components/PremiereFilmDate/premiereFilmDate.handlebars';
 import { Component } from '@components/Component';
 import {
     restrictText
 } from '@utils/decorationData';
 import { roundFloat } from '@utils/common';
+
+import { PremiereFilmDateUI } from 'moviegate-ui-kit';
 
 const maxLengthDescription = 200;
 /**
@@ -17,7 +18,7 @@ export class PremiereFilmDate extends Component {
             return;
         }
 
-        const film = template({
+        const film = PremiereFilmDateUI.renderTemplate({
             ...filmData,
             ticket_link: filmData.id,
             description: restrictText(filmData.description, maxLengthDescription),

@@ -1,11 +1,12 @@
 import { Userbar } from '@components/Userbar/userbar';
-import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
 import templateUserbar from '@components/Userbar/userbar.handlebars';
+
+import { HeaderUI } from 'moviegate-ui-kit';
 
 export interface Header {
     state: {
@@ -46,14 +47,14 @@ export class Header extends Component {
             header.remove();
         }
 
-        this.rootNode.insertAdjacentHTML('afterbegin', template(
-            Object.assign(
-                { isMobile },
-                this.state.user,
-                { search },
-                { userbar: templateUserbar() },
-            )
-        ));
+        this.rootNode.insertAdjacentHTML('afterbegin', HeaderUI.renderTemplate(
+                Object.assign(
+                    { isMobile },
+                    this.state.user,
+                    { search },
+                    { userbar: templateUserbar() },
+                )
+            ));
 
         const logoutButton = this.rootNode.querySelector('.js-header__mobile-userbar__link-out');
         if (this.state.user) {

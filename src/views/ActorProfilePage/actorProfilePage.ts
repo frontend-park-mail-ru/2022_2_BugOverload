@@ -3,9 +3,10 @@ import { Collection } from '@components/Collection/collection';
 import { Film } from '@components/Film/film';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
-import templateCollection from '@components/Collection/collection.handlebars';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
+
+import { CollectionUI } from 'moviegate-ui-kit';
 
 /**
  * Отрисовывает страницу актера, добавляя HTML-шаблон в root в index.html
@@ -64,7 +65,7 @@ class ActorPage extends View {
                 ...this.state.actor,
                 birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
             }),
-            collectionBestFilms: templateCollection({
+            collectionBestFilms: CollectionUI.renderTemplate({
                 films,
                 name: 'Лучшие фильмы',
                 url: `actor${this.state.id}`,

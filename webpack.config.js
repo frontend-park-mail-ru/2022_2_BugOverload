@@ -56,6 +56,11 @@ const addPlugins = () => {
                     from: path.resolve(__dirname, 'src/sw.js'),
                     to: path.resolve(__dirname, 'dist'),
                 },
+                {
+                    from: path.resolve(__dirname, 'node_modules/moviegate-ui-kit/dist/*.png'),
+                    to: path.resolve(__dirname, 'dist'),
+                    context: path.resolve(__dirname, 'node_modules/moviegate-ui-kit/dist'),
+                },
             ],
         }),
         new MiniCssExtractPlugin({

@@ -1,7 +1,7 @@
-import template from '@components/PremiereList/premiereList.handlebars';
 import { Component } from '@components/Component';
 import { PremiereDay } from '@components/PremiereDay/premiereDay';
 
+import { PremiereListUI } from 'moviegate-ui-kit';
 /**
 * Список премьер.
 * Отрисовывает блоки фильмов, сгруппированных по дням.
@@ -21,7 +21,7 @@ export class PremiereList extends Component {
             return;
         }
         // вставляем шаблон-контейнер на страницу
-        this.location.insertAdjacentHTML('afterbegin', template());
+        this.location.insertAdjacentHTML('afterbegin', PremiereListUI.renderTemplate());
 
         this.blocksDay = <Array<PremiereDay>>[];
         let filmsByDay: Array<filmPremiere> = [];

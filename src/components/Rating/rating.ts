@@ -1,4 +1,3 @@
-import template from '@components/Rating/rating.handlebars';
 import { InputReview } from '@components/InputReview/inputReview';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
@@ -6,10 +5,12 @@ import { ShowMessage } from '@components/Message/message';
 import {
     actionRate, actionDeleteRate, actionGetMetaDataFilm,
 } from '@actions/filmActions';
-
 import {
     decoreCountScores,
 } from '@utils/decorationData';
+
+import { RatingUI } from 'moviegate-ui-kit';
+
 /**
 * Рейтинг фильма.
 * Отрисовывает рейтинг и форму для отправки удаления оценки.
@@ -56,7 +57,7 @@ export class Rating extends Component {
     render() {
         this.remove();
 
-        this.location.insertAdjacentHTML('afterbegin', template({
+        this.location.insertAdjacentHTML('afterbegin', RatingUI.renderTemplate({
             rate: this.state.rating?.value,
             dateRating: this.state.rating?.dateRating,
             [`type_${this.state.film.type || 'film'}`]: true,

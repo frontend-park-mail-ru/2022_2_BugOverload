@@ -1,5 +1,6 @@
-import template from '@components/Modal/modal.handlebars';
 import { hrefRegExp } from '@config/regExp';
+
+import { ModalUI } from 'moviegate-ui-kit';
 
 export interface Modal {
     root: HTMLElement;
@@ -21,7 +22,7 @@ export class Modal {
      * Рендерит модальное окно
      */
     render() {
-        this.root.insertAdjacentHTML('afterbegin', template());
+        this.root.insertAdjacentHTML('afterbegin', ModalUI.renderTemplate());
         this.handler();
     }
 

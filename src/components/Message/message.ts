@@ -1,6 +1,5 @@
 import { ROOT } from '@config/config';
-import templateError from '@components/Message/errorMessage.handlebars';
-import templateSuccess from '@components/Message/successMessage.handlebars';
+import { MessageUI } from 'moviegate-ui-kit';
 
 /**
 * Добавляет в root в index.html сообщение, которое изчезает через 2 секунды
@@ -10,13 +9,13 @@ export function ShowMessage(textMessage = 'Упс, что-то пошло не �
     let content;
     switch (type) {
     case 'negative':
-        content = templateError({ text: textMessage });
+        content = MessageUI.renderTemplateError({ text: textMessage });
         break;
     case 'positive':
-        content = templateSuccess({ text: textMessage });
+        content = MessageUI.renderTemplateSuccess({ text: textMessage });
         break;
     default:
-        content = templateError({ text: textMessage });
+        content = MessageUI.renderTemplateError({ text: textMessage });
     }
 
     const errorDiv = document.querySelector('.js-errorMessage');

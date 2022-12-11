@@ -3,6 +3,8 @@ declare module "*.handlebars" {
     export default _;
 }
 
+declare module 'moviegate-ui-kit';
+
 declare module "*.svg" {
     const content: any;
     export default content;

@@ -1,4 +1,3 @@
-import template from '@components/AboutFilm/aboutFilm.handlebars';
 import { SaveToCollectionMenu } from '@components/SaveToCollectionMenu/saveToCollectionMenu';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
@@ -13,7 +12,10 @@ import {
 import { API } from '@config/config';
 import { Modal } from '@components/Modal/modal';
 
+import { AboutFilmUI } from 'moviegate-ui-kit';
+
 const video = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+
 
 /**
 * Отрисовывает стилизованную общую информацию о фильме.
@@ -69,7 +71,7 @@ export class AboutFilm extends Component {
      * Навешивает обработчики на пользовательский интерфейс, генерируемый компонентом
      */
     render() {
-        this.location.insertAdjacentHTML('afterbegin', template(this.about));
+        this.location.insertAdjacentHTML('afterbegin', AboutFilmUI.renderTemplate(this.about));
         this.location.querySelector('.js-about-film').style.backgroundImage = `url('${API.img.poster_hor(this.data.poster_hor)}')`;
         decoreColorRating(this.location, '.js-about-film__rating', this.data.rating);
 

@@ -1,4 +1,3 @@
-import template from '@components/InputReview/inputReview.handlebars';
 import { Modal } from '@components/Modal/modal';
 import { Component } from '@components/Component';
 import { actionSendReview } from '@actions/filmActions';
@@ -7,6 +6,8 @@ import {
     renderError, removeError,
 } from '@utils/valid';
 import { decoreCountReviews } from '@utils/decorationData';
+
+import { InputReviewUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает форму для написания отзыва в виде модального окна
@@ -50,7 +51,7 @@ export class InputReview extends Component {
         modal.render();
 
         modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-        modalWindow.insertAdjacentHTML('afterbegin', template({
+        modalWindow.insertAdjacentHTML('afterbegin', InputReviewUI.renderTemplate({
             count_reviews: decoreCountReviews(store.getState('countReviews')),
             nickname: this.state.user.nickname,
             user_avatar: this.state.user.avatar,
