@@ -1,6 +1,7 @@
-import template from '@components/DetailsFilm/detailsFilm.handlebars';
 import { API } from '@config/config';
 import { Component } from '@components/Component';
+
+import { DetailsFilmUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает подробную информацию о фильме.
@@ -29,7 +30,7 @@ export class DetailsFilm extends Component {
         }
 
         this.isActive = true;
-        this.location.insertAdjacentHTML('afterbegin', template(this.information));
+        this.location.insertAdjacentHTML('afterbegin', DetailsFilmUI.renderTemplate(this.information));
     }
 
     /**
