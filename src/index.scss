@@ -4,8 +4,6 @@
 @import "@components/Genre/genre.scss";
 @import "@components/ListReviews/listReviews.scss";
 @import "@components/Login/login.scss";
-@import "@components/Message/errorMessage.scss";
-@import "@components/Message/successMessage.scss";
 @import "@components/Modal/modal.scss";
 @import "@components/PersonMed/personMed.scss";
 @import "@components/PremiereDay/premiereDay.scss";
@@ -32,9 +30,6 @@
 @import "@views/SearchPage/searchPage.scss";
 @import "@views/UserCollections/userCollections.scss";
 @import "@views/UserProfile/userProfile.scss";
-// @import "@components/Collection/collection.scss";
-// @import "@components/InputReview/inputReview.scss";
-// @import "@components/MenuInfoFilm/menuInfoFilm.scss";
 
 ::-webkit-scrollbar {
   width: 0;
