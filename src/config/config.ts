@@ -17,6 +17,7 @@ let i = 0;
 const randomMy = () => i++;
 
 export const API = {
+    ws: `${PROTOCOL === 'https' ? 'wss' : 'ws'}://${DOMAIN}/api/v1/ws`,
     img: {
         poster_hor(key: string) {
             if (key === 'default') {
@@ -138,8 +139,8 @@ export const routes = [
 
 export const privateRoutes = [
     { path: '/profile/', view: profile },
-    { path: '/user/collections/', view: userCollections }, 
-    { path: '/user/collection/', view: collectionPage }, 
+    { path: '/user/collections/', view: userCollections },
+    { path: '/user/collection/', view: collectionPage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
