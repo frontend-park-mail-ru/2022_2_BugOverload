@@ -1,10 +1,10 @@
-import template from '@components/PersonMed/personMed.handlebars';
 import { Component } from '@components/Component';
 import { API } from '@config/config';
 import {
     decoreDuration, decoreAge, decoreCountFilms,
 } from '@utils/decorationData';
 import { getAge } from '@utils/common';
+import { PersonMedUI } from 'moviegate-ui-kit';
 
 /**
 * Рейтинг фильма.
@@ -14,7 +14,7 @@ import { getAge } from '@utils/common';
 export class PersonMed extends Component {
     static createPersonMed(personData: filmPremiere, mode = '') {
 
-        const person = template({
+        const person = PersonMedUI.renderTemplate({
             ...personData,
             avatar: API.img.person_avatar(personData.avatar),
             year: personData.birthday.split('.')[0],

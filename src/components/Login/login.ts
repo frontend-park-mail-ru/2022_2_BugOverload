@@ -1,4 +1,3 @@
-import templateLogin from '@components/Login/login.handlebars';
 import {
     checkEmail, checkPassword, renderError, removeError,
 } from '@utils/valid';
@@ -7,6 +6,7 @@ import { Modal, exit } from '@components/Modal/modal';
 import { store } from '@store/Store';
 import { actionLogin } from '@store/actionCreater/userActions';
 import { responsStatuses } from '@config/config';
+import { LoginUI } from 'moviegate-ui-kit';
 
 export interface Login {
     state: {
@@ -86,7 +86,7 @@ export class Login extends Component {
         }
 
         const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-        modalWindow.insertAdjacentHTML('afterbegin', templateLogin());
+        modalWindow.insertAdjacentHTML('afterbegin', LoginUI.renderTemplate());
         this.componentDidMount();
     }
 

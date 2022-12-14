@@ -5,6 +5,7 @@ import { store } from '@store/Store';
 import { Component } from '@components/Component';
 import { InputReview } from '@components/InputReview/inputReview';
 import { actionGetDataReviews } from '@actions/filmActions';
+import { ListReviewsUI } from 'moviegate-ui-kit';
 
 /**
 * Выводит список пользовательских рецензий
@@ -165,7 +166,7 @@ export class ListReviews extends Component {
             return;
         }
 
-        this.location.insertAdjacentHTML('afterbegin', template());
+        this.location.insertAdjacentHTML('afterbegin', ListReviewsUI.renderTemplate());
 
         const btn = this.location.querySelector('.js-list-reviews__btn-write-review');
         if (!btn) {

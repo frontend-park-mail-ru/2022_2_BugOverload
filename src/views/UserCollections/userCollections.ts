@@ -4,10 +4,11 @@ import { router } from '@router/Router';
 import { actionGetUserCollections } from '@actions/userActions';
 import { View } from '@views/View';
 import template from '@views/UserCollections/userCollections.handlebars';
-import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { UserCollList } from '@components/UserCollList/userCollList';
 import { responsStatuses } from '@config/config';
 import { ShowMessage } from '@components/Message/message';
+
+import { ProfileMenuUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -50,7 +51,7 @@ class UserCollections extends View {
         }
 
         ROOT.insertAdjacentHTML('beforeend', template({
-            profileMenu: templateProfileMenu(),
+            profileMenu: ProfileMenuUI.renderTemplate(),
         }));
 
         this.rootNode?.querySelectorAll('.js-profile__menu__links')?.forEach((elem: HTMLElement) => {

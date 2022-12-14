@@ -3,6 +3,14 @@
     flex-flow: row;
 }
 
+@mixin column__flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
 $profile-height: calc(240px + (400 - 240) * ((100vw - 300px) / (1920 - 300)));
 $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
 
@@ -37,7 +45,7 @@ $profile-width: calc(180px + (300 - 180) * ((100vw - 300px) / (1920 - 300)));
             width: 100%;
             border: 0;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 15px; 
 
             &:hover {
                 background-color: var(--secondary-color-hover);

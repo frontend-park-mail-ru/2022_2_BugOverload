@@ -4,9 +4,8 @@ import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
-import templateUserbar from '@components/Userbar/userbar.handlebars';
 
-import { HeaderUI } from 'moviegate-ui-kit';
+import { HeaderUI, UserbarUI } from 'moviegate-ui-kit';
 
 export interface Header {
     state: {
@@ -52,7 +51,7 @@ export class Header extends Component {
                     { isMobile },
                     this.state.user,
                     { search },
-                    { userbar: templateUserbar() },
+                    { userbar: UserbarUI.renderTemplate() },
                 )
             ));
 
