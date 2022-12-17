@@ -6,7 +6,7 @@ import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
 import templateCollection from '@components/Collection/collection.handlebars';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
-
+import { decoreDate } from '@utils/decorationData';
 /**
  * Отрисовывает страницу актера, добавляя HTML-шаблон в root в index.html
  *
@@ -62,7 +62,8 @@ class ActorPage extends View {
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: templateProfile({
                 ...this.state.actor,
-                birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
+                birthday: decoreDate(this.state.actor?.birthday),
+                death: decoreDate(this.state.actor?.death),
             }),
             collectionBestFilms: templateCollection({
                 films,
