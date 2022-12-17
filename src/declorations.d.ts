@@ -195,3 +195,12 @@ interface premiereParams extends anyObject {
     countFilms: number,
     delimiter: number,
 }
+
+interface filmNotifPayload {
+    id: number,
+    poster_hor: string,
+    name: string,
+    rating: number,
+    ticket_link: string,
+    prod_date: string,
+}

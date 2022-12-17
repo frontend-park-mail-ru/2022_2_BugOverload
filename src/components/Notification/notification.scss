@@ -1,0 +1,136 @@
+.placeholder-notification {
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    right: var(--standart-margin);
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    height: fit-content;
+}
+
+.notification {
+    margin-bottom: 20px;
+
+    &__container {
+        width: 460px;
+        height: 165px;
+        display: flex;
+        flex-flow: row nowrap;
+        position: relative;
+        background-color: rgba(44 44 44 / 60%);
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
+        border-radius: 10px;
+        cursor: pointer;
+
+        @media screen and (max-width: 500px) {
+            width: 230px;
+            height: 90px;
+        }
+    }
+
+    &__rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        position: absolute;
+        font-size: 16px;
+        padding: 1px 6px 0;
+        width: 35px;
+        height: 25px;
+        top: 10px;
+        left: -7px;
+        border-radius: 5px;
+        color: var(--text-color-on-primary);
+        background-color: var(--primary-color);
+
+        @media screen and (max-width: 500px) {
+            font-size: 9px;
+            width: 20px;
+            height: 14px;
+            border-radius: 2px;
+            top: 5px;
+            left: -4px;
+        }
+    }
+
+    &__poster {
+        display: block;
+        width: 210px;
+        border-radius: 5px;
+        background-size: 210px;
+        overflow: hidden;
+        background-position-y: -50px;
+
+        @media screen and (max-width: 500px) {
+            width: 95px;
+            background-size: 95px;
+            background-position-y: -30px;
+        }
+    }
+
+    &__data {
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 20px 15px;
+        width: 50%;
+        justify-content: space-between;
+
+        @media screen and (max-width: 500px) {
+            padding: 10px 5px;
+        }
+    }
+
+    &__film-name {
+        color: var(--main-color-text);
+        font-size: 18px;
+        font-family: "Mail Sans Roman Med";
+
+        @media screen and (max-width: 500px) {
+            font-size: 12px;
+        }
+    }
+
+    &__description {
+        color: var(--secondary-color-text);
+        font-size: 16px;
+
+        @media screen and (max-width: 500px) {
+            font-size: 10px;
+        }
+    }
+
+    &__button {
+        width: 145px;
+        height: 30px;
+
+        @media screen and (max-width: 500px) {
+            width: 95px;
+            height: 20px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+    }
+
+    &__cancel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+
+    &__cancel-icon{
+        width: 16px;
+        height: 16px;
+        @media screen and (max-width: 500px) {
+            width: 10px;
+            height: 10px;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import { API } from '@config/config';
+import { showNotification } from '@components/Notification/notification';
 
 interface wsMessage {
     action: string,
@@ -21,23 +22,19 @@ class WebSocketService {
         this._ws = new WebSocket(url);
         this.mapActionHandlers = new Map();
 
-        this.subscribe('message', (payload) => console.log(`EMITTED: ${JSON.stringify(payload)}`))
-        // this.subscribe('message', (payload) => {
-        //     console.log(`AAAAAAAA infinity: ${JSON.stringify(payload)}`);
-        //     this.send('message', payload);
-        // });
+        this.subscribe('ANONS_FILM', (payload: filmNotifPayload) => {
+            showNotification('ANONS_FILM', payload);
+        });
     }
 
     initialize() {
         this.openHandler = () => {
-            console.log('success open WS!');
             this.send('message',{ msg: 'Hello!' });
         };
         this._ws.addEventListener('open', this.openHandler);
 
         this.messageHadnler = (event: MessageEvent<any>) => {
             const data: wsMessage = JSON.parse(event.data)
-            console.log(`get MESSAGE: type: ${data.action}, payload: ${JSON.stringify(data.payload)}`);
             this.emit([data.action], data.payload);
         };
         this._ws.addEventListener('message', this.messageHadnler);
@@ -48,7 +45,7 @@ class WebSocketService {
         this._ws.addEventListener('error', this.errorHandler);
 
         this.closeHandler = (event: CloseEvent) => {
-            console.log(`success close! code: ${event.code}, reason: ${event.reason}`);
+            console.log(`websocket success close! code: ${event.code}`);
         };
         this._ws.addEventListener('close', this.closeHandler);
     }

@@ -1220,23 +1220,67 @@ const wss = new ws.Server({
     port: port+1,
 }, () => console.log(`WSS started on ${port+1}`));
 
+const premieresFilmsBD = [
+	{
+		id: 11,
+		name: 'Дом дракона',
+		poster_hor: 'https://upload.wikimedia.org/wikipedia/ru/6/67/%D0%94%D0%BE%D0%BC%D0%94%D1%80%D0%B0%D0%BA%D0%BE%D0%BD%D0%B0%D0%9F%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg',
+		rating: -1.8,
+		ticket_link: 'https://rutracker.org/forum/viewtopic.php?t=6249419',
+		prod_date: '2022.11.12',
+	},
+	{
+		id: 10,
+		name: 'С широко закрытыми глазами',
+		poster_hor: 'https://upload.wikimedia.org/wikipedia/ru/a/aa/EyesWideShutPoster.jpg',
+		rating: 7.8,
+		ticket_link: 'https://www.kinopoisk.ru/film/3608/',
+		prod_date: '2022.11.05',
+	},
+];
+
+
+const timer = setInterval(() => broadcastMessage({
+	action: 'ANONS_FILM',
+	payload: premieresFilmsBD[Math.floor(Math.random() * premieresFilmsBD.length)],
+}), 5000);
 
 wss.on('connection', function connection(ws, request, client) {
-	const ip = request.socket.remoteAddress;
+	// const timer = setInterval(() => broadcastMessage({
+	// 	action: 'ANONS_FILM',
+	// 	payload: premieresFilmsBD[Math.floor(Math.random() * premieresFilmsBD.length)],
+	// }), 5000);
+
+	ws.on('message', function (message) {
+		message = JSON.parse(message)
+		switch (message.action) {
+			case 'CLOSE':
+				clearInterval(timer);
+				break;
+			}
+	});
+	// const ip = request.socket.remoteAddress;
 	// const ip = req.headers['x-forwarded-for'].split(',')[0].trim();
 	// authenticate();
-    ws.on('message', function (message) {
-        message = JSON.parse(message)
-		console.log(`Received message ${JSON.stringify(message)} from user ${client}, ip: ${ip}`);
-        switch (message.action) {
-            case 'message':
-                broadcastMessage(message)
-                break;
-            case 'connection':
-                broadcastMessage(message)
-                break;
-        }
-    })
+    // ws.on('message', function (message) {
+    //     message = JSON.parse(message)
+	// 	console.log(`Received message ${JSON.stringify(message)} from user ${client}, ip: ${ip}`);
+	// 	let timer;
+    //     switch (message.action) {
+    //         case 'ANONS_FILM':
+    //             timer = setInterval(() => broadcastMessage({
+	// 				action: 'ANONS_FILM',
+	// 				payload: premieresFilmsBD[Math.floor(Math.random() * arr.length)];
+	// 			}), 5000);
+    //             break;
+	// 		case 'close':
+	// 			clearInterval(timer);
+	// 			break;
+    //         case 'connection':
+    //             broadcastMessage(message)
+    //             break;
+    //     }
+    // })
 });
 
 function broadcastMessage(message, id) {
