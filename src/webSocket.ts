@@ -1,5 +1,9 @@
-import { API } from '@config/config';
+import { API, responsStatuses } from '@config/config';
+import { Ajax } from '@utils/ajax';
 import { showNotification } from '@components/Notification/notification';
+import { store } from '@store/Store';
+import { decoreDate } from '@utils/decorationData';
+
 
 interface wsMessage {
     action: string,
@@ -17,14 +21,53 @@ class WebSocketService {
     private messageHadnler: EventListener;
     private errorHandler: EventListener;
     private closeHandler: EventListener;
+    private subHandler: Function;
+    private state: {
+        user: string|null,
+        permission: string|null,
+        isActive: boolean|null,
+    };
 
     constructor (url: string = API.ws) {
         this._ws = new WebSocket(url);
         this.mapActionHandlers = new Map();
 
+        this.state = {
+            user: null,
+            permission: null,
+            isActive: null,
+        };
+
         this.subscribe('ANONS_FILM', (payload: filmNotifPayload) => {
             showNotification('ANONS_FILM', payload);
+
+            if (!this.state.isActive && (this.state.permission === 'granted')) {
+                const date = decoreDate(payload.prod_date).split(' ');
+                new Notification('Премьера фильма!', {
+                    body: `${payload.name} в Кино с ${date[0]} ${date[1]}`,
+                })
+            }
         });
+
+        this.subHandler = async () => {
+            this.state.user = store.getState('user');
+
+            if (this.state.user) {
+                const response = await Ajax.get(API.ws_auth);
+                if (response.status !== responsStatuses.OK) {
+                    return;
+                }
+
+                Notification.requestPermission().then(permission => {
+                    this.state.permission = permission;
+                });
+            }
+        };
+
+        store.subscribe('user', this.subHandler);
+
+        window.onfocus = () => this.state.isActive = true;
+        window.onblur = () => this.state.isActive = false;
     }
 
     initialize() {
@@ -79,6 +122,7 @@ class WebSocketService {
         this._ws.removeEventListener('message', this.messageHadnler);
         this._ws.removeEventListener('error', this.errorHandler);
         this._ws.removeEventListener('close', this.closeHandler);
+        store.unsubscribe('user', this.subHandler);
     }
 }
 

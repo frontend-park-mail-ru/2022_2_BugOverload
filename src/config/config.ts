@@ -18,6 +18,8 @@ const randomMy = () => i++;
 
 export const API = {
     ws: `ws://${DOMAIN}/api/v1/notification`,
+    ws_auth: `${PROTOCOL}://${DOMAIN}/api/v1/ws_auth`,
+
     img: {
         poster_hor(key: string) {
             if (key === 'default') {
