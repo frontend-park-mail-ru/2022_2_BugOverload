@@ -198,7 +198,7 @@ export const decoreDate = (date: string, sep: string = ' ', decoreMonth = true) 
     return newFormatDate.join(sep);
 };
 
-const getMonthName = (numberMonth: number) => {
+export const getMonthName = (numberMonth: number) => {
     if (!numberMonth || !isFinite(numberMonth) || numberMonth > 12 || numberMonth === 0) {
         return 'января';
     }

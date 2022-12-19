@@ -4,6 +4,7 @@ import { Film } from '@components/Film/film';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
+import { decoreDate } from '@utils/decorationData';
 
 import { CollectionUI, ActorProfileUI } from 'moviegate-ui-kit';
 
@@ -20,7 +21,7 @@ class ActorPage extends View {
         super(props);
         this.state = {
             actor: null,
-            id: null, 
+            id: null,
         };
     }
 
@@ -53,7 +54,8 @@ class ActorPage extends View {
         this.rootNode.insertAdjacentHTML('beforeend', template({
             actorProfile: ActorProfileUI.renderTemplate({
                 ...this.state.actor,
-                birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
+                birthday: decoreDate(this.state.actor?.birthday),
+                death: decoreDate(this.state.actor?.death),
             }),
             collectionBestFilms: CollectionUI.renderTemplate({
                 films,

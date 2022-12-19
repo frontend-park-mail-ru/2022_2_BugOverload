@@ -4,12 +4,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const body = require('body-parser');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const cors = require('cors');
 var cookieParser = require('cookie-parser')
+const ws = require('ws');
 
-
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cookieParser());
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
@@ -45,9 +45,6 @@ const DEFAULT_AVATAR = 'assets/img/users/default_user.jpg'
 const ids = {};
 
 app.post('/api/v1/auth/login',  (req, res) => {
-	console.log(req);
-	console.log(req.body);
-
 	const password = req.body.password;
 	const email = req.body.email;
 	if (!password || !email) {
@@ -89,7 +86,6 @@ app.put('/api/v1/user/setting',  (req, res) => {
 });
 
 app.put('/api/v1/image', (req, res) => {
-	console.log(req.body)
 	res.sendStatus(204);
 });
 
@@ -124,7 +120,6 @@ app.post('/api/v1/auth/signup', (req, res) => {
 	const password = req.body.password;
 	const email = req.body.email;
 	const nickname = req.body.nickname;
-	console.log(nickname)
 	if (
 		!password || !email || !nickname
 	) {
@@ -145,7 +140,6 @@ app.post('/api/v1/auth/signup', (req, res) => {
 });
 
 app.get('/api/v1/collection', (req, res) => {
-	console.log('GET: popular CinemaTodayData')
 	const tag = req.params.tag;
 	const collectionCinemaTodayData = {
 			name: "Сейчас в кино",
@@ -557,7 +551,6 @@ app.get('/api/v1/collection', (req, res) => {
 				genres: ["Фентези", "Приключения"],
 			},
 		]};
-		console.log(JSON.stringify(collectionCinemaTodayData));
 
 
 		res.status(200).json(collectionCinemaTodayData);
@@ -1164,7 +1157,6 @@ app.get('/api/v1/person/:id', (req, res) => {
 })
 
 app.get('/api/v1/film/recommendation', (req, res) => {
-	console.log('GET: film/recommendation')
 	const previewSpace = {
 		id: 0,
 		name: "2001 год: Космическая одиссея",
@@ -1566,7 +1558,6 @@ app.post('/api/v1/film/:id/rate/drop', (req, res) => {
 app.get('/api/v1/film/:id/reviews',  (req, res) => {
 	const filmID = req.params.id;
 	const { count, offset } = req.query;
-	console.log(`count ${count}, offset ${offset} `);
 
 	let reviewsList = [];
 	for (let i = offset; reviewsList.length < count && i < reviewsStorage[filmID].length; ++i) {
@@ -1586,14 +1577,11 @@ app.get('/api/v1/film/:id/reviews',  (req, res) => {
 		});
 	}
 
-	console.log(JSON.stringify(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]})));
 	res.status(200).json(Object.assign({}, {reviews: reviewsList}, {infoReviews: reviewsTotalCountsStorage[filmID]}));
 });
 
 app.post('/api/v1/film/:id/review/new', (req, res) => {
-	console.log(JSON.stringify(req.cookies) + 'zzzz');
 	if (Object.keys(req.cookies).length == 0) {
-		console.log(JSON.stringify(req.cookies) + 'zzzz');
 		res.status(401).json({});
 		return;
 	}
@@ -1646,6 +1634,53 @@ if (!currentPort) {
 }
 
 const port = process.env.PORT || (+currentPort);
+
+const wss = new ws.Server({
+    port: port+1,
+}, () => console.log(`WSS started on ${port+1}`));
+
+const premieresFilmsBD = [
+	{
+		id: 11,
+		name: 'Дом дракона',
+		poster_hor: 'https://upload.wikimedia.org/wikipedia/ru/6/67/%D0%94%D0%BE%D0%BC%D0%94%D1%80%D0%B0%D0%BA%D0%BE%D0%BD%D0%B0%D0%9F%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg',
+		rating: -1.8,
+		ticket_link: 'https://rutracker.org/forum/viewtopic.php?t=6249419',
+		prod_date: '2022.11.12',
+	},
+	{
+		id: 10,
+		name: 'С широко закрытыми глазами',
+		poster_hor: 'https://upload.wikimedia.org/wikipedia/ru/a/aa/EyesWideShutPoster.jpg',
+		rating: 7.8,
+		ticket_link: 'https://www.kinopoisk.ru/film/3608/',
+		prod_date: '2022.11.05',
+	},
+];
+
+
+const timer = setInterval(() => broadcastMessage({
+	action: 'ANONS_FILM',
+	payload: premieresFilmsBD[Math.floor(Math.random() * premieresFilmsBD.length)],
+}), 5000);
+
+wss.on('connection', function connection(ws, request, client) {
+	ws.on('message', function (message) {
+		message = JSON.parse(message)
+		switch (message.action) {
+			case 'CLOSE':
+				clearInterval(timer);
+				break;
+			}
+	});
+});
+
+function broadcastMessage(message, id) {
+
+    wss.clients.forEach(client => {
+        client.send(JSON.stringify(message))
+    })
+}
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
