@@ -140,7 +140,10 @@ export class FilmPage extends View {
 
         this.listReviews = new ListReviews({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.listReviews.init();
     }
