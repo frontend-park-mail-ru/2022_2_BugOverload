@@ -107,7 +107,6 @@ export class Header extends Component {
                     searchForm.style.display = 'block';
                     searchForm.children[0].classList.add('header__form__input_full');
                     searchForm.children[1].classList.add('header__form__icon-search_input-full');
-                    // searchForm.children[0].classList.remove('header__form__input');
                     searchForm.classList.add('header__form_full');
                 }
 

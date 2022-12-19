@@ -2,7 +2,6 @@ import { Film } from '@components/Film/film';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
-// import template from '@components/Collection/collection.handlebars';
 import { CollectionUI } from 'moviegate-ui-kit';
 
 /**
