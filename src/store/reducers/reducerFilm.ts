@@ -2,7 +2,7 @@ import { Ajax } from '@utils/ajax';
 import { getDateNow } from '@utils/common';
 import { API, responsStatuses } from '@config/config';
 import { store } from '@store/Store';
-import { mockFilm, mockPremieres } from '@store/reducers/mockData';
+import { mockFilm, mockPremieres, mockCollection } from '@store/reducers/mockData';
 
 class ReducerFilm {
     async getFilmData({ id } :{id :number}) {
@@ -183,6 +183,19 @@ class ReducerFilm {
 
         return { removeFromCollStatus: response.status };
     };
+
+    async getSimilarFilms(idFilm: number) {
+        let response;
+        try {
+            response = await Ajax.get(API.getSimilarFilms(idFilm)) as Response;
+        } catch (e) {
+            return { [`film${idFilm}Similar`]: mockCollection() };
+        }
+        if (response.status === responsStatuses.OK) {
+            return { [`film${idFilm}Similar`]: response.body };
+        }
+      return null;
+    }
 }
 
 export const reducerFilm = new ReducerFilm();

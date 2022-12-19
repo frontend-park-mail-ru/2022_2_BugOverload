@@ -1,11 +1,11 @@
 import { Userbar } from '@components/Userbar/userbar';
-import template from '@components/Header/header.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { router } from '@router/Router';
 import { actionAuth, actionLogout } from '@store/actionCreater/userActions';
 import { isMobile } from '@/config/config';
-import templateUserbar from '@components/Userbar/userbar.handlebars';
+
+import { HeaderUI, UserbarUI } from 'moviegate-ui-kit';
 
 export interface Header {
     state: {
@@ -46,14 +46,14 @@ export class Header extends Component {
             header.remove();
         }
 
-        this.rootNode.insertAdjacentHTML('afterbegin', template(
-            Object.assign(
-                { isMobile },
-                this.state.user,
-                { search },
-                { userbar: templateUserbar() },
-            )
-        ));
+        this.rootNode.insertAdjacentHTML('afterbegin', HeaderUI.renderTemplate(
+                Object.assign(
+                    { isMobile },
+                    this.state.user,
+                    { search },
+                    { userbar: UserbarUI.renderTemplate() },
+                )
+            ));
 
         const logoutButton = this.rootNode.querySelector('.js-header__mobile-userbar__link-out');
         if (this.state.user) {
@@ -107,7 +107,6 @@ export class Header extends Component {
                     searchForm.style.display = 'block';
                     searchForm.children[0].classList.add('header__form__input_full');
                     searchForm.children[1].classList.add('header__form__icon-search_input-full');
-                    // searchForm.children[0].classList.remove('header__form__input');
                     searchForm.classList.add('header__form_full');
                 }
 

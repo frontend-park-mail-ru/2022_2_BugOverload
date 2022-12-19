@@ -4,7 +4,7 @@ import template from '@views/CollectionPage/collectionPage.handlebars';
 import { actionGetCollectionData, actionGetUserCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
-import { actionRemoveFromCollection } from '@store/actionCreater/filmActions';
+import { actionRemoveFromCollection, actionGetSimilarFilms } from '@store/actionCreater/filmActions';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -17,11 +17,6 @@ class CollectionPage extends View {
         this.state = {
             nameObjectStore: null,
             collection: null,
-            isDispatched: false,
-            isSubscribedCollection: false,
-            isSubscribedPerson: false,
-            isSubscribedUserCollection: false,
-            isSubscribedRemoveCollection: false,
             typeCollection: null,
             isUserCollection: false,
         }
@@ -39,10 +34,7 @@ class CollectionPage extends View {
             return;
         }
 
-        if(!this.state.isSubscribedRemoveCollection) {
-            this.state.isSubscribedRemoveCollection = true;
-            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-        }
+        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe, true);
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -56,13 +48,8 @@ class CollectionPage extends View {
             this.state.collection = store.getState(this.state.nameObjectStore);
 
             const params = this.state.typeCollection.split('-');
-            if(!this.state.collection && !this.state.isDispatched) {
-                this.state.isDispatched = true;
-
-                if(!this.state.isSubscribedCollection) {
-                    this.state.isSubscribedCollection = true;
-                    store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
-                }
+            if(!this.state.collection) {
+                store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
 
                 store.dispatch(actionGetCollectionData({
                     name: this.state.nameObjectStore,
@@ -75,35 +62,39 @@ class CollectionPage extends View {
                 return;
             }
         } else {
-            //actor
-            if(!this.state.typeCollection.match(/\d+/)) {
-                this.state.nameObjectStore = this.state.typeCollection;
-                this.state.collection = {
-                    name: 'Лучшие фильмы',
-                    films: store.getState(this.state.nameObjectStore)?.best_films,
-                };
+            //actor || film
+            if(this.state.typeCollection.match(/\d+/)) {
+                let actionCreator;
+
+                if(this.state.typeCollection.match('film')) {
+                    actionCreator = actionGetSimilarFilms;
+                    this.state.nameObjectStore = this.state.typeCollection + 'Similar';
+                    this.state.collection = {
+                        name: store.getState(this.state.nameObjectStore)?.name,
+                        films: store.getState(this.state.nameObjectStore)?.films,
+                    };
+                }
+
+                if(this.state.typeCollection.match('actor')) {
+                    actionCreator = actionGetActor;
+                    this.state.collection = {
+                        name: 'Лучшие фильмы',
+                        films: store.getState(this.state.nameObjectStore)?.best_films,
+                    };
+                    this.state.nameObjectStore = this.state.typeCollection;
+                }
     
-                if(!this.state.collection.films && !this.state.isDispatched) {
-                    this.state.isDispatched = true;
+                if(!this.state.collection.films) {
+                    store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
     
-                    if(!this.state.isSubscribedPerson) {
-                        this.state.isSubscribedPerson = true;
-                        store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
-                    }
-    
-                    store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
+                    store.dispatch(actionCreator(this.state.nameObjectStore.match(/\d+/)[0]));
                     return;
                 }
             } else {
                 //user  
                 this.state.isUserCollection = true;
-                if(!this.state.collection && !this.state.isDispatched) {
-                    this.state.isDispatched = true;
-    
-                    if(!this.state.isSubscribedUserCollection) {
-                        this.state.isSubscribedUserCollection = true;
-                        store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe);
-                    }
+                if(!this.state.collection) {    
+                    store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
                     store.dispatch(actionGetUserCollectionData({
                         id: this.state.typeCollection,
                     }));
@@ -132,7 +123,6 @@ class CollectionPage extends View {
                         delete this.state.collection.films;
                     } else {
                         this.state.collection = null;
-                        this.state.isDispatched = null;
                     }
 
                     store.dispatch(actionRemoveFromCollection({
@@ -154,24 +144,7 @@ class CollectionPage extends View {
     }
 
     componentWillUnmount() {
-        if(this.state.isSubscribedCollection) {
-            this.state.isSubscribedCollection = false;
-            store.unsubscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
-        }
-        if(this.state.isSubscribedPerson) {
-            this.state.isSubscribedPerson = false;
-            store.unsubscribe(this.state.nameObjectStore, this.collectionPageSubscribe);
-        }
-        if(this.state.isSubscribedUserCollection) {
-            this.state.isSubscribedUserCollection = false;
-            store.unsubscribe(this.state.nameObjectStore, this.userCollectionPageSubscribe);
-        }
-        if(this.state.isSubscribedRemoveCollection) {
-            this.state.isSubscribedRemoveCollection = false;
-            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
-        }
 
-        this.state.isDispatched = false;
         this.state.collection = null;
         this.state.isUserCollection = false;
     }

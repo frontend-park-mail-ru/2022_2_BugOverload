@@ -1,6 +1,7 @@
-import template from '@components/ReviewStatistic/reviewStatistic.handlebars';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
+
+import { ReviewStatisticUI } from 'moviegate-ui-kit';
 
 /**
 * Отражает общую информацию о рецензиях на данный фильм
@@ -22,7 +23,7 @@ export class ReviewStatistic extends Component {
      * Отрисовывает компонент, используя location и hbs-template и данные фильма
      */
     render() {
-        this.location.insertAdjacentHTML('afterbegin', template({
+        this.location.insertAdjacentHTML('afterbegin', ReviewStatisticUI.renderTemplate({
             total: (this.state.film.count_negative_reviews || 0)
                 + (this.state.film.count_neutral_reviews || 0)
                 + (this.state.film.count_positive_reviews || 0),

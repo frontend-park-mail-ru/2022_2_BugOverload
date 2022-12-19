@@ -1,7 +1,7 @@
 import { View } from '@views/View';
 import template from '@views/CollectionPage/collectionPage.handlebars';
-import templateGenres from '@components/Genre/genre.handlebars';
 import { genres } from '@assets/icons/genre/genres.js';
+import { GenreUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -15,7 +15,7 @@ class PageGenres extends View {
         }
         super.render();
 
-        const genresHtml = templateGenres({
+        const genresHtml = GenreUI.renderTemplate({
             genres,
         });
 

@@ -2,7 +2,7 @@ import { Film } from '@components/Film/film';
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetCollectionData } from '@actions/commonActions';
-import template from '@components/Collection/collection.handlebars';
+import { CollectionUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает список фильмов в виде коллекции.
@@ -70,7 +70,7 @@ export class Collection extends Component {
             this.state.collection.name = name;
         }
 
-        this.location.insertAdjacentHTML('afterbegin', template({ name: this.state.collection.name, films, url:  this.getTagFromName(this.nameLocation)}));
+        this.location.insertAdjacentHTML('afterbegin', CollectionUI.renderTemplate({ name: this.state.collection.name, films, url:  this.getTagFromName(this.nameLocation)}));
         this.componentDidMount();
     }
 
@@ -136,7 +136,8 @@ export class Collection extends Component {
         let isHiddenLeft = true;
 
         this.handlerSlider = function (event: Event) {
-            if (event.target === btnRight.querySelector('img')) {
+            // if (event.target === btnRight.querySelector('img')) {
+            if (event.target === btnRight) {
                 event.preventDefault();
                 if (isHiddenLeft) {
                     btnLeft.style.display = '';
@@ -157,7 +158,8 @@ export class Collection extends Component {
                 return;
             }
 
-            if (event.target === btnLeft.querySelector('img')) {
+            // if (event.target === btnLeft.querySelector('img')) {
+            if (event.target === btnLeft) {
                 event.preventDefault();
                 if (isHiddenRight) {
                     btnRight.style.display = '';

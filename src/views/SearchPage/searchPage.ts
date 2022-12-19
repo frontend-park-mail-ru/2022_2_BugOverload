@@ -7,7 +7,6 @@ import { PremiereFilm } from '@components/PremiereFilm/premiereFilm';
 import { PersonMed } from '@components/PersonMed/personMed';
 import { SearchList } from '@components/SearchList/searchList';
 import { isMobile } from '@/config/config';
-import { router } from '@router/Router';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html

@@ -1,5 +1,6 @@
-import template from '@components/DescriptionFilm/descriptionFilm.handlebars';
 import { Component } from '@components/Component';
+
+import { DescriptionFilmUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает описание фильма.
@@ -25,7 +26,7 @@ export class DescriptionFilm extends Component {
         }
 
         this.isActive = true;
-        this.location.insertAdjacentHTML('afterbegin', template({ text: this.text }));
+        this.location.insertAdjacentHTML('afterbegin', DescriptionFilmUI.renderTemplate({ text: this.text }));
     }
 
     /**

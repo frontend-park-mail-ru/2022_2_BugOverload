@@ -1,5 +1,7 @@
-import template from '@components/Review/review.handlebars';
 import { decoreCountReviews } from '@utils/decorationData';
+
+import { ReviewUI } from 'moviegate-ui-kit';
+
 
 /**
 * Отзыв юзера на фильм.
@@ -11,7 +13,7 @@ export class Review {
      * Создаёт html-шаблон рецензии
      */
     static createReview(data: review) {
-        return template({
+        return ReviewUI.renderTemplate({
             ...data,
             countReviews: decoreCountReviews(data.author.count_reviews),
             user_avatar: data.author.avatar,

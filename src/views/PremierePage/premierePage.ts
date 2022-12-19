@@ -14,7 +14,6 @@ export class PremierePage extends View {
         super(props);
         this.state = {
             premieres: null,
-            isSubscribed: false,
         };
     }
 
@@ -35,10 +34,7 @@ export class PremierePage extends View {
             this.render();
         }
 
-        if (!this.state.isSubscribed) {
-            store.subscribe('premieres', this.subHandler);
-            this.state.isSubscribed = true;
-        }
+        store.subscribe('premieres', this.subHandler, true);
 
         if (!this.state.premieres) {
             store.dispatch(actionGetPremieresData({
@@ -56,14 +52,6 @@ export class PremierePage extends View {
         });
 
         premiereList.render();
-    }
-
-    /**
-     * Используется для обнуления состояния *** для перехода к новому фильму
-     */
-    componentWillUnmount() {
-        store.unsubscribe('premieres', this.subHandler);
-        this.state.isSubscribed = false;
     }
 }
 

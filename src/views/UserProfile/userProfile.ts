@@ -1,11 +1,10 @@
 import { View } from '@views/View';
 import templateProfile from '@views/UserProfile/userProfile.handlebars';
-import templateProfileMenu from '@components/ProfileMenu/profileMenu.handlebars';
 import { store } from '@store/Store';
 import { actionGetSettings, actionPutAvatar, actionAuth } from '@store/actionCreater/userActions';
 import { ProfileChange } from '@components/ProfileChange/profileChange';
 import { ShowMessage } from '@components/Message/message';
-import templateProfileChange from '@components/ProfileChange/profileChange.handlebars';
+import { ProfileChangeUI, ProfileMenuUI } from 'moviegate-ui-kit';
 
 interface UserProfile{
     state: {
@@ -79,8 +78,8 @@ class UserProfile extends View {
         this.state.userInfo = store.getState('userInfo');
         this.rootNode.insertAdjacentHTML('beforeend', templateProfile(
             {
-                profileMenu: templateProfileMenu(),
-                profileChange: templateProfileChange(),
+                profileMenu: ProfileMenuUI.renderTemplate(),
+                profileChange: ProfileChangeUI.renderTemplate(),
                 ...this.state.user,
                 ...this.state.userInfo,
             },

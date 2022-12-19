@@ -2,10 +2,10 @@ import { View } from '@views/View';
 import { Collection } from '@components/Collection/collection';
 import { Film } from '@components/Film/film';
 import template from '@views/ActorProfilePage/actorProfilePage.handlebars';
-import templateProfile from '@components/ActorProfile/actorProfile.handlebars';
-import templateCollection from '@components/Collection/collection.handlebars';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
+
+import { CollectionUI, ActorProfileUI } from 'moviegate-ui-kit';
 
 /**
  * Отрисовывает страницу актера, добавляя HTML-шаблон в root в index.html
@@ -20,8 +20,7 @@ class ActorPage extends View {
         super(props);
         this.state = {
             actor: null,
-            id: null,
-            isSubscribed: false,
+            id: null, 
         };
     }
 
@@ -37,17 +36,9 @@ class ActorPage extends View {
         }
 
         if (!this.state.actor) {
-            if (!this.state.isSubscribed) {
-                store.subscribe(`actor${this.state.id}`, subscribeActorPage);
-                this.state.isSubscribed = true;
-                store.dispatch(actionGetActor(this.state.id));
-            }
+            store.subscribe(`actor${this.state.id}`, subscribeActorPage, true);
+            store.dispatch(actionGetActor(this.state.id));
             return;
-        }
-
-        if (this.state.isSubscribed) {
-            store.unsubscribe(`actor${this.state.id}`, subscribeActorPage);
-            this.state.isSubscribed = false;
         }
 
         super.render();
@@ -60,11 +51,11 @@ class ActorPage extends View {
         const collection = new Collection('');
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
-            actorProfile: templateProfile({
+            actorProfile: ActorProfileUI.renderTemplate({
                 ...this.state.actor,
                 birthday: this.state.actor?.birthday?.split(' ')[0].split('.').reverse().join('.'),
             }),
-            collectionBestFilms: templateCollection({
+            collectionBestFilms: CollectionUI.renderTemplate({
                 films,
                 name: 'Лучшие фильмы',
                 url: `actor${this.state.id}`,

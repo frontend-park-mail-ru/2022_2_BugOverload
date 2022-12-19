@@ -1,8 +1,9 @@
 import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { actionGetPreviewData } from '@actions/commonActions';
-import template from '@components/PreviewFilm/previewFilm.handlebars';
 import { API } from '@config/config';
+
+import { PreviewFilmUI } from 'moviegate-ui-kit';
 
 /**
 * Отображает фильм как рекомендацию на главной странице
@@ -47,7 +48,7 @@ export class PreviewFilm extends Component {
      */
     render() {
         this.location.innerHTML = '';
-        this.location.insertAdjacentHTML('afterbegin', template(this.state.preview));
+        this.location.insertAdjacentHTML('afterbegin', PreviewFilmUI.renderTemplate(this.state.preview));
         this.location.querySelector('.js-preview-film').style.backgroundImage = `url('${API.img.poster_hor(this.state.preview.poster_hor)}')`;
     }
 

@@ -7,7 +7,6 @@ interface PublicProfile {
     state: {
         user: user,
         id: number,
-        isSubscribed: boolean,
     }
 }
 /**
@@ -23,7 +22,6 @@ class PublicProfile extends View {
         this.state = {
             user: null,
             id: null,
-            isSubscribed: false,
         };
 
         this.subscribePublicProfile = this.subscribePublicProfile.bind(this);
@@ -43,11 +41,8 @@ class PublicProfile extends View {
         super.render();
 
         if (!this.state.user) {
-            if (!this.state.isSubscribed) {
-                store.subscribe(`user${this.state.id}`, this.subscribePublicProfile);
-                this.state.isSubscribed = true;
-                store.dispatch(actionGetPublicProfile(this.state.id));
-            }
+            store.subscribe(`user${this.state.id}`, this.subscribePublicProfile, true);
+            store.dispatch(actionGetPublicProfile(this.state.id));
             return;
         }
 
@@ -71,10 +66,6 @@ class PublicProfile extends View {
      * Вызывается при переходе на другие страницы
      */
     componentWillUnmount() {
-        if (this.state.isSubscribed) {
-            store.unsubscribe(`user${this.state.id}`, this.subscribePublicProfile);
-            this.state.isSubscribed = false;
-        }
         this.state.id = null;
         this.state.user = null;
     }
