@@ -17,7 +17,6 @@ class CollectionPage extends View {
         this.state = {
             nameObjectStore: null,
             collection: null,
-            isSubscribedRemoveCollection: false,
             typeCollection: null,
             isUserCollection: false,
         }
@@ -35,10 +34,7 @@ class CollectionPage extends View {
             return;
         }
 
-        if(!this.state.isSubscribedRemoveCollection) {
-            this.state.isSubscribedRemoveCollection = true;
-            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-        }
+        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe, true);
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -67,7 +63,7 @@ class CollectionPage extends View {
             }
         } else {
             //actor
-            if(!this.state.typeCollection.match(/\d+/)) {
+            if(this.state.typeCollection.match(/\d+/)) {
                 this.state.nameObjectStore = this.state.typeCollection;
                 this.state.collection = {
                     name: 'Лучшие фильмы',
@@ -134,10 +130,6 @@ class CollectionPage extends View {
     }
 
     componentWillUnmount() {
-        if(this.state.isSubscribedRemoveCollection) {
-            this.state.isSubscribedRemoveCollection = false;
-            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
-        }
 
         this.state.collection = null;
         this.state.isUserCollection = false;
