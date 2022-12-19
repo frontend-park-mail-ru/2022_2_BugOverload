@@ -92,22 +92,6 @@ export class FilmPage extends View {
             filmPageElement.remove();
         }
 
-        // if (!this.state.film) {
-        //     if (!this.state.isSubscribed) {
-        //         store.subscribe(`film${this.state.id}`, subscribeFilmPage);
-
-        //         this.state.isSubscribed = true;
-        //         store.dispatch(actionGetFilmData(this.state.id));
-        //     }
-        //     return;
-        // }
-        // this.state.film.id = this.state.id;
-
-        // if (this.state.isSubscribed) {
-        //     store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
-        //     this.state.isSubscribed = false;
-        // }
-
         if (!this.state.film) {
             store.subscribe(`film${this.state.id}`, subscribeFilmPage, true);
             store.dispatch(actionGetFilmData(this.state.id));
@@ -134,7 +118,6 @@ export class FilmPage extends View {
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
 
-        //TODO simular films
         const films = this.state.similarFilms.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const collection = new Collection('');
 

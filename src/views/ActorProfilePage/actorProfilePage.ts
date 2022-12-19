@@ -21,7 +21,6 @@ class ActorPage extends View {
         this.state = {
             actor: null,
             id: null, 
-            isSubscribed: false,
         };
     }
 
@@ -37,17 +36,9 @@ class ActorPage extends View {
         }
 
         if (!this.state.actor) {
-            if (!this.state.isSubscribed) {
-                store.subscribe(`actor${this.state.id}`, subscribeActorPage);
-                this.state.isSubscribed = true;
-                store.dispatch(actionGetActor(this.state.id));
-            }
+            store.subscribe(`actor${this.state.id}`, subscribeActorPage, true);
+            store.dispatch(actionGetActor(this.state.id));
             return;
-        }
-
-        if (this.state.isSubscribed) {
-            store.unsubscribe(`actor${this.state.id}`, subscribeActorPage);
-            this.state.isSubscribed = false;
         }
 
         super.render();
