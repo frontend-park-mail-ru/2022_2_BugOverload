@@ -1246,11 +1246,6 @@ const timer = setInterval(() => broadcastMessage({
 }), 5000);
 
 wss.on('connection', function connection(ws, request, client) {
-	// const timer = setInterval(() => broadcastMessage({
-	// 	action: 'ANONS_FILM',
-	// 	payload: premieresFilmsBD[Math.floor(Math.random() * premieresFilmsBD.length)],
-	// }), 5000);
-
 	ws.on('message', function (message) {
 		message = JSON.parse(message)
 		switch (message.action) {
@@ -1259,28 +1254,6 @@ wss.on('connection', function connection(ws, request, client) {
 				break;
 			}
 	});
-	// const ip = request.socket.remoteAddress;
-	// const ip = req.headers['x-forwarded-for'].split(',')[0].trim();
-	// authenticate();
-    // ws.on('message', function (message) {
-    //     message = JSON.parse(message)
-	// 	console.log(`Received message ${JSON.stringify(message)} from user ${client}, ip: ${ip}`);
-	// 	let timer;
-    //     switch (message.action) {
-    //         case 'ANONS_FILM':
-    //             timer = setInterval(() => broadcastMessage({
-	// 				action: 'ANONS_FILM',
-	// 				payload: premieresFilmsBD[Math.floor(Math.random() * arr.length)];
-	// 			}), 5000);
-    //             break;
-	// 		case 'close':
-	// 			clearInterval(timer);
-	// 			break;
-    //         case 'connection':
-    //             broadcastMessage(message)
-    //             break;
-    //     }
-    // })
 });
 
 function broadcastMessage(message, id) {

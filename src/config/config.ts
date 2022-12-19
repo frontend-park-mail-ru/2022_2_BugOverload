@@ -17,7 +17,7 @@ let i = 0;
 const randomMy = () => i++;
 
 export const API = {
-    ws: `${PROTOCOL === 'https' ? 'wss' : 'ws'}://${DOMAIN}/api/v1/ws`,
+    ws: `ws://${DOMAIN}/api/v1/notification`,
     img: {
         poster_hor(key: string) {
             if (key === 'default') {

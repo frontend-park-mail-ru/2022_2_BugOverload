@@ -82,4 +82,4 @@ class WebSocketService {
     }
 }
 
-export const webSocket = new WebSocketService('ws://localhost:3001'); // test
+export const webSocket = new WebSocketService(API.ws);
