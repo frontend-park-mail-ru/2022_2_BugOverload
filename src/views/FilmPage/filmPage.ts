@@ -92,20 +92,26 @@ export class FilmPage extends View {
             filmPageElement.remove();
         }
 
+        // if (!this.state.film) {
+        //     if (!this.state.isSubscribed) {
+        //         store.subscribe(`film${this.state.id}`, subscribeFilmPage);
+
+        //         this.state.isSubscribed = true;
+        //         store.dispatch(actionGetFilmData(this.state.id));
+        //     }
+        //     return;
+        // }
+        // this.state.film.id = this.state.id;
+
+        // if (this.state.isSubscribed) {
+        //     store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
+        //     this.state.isSubscribed = false;
+        // }
+
         if (!this.state.film) {
-            if (!this.state.isSubscribed) {
-                store.subscribe(`film${this.state.id}`, subscribeFilmPage);
-
-                this.state.isSubscribed = true;
-                store.dispatch(actionGetFilmData(this.state.id));
-            }
+            store.subscribe(`film${this.state.id}`, subscribeFilmPage, true);
+            store.dispatch(actionGetFilmData(this.state.id));
             return;
-        }
-        this.state.film.id = this.state.id;
-
-        if (this.state.isSubscribed) {
-            store.unsubscribe(`film${this.state.id}`, subscribeFilmPage);
-            this.state.isSubscribed = false;
         }
 
         if (!this.state.similarFilms) {

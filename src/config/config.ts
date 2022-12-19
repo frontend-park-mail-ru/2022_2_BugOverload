@@ -10,7 +10,6 @@ import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
 import { userCollections } from '@views/UserCollections/userCollections';
 import { pageGenres } from '@/views/PageGenres/pageGenres';
-import { actionGetSimilarFilms } from 'dist/app.d98e6934ab2667116ecb';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
