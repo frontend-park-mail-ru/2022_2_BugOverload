@@ -167,7 +167,6 @@ export class FilmPage extends View {
      * Используется для обнуления состояния FilmPage для перехода к новому фильму
      */
     componentWillUnmount() {
-        this.isSubscribed = false;
         this.state.id = null;
         this.state.film = null;
         this.state.reviews = null;
