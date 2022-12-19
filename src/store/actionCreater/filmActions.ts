@@ -44,3 +44,8 @@ export const actionRemoveFromCollection = (params: filmToCollParams) => ({
     type: 'removeFromCollection',
     value: params,
 });
+
+export const actionGetSimilarFilms = (idFilm: number) => ({
+    type: 'getSimilarFilms',
+    value: idFilm,
+});

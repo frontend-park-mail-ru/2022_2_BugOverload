@@ -5,12 +5,15 @@ import { Collection } from '@components/Collection/collection';
 import { ListReviews } from '@components/ListReviews/listReviews';
 import { ReviewStatistic } from '@components/ReviewStatistic/reviewStatistic';
 import { store } from '@store/Store';
-import { actionGetFilmData } from '@actions/filmActions';
+import { actionGetFilmData, actionGetSimilarFilms } from '@actions/filmActions';
 import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
-import { responsStatuses } from '@config/config';
+import { responsStatuses } from '@config/config'; 
+import { Film } from '@components/Film/film';
+
+import { CollectionUI } from 'moviegate-ui-kit';
 
 /**
 * Отрисовывает фильма страницу, добавляя HTML-шаблон в root в index.html
@@ -22,6 +25,7 @@ export class FilmPage extends View {
         this.state = {
             id: null,
             film: null,
+            similarFilms: null,
             isSubscribed: false,
             saveToCollStatus: null,
             removeFromCollStatus: null,
@@ -104,6 +108,12 @@ export class FilmPage extends View {
             this.state.isSubscribed = false;
         }
 
+        if (!this.state.similarFilms) {
+            store.subscribe(`film${filmPage.state.id}Similar`, subscribeFilmPageSimilar, true);
+            store.dispatch(actionGetSimilarFilms(this.state.id));
+            return;
+        }
+
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
         this.aboutFilm = new AboutFilm({
             rootNode: this.rootNode,
@@ -118,11 +128,21 @@ export class FilmPage extends View {
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
 
-        this.likelyFilms = new Collection('collection-tag-popular');
-        this.likelyFilms.init();
+        //TODO simular films
+        const films = this.state.similarFilms.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const collection = new Collection('');
 
-        this.directorFilms = new Collection('collection-tag-in_cinema');
-        this.directorFilms.init();
+        const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar'); 
+        similarFilmsWrapper.insertAdjacentHTML('beforeend', 
+        CollectionUI.renderTemplate({
+                films,
+                name: this.state.similarFilms.name,
+                url: `actor${this.state.id}`,
+            }),
+        );
+        collection.addHandlerSlider(
+            this.rootNode.querySelector('.js-collection__container'),
+        );
 
         this.reviewStatistic = new ReviewStatistic({
             rootNode: this.rootNode,
@@ -164,6 +184,11 @@ const subscribeFilmPage = () => {
     if (Number.isInteger(filmPage.state.film.rating)) {
         filmPage.state.film.rating = `${filmPage.state.film.rating}.0`;
     }
+    filmPage.render();
+};
+
+const subscribeFilmPageSimilar = () => {
+    filmPage.state.similarFilms = store.getState(`film${filmPage.state.id}Similar`);
     filmPage.render();
 };
 

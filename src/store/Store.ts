@@ -4,6 +4,7 @@ interface Store {
     state: {[key: string]: any};
     mapActionHandlers: Map<string, Function>;
     mapSubscribers: Map<string, Array<Function>>;
+    mapOnceSubscribers: Map<string, Array<Function>>;
 }
  
 class Store {
@@ -13,6 +14,7 @@ class Store {
         this.mapActionHandlers = new Map();
 
         this.mapSubscribers = new Map();
+        this.mapOnceSubscribers = new Map();
 
         for (const handler of handlers) {
             this.register(handler);
@@ -23,12 +25,16 @@ class Store {
         this.mapActionHandlers.set(type, methodStore);
     }
 
-    subscribe(type :string, callback :Function) {
-        const arraySubsribes = this.mapSubscribers.get(type);
+    subscribe(type :string, callback :Function, once = false) {
+        const arraySubsribes = once? 
+            this.mapSubscribers.get(type):
+            this.mapOnceSubscribers.get(type);
         if (arraySubsribes) {
             arraySubsribes.push(callback);
         } else {
-            this.mapSubscribers.set(type, [callback]);
+            once? 
+                this.mapSubscribers.set(type, [callback]):
+                this.mapOnceSubscribers.set(type, [callback]);
         }
     }
 
@@ -48,10 +54,17 @@ class Store {
         let subscribers;
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
-            subscribers = this.mapSubscribers.get(key);
 
+            subscribers = this.mapSubscribers.get(key);
             if (subscribers) {
                 subscribers.forEach((subscriber) => subscriber());
+                return;
+            }
+
+            subscribers = this.mapOnceSubscribers.get(key);
+            if (subscribers) {
+                subscribers.forEach((subscriber) => subscriber());
+                this.mapOnceSubscribers.delete(key);
             }
         });
     }

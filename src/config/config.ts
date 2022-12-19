@@ -10,6 +10,7 @@ import { searchPage } from '@views/SearchPage/searchPage';
 import { collectionPage } from '@views/CollectionPage/collectionPage';
 import { userCollections } from '@views/UserCollections/userCollections';
 import { pageGenres } from '@/views/PageGenres/pageGenres';
+import { actionGetSimilarFilms } from 'dist/app.d98e6934ab2667116ecb';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
 
@@ -105,7 +106,9 @@ export const API = {
 
     premieres(countFilms: number = 20, delimiter: number = 0) {return `${PROTOCOL}://${DOMAIN}/api/v1/premieres?count_films=${countFilms}&delimiter=${delimiter}`},
 
-    search(request: string = '') {return `${PROTOCOL}://${DOMAIN}/api/v1/search?q=${request.slice(2)}`}
+    search(request: string = '') {return `${PROTOCOL}://${DOMAIN}/api/v1/search?q=${request.slice(2)}`},
+
+    getSimilarFilms(idFilm: number) { return `${PROTOCOL}://${DOMAIN}/api/v1/film/${idFilm}/similar`; }
 };
 
 export const responsStatuses = {

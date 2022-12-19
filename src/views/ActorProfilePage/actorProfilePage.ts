@@ -20,7 +20,7 @@ class ActorPage extends View {
         super(props);
         this.state = {
             actor: null,
-            id: null,
+            id: null, 
             isSubscribed: false,
         };
     }
