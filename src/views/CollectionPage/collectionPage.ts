@@ -17,6 +17,7 @@ class CollectionPage extends View {
         this.state = {
             nameObjectStore: null,
             collection: null,
+            isSubscribedRemoveCollection: false,
             typeCollection: null,
             isUserCollection: false,
         }
@@ -34,7 +35,10 @@ class CollectionPage extends View {
             return;
         }
 
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe, true);
+        if(!this.state.isSubscribedRemoveCollection) {
+            this.state.isSubscribedRemoveCollection = true;
+            store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+        }
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -130,6 +134,11 @@ class CollectionPage extends View {
     }
 
     componentWillUnmount() {
+        if(this.state.isSubscribedRemoveCollection) {
+            this.state.isSubscribedRemoveCollection = false;
+            store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
+        }
+
         this.state.collection = null;
         this.state.isUserCollection = false;
     }
