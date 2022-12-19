@@ -26,7 +26,6 @@ export class FilmPage extends View {
             id: null,
             film: null,
             similarFilms: null,
-            isSubscribed: false,
             saveToCollStatus: null,
             removeFromCollStatus: null,
         };

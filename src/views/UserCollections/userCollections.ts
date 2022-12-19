@@ -1,17 +1,14 @@
 import { ROOT } from '@config/config';
 import { store } from '@store/Store';
-import { router } from '@router/Router';
 import { actionGetUserCollections } from '@actions/userActions';
 import { View } from '@views/View';
 import template from '@views/UserCollections/userCollections.handlebars';
 import { UserCollList } from '@components/UserCollList/userCollList';
-import { responsStatuses } from '@config/config';
-import { ShowMessage } from '@components/Message/message';
 
 import { ProfileMenuUI } from 'moviegate-ui-kit';
 
 /**
-* Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
+* Отрисовывает пользовательские коллекции в профиле
 *
 */
 class UserCollections extends View {
