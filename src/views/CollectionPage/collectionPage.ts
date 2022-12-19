@@ -4,7 +4,7 @@ import template from '@views/CollectionPage/collectionPage.handlebars';
 import { actionGetCollectionData, actionGetUserCollectionData } from '@actions/commonActions';
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
-import { actionRemoveFromCollection } from '@store/actionCreater/filmActions';
+import { actionRemoveFromCollection, actionGetSimilarFilms } from '@store/actionCreater/filmActions';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -62,18 +62,32 @@ class CollectionPage extends View {
                 return;
             }
         } else {
-            //actor
+            //actor || film
             if(this.state.typeCollection.match(/\d+/)) {
-                this.state.nameObjectStore = this.state.typeCollection;
-                this.state.collection = {
-                    name: 'Лучшие фильмы',
-                    films: store.getState(this.state.nameObjectStore)?.best_films,
-                };
+                let actionCreator;
+
+                if(this.state.typeCollection.match('film')) {
+                    actionCreator = actionGetSimilarFilms;
+                    this.state.nameObjectStore = this.state.typeCollection + 'Similar';
+                    this.state.collection = {
+                        name: store.getState(this.state.nameObjectStore)?.name,
+                        films: store.getState(this.state.nameObjectStore)?.films,
+                    };
+                }
+
+                if(this.state.typeCollection.match('actor')) {
+                    actionCreator = actionGetActor;
+                    this.state.collection = {
+                        name: 'Лучшие фильмы',
+                        films: store.getState(this.state.nameObjectStore)?.best_films,
+                    };
+                    this.state.nameObjectStore = this.state.typeCollection;
+                }
     
                 if(!this.state.collection.films) {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
     
-                    store.dispatch(actionGetActor(this.state.nameObjectStore.match(/\d+/)[0]));
+                    store.dispatch(actionCreator(this.state.nameObjectStore.match(/\d+/)[0]));
                     return;
                 }
             } else {

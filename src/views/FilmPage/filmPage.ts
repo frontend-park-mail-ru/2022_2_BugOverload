@@ -125,7 +125,7 @@ export class FilmPage extends View {
         CollectionUI.renderTemplate({
                 films,
                 name: this.state.similarFilms.name,
-                url: `actor${this.state.id}`,
+                url: `film${this.state.id}`,
             }),
         );
         collection.addHandlerSlider(
