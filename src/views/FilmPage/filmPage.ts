@@ -107,13 +107,19 @@ export class FilmPage extends View {
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
         this.aboutFilm = new AboutFilm({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.aboutFilm.render();
 
         this.menuInfoFilm = new MenuInfoFilm({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
@@ -135,7 +141,10 @@ export class FilmPage extends View {
 
         this.reviewStatistic = new ReviewStatistic({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.reviewStatistic.render();
 
