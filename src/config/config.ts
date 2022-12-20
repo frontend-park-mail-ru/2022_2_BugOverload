@@ -12,13 +12,14 @@ import { userCollections } from '@views/UserCollections/userCollections';
 import { pageGenres } from '@/views/PageGenres/pageGenres';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+const WS_PROTOCOL = `${PROTOCOL}` === 'https' ? 'wss' : 'ws';
 
 let i = 0;
 const randomMy = () => i++;
 
 export const API = {
-    ws: `ws://${DOMAIN}/api/v1/notification`,
-    ws_auth: `${PROTOCOL}://${DOMAIN}/api/v1/ws_auth`,
+    ws: `${WS_PROTOCOL}://${DOMAIN}/api/v1/notification`,
+    // ws_auth: `${PROTOCOL}://${DOMAIN}/api/v1/ws_auth`,
 
     img: {
         poster_hor(key: string) {

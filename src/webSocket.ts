@@ -15,13 +15,14 @@ interface Callback {
 }
 
 class WebSocketService {
-    private _ws:WebSocket;
+    private _ws:WebSocket|null;
+    private _wsUrl: string;
     private mapActionHandlers: Map<string, Callback>;
     private openHandler: EventListener;
     private messageHadnler: EventListener;
     private errorHandler: EventListener;
     private closeHandler: EventListener;
-    private subHandler: Function;
+    private storeHandler: Function;
     private state: {
         user: string|null,
         permission: string|null,
@@ -29,7 +30,8 @@ class WebSocketService {
     };
 
     constructor (url: string = API.ws) {
-        this._ws = new WebSocket(url);
+        this._wsUrl = url;
+        this._ws = null;
         this.mapActionHandlers = new Map();
 
         this.state = {
@@ -49,14 +51,11 @@ class WebSocketService {
             }
         });
 
-        this.subHandler = async () => {
+        this.storeHandler = () => {
             this.state.user = store.getState('user');
 
             if (this.state.user) {
-                const response = await Ajax.get(API.ws_auth);
-                if (response.status !== responsStatuses.OK) {
-                    return;
-                }
+                this._ws = new WebSocket(this._wsUrl);
 
                 Notification.requestPermission().then(permission => {
                     this.state.permission = permission;
@@ -64,7 +63,7 @@ class WebSocketService {
             }
         };
 
-        store.subscribe('user', this.subHandler);
+        store.subscribe('user', this.storeHandler);
 
         window.onfocus = () => this.state.isActive = true;
         window.onblur = () => this.state.isActive = false;
@@ -122,7 +121,7 @@ class WebSocketService {
         this._ws.removeEventListener('message', this.messageHadnler);
         this._ws.removeEventListener('error', this.errorHandler);
         this._ws.removeEventListener('close', this.closeHandler);
-        store.unsubscribe('user', this.subHandler);
+        store.unsubscribe('user', this.storeHandler);
     }
 }
 
