@@ -53,6 +53,7 @@ class WebSocketService {
 
         this.storeHandler = () => {
             this.state.user = store.getState('user');
+            console.log('store.getState(user)');
 
             if (this.state.user) {
                 this._ws = new WebSocket(this._wsUrl);
@@ -72,6 +73,11 @@ class WebSocketService {
     }
 
     initialize() {
+        if (!this._ws) {
+            console.log('no _ws');
+            return;
+        }
+
         this.openHandler = () => {
             this.send('message',{ msg: 'Hello!' });
         };
