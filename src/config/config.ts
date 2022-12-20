@@ -18,7 +18,7 @@ let i = 0;
 const randomMy = () => i++;
 
 export const API = {
-    ws: `${WS_PROTOCOL}://${DOMAIN}/api/v1/notification`,
+    ws: `${WS_PROTOCOL}://${DOMAIN}/api/v1/notifications`,
     // ws_auth: `${PROTOCOL}://${DOMAIN}/api/v1/ws_auth`,
 
     img: {
