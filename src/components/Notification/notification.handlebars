@@ -3,7 +3,7 @@
         <div class="notification__rating">
             {{rating}}
         </div>
-        <div class="notification__poster" {{#if id}}data-section="/film/{{id}}/"{{/if}} style="background-image: url('{{poster_ver}}');"></div>
+        <div class="notification__poster" {{#if film_id}}data-section="/film/{{film_id}}/"{{/if}} style="background-image: url('{{poster_ver}}');"></div>
         <div class="notification__data">
             <div class="notification__film-name">
                 {{name}}
