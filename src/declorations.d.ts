@@ -200,7 +200,7 @@ interface premiereParams extends anyObject {
 
 interface filmNotifPayload {
     id: number,
-    poster_hor: string,
+    poster_ver: string,
     name: string,
     rating: number,
     ticket_link: string,
