@@ -10,7 +10,7 @@ import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
-import { responsStatuses } from '@config/config'; 
+import { responsStatuses } from '@config/config';
 import { Film } from '@components/Film/film';
 
 import { CollectionUI } from 'moviegate-ui-kit';
@@ -77,6 +77,7 @@ export class FilmPage extends View {
     * Используется при первом заходе на страницу
     */
     render(id?:number) {
+        console.log(`FILM ID: ${id}`);
         if (id) {
             this.state.id = id;
         }
@@ -120,8 +121,8 @@ export class FilmPage extends View {
         const films = this.state.similarFilms.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const collection = new Collection('');
 
-        const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar'); 
-        similarFilmsWrapper.insertAdjacentHTML('beforeend', 
+        const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar');
+        similarFilmsWrapper.insertAdjacentHTML('beforeend',
         CollectionUI.renderTemplate({
                 films,
                 name: this.state.similarFilms.name,

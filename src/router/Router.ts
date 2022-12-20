@@ -61,6 +61,7 @@ class Router {
             } else {
                 reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
                 matchHref = href.match(reg);
+                console.log(JSON.stringify(matchHref));
             }
         }
         return matchHref;
@@ -73,7 +74,7 @@ class Router {
      * @param {Bool} privatePath = false - parameter
      */
     register({ path, view } :{path :string, view :any}, privatePath = false) {
-        privatePath? 
+        privatePath?
             this.privateMapViews.set(path, view):
             this.mapViews.set(path, view);
     }
@@ -211,7 +212,7 @@ class Router {
                     this.refresh();
                     return;
                 }
-            } 
+            }
         } else {
             view = this.mapViews.get(stateObject.path);
         }
@@ -232,8 +233,8 @@ class Router {
                     viewBeforModal.render(prevState[1]);
                 }
             } else if (
-                location !== '/login/' && 
-                location !== '/signup/' && 
+                location !== '/login/' &&
+                location !== '/signup/' &&
                 !this.privateMapViews.get(this.matchHref(location)[0])
             ) {
                 window.localStorage.setItem('pathBeforModal', location);

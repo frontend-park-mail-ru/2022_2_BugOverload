@@ -1,5 +1,4 @@
-import { API, responsStatuses } from '@config/config';
-import { Ajax } from '@utils/ajax';
+import { API } from '@config/config';
 import { showNotification } from '@components/Notification/notification';
 import { store } from '@store/Store';
 import { decoreDate } from '@utils/decorationData';
@@ -43,7 +42,7 @@ class WebSocketService {
         this.subscribe('ANONS_FILM', (payload: filmNotifPayload) => {
             showNotification('ANONS_FILM', payload);
 
-            if (!this.state.isActive && (this.state.permission === 'granted')) {
+            if (!this.state.isActive && this.state.permission === 'granted') {
                 const date = decoreDate(payload.prod_date).split(' ');
                 new Notification('Премьера фильма!', {
                     body: `${payload.name} в Кино с ${date[0]} ${date[1]}`,
