@@ -63,8 +63,9 @@ class CollectionPage extends View {
             }
         } else {
             //actor || film
-            if(this.state.typeCollection.match(/\d+/)) {
+            if(this.state.typeCollection.match(/\w+d+/)) {
                 let actionCreator;
+                console.log(this.state.typeCollection, this.state.typeCollection.match(/\w+d+/));
 
                 if(this.state.typeCollection.match('film')) {
                     actionCreator = actionGetSimilarFilms;
@@ -83,17 +84,17 @@ class CollectionPage extends View {
                     };
                     this.state.nameObjectStore = this.state.typeCollection;
                 }
-    
+
                 if(!this.state.collection.films) {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
-    
+
                     store.dispatch(actionCreator(this.state.nameObjectStore.match(/\d+/)[0]));
                     return;
                 }
             } else {
-                //user  
+                //user
                 this.state.isUserCollection = true;
-                if(!this.state.collection) {    
+                if(!this.state.collection) {
                     store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
                     store.dispatch(actionGetUserCollectionData({
                         id: this.state.typeCollection,

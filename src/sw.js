@@ -61,31 +61,31 @@ this.addEventListener('fetch', (event) => {
     ) {
         event.respondWith(networkFirst(request));
     }
-    else {
-        event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
-    }
+    // else {
+    //     event.respondWith(cacheFirst(request, url.search.match(blackSearchUrls[0])));
+    // }
 
     return true;
 });
 
-async function cacheFirst(request, watchCache = false) {
-    if (!watchCache) {
-        const cached = await caches.match(request);
-        if (cached) {
-            return cached;
-        }
-    }
+// async function cacheFirst(request, watchCache = false) {
+//     if (!watchCache) {
+//         const cached = await caches.match(request);
+//         if (cached) {
+//             return cached;
+//         }
+//     }
 
-    let response;
+//     let response;
 
-    try {
-        response = await fetch(request);
-    } catch (e) {
-        return null;
-    }
+//     try {
+//         response = await fetch(request);
+//     } catch (e) {
+//         return null;
+//     }
 
-    return response;
-}
+//     return response;
+// }
 
 async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
