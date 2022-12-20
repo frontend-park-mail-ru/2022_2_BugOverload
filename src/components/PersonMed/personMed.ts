@@ -1,7 +1,7 @@
 import { Component } from '@components/Component';
 import { API } from '@config/config';
 import {
-    decoreDuration, decoreAge, decoreCountFilms,
+    decoreAge, decoreCountFilms,
 } from '@utils/decorationData';
 import { getAge } from '@utils/common';
 import { PersonMedUI } from 'moviegate-ui-kit';

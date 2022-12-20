@@ -57,16 +57,6 @@ class WebSocketService {
             if (this.state.user) {
                 this._ws = new WebSocket(this._wsUrl);
 
-                // if (!this._ws) {
-                //     setInterval(() => {
-                //         showNotification('ANONS_FILM', {
-                //             rating: 9.1,
-                //             name: 'Game of Thrones',
-                //             desct
-                //         });
-                //     }, 5000)
-                // };
-
                 this.initialize();
 
                 Notification.requestPermission().then(permission => {

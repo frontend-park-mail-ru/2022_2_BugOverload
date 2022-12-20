@@ -4,12 +4,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const body = require('body-parser');
-// const morgan = require('morgan');
 const cors = require('cors');
 var cookieParser = require('cookie-parser')
 const ws = require('ws');
 
-// app.use(morgan('dev'));
 app.use(cookieParser());
 app.use('/',express.static(path.resolve(__dirname, '../dist')));
 app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
