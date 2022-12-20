@@ -56,6 +56,7 @@ class WebSocketService {
 
             if (this.state.user) {
                 this._ws = new WebSocket(this._wsUrl);
+                this.initialize();
 
                 Notification.requestPermission().then(permission => {
                     this.state.permission = permission;
@@ -67,6 +68,7 @@ class WebSocketService {
 
         window.onfocus = () => this.state.isActive = true;
         window.onblur = () => this.state.isActive = false;
+        console.log('WebSocketService created');
     }
 
     initialize() {
