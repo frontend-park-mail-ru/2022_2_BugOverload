@@ -55,7 +55,7 @@ class ActorPage extends View {
             actorProfile: ActorProfileUI.renderTemplate({
                 ...this.state.actor,
                 birthday: decoreDate(this.state.actor?.birthday),
-                death: decoreDate(this.state.actor?.death),
+                death: this.state.actor?.death? decoreDate(this.state.actor?.death): null,
             }),
             collectionBestFilms: CollectionUI.renderTemplate({
                 films,
