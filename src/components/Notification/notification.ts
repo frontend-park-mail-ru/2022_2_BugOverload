@@ -4,6 +4,8 @@ import {
     getMonthName,
 } from '@utils/decorationData';
 
+import { roundFloat } from '@utils/common';
+
 export const showNotification = (type:string = 'ANONS_FILM', payload: filmNotifPayload) => {
     let content:string;
     switch (type) {
@@ -11,6 +13,7 @@ export const showNotification = (type:string = 'ANONS_FILM', payload: filmNotifP
         const sepDate = payload.prod_date.split(' ')[0].split('.').reverse();
         content = template({
             ...payload,
+            rating: roundFloat(payload.rating),
             description: `В Кино с ${+sepDate[0]} ${getMonthName(+sepDate[1])}!`
         });
         break;

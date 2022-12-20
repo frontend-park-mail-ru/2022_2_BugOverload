@@ -58,7 +58,13 @@ class WebSocketService {
                 this._ws = new WebSocket(this._wsUrl);
 
                 // if (!this._ws) {
-                //     setInterval(() => {}, 5000)
+                //     setInterval(() => {
+                //         showNotification('ANONS_FILM', {
+                //             rating: 9.1,
+                //             name: 'Game of Thrones',
+                //             desct
+                //         });
+                //     }, 5000)
                 // };
 
                 this.initialize();
