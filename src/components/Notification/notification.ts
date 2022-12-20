@@ -15,7 +15,7 @@ export const showNotification = (type:string = 'ANONS_FILM', payload: filmNotifP
         content = template({
             ...payload,
             rating: roundFloat(payload.rating),
-            poster_ver: API.image(payload.poster_ver),
+            poster_ver: API.img.poster_ver(payload.poster_ver),
             description: `В Кино с ${+sepDate[0]} ${getMonthName(+sepDate[1])}!`
         });
         break;
