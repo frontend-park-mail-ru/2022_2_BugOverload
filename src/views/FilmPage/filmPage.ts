@@ -28,6 +28,7 @@ export class FilmPage extends View {
             similarFilms: null,
             saveToCollStatus: null,
             removeFromCollStatus: null,
+            isDispatchedSimilar: false,
         };
 
         this.sendReviewSuccess = () => {
@@ -99,9 +100,11 @@ export class FilmPage extends View {
         }
 
         if (!this.state.similarFilms) {
-            store.subscribe(`film${filmPage.state.id}Similar`, subscribeFilmPageSimilar, true);
-            store.dispatch(actionGetSimilarFilms(this.state.id));
-            return;
+            if(!this.state.isDispatchedSimilar) {
+                store.subscribe(`film${filmPage.state.id}Similar`, subscribeFilmPageSimilar, true);
+                store.dispatch(actionGetSimilarFilms(this.state.id));
+                this.state.isDispatchedSimilar = true;
+            } 
         }
 
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
@@ -172,6 +175,7 @@ export class FilmPage extends View {
         this.likelyFilms?.unsubscribe();
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
+        this.state.isDispatchedSimilar = false;
     }
 }
 
