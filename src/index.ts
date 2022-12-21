@@ -13,3 +13,14 @@ document.addEventListener('click', (e) => {
         ShowMessage('В разработке', 'negative');
     }
 })
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('sw.js', { scope: '/' })
+      .then((registration) => {
+        console.log('sw available on scope:', registration.scope);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+}

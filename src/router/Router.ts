@@ -155,7 +155,7 @@ class Router {
         const matchedHref = this.getCurrentUrlObject();
         if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
             if(!redirect) {
-                this.cache();
+                // this.cache();
             }
             this.go({
                 path: matchedHref[0],
@@ -276,17 +276,17 @@ class Router {
             this.prevUrl = path;
         }
 
-        this.cache();
+        // this.cache();
     }
 
-    cache(url = './') {
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.register('/sw.js', { scope: url });
-            if (!this.cachedUrls.includes(url)) {
-                this.cachedUrls.push(url);
-            }
-        }
-    }
+    // cache(url = './') {
+    //     if (navigator.serviceWorker) {
+    //         navigator.serviceWorker.register('/sw.js', { scope: url });
+    //         if (!this.cachedUrls.includes(url)) {
+    //             this.cachedUrls.push(url);
+    //         }
+    //     }
+    // }
 }
 
 export const router = new Router(ROOT);

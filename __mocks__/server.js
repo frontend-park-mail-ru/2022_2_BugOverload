@@ -8,21 +8,27 @@ const cors = require('cors');
 var cookieParser = require('cookie-parser')
 const ws = require('ws');
 
+const options = {
+    setHeaders: function (res, path, stat) {
+        res.set('Service-Worker-Allowed', '/');
+    },
+};
+
 app.use(cookieParser());
-app.use('/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/login/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/signup/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/profile/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/premieres/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/search/:q/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/search/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/user/collections/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/user/collection/:id/',express.static(path.resolve(__dirname, '../dist')));
-app.use('/collection/genres/',express.static(path.resolve(__dirname, '../dist')));
+app.use('/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/login/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/signup/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/profile/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/film/:id/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/person/:id/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/user/:id/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/premieres/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/search/:q/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/search/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/user/collections/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/user/collection/:id/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/collection/genres/',express.static(path.resolve(__dirname, '../dist'), options));
 
 app.use(body.json());
 app.use(cors({

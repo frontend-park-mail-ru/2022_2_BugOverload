@@ -46,15 +46,6 @@ export class Userbar extends Component {
                 return;
             }
 
-            /*document.body.querySelector('.js-header').remove();
-
-            const props = {
-                isMobile,
-                userbar: templateUserbar(),
-                ...user,
-            };
-
-            rootNode.insertAdjacentHTML('afterbegin', templateHeader(props));*/
             const userbarArea = rootNode.querySelector('.header__userbar-items-container');
    
             if(userbarArea.classList.contains('dysplay-none')) {
