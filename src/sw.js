@@ -1,12 +1,12 @@
 const CACHE_NAME = 'moviegate-1';
 
-const whiteDynamicUrls = [
-    '/api/v1/image',
-    '/api/v1/collection/popular',
-    '/api/v1/collection/in_cinema',
-    '/api/v1/recommendation',
-    '/api/v1/premieres',
-];
+// const whiteDynamicUrls = [
+//     '/api/v1/image',
+//     '/api/v1/collection/popular',
+//     '/api/v1/collection/in_cinema',
+//     '/api/v1/recommendation',
+//     '/api/v1/premieres',
+// ];
 
 const blackSearchUrls = /object=user_avatar|user\/\d+/;
 
