@@ -1,6 +1,5 @@
 .page__collection {
     width: 100vw;
-    height: 100vh;
     padding-top: var(--header-height);
 
     &__title {
@@ -10,7 +9,7 @@
     }
 
     &__description {
-        margin: 25px var(--standart-margin) 70px;
+        margin: 25px var(--standart-margin) 30px;
         font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1920 - 300)));
         color: var( --secondary-color-text);
     }
