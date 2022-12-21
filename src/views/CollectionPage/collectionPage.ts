@@ -19,11 +19,12 @@ class CollectionPage extends View {
             collection: null,
             typeCollection: null,
             isUserCollection: false,
+            isDispatched: false,
+            isSubscribedUserCollection: false,
         }
 
         this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
         this.userCollectionPageSubscribe = this.userCollectionPageSubscribe.bind(this);
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
     }
 
     render(typeCollection :string|number = null) {
@@ -92,9 +93,22 @@ class CollectionPage extends View {
             } else {
                 //user
                 this.state.isUserCollection = true;
-                this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
-                if(!this.state.collection) {
-                    store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
+                // this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
+                // if(!this.state.collection) {
+                //     store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
+                //     store.dispatch(actionGetUserCollectionData({
+                //         id: this.state.typeCollection,
+                //     }));
+                //     return;
+                // }
+                if(!this.state.collection && !this.state.isDispatched) {
+                    this.state.isDispatched = true;
+
+                    if(!this.state.isSubscribedUserCollection) {
+                        this.state.isSubscribedUserCollection = true;
+                        store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe);
+                    }
+
                     store.dispatch(actionGetUserCollectionData({
                         id: this.state.typeCollection,
                     }));
@@ -123,6 +137,7 @@ class CollectionPage extends View {
                         delete this.state.collection.films;
                     } else {
                         this.state.collection = null;
+                        this.state.isDispatched = false;
                     }
 
                     store.dispatch(actionRemoveFromCollection({
@@ -147,6 +162,12 @@ class CollectionPage extends View {
         store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
         this.state.collection = null;
         this.state.isUserCollection = false;
+        this.state.isDispatched = false;
+
+        if(this.state.isSubscribedUserCollection) {
+            this.state.isSubscribedUserCollection = false;
+            store.unsubscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe);
+        }
     }
 }
 
