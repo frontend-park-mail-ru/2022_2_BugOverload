@@ -14,7 +14,6 @@ interface Router {
     root: Element;
     mapViews: Map<string, Class>;
     privateMapViews: Map<string, Class>;
-    cachedUrls: Array<string>;
     pathBeforModal: string;
     prevUrl: string;
     isDispatchedAuth: boolean;
@@ -38,7 +37,6 @@ class Router {
         this.root = root;
         this.mapViews = new Map();
         this.privateMapViews = new Map();
-        this.cachedUrls = [];
         this.isDispatchedAuth = false;
         this.isSubscribedLogout = false;
     }
@@ -154,9 +152,6 @@ class Router {
 
         const matchedHref = this.getCurrentUrlObject();
         if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
-            if(!redirect) {
-                // this.cache();
-            }
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -217,7 +212,6 @@ class Router {
             view = this.mapViews.get(stateObject.path);
         }
 
-        // click login/signup after signup/login
         if (stateObject.path === '/login/' || stateObject.path === '/signup/') {
             if (refresh) {
                 this.pathBeforModal = window.localStorage.getItem('pathBeforModal');
@@ -241,7 +235,6 @@ class Router {
             }
         }
 
-        // click no login/signup after login/signup
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             this.root.replaceChildren();
         }
@@ -275,18 +268,7 @@ class Router {
             }
             this.prevUrl = path;
         }
-
-        // this.cache();
     }
-
-    // cache(url = './') {
-    //     if (navigator.serviceWorker) {
-    //         navigator.serviceWorker.register('/sw.js', { scope: url });
-    //         if (!this.cachedUrls.includes(url)) {
-    //             this.cachedUrls.push(url);
-    //         }
-    //     }
-    // }
 }
 
 export const router = new Router(ROOT);

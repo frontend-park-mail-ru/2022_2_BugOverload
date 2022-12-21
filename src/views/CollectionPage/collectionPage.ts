@@ -26,7 +26,6 @@ class CollectionPage extends View {
         store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
     }
 
-
     render(typeCollection :string|number = null) {
         if(typeCollection) {
             this.state.typeCollection = typeCollection;
@@ -93,6 +92,7 @@ class CollectionPage extends View {
             } else {
                 //user
                 this.state.isUserCollection = true;
+                this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
                 if(!this.state.collection) {
                     store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
                     store.dispatch(actionGetUserCollectionData({
