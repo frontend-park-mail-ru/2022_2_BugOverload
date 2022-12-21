@@ -23,6 +23,7 @@ class CollectionPage extends View {
 
         this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
         this.userCollectionPageSubscribe = this.userCollectionPageSubscribe.bind(this);
+        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
     }
 
 
@@ -33,8 +34,6 @@ class CollectionPage extends View {
         if(!this.state.typeCollection) {
             return;
         }
-
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe, true);
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -145,7 +144,7 @@ class CollectionPage extends View {
     }
 
     componentWillUnmount() {
-
+        store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
         this.state.collection = null;
         this.state.isUserCollection = false;
     }
