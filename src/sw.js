@@ -36,7 +36,7 @@ this.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(assetUrls)),
     )
-    self.skipWaiting();
+    this.skipWaiting();
 });
 
 this.addEventListener('fetch', (event) => {
@@ -44,25 +44,25 @@ this.addEventListener('fetch', (event) => {
 
     const url = new URL(request.url);
     if (event.request.method !== 'GET' || !cachedReg.test(url.pathname) || blackSearchUrls.test(url.search)) {
-        console.log(url)
         return;
     }
 
-    event.respondWith(networkFirst(request));
+    event.respondWith(networkFirst(request, (/\/$/).test(url.pathname)));
 });
 
-async function networkFirst(request) {
+async function networkFirst(request, html) {
     const cache = await caches.open(CACHE_NAME);
     try {
         const response = await fetch(request);
 
-        await cache.put(request, response.clone());
+
+        await cache.put(html? '/': request, response.clone());
 
         return response;
     } catch (e) {
         let cached;
         try {
-            cached = await cache.match(request);
+            cached = await cache.match(html? '/': request);
         } catch {
             return new Response(null, { status: 404, statusText: 'Not Found' });
         }
