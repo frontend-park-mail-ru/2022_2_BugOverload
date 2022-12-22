@@ -145,7 +145,7 @@ export class AboutFilm extends Component {
             modal.render();
 
             const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${this.about.trailer}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${this.about.trailer || 'https://www.youtube.com/embed/dQw4w9WgXcQ'}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);

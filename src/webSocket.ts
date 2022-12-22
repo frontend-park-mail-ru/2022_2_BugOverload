@@ -36,7 +36,7 @@ class WebSocketService {
         this.state = {
             user: null,
             permission: null,
-            isActive: null,
+            isActive: true,
         };
 
         this.subscribe('ANONS_FILM', (payload: filmNotifPayload) => {
