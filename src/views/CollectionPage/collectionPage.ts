@@ -65,7 +65,8 @@ class CollectionPage extends View {
             }
         } else {
             //actor || film
-            if(this.state.typeCollection.match(/\w+\d+/)) {
+            if(this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
+                console.log('actor,film')
                 let actionCreator;
 
                 if(this.state.typeCollection.match('film')) {
@@ -88,7 +89,7 @@ class CollectionPage extends View {
                     this.state.nameObjectStore = this.state.typeCollection;
                 }
 
-                if(!this.state.collection && !this.state.collection.films) {
+                if(!this.state.collection.films) {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
 
                     store.dispatch(actionCreator(this.state.nameObjectStore.match(/\d+/)[0]));
