@@ -36,7 +36,7 @@ class CollectionPage extends View {
             return;
         }
 
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+        // store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -120,10 +120,10 @@ class CollectionPage extends View {
                     return;
                 }
 
-                // if(!this.state.isSubscribedRemoveCollection) {
-                //     this.state.isSubscribedRemoveCollection = true;
-                //     store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-                // }
+                if(!this.state.isSubscribedRemoveCollection) {
+                    this.state.isSubscribedRemoveCollection = true;
+                    store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+                }
             }
         }
 
