@@ -88,7 +88,7 @@ class CollectionPage extends View {
                     this.state.nameObjectStore = this.state.typeCollection;
                 }
 
-                if(!this.state.collection.films) {
+                if(!this.state.collection && !this.state.collection.films) {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
 
                     store.dispatch(actionCreator(this.state.nameObjectStore.match(/\d+/)[0]));
