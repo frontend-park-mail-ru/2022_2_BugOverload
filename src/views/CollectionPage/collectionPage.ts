@@ -130,16 +130,44 @@ class CollectionPage extends View {
             films,
         }));
 
-        this.copyHandler = () => {
-            navigator.clipboard.writeText(window.location.href)
-            .then(() => {
-                ShowMessage('Скопировано!', 'positive');
-            })
-            .catch(err => {
-                ShowMessage('Не удалось скопировать');
-                console.log('Something went wrong', err);
-            });
-        };
+        this.copyHandler = (() => {
+            let counterCopyed = 0;
+            return () => {
+                navigator.clipboard.writeText(window.location.href)
+                .then(() => {
+                    if (counterCopyed === 0) {
+                        ShowMessage('Скопировано!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 1) {
+                        ShowMessage('Двойное копирование!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 2) {
+                        ShowMessage('Тройное копирование!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 3) {
+                        ShowMessage('Безумие!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 4) {
+                        ShowMessage('Ты потрясающий!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    counterCopyed = 0;
+                })
+                .catch(err => {
+                    ShowMessage('Не удалось скопировать');
+                    console.log('Something went wrong', err);
+                });
+            }
+        })();
         const shareButton = this.rootNode.querySelector('.js-page__collection__share');
         if (shareButton) {
             shareButton.addEventListener('click', this.copyHandler);
