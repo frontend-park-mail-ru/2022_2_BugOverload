@@ -76,7 +76,7 @@ class WebSocketService {
         }
 
         this.openHandler = () => {
-            this.send('message',{ msg: 'Hello!' });
+            console.log('open websocket');
         };
         this._ws.addEventListener('open', this.openHandler);
 
