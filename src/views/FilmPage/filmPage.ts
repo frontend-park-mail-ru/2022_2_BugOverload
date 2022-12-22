@@ -127,7 +127,7 @@ export class FilmPage extends View {
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
 
-        const films = this.state.similarFilms.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const films = this.state.similarFilms?.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const collection = new Collection('');
 
         const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar');
