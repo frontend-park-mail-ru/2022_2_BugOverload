@@ -36,8 +36,6 @@ class CollectionPage extends View {
             return;
         }
 
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
             pageCollection.remove();
@@ -96,17 +94,13 @@ class CollectionPage extends View {
                     return;
                 }
             } else {
-                console.log('usercol')
+                if(!this.state.isSubscribedRemoveCollection) {
+                    this.state.isSubscribedRemoveCollection = true;
+                    store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+                }
                 //user
                 this.state.isUserCollection = true;
-                // this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
-                // if(!this.state.collection) {
-                //     store.subscribe(`collection-${this.state.typeCollection}`, this.userCollectionPageSubscribe, true);
-                //     store.dispatch(actionGetUserCollectionData({
-                //         id: this.state.typeCollection,
-                //     }));
-                //     return;
-                // }
+
                 if(!this.state.collection && !this.state.isDispatched) {
                     this.state.isDispatched = true;
 
@@ -120,12 +114,6 @@ class CollectionPage extends View {
                     }));
                     return;
                 }
-
-                // if(!this.state.isSubscribedRemoveCollection) {
-                //     console.log('rem')
-                //     this.state.isSubscribedRemoveCollection = true;
-                //     store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-                // }
             }
         }
 
@@ -181,7 +169,7 @@ class CollectionPage extends View {
         }
 
         if(this.state.isSubscribedRemoveCollection) {
-            this.state.isSubscribedRemoveCollection = true;
+            this.state.isSubscribedRemoveCollection = false;
             store.unsubscribe('removeFromCollStatus', this.collectionPageSubscribe);
         }
     }
