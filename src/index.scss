@@ -9,6 +9,11 @@
 @import "@views/UserProfile/userProfile.scss";
 @import "@components/Notification/notification.scss";
 
+body,
+html {
+  -webkit-tap-highlight-color: rgba(0 0 0 / 0%);
+}
+
 @media screen and (max-width: 1200px) {
   .profile__menu__column {
     display: none;
