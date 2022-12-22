@@ -134,7 +134,7 @@ export class FilmPage extends View {
         similarFilmsWrapper.insertAdjacentHTML('beforeend',
         CollectionUI.renderTemplate({
                 films,
-                name: this.state.similarFilms.name,
+                name: this.state.similarFilms?.name,
                 url: `film${this.state.id}`,
             }),
         );

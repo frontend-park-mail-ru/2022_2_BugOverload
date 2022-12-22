@@ -33,6 +33,7 @@ this.addEventListener('activate', (event) => {
 });
 
 this.addEventListener('install', (event) => {
+    console.log(assetUrls);
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(assetUrls)),
     )
