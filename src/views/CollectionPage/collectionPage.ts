@@ -160,6 +160,7 @@ class CollectionPage extends View {
                         ++counterCopyed;
                         return;
                     }
+                    ShowMessage('Скопировано!', 'positive');
                     counterCopyed = 0;
                 })
                 .catch(err => {
