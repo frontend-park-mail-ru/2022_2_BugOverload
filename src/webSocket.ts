@@ -22,10 +22,12 @@ class WebSocketService {
     private errorHandler: EventListener;
     private closeHandler: EventListener;
     private storeHandler: Function;
+    private logoutHandler: Function;
     private state: {
         user: string|null,
         permission: string|null,
         isActive: boolean|null,
+        logoutStatus: number|null,
     };
 
     constructor (url: string = API.ws) {
@@ -37,6 +39,7 @@ class WebSocketService {
             user: null,
             permission: null,
             isActive: true,
+            logoutStatus: null,
         };
 
         this.subscribe('ANONS_FILM', (payload: filmNotifPayload) => {
@@ -65,6 +68,14 @@ class WebSocketService {
         };
 
         store.subscribe('user', this.storeHandler);
+
+        this.logoutHandler = () => {
+            this.state.logoutStatus = store.getState('logoutStatus');
+            if (this.state.logoutStatus) {
+                this.cancel();
+            }
+        };
+        store.subscribe('logoutStatus', this.logoutHandler);
 
         window.onfocus = () => this.state.isActive = true;
         window.onblur = () => this.state.isActive = false;
@@ -127,6 +138,7 @@ class WebSocketService {
         this._ws.removeEventListener('error', this.errorHandler);
         this._ws.removeEventListener('close', this.closeHandler);
         store.unsubscribe('user', this.storeHandler);
+        this._ws = null;
     }
 }
 

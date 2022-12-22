@@ -161,7 +161,7 @@ class CollectionPage extends View {
                         return;
                     }
                     ShowMessage('Скопировано!', 'positive');
-                    counterCopyed = 0;
+                    counterCopyed = 1;
                 })
                 .catch(err => {
                     ShowMessage('Не удалось скопировать');
