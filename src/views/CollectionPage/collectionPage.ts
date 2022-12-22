@@ -36,7 +36,7 @@ class CollectionPage extends View {
             return;
         }
 
-        store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+        // store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
 
         const pageCollection = this.rootNode.querySelector('.page__collection');
         if(pageCollection) {
@@ -65,16 +65,18 @@ class CollectionPage extends View {
             }
         } else {
             //actor || film
-            if(this.state.typeCollection.match(/\w+d+/)) {
+            if(this.state.typeCollection.match(/\w+\d+/)) {
                 let actionCreator;
 
                 if(this.state.typeCollection.match('film')) {
                     actionCreator = actionGetSimilarFilms;
                     this.state.nameObjectStore = this.state.typeCollection + 'Similar';
-                    this.state.collection = {
-                        name: store.getState(this.state.nameObjectStore)?.name,
-                        films: store.getState(this.state.nameObjectStore)?.films,
-                    };
+
+                        this.state.collection = {
+                            name: store.getState(this.state.nameObjectStore)?.name,
+                            films: store.getState(this.state.nameObjectStore)?.films,
+                        };
+                    
                 }
 
                 if(this.state.typeCollection.match('actor')) {
@@ -93,6 +95,7 @@ class CollectionPage extends View {
                     return;
                 }
             } else {
+                console.log('usercol')
                 //user
                 this.state.isUserCollection = true;
                 // this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
@@ -117,10 +120,10 @@ class CollectionPage extends View {
                     return;
                 }
 
-                // if(!this.state.isSubscribedRemoveCollection) {
-                //     this.state.isSubscribedRemoveCollection = true;
-                //     store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
-                // }
+                if(!this.state.isSubscribedRemoveCollection) {
+                    this.state.isSubscribedRemoveCollection = true;
+                    store.subscribe('removeFromCollStatus', this.collectionPageSubscribe);
+                }
             }
         }
 
