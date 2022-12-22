@@ -117,7 +117,6 @@ export class Header extends Component {
 
             this.comebackHeader = (e: Event) => {
                 if (this.isOpenSearch && !(e.target as HTMLElement).closest('.js-header-search')) {
-                    console.log('edned');
                     this.componentWillUnmount();
                     this.render('', false);
                     this.isOpenSearch = false;

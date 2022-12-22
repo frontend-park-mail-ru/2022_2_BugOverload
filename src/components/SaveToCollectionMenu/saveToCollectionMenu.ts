@@ -22,7 +22,6 @@ export class SaveToCollectionMenu extends Component {
         // Навешиваем обработчик на выход по клику вне области меню
         this.closeMenuHandler = (e: Event) => {
             if (this.isOpen && !(e.target as HTMLElement).closest(`.${nameLocation}`)) {
-                console.log('closeMenuHandler close!');
                 this.close();
             }
         };

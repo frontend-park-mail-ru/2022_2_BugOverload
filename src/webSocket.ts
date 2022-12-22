@@ -52,7 +52,6 @@ class WebSocketService {
 
         this.storeHandler = () => {
             this.state.user = store.getState('user');
-            console.log('store.getState(user)');
 
             if (this.state.user) {
                 this._ws = new WebSocket(this._wsUrl);
@@ -69,12 +68,10 @@ class WebSocketService {
 
         window.onfocus = () => this.state.isActive = true;
         window.onblur = () => this.state.isActive = false;
-        console.log('WebSocketService created');
     }
 
     initialize() {
         if (!this._ws) {
-            console.log('no _ws');
             return;
         }
 

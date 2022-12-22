@@ -78,7 +78,6 @@ export class FilmPage extends View {
     * Используется при первом заходе на страницу
     */
     render(id?:number) {
-        console.log(`FILM ID: ${id}`);
         if (id) {
             this.state.id = id;
         }

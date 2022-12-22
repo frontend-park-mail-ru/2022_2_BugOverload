@@ -65,7 +65,6 @@ class CollectionPage extends View {
             //actor || film
             if(this.state.typeCollection.match(/\w+d+/)) {
                 let actionCreator;
-                console.log(this.state.typeCollection, this.state.typeCollection.match(/\w+d+/));
 
                 if(this.state.typeCollection.match('film')) {
                     actionCreator = actionGetSimilarFilms;

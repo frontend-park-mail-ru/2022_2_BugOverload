@@ -145,8 +145,6 @@ class ReducerFilm {
                 }
             }
 
-            console.log(`saveToCollection new: ${JSON.stringify(newList)}`);
-
             return {
                 saveToCollStatus: response.status,
                 listCollectionsUser: newList,
@@ -164,7 +162,6 @@ class ReducerFilm {
         });
 
         const newList = store.getState('listCollectionsUser') || {};
-        console.log(newList)
         if(newList) {
             for (let coll of newList) {
                 if (coll.id === removeFromCollParams.idCollection) {
@@ -173,7 +170,6 @@ class ReducerFilm {
                 }
             }
         }
-        console.log(`removeFromCollection new: ${JSON.stringify(newList)}`);
 
         if (response.status === responsStatuses.NoContent) {
             return {

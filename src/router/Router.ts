@@ -59,7 +59,6 @@ class Router {
             } else {
                 reg = new RegExp(`^${href.replace(hrefRegExp.idFilms, hrefRegExp.filmProps)}?$`);
                 matchHref = href.match(reg);
-                console.log(JSON.stringify(matchHref));
             }
         }
         return matchHref;
