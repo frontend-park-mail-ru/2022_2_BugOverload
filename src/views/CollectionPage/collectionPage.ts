@@ -65,7 +65,8 @@ class CollectionPage extends View {
             }
         } else {
             //actor || film
-            if(this.state.typeCollection.match(/\w+\d+/)) {
+            if(this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
+                console.log('actor,film')
                 let actionCreator;
 
                 if(this.state.typeCollection.match('film')) {
