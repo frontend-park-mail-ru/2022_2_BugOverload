@@ -191,6 +191,7 @@ interface filmPremiere extends anyObject {
     duration: number,
     rating: number,
     description: string,
+    ticket: string,
 }
 
 interface premiereParams extends anyObject {
@@ -203,6 +204,6 @@ interface filmNotifPayload {
     poster_ver: string,
     name: string,
     rating: number,
-    ticket_link: string,
+    ticket: string,
     prod_date: string,
 }
