@@ -4,6 +4,7 @@ import {
     decoreAge, decoreCountFilms,
 } from '@utils/decorationData';
 import { getAge } from '@utils/common';
+
 import { PersonMedUI } from 'moviegate-ui-kit';
 
 /**
