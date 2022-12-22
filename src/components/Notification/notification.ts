@@ -16,7 +16,8 @@ export const showNotification = (type:string = 'ANONS_FILM', payload: filmNotifP
             ...payload,
             rating: roundFloat(payload.rating),
             poster_ver: API.img.poster_ver(payload.poster_ver),
-            description: `В Кино с ${+sepDate[0]} ${getMonthName(+sepDate[1])}!`
+            description: `В Кино с ${+sepDate[0]} ${getMonthName(+sepDate[1])}!`,
+            ticket: payload.ticket || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         });
         break;
     default:

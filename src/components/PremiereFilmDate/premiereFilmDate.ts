@@ -20,7 +20,7 @@ export class PremiereFilmDate extends Component {
 
         const film = PremiereFilmDateUI.renderTemplate({
             ...filmData,
-            ticket_link: filmData.id,
+            ticket_link: filmData.ticket || filmData.id,
             description: restrictText(filmData.description, maxLengthDescription),
             rating: roundFloat(filmData.rating),
         });
