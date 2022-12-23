@@ -160,6 +160,7 @@ export class Header extends Component {
 
     subscribeHeader() {
         this.state.user = store.getState('user');
+        console.log(this.state.user)
         this.render();
     }
 }
