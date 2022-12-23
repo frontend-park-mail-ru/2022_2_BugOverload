@@ -211,6 +211,7 @@ class CollectionPage extends View {
     collectionPageSubscribeLogout() {
         console.log('logout', this.state.collection)
         if(!this.state.collection.private_col) {
+            this.state.collection.is_author = false;
             this.render();
         }
     }
