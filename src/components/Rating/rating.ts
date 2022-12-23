@@ -45,6 +45,8 @@ export class Rating extends Component {
                 return;
             }
             ShowMessage('Успех!', 'positive');
+            this.state.rating = store.getState('rating');
+            this.render();
         };
 
         store.subscribe('statusRating', this.subHandlerStatusRating);
