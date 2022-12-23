@@ -94,7 +94,7 @@ interface filmToCollParams {
 //person types
 interface person extends anyObject {
     avatar: string;
-    images: Array<string>;
+    images?: Array<string>;
 }
 
 //film types

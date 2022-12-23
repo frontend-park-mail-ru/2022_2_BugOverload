@@ -39,18 +39,18 @@ export const reducerActor = new ReducerActor();
 
 const handlerPropertiesPerson = (id :number, object :person, nameProperties :Array<string>) => {
     nameProperties.forEach((key) => {
-        if (key === 'avatar') {
+        if (key === 'avatar' && object[key]) {
             const newUrl = API.img.person_avatar(object[key]);
             object[key] = newUrl;
         }
-        if (key === 'images') {
+        if (key === 'images' && object[key]) {
             const images = object[key];
             images.forEach((image, index) => {
                 const newUrl = API.img.person_image(id, image);
                 object[key][index] = newUrl;
             });
         }
-        if (key === 'professions') {
+        if (key === 'professions' && object[key]) {
             object[key] = object[key].join(', ');
         }
     });
