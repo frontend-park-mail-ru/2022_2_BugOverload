@@ -133,12 +133,15 @@ class WebSocketService {
     }
 
     cancel() {
-        this._ws.removeEventListener('open', this.openHandler);
-        this._ws.removeEventListener('message', this.messageHadnler);
-        this._ws.removeEventListener('error', this.errorHandler);
-        this._ws.removeEventListener('close', this.closeHandler);
+        if(this._ws) {
+            this._ws.removeEventListener('open', this.openHandler);
+            this._ws.removeEventListener('message', this.messageHadnler);
+            this._ws.removeEventListener('error', this.errorHandler);
+            this._ws.removeEventListener('close', this.closeHandler);
+            this._ws = null;
+        }
+
         store.unsubscribe('user', this.storeHandler);
-        this._ws = null;
     }
 }
 
