@@ -33,6 +33,7 @@ export class Rating extends Component {
             this.state.countScores = store.getState('countScores') || props.film.count_ratings;
 
             this.render();
+            store.dispatch(actionGetMetaDataFilm({ filmID: this.state.film.id }));
         };
 
         store.subscribe('rating', this.subHandlerRating);
@@ -166,3 +167,4 @@ export class Rating extends Component {
         store.unsubscribe('statusRating', this.subHandlerStatusRating);
     }
 }
+ 
