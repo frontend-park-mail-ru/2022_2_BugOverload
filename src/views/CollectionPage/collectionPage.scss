@@ -33,7 +33,16 @@
         padding: var(--standart-margin);
     }
 
-    .header__userbar-name-container {
-        align-items: flex-end;
+    .header__userbar-user-info-container{
+        align-items: center;
+        
+        .header__userbar-name-container {
+            align-items: flex-end;
+            margin-right: 15px;
+        }
+
+        .header__avatar{
+            margin-top: 4px 15px 0 0;
+        }
     }
 }
