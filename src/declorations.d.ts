@@ -77,6 +77,7 @@ interface userCollection {
     name: string,
     poster: string,
     update_time: string,
+    private_col?: boolean,
 }
 
 interface userCollListItem {

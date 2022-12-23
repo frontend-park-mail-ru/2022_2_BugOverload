@@ -14,6 +14,11 @@ interface userInfoResponse{
     body: userInfo;
 }
 
+interface userColResponse{
+    status: number;
+    body: Array<userCollection>;
+}
+
 class ReducerUser {
     async login(user :anyObject) {
         const responsePromise = Ajax.post({
@@ -138,13 +143,13 @@ class ReducerUser {
     async getUserCollections({sort_param, count_collections, delimiter}: userCollsParams) {
         let response;
         try {
-            response = await Ajax.get(API.userCollections(sort_param, count_collections, delimiter)) as Response;
+            response = await Ajax.get(API.userCollections(sort_param, count_collections, delimiter)) as userColResponse;
         } catch (e) {
             return { userCollections: mockUserCollections() };
         }
 
         if (response.status === responsStatuses.OK) {
-            return { userCollections: response.body };
+            return { userCollections: handlerListUserCol(response.body) };
         }
 
         if (response.status === responsStatuses.NotFound) {
@@ -179,4 +184,14 @@ const handlerUserInfoFields = (userInfo :anyObject) => {
     }
 
     return userInfo;
+};
+
+const handlerListUserCol = (arrayUserCol :Array<userCollection>) => {
+    arrayUserCol.forEach((userCol) => {
+        if(userCol.name === 'Избранное' || userCol.name === 'Буду смотреть') {
+            userCol.private_col = true;
+            console.log(userCol)
+        }
+    });
+    return arrayUserCol;
 };
