@@ -141,7 +141,7 @@ class WebSocketService {
             this._ws = null;
         }
 
-        store.unsubscribe('user', this.storeHandler);
+       // store.unsubscribe('user', this.storeHandler);
     }
 }
 
