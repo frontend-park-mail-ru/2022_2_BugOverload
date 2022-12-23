@@ -37,7 +37,10 @@ export class Login extends Component {
         };
 
         this.subscribeLoginpStatus = this.subscribeLoginpStatus.bind(this);
-        this.subscribeLogin = this.subscribeLogin.bind(this);
+        this.subscribeLogin = () => {
+            console.log(this)
+            this.render();
+        };
     }
 
     /**
@@ -195,10 +198,6 @@ export class Login extends Component {
      */
     subscribeLoginpStatus() {
         this.state.statusLogin = store.getState('statusLogin');
-        this.render();
-    }
-
-    subscribeLogin() {
         this.render();
     }
 }
