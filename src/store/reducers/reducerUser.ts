@@ -79,8 +79,8 @@ class ReducerUser {
         const response = await responsePromise as Response;
         if (response.status === responsStatuses.NoContent) {
             return {
-                user: null,
                 logoutStatus: responsStatuses.NoContent,
+                user: null,
             } as anyObject;
         }
         return null;
