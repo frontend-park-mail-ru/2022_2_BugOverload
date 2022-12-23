@@ -80,7 +80,7 @@ class ReducerUser {
         if (response.status === responsStatuses.NoContent) {
             return {
                 logoutStatus: responsStatuses.NoContent,
-                user: null,
+                user: {},
             } as anyObject;
         }
         return null;

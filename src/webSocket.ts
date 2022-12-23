@@ -67,7 +67,7 @@ class WebSocketService {
             }
         };
 
-       // store.subscribe('user', this.storeHandler);
+       store.subscribe('user', this.storeHandler);
 
         this.logoutHandler = () => {
             this.state.logoutStatus = store.getState('logoutStatus');
@@ -75,7 +75,7 @@ class WebSocketService {
                 this.cancel();
             }
         };
-        //store.subscribe('logoutStatus', this.logoutHandler);
+        store.subscribe('logoutStatus', this.logoutHandler);
 
         window.onfocus = () => this.state.isActive = true;
         window.onblur = () => this.state.isActive = false;
