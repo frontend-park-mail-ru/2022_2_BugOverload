@@ -168,6 +168,7 @@ export class FilmPage extends View {
         this.state.film = null;
         this.state.reviews = null;
         this.state.countScores = null;
+        this.state.similarFilms = null;
         this.listReviews?.unsubscribe();
         this.aboutFilm?.unsubscribe();
         this.menuInfoFilm?.unsubscribe();
