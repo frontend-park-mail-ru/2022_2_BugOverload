@@ -220,7 +220,7 @@ class CollectionPage extends View {
 
     collectionPageSubscribeLogout() {
         console.log('logout', this.state.collection)
-        if(!this.state.collection.private_col) {
+        if(this.state.collection && !this.state.collection.private_col) {
             this.componentWillUnmount();
             this.render();
         }
