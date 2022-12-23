@@ -29,7 +29,11 @@ export class Header extends Component {
         this.state = {
             user: null,
         };
-        this.subscribeHeader = this.subscribeHeader.bind(this);
+        this.subscribeHeader = () => {
+            console.log(this.state.user)
+            this.render();
+        };
+        
         store.subscribe('user', this.subscribeHeader);
 
         this.isOpenSearch = false;
@@ -156,11 +160,6 @@ export class Header extends Component {
         }
 
         form.removeEventListener('submit', this.submitHadndler)
-    }
-
-    subscribeHeader() {
-        console.log(this.state.user)
-        this.render();
     }
 }
 
