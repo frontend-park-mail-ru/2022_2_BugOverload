@@ -77,10 +77,11 @@ class ReducerUser {
         const responsePromise = Ajax.delete({ url: API.logout });
 
         const response = await responsePromise as Response;
+        console.log(response.status)
         if (response.status === responsStatuses.NoContent) {
             return {
                 logoutStatus: responsStatuses.NoContent,
-                user: {},
+                user: null,
             } as anyObject;
         }
         return null;
