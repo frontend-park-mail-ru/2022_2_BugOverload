@@ -139,7 +139,7 @@ class CollectionPage extends View {
         if (author) {
             user = store.getState('user');
             author.avatar = API.img.user_avatar(author.avatar);
-            author.count_collections = author.count_collections + ' коллекций';
+            author.count_collections = author.count_collections + rightColName(author.count_collections);
         }
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
@@ -260,3 +260,14 @@ class CollectionPage extends View {
 }
 
 export const collectionPage = new CollectionPage({ rootNode: document.getElementById('root') });
+
+const rightColName = (numCol :number) => {
+    if(numCol === 0) {
+        return ' коллекций';
+    }
+    if(numCol > 0 && numCol < 5) {
+        return ' коллекции';
+    }
+
+    return ' коллекций';
+}
