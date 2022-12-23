@@ -128,6 +128,7 @@ class CollectionPage extends View {
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
+            private_col: this.state.collection?.private_col,
         }));
 
         this.copyHandler = (() => {
