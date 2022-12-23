@@ -34,11 +34,11 @@
     }
 
     .header__userbar-user-info-container{
-        align-items: center;
+        align-items: flex-start;
         
         .header__userbar-name-container {
             align-items: flex-end;
-            margin-right: 15px;
+            margin: 4px 15px 0 0;
         }
 
         .header__avatar{
