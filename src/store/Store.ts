@@ -26,11 +26,13 @@ class Store {
     }
 
     subscribe(type :string, callback :Function, once = false) {
+        console.log('type',type,callback)
         const arraySubsribes = !once?
             this.mapSubscribers.get(type):
             this.mapOnceSubscribers.get(type);
         if (arraySubsribes) {
             arraySubsribes.push(callback);
+            console.log('arraySubsribes',arraySubsribes)
         } else {
             !once?
                 this.mapSubscribers.set(type, [callback]):
