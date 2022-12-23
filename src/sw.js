@@ -12,7 +12,7 @@ const blackSearchUrls = /object=user_avatar|user\/\d+/;
 
 const assetUrls = [];
 
-const cachedReg = /\/api|(.png|.ttf|.woff2|.js|.css|\/)$/
+const cachedReg = /\/api|(.png|.ttf|.woff2|.js|.css|\/)$/;
 
 this.addEventListener('activate', (event) => {
     const expectedCacheNames = Object.keys(CACHE_NAME).map((key) => CACHE_NAME[key]);
@@ -35,7 +35,7 @@ this.addEventListener('activate', (event) => {
 this.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(assetUrls)),
-    )
+    );
     this.skipWaiting();
 });
 
@@ -55,14 +55,13 @@ async function networkFirst(request, html) {
     try {
         const response = await fetch(request);
 
-
-        await cache.put(html? '/': request, response.clone());
+        await cache.put(html ? '/' : request, response.clone());
 
         return response;
     } catch (e) {
         let cached;
         try {
-            cached = await cache.match(html? '/': request);
+            cached = await cache.match(html ? '/' : request);
         } catch {
             return new Response(null, { status: 404, statusText: 'Not Found' });
         }
