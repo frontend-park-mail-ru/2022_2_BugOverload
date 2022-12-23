@@ -58,6 +58,7 @@ class Store {
             subscribers = this.mapSubscribers.get(key);
             if (subscribers) {
                 subscribers.forEach((subscriber) => subscriber());
+                return;
             }
 
             subscribers = this.mapOnceSubscribers.get(key);
