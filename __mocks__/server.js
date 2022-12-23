@@ -29,6 +29,7 @@ app.use('/collection/:tag/',express.static(path.resolve(__dirname, '../dist'), o
 app.use('/user/collections/',express.static(path.resolve(__dirname, '../dist'), options));
 app.use('/user/collection/:id/',express.static(path.resolve(__dirname, '../dist'), options));
 app.use('/collection/genres/',express.static(path.resolve(__dirname, '../dist'), options));
+app.use('/user/public/collection/:id/',express.static(path.resolve(__dirname, '../dist'), options));
 
 app.use(body.json());
 app.use(cors({

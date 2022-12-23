@@ -140,6 +140,7 @@ export const routes = [
     { path: '/collection/', view: collectionPage },
     { path: '/collection/genres/', view: pageGenres },
     { path: '/public-user/collection/', view: collectionPage },
+    { path: '/user/public/collection/', view: collectionPage },
 ];
 
 export const privateRoutes = [
