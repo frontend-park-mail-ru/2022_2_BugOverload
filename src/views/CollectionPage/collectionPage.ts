@@ -24,10 +24,12 @@ class CollectionPage extends View {
             isSubscribedUserCollection: false,
             isSubscribedRemoveCollection: false,
             isSubscribedLogout: false,
+            private_col: false,
         }
 
         this.collectionPageSubscribe = this.collectionPageSubscribe.bind(this);
         this.userCollectionPageSubscribe = this.userCollectionPageSubscribe.bind(this);
+        this.collectionPageSubscribeLogout = this.collectionPageSubscribeLogout.bind(this);
     }
 
     render(typeCollection :string|number = null) {
@@ -102,7 +104,7 @@ class CollectionPage extends View {
                 }
                 if(!this.state.isSubscribedLogout) {
                     this.state.isSubscribedLogout = true;
-                    store.subscribe('logoutStatus', this.collectionPageSubscribe);
+                    store.subscribe('logoutStatus', this.collectionPageSubscribeLogout);
                 }
                 //user
                 this.state.isUserCollection = true;
@@ -129,12 +131,12 @@ class CollectionPage extends View {
         }
 
         const name = this.state.collection.name;
-        const private_col = (name === 'Избранное' || name === 'Буду смотреть')?true:false;
+        this.state.collection.private_col = (name === 'Избранное' || name === 'Буду смотреть')?true:false;
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
-            private_col,
+            private_col: this.state.collection.private_col,
         }));
 
         this.copyHandler = (() => {
@@ -206,6 +208,12 @@ class CollectionPage extends View {
         this.render();
     }
 
+    collectionPageSubscribeLogout() {
+        if(!this.state.collection.private_col) {
+            this.render();
+        }
+    }
+
     userCollectionPageSubscribe() {
         this.state.collection = store.getState(`collection-${this.state.typeCollection}`);
         this.render();
@@ -233,7 +241,7 @@ class CollectionPage extends View {
 
         if(this.state.isSubscribedLogout) {
             this.state.isSubscribedLogout = false;
-            store.unsubscribe('logoutStatus', this.collectionPageSubscribe);
+            store.unsubscribe('logoutStatus', this.collectionPageSubscribeLogout);
         }
     }
 }
