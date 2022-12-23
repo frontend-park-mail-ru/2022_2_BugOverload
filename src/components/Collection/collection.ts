@@ -136,7 +136,6 @@ export class Collection extends Component {
         let isHiddenLeft = true;
 
         this.handlerSlider = function (event: Event) {
-            // if (event.target === btnRight.querySelector('img')) {
             if (event.target === btnRight) {
                 event.preventDefault();
                 if (isHiddenLeft) {
@@ -158,7 +157,6 @@ export class Collection extends Component {
                 return;
             }
 
-            // if (event.target === btnLeft.querySelector('img')) {
             if (event.target === btnLeft) {
                 event.preventDefault();
                 if (isHiddenRight) {

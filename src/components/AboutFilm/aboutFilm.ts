@@ -14,9 +14,6 @@ import { Modal } from '@components/Modal/modal';
 
 import { AboutFilmUI } from 'moviegate-ui-kit';
 
-const video = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
-
-
 /**
 * Отрисовывает стилизованную общую информацию о фильме.
 * Создаёт компонент выпадающего меню для сохранения в коллекции
@@ -49,12 +46,11 @@ export class AboutFilm extends Component {
             short_description: this.data.short_description,
             directors: decoreListPersons(this.data.directors, 2),
             actors: decoreListPersons(this.data.actors, 3),
+            trailer: this.data.trailer,
         };
 
         this.subHandler = () => {
             this.state.listCollections = store.getState('listCollectionsUser');
-            console.log(`In ABOUT new: ${JSON.stringify(this.state.listCollections)}`);
-            console.log(`this.location: ${this.location}`);
 
             if ('is_used' in this.state.listCollections.find((coll: userCollListItem) => coll.name === 'Буду смотреть')) {
                 (this.location.querySelector('.js-about-film__button_bookmark')as HTMLElement).style.stroke = '#feba2b';
@@ -149,7 +145,7 @@ export class AboutFilm extends Component {
             modal.render();
 
             const modalWindow = this.rootNode.querySelector('.js-modal__window__flex');
-            modalWindow.insertAdjacentHTML('afterbegin', `<iframe width="720" height="440" src="${video}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            modalWindow.insertAdjacentHTML('afterbegin', `<iframe class="trailer__iframe" src="${this.about.trailer || 'https://www.youtube.com/embed/dQw4w9WgXcQ'}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
         };
 
         buttonTrailer.addEventListener('click', this.handlerTrailer);

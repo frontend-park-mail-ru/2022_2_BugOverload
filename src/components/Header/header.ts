@@ -29,10 +29,9 @@ export class Header extends Component {
         this.state = {
             user: null,
         };
-        store.subscribe('user', () => {
-            this.state.user = store.getState('user');
-            this.render();
-        });
+        this.subscribeHeader = this.subscribeHeader.bind(this);
+        store.subscribe('user', this.subscribeHeader);
+        store.subscribe('logoutStatus', this.subscribeHeader);
 
         this.isOpenSearch = false;
     }
@@ -117,7 +116,6 @@ export class Header extends Component {
 
             this.comebackHeader = (e: Event) => {
                 if (this.isOpenSearch && !(e.target as HTMLElement).closest('.js-header-search')) {
-                    console.log('edned');
                     this.componentWillUnmount();
                     this.render('', false);
                     this.isOpenSearch = false;
@@ -158,6 +156,12 @@ export class Header extends Component {
         }
 
         form.removeEventListener('submit', this.submitHadndler)
+    }
+
+    subscribeHeader() {
+        this.state.user = store.getState('user');
+        console.log(this.state.user)
+        this.render();
     }
 }
 

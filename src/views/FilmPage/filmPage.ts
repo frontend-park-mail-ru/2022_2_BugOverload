@@ -10,7 +10,7 @@ import { ShowMessage } from '@components/Message/message';
 import templateFilmPage from '@views/FilmPage/filmPage.handlebars';
 import { View } from '@views/View';
 import { roundFloat } from '@utils/common';
-import { responsStatuses } from '@config/config'; 
+import { responsStatuses } from '@config/config';
 import { Film } from '@components/Film/film';
 
 import { CollectionUI } from 'moviegate-ui-kit';
@@ -28,6 +28,7 @@ export class FilmPage extends View {
             similarFilms: null,
             saveToCollStatus: null,
             removeFromCollStatus: null,
+            isDispatchedSimilar: false,
         };
 
         this.sendReviewSuccess = () => {
@@ -98,33 +99,41 @@ export class FilmPage extends View {
         }
 
         if (!this.state.similarFilms) {
-            store.subscribe(`film${filmPage.state.id}Similar`, subscribeFilmPageSimilar, true);
-            store.dispatch(actionGetSimilarFilms(this.state.id));
-            return;
+            if(!this.state.isDispatchedSimilar) {
+                store.subscribe(`film${filmPage.state.id}Similar`, subscribeFilmPageSimilar, true);
+                store.dispatch(actionGetSimilarFilms(this.state.id));
+                this.state.isDispatchedSimilar = true;
+            } 
         }
 
         ROOT.insertAdjacentHTML('beforeend', templateFilmPage());
         this.aboutFilm = new AboutFilm({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.aboutFilm.render();
 
         this.menuInfoFilm = new MenuInfoFilm({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.menuInfoFilm.render();
         this.menuInfoFilm.componentDidMount();
 
-        const films = this.state.similarFilms.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const films = this.state.similarFilms?.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const collection = new Collection('');
 
-        const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar'); 
-        similarFilmsWrapper.insertAdjacentHTML('beforeend', 
+        const similarFilmsWrapper = this.rootNode.querySelector('.js-collection-tag-similar');
+        similarFilmsWrapper.insertAdjacentHTML('beforeend',
         CollectionUI.renderTemplate({
                 films,
-                name: this.state.similarFilms.name,
+                name: this.state.similarFilms?.name,
                 url: `film${this.state.id}`,
             }),
         );
@@ -134,7 +143,10 @@ export class FilmPage extends View {
 
         this.reviewStatistic = new ReviewStatistic({
             rootNode: this.rootNode,
-            film: this.state.film,
+            film: {
+                id: this.state.id,
+                ...this.state.film,
+            },
         });
         this.reviewStatistic.render();
 
@@ -162,6 +174,7 @@ export class FilmPage extends View {
         this.likelyFilms?.unsubscribe();
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
+        this.state.isDispatchedSimilar = false;
     }
 }
 

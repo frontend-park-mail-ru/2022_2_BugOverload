@@ -6,7 +6,7 @@ interface Store {
     mapSubscribers: Map<string, Array<Function>>;
     mapOnceSubscribers: Map<string, Array<Function>>;
 }
- 
+
 class Store {
     constructor() {
         this.state = {};
@@ -26,13 +26,13 @@ class Store {
     }
 
     subscribe(type :string, callback :Function, once = false) {
-        const arraySubsribes = once? 
+        const arraySubsribes = !once?
             this.mapSubscribers.get(type):
             this.mapOnceSubscribers.get(type);
         if (arraySubsribes) {
             arraySubsribes.push(callback);
         } else {
-            once? 
+            !once?
                 this.mapSubscribers.set(type, [callback]):
                 this.mapOnceSubscribers.set(type, [callback]);
         }

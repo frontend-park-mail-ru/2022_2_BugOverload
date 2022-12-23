@@ -14,7 +14,6 @@ interface Router {
     root: Element;
     mapViews: Map<string, Class>;
     privateMapViews: Map<string, Class>;
-    cachedUrls: Array<string>;
     pathBeforModal: string;
     prevUrl: string;
     isDispatchedAuth: boolean;
@@ -38,7 +37,6 @@ class Router {
         this.root = root;
         this.mapViews = new Map();
         this.privateMapViews = new Map();
-        this.cachedUrls = [];
         this.isDispatchedAuth = false;
         this.isSubscribedLogout = false;
     }
@@ -73,7 +71,7 @@ class Router {
      * @param {Bool} privatePath = false - parameter
      */
     register({ path, view } :{path :string, view :any}, privatePath = false) {
-        privatePath? 
+        privatePath?
             this.privateMapViews.set(path, view):
             this.mapViews.set(path, view);
     }
@@ -153,9 +151,6 @@ class Router {
 
         const matchedHref = this.getCurrentUrlObject();
         if (this.mapViews.get(matchedHref[0]) || this.privateMapViews.get(matchedHref[0])) {
-            if(!redirect) {
-                this.cache();
-            }
             this.go({
                 path: matchedHref[0],
                 props: matchedHref[1],
@@ -211,12 +206,11 @@ class Router {
                     this.refresh();
                     return;
                 }
-            } 
+            }
         } else {
             view = this.mapViews.get(stateObject.path);
         }
 
-        // click login/signup after signup/login
         if (stateObject.path === '/login/' || stateObject.path === '/signup/') {
             if (refresh) {
                 this.pathBeforModal = window.localStorage.getItem('pathBeforModal');
@@ -232,15 +226,14 @@ class Router {
                     viewBeforModal.render(prevState[1]);
                 }
             } else if (
-                location !== '/login/' && 
-                location !== '/signup/' && 
+                location !== '/login/' &&
+                location !== '/signup/' &&
                 !this.privateMapViews.get(this.matchHref(location)[0])
             ) {
                 window.localStorage.setItem('pathBeforModal', location);
             }
         }
 
-        // click no login/signup after login/signup
         if (stateObject.path !== '/login/' && stateObject.path !== '/signup/') {
             this.root.replaceChildren();
         }
@@ -273,17 +266,6 @@ class Router {
                 window.history.replaceState(props, null, location + path);
             }
             this.prevUrl = path;
-        }
-
-        this.cache();
-    }
-
-    cache(url = './') {
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.register('/sw.js', { scope: url });
-            if (!this.cachedUrls.includes(url)) {
-                this.cachedUrls.push(url);
-            }
         }
     }
 }

@@ -1,5 +1,20 @@
 <div class="page__collection">
-    <div class="page__collection__title">{{name}}</div>
+    <div class="page__collection__head">
+        <div class="page__collection__title">{{name}}</div>
+        {{#if private_col}}
+        {{else}}
+        <div class="page__collection__share primary-btn-big js-page__collection__share">
+            <svg class="page__collection__share-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 9.33331C22.933 9.33331 24.5 7.76631 24.5 5.83331C24.5 3.90032 22.933 2.33331 21 2.33331C19.067 2.33331 17.5 3.90032 17.5 5.83331C17.5 7.76631 19.067 9.33331 21 9.33331Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 17.5C8.933 17.5 10.5 15.933 10.5 14C10.5 12.067 8.933 10.5 7 10.5C5.067 10.5 3.5 12.067 3.5 14C3.5 15.933 5.067 17.5 7 17.5Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 25.6667C22.933 25.6667 24.5 24.0997 24.5 22.1667C24.5 20.2337 22.933 18.6667 21 18.6667C19.067 18.6667 17.5 20.2337 17.5 22.1667C17.5 24.0997 19.067 25.6667 21 25.6667Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.0215 15.7617L17.9898 20.405" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17.9782 7.59497L10.0215 12.2383" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        {{/if}}
+    </div>
+
     {{#if description}}
     <div class="page__collection__description">{{description}}</div>
     {{/if}}

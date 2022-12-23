@@ -1,8 +1,10 @@
 import { router } from '@router/Router';
 import '@/index.scss';
 import { ShowMessage } from '@components/Message/message';
+import { webSocket } from '@/webSocket';
 
 router.start();
+webSocket.initialize();
 
 document.addEventListener('click', (e) => {
     const target = e.target as Element;
@@ -11,3 +13,11 @@ document.addEventListener('click', (e) => {
         ShowMessage('В разработке', 'negative');
     }
 })
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js', { scope: '/' })
+      .catch((err) => {
+        console.error(err);
+      });
+}

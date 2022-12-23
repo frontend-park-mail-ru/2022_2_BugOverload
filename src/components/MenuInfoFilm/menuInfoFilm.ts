@@ -1,4 +1,3 @@
-// import template from '@components/MenuInfoFilm/menuInfoFilm.handlebars';
 import { DescriptionFilm } from '@components/DescriptionFilm/descriptionFilm';
 import { DetailsFilm } from '@components/DetailsFilm/detailsFilm';
 import { Rating } from '@components/Rating/rating';

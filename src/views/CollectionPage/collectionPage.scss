@@ -1,7 +1,12 @@
 .page__collection {
     width: 100vw;
-    height: 100vh;
     padding-top: var(--header-height);
+
+    &__head {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
 
     &__title {
         margin: 0 var(--standart-margin);
@@ -9,8 +14,14 @@
         color: var(--main-color-text);
     }
 
+    &__share {
+        width: 46px;
+        height: 46px;
+        margin-right: var(--standart-margin);
+    }
+
     &__description {
-        margin: 25px var(--standart-margin) 70px;
+        margin: 25px var(--standart-margin) 30px;
         font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1920 - 300)));
         color: var( --secondary-color-text);
     }

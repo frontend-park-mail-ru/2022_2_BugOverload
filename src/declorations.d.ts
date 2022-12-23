@@ -77,6 +77,7 @@ interface userCollection {
     name: string,
     poster: string,
     update_time: string,
+    private_col?: boolean,
 }
 
 interface userCollListItem {
@@ -93,7 +94,7 @@ interface filmToCollParams {
 //person types
 interface person extends anyObject {
     avatar: string;
-    images: Array<string>;
+    images?: Array<string>;
 }
 
 //film types
@@ -186,14 +187,24 @@ interface filmPremiere extends anyObject {
     name: string,
     prod_year: string,
     genres: Array<string>,
-    prod_countries: Array<string>,
-    directors: Array<actor>,
-    duration: number,
+    prod_countries?: Array<string>,
+    directors?: Array<actor>,
+    duration?: number,
     rating: number,
     description: string,
+    ticket?: string,
 }
 
 interface premiereParams extends anyObject {
     countFilms: number,
     delimiter: number,
+}
+
+interface filmNotifPayload {
+    id: number,
+    poster_ver: string,
+    name: string,
+    rating: number,
+    ticket: string,
+    prod_date: string,
 }

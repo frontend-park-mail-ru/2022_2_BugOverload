@@ -12,11 +12,14 @@ import { userCollections } from '@views/UserCollections/userCollections';
 import { pageGenres } from '@/views/PageGenres/pageGenres';
 
 const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+const WS_PROTOCOL = `${PROTOCOL}` === 'https' ? 'wss' : 'ws';
 
 let i = 0;
 const randomMy = () => i++;
 
 export const API = {
+    ws: `${WS_PROTOCOL}://${DOMAIN}/api/v1/notifications`,
+
     img: {
         poster_hor(key: string) {
             if (key === 'default') {
@@ -136,12 +139,14 @@ export const routes = [
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
     { path: '/collection/genres/', view: pageGenres },
+    { path: '/public-user/collection/', view: collectionPage },
+    { path: '/user/public/collection/', view: collectionPage },
 ];
 
 export const privateRoutes = [
     { path: '/profile/', view: profile },
-    { path: '/user/collections/', view: userCollections }, 
-    { path: '/user/collection/', view: collectionPage }, 
+    { path: '/user/collections/', view: userCollections },
+    { path: '/user/collection/', view: collectionPage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
