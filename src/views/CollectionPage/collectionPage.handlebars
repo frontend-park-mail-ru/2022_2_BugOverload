@@ -7,12 +7,10 @@
         <div class="header__userbar-user-info-container js-header__userbar-user-info-container">
             {{#if isMobile}}
             {{else}}
-            {{#if author.email}}
             <div class="header__userbar-name-container">
                 <div class="header__userbar-name">{{author.nickname}}</div>
-                <div class="header__userbar-email">{{author.email}}</div>
+                <div class="header__userbar-email">{{author.count_collections}}</div>
             </div>
-            {{/if}}
             <img class="header__avatar" data-section="/user/{{author.id}}/" src="{{author.avatar}}" alt="">
         </div>
         {{/if}}
