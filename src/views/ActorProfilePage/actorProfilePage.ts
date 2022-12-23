@@ -48,7 +48,7 @@ class ActorPage extends View {
             actorPageElement.remove();
         }
 
-        const films = this.state.actor.best_films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
+        const films = this.state.actor?.best_films?.reduce((res: string, filmData: film) => res + Film.createFilm(filmData), '');
         const collection = new Collection('');
 
         this.rootNode.insertAdjacentHTML('beforeend', template({
