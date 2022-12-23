@@ -138,10 +138,12 @@ class ReducerFilm {
 
         if (response.status === responsStatuses.NoContent) {
             const newList = store.getState('listCollectionsUser');
-            for (let coll of newList) {
-                if (coll.id === saveToCollParams.idCollection) {
-                    coll.is_used = true;
-                    break;
+            if(newList) {
+                for (let coll of newList) {
+                    if (coll.id === saveToCollParams.idCollection) {
+                        coll.is_used = true;
+                        break;
+                    }
                 }
             }
 
