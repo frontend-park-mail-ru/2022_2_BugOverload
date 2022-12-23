@@ -6,6 +6,8 @@ import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 import { actionRemoveFromCollection, actionGetSimilarFilms } from '@store/actionCreater/filmActions';
 import { ShowMessage } from '@/components/Message/message';
+import { isMobile } from '@/config/config';
+import { API } from '@config/config';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -132,11 +134,19 @@ class CollectionPage extends View {
 
         const name = this.state.collection.name;
         this.state.collection.private_col = (name === 'Избранное' || name === 'Буду смотреть')?true:false;
+        const author = this.state.collection?.author;
+        let user;
+        if (author) {
+            user = store.getState('user');
+            author.avatar = API.publicProfile(author.avatar);
+        }
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
             private_col: this.state.collection.private_col,
+            isMobile,
+            author: user? null: author,
         }));
 
         this.copyHandler = (() => {

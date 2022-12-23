@@ -5,11 +5,11 @@
     &__head {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     &__title {
-        margin: 0 var(--standart-margin);
+        margin: 0 auto 0 var(--standart-margin);
         font-size: calc(28px + (40 - 28) * ((100vw - 300px) / (1920 - 300)));
         color: var(--main-color-text);
     }
@@ -31,5 +31,9 @@
         flex-flow: row wrap;
         gap: 5px;
         padding: var(--standart-margin);
+    }
+
+    .header__userbar-name-container {
+        align-items: flex-end;
     }
 }
