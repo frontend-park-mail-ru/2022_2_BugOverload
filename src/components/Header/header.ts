@@ -31,6 +31,7 @@ export class Header extends Component {
         };
         this.subscribeHeader = this.subscribeHeader.bind(this);
         store.subscribe('user', this.subscribeHeader);
+        store.subscribe('logoutStatus', this.subscribeHeader);
 
         this.isOpenSearch = false;
     }
