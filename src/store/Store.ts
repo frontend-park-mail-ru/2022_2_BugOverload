@@ -61,7 +61,6 @@ class Store {
             console.log(subscribers)
             if (subscribers && subscribers.length) {
                 subscribers.forEach((subscriber) => subscriber());
-                return;
             }
 
             subscribers = this.mapOnceSubscribers.get(key);
