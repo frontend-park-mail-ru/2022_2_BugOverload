@@ -186,12 +186,12 @@ interface filmPremiere extends anyObject {
     name: string,
     prod_year: string,
     genres: Array<string>,
-    prod_countries: Array<string>,
-    directors: Array<actor>,
-    duration: number,
+    prod_countries?: Array<string>,
+    directors?: Array<actor>,
+    duration?: number,
     rating: number,
     description: string,
-    ticket: string,
+    ticket?: string,
 }
 
 interface premiereParams extends anyObject {

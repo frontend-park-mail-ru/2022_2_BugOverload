@@ -5,6 +5,7 @@ import { actionGetCollectionData, actionGetUserCollectionData } from '@actions/c
 import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 import { actionRemoveFromCollection, actionGetSimilarFilms } from '@store/actionCreater/filmActions';
+import { ShowMessage } from '@/components/Message/message';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -75,7 +76,7 @@ class CollectionPage extends View {
                             name: store.getState(this.state.nameObjectStore)?.name,
                             films: store.getState(this.state.nameObjectStore)?.films,
                         };
-                    
+
                 }
 
                 if(this.state.typeCollection.match('actor')) {
@@ -128,6 +129,51 @@ class CollectionPage extends View {
             description: this.state.collection.description,
             films,
         }));
+
+        this.copyHandler = (() => {
+            let counterCopyed = 0;
+            return () => {
+                navigator.clipboard.writeText(window.location.href)
+                .then(() => {
+                    if (counterCopyed === 0) {
+                        ShowMessage('Скопировано!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 1) {
+                        ShowMessage('Двойное копирование!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 2) {
+                        ShowMessage('Тройное копирование!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 3) {
+                        ShowMessage('Безумие!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    if (counterCopyed === 4) {
+                        ShowMessage('Ты потрясающий!', 'positive');
+                        ++counterCopyed;
+                        return;
+                    }
+                    ShowMessage('Скопировано!', 'positive');
+                    counterCopyed = 1;
+                })
+                .catch(err => {
+                    ShowMessage('Не удалось скопировать');
+                    console.log('Something went wrong', err);
+                });
+            }
+        })();
+        const shareButton = this.rootNode.querySelector('.js-page__collection__share');
+        if (shareButton) {
+            shareButton.addEventListener('click', this.copyHandler);
+        }
+
         if(this.state.isUserCollection) {
             const pageUserCollection = this.rootNode.querySelector('.page__collection');
             pageUserCollection.addEventListener('click', (e) => {
@@ -162,6 +208,11 @@ class CollectionPage extends View {
         this.state.collection = null;
         this.state.isUserCollection = false;
         this.state.isDispatched = false;
+
+        const shareButton = this.rootNode.querySelector('.js-page__collection__share');
+        if (shareButton) {
+            shareButton.removeEventListener('click', this.copyHandler);
+        }
 
         if(this.state.isSubscribedUserCollection) {
             this.state.isSubscribedUserCollection = false;

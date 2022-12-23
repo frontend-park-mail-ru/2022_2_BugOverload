@@ -1,18 +1,16 @@
 import { ROOT } from '@config/config';
-import template from '@components/Notification/notification.handlebars';
-import {
-    getMonthName,
-} from '@utils/decorationData';
+import { getMonthName } from '@utils/decorationData';
 import { API } from '@config/config';
-
 import { roundFloat } from '@utils/common';
+
+import { NotificationUI } from 'moviegate-ui-kit';
 
 export const showNotification = (type:string = 'ANONS_FILM', payload: filmNotifPayload) => {
     let content:string;
     switch (type) {
     case 'ANONS_FILM':
         const sepDate = payload.prod_date.split(' ')[0].split('.').reverse();
-        content = template({
+        content = NotificationUI.renderTemplate({
             ...payload,
             rating: roundFloat(payload.rating),
             poster_ver: API.img.poster_ver(payload.poster_ver),

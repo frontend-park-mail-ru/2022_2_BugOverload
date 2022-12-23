@@ -2,10 +2,22 @@
     width: 100vw;
     padding-top: var(--header-height);
 
+    &__head {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
     &__title {
         margin: 0 var(--standart-margin);
         font-size: calc(28px + (40 - 28) * ((100vw - 300px) / (1920 - 300)));
         color: var(--main-color-text);
+    }
+
+    &__share {
+        width: 46px;
+        height: 46px;
+        margin-right: var(--standart-margin);
     }
 
     &__description {
