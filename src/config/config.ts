@@ -139,12 +139,13 @@ export const routes = [
     { path: '/search/', view: searchPage },
     { path: '/collection/', view: collectionPage },
     { path: '/collection/genres/', view: pageGenres },
-    { path: '/user/collection/', view: collectionPage },
+    { path: '/public-user/collection/', view: collectionPage },
 ];
 
 export const privateRoutes = [
     { path: '/profile/', view: profile },
     { path: '/user/collections/', view: userCollections },
+    { path: '/user/collection/', view: collectionPage },
 ];
 
 export const isMobile = /Android|webOS|iPhone|iPad|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(window.navigator.userAgent) ||
