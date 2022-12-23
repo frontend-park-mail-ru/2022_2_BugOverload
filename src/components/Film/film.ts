@@ -15,13 +15,14 @@ export class Film {
     * @param {filmData Object} filmData - объект с данными о фильме
     * @return {string} HTML созданного фильма
     */
-    static createFilm(filmData: film, isUserCollection = false) {
+    static createFilm(filmData: film, isUserCollection = false, is_author = false) {
         const film = FilmUI.renderTemplate({
             ...filmData,
             poster_ver: API.img.poster_ver(filmData.poster_ver),
             rating: roundFloat(filmData.rating),
             genres: Film.decoreFilmInfo(filmData),
             isUserCollection,
+            is_author,
         });
 
         const div = document.createElement('div');

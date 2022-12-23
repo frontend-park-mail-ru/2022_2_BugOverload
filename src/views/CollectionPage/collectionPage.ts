@@ -120,7 +120,7 @@ class CollectionPage extends View {
 
         let films = null;
         if(this.state.collection && Object.hasOwnProperty.call(this.state.collection, 'films')) {
-            films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData, this.state.isUserCollection), '');
+            films = this.state.collection.films.reduce((res: string, filmData: film) => res + Film.createFilm(filmData, this.state.isUserCollection, this.state.collection?.is_author), '');
         }
 
         const name = this.state.collection.name;
