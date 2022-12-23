@@ -262,10 +262,10 @@ class CollectionPage extends View {
 export const collectionPage = new CollectionPage({ rootNode: document.getElementById('root') });
 
 const rightColName = (numCol :number) => {
-    if(numCol === 0) {
-        return ' коллекций';
+    if(numCol === 1) {
+        return ' коллекция';
     }
-    if(numCol > 0 && numCol < 5) {
+    if(numCol > 1 && numCol < 5) {
         return ' коллекции';
     }
 
