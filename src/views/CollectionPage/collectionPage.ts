@@ -124,11 +124,12 @@ class CollectionPage extends View {
         }
 
         const name = this.state.collection.name;
+        const private_col = (name === 'Избранное' || name === 'Буду смотреть')?true:false;
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
-            private_col: this.state.collection?.private_col,
+            private_col,
         }));
 
         this.copyHandler = (() => {
