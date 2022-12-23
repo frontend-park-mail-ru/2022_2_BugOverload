@@ -1,6 +1,8 @@
 <div class="page__collection">
     <div class="page__collection__head">
         <div class="page__collection__title">{{name}}</div>
+        {{#if private_col}}
+        {{else}}
         <div class="page__collection__share primary-btn-big js-page__collection__share">
             <svg class="page__collection__share-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M21 9.33331C22.933 9.33331 24.5 7.76631 24.5 5.83331C24.5 3.90032 22.933 2.33331 21 2.33331C19.067 2.33331 17.5 3.90032 17.5 5.83331C17.5 7.76631 19.067 9.33331 21 9.33331Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -10,6 +12,7 @@
             <path d="M17.9782 7.59497L10.0215 12.2383" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
+        {{/if}}
     </div>
 
     {{#if description}}
