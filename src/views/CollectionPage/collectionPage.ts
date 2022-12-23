@@ -139,6 +139,7 @@ class CollectionPage extends View {
         if (author) {
             user = store.getState('user');
             author.avatar = API.img.user_avatar(author.avatar);
+            author.count_collections = author.count_collections + ' коллекций';
         }
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
