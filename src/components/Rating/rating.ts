@@ -3,7 +3,7 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 import {
-    actionRate, actionDeleteRate, actionGetMetaDataFilm,
+    actionRate, actionDeleteRate, actionGetMetaDataFilm, actionGetFilmData
 } from '@actions/filmActions';
 import {
     decoreCountScores,
@@ -38,8 +38,15 @@ export class Rating extends Component {
 
         store.subscribe('rating', this.subHandlerRating);
 
+        this.subscribeFilmGlobalRating = () => {
+            this.state.film = store.getState(`film${this.state.film.id}`);
+            this.render();
+        }
         this.subHandlerStatusRating = () => {
             this.state.statusRating = store.getState('statusRating');
+
+            store.subscribe(`film${this.state.film.id}`, this.subscribeFilmGlobalRating, true);
+            store.dispatch(actionGetFilmData(this.state.film.id));
 
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
