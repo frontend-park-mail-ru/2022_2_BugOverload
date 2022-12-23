@@ -8,6 +8,7 @@ import {
 import {
     decoreCountScores,
 } from '@utils/decorationData';
+import { roundFloat } from '@utils/common';
 
 import { RatingUI } from 'moviegate-ui-kit';
 
@@ -40,6 +41,10 @@ export class Rating extends Component {
 
         this.subscribeFilmGlobalRating = () => {
             this.state.film = store.getState(`film${this.state.film.id}`);
+            this.state.film.rating = roundFloat(this.state.film.rating);
+            if (Number.isInteger(this.filmPage.state.film.rating)) {
+                this.filmPage.state.film.rating = `${this.filmPage.state.film.rating}.0`;
+            }
             this.render();
         }
         this.subHandlerStatusRating = () => {
