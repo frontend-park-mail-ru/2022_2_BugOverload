@@ -138,7 +138,7 @@ class CollectionPage extends View {
         let user;
         if (author) {
             user = store.getState('user');
-            author.avatar = API.publicProfile(author.avatar);
+            author.avatar = API.img.user_avatar(author.avatar);
         }
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
