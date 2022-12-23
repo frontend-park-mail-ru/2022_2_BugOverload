@@ -30,8 +30,7 @@ export class Header extends Component {
             user: null,
         };
         this.subscribeHeader = this.subscribeHeader.bind(this);
-        store.subscribe('user', this.subscribeHeader);
-        store.subscribe('logoutStatus', this.subscribeHeader);
+        //store.subscribe('logoutStatus', this.subscribeHeader);
 
         this.isOpenSearch = false;
     }
@@ -40,6 +39,7 @@ export class Header extends Component {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render( search = '', auth = true) {
+        store.subscribe('user', this.subscribeHeader, true);
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
