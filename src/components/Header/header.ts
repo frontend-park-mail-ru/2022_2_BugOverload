@@ -39,6 +39,7 @@ export class Header extends Component {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render( search = '', auth = true) {
+        this.state.user = store.getState('user');
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
@@ -158,7 +159,6 @@ export class Header extends Component {
     }
 
     subscribeHeader() {
-        this.state.user = store.getState('user');
         console.log(this.state.user)
         this.render();
     }
