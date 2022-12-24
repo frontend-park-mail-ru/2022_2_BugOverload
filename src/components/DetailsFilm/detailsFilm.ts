@@ -19,14 +19,17 @@ export class DetailsFilm extends Component {
         //         .forEach((person: actor) => { person.avatar = API.img.person_avatar(person.avatar); });
         // }
         console.log('this.information',this.informations )
+        // if (this.information.actors) {
+        //     this.information.actors = this.information.actors.map(
+        //         (person: actor) => { 
+        //             person.avatar = API.img.person_avatar(person.avatar); 
+        //             return person;
+        //         }
+        //     );
+        // }
         if (this.information.actors) {
-            this.information.actors = this.information.actors.map(
-                (person: actor) => { 
-                    person.avatar = API.img.person_avatar(person.avatar); 
-                    return person;
-                }
-            );
-        }
+                this.information.actors[0].avatar = API.img.person_avatar(this.information.actors[0].avatar);
+            }
         console.log('this.information after',this.information)
         this.location = document.querySelector('.js-film-page__details');
     }
