@@ -192,6 +192,7 @@ class Router {
         if(view) {
             if(!store.getState('user')) {
                 if(!this.isDispatchedAuth) {
+                    this.isDispatchedAuth = true;
                     if (!this.privateMapViews.get(this.matchHref(location)[0])) {
                         window.localStorage.setItem('pathBeforModal', location);
                     }
