@@ -63,6 +63,8 @@ export class MenuInfoFilm extends Component {
             prod_countries: decoreListItems(this.filmData.prod_countries, 3),
         };
 
+        console.log('fullDetails',fullDetails)
+
         this.details = new DetailsFilm(fullDetails);
 
         this.state = this.menuState.description;
