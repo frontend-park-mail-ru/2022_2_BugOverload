@@ -29,9 +29,11 @@ export class Header extends Component {
         this.state = {
             user: null,
         };
-        this.subscribeHeader = this.subscribeHeader.bind(this);
+        this.subscribeHeader = () => {
+            this.render();
+        };
+        
         store.subscribe('user', this.subscribeHeader);
-        store.subscribe('logoutStatus', this.subscribeHeader);
 
         this.isOpenSearch = false;
     }
@@ -40,6 +42,7 @@ export class Header extends Component {
      * Рендерит стандартный хэдер без пользовательских данных
      */
     render( search = '', auth = true) {
+        this.state.user = store.getState('user');
         const header = this.rootNode.querySelector('.js-header');
         if (header) {
             header.remove();
@@ -156,12 +159,6 @@ export class Header extends Component {
         }
 
         form.removeEventListener('submit', this.submitHadndler)
-    }
-
-    subscribeHeader() {
-        this.state.user = store.getState('user');
-        console.log(this.state.user)
-        this.render();
     }
 }
 

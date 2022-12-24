@@ -157,7 +157,12 @@ export class FilmPage extends View {
                 ...this.state.film,
             },
         });
-        this.listReviews.init();
+        if(!this.isGetReview) {
+            this.isGetReview = true;
+            this.listReviews.init();
+        } else {
+            this.listReviews.componentDidMount();
+        }
     }
 
     /**
@@ -168,6 +173,7 @@ export class FilmPage extends View {
         this.state.film = null;
         this.state.reviews = null;
         this.state.countScores = null;
+        this.state.similarFilms = null;
         this.listReviews?.unsubscribe();
         this.aboutFilm?.unsubscribe();
         this.menuInfoFilm?.unsubscribe();
@@ -175,6 +181,7 @@ export class FilmPage extends View {
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
         this.state.isDispatchedSimilar = false;
+        this.isGetReview = false;
     }
 }
 

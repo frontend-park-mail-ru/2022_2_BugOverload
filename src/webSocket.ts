@@ -67,7 +67,7 @@ class WebSocketService {
             }
         };
 
-        store.subscribe('user', this.storeHandler);
+       store.subscribe('user', this.storeHandler);
 
         this.logoutHandler = () => {
             this.state.logoutStatus = store.getState('logoutStatus');
@@ -141,7 +141,7 @@ class WebSocketService {
             this._ws = null;
         }
 
-        store.unsubscribe('user', this.storeHandler);
+       // store.unsubscribe('user', this.storeHandler);
     }
 }
 

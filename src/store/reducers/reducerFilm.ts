@@ -86,8 +86,10 @@ class ReducerFilm {
     }
 
     async sendReview(reviewData: review) {
+        const { filmID } = reviewData;
+        delete reviewData['filmID'];
         const response = await Ajax.post({
-            url: API.send_review(reviewData.filmID),
+            url: API.send_review(filmID),
             body: reviewData,
         }) as Response;
 

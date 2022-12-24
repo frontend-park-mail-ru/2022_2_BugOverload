@@ -77,10 +77,11 @@ class ReducerUser {
         const responsePromise = Ajax.delete({ url: API.logout });
 
         const response = await responsePromise as Response;
+
         if (response.status === responsStatuses.NoContent) {
             return {
-                user: null,
                 logoutStatus: responsStatuses.NoContent,
+                user: null,
             } as anyObject;
         }
         return null;
@@ -190,7 +191,6 @@ const handlerListUserCol = (arrayUserCol :Array<userCollection>) => {
     arrayUserCol.forEach((userCol) => {
         if(userCol.name === 'Избранное' || userCol.name === 'Буду смотреть') {
             userCol.private_col = true;
-            console.log(userCol)
         }
     });
     return arrayUserCol;

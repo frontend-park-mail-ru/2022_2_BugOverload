@@ -3,11 +3,12 @@ import { Component } from '@components/Component';
 import { store } from '@store/Store';
 import { ShowMessage } from '@components/Message/message';
 import {
-    actionRate, actionDeleteRate, actionGetMetaDataFilm,
+    actionRate, actionDeleteRate, actionGetMetaDataFilm, actionGetFilmData
 } from '@actions/filmActions';
 import {
     decoreCountScores,
 } from '@utils/decorationData';
+import { roundFloat } from '@utils/common';
 
 import { RatingUI } from 'moviegate-ui-kit';
 
@@ -37,14 +38,30 @@ export class Rating extends Component {
 
         store.subscribe('rating', this.subHandlerRating);
 
+        this.subscribeFilmGlobalRating = () => {
+            this.state.film = {
+                id: this.state.film.id,
+                ...store.getState(`film${this.state.film.id}`),
+            };
+            this.state.film.rating = roundFloat(this.state.film.rating);
+            if (Number.isInteger(this.state.film.rating)) {
+                this.state.film.rating = `${this.state.film.rating}.0`;
+            }
+            this.render();
+        }
         this.subHandlerStatusRating = () => {
             this.state.statusRating = store.getState('statusRating');
+
+            store.subscribe(`film${this.state.film.id}`, this.subscribeFilmGlobalRating, true);
+            store.dispatch(actionGetFilmData(this.state.film.id));
 
             if (!this.state.statusRating) {
                 ShowMessage('Оценка успешно удалена', 'positive');
                 return;
             }
             ShowMessage('Успех!', 'positive');
+            this.state.rating = store.getState('rating');
+            this.render();
         };
 
         store.subscribe('statusRating', this.subHandlerStatusRating);
@@ -166,3 +183,4 @@ export class Rating extends Component {
         store.unsubscribe('statusRating', this.subHandlerStatusRating);
     }
 }
+ 

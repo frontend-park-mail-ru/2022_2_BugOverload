@@ -6,6 +6,8 @@ import { store } from '@store/Store';
 import { actionGetActor } from '@store/actionCreater/actorActions';
 import { actionRemoveFromCollection, actionGetSimilarFilms } from '@store/actionCreater/filmActions';
 import { ShowMessage } from '@/components/Message/message';
+import { isMobile } from '@/config/config';
+import { API } from '@config/config';
 
 /**
 * Отрисовывает главную страницу, добавляя HTML-шаблон в root в index.html
@@ -68,7 +70,6 @@ class CollectionPage extends View {
         } else {
             //actor || film
             if(this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
-                console.log('actor,film')
                 let actionCreator;
 
                 if(this.state.typeCollection.match('film')) {
@@ -132,11 +133,20 @@ class CollectionPage extends View {
 
         const name = this.state.collection.name;
         this.state.collection.private_col = (name === 'Избранное' || name === 'Буду смотреть')?true:false;
+        const author = this.state.collection?.author;
+        let user;
+        if (author) {
+            user = store.getState('user');
+            author.avatar = API.img.user_avatar(author.avatar);
+            author.count_collections = author.count_collections + rightColName(author.count_collections);
+        }
         this.rootNode.insertAdjacentHTML('beforeend', template({
             name: name.charAt(0).toUpperCase() + name.slice(1),
             description: this.state.collection.description,
             films,
             private_col: this.state.collection.private_col,
+            isMobile,
+            author: user? null: author,
         }));
 
         this.copyHandler = (() => {
@@ -174,7 +184,6 @@ class CollectionPage extends View {
                 })
                 .catch(err => {
                     ShowMessage('Не удалось скопировать');
-                    console.log('Something went wrong', err);
                 });
             }
         })();
@@ -209,9 +218,8 @@ class CollectionPage extends View {
     }
 
     collectionPageSubscribeLogout() {
-        console.log('logout', this.state.collection)
-        if(!this.state.collection.private_col) {
-            this.state.collection.is_author = false;
+        if(this.state.collection && !this.state.collection.private_col) {
+            this.componentWillUnmount();
             this.render();
         }
     }
@@ -249,3 +257,14 @@ class CollectionPage extends View {
 }
 
 export const collectionPage = new CollectionPage({ rootNode: document.getElementById('root') });
+
+const rightColName = (numCol :number) => {
+    if(numCol === 1) {
+        return ' коллекция';
+    }
+    if(numCol > 1 && numCol < 5) {
+        return ' коллекции';
+    }
+
+    return ' коллекций';
+}

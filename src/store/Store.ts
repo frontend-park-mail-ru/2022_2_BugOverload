@@ -52,17 +52,17 @@ class Store {
 
     setState(newState :{[key: string]: any}) {
         let subscribers;
+        
         Object.keys(newState).forEach((key) => {
             this.state[key] = newState[key];
 
             subscribers = this.mapSubscribers.get(key);
-            if (subscribers) {
+            if (subscribers && subscribers.length) {
                 subscribers.forEach((subscriber) => subscriber());
-                return;
             }
 
             subscribers = this.mapOnceSubscribers.get(key);
-            if (subscribers) {
+            if (subscribers && subscribers.length) {
                 subscribers.forEach((subscriber) => subscriber());
                 this.mapOnceSubscribers.delete(key);
             }
