@@ -12,12 +12,12 @@ export class DetailsFilm extends Component {
      * @param {Object} information - информация о фильме.
      */
     constructor(information: fullDetails) {
-        super();
+        super(); 
         this.information = information;
-        if (this.information.actors) {
+       /* if (this.information.actors) {
             this.information.actors
                 .forEach((person: actor) => { person.avatar = API.img.person_avatar(person.avatar); });
-        }
+        }*/
         this.location = document.querySelector('.js-film-page__details');
     }
 
