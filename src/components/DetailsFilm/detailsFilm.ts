@@ -18,6 +18,7 @@ export class DetailsFilm extends Component {
             this.information.actors
                 .forEach((person: actor) => { person.avatar = API.img.person_avatar(person.avatar); });
         }*/
+        console.log('this.information',this.information)
         if (this.information.actors) {
             this.information.actors = this.information.actors.map(
                 (person: actor) => { 
