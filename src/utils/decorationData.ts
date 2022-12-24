@@ -20,6 +20,7 @@ export const decoreDuration = (minutes: number, mode = 'full') => {
 };
 
 export const decoreListPersons = (list: Array<actor>, maxCount: number, sep = ',') => {
+    console.log('decoreListPersons',list)
     if (!list) {
         return null;
     }
@@ -30,6 +31,7 @@ export const decoreListPersons = (list: Array<actor>, maxCount: number, sep = ',
         newList[i].name += sep;
     }
     newList.push(list[i]);
+    console.log('decoreListPersons',list)
 
     return newList;
 };
