@@ -26,13 +26,11 @@ class Store {
     }
 
     subscribe(type :string, callback :Function, once = false) {
-        console.log('type',type,callback)
         const arraySubsribes = !once?
             this.mapSubscribers.get(type):
             this.mapOnceSubscribers.get(type);
         if (arraySubsribes) {
             arraySubsribes.push(callback);
-            console.log('arraySubsribes',arraySubsribes)
         } else {
             !once?
                 this.mapSubscribers.set(type, [callback]):
@@ -56,17 +54,14 @@ class Store {
         let subscribers;
         
         Object.keys(newState).forEach((key) => {
-            console.log('key',key)
             this.state[key] = newState[key];
 
             subscribers = this.mapSubscribers.get(key);
-            console.log(subscribers)
             if (subscribers && subscribers.length) {
                 subscribers.forEach((subscriber) => subscriber());
             }
 
             subscribers = this.mapOnceSubscribers.get(key);
-            console.log(subscribers)
             if (subscribers && subscribers.length) {
                 subscribers.forEach((subscriber) => subscriber());
                 this.mapOnceSubscribers.delete(key);

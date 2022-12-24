@@ -70,7 +70,6 @@ class CollectionPage extends View {
         } else {
             //actor || film
             if(this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
-                console.log('actor,film')
                 let actionCreator;
 
                 if(this.state.typeCollection.match('film')) {
@@ -185,7 +184,6 @@ class CollectionPage extends View {
                 })
                 .catch(err => {
                     ShowMessage('Не удалось скопировать');
-                    console.log('Something went wrong', err);
                 });
             }
         })();
@@ -220,7 +218,6 @@ class CollectionPage extends View {
     }
 
     collectionPageSubscribeLogout() {
-        console.log('logout', this.state.collection)
         if(this.state.collection && !this.state.collection.private_col) {
             this.componentWillUnmount();
             this.render();

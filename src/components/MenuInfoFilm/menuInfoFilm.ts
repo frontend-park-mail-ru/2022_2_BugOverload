@@ -28,7 +28,6 @@ export class MenuInfoFilm extends Component {
 
         this.description = new DescriptionFilm(this.filmData.description);
         this.rating = new Rating(props);
-        console.log('filmData',this.filmData)
 
         const fullDetails: fullDetails = {
             [`type_${this.filmData.type}`]: true,
@@ -62,8 +61,6 @@ export class MenuInfoFilm extends Component {
             prod_companies: decoreListItems(this.filmData.prod_companies, 3),
             prod_countries: decoreListItems(this.filmData.prod_countries, 3),
         };
-
-        console.log('fullDetails',fullDetails)
 
         this.details = new DetailsFilm(fullDetails);
 

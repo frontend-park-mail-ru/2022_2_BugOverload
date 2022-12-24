@@ -79,7 +79,6 @@ class ReducerUser {
         const response = await responsePromise as Response;
 
         if (response.status === responsStatuses.NoContent) {
-            console.log(response.status)
             return {
                 logoutStatus: responsStatuses.NoContent,
                 user: null,
@@ -192,7 +191,6 @@ const handlerListUserCol = (arrayUserCol :Array<userCollection>) => {
     arrayUserCol.forEach((userCol) => {
         if(userCol.name === 'Избранное' || userCol.name === 'Буду смотреть') {
             userCol.private_col = true;
-            console.log(userCol)
         }
     });
     return arrayUserCol;

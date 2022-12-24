@@ -30,7 +30,6 @@ export class Header extends Component {
             user: null,
         };
         this.subscribeHeader = () => {
-            console.log(this.state.user)
             this.render();
         };
         
