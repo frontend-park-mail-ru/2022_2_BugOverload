@@ -18,6 +18,13 @@ export class DetailsFilm extends Component {
             this.information.actors
                 .forEach((person: actor) => { person.avatar = API.img.person_avatar(person.avatar); });
         }*/
+        if (this.information.actors) {
+            this.information.actors = this.information.actors.map(
+                (person: actor) => { 
+                    API.img.person_avatar(person.avatar); 
+                }
+            );
+        }
         this.location = document.querySelector('.js-film-page__details');
     }
 
