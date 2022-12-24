@@ -28,6 +28,7 @@ export class Collection extends Component {
             this.render();
         };
 
+        console.log('nameLocation',nameLocation)
         store.subscribe(`${nameLocation}`, this.subHandler);
     }
 
