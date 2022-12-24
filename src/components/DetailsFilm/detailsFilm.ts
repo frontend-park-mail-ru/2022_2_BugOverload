@@ -26,6 +26,7 @@ export class DetailsFilm extends Component {
                 }
             );
         }
+        console.log('this.information after',this.information)
         this.location = document.querySelector('.js-film-page__details');
     }
 
