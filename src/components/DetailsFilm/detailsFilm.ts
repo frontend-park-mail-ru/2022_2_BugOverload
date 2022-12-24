@@ -29,7 +29,9 @@ export class DetailsFilm extends Component {
         // }
         if (this.information.actors) {
                 this.information.actors[0].avatar = API.img.person_avatar(this.information.actors[0].avatar);
-                this.information.actors[1].avatar = this.information.actors[1].avatar;
+                console.log('this.information.actors[1].avatar',this.information.actors[1].avatar)
+                this.information.actors[1].avatar = API.img.person_avatar(this.information.actors[1].avatar);
+                console.log('this.information.actors[1].avatar after',this.information.actors[1].avatar)
         }
         console.log('this.information after',this.information)
         this.location = document.querySelector('.js-film-page__details');
