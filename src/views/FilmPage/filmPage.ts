@@ -161,6 +161,8 @@ export class FilmPage extends View {
         if(!this.isGetReview) {
             this.isGetReview = true;
             this.listReviews.init();
+        } else {
+            this.listReviews.componentDidMount();
         }
     }
 
