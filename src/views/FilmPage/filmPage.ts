@@ -158,7 +158,10 @@ export class FilmPage extends View {
                 ...this.state.film,
             },
         });
-        this.listReviews.init();
+        if(!this.isGetReview) {
+            this.isGetReview = true;
+            this.listReviews.init();
+        }
     }
 
     /**
@@ -177,6 +180,7 @@ export class FilmPage extends View {
         this.directorFilms?.unsubscribe();
         this.reviewStatistic?.unsubscribe();
         this.state.isDispatchedSimilar = false;
+        this.isGetReview = false;
     }
 }
 
