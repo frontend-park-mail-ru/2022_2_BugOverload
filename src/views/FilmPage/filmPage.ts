@@ -150,7 +150,6 @@ export class FilmPage extends View {
         });
         this.reviewStatistic.render();
 
-        console.log('ListReviews')
         this.listReviews = new ListReviews({
             rootNode: this.rootNode,
             film: {
