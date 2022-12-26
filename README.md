@@ -43,3 +43,7 @@ https://www.figma.com/file/WIbsjIKSCPSJph8XJ12ArL/Untitled?node-id=90%3A185
 ## Ссылка на backend
 
 https://github.com/go-park-mail-ru/2022_2_BugOverload
+
+## Презентация
+
+https://docs.google.com/presentation/d/1n7LSBqo04dTej0tCotnR-ueNMbCgR2pj4aQ6NLC92bc/edit#slide=id.g1c0cf0839e5_1_45
