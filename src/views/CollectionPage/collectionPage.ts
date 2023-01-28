@@ -48,7 +48,7 @@ class CollectionPage extends View {
         }
         super.render();
 
-        if(!this.state.typeCollection.match(/\w+\d+/)) {
+        if(!this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
             //tag genre
             this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
             this.state.collection = store.getState(this.state.nameObjectStore);
@@ -91,7 +91,7 @@ class CollectionPage extends View {
                     };
                     this.state.nameObjectStore = this.state.typeCollection;
                 }
-
+ 
                 if(!this.state.collection.films) {
                     store.subscribe(this.state.nameObjectStore, this.collectionPageSubscribe, true);
 
