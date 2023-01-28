@@ -47,10 +47,8 @@ class CollectionPage extends View {
             pageCollection.remove();
         }
         super.render();
-
-        console.log('typeCollection',typeCollection)
-
-        if(!this.state.typeCollection.match(/[a-z]+[0-9]+/)) {
+        
+        if(!this.state.typeCollection.match(/[a-z]*[0-9]+/)) {
             //tag genre
             this.state.nameObjectStore = `collection-${this.state.typeCollection}`;
             this.state.collection = store.getState(this.state.nameObjectStore);
