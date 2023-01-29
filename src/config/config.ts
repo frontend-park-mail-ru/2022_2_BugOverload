@@ -69,7 +69,7 @@ export const API = {
     logout: `${PROTOCOL}://${DOMAIN}/api/v1/auth/logout`,
 
     collection(target: string, key: string, sortParam: 'rating'|'date', countFilms: number = 30, delimiter: number = 0) {
-        return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
+        return `${PROTOCOL}://${DOMAIN}/api/v1/collection?target=${target || 'tag'}&key=${key}&sort_param=${sortParam}&count_films=${countFilms}&delimiter=${delimiter}`;
     },
 
     userCollectionData(id :number, sort :string) {

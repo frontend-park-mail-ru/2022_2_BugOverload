@@ -182,7 +182,7 @@ class Router {
             prevView.componentWillUnmount();
         }
 
-        //redirect on login if user don't auth
+        // redirect on login if user don't auth
         if(!this.isSubscribedLogout) {
             this.isSubscribedLogout = true;
             store.subscribe('logoutStatus', subscribeRouterLogout);
