@@ -14,7 +14,7 @@
 
 ### Деплой
 
-http://movie-gate.ru/
+http://movie-gate.online/
 
 ## Авторы
 
