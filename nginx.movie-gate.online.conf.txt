@@ -1,7 +1,7 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name db.movie-gate.online www.db.movie-gate.online;
+    server_name db.movie-gate.ru www.db.movie-gate.ru;
 
     location / {
         proxy_pass  http://127.0.0.1:5432;
@@ -10,7 +10,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name admindb.movie-gate.online www.admindb.movie-gate.online;
+    server_name admindb.movie-gate.ru www.admindb.movie-gate.ru;
 
     location / {
         proxy_pass  http://127.0.0.1:5050;
@@ -19,7 +19,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name prometheus.movie-gate.online www.prometheus.movie-gate.online;
+    server_name prometheus.movie-gate.ru www.prometheus.movie-gate.ru;
 
     location / {
         proxy_pass  http://127.0.0.1:9090;
@@ -33,7 +33,7 @@ upstream grafana {
 server {
   listen 80;
   listen [::]:80;
-  server_name www.monitoring.movie-gate.online;
+  server_name www.monitoring.movie-gate.ru;
   root /usr/share/nginx/html;
   index index.html index.htm;
 
@@ -60,15 +60,15 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name movie-gate.online www.movie-gate.online;
-    return 301 https://movie-gate.online$request_uri;
+    server_name movie-gate.ru www.movie-gate.ru;
+    return 301 https://movie-gate.ru$request_uri;
 }
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    server_name movie-gate.online;
-    root /var/www/movie-gate.online/html/;
+    server_name movie-gate.ru;
+    root /var/www/movie-gate.ru/html/;
     location / {
        index  index.html;
         add_header Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-eval'; connect-src 'self' ws: wss:; frame-src youtube.com www.youtube.com; img-src 'self' data:; sty>
@@ -102,9 +102,9 @@ server {
         proxy_read_timeout 10m;
     }
 
-    ssl_certificate /etc/letsencrypt/live/movie-gate.online/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/movie-gate.online/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/movie-gate.online/chain.pem;
+    ssl_certificate /etc/letsencrypt/live/movie-gate.ru/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/movie-gate.ru/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/movie-gate.ru/chain.pem;
 
     include snippets/ssl-params.conf;
 }
@@ -113,20 +113,20 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name uikit.movie-gate.online;
-    return 301 https://uikit.movie-gate.online.com$request_uri;
+    server_name uikit.movie-gate.ru;
+    return 301 https://uikit.movie-gate.ru.com$request_uri;
 }
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    server_name uikit.movie-gate.online;
+    server_name uikit.movie-gate.ru;
     root /var/www/moviegate-storybook;
     index index.html;
 
-    ssl_certificate /etc/letsencrypt/live/uikit.movie-gate.online/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/uikit.movie-gate.online/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/uikit.movie-gate.online/chain.pem;
+    ssl_certificate /etc/letsencrypt/live/uikit.movie-gate.ru/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/uikit.movie-gate.ru/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/uikit.movie-gate.ru/chain.pem;
 
     include snippets/ssl-params.conf;
 }

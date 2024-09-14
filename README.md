@@ -14,7 +14,7 @@
 
 ### Деплой
 
-http://movie-gate.online/
+http://movie-gate.ru/
 
 ## Авторы
 
@@ -30,7 +30,7 @@ http://movie-gate.online/
 
 ## Ссылка на Storybook
 
-https://uikit.movie-gate.online
+https://uikit.movie-gate.ru
 
 ## Ссылка на Swagger
 

@@ -11,7 +11,7 @@ import { collectionPage } from '@views/CollectionPage/collectionPage';
 import { userCollections } from '@views/UserCollections/userCollections';
 import { pageGenres } from '@/views/PageGenres/pageGenres';
 
-const PROTOCOL = `${DOMAIN}` === 'movie-gate.online' ? 'https' : 'http';
+const PROTOCOL = `${DOMAIN}` === 'movie-gate.ru' ? 'https' : 'http';
 const WS_PROTOCOL = `${PROTOCOL}` === 'https' ? 'wss' : 'ws';
 
 let i = 0;
