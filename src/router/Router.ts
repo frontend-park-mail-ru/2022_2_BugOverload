@@ -89,7 +89,7 @@ class Router {
             this.register(rout, true);
         }
 
-        document.addEventListener('click', (e) => {
+        document.addEventListener('mousedown', (e) => {
             const { target } = e;
             if (target instanceof HTMLElement || target instanceof SVGElement) {
                 if (target.dataset.section) {

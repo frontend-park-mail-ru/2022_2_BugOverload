@@ -32,7 +32,7 @@ export class Modal {
     handler() {
         document.body
             .querySelector('.js-modal__background')
-            .addEventListener('click', (e) => {
+            .addEventListener('mousedown', (e) => {
                 const target = e.target as HTMLElement;
 
                 if (target.classList.contains('modal__background')) {
