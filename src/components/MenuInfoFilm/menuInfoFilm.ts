@@ -55,7 +55,7 @@ export class MenuInfoFilm extends Component {
             count_seasons: this.filmData.count_seasons,
             count_ratings: this.filmData.count_ratings,
             count_main_actors: decoreCountActors(this.filmData.actors?.length),
-            count_actors: decoreCountActors(this.filmData.count_actors),
+            count_actors: decoreCountActors(this.filmData.actors?.length),
             duration: decoreDuration(this.filmData.duration),
             genres: decoreListItems(this.filmData.genres, 3),
             prod_companies: decoreListItems(this.filmData.prod_companies, 3),

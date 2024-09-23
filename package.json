@@ -85,6 +85,6 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "glob": "^8.0.3",
-    "moviegate-ui-kit": "^1.0.35"
+    "moviegate-ui-kit": "^1.0.37"
   }
 }
