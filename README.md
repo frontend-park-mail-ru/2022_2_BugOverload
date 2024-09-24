@@ -18,8 +18,8 @@ http://movie-gate.ru/
 
 ## Авторы
 
+* [**Волков Михаил**](https://github.com/Mike5535) - *Frontend-developer*
 * [**Бирюков Иван**](https://github.com/Ivan-Bir) - *Frontend-developer*
-* [**Волков Михаил**](https://github.com/Mike5535)        -  *Frontend-developer*
 * [**Анофриков Александр**](https://github.com/Andeo1812) - *Backend-developer*
 * [**Ходосов Михаил**](https://github.com/lonkidely) - *Fullstack-developer*
 
