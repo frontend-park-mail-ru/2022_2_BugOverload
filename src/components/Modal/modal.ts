@@ -59,7 +59,7 @@ export const exit = () => {
     const dispatchElement = document.body.querySelector('.js-modal__background');
     if (dispatchElement) {
         const redirect = new Event(
-            'click',
+            'mousedown',
             {
                 bubbles: true,
                 cancelable: true,
